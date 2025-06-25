@@ -29,3406 +29,2630 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta1.DataFusionClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'datafusion.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          datafusionModule.v1beta1.DataFusionClient.servicePath;
-        assert.strictEqual(servicePath, 'datafusion.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          datafusionModule.v1beta1.DataFusionClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'datafusion.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'datafusion.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'datafusion.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new datafusionModule.v1beta1.DataFusionClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'datafusion.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'datafusion.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new datafusionModule.v1beta1.DataFusionClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'datafusion.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new datafusionModule.v1beta1.DataFusionClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = datafusionModule.v1beta1.DataFusionClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.dataFusionStub, undefined);
-      await client.initialize();
-      assert(client.dataFusionStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.dataFusionStub);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.dataFusionStub, undefined);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getInstance', () => {
-    it('invokes getInstance without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.GetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.GetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.Instance()
-      );
-      client.innerApiCalls.getInstance = stubSimpleCall(expectedResponse);
-      const [response] = await client.getInstance(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInstance without error using callback', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.GetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.GetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.Instance()
-      );
-      client.innerApiCalls.getInstance =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datafusion.v1beta1.IInstance | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInstance with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.GetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.GetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getInstance = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getInstance with closed client', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.GetInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.GetInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getInstance(request), expectedError);
-    });
-  });
-
-  describe('removeIamPolicy', () => {
-    it('invokes removeIamPolicy without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyResponse()
-      );
-      client.innerApiCalls.removeIamPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.removeIamPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeIamPolicy without error using callback', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyResponse()
-      );
-      client.innerApiCalls.removeIamPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.removeIamPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeIamPolicy with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.removeIamPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.removeIamPolicy(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.removeIamPolicy as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeIamPolicy as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeIamPolicy with closed client', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest',
-        ['resource']
-      );
-      request.resource = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.removeIamPolicy(request), expectedError);
-    });
-  });
-
-  describe('addDnsPeering', () => {
-    it('invokes addDnsPeering without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringResponse()
-      );
-      client.innerApiCalls.addDnsPeering = stubSimpleCall(expectedResponse);
-      const [response] = await client.addDnsPeering(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.addDnsPeering as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addDnsPeering as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addDnsPeering without error using callback', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringResponse()
-      );
-      client.innerApiCalls.addDnsPeering =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.addDnsPeering(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.addDnsPeering as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addDnsPeering as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addDnsPeering with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.addDnsPeering = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.addDnsPeering(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.addDnsPeering as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.addDnsPeering as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes addDnsPeering with closed client', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.addDnsPeering(request), expectedError);
-    });
-  });
-
-  describe('removeDnsPeering', () => {
-    it('invokes removeDnsPeering without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringResponse()
-      );
-      client.innerApiCalls.removeDnsPeering = stubSimpleCall(expectedResponse);
-      const [response] = await client.removeDnsPeering(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeDnsPeering as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeDnsPeering as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeDnsPeering without error using callback', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringResponse()
-      );
-      client.innerApiCalls.removeDnsPeering =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.removeDnsPeering(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.removeDnsPeering as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeDnsPeering as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeDnsPeering with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.removeDnsPeering = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.removeDnsPeering(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.removeDnsPeering as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.removeDnsPeering as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes removeDnsPeering with closed client', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.removeDnsPeering(request), expectedError);
-    });
-  });
-
-  describe('createInstance', () => {
-    it('invokes createInstance without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.CreateInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.CreateInstanceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createInstance =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createInstance(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createInstance without error using callback', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.CreateInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.CreateInstanceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createInstance =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.datafusion.v1beta1.IInstance,
-              protos.google.cloud.datafusion.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.datafusion.v1beta1.IInstance,
-        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createInstance with call error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.CreateInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.CreateInstanceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createInstance = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createInstance with LRO error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.CreateInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.CreateInstanceRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createInstance = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createInstance(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateInstanceProgress without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateInstanceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateInstanceProgress with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateInstanceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteInstance', () => {
-    it('invokes deleteInstance without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.DeleteInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.DeleteInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteInstance =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteInstance(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteInstance without error using callback', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.DeleteInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.DeleteInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteInstance =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.datafusion.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteInstance with call error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.DeleteInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.DeleteInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteInstance = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteInstance with LRO error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.DeleteInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.DeleteInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteInstance = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteInstance(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteInstanceProgress without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteInstanceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteInstanceProgress with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteInstanceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateInstance', () => {
-    it('invokes updateInstance without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.UpdateInstanceRequest()
-      );
-      request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.UpdateInstanceRequest',
-        ['instance', 'name']
-      );
-      request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateInstance =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateInstance(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateInstance without error using callback', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.UpdateInstanceRequest()
-      );
-      request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.UpdateInstanceRequest',
-        ['instance', 'name']
-      );
-      request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateInstance =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.datafusion.v1beta1.IInstance,
-              protos.google.cloud.datafusion.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.datafusion.v1beta1.IInstance,
-        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateInstance with call error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.UpdateInstanceRequest()
-      );
-      request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.UpdateInstanceRequest',
-        ['instance', 'name']
-      );
-      request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateInstance = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateInstance with LRO error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.UpdateInstanceRequest()
-      );
-      request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.UpdateInstanceRequest',
-        ['instance', 'name']
-      );
-      request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateInstance = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateInstance(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateInstanceProgress without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateInstanceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateInstanceProgress with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateInstanceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('restartInstance', () => {
-    it('invokes restartInstance without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RestartInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.RestartInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.restartInstance =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.restartInstance(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.restartInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restartInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes restartInstance without error using callback', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RestartInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.RestartInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.restartInstance =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.restartInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.datafusion.v1beta1.IInstance,
-              protos.google.cloud.datafusion.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.datafusion.v1beta1.IInstance,
-        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.restartInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restartInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes restartInstance with call error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RestartInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.RestartInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.restartInstance = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.restartInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.restartInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restartInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes restartInstance with LRO error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.RestartInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.RestartInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.restartInstance = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.restartInstance(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.restartInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.restartInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkRestartInstanceProgress without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkRestartInstanceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkRestartInstanceProgress with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkRestartInstanceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('upgradeInstance', () => {
-    it('invokes upgradeInstance without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.upgradeInstance =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.upgradeInstance(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.upgradeInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.upgradeInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes upgradeInstance without error using callback', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.upgradeInstance =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.upgradeInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.datafusion.v1beta1.IInstance,
-              protos.google.cloud.datafusion.v1beta1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.datafusion.v1beta1.IInstance,
-        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.upgradeInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.upgradeInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes upgradeInstance with call error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.upgradeInstance = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.upgradeInstance(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.upgradeInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.upgradeInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes upgradeInstance with LRO error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.upgradeInstance = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.upgradeInstance(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.upgradeInstance as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.upgradeInstance as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpgradeInstanceProgress without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpgradeInstanceProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpgradeInstanceProgress with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpgradeInstanceProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listAvailableVersions', () => {
-    it('invokes listAvailableVersions without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Version()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Version()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Version()
-        ),
-      ];
-      client.innerApiCalls.listAvailableVersions =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listAvailableVersions(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAvailableVersions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAvailableVersions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAvailableVersions without error using callback', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Version()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Version()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Version()
-        ),
-      ];
-      client.innerApiCalls.listAvailableVersions =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAvailableVersions(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datafusion.v1beta1.IVersion[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listAvailableVersions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAvailableVersions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAvailableVersions with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAvailableVersions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listAvailableVersions(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listAvailableVersions as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listAvailableVersions as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listAvailableVersionsStream without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Version()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Version()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Version()
-        ),
-      ];
-      client.descriptors.page.listAvailableVersions.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listAvailableVersionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datafusion.v1beta1.Version[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datafusion.v1beta1.Version) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listAvailableVersions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAvailableVersions, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listAvailableVersions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('invokes listAvailableVersionsStream with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAvailableVersions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAvailableVersionsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datafusion.v1beta1.Version[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datafusion.v1beta1.Version) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listAvailableVersions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listAvailableVersions, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listAvailableVersions
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listAvailableVersions without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Version()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Version()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Version()
-        ),
-      ];
-      client.descriptors.page.listAvailableVersions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.datafusion.v1beta1.IVersion[] = [];
-      const iterable = client.listAvailableVersionsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAvailableVersions
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listAvailableVersions
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listAvailableVersions with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listAvailableVersions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAvailableVersionsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.datafusion.v1beta1.IVersion[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = datafusionModule.v1beta1.DataFusionClient.servicePath;
+                assert.strictEqual(servicePath, 'datafusion.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = datafusionModule.v1beta1.DataFusionClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'datafusion.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAvailableVersions
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listAvailableVersions
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-
-  describe('listInstances', () => {
-    it('invokes listInstances without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Instance()
-        ),
-      ];
-      client.innerApiCalls.listInstances = stubSimpleCall(expectedResponse);
-      const [response] = await client.listInstances(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listInstances without error using callback', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Instance()
-        ),
-      ];
-      client.innerApiCalls.listInstances =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listInstances(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datafusion.v1beta1.IInstance[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listInstances with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listInstances = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listInstances(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listInstances as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listInstancesStream without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Instance()
-        ),
-      ];
-      client.descriptors.page.listInstances.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listInstancesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datafusion.v1beta1.Instance[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datafusion.v1beta1.Instance) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'datafusion.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listInstances.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listInstances, request)
-      );
-      assert(
-        (client.descriptors.page.listInstances.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listInstancesStream with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listInstances.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listInstancesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datafusion.v1beta1.Instance[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datafusion.v1beta1.Instance) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'datafusion.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listInstances.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listInstances, request)
-      );
-      assert(
-        (client.descriptors.page.listInstances.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listInstances without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Instance()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Instance()
-        ),
-      ];
-      client.descriptors.page.listInstances.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.datafusion.v1beta1.IInstance[] = [];
-      const iterable = client.listInstancesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listInstances.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listInstances.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new datafusionModule.v1beta1.DataFusionClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'datafusion.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listInstances with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListInstancesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listInstances.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listInstancesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.datafusion.v1beta1.IInstance[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new datafusionModule.v1beta1.DataFusionClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'datafusion.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listInstances.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listInstances.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new datafusionModule.v1beta1.DataFusionClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listNamespaces', () => {
-    it('invokes listNamespaces without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListNamespacesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Namespace()
-        ),
-      ];
-      client.innerApiCalls.listNamespaces = stubSimpleCall(expectedResponse);
-      const [response] = await client.listNamespaces(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNamespaces as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNamespaces as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = datafusionModule.v1beta1.DataFusionClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.dataFusionStub, undefined);
+            await client.initialize();
+            assert(client.dataFusionStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.dataFusionStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.dataFusionStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listNamespaces without error using callback', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListNamespacesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Namespace()
-        ),
-      ];
-      client.innerApiCalls.listNamespaces =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listNamespaces(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datafusion.v1beta1.INamespace[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getInstance', () => {
+        it('invokes getInstance without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.GetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.GetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.Instance()
+            );
+            client.innerApiCalls.getInstance = stubSimpleCall(expectedResponse);
+            const [response] = await client.getInstance(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInstance without error using callback', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.GetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.GetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.Instance()
+            );
+            client.innerApiCalls.getInstance = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getInstance(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datafusion.v1beta1.IInstance|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInstance with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.GetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.GetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getInstance = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getInstance with closed client', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.GetInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.GetInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getInstance(request), expectedError);
+        });
+    });
+
+    describe('removeIamPolicy', () => {
+        it('invokes removeIamPolicy without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyResponse()
+            );
+            client.innerApiCalls.removeIamPolicy = stubSimpleCall(expectedResponse);
+            const [response] = await client.removeIamPolicy(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeIamPolicy without error using callback', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyResponse()
+            );
+            client.innerApiCalls.removeIamPolicy = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.removeIamPolicy(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeIamPolicy with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedHeaderRequestParams = `resource=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.removeIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.removeIamPolicy(request), expectedError);
+            const actualRequest = (client.innerApiCalls.removeIamPolicy as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeIamPolicy as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeIamPolicy with closed client', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest', ['resource']);
+            request.resource = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.removeIamPolicy(request), expectedError);
+        });
+    });
+
+    describe('addDnsPeering', () => {
+        it('invokes addDnsPeering without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringResponse()
+            );
+            client.innerApiCalls.addDnsPeering = stubSimpleCall(expectedResponse);
+            const [response] = await client.addDnsPeering(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addDnsPeering as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addDnsPeering as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addDnsPeering without error using callback', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringResponse()
+            );
+            client.innerApiCalls.addDnsPeering = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.addDnsPeering(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.addDnsPeering as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addDnsPeering as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addDnsPeering with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.addDnsPeering = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.addDnsPeering(request), expectedError);
+            const actualRequest = (client.innerApiCalls.addDnsPeering as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.addDnsPeering as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes addDnsPeering with closed client', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.addDnsPeering(request), expectedError);
+        });
+    });
+
+    describe('removeDnsPeering', () => {
+        it('invokes removeDnsPeering without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringResponse()
+            );
+            client.innerApiCalls.removeDnsPeering = stubSimpleCall(expectedResponse);
+            const [response] = await client.removeDnsPeering(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeDnsPeering as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeDnsPeering as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeDnsPeering without error using callback', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringResponse()
+            );
+            client.innerApiCalls.removeDnsPeering = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.removeDnsPeering(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.removeDnsPeering as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeDnsPeering as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeDnsPeering with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.removeDnsPeering = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.removeDnsPeering(request), expectedError);
+            const actualRequest = (client.innerApiCalls.removeDnsPeering as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.removeDnsPeering as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes removeDnsPeering with closed client', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.removeDnsPeering(request), expectedError);
+        });
+    });
+
+    describe('createInstance', () => {
+        it('invokes createInstance without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.CreateInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.CreateInstanceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createInstance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createInstance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createInstance without error using callback', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.CreateInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.CreateInstanceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createInstance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createInstance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createInstance with call error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.CreateInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.CreateInstanceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createInstance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createInstance with LRO error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.CreateInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.CreateInstanceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createInstance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createInstance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateInstanceProgress without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateInstanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateInstanceProgress with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateInstanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteInstance', () => {
+        it('invokes deleteInstance without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.DeleteInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.DeleteInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteInstance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteInstance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteInstance without error using callback', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.DeleteInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.DeleteInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteInstance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteInstance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteInstance with call error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.DeleteInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.DeleteInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteInstance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteInstance with LRO error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.DeleteInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.DeleteInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteInstance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteInstance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteInstanceProgress without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteInstanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteInstanceProgress with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteInstanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateInstance', () => {
+        it('invokes updateInstance without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.UpdateInstanceRequest()
+            );
+            request.instance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.UpdateInstanceRequest', ['instance', 'name']);
+            request.instance.name = defaultValue1;
+            const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateInstance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateInstance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateInstance without error using callback', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.UpdateInstanceRequest()
+            );
+            request.instance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.UpdateInstanceRequest', ['instance', 'name']);
+            request.instance.name = defaultValue1;
+            const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateInstance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateInstance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateInstance with call error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.UpdateInstanceRequest()
+            );
+            request.instance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.UpdateInstanceRequest', ['instance', 'name']);
+            request.instance.name = defaultValue1;
+            const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateInstance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateInstance with LRO error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.UpdateInstanceRequest()
+            );
+            request.instance ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.UpdateInstanceRequest', ['instance', 'name']);
+            request.instance.name = defaultValue1;
+            const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateInstance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateInstance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateInstanceProgress without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateInstanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateInstanceProgress with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateInstanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('restartInstance', () => {
+        it('invokes restartInstance without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RestartInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.RestartInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.restartInstance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.restartInstance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.restartInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restartInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes restartInstance without error using callback', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RestartInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.RestartInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.restartInstance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.restartInstance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.restartInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restartInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes restartInstance with call error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RestartInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.RestartInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.restartInstance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.restartInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.restartInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restartInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes restartInstance with LRO error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.RestartInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.RestartInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.restartInstance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.restartInstance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.restartInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.restartInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkRestartInstanceProgress without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkRestartInstanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkRestartInstanceProgress with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkRestartInstanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('upgradeInstance', () => {
+        it('invokes upgradeInstance without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.upgradeInstance = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.upgradeInstance(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.upgradeInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.upgradeInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes upgradeInstance without error using callback', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.upgradeInstance = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.upgradeInstance(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.upgradeInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.upgradeInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes upgradeInstance with call error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.upgradeInstance = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.upgradeInstance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.upgradeInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.upgradeInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes upgradeInstance with LRO error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.upgradeInstance = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.upgradeInstance(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.upgradeInstance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.upgradeInstance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpgradeInstanceProgress without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpgradeInstanceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpgradeInstanceProgress with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpgradeInstanceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listAvailableVersions', () => {
+        it('invokes listAvailableVersions without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Version()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Version()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Version()),
+            ];
+            client.innerApiCalls.listAvailableVersions = stubSimpleCall(expectedResponse);
+            const [response] = await client.listAvailableVersions(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAvailableVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAvailableVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAvailableVersions without error using callback', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Version()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Version()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Version()),
+            ];
+            client.innerApiCalls.listAvailableVersions = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listAvailableVersions(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datafusion.v1beta1.IVersion[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listAvailableVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAvailableVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAvailableVersions with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listAvailableVersions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listAvailableVersions(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listAvailableVersions as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listAvailableVersions as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listAvailableVersionsStream without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Version()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Version()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Version()),
+            ];
+            client.descriptors.page.listAvailableVersions.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listAvailableVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datafusion.v1beta1.Version[] = [];
+                stream.on('data', (response: protos.google.cloud.datafusion.v1beta1.Version) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listAvailableVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAvailableVersions, request));
+            assert(
+                (client.descriptors.page.listAvailableVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listAvailableVersionsStream with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAvailableVersions.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listAvailableVersionsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datafusion.v1beta1.Version[] = [];
+                stream.on('data', (response: protos.google.cloud.datafusion.v1beta1.Version) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listAvailableVersions.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listAvailableVersions, request));
+            assert(
+                (client.descriptors.page.listAvailableVersions.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listAvailableVersions without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Version()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Version()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Version()),
+            ];
+            client.descriptors.page.listAvailableVersions.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.datafusion.v1beta1.IVersion[] = [];
+            const iterable = client.listAvailableVersionsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listNamespaces as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNamespaces as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNamespaces with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListNamespacesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listNamespaces = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listNamespaces(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listNamespaces as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listNamespaces as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listNamespacesStream without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListNamespacesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Namespace()
-        ),
-      ];
-      client.descriptors.page.listNamespaces.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listNamespacesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datafusion.v1beta1.Namespace[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datafusion.v1beta1.Namespace) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAvailableVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAvailableVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listAvailableVersions with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listAvailableVersions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listAvailableVersionsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.datafusion.v1beta1.IVersion[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listAvailableVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listAvailableVersions.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listNamespaces.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listNamespaces, request)
-      );
-      assert(
-        (client.descriptors.page.listNamespaces.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listNamespacesStream with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListNamespacesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listNamespaces.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listNamespacesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datafusion.v1beta1.Namespace[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datafusion.v1beta1.Namespace) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listInstances', () => {
+        it('invokes listInstances without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Instance()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Instance()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Instance()),
+            ];
+            client.innerApiCalls.listInstances = stubSimpleCall(expectedResponse);
+            const [response] = await client.listInstances(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listInstances without error using callback', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Instance()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Instance()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Instance()),
+            ];
+            client.innerApiCalls.listInstances = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listInstances(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datafusion.v1beta1.IInstance[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listNamespaces.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listNamespaces, request)
-      );
-      assert(
-        (client.descriptors.page.listNamespaces.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listNamespaces without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListNamespacesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Namespace()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.Namespace()
-        ),
-      ];
-      client.descriptors.page.listNamespaces.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.datafusion.v1beta1.INamespace[] = [];
-      const iterable = client.listNamespacesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listNamespaces.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listInstances with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listInstances = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listInstances(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listInstances as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listNamespaces with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListNamespacesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listNamespaces.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listNamespacesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.datafusion.v1beta1.INamespace[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listNamespaces.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listInstancesStream without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Instance()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Instance()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Instance()),
+            ];
+            client.descriptors.page.listInstances.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listInstancesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datafusion.v1beta1.Instance[] = [];
+                stream.on('data', (response: protos.google.cloud.datafusion.v1beta1.Instance) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listInstances.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listInstances, request));
+            assert(
+                (client.descriptors.page.listInstances.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listDnsPeerings', () => {
-    it('invokes listDnsPeerings without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.DnsPeering()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.DnsPeering()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.DnsPeering()
-        ),
-      ];
-      client.innerApiCalls.listDnsPeerings = stubSimpleCall(expectedResponse);
-      const [response] = await client.listDnsPeerings(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDnsPeerings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDnsPeerings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listInstancesStream with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listInstances.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listInstancesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datafusion.v1beta1.Instance[] = [];
+                stream.on('data', (response: protos.google.cloud.datafusion.v1beta1.Instance) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listInstances.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listInstances, request));
+            assert(
+                (client.descriptors.page.listInstances.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listDnsPeerings without error using callback', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.DnsPeering()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.DnsPeering()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.DnsPeering()
-        ),
-      ];
-      client.innerApiCalls.listDnsPeerings =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listDnsPeerings(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datafusion.v1beta1.IDnsPeering[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listInstances without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Instance()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Instance()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Instance()),
+            ];
+            client.descriptors.page.listInstances.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.datafusion.v1beta1.IInstance[] = [];
+            const iterable = client.listInstancesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDnsPeerings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDnsPeerings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDnsPeerings with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listDnsPeerings = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listDnsPeerings(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listDnsPeerings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDnsPeerings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDnsPeeringsStream without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.DnsPeering()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.DnsPeering()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.DnsPeering()
-        ),
-      ];
-      client.descriptors.page.listDnsPeerings.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listDnsPeeringsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datafusion.v1beta1.DnsPeering[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datafusion.v1beta1.DnsPeering) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listInstances with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListInstancesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listInstances.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listInstancesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.datafusion.v1beta1.IInstance[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listInstances.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listDnsPeerings.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDnsPeerings, request)
-      );
-      assert(
-        (client.descriptors.page.listDnsPeerings.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listDnsPeeringsStream with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDnsPeerings.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listDnsPeeringsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datafusion.v1beta1.DnsPeering[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datafusion.v1beta1.DnsPeering) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listNamespaces', () => {
+        it('invokes listNamespaces without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Namespace()),
+            ];
+            client.innerApiCalls.listNamespaces = stubSimpleCall(expectedResponse);
+            const [response] = await client.listNamespaces(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNamespaces as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNamespaces as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listNamespaces without error using callback', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Namespace()),
+            ];
+            client.innerApiCalls.listNamespaces = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listNamespaces(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datafusion.v1beta1.INamespace[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listNamespaces as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNamespaces as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listDnsPeerings.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDnsPeerings, request)
-      );
-      assert(
-        (client.descriptors.page.listDnsPeerings.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+
+        it('invokes listNamespaces with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listNamespaces = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listNamespaces(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listNamespaces as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listNamespaces as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listNamespacesStream without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Namespace()),
+            ];
+            client.descriptors.page.listNamespaces.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listNamespacesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datafusion.v1beta1.Namespace[] = [];
+                stream.on('data', (response: protos.google.cloud.datafusion.v1beta1.Namespace) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listNamespaces.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNamespaces, request));
+            assert(
+                (client.descriptors.page.listNamespaces.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listNamespacesStream with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNamespaces.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listNamespacesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datafusion.v1beta1.Namespace[] = [];
+                stream.on('data', (response: protos.google.cloud.datafusion.v1beta1.Namespace) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listNamespaces.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listNamespaces, request));
+            assert(
+                (client.descriptors.page.listNamespaces.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listNamespaces without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.Namespace()),
+            ];
+            client.descriptors.page.listNamespaces.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.datafusion.v1beta1.INamespace[] = [];
+            const iterable = client.listNamespacesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listNamespaces with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listNamespaces.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listNamespacesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.datafusion.v1beta1.INamespace[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with listDnsPeerings without error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.DnsPeering()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.DnsPeering()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datafusion.v1beta1.DnsPeering()
-        ),
-      ];
-      client.descriptors.page.listDnsPeerings.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.datafusion.v1beta1.IDnsPeering[] =
-        [];
-      const iterable = client.listDnsPeeringsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDnsPeerings.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDnsPeerings.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+    describe('listDnsPeerings', () => {
+        it('invokes listDnsPeerings without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.DnsPeering()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.DnsPeering()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.DnsPeering()),
+            ];
+            client.innerApiCalls.listDnsPeerings = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDnsPeerings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDnsPeerings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDnsPeerings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDnsPeerings without error using callback', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.DnsPeering()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.DnsPeering()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.DnsPeering()),
+            ];
+            client.innerApiCalls.listDnsPeerings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDnsPeerings(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datafusion.v1beta1.IDnsPeering[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDnsPeerings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDnsPeerings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDnsPeerings with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDnsPeerings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDnsPeerings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDnsPeerings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDnsPeerings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDnsPeeringsStream without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.DnsPeering()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.DnsPeering()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.DnsPeering()),
+            ];
+            client.descriptors.page.listDnsPeerings.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDnsPeeringsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datafusion.v1beta1.DnsPeering[] = [];
+                stream.on('data', (response: protos.google.cloud.datafusion.v1beta1.DnsPeering) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDnsPeerings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDnsPeerings, request));
+            assert(
+                (client.descriptors.page.listDnsPeerings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDnsPeeringsStream with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDnsPeerings.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDnsPeeringsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datafusion.v1beta1.DnsPeering[] = [];
+                stream.on('data', (response: protos.google.cloud.datafusion.v1beta1.DnsPeering) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDnsPeerings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDnsPeerings, request));
+            assert(
+                (client.descriptors.page.listDnsPeerings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDnsPeerings without error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.DnsPeering()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.DnsPeering()),
+              generateSampleMessage(new protos.google.cloud.datafusion.v1beta1.DnsPeering()),
+            ];
+            client.descriptors.page.listDnsPeerings.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.datafusion.v1beta1.IDnsPeering[] = [];
+            const iterable = client.listDnsPeeringsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDnsPeerings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDnsPeerings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listDnsPeerings with error', async () => {
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDnsPeerings.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDnsPeeringsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.datafusion.v1beta1.IDnsPeering[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDnsPeerings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDnsPeerings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with listDnsPeerings with error', async () => {
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDnsPeerings.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listDnsPeeringsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.datafusion.v1beta1.IDnsPeering[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDnsPeerings.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDnsPeerings.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+    describe('Path templates', () => {
+
+        describe('cryptoKey', async () => {
+            const fakePath = "/rendered/path/cryptoKey";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                key_ring: "keyRingValue",
+                crypto_key: "cryptoKeyValue",
+            };
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cryptoKeyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cryptoKeyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cryptoKeyPath', () => {
+                const result = client.cryptoKeyPath("projectValue", "locationValue", "keyRingValue", "cryptoKeyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cryptoKeyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCryptoKeyName', () => {
+                const result = client.matchProjectFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCryptoKeyName', () => {
+                const result = client.matchLocationFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchKeyRingFromCryptoKeyName', () => {
+                const result = client.matchKeyRingFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "keyRingValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCryptoKeyFromCryptoKeyName', () => {
+                const result = client.matchCryptoKeyFromCryptoKeyName(fakePath);
+                assert.strictEqual(result, "cryptoKeyValue");
+                assert((client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('instance', async () => {
+            const fakePath = "/rendered/path/instance";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+            };
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.instancePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.instancePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('instancePath', () => {
+                const result = client.instancePath("projectValue", "locationValue", "instanceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.instancePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInstanceName', () => {
+                const result = client.matchProjectFromInstanceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInstanceName', () => {
+                const result = client.matchLocationFromInstanceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromInstanceName', () => {
+                const result = client.matchInstanceFromInstanceName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('namespace', async () => {
+            const fakePath = "/rendered/path/namespace";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+                namespace: "namespaceValue",
+            };
+            const client = new datafusionModule.v1beta1.DataFusionClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.namespacePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.namespacePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('namespacePath', () => {
+                const result = client.namespacePath("projectValue", "locationValue", "instanceValue", "namespaceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.namespacePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromNamespaceName', () => {
+                const result = client.matchProjectFromNamespaceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.namespacePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromNamespaceName', () => {
+                const result = client.matchLocationFromNamespaceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.namespacePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromNamespaceName', () => {
+                const result = client.matchInstanceFromNamespaceName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.namespacePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNamespaceFromNamespaceName', () => {
+                const result = client.matchNamespaceFromNamespaceName(fakePath);
+                assert.strictEqual(result, "namespaceValue");
+                assert((client.pathTemplates.namespacePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-  });
-
-  describe('Path templates', () => {
-    describe('cryptoKey', async () => {
-      const fakePath = '/rendered/path/cryptoKey';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        key_ring: 'keyRingValue',
-        crypto_key: 'cryptoKeyValue',
-      };
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.cryptoKeyPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cryptoKeyPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('cryptoKeyPath', () => {
-        const result = client.cryptoKeyPath(
-          'projectValue',
-          'locationValue',
-          'keyRingValue',
-          'cryptoKeyValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromCryptoKeyName', () => {
-        const result = client.matchProjectFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromCryptoKeyName', () => {
-        const result = client.matchLocationFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchKeyRingFromCryptoKeyName', () => {
-        const result = client.matchKeyRingFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'keyRingValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCryptoKeyFromCryptoKeyName', () => {
-        const result = client.matchCryptoKeyFromCryptoKeyName(fakePath);
-        assert.strictEqual(result, 'cryptoKeyValue');
-        assert(
-          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('instance', async () => {
-      const fakePath = '/rendered/path/instance';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        instance: 'instanceValue',
-      };
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.instancePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.instancePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('instancePath', () => {
-        const result = client.instancePath(
-          'projectValue',
-          'locationValue',
-          'instanceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.instancePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromInstanceName', () => {
-        const result = client.matchProjectFromInstanceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.instancePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromInstanceName', () => {
-        const result = client.matchLocationFromInstanceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.instancePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInstanceFromInstanceName', () => {
-        const result = client.matchInstanceFromInstanceName(fakePath);
-        assert.strictEqual(result, 'instanceValue');
-        assert(
-          (client.pathTemplates.instancePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('namespace', async () => {
-      const fakePath = '/rendered/path/namespace';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        instance: 'instanceValue',
-        namespace: 'namespaceValue',
-      };
-      const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.namespacePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.namespacePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('namespacePath', () => {
-        const result = client.namespacePath(
-          'projectValue',
-          'locationValue',
-          'instanceValue',
-          'namespaceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.namespacePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromNamespaceName', () => {
-        const result = client.matchProjectFromNamespaceName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.namespacePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromNamespaceName', () => {
-        const result = client.matchLocationFromNamespaceName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.namespacePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchInstanceFromNamespaceName', () => {
-        const result = client.matchInstanceFromNamespaceName(fakePath);
-        assert.strictEqual(result, 'instanceValue');
-        assert(
-          (client.pathTemplates.namespacePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchNamespaceFromNamespaceName', () => {
-        const result = client.matchNamespaceFromNamespaceName(fakePath);
-        assert.strictEqual(result, 'namespaceValue');
-        assert(
-          (client.pathTemplates.namespacePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

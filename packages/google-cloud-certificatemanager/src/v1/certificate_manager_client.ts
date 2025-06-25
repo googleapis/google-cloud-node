@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -138,41 +127,20 @@ export class CertificateManagerClient {
    *     const client = new CertificateManagerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof CertificateManagerClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'certificatemanager.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -198,7 +166,7 @@ export class CertificateManagerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -214,9 +182,13 @@ export class CertificateManagerClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -264,311 +236,177 @@ export class CertificateManagerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listCertificates: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'certificates'
-      ),
-      listCertificateMaps: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'certificateMaps'
-      ),
-      listCertificateMapEntries: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'certificateMapEntries'
-      ),
-      listDnsAuthorizations: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'dnsAuthorizations'
-      ),
-      listCertificateIssuanceConfigs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'certificateIssuanceConfigs'
-      ),
-      listTrustConfigs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'trustConfigs'
-      ),
+      listCertificates:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'certificates'),
+      listCertificateMaps:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'certificateMaps'),
+      listCertificateMapEntries:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'certificateMapEntries'),
+      listDnsAuthorizations:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dnsAuthorizations'),
+      listCertificateIssuanceConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'certificateIssuanceConfigs'),
+      listTrustConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'trustConfigs')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createCertificateResponse = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.Certificate'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.Certificate') as gax.protobuf.Type;
     const createCertificateMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const updateCertificateResponse = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.Certificate'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.Certificate') as gax.protobuf.Type;
     const updateCertificateMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteCertificateResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteCertificateMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const createCertificateMapResponse = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.CertificateMap'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.CertificateMap') as gax.protobuf.Type;
     const createCertificateMapMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const updateCertificateMapResponse = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.CertificateMap'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.CertificateMap') as gax.protobuf.Type;
     const updateCertificateMapMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteCertificateMapResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteCertificateMapMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const createCertificateMapEntryResponse = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.CertificateMapEntry'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.CertificateMapEntry') as gax.protobuf.Type;
     const createCertificateMapEntryMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const updateCertificateMapEntryResponse = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.CertificateMapEntry'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.CertificateMapEntry') as gax.protobuf.Type;
     const updateCertificateMapEntryMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteCertificateMapEntryResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteCertificateMapEntryMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const createDnsAuthorizationResponse = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.DnsAuthorization'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.DnsAuthorization') as gax.protobuf.Type;
     const createDnsAuthorizationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const updateDnsAuthorizationResponse = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.DnsAuthorization'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.DnsAuthorization') as gax.protobuf.Type;
     const updateDnsAuthorizationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteDnsAuthorizationResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteDnsAuthorizationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const createCertificateIssuanceConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.CertificateIssuanceConfig'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.CertificateIssuanceConfig') as gax.protobuf.Type;
     const createCertificateIssuanceConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteCertificateIssuanceConfigResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteCertificateIssuanceConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const createTrustConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.TrustConfig'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.TrustConfig') as gax.protobuf.Type;
     const createTrustConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const updateTrustConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.TrustConfig'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.TrustConfig') as gax.protobuf.Type;
     const updateTrustConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteTrustConfigResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteTrustConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.certificatemanager.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.certificatemanager.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createCertificate: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createCertificateResponse.decode.bind(createCertificateResponse),
-        createCertificateMetadata.decode.bind(createCertificateMetadata)
-      ),
+        createCertificateMetadata.decode.bind(createCertificateMetadata)),
       updateCertificate: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateCertificateResponse.decode.bind(updateCertificateResponse),
-        updateCertificateMetadata.decode.bind(updateCertificateMetadata)
-      ),
+        updateCertificateMetadata.decode.bind(updateCertificateMetadata)),
       deleteCertificate: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteCertificateResponse.decode.bind(deleteCertificateResponse),
-        deleteCertificateMetadata.decode.bind(deleteCertificateMetadata)
-      ),
+        deleteCertificateMetadata.decode.bind(deleteCertificateMetadata)),
       createCertificateMap: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createCertificateMapResponse.decode.bind(createCertificateMapResponse),
-        createCertificateMapMetadata.decode.bind(createCertificateMapMetadata)
-      ),
+        createCertificateMapMetadata.decode.bind(createCertificateMapMetadata)),
       updateCertificateMap: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateCertificateMapResponse.decode.bind(updateCertificateMapResponse),
-        updateCertificateMapMetadata.decode.bind(updateCertificateMapMetadata)
-      ),
+        updateCertificateMapMetadata.decode.bind(updateCertificateMapMetadata)),
       deleteCertificateMap: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteCertificateMapResponse.decode.bind(deleteCertificateMapResponse),
-        deleteCertificateMapMetadata.decode.bind(deleteCertificateMapMetadata)
-      ),
+        deleteCertificateMapMetadata.decode.bind(deleteCertificateMapMetadata)),
       createCertificateMapEntry: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createCertificateMapEntryResponse.decode.bind(
-          createCertificateMapEntryResponse
-        ),
-        createCertificateMapEntryMetadata.decode.bind(
-          createCertificateMapEntryMetadata
-        )
-      ),
+        createCertificateMapEntryResponse.decode.bind(createCertificateMapEntryResponse),
+        createCertificateMapEntryMetadata.decode.bind(createCertificateMapEntryMetadata)),
       updateCertificateMapEntry: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateCertificateMapEntryResponse.decode.bind(
-          updateCertificateMapEntryResponse
-        ),
-        updateCertificateMapEntryMetadata.decode.bind(
-          updateCertificateMapEntryMetadata
-        )
-      ),
+        updateCertificateMapEntryResponse.decode.bind(updateCertificateMapEntryResponse),
+        updateCertificateMapEntryMetadata.decode.bind(updateCertificateMapEntryMetadata)),
       deleteCertificateMapEntry: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteCertificateMapEntryResponse.decode.bind(
-          deleteCertificateMapEntryResponse
-        ),
-        deleteCertificateMapEntryMetadata.decode.bind(
-          deleteCertificateMapEntryMetadata
-        )
-      ),
+        deleteCertificateMapEntryResponse.decode.bind(deleteCertificateMapEntryResponse),
+        deleteCertificateMapEntryMetadata.decode.bind(deleteCertificateMapEntryMetadata)),
       createDnsAuthorization: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createDnsAuthorizationResponse.decode.bind(
-          createDnsAuthorizationResponse
-        ),
-        createDnsAuthorizationMetadata.decode.bind(
-          createDnsAuthorizationMetadata
-        )
-      ),
+        createDnsAuthorizationResponse.decode.bind(createDnsAuthorizationResponse),
+        createDnsAuthorizationMetadata.decode.bind(createDnsAuthorizationMetadata)),
       updateDnsAuthorization: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateDnsAuthorizationResponse.decode.bind(
-          updateDnsAuthorizationResponse
-        ),
-        updateDnsAuthorizationMetadata.decode.bind(
-          updateDnsAuthorizationMetadata
-        )
-      ),
+        updateDnsAuthorizationResponse.decode.bind(updateDnsAuthorizationResponse),
+        updateDnsAuthorizationMetadata.decode.bind(updateDnsAuthorizationMetadata)),
       deleteDnsAuthorization: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteDnsAuthorizationResponse.decode.bind(
-          deleteDnsAuthorizationResponse
-        ),
-        deleteDnsAuthorizationMetadata.decode.bind(
-          deleteDnsAuthorizationMetadata
-        )
-      ),
-      createCertificateIssuanceConfig:
-        new this._gaxModule.LongrunningDescriptor(
-          this.operationsClient,
-          createCertificateIssuanceConfigResponse.decode.bind(
-            createCertificateIssuanceConfigResponse
-          ),
-          createCertificateIssuanceConfigMetadata.decode.bind(
-            createCertificateIssuanceConfigMetadata
-          )
-        ),
-      deleteCertificateIssuanceConfig:
-        new this._gaxModule.LongrunningDescriptor(
-          this.operationsClient,
-          deleteCertificateIssuanceConfigResponse.decode.bind(
-            deleteCertificateIssuanceConfigResponse
-          ),
-          deleteCertificateIssuanceConfigMetadata.decode.bind(
-            deleteCertificateIssuanceConfigMetadata
-          )
-        ),
+        deleteDnsAuthorizationResponse.decode.bind(deleteDnsAuthorizationResponse),
+        deleteDnsAuthorizationMetadata.decode.bind(deleteDnsAuthorizationMetadata)),
+      createCertificateIssuanceConfig: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createCertificateIssuanceConfigResponse.decode.bind(createCertificateIssuanceConfigResponse),
+        createCertificateIssuanceConfigMetadata.decode.bind(createCertificateIssuanceConfigMetadata)),
+      deleteCertificateIssuanceConfig: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteCertificateIssuanceConfigResponse.decode.bind(deleteCertificateIssuanceConfigResponse),
+        deleteCertificateIssuanceConfigMetadata.decode.bind(deleteCertificateIssuanceConfigMetadata)),
       createTrustConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createTrustConfigResponse.decode.bind(createTrustConfigResponse),
-        createTrustConfigMetadata.decode.bind(createTrustConfigMetadata)
-      ),
+        createTrustConfigMetadata.decode.bind(createTrustConfigMetadata)),
       updateTrustConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateTrustConfigResponse.decode.bind(updateTrustConfigResponse),
-        updateTrustConfigMetadata.decode.bind(updateTrustConfigMetadata)
-      ),
+        updateTrustConfigMetadata.decode.bind(updateTrustConfigMetadata)),
       deleteTrustConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteTrustConfigResponse.decode.bind(deleteTrustConfigResponse),
-        deleteTrustConfigMetadata.decode.bind(deleteTrustConfigMetadata)
-      ),
+        deleteTrustConfigMetadata.decode.bind(deleteTrustConfigMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.certificatemanager.v1.CertificateManager',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.certificatemanager.v1.CertificateManager', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -599,64 +437,28 @@ export class CertificateManagerClient {
     // Put together the "service stub" for
     // google.cloud.certificatemanager.v1.CertificateManager.
     this.certificateManagerStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.certificatemanager.v1.CertificateManager'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.certificatemanager.v1
-            .CertificateManager,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.certificatemanager.v1.CertificateManager') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.certificatemanager.v1.CertificateManager,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const certificateManagerStubMethods = [
-      'listCertificates',
-      'getCertificate',
-      'createCertificate',
-      'updateCertificate',
-      'deleteCertificate',
-      'listCertificateMaps',
-      'getCertificateMap',
-      'createCertificateMap',
-      'updateCertificateMap',
-      'deleteCertificateMap',
-      'listCertificateMapEntries',
-      'getCertificateMapEntry',
-      'createCertificateMapEntry',
-      'updateCertificateMapEntry',
-      'deleteCertificateMapEntry',
-      'listDnsAuthorizations',
-      'getDnsAuthorization',
-      'createDnsAuthorization',
-      'updateDnsAuthorization',
-      'deleteDnsAuthorization',
-      'listCertificateIssuanceConfigs',
-      'getCertificateIssuanceConfig',
-      'createCertificateIssuanceConfig',
-      'deleteCertificateIssuanceConfig',
-      'listTrustConfigs',
-      'getTrustConfig',
-      'createTrustConfig',
-      'updateTrustConfig',
-      'deleteTrustConfig',
-    ];
+    const certificateManagerStubMethods =
+        ['listCertificates', 'getCertificate', 'createCertificate', 'updateCertificate', 'deleteCertificate', 'listCertificateMaps', 'getCertificateMap', 'createCertificateMap', 'updateCertificateMap', 'deleteCertificateMap', 'listCertificateMapEntries', 'getCertificateMapEntry', 'createCertificateMapEntry', 'updateCertificateMapEntry', 'deleteCertificateMapEntry', 'listDnsAuthorizations', 'getDnsAuthorization', 'createDnsAuthorization', 'updateDnsAuthorization', 'deleteDnsAuthorization', 'listCertificateIssuanceConfigs', 'getCertificateIssuanceConfig', 'createCertificateIssuanceConfig', 'deleteCertificateIssuanceConfig', 'listTrustConfigs', 'getTrustConfig', 'createTrustConfig', 'updateTrustConfig', 'deleteTrustConfig'];
     for (const methodName of certificateManagerStubMethods) {
       const callPromise = this.certificateManagerStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -681,14 +483,8 @@ export class CertificateManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'certificatemanager.googleapis.com';
   }
@@ -699,14 +495,8 @@ export class CertificateManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'certificatemanager.googleapis.com';
   }
@@ -737,7 +527,9 @@ export class CertificateManagerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -746,9 +538,8 @@ export class CertificateManagerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -759,3838 +550,2549 @@ export class CertificateManagerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of a single Certificate.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A name of the certificate to describe. Must be in the format
-   *   `projects/* /locations/* /certificates/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.certificatemanager.v1.Certificate|Certificate}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.get_certificate.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_GetCertificate_async
-   */
+/**
+ * Gets details of a single Certificate.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the certificate to describe. Must be in the format
+ *   `projects/* /locations/* /certificates/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.certificatemanager.v1.Certificate|Certificate}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.get_certificate.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_GetCertificate_async
+ */
   getCertificate(
-    request?: protos.google.cloud.certificatemanager.v1.IGetCertificateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificate,
-      (
-        | protos.google.cloud.certificatemanager.v1.IGetCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IGetCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificate,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateRequest|undefined, {}|undefined
+      ]>;
   getCertificate(
-    request: protos.google.cloud.certificatemanager.v1.IGetCertificateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.certificatemanager.v1.ICertificate,
-      | protos.google.cloud.certificatemanager.v1.IGetCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificate(
-    request: protos.google.cloud.certificatemanager.v1.IGetCertificateRequest,
-    callback: Callback<
-      protos.google.cloud.certificatemanager.v1.ICertificate,
-      | protos.google.cloud.certificatemanager.v1.IGetCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificate(
-    request?: protos.google.cloud.certificatemanager.v1.IGetCertificateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.certificatemanager.v1.IGetCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.certificatemanager.v1.ICertificate,
-          | protos.google.cloud.certificatemanager.v1.IGetCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.certificatemanager.v1.ICertificate,
-      | protos.google.cloud.certificatemanager.v1.IGetCertificateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificate,
-      (
-        | protos.google.cloud.certificatemanager.v1.IGetCertificateRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.certificatemanager.v1.IGetCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificate(
+      request: protos.google.cloud.certificatemanager.v1.IGetCertificateRequest,
+      callback: Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificate,
+          protos.google.cloud.certificatemanager.v1.IGetCertificateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificate(
+      request?: protos.google.cloud.certificatemanager.v1.IGetCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificate,
+          protos.google.cloud.certificatemanager.v1.IGetCertificateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificate,
+          protos.google.cloud.certificatemanager.v1.IGetCertificateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificate,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCertificate request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.certificatemanager.v1.ICertificate,
-          | protos.google.cloud.certificatemanager.v1.IGetCertificateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.certificatemanager.v1.ICertificate,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCertificate response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCertificate(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.certificatemanager.v1.ICertificate,
-          (
-            | protos.google.cloud.certificatemanager.v1.IGetCertificateRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCertificate response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCertificate(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.certificatemanager.v1.ICertificate,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCertificate response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single CertificateMap.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A name of the certificate map to describe. Must be in the format
-   *   `projects/* /locations/* /certificateMaps/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.certificatemanager.v1.CertificateMap|CertificateMap}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.get_certificate_map.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_GetCertificateMap_async
-   */
+/**
+ * Gets details of a single CertificateMap.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the certificate map to describe. Must be in the format
+ *   `projects/* /locations/* /certificateMaps/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.certificatemanager.v1.CertificateMap|CertificateMap}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.get_certificate_map.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_GetCertificateMap_async
+ */
   getCertificateMap(
-    request?: protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificateMap,
-      (
-        | protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificateMap,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest|undefined, {}|undefined
+      ]>;
   getCertificateMap(
-    request: protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.certificatemanager.v1.ICertificateMap,
-      | protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificateMap(
-    request: protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest,
-    callback: Callback<
-      protos.google.cloud.certificatemanager.v1.ICertificateMap,
-      | protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificateMap(
-    request?: protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.certificatemanager.v1.ICertificateMap,
-          | protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.certificatemanager.v1.ICertificateMap,
-      | protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificateMap,
-      (
-        | protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificateMap(
+      request: protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest,
+      callback: Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificateMap,
+          protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificateMap(
+      request?: protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificateMap,
+          protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificateMap,
+          protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificateMap,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCertificateMap request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.certificatemanager.v1.ICertificateMap,
-          | protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.certificatemanager.v1.ICertificateMap,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCertificateMap response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCertificateMap(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.certificatemanager.v1.ICertificateMap,
-          (
-            | protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCertificateMap response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCertificateMap(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.certificatemanager.v1.ICertificateMap,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateMapRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCertificateMap response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single CertificateMapEntry.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A name of the certificate map entry to describe. Must be in the
-   *   format `projects/* /locations/* /certificateMaps/* /certificateMapEntries/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.certificatemanager.v1.CertificateMapEntry|CertificateMapEntry}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.get_certificate_map_entry.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_GetCertificateMapEntry_async
-   */
+/**
+ * Gets details of a single CertificateMapEntry.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the certificate map entry to describe. Must be in the
+ *   format `projects/* /locations/* /certificateMaps/* /certificateMapEntries/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.certificatemanager.v1.CertificateMapEntry|CertificateMapEntry}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.get_certificate_map_entry.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_GetCertificateMapEntry_async
+ */
   getCertificateMapEntry(
-    request?: protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-      (
-        | protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest|undefined, {}|undefined
+      ]>;
   getCertificateMapEntry(
-    request: protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-      | protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificateMapEntry(
-    request: protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest,
-    callback: Callback<
-      protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-      | protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificateMapEntry(
-    request?: protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-          | protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-      | protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-      (
-        | protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificateMapEntry(
+      request: protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest,
+      callback: Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
+          protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificateMapEntry(
+      request?: protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
+          protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
+          protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCertificateMapEntry request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-          | protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCertificateMapEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCertificateMapEntry(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-          (
-            | protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCertificateMapEntry response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCertificateMapEntry(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateMapEntryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCertificateMapEntry response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single DnsAuthorization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A name of the dns authorization to describe. Must be in the
-   *   format `projects/* /locations/* /dnsAuthorizations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.certificatemanager.v1.DnsAuthorization|DnsAuthorization}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.get_dns_authorization.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_GetDnsAuthorization_async
-   */
+/**
+ * Gets details of a single DnsAuthorization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the dns authorization to describe. Must be in the
+ *   format `projects/* /locations/* /dnsAuthorizations/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.certificatemanager.v1.DnsAuthorization|DnsAuthorization}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.get_dns_authorization.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_GetDnsAuthorization_async
+ */
   getDnsAuthorization(
-    request?: protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-      (
-        | protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
+        protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest|undefined, {}|undefined
+      ]>;
   getDnsAuthorization(
-    request: protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-      | protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDnsAuthorization(
-    request: protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest,
-    callback: Callback<
-      protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-      | protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDnsAuthorization(
-    request?: protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-          | protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-      | protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-      (
-        | protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDnsAuthorization(
+      request: protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest,
+      callback: Callback<
+          protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
+          protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDnsAuthorization(
+      request?: protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
+          protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
+          protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
+        protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDnsAuthorization request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-          | protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
+        protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDnsAuthorization response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDnsAuthorization(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-          (
-            | protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDnsAuthorization response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDnsAuthorization(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
+        protos.google.cloud.certificatemanager.v1.IGetDnsAuthorizationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDnsAuthorization response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single CertificateIssuanceConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A name of the certificate issuance config to describe. Must be in
-   *   the format `projects/* /locations/* /certificateIssuanceConfigs/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig|CertificateIssuanceConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.get_certificate_issuance_config.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_GetCertificateIssuanceConfig_async
-   */
+/**
+ * Gets details of a single CertificateIssuanceConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the certificate issuance config to describe. Must be in
+ *   the format `projects/* /locations/* /certificateIssuanceConfigs/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig|CertificateIssuanceConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.get_certificate_issuance_config.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_GetCertificateIssuanceConfig_async
+ */
   getCertificateIssuanceConfig(
-    request?: protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-      (
-        | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest|undefined, {}|undefined
+      ]>;
   getCertificateIssuanceConfig(
-    request: protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-      | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificateIssuanceConfig(
-    request: protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest,
-    callback: Callback<
-      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-      | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCertificateIssuanceConfig(
-    request?: protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-          | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-      | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-      (
-        | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificateIssuanceConfig(
+      request: protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest,
+      callback: Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+          protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCertificateIssuanceConfig(
+      request?: protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+          protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+          protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCertificateIssuanceConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-          | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCertificateIssuanceConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCertificateIssuanceConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-          (
-            | protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCertificateIssuanceConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCertificateIssuanceConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+        protos.google.cloud.certificatemanager.v1.IGetCertificateIssuanceConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCertificateIssuanceConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single TrustConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A name of the TrustConfig to describe. Must be in the format
-   *   `projects/* /locations/* /trustConfigs/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.certificatemanager.v1.TrustConfig|TrustConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.get_trust_config.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_GetTrustConfig_async
-   */
+/**
+ * Gets details of a single TrustConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the TrustConfig to describe. Must be in the format
+ *   `projects/* /locations/* /trustConfigs/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.certificatemanager.v1.TrustConfig|TrustConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.get_trust_config.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_GetTrustConfig_async
+ */
   getTrustConfig(
-    request?: protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ITrustConfig,
-      (
-        | protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ITrustConfig,
+        protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest|undefined, {}|undefined
+      ]>;
   getTrustConfig(
-    request: protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.certificatemanager.v1.ITrustConfig,
-      | protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTrustConfig(
-    request: protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest,
-    callback: Callback<
-      protos.google.cloud.certificatemanager.v1.ITrustConfig,
-      | protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTrustConfig(
-    request?: protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.certificatemanager.v1.ITrustConfig,
-          | protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.certificatemanager.v1.ITrustConfig,
-      | protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ITrustConfig,
-      (
-        | protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTrustConfig(
+      request: protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest,
+      callback: Callback<
+          protos.google.cloud.certificatemanager.v1.ITrustConfig,
+          protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTrustConfig(
+      request?: protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.certificatemanager.v1.ITrustConfig,
+          protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.certificatemanager.v1.ITrustConfig,
+          protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ITrustConfig,
+        protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getTrustConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.certificatemanager.v1.ITrustConfig,
-          | protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.certificatemanager.v1.ITrustConfig,
+        protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTrustConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getTrustConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.certificatemanager.v1.ITrustConfig,
-          (
-            | protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getTrustConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getTrustConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.certificatemanager.v1.ITrustConfig,
+        protos.google.cloud.certificatemanager.v1.IGetTrustConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getTrustConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a new Certificate in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the certificate. Must be in the format
-   *   `projects/* /locations/*`.
-   * @param {string} request.certificateId
-   *   Required. A user-provided name of the certificate.
-   * @param {google.cloud.certificatemanager.v1.Certificate} request.certificate
-   *   Required. A definition of the certificate to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificate_async
-   */
+/**
+ * Creates a new Certificate in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the certificate. Must be in the format
+ *   `projects/* /locations/*`.
+ * @param {string} request.certificateId
+ *   Required. A user-provided name of the certificate.
+ * @param {google.cloud.certificatemanager.v1.Certificate} request.certificate
+ *   Required. A definition of the certificate to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificate_async
+ */
   createCertificate(
-    request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificate,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createCertificate(
-    request: protos.google.cloud.certificatemanager.v1.ICreateCertificateRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificate,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.ICreateCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCertificate(
-    request: protos.google.cloud.certificatemanager.v1.ICreateCertificateRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificate,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.ICreateCertificateRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCertificate(
-    request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificate,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificate,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificate,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificate,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createCertificate response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createCertificate request %j', request);
-    return this.innerApiCalls
-      .createCertificate(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificate,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createCertificate response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createCertificate(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createCertificate response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createCertificate()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificate_async
-   */
-  async checkCreateCertificateProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.certificatemanager.v1.Certificate,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createCertificate()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificate_async
+ */
+  async checkCreateCertificateProgress(name: string): Promise<LROperation<protos.google.cloud.certificatemanager.v1.Certificate, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('createCertificate long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createCertificate,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.certificatemanager.v1.Certificate,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createCertificate, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.certificatemanager.v1.Certificate, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Updates a Certificate.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.certificatemanager.v1.Certificate} request.certificate
-   *   Required. A definition of the certificate to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. For the `FieldMask`
-   *   definition, see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.update_certificate.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateCertificate_async
-   */
+/**
+ * Updates a Certificate.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.certificatemanager.v1.Certificate} request.certificate
+ *   Required. A definition of the certificate to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The update mask applies to the resource. For the `FieldMask`
+ *   definition, see
+ *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.update_certificate.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateCertificate_async
+ */
   updateCertificate(
-    request?: protos.google.cloud.certificatemanager.v1.IUpdateCertificateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificate,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IUpdateCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateCertificate(
-    request: protos.google.cloud.certificatemanager.v1.IUpdateCertificateRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificate,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IUpdateCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCertificate(
-    request: protos.google.cloud.certificatemanager.v1.IUpdateCertificateRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificate,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IUpdateCertificateRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCertificate(
-    request?: protos.google.cloud.certificatemanager.v1.IUpdateCertificateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificate,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificate,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificate,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.IUpdateCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'certificate.name': request.certificate!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'certificate.name': request.certificate!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificate,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateCertificate response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateCertificate request %j', request);
-    return this.innerApiCalls
-      .updateCertificate(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificate,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCertificate response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateCertificate(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.certificatemanager.v1.ICertificate, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateCertificate response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateCertificate()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.update_certificate.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateCertificate_async
-   */
-  async checkUpdateCertificateProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.certificatemanager.v1.Certificate,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateCertificate()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.update_certificate.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateCertificate_async
+ */
+  async checkUpdateCertificateProgress(name: string): Promise<LROperation<protos.google.cloud.certificatemanager.v1.Certificate, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('updateCertificate long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateCertificate,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.certificatemanager.v1.Certificate,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateCertificate, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.certificatemanager.v1.Certificate, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single Certificate.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A name of the certificate to delete. Must be in the format
-   *   `projects/* /locations/* /certificates/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificate_async
-   */
+/**
+ * Deletes a single Certificate.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the certificate to delete. Must be in the format
+ *   `projects/* /locations/* /certificates/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificate_async
+ */
   deleteCertificate(
-    request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteCertificate(
-    request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCertificate(
-    request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCertificate(
-    request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteCertificate response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteCertificate request %j', request);
-    return this.innerApiCalls
-      .deleteCertificate(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCertificate response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteCertificate(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteCertificate response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteCertificate()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificate_async
-   */
-  async checkDeleteCertificateProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteCertificate()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificate_async
+ */
+  async checkDeleteCertificateProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('deleteCertificate long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteCertificate,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCertificate, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new CertificateMap in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the certificate map. Must be in the format
-   *   `projects/* /locations/*`.
-   * @param {string} request.certificateMapId
-   *   Required. A user-provided name of the certificate map.
-   * @param {google.cloud.certificatemanager.v1.CertificateMap} request.certificateMap
-   *   Required. A definition of the certificate map to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate_map.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificateMap_async
-   */
+/**
+ * Creates a new CertificateMap in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the certificate map. Must be in the format
+ *   `projects/* /locations/*`.
+ * @param {string} request.certificateMapId
+ *   Required. A user-provided name of the certificate map.
+ * @param {google.cloud.certificatemanager.v1.CertificateMap} request.certificateMap
+ *   Required. A definition of the certificate map to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate_map.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificateMap_async
+ */
   createCertificateMap(
-    request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMap,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createCertificateMap(
-    request: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMap,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCertificateMap(
-    request: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMap,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCertificateMap(
-    request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificateMap,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMap,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMap,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificateMap,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createCertificateMap response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createCertificateMap request %j', request);
-    return this.innerApiCalls
-      .createCertificateMap(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificateMap,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createCertificateMap response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createCertificateMap(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createCertificateMap response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createCertificateMap()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate_map.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificateMap_async
-   */
-  async checkCreateCertificateMapProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.certificatemanager.v1.CertificateMap,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createCertificateMap()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate_map.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificateMap_async
+ */
+  async checkCreateCertificateMapProgress(name: string): Promise<LROperation<protos.google.cloud.certificatemanager.v1.CertificateMap, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('createCertificateMap long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createCertificateMap,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.certificatemanager.v1.CertificateMap,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createCertificateMap, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.certificatemanager.v1.CertificateMap, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Updates a CertificateMap.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.certificatemanager.v1.CertificateMap} request.certificateMap
-   *   Required. A definition of the certificate map to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. For the `FieldMask`
-   *   definition, see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.update_certificate_map.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateCertificateMap_async
-   */
+/**
+ * Updates a CertificateMap.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.certificatemanager.v1.CertificateMap} request.certificateMap
+ *   Required. A definition of the certificate map to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The update mask applies to the resource. For the `FieldMask`
+ *   definition, see
+ *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.update_certificate_map.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateCertificateMap_async
+ */
   updateCertificateMap(
-    request?: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMap,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateCertificateMap(
-    request: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMap,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCertificateMap(
-    request: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMap,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCertificateMap(
-    request?: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificateMap,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMap,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMap,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'certificate_map.name': request.certificateMap!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'certificate_map.name': request.certificateMap!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificateMap,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateCertificateMap response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateCertificateMap request %j', request);
-    return this.innerApiCalls
-      .updateCertificateMap(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificateMap,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCertificateMap response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateCertificateMap(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMap, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateCertificateMap response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateCertificateMap()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.update_certificate_map.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateCertificateMap_async
-   */
-  async checkUpdateCertificateMapProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.certificatemanager.v1.CertificateMap,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateCertificateMap()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.update_certificate_map.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateCertificateMap_async
+ */
+  async checkUpdateCertificateMapProgress(name: string): Promise<LROperation<protos.google.cloud.certificatemanager.v1.CertificateMap, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('updateCertificateMap long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateCertificateMap,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.certificatemanager.v1.CertificateMap,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateCertificateMap, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.certificatemanager.v1.CertificateMap, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single CertificateMap. A Certificate Map can't be deleted
-   * if it contains Certificate Map Entries. Remove all the entries from
-   * the map before calling this method.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A name of the certificate map to delete. Must be in the format
-   *   `projects/* /locations/* /certificateMaps/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate_map.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificateMap_async
-   */
+/**
+ * Deletes a single CertificateMap. A Certificate Map can't be deleted
+ * if it contains Certificate Map Entries. Remove all the entries from
+ * the map before calling this method.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the certificate map to delete. Must be in the format
+ *   `projects/* /locations/* /certificateMaps/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate_map.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificateMap_async
+ */
   deleteCertificateMap(
-    request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteCertificateMap(
-    request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCertificateMap(
-    request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCertificateMap(
-    request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteCertificateMap response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteCertificateMap request %j', request);
-    return this.innerApiCalls
-      .deleteCertificateMap(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCertificateMap response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteCertificateMap(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteCertificateMap response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteCertificateMap()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate_map.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificateMap_async
-   */
-  async checkDeleteCertificateMapProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteCertificateMap()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate_map.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificateMap_async
+ */
+  async checkDeleteCertificateMapProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('deleteCertificateMap long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteCertificateMap,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCertificateMap, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new CertificateMapEntry in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the certificate map entry. Must be in the
-   *   format `projects/* /locations/* /certificateMaps/*`.
-   * @param {string} request.certificateMapEntryId
-   *   Required. A user-provided name of the certificate map entry.
-   * @param {google.cloud.certificatemanager.v1.CertificateMapEntry} request.certificateMapEntry
-   *   Required. A definition of the certificate map entry to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate_map_entry.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificateMapEntry_async
-   */
+/**
+ * Creates a new CertificateMapEntry in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the certificate map entry. Must be in the
+ *   format `projects/* /locations/* /certificateMaps/*`.
+ * @param {string} request.certificateMapEntryId
+ *   Required. A user-provided name of the certificate map entry.
+ * @param {google.cloud.certificatemanager.v1.CertificateMapEntry} request.certificateMapEntry
+ *   Required. A definition of the certificate map entry to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate_map_entry.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificateMapEntry_async
+ */
   createCertificateMapEntry(
-    request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapEntryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapEntryRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createCertificateMapEntry(
-    request: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapEntryRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapEntryRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCertificateMapEntry(
-    request: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapEntryRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapEntryRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCertificateMapEntry(
-    request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapEntryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateMapEntryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createCertificateMapEntry response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createCertificateMapEntry request %j', request);
-    return this.innerApiCalls
-      .createCertificateMapEntry(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createCertificateMapEntry response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createCertificateMapEntry(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createCertificateMapEntry response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createCertificateMapEntry()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate_map_entry.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificateMapEntry_async
-   */
-  async checkCreateCertificateMapEntryProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.certificatemanager.v1.CertificateMapEntry,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createCertificateMapEntry()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate_map_entry.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificateMapEntry_async
+ */
+  async checkCreateCertificateMapEntryProgress(name: string): Promise<LROperation<protos.google.cloud.certificatemanager.v1.CertificateMapEntry, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('createCertificateMapEntry long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createCertificateMapEntry,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.certificatemanager.v1.CertificateMapEntry,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createCertificateMapEntry, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.certificatemanager.v1.CertificateMapEntry, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Updates a CertificateMapEntry.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.certificatemanager.v1.CertificateMapEntry} request.certificateMapEntry
-   *   Required. A definition of the certificate map entry to create map entry.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. For the `FieldMask`
-   *   definition, see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.update_certificate_map_entry.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateCertificateMapEntry_async
-   */
+/**
+ * Updates a CertificateMapEntry.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.certificatemanager.v1.CertificateMapEntry} request.certificateMapEntry
+ *   Required. A definition of the certificate map entry to create map entry.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The update mask applies to the resource. For the `FieldMask`
+ *   definition, see
+ *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.update_certificate_map_entry.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateCertificateMapEntry_async
+ */
   updateCertificateMapEntry(
-    request?: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapEntryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapEntryRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateCertificateMapEntry(
-    request: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapEntryRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapEntryRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCertificateMapEntry(
-    request: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapEntryRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapEntryRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateCertificateMapEntry(
-    request?: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapEntryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.IUpdateCertificateMapEntryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'certificate_map_entry.name': request.certificateMapEntry!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'certificate_map_entry.name': request.certificateMapEntry!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateCertificateMapEntry response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateCertificateMapEntry request %j', request);
-    return this.innerApiCalls
-      .updateCertificateMapEntry(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificateMapEntry,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCertificateMapEntry response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateCertificateMapEntry(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateCertificateMapEntry response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateCertificateMapEntry()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.update_certificate_map_entry.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateCertificateMapEntry_async
-   */
-  async checkUpdateCertificateMapEntryProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.certificatemanager.v1.CertificateMapEntry,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateCertificateMapEntry()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.update_certificate_map_entry.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateCertificateMapEntry_async
+ */
+  async checkUpdateCertificateMapEntryProgress(name: string): Promise<LROperation<protos.google.cloud.certificatemanager.v1.CertificateMapEntry, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('updateCertificateMapEntry long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateCertificateMapEntry,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.certificatemanager.v1.CertificateMapEntry,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateCertificateMapEntry, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.certificatemanager.v1.CertificateMapEntry, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single CertificateMapEntry.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A name of the certificate map entry to delete. Must be in the
-   *   format `projects/* /locations/* /certificateMaps/* /certificateMapEntries/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate_map_entry.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificateMapEntry_async
-   */
+/**
+ * Deletes a single CertificateMapEntry.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the certificate map entry to delete. Must be in the
+ *   format `projects/* /locations/* /certificateMaps/* /certificateMapEntries/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate_map_entry.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificateMapEntry_async
+ */
   deleteCertificateMapEntry(
-    request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapEntryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapEntryRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteCertificateMapEntry(
-    request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapEntryRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapEntryRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCertificateMapEntry(
-    request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapEntryRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapEntryRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCertificateMapEntry(
-    request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapEntryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateMapEntryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteCertificateMapEntry response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteCertificateMapEntry request %j', request);
-    return this.innerApiCalls
-      .deleteCertificateMapEntry(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCertificateMapEntry response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteCertificateMapEntry(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteCertificateMapEntry response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteCertificateMapEntry()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate_map_entry.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificateMapEntry_async
-   */
-  async checkDeleteCertificateMapEntryProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteCertificateMapEntry()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate_map_entry.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificateMapEntry_async
+ */
+  async checkDeleteCertificateMapEntryProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('deleteCertificateMapEntry long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteCertificateMapEntry,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCertificateMapEntry, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new DnsAuthorization in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the dns authorization. Must be in the
-   *   format `projects/* /locations/*`.
-   * @param {string} request.dnsAuthorizationId
-   *   Required. A user-provided name of the dns authorization.
-   * @param {google.cloud.certificatemanager.v1.DnsAuthorization} request.dnsAuthorization
-   *   Required. A definition of the dns authorization to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.create_dns_authorization.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_CreateDnsAuthorization_async
-   */
+/**
+ * Creates a new DnsAuthorization in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the dns authorization. Must be in the
+ *   format `projects/* /locations/*`.
+ * @param {string} request.dnsAuthorizationId
+ *   Required. A user-provided name of the dns authorization.
+ * @param {google.cloud.certificatemanager.v1.DnsAuthorization} request.dnsAuthorization
+ *   Required. A definition of the dns authorization to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.create_dns_authorization.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_CreateDnsAuthorization_async
+ */
   createDnsAuthorization(
-    request?: protos.google.cloud.certificatemanager.v1.ICreateDnsAuthorizationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.ICreateDnsAuthorizationRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createDnsAuthorization(
-    request: protos.google.cloud.certificatemanager.v1.ICreateDnsAuthorizationRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.ICreateDnsAuthorizationRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createDnsAuthorization(
-    request: protos.google.cloud.certificatemanager.v1.ICreateDnsAuthorizationRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.ICreateDnsAuthorizationRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createDnsAuthorization(
-    request?: protos.google.cloud.certificatemanager.v1.ICreateDnsAuthorizationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.ICreateDnsAuthorizationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createDnsAuthorization response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createDnsAuthorization request %j', request);
-    return this.innerApiCalls
-      .createDnsAuthorization(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createDnsAuthorization response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createDnsAuthorization(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createDnsAuthorization response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createDnsAuthorization()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.create_dns_authorization.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_CreateDnsAuthorization_async
-   */
-  async checkCreateDnsAuthorizationProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.certificatemanager.v1.DnsAuthorization,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createDnsAuthorization()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.create_dns_authorization.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_CreateDnsAuthorization_async
+ */
+  async checkCreateDnsAuthorizationProgress(name: string): Promise<LROperation<protos.google.cloud.certificatemanager.v1.DnsAuthorization, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('createDnsAuthorization long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createDnsAuthorization,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.certificatemanager.v1.DnsAuthorization,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createDnsAuthorization, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.certificatemanager.v1.DnsAuthorization, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Updates a DnsAuthorization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.certificatemanager.v1.DnsAuthorization} request.dnsAuthorization
-   *   Required. A definition of the dns authorization to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. For the `FieldMask`
-   *   definition, see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.update_dns_authorization.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateDnsAuthorization_async
-   */
+/**
+ * Updates a DnsAuthorization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.certificatemanager.v1.DnsAuthorization} request.dnsAuthorization
+ *   Required. A definition of the dns authorization to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The update mask applies to the resource. For the `FieldMask`
+ *   definition, see
+ *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.update_dns_authorization.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateDnsAuthorization_async
+ */
   updateDnsAuthorization(
-    request?: protos.google.cloud.certificatemanager.v1.IUpdateDnsAuthorizationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IUpdateDnsAuthorizationRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateDnsAuthorization(
-    request: protos.google.cloud.certificatemanager.v1.IUpdateDnsAuthorizationRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IUpdateDnsAuthorizationRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateDnsAuthorization(
-    request: protos.google.cloud.certificatemanager.v1.IUpdateDnsAuthorizationRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IUpdateDnsAuthorizationRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateDnsAuthorization(
-    request?: protos.google.cloud.certificatemanager.v1.IUpdateDnsAuthorizationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.IUpdateDnsAuthorizationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'dns_authorization.name': request.dnsAuthorization!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'dns_authorization.name': request.dnsAuthorization!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateDnsAuthorization response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateDnsAuthorization request %j', request);
-    return this.innerApiCalls
-      .updateDnsAuthorization(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.IDnsAuthorization,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDnsAuthorization response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateDnsAuthorization(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.certificatemanager.v1.IDnsAuthorization, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateDnsAuthorization response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateDnsAuthorization()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.update_dns_authorization.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateDnsAuthorization_async
-   */
-  async checkUpdateDnsAuthorizationProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.certificatemanager.v1.DnsAuthorization,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateDnsAuthorization()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.update_dns_authorization.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateDnsAuthorization_async
+ */
+  async checkUpdateDnsAuthorizationProgress(name: string): Promise<LROperation<protos.google.cloud.certificatemanager.v1.DnsAuthorization, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('updateDnsAuthorization long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateDnsAuthorization,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.certificatemanager.v1.DnsAuthorization,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateDnsAuthorization, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.certificatemanager.v1.DnsAuthorization, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single DnsAuthorization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A name of the dns authorization to delete. Must be in the format
-   *   `projects/* /locations/* /dnsAuthorizations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.delete_dns_authorization.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteDnsAuthorization_async
-   */
+/**
+ * Deletes a single DnsAuthorization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the dns authorization to delete. Must be in the format
+ *   `projects/* /locations/* /dnsAuthorizations/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.delete_dns_authorization.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteDnsAuthorization_async
+ */
   deleteDnsAuthorization(
-    request?: protos.google.cloud.certificatemanager.v1.IDeleteDnsAuthorizationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IDeleteDnsAuthorizationRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteDnsAuthorization(
-    request: protos.google.cloud.certificatemanager.v1.IDeleteDnsAuthorizationRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IDeleteDnsAuthorizationRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteDnsAuthorization(
-    request: protos.google.cloud.certificatemanager.v1.IDeleteDnsAuthorizationRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IDeleteDnsAuthorizationRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteDnsAuthorization(
-    request?: protos.google.cloud.certificatemanager.v1.IDeleteDnsAuthorizationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.IDeleteDnsAuthorizationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteDnsAuthorization response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteDnsAuthorization request %j', request);
-    return this.innerApiCalls
-      .deleteDnsAuthorization(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDnsAuthorization response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteDnsAuthorization(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteDnsAuthorization response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteDnsAuthorization()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.delete_dns_authorization.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteDnsAuthorization_async
-   */
-  async checkDeleteDnsAuthorizationProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteDnsAuthorization()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.delete_dns_authorization.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteDnsAuthorization_async
+ */
+  async checkDeleteDnsAuthorizationProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('deleteDnsAuthorization long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteDnsAuthorization,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteDnsAuthorization, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new CertificateIssuanceConfig in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the certificate issuance config. Must be
-   *   in the format `projects/* /locations/*`.
-   * @param {string} request.certificateIssuanceConfigId
-   *   Required. A user-provided name of the certificate config.
-   * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig} request.certificateIssuanceConfig
-   *   Required. A definition of the certificate issuance config to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate_issuance_config.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificateIssuanceConfig_async
-   */
+/**
+ * Creates a new CertificateIssuanceConfig in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the certificate issuance config. Must be
+ *   in the format `projects/* /locations/*`.
+ * @param {string} request.certificateIssuanceConfigId
+ *   Required. A user-provided name of the certificate config.
+ * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig} request.certificateIssuanceConfig
+ *   Required. A definition of the certificate issuance config to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate_issuance_config.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificateIssuanceConfig_async
+ */
   createCertificateIssuanceConfig(
-    request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createCertificateIssuanceConfig(
-    request: protos.google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCertificateIssuanceConfig(
-    request: protos.google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createCertificateIssuanceConfig(
-    request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.ICreateCertificateIssuanceConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'createCertificateIssuanceConfig response %j',
-            rawResponse
-          );
+          this._log.info('createCertificateIssuanceConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createCertificateIssuanceConfig request %j', request);
-    return this.innerApiCalls
-      .createCertificateIssuanceConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'createCertificateIssuanceConfig response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createCertificateIssuanceConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createCertificateIssuanceConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createCertificateIssuanceConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate_issuance_config.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificateIssuanceConfig_async
-   */
-  async checkCreateCertificateIssuanceConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createCertificateIssuanceConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.create_certificate_issuance_config.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_CreateCertificateIssuanceConfig_async
+ */
+  async checkCreateCertificateIssuanceConfigProgress(name: string): Promise<LROperation<protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('createCertificateIssuanceConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createCertificateIssuanceConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createCertificateIssuanceConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single CertificateIssuanceConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A name of the certificate issuance config to delete. Must be in
-   *   the format `projects/* /locations/* /certificateIssuanceConfigs/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate_issuance_config.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificateIssuanceConfig_async
-   */
+/**
+ * Deletes a single CertificateIssuanceConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the certificate issuance config to delete. Must be in
+ *   the format `projects/* /locations/* /certificateIssuanceConfigs/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate_issuance_config.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificateIssuanceConfig_async
+ */
   deleteCertificateIssuanceConfig(
-    request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteCertificateIssuanceConfig(
-    request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCertificateIssuanceConfig(
-    request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteCertificateIssuanceConfig(
-    request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'deleteCertificateIssuanceConfig response %j',
-            rawResponse
-          );
+          this._log.info('deleteCertificateIssuanceConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteCertificateIssuanceConfig request %j', request);
-    return this.innerApiCalls
-      .deleteCertificateIssuanceConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'deleteCertificateIssuanceConfig response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteCertificateIssuanceConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteCertificateIssuanceConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteCertificateIssuanceConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate_issuance_config.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificateIssuanceConfig_async
-   */
-  async checkDeleteCertificateIssuanceConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteCertificateIssuanceConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.delete_certificate_issuance_config.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteCertificateIssuanceConfig_async
+ */
+  async checkDeleteCertificateIssuanceConfigProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('deleteCertificateIssuanceConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteCertificateIssuanceConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCertificateIssuanceConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new TrustConfig in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the TrustConfig. Must be in the format
-   *   `projects/* /locations/*`.
-   * @param {string} request.trustConfigId
-   *   Required. A user-provided name of the TrustConfig. Must match the regexp
-   *   `[a-z0-9-]{1,63}`.
-   * @param {google.cloud.certificatemanager.v1.TrustConfig} request.trustConfig
-   *   Required. A definition of the TrustConfig to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.create_trust_config.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_CreateTrustConfig_async
-   */
+/**
+ * Creates a new TrustConfig in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the TrustConfig. Must be in the format
+ *   `projects/* /locations/*`.
+ * @param {string} request.trustConfigId
+ *   Required. A user-provided name of the TrustConfig. Must match the regexp
+ *   `[a-z0-9-]{1,63}`.
+ * @param {google.cloud.certificatemanager.v1.TrustConfig} request.trustConfig
+ *   Required. A definition of the TrustConfig to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.create_trust_config.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_CreateTrustConfig_async
+ */
   createTrustConfig(
-    request?: protos.google.cloud.certificatemanager.v1.ICreateTrustConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ITrustConfig,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.ICreateTrustConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createTrustConfig(
-    request: protos.google.cloud.certificatemanager.v1.ICreateTrustConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ITrustConfig,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.ICreateTrustConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createTrustConfig(
-    request: protos.google.cloud.certificatemanager.v1.ICreateTrustConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ITrustConfig,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.ICreateTrustConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createTrustConfig(
-    request?: protos.google.cloud.certificatemanager.v1.ICreateTrustConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ITrustConfig,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ITrustConfig,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ITrustConfig,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.ICreateTrustConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ITrustConfig,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createTrustConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createTrustConfig request %j', request);
-    return this.innerApiCalls
-      .createTrustConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ITrustConfig,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createTrustConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createTrustConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createTrustConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createTrustConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.create_trust_config.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_CreateTrustConfig_async
-   */
-  async checkCreateTrustConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.certificatemanager.v1.TrustConfig,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createTrustConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.create_trust_config.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_CreateTrustConfig_async
+ */
+  async checkCreateTrustConfigProgress(name: string): Promise<LROperation<protos.google.cloud.certificatemanager.v1.TrustConfig, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('createTrustConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createTrustConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.certificatemanager.v1.TrustConfig,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createTrustConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.certificatemanager.v1.TrustConfig, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Updates a TrustConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.certificatemanager.v1.TrustConfig} request.trustConfig
-   *   Required. A definition of the TrustConfig to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. For the `FieldMask`
-   *   definition, see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.update_trust_config.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateTrustConfig_async
-   */
+/**
+ * Updates a TrustConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.certificatemanager.v1.TrustConfig} request.trustConfig
+ *   Required. A definition of the TrustConfig to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The update mask applies to the resource. For the `FieldMask`
+ *   definition, see
+ *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.update_trust_config.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateTrustConfig_async
+ */
   updateTrustConfig(
-    request?: protos.google.cloud.certificatemanager.v1.IUpdateTrustConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ITrustConfig,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IUpdateTrustConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateTrustConfig(
-    request: protos.google.cloud.certificatemanager.v1.IUpdateTrustConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ITrustConfig,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IUpdateTrustConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateTrustConfig(
-    request: protos.google.cloud.certificatemanager.v1.IUpdateTrustConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ITrustConfig,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IUpdateTrustConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateTrustConfig(
-    request?: protos.google.cloud.certificatemanager.v1.IUpdateTrustConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ITrustConfig,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ITrustConfig,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.certificatemanager.v1.ITrustConfig,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.IUpdateTrustConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'trust_config.name': request.trustConfig!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'trust_config.name': request.trustConfig!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ITrustConfig,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateTrustConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateTrustConfig request %j', request);
-    return this.innerApiCalls
-      .updateTrustConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.certificatemanager.v1.ITrustConfig,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateTrustConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateTrustConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.certificatemanager.v1.ITrustConfig, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateTrustConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateTrustConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.update_trust_config.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateTrustConfig_async
-   */
-  async checkUpdateTrustConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.certificatemanager.v1.TrustConfig,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateTrustConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.update_trust_config.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateTrustConfig_async
+ */
+  async checkUpdateTrustConfigProgress(name: string): Promise<LROperation<protos.google.cloud.certificatemanager.v1.TrustConfig, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('updateTrustConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateTrustConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.certificatemanager.v1.TrustConfig,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateTrustConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.certificatemanager.v1.TrustConfig, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single TrustConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A name of the TrustConfig to delete. Must be in the format
-   *   `projects/* /locations/* /trustConfigs/*`.
-   * @param {string} request.etag
-   *   The current etag of the TrustConfig.
-   *   If an etag is provided and does not match the current etag of the resource,
-   *   deletion will be blocked and an ABORTED error will be returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.delete_trust_config.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteTrustConfig_async
-   */
+/**
+ * Deletes a single TrustConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the TrustConfig to delete. Must be in the format
+ *   `projects/* /locations/* /trustConfigs/*`.
+ * @param {string} request.etag
+ *   The current etag of the TrustConfig.
+ *   If an etag is provided and does not match the current etag of the resource,
+ *   deletion will be blocked and an ABORTED error will be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.delete_trust_config.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteTrustConfig_async
+ */
   deleteTrustConfig(
-    request?: protos.google.cloud.certificatemanager.v1.IDeleteTrustConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IDeleteTrustConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteTrustConfig(
-    request: protos.google.cloud.certificatemanager.v1.IDeleteTrustConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IDeleteTrustConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteTrustConfig(
-    request: protos.google.cloud.certificatemanager.v1.IDeleteTrustConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.certificatemanager.v1.IDeleteTrustConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteTrustConfig(
-    request?: protos.google.cloud.certificatemanager.v1.IDeleteTrustConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.certificatemanager.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.certificatemanager.v1.IDeleteTrustConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteTrustConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteTrustConfig request %j', request);
-    return this.innerApiCalls
-      .deleteTrustConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.certificatemanager.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteTrustConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteTrustConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.certificatemanager.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteTrustConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteTrustConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.delete_trust_config.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteTrustConfig_async
-   */
-  async checkDeleteTrustConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteTrustConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.delete_trust_config.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_DeleteTrustConfig_async
+ */
+  async checkDeleteTrustConfigProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.certificatemanager.v1.OperationMetadata>>{
     this._log.info('deleteTrustConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteTrustConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.certificatemanager.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteTrustConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.certificatemanager.v1.OperationMetadata>;
   }
-  /**
-   * Lists Certificates in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the certificate should be
-   *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificates to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificatesResponse`. Indicates that
-   *   this is a continuation of a prior `ListCertificates` call, and that the
-   *   system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate field names used to specify the order of the returned
-   *   results. The default sorting order is ascending. To specify descending
-   *   order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.certificatemanager.v1.Certificate|Certificate}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCertificatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Certificates in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the certificate should be
+ *   listed, specified in the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of certificates to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListCertificatesResponse`. Indicates that
+ *   this is a continuation of a prior `ListCertificates` call, and that the
+ *   system should return the next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the Certificates returned.
+ * @param {string} request.orderBy
+ *   A list of Certificate field names used to specify the order of the returned
+ *   results. The default sorting order is ascending. To specify descending
+ *   order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.certificatemanager.v1.Certificate|Certificate}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCertificatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificates(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificate[],
-      protos.google.cloud.certificatemanager.v1.IListCertificatesRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificatesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificate[],
+        protos.google.cloud.certificatemanager.v1.IListCertificatesRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListCertificatesResponse
+      ]>;
   listCertificates(
-    request: protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
-      | protos.google.cloud.certificatemanager.v1.IListCertificatesResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.ICertificate
-    >
-  ): void;
-  listCertificates(
-    request: protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
-      | protos.google.cloud.certificatemanager.v1.IListCertificatesResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.ICertificate
-    >
-  ): void;
-  listCertificates(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
-          | protos.google.cloud.certificatemanager.v1.IListCertificatesResponse
-          | null
-          | undefined,
-          protos.google.cloud.certificatemanager.v1.ICertificate
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
-      | protos.google.cloud.certificatemanager.v1.IListCertificatesResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.ICertificate
-    >
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificate[],
-      protos.google.cloud.certificatemanager.v1.IListCertificatesRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificatesResponse,
-    ]
-  > | void {
+          protos.google.cloud.certificatemanager.v1.IListCertificatesResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificate>): void;
+  listCertificates(
+      request: protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
+          protos.google.cloud.certificatemanager.v1.IListCertificatesResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificate>): void;
+  listCertificates(
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
+          protos.google.cloud.certificatemanager.v1.IListCertificatesResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificate>,
+      callback?: PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
+          protos.google.cloud.certificatemanager.v1.IListCertificatesResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificate>):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificate[],
+        protos.google.cloud.certificatemanager.v1.IListCertificatesRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListCertificatesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
-          | protos.google.cloud.certificatemanager.v1.IListCertificatesResponse
-          | null
-          | undefined,
-          protos.google.cloud.certificatemanager.v1.ICertificate
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
+      protos.google.cloud.certificatemanager.v1.IListCertificatesResponse|null|undefined,
+      protos.google.cloud.certificatemanager.v1.ICertificate>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCertificates values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4599,65 +3101,62 @@ export class CertificateManagerClient {
     this._log.info('listCertificates request %j', request);
     return this.innerApiCalls
       .listCertificates(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.certificatemanager.v1.ICertificate[],
-          protos.google.cloud.certificatemanager.v1.IListCertificatesRequest | null,
-          protos.google.cloud.certificatemanager.v1.IListCertificatesResponse,
-        ]) => {
-          this._log.info('listCertificates values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.certificatemanager.v1.ICertificate[],
+        protos.google.cloud.certificatemanager.v1.IListCertificatesRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListCertificatesResponse
+      ]) => {
+        this._log.info('listCertificates values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCertificates`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the certificate should be
-   *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificates to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificatesResponse`. Indicates that
-   *   this is a continuation of a prior `ListCertificates` call, and that the
-   *   system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate field names used to specify the order of the returned
-   *   results. The default sorting order is ascending. To specify descending
-   *   order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.certificatemanager.v1.Certificate|Certificate} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCertificatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCertificates`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the certificate should be
+ *   listed, specified in the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of certificates to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListCertificatesResponse`. Indicates that
+ *   this is a continuation of a prior `ListCertificates` call, and that the
+ *   system should return the next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the Certificates returned.
+ * @param {string} request.orderBy
+ *   A list of Certificate field names used to specify the order of the returned
+ *   results. The default sorting order is ascending. To specify descending
+ *   order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.certificatemanager.v1.Certificate|Certificate} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCertificatesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificatesStream(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCertificates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificates stream %j', request);
     return this.descriptors.page.listCertificates.createStream(
       this.innerApiCalls.listCertificates as GaxCall,
@@ -4666,56 +3165,55 @@ export class CertificateManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listCertificates`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the certificate should be
-   *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificates to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificatesResponse`. Indicates that
-   *   this is a continuation of a prior `ListCertificates` call, and that the
-   *   system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate field names used to specify the order of the returned
-   *   results. The default sorting order is ascending. To specify descending
-   *   order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.certificatemanager.v1.Certificate|Certificate}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.list_certificates.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_ListCertificates_async
-   */
+/**
+ * Equivalent to `listCertificates`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the certificate should be
+ *   listed, specified in the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of certificates to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListCertificatesResponse`. Indicates that
+ *   this is a continuation of a prior `ListCertificates` call, and that the
+ *   system should return the next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the Certificates returned.
+ * @param {string} request.orderBy
+ *   A list of Certificate field names used to specify the order of the returned
+ *   results. The default sorting order is ascending. To specify descending
+ *   order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.certificatemanager.v1.Certificate|Certificate}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.list_certificates.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_ListCertificates_async
+ */
   listCertificatesAsync(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificate> {
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificatesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificate>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCertificates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificates iterate %j', request);
     return this.descriptors.page.listCertificates.asyncIterate(
       this.innerApiCalls['listCertificates'] as GaxCall,
@@ -4723,121 +3221,96 @@ export class CertificateManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificate>;
   }
-  /**
-   * Lists CertificateMaps in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the certificate maps should
-   *   be listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate maps to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateMapsResponse`. Indicates
-   *   that this is a continuation of a prior `ListCertificateMaps` call, and that
-   *   the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates Maps returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate Map field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
-   *   descending order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.certificatemanager.v1.CertificateMap|CertificateMap}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCertificateMapsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists CertificateMaps in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the certificate maps should
+ *   be listed, specified in the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of certificate maps to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListCertificateMapsResponse`. Indicates
+ *   that this is a continuation of a prior `ListCertificateMaps` call, and that
+ *   the system should return the next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the Certificates Maps returned.
+ * @param {string} request.orderBy
+ *   A list of Certificate Map field names used to specify the order of the
+ *   returned results. The default sorting order is ascending. To specify
+ *   descending order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.certificatemanager.v1.CertificateMap|CertificateMap}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCertificateMapsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificateMaps(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificateMap[],
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificateMap[],
+        protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse
+      ]>;
   listCertificateMaps(
-    request: protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
-      | protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.ICertificateMap
-    >
-  ): void;
-  listCertificateMaps(
-    request: protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
-      | protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.ICertificateMap
-    >
-  ): void;
-  listCertificateMaps(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
-          | protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse
-          | null
-          | undefined,
-          protos.google.cloud.certificatemanager.v1.ICertificateMap
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
-      | protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.ICertificateMap
-    >
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificateMap[],
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse,
-    ]
-  > | void {
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateMap>): void;
+  listCertificateMaps(
+      request: protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateMap>): void;
+  listCertificateMaps(
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateMap>,
+      callback?: PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateMap>):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificateMap[],
+        protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
-          | protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse
-          | null
-          | undefined,
-          protos.google.cloud.certificatemanager.v1.ICertificateMap
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
+      protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse|null|undefined,
+      protos.google.cloud.certificatemanager.v1.ICertificateMap>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCertificateMaps values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4846,65 +3319,62 @@ export class CertificateManagerClient {
     this._log.info('listCertificateMaps request %j', request);
     return this.innerApiCalls
       .listCertificateMaps(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.certificatemanager.v1.ICertificateMap[],
-          protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest | null,
-          protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse,
-        ]) => {
-          this._log.info('listCertificateMaps values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.certificatemanager.v1.ICertificateMap[],
+        protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListCertificateMapsResponse
+      ]) => {
+        this._log.info('listCertificateMaps values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCertificateMaps`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the certificate maps should
-   *   be listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate maps to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateMapsResponse`. Indicates
-   *   that this is a continuation of a prior `ListCertificateMaps` call, and that
-   *   the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates Maps returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate Map field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
-   *   descending order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.certificatemanager.v1.CertificateMap|CertificateMap} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCertificateMapsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCertificateMaps`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the certificate maps should
+ *   be listed, specified in the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of certificate maps to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListCertificateMapsResponse`. Indicates
+ *   that this is a continuation of a prior `ListCertificateMaps` call, and that
+ *   the system should return the next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the Certificates Maps returned.
+ * @param {string} request.orderBy
+ *   A list of Certificate Map field names used to specify the order of the
+ *   returned results. The default sorting order is ascending. To specify
+ *   descending order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.certificatemanager.v1.CertificateMap|CertificateMap} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCertificateMapsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificateMapsStream(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCertificateMaps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificateMaps stream %j', request);
     return this.descriptors.page.listCertificateMaps.createStream(
       this.innerApiCalls.listCertificateMaps as GaxCall,
@@ -4913,56 +3383,55 @@ export class CertificateManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listCertificateMaps`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the certificate maps should
-   *   be listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate maps to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateMapsResponse`. Indicates
-   *   that this is a continuation of a prior `ListCertificateMaps` call, and that
-   *   the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates Maps returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate Map field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
-   *   descending order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.certificatemanager.v1.CertificateMap|CertificateMap}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.list_certificate_maps.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_ListCertificateMaps_async
-   */
+/**
+ * Equivalent to `listCertificateMaps`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the certificate maps should
+ *   be listed, specified in the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of certificate maps to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListCertificateMapsResponse`. Indicates
+ *   that this is a continuation of a prior `ListCertificateMaps` call, and that
+ *   the system should return the next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the Certificates Maps returned.
+ * @param {string} request.orderBy
+ *   A list of Certificate Map field names used to specify the order of the
+ *   returned results. The default sorting order is ascending. To specify
+ *   descending order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.certificatemanager.v1.CertificateMap|CertificateMap}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.list_certificate_maps.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_ListCertificateMaps_async
+ */
   listCertificateMapsAsync(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificateMap> {
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificateMap>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCertificateMaps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificateMaps iterate %j', request);
     return this.descriptors.page.listCertificateMaps.asyncIterate(
       this.innerApiCalls['listCertificateMaps'] as GaxCall,
@@ -4970,126 +3439,101 @@ export class CertificateManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificateMap>;
   }
-  /**
-   * Lists CertificateMapEntries in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project, location and certificate map from which the
-   *   certificate map entries should be listed, specified in the format
-   *   `projects/* /locations/* /certificateMaps/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate map entries to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 50 certificate map entries will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateMapEntriesResponse`.
-   *   Indicates that this is a continuation of a prior
-   *   `ListCertificateMapEntries` call, and that the system should return the
-   *   next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the returned Certificate Map Entries.
-   * @param {string} request.orderBy
-   *   A list of Certificate Map Entry field names used to specify
-   *   the order of the returned results. The default sorting order is ascending.
-   *   To specify descending order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.certificatemanager.v1.CertificateMapEntry|CertificateMapEntry}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCertificateMapEntriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists CertificateMapEntries in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project, location and certificate map from which the
+ *   certificate map entries should be listed, specified in the format
+ *   `projects/* /locations/* /certificateMaps/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of certificate map entries to return. The service may return
+ *   fewer than this value.
+ *   If unspecified, at most 50 certificate map entries will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListCertificateMapEntriesResponse`.
+ *   Indicates that this is a continuation of a prior
+ *   `ListCertificateMapEntries` call, and that the system should return the
+ *   next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the returned Certificate Map Entries.
+ * @param {string} request.orderBy
+ *   A list of Certificate Map Entry field names used to specify
+ *   the order of the returned results. The default sorting order is ascending.
+ *   To specify descending order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.certificatemanager.v1.CertificateMapEntry|CertificateMapEntry}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCertificateMapEntriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificateMapEntries(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificateMapEntry[],
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry[],
+        protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse
+      ]>;
   listCertificateMapEntries(
-    request: protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
-      | protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.ICertificateMapEntry
-    >
-  ): void;
-  listCertificateMapEntries(
-    request: protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
-      | protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.ICertificateMapEntry
-    >
-  ): void;
-  listCertificateMapEntries(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
-          | protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
-      | protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.ICertificateMapEntry
-    >
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificateMapEntry[],
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse,
-    ]
-  > | void {
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry>): void;
+  listCertificateMapEntries(
+      request: protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry>): void;
+  listCertificateMapEntries(
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry>,
+      callback?: PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
+          protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry>):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry[],
+        protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
-          | protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
+      protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse|null|undefined,
+      protos.google.cloud.certificatemanager.v1.ICertificateMapEntry>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCertificateMapEntries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5098,70 +3542,67 @@ export class CertificateManagerClient {
     this._log.info('listCertificateMapEntries request %j', request);
     return this.innerApiCalls
       .listCertificateMapEntries(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.certificatemanager.v1.ICertificateMapEntry[],
-          protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest | null,
-          protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse,
-        ]) => {
-          this._log.info('listCertificateMapEntries values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.certificatemanager.v1.ICertificateMapEntry[],
+        protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesResponse
+      ]) => {
+        this._log.info('listCertificateMapEntries values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCertificateMapEntries`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project, location and certificate map from which the
-   *   certificate map entries should be listed, specified in the format
-   *   `projects/* /locations/* /certificateMaps/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate map entries to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 50 certificate map entries will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateMapEntriesResponse`.
-   *   Indicates that this is a continuation of a prior
-   *   `ListCertificateMapEntries` call, and that the system should return the
-   *   next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the returned Certificate Map Entries.
-   * @param {string} request.orderBy
-   *   A list of Certificate Map Entry field names used to specify
-   *   the order of the returned results. The default sorting order is ascending.
-   *   To specify descending order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.certificatemanager.v1.CertificateMapEntry|CertificateMapEntry} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCertificateMapEntriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCertificateMapEntries`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project, location and certificate map from which the
+ *   certificate map entries should be listed, specified in the format
+ *   `projects/* /locations/* /certificateMaps/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of certificate map entries to return. The service may return
+ *   fewer than this value.
+ *   If unspecified, at most 50 certificate map entries will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListCertificateMapEntriesResponse`.
+ *   Indicates that this is a continuation of a prior
+ *   `ListCertificateMapEntries` call, and that the system should return the
+ *   next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the returned Certificate Map Entries.
+ * @param {string} request.orderBy
+ *   A list of Certificate Map Entry field names used to specify
+ *   the order of the returned results. The default sorting order is ascending.
+ *   To specify descending order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.certificatemanager.v1.CertificateMapEntry|CertificateMapEntry} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCertificateMapEntriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificateMapEntriesStream(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCertificateMapEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificateMapEntries stream %j', request);
     return this.descriptors.page.listCertificateMapEntries.createStream(
       this.innerApiCalls.listCertificateMapEntries as GaxCall,
@@ -5170,61 +3611,60 @@ export class CertificateManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listCertificateMapEntries`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project, location and certificate map from which the
-   *   certificate map entries should be listed, specified in the format
-   *   `projects/* /locations/* /certificateMaps/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate map entries to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 50 certificate map entries will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateMapEntriesResponse`.
-   *   Indicates that this is a continuation of a prior
-   *   `ListCertificateMapEntries` call, and that the system should return the
-   *   next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the returned Certificate Map Entries.
-   * @param {string} request.orderBy
-   *   A list of Certificate Map Entry field names used to specify
-   *   the order of the returned results. The default sorting order is ascending.
-   *   To specify descending order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.certificatemanager.v1.CertificateMapEntry|CertificateMapEntry}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.list_certificate_map_entries.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_ListCertificateMapEntries_async
-   */
+/**
+ * Equivalent to `listCertificateMapEntries`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project, location and certificate map from which the
+ *   certificate map entries should be listed, specified in the format
+ *   `projects/* /locations/* /certificateMaps/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of certificate map entries to return. The service may return
+ *   fewer than this value.
+ *   If unspecified, at most 50 certificate map entries will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListCertificateMapEntriesResponse`.
+ *   Indicates that this is a continuation of a prior
+ *   `ListCertificateMapEntries` call, and that the system should return the
+ *   next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the returned Certificate Map Entries.
+ * @param {string} request.orderBy
+ *   A list of Certificate Map Entry field names used to specify
+ *   the order of the returned results. The default sorting order is ascending.
+ *   To specify descending order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.certificatemanager.v1.CertificateMapEntry|CertificateMapEntry}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.list_certificate_map_entries.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_ListCertificateMapEntries_async
+ */
   listCertificateMapEntriesAsync(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry> {
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificateMapEntriesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCertificateMapEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificateMapEntries iterate %j', request);
     return this.descriptors.page.listCertificateMapEntries.asyncIterate(
       this.innerApiCalls['listCertificateMapEntries'] as GaxCall,
@@ -5232,121 +3672,96 @@ export class CertificateManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificateMapEntry>;
   }
-  /**
-   * Lists DnsAuthorizations in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the dns authorizations should
-   *   be listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of dns authorizations to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListDnsAuthorizationsResponse`. Indicates
-   *   that this is a continuation of a prior `ListDnsAuthorizations` call, and
-   *   that the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Dns Authorizations returned.
-   * @param {string} request.orderBy
-   *   A list of Dns Authorization field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
-   *   descending order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.certificatemanager.v1.DnsAuthorization|DnsAuthorization}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDnsAuthorizationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists DnsAuthorizations in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the dns authorizations should
+ *   be listed, specified in the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of dns authorizations to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListDnsAuthorizationsResponse`. Indicates
+ *   that this is a continuation of a prior `ListDnsAuthorizations` call, and
+ *   that the system should return the next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the Dns Authorizations returned.
+ * @param {string} request.orderBy
+ *   A list of Dns Authorization field names used to specify the order of the
+ *   returned results. The default sorting order is ascending. To specify
+ *   descending order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.certificatemanager.v1.DnsAuthorization|DnsAuthorization}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDnsAuthorizationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDnsAuthorizations(
-    request?: protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.IDnsAuthorization[],
-      protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.IDnsAuthorization[],
+        protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse
+      ]>;
   listDnsAuthorizations(
-    request: protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
-      | protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.IDnsAuthorization
-    >
-  ): void;
-  listDnsAuthorizations(
-    request: protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
-      | protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.IDnsAuthorization
-    >
-  ): void;
-  listDnsAuthorizations(
-    request?: protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
-          | protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.certificatemanager.v1.IDnsAuthorization
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
-      | protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.IDnsAuthorization
-    >
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.IDnsAuthorization[],
-      protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse,
-    ]
-  > | void {
+          protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.IDnsAuthorization>): void;
+  listDnsAuthorizations(
+      request: protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
+          protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.IDnsAuthorization>): void;
+  listDnsAuthorizations(
+      request?: protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
+          protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.IDnsAuthorization>,
+      callback?: PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
+          protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.IDnsAuthorization>):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.IDnsAuthorization[],
+        protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
-          | protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.certificatemanager.v1.IDnsAuthorization
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
+      protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse|null|undefined,
+      protos.google.cloud.certificatemanager.v1.IDnsAuthorization>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDnsAuthorizations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5355,65 +3770,62 @@ export class CertificateManagerClient {
     this._log.info('listDnsAuthorizations request %j', request);
     return this.innerApiCalls
       .listDnsAuthorizations(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.certificatemanager.v1.IDnsAuthorization[],
-          protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest | null,
-          protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse,
-        ]) => {
-          this._log.info('listDnsAuthorizations values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.certificatemanager.v1.IDnsAuthorization[],
+        protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsResponse
+      ]) => {
+        this._log.info('listDnsAuthorizations values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDnsAuthorizations`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the dns authorizations should
-   *   be listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of dns authorizations to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListDnsAuthorizationsResponse`. Indicates
-   *   that this is a continuation of a prior `ListDnsAuthorizations` call, and
-   *   that the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Dns Authorizations returned.
-   * @param {string} request.orderBy
-   *   A list of Dns Authorization field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
-   *   descending order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.certificatemanager.v1.DnsAuthorization|DnsAuthorization} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDnsAuthorizationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDnsAuthorizations`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the dns authorizations should
+ *   be listed, specified in the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of dns authorizations to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListDnsAuthorizationsResponse`. Indicates
+ *   that this is a continuation of a prior `ListDnsAuthorizations` call, and
+ *   that the system should return the next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the Dns Authorizations returned.
+ * @param {string} request.orderBy
+ *   A list of Dns Authorization field names used to specify the order of the
+ *   returned results. The default sorting order is ascending. To specify
+ *   descending order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.certificatemanager.v1.DnsAuthorization|DnsAuthorization} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDnsAuthorizationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDnsAuthorizationsStream(
-    request?: protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDnsAuthorizations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDnsAuthorizations stream %j', request);
     return this.descriptors.page.listDnsAuthorizations.createStream(
       this.innerApiCalls.listDnsAuthorizations as GaxCall,
@@ -5422,56 +3834,55 @@ export class CertificateManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listDnsAuthorizations`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the dns authorizations should
-   *   be listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of dns authorizations to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListDnsAuthorizationsResponse`. Indicates
-   *   that this is a continuation of a prior `ListDnsAuthorizations` call, and
-   *   that the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Dns Authorizations returned.
-   * @param {string} request.orderBy
-   *   A list of Dns Authorization field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
-   *   descending order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.certificatemanager.v1.DnsAuthorization|DnsAuthorization}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.list_dns_authorizations.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_ListDnsAuthorizations_async
-   */
+/**
+ * Equivalent to `listDnsAuthorizations`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the dns authorizations should
+ *   be listed, specified in the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of dns authorizations to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListDnsAuthorizationsResponse`. Indicates
+ *   that this is a continuation of a prior `ListDnsAuthorizations` call, and
+ *   that the system should return the next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the Dns Authorizations returned.
+ * @param {string} request.orderBy
+ *   A list of Dns Authorization field names used to specify the order of the
+ *   returned results. The default sorting order is ascending. To specify
+ *   descending order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.certificatemanager.v1.DnsAuthorization|DnsAuthorization}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.list_dns_authorizations.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_ListDnsAuthorizations_async
+ */
   listDnsAuthorizationsAsync(
-    request?: protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.certificatemanager.v1.IDnsAuthorization> {
+      request?: protos.google.cloud.certificatemanager.v1.IListDnsAuthorizationsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.certificatemanager.v1.IDnsAuthorization>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDnsAuthorizations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDnsAuthorizations iterate %j', request);
     return this.descriptors.page.listDnsAuthorizations.asyncIterate(
       this.innerApiCalls['listDnsAuthorizations'] as GaxCall,
@@ -5479,122 +3890,97 @@ export class CertificateManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.certificatemanager.v1.IDnsAuthorization>;
   }
-  /**
-   * Lists CertificateIssuanceConfigs in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the certificate should be
-   *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate configs to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateIssuanceConfigsResponse`.
-   *   Indicates that this is a continuation of a prior
-   *   `ListCertificateIssuanceConfigs` call, and that the system should return
-   *   the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates Configs returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate Config field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
-   *   descending order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig|CertificateIssuanceConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCertificateIssuanceConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists CertificateIssuanceConfigs in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the certificate should be
+ *   listed, specified in the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of certificate configs to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListCertificateIssuanceConfigsResponse`.
+ *   Indicates that this is a continuation of a prior
+ *   `ListCertificateIssuanceConfigs` call, and that the system should return
+ *   the next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the Certificates Configs returned.
+ * @param {string} request.orderBy
+ *   A list of Certificate Config field names used to specify the order of the
+ *   returned results. The default sorting order is ascending. To specify
+ *   descending order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig|CertificateIssuanceConfig}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCertificateIssuanceConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificateIssuanceConfigs(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig[],
-      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig[],
+        protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
+      ]>;
   listCertificateIssuanceConfigs(
-    request: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
-      | protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig
-    >
-  ): void;
-  listCertificateIssuanceConfigs(
-    request: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
-      | protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig
-    >
-  ): void;
-  listCertificateIssuanceConfigs(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
-          | protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
-      | protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig
-    >
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig[],
-      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse,
-    ]
-  > | void {
+          protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig>): void;
+  listCertificateIssuanceConfigs(
+      request: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+          protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig>): void;
+  listCertificateIssuanceConfigs(
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+          protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig>,
+      callback?: PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+          protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig>):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig[],
+        protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
-          | protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+      protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse|null|undefined,
+      protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCertificateIssuanceConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5603,67 +3989,63 @@ export class CertificateManagerClient {
     this._log.info('listCertificateIssuanceConfigs request %j', request);
     return this.innerApiCalls
       .listCertificateIssuanceConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig[],
-          protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest | null,
-          protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse,
-        ]) => {
-          this._log.info('listCertificateIssuanceConfigs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig[],
+        protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsResponse
+      ]) => {
+        this._log.info('listCertificateIssuanceConfigs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCertificateIssuanceConfigs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the certificate should be
-   *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate configs to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateIssuanceConfigsResponse`.
-   *   Indicates that this is a continuation of a prior
-   *   `ListCertificateIssuanceConfigs` call, and that the system should return
-   *   the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates Configs returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate Config field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
-   *   descending order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig|CertificateIssuanceConfig} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCertificateIssuanceConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCertificateIssuanceConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the certificate should be
+ *   listed, specified in the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of certificate configs to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListCertificateIssuanceConfigsResponse`.
+ *   Indicates that this is a continuation of a prior
+ *   `ListCertificateIssuanceConfigs` call, and that the system should return
+ *   the next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the Certificates Configs returned.
+ * @param {string} request.orderBy
+ *   A list of Certificate Config field names used to specify the order of the
+ *   returned results. The default sorting order is ascending. To specify
+ *   descending order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig|CertificateIssuanceConfig} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCertificateIssuanceConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCertificateIssuanceConfigsStream(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['listCertificateIssuanceConfigs'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    const defaultCallSettings = this._defaults['listCertificateIssuanceConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificateIssuanceConfigs stream %j', request);
     return this.descriptors.page.listCertificateIssuanceConfigs.createStream(
       this.innerApiCalls.listCertificateIssuanceConfigs as GaxCall,
@@ -5672,58 +4054,56 @@ export class CertificateManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listCertificateIssuanceConfigs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the certificate should be
-   *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate configs to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateIssuanceConfigsResponse`.
-   *   Indicates that this is a continuation of a prior
-   *   `ListCertificateIssuanceConfigs` call, and that the system should return
-   *   the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates Configs returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate Config field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
-   *   descending order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig|CertificateIssuanceConfig}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.list_certificate_issuance_configs.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_ListCertificateIssuanceConfigs_async
-   */
+/**
+ * Equivalent to `listCertificateIssuanceConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the certificate should be
+ *   listed, specified in the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of certificate configs to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListCertificateIssuanceConfigsResponse`.
+ *   Indicates that this is a continuation of a prior
+ *   `ListCertificateIssuanceConfigs` call, and that the system should return
+ *   the next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the Certificates Configs returned.
+ * @param {string} request.orderBy
+ *   A list of Certificate Config field names used to specify the order of the
+ *   returned results. The default sorting order is ascending. To specify
+ *   descending order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig|CertificateIssuanceConfig}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.list_certificate_issuance_configs.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_ListCertificateIssuanceConfigs_async
+ */
   listCertificateIssuanceConfigsAsync(
-    request?: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig> {
+      request?: protos.google.cloud.certificatemanager.v1.IListCertificateIssuanceConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings =
-      this._defaults['listCertificateIssuanceConfigs'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    const defaultCallSettings = this._defaults['listCertificateIssuanceConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
     this._log.info('listCertificateIssuanceConfigs iterate %j', request);
     return this.descriptors.page.listCertificateIssuanceConfigs.asyncIterate(
       this.innerApiCalls['listCertificateIssuanceConfigs'] as GaxCall,
@@ -5731,121 +4111,96 @@ export class CertificateManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig>;
   }
-  /**
-   * Lists TrustConfigs in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the TrustConfigs should be
-   *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of TrustConfigs to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListTrustConfigsResponse`. Indicates
-   *   that this is a continuation of a prior `ListTrustConfigs` call, and that
-   *   the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the TrustConfigs returned.
-   * @param {string} request.orderBy
-   *   A list of TrustConfig field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
-   *   descending order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.certificatemanager.v1.TrustConfig|TrustConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listTrustConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists TrustConfigs in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the TrustConfigs should be
+ *   listed, specified in the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of TrustConfigs to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListTrustConfigsResponse`. Indicates
+ *   that this is a continuation of a prior `ListTrustConfigs` call, and that
+ *   the system should return the next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the TrustConfigs returned.
+ * @param {string} request.orderBy
+ *   A list of TrustConfig field names used to specify the order of the
+ *   returned results. The default sorting order is ascending. To specify
+ *   descending order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.certificatemanager.v1.TrustConfig|TrustConfig}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listTrustConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTrustConfigs(
-    request?: protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ITrustConfig[],
-      protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ITrustConfig[],
+        protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse
+      ]>;
   listTrustConfigs(
-    request: protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
-      | protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.ITrustConfig
-    >
-  ): void;
-  listTrustConfigs(
-    request: protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
-      | protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.ITrustConfig
-    >
-  ): void;
-  listTrustConfigs(
-    request?: protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
-          | protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.certificatemanager.v1.ITrustConfig
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
-      | protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.certificatemanager.v1.ITrustConfig
-    >
-  ): Promise<
-    [
-      protos.google.cloud.certificatemanager.v1.ITrustConfig[],
-      protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest | null,
-      protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse,
-    ]
-  > | void {
+          protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ITrustConfig>): void;
+  listTrustConfigs(
+      request: protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
+          protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ITrustConfig>): void;
+  listTrustConfigs(
+      request?: protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
+          protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ITrustConfig>,
+      callback?: PaginationCallback<
+          protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
+          protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse|null|undefined,
+          protos.google.cloud.certificatemanager.v1.ITrustConfig>):
+      Promise<[
+        protos.google.cloud.certificatemanager.v1.ITrustConfig[],
+        protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
-          | protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.certificatemanager.v1.ITrustConfig
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
+      protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse|null|undefined,
+      protos.google.cloud.certificatemanager.v1.ITrustConfig>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTrustConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5854,65 +4209,62 @@ export class CertificateManagerClient {
     this._log.info('listTrustConfigs request %j', request);
     return this.innerApiCalls
       .listTrustConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.certificatemanager.v1.ITrustConfig[],
-          protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest | null,
-          protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse,
-        ]) => {
-          this._log.info('listTrustConfigs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.certificatemanager.v1.ITrustConfig[],
+        protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest|null,
+        protos.google.cloud.certificatemanager.v1.IListTrustConfigsResponse
+      ]) => {
+        this._log.info('listTrustConfigs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listTrustConfigs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the TrustConfigs should be
-   *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of TrustConfigs to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListTrustConfigsResponse`. Indicates
-   *   that this is a continuation of a prior `ListTrustConfigs` call, and that
-   *   the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the TrustConfigs returned.
-   * @param {string} request.orderBy
-   *   A list of TrustConfig field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
-   *   descending order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.certificatemanager.v1.TrustConfig|TrustConfig} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listTrustConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listTrustConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the TrustConfigs should be
+ *   listed, specified in the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of TrustConfigs to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListTrustConfigsResponse`. Indicates
+ *   that this is a continuation of a prior `ListTrustConfigs` call, and that
+ *   the system should return the next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the TrustConfigs returned.
+ * @param {string} request.orderBy
+ *   A list of TrustConfig field names used to specify the order of the
+ *   returned results. The default sorting order is ascending. To specify
+ *   descending order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.certificatemanager.v1.TrustConfig|TrustConfig} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listTrustConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTrustConfigsStream(
-    request?: protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTrustConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTrustConfigs stream %j', request);
     return this.descriptors.page.listTrustConfigs.createStream(
       this.innerApiCalls.listTrustConfigs as GaxCall,
@@ -5921,56 +4273,55 @@ export class CertificateManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listTrustConfigs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location from which the TrustConfigs should be
-   *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of TrustConfigs to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListTrustConfigsResponse`. Indicates
-   *   that this is a continuation of a prior `ListTrustConfigs` call, and that
-   *   the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the TrustConfigs returned.
-   * @param {string} request.orderBy
-   *   A list of TrustConfig field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
-   *   descending order for a field, add a suffix `" desc"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.certificatemanager.v1.TrustConfig|TrustConfig}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/certificate_manager.list_trust_configs.js</caption>
-   * region_tag:certificatemanager_v1_generated_CertificateManager_ListTrustConfigs_async
-   */
+/**
+ * Equivalent to `listTrustConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the TrustConfigs should be
+ *   listed, specified in the format `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Maximum number of TrustConfigs to return per call.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListTrustConfigsResponse`. Indicates
+ *   that this is a continuation of a prior `ListTrustConfigs` call, and that
+ *   the system should return the next page of data.
+ * @param {string} request.filter
+ *   Filter expression to restrict the TrustConfigs returned.
+ * @param {string} request.orderBy
+ *   A list of TrustConfig field names used to specify the order of the
+ *   returned results. The default sorting order is ascending. To specify
+ *   descending order for a field, add a suffix `" desc"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.certificatemanager.v1.TrustConfig|TrustConfig}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/certificate_manager.list_trust_configs.js</caption>
+ * region_tag:certificatemanager_v1_generated_CertificateManager_ListTrustConfigs_async
+ */
   listTrustConfigsAsync(
-    request?: protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.certificatemanager.v1.ITrustConfig> {
+      request?: protos.google.cloud.certificatemanager.v1.IListTrustConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.certificatemanager.v1.ITrustConfig>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTrustConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTrustConfigs iterate %j', request);
     return this.descriptors.page.listTrustConfigs.asyncIterate(
       this.innerApiCalls['listTrustConfigs'] as GaxCall,
@@ -5978,7 +4329,7 @@ export class CertificateManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.certificatemanager.v1.ITrustConfig>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -6018,7 +4369,7 @@ export class CertificateManagerClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -6056,7 +4407,7 @@ export class CertificateManagerClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -6101,20 +4452,20 @@ export class CertificateManagerClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -6151,13 +4502,13 @@ export class CertificateManagerClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -6191,7 +4542,7 @@ export class CertificateManagerClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -6206,20 +4557,20 @@ export class CertificateManagerClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -6263,20 +4614,20 @@ export class CertificateManagerClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -6292,7 +4643,7 @@ export class CertificateManagerClient {
    * @param {string} certificate
    * @returns {string} Resource name string.
    */
-  certificatePath(project: string, location: string, certificate: string) {
+  certificatePath(project:string,location:string,certificate:string) {
     return this.pathTemplates.certificatePathTemplate.render({
       project: project,
       location: location,
@@ -6308,8 +4659,7 @@ export class CertificateManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCertificateName(certificateName: string) {
-    return this.pathTemplates.certificatePathTemplate.match(certificateName)
-      .project;
+    return this.pathTemplates.certificatePathTemplate.match(certificateName).project;
   }
 
   /**
@@ -6320,8 +4670,7 @@ export class CertificateManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCertificateName(certificateName: string) {
-    return this.pathTemplates.certificatePathTemplate.match(certificateName)
-      .location;
+    return this.pathTemplates.certificatePathTemplate.match(certificateName).location;
   }
 
   /**
@@ -6332,8 +4681,7 @@ export class CertificateManagerClient {
    * @returns {string} A string representing the certificate.
    */
   matchCertificateFromCertificateName(certificateName: string) {
-    return this.pathTemplates.certificatePathTemplate.match(certificateName)
-      .certificate;
+    return this.pathTemplates.certificatePathTemplate.match(certificateName).certificate;
   }
 
   /**
@@ -6344,11 +4692,7 @@ export class CertificateManagerClient {
    * @param {string} certificate_issuance_config
    * @returns {string} Resource name string.
    */
-  certificateIssuanceConfigPath(
-    project: string,
-    location: string,
-    certificateIssuanceConfig: string
-  ) {
+  certificateIssuanceConfigPath(project:string,location:string,certificateIssuanceConfig:string) {
     return this.pathTemplates.certificateIssuanceConfigPathTemplate.render({
       project: project,
       location: location,
@@ -6363,12 +4707,8 @@ export class CertificateManagerClient {
    *   A fully-qualified path representing CertificateIssuanceConfig resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromCertificateIssuanceConfigName(
-    certificateIssuanceConfigName: string
-  ) {
-    return this.pathTemplates.certificateIssuanceConfigPathTemplate.match(
-      certificateIssuanceConfigName
-    ).project;
+  matchProjectFromCertificateIssuanceConfigName(certificateIssuanceConfigName: string) {
+    return this.pathTemplates.certificateIssuanceConfigPathTemplate.match(certificateIssuanceConfigName).project;
   }
 
   /**
@@ -6378,12 +4718,8 @@ export class CertificateManagerClient {
    *   A fully-qualified path representing CertificateIssuanceConfig resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromCertificateIssuanceConfigName(
-    certificateIssuanceConfigName: string
-  ) {
-    return this.pathTemplates.certificateIssuanceConfigPathTemplate.match(
-      certificateIssuanceConfigName
-    ).location;
+  matchLocationFromCertificateIssuanceConfigName(certificateIssuanceConfigName: string) {
+    return this.pathTemplates.certificateIssuanceConfigPathTemplate.match(certificateIssuanceConfigName).location;
   }
 
   /**
@@ -6393,12 +4729,8 @@ export class CertificateManagerClient {
    *   A fully-qualified path representing CertificateIssuanceConfig resource.
    * @returns {string} A string representing the certificate_issuance_config.
    */
-  matchCertificateIssuanceConfigFromCertificateIssuanceConfigName(
-    certificateIssuanceConfigName: string
-  ) {
-    return this.pathTemplates.certificateIssuanceConfigPathTemplate.match(
-      certificateIssuanceConfigName
-    ).certificate_issuance_config;
+  matchCertificateIssuanceConfigFromCertificateIssuanceConfigName(certificateIssuanceConfigName: string) {
+    return this.pathTemplates.certificateIssuanceConfigPathTemplate.match(certificateIssuanceConfigName).certificate_issuance_config;
   }
 
   /**
@@ -6409,11 +4741,7 @@ export class CertificateManagerClient {
    * @param {string} certificate_map
    * @returns {string} Resource name string.
    */
-  certificateMapPath(
-    project: string,
-    location: string,
-    certificateMap: string
-  ) {
+  certificateMapPath(project:string,location:string,certificateMap:string) {
     return this.pathTemplates.certificateMapPathTemplate.render({
       project: project,
       location: location,
@@ -6429,9 +4757,7 @@ export class CertificateManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCertificateMapName(certificateMapName: string) {
-    return this.pathTemplates.certificateMapPathTemplate.match(
-      certificateMapName
-    ).project;
+    return this.pathTemplates.certificateMapPathTemplate.match(certificateMapName).project;
   }
 
   /**
@@ -6442,9 +4768,7 @@ export class CertificateManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCertificateMapName(certificateMapName: string) {
-    return this.pathTemplates.certificateMapPathTemplate.match(
-      certificateMapName
-    ).location;
+    return this.pathTemplates.certificateMapPathTemplate.match(certificateMapName).location;
   }
 
   /**
@@ -6455,9 +4779,7 @@ export class CertificateManagerClient {
    * @returns {string} A string representing the certificate_map.
    */
   matchCertificateMapFromCertificateMapName(certificateMapName: string) {
-    return this.pathTemplates.certificateMapPathTemplate.match(
-      certificateMapName
-    ).certificate_map;
+    return this.pathTemplates.certificateMapPathTemplate.match(certificateMapName).certificate_map;
   }
 
   /**
@@ -6469,12 +4791,7 @@ export class CertificateManagerClient {
    * @param {string} certificate_map_entry
    * @returns {string} Resource name string.
    */
-  certificateMapEntryPath(
-    project: string,
-    location: string,
-    certificateMap: string,
-    certificateMapEntry: string
-  ) {
+  certificateMapEntryPath(project:string,location:string,certificateMap:string,certificateMapEntry:string) {
     return this.pathTemplates.certificateMapEntryPathTemplate.render({
       project: project,
       location: location,
@@ -6491,9 +4808,7 @@ export class CertificateManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCertificateMapEntryName(certificateMapEntryName: string) {
-    return this.pathTemplates.certificateMapEntryPathTemplate.match(
-      certificateMapEntryName
-    ).project;
+    return this.pathTemplates.certificateMapEntryPathTemplate.match(certificateMapEntryName).project;
   }
 
   /**
@@ -6504,9 +4819,7 @@ export class CertificateManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCertificateMapEntryName(certificateMapEntryName: string) {
-    return this.pathTemplates.certificateMapEntryPathTemplate.match(
-      certificateMapEntryName
-    ).location;
+    return this.pathTemplates.certificateMapEntryPathTemplate.match(certificateMapEntryName).location;
   }
 
   /**
@@ -6516,12 +4829,8 @@ export class CertificateManagerClient {
    *   A fully-qualified path representing CertificateMapEntry resource.
    * @returns {string} A string representing the certificate_map.
    */
-  matchCertificateMapFromCertificateMapEntryName(
-    certificateMapEntryName: string
-  ) {
-    return this.pathTemplates.certificateMapEntryPathTemplate.match(
-      certificateMapEntryName
-    ).certificate_map;
+  matchCertificateMapFromCertificateMapEntryName(certificateMapEntryName: string) {
+    return this.pathTemplates.certificateMapEntryPathTemplate.match(certificateMapEntryName).certificate_map;
   }
 
   /**
@@ -6531,12 +4840,8 @@ export class CertificateManagerClient {
    *   A fully-qualified path representing CertificateMapEntry resource.
    * @returns {string} A string representing the certificate_map_entry.
    */
-  matchCertificateMapEntryFromCertificateMapEntryName(
-    certificateMapEntryName: string
-  ) {
-    return this.pathTemplates.certificateMapEntryPathTemplate.match(
-      certificateMapEntryName
-    ).certificate_map_entry;
+  matchCertificateMapEntryFromCertificateMapEntryName(certificateMapEntryName: string) {
+    return this.pathTemplates.certificateMapEntryPathTemplate.match(certificateMapEntryName).certificate_map_entry;
   }
 
   /**
@@ -6547,11 +4852,7 @@ export class CertificateManagerClient {
    * @param {string} dns_authorization
    * @returns {string} Resource name string.
    */
-  dnsAuthorizationPath(
-    project: string,
-    location: string,
-    dnsAuthorization: string
-  ) {
+  dnsAuthorizationPath(project:string,location:string,dnsAuthorization:string) {
     return this.pathTemplates.dnsAuthorizationPathTemplate.render({
       project: project,
       location: location,
@@ -6567,9 +4868,7 @@ export class CertificateManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDnsAuthorizationName(dnsAuthorizationName: string) {
-    return this.pathTemplates.dnsAuthorizationPathTemplate.match(
-      dnsAuthorizationName
-    ).project;
+    return this.pathTemplates.dnsAuthorizationPathTemplate.match(dnsAuthorizationName).project;
   }
 
   /**
@@ -6580,9 +4879,7 @@ export class CertificateManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDnsAuthorizationName(dnsAuthorizationName: string) {
-    return this.pathTemplates.dnsAuthorizationPathTemplate.match(
-      dnsAuthorizationName
-    ).location;
+    return this.pathTemplates.dnsAuthorizationPathTemplate.match(dnsAuthorizationName).location;
   }
 
   /**
@@ -6593,9 +4890,7 @@ export class CertificateManagerClient {
    * @returns {string} A string representing the dns_authorization.
    */
   matchDnsAuthorizationFromDnsAuthorizationName(dnsAuthorizationName: string) {
-    return this.pathTemplates.dnsAuthorizationPathTemplate.match(
-      dnsAuthorizationName
-    ).dns_authorization;
+    return this.pathTemplates.dnsAuthorizationPathTemplate.match(dnsAuthorizationName).dns_authorization;
   }
 
   /**
@@ -6605,7 +4900,7 @@ export class CertificateManagerClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -6642,7 +4937,7 @@ export class CertificateManagerClient {
    * @param {string} trust_config
    * @returns {string} Resource name string.
    */
-  trustConfigPath(project: string, location: string, trustConfig: string) {
+  trustConfigPath(project:string,location:string,trustConfig:string) {
     return this.pathTemplates.trustConfigPathTemplate.render({
       project: project,
       location: location,
@@ -6658,8 +4953,7 @@ export class CertificateManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTrustConfigName(trustConfigName: string) {
-    return this.pathTemplates.trustConfigPathTemplate.match(trustConfigName)
-      .project;
+    return this.pathTemplates.trustConfigPathTemplate.match(trustConfigName).project;
   }
 
   /**
@@ -6670,8 +4964,7 @@ export class CertificateManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTrustConfigName(trustConfigName: string) {
-    return this.pathTemplates.trustConfigPathTemplate.match(trustConfigName)
-      .location;
+    return this.pathTemplates.trustConfigPathTemplate.match(trustConfigName).location;
   }
 
   /**
@@ -6682,8 +4975,7 @@ export class CertificateManagerClient {
    * @returns {string} A string representing the trust_config.
    */
   matchTrustConfigFromTrustConfigName(trustConfigName: string) {
-    return this.pathTemplates.trustConfigPathTemplate.match(trustConfigName)
-      .trust_config;
+    return this.pathTemplates.trustConfigPathTemplate.match(trustConfigName).trust_config;
   }
 
   /**
@@ -6698,8 +4990,8 @@ export class CertificateManagerClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {throw err});
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

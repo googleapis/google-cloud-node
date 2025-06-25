@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const contactcenterinsights = require('@google-cloud/contact-center-insights');
 
 function main() {
-  const contactCenterInsightsClient =
-    new contactcenterinsights.ContactCenterInsightsClient();
+  const contactCenterInsightsClient = new contactcenterinsights.ContactCenterInsightsClient();
 }
 
 main();

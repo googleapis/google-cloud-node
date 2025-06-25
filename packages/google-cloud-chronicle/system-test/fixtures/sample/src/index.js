@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const chronicle = require('@google-cloud/chronicle');
 
 function main() {
-  const dataAccessControlServiceClient =
-    new chronicle.DataAccessControlServiceClient();
+  const dataAccessControlServiceClient = new chronicle.DataAccessControlServiceClient();
   const entityServiceClient = new chronicle.EntityServiceClient();
   const instanceServiceClient = new chronicle.InstanceServiceClient();
   const referenceListServiceClient = new chronicle.ReferenceListServiceClient();

@@ -29,1090 +29,879 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.AccountsServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'css.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          accountsserviceModule.v1.AccountsServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'css.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          accountsserviceModule.v1.AccountsServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'css.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'css.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'css.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new accountsserviceModule.v1.AccountsServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'css.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'css.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new accountsserviceModule.v1.AccountsServiceClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'css.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new accountsserviceModule.v1.AccountsServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = accountsserviceModule.v1.AccountsServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = accountsserviceModule.v1.AccountsServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'css.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.accountsServiceStub, undefined);
-      await client.initialize();
-      assert(client.accountsServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.accountsServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.accountsServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getAccount', () => {
-    it('invokes getAccount without error', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.GetAccountRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.GetAccountRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.css.v1.Account()
-      );
-      client.innerApiCalls.getAccount = stubSimpleCall(expectedResponse);
-      const [response] = await client.getAccount(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAccount as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAccount as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAccount without error using callback', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.GetAccountRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.GetAccountRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.css.v1.Account()
-      );
-      client.innerApiCalls.getAccount =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAccount(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.shopping.css.v1.IAccount | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getAccount as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAccount as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAccount with error', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.GetAccountRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.GetAccountRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAccount = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getAccount(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getAccount as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getAccount as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getAccount with closed client', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.GetAccountRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.GetAccountRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getAccount(request), expectedError);
-    });
-  });
-
-  describe('updateLabels', () => {
-    it('invokes updateLabels without error', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.UpdateAccountLabelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.UpdateAccountLabelsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.css.v1.Account()
-      );
-      client.innerApiCalls.updateLabels = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateLabels(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateLabels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLabels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateLabels without error using callback', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.UpdateAccountLabelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.UpdateAccountLabelsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.css.v1.Account()
-      );
-      client.innerApiCalls.updateLabels =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateLabels(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.shopping.css.v1.IAccount | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateLabels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLabels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateLabels with error', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.UpdateAccountLabelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.UpdateAccountLabelsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateLabels = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateLabels(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateLabels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateLabels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateLabels with closed client', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.UpdateAccountLabelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.UpdateAccountLabelsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.updateLabels(request), expectedError);
-    });
-  });
-
-  describe('listChildAccounts', () => {
-    it('invokes listChildAccounts without error', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListChildAccountsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListChildAccountsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.shopping.css.v1.Account()),
-        generateSampleMessage(new protos.google.shopping.css.v1.Account()),
-        generateSampleMessage(new protos.google.shopping.css.v1.Account()),
-      ];
-      client.innerApiCalls.listChildAccounts = stubSimpleCall(expectedResponse);
-      const [response] = await client.listChildAccounts(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listChildAccounts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listChildAccounts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listChildAccounts without error using callback', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListChildAccountsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListChildAccountsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.shopping.css.v1.Account()),
-        generateSampleMessage(new protos.google.shopping.css.v1.Account()),
-        generateSampleMessage(new protos.google.shopping.css.v1.Account()),
-      ];
-      client.innerApiCalls.listChildAccounts =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listChildAccounts(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.shopping.css.v1.IAccount[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listChildAccounts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listChildAccounts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listChildAccounts with error', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListChildAccountsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListChildAccountsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listChildAccounts = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listChildAccounts(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listChildAccounts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listChildAccounts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listChildAccountsStream without error', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListChildAccountsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListChildAccountsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.shopping.css.v1.Account()),
-        generateSampleMessage(new protos.google.shopping.css.v1.Account()),
-        generateSampleMessage(new protos.google.shopping.css.v1.Account()),
-      ];
-      client.descriptors.page.listChildAccounts.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listChildAccountsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.shopping.css.v1.Account[] = [];
-        stream.on('data', (response: protos.google.shopping.css.v1.Account) => {
-          responses.push(response);
-        });
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listChildAccounts.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listChildAccounts, request)
-      );
-      assert(
-        (client.descriptors.page.listChildAccounts.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listChildAccountsStream with error', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListChildAccountsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListChildAccountsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listChildAccounts.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listChildAccountsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.shopping.css.v1.Account[] = [];
-        stream.on('data', (response: protos.google.shopping.css.v1.Account) => {
-          responses.push(response);
-        });
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listChildAccounts.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listChildAccounts, request)
-      );
-      assert(
-        (client.descriptors.page.listChildAccounts.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listChildAccounts without error', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListChildAccountsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListChildAccountsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.shopping.css.v1.Account()),
-        generateSampleMessage(new protos.google.shopping.css.v1.Account()),
-        generateSampleMessage(new protos.google.shopping.css.v1.Account()),
-      ];
-      client.descriptors.page.listChildAccounts.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.shopping.css.v1.IAccount[] = [];
-      const iterable = client.listChildAccountsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listChildAccounts.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listChildAccounts.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listChildAccounts with error', async () => {
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListChildAccountsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListChildAccountsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listChildAccounts.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listChildAccountsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.shopping.css.v1.IAccount[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = accountsserviceModule.v1.AccountsServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'css.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listChildAccounts.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listChildAccounts.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'css.example.com');
+        });
 
-  describe('Path templates', () => {
-    describe('account', async () => {
-      const fakePath = '/rendered/path/account';
-      const expectedParameters = {
-        account: 'accountValue',
-      };
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.accountPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.accountPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'css.example.com');
+        });
 
-      it('accountPath', () => {
-        const result = client.accountPath('accountValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.accountPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new accountsserviceModule.v1.AccountsServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'css.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-      it('matchAccountFromAccountName', () => {
-        const result = client.matchAccountFromAccountName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.accountPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new accountsserviceModule.v1.AccountsServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'css.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new accountsserviceModule.v1.AccountsServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-    describe('accountLabel', async () => {
-      const fakePath = '/rendered/path/accountLabel';
-      const expectedParameters = {
-        account: 'accountValue',
-        label: 'labelValue',
-      };
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.accountLabelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.accountLabelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has port', () => {
+            const port = accountsserviceModule.v1.AccountsServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('accountLabelPath', () => {
-        const result = client.accountLabelPath('accountValue', 'labelValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.accountLabelPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('should create a client with no option', () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient();
+            assert(client);
+        });
 
-      it('matchAccountFromAccountLabelName', () => {
-        const result = client.matchAccountFromAccountLabelName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.accountLabelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('should create a client with gRPC fallback', () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-      it('matchLabelFromAccountLabelName', () => {
-        const result = client.matchLabelFromAccountLabelName(fakePath);
-        assert.strictEqual(result, 'labelValue');
-        assert(
-          (client.pathTemplates.accountLabelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.accountsServiceStub, undefined);
+            await client.initialize();
+            assert(client.accountsServiceStub);
+        });
 
-    describe('cssProduct', async () => {
-      const fakePath = '/rendered/path/cssProduct';
-      const expectedParameters = {
-        account: 'accountValue',
-        css_product: 'cssProductValue',
-      };
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.cssProductPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cssProductPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has close method for the initialized client', done => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.accountsServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('cssProductPath', () => {
-        const result = client.cssProductPath('accountValue', 'cssProductValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.cssProductPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('has close method for the non-initialized client', done => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.accountsServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('matchAccountFromCssProductName', () => {
-        const result = client.matchAccountFromCssProductName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.cssProductPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
 
-      it('matchCssProductFromCssProductName', () => {
-        const result = client.matchCssProductFromCssProductName(fakePath);
-        assert.strictEqual(result, 'cssProductValue');
-        assert(
-          (client.pathTemplates.cssProductPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    describe('cssProductInput', async () => {
-      const fakePath = '/rendered/path/cssProductInput';
-      const expectedParameters = {
-        account: 'accountValue',
-        css_product_input: 'cssProductInputValue',
-      };
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.cssProductInputPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cssProductInputPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('getAccount', () => {
+        it('invokes getAccount without error', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.GetAccountRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.GetAccountRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.css.v1.Account()
+            );
+            client.innerApiCalls.getAccount = stubSimpleCall(expectedResponse);
+            const [response] = await client.getAccount(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAccount as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAccount as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('cssProductInputPath', () => {
-        const result = client.cssProductInputPath(
-          'accountValue',
-          'cssProductInputValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.cssProductInputPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getAccount without error using callback', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.GetAccountRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.GetAccountRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.css.v1.Account()
+            );
+            client.innerApiCalls.getAccount = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getAccount(
+                    request,
+                    (err?: Error|null, result?: protos.google.shopping.css.v1.IAccount|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getAccount as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAccount as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchAccountFromCssProductInputName', () => {
-        const result = client.matchAccountFromCssProductInputName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.cssProductInputPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getAccount with error', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.GetAccountRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.GetAccountRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getAccount = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getAccount(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getAccount as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getAccount as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchCssProductInputFromCssProductInputName', () => {
-        const result =
-          client.matchCssProductInputFromCssProductInputName(fakePath);
-        assert.strictEqual(result, 'cssProductInputValue');
-        assert(
-          (client.pathTemplates.cssProductInputPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getAccount with closed client', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.GetAccountRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.GetAccountRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getAccount(request), expectedError);
+        });
     });
 
-    describe('quotaGroup', async () => {
-      const fakePath = '/rendered/path/quotaGroup';
-      const expectedParameters = {
-        account: 'accountValue',
-        quota_group: 'quotaGroupValue',
-      };
-      const client = new accountsserviceModule.v1.AccountsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.quotaGroupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.quotaGroupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('updateLabels', () => {
+        it('invokes updateLabels without error', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.UpdateAccountLabelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.UpdateAccountLabelsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.css.v1.Account()
+            );
+            client.innerApiCalls.updateLabels = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateLabels(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateLabels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLabels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('quotaGroupPath', () => {
-        const result = client.quotaGroupPath('accountValue', 'quotaGroupValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.quotaGroupPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes updateLabels without error using callback', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.UpdateAccountLabelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.UpdateAccountLabelsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.css.v1.Account()
+            );
+            client.innerApiCalls.updateLabels = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateLabels(
+                    request,
+                    (err?: Error|null, result?: protos.google.shopping.css.v1.IAccount|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateLabels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLabels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchAccountFromQuotaGroupName', () => {
-        const result = client.matchAccountFromQuotaGroupName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.quotaGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes updateLabels with error', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.UpdateAccountLabelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.UpdateAccountLabelsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateLabels = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateLabels(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateLabels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateLabels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchQuotaGroupFromQuotaGroupName', () => {
-        const result = client.matchQuotaGroupFromQuotaGroupName(fakePath);
-        assert.strictEqual(result, 'quotaGroupValue');
-        assert(
-          (client.pathTemplates.quotaGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes updateLabels with closed client', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.UpdateAccountLabelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.UpdateAccountLabelsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateLabels(request), expectedError);
+        });
     });
-  });
+
+    describe('listChildAccounts', () => {
+        it('invokes listChildAccounts without error', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListChildAccountsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListChildAccountsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.css.v1.Account()),
+              generateSampleMessage(new protos.google.shopping.css.v1.Account()),
+              generateSampleMessage(new protos.google.shopping.css.v1.Account()),
+            ];
+            client.innerApiCalls.listChildAccounts = stubSimpleCall(expectedResponse);
+            const [response] = await client.listChildAccounts(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listChildAccounts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listChildAccounts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listChildAccounts without error using callback', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListChildAccountsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListChildAccountsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.css.v1.Account()),
+              generateSampleMessage(new protos.google.shopping.css.v1.Account()),
+              generateSampleMessage(new protos.google.shopping.css.v1.Account()),
+            ];
+            client.innerApiCalls.listChildAccounts = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listChildAccounts(
+                    request,
+                    (err?: Error|null, result?: protos.google.shopping.css.v1.IAccount[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listChildAccounts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listChildAccounts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listChildAccounts with error', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListChildAccountsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListChildAccountsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listChildAccounts = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listChildAccounts(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listChildAccounts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listChildAccounts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listChildAccountsStream without error', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListChildAccountsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListChildAccountsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.css.v1.Account()),
+              generateSampleMessage(new protos.google.shopping.css.v1.Account()),
+              generateSampleMessage(new protos.google.shopping.css.v1.Account()),
+            ];
+            client.descriptors.page.listChildAccounts.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listChildAccountsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.shopping.css.v1.Account[] = [];
+                stream.on('data', (response: protos.google.shopping.css.v1.Account) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listChildAccounts.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listChildAccounts, request));
+            assert(
+                (client.descriptors.page.listChildAccounts.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listChildAccountsStream with error', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListChildAccountsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListChildAccountsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listChildAccounts.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listChildAccountsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.shopping.css.v1.Account[] = [];
+                stream.on('data', (response: protos.google.shopping.css.v1.Account) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listChildAccounts.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listChildAccounts, request));
+            assert(
+                (client.descriptors.page.listChildAccounts.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listChildAccounts without error', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListChildAccountsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListChildAccountsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.css.v1.Account()),
+              generateSampleMessage(new protos.google.shopping.css.v1.Account()),
+              generateSampleMessage(new protos.google.shopping.css.v1.Account()),
+            ];
+            client.descriptors.page.listChildAccounts.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.shopping.css.v1.IAccount[] = [];
+            const iterable = client.listChildAccountsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listChildAccounts.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listChildAccounts.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listChildAccounts with error', async () => {
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListChildAccountsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListChildAccountsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listChildAccounts.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listChildAccountsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.shopping.css.v1.IAccount[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listChildAccounts.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listChildAccounts.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('account', async () => {
+            const fakePath = "/rendered/path/account";
+            const expectedParameters = {
+                account: "accountValue",
+            };
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.accountPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.accountPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('accountPath', () => {
+                const result = client.accountPath("accountValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.accountPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromAccountName', () => {
+                const result = client.matchAccountFromAccountName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.accountPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('accountLabel', async () => {
+            const fakePath = "/rendered/path/accountLabel";
+            const expectedParameters = {
+                account: "accountValue",
+                label: "labelValue",
+            };
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.accountLabelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.accountLabelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('accountLabelPath', () => {
+                const result = client.accountLabelPath("accountValue", "labelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.accountLabelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromAccountLabelName', () => {
+                const result = client.matchAccountFromAccountLabelName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.accountLabelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLabelFromAccountLabelName', () => {
+                const result = client.matchLabelFromAccountLabelName(fakePath);
+                assert.strictEqual(result, "labelValue");
+                assert((client.pathTemplates.accountLabelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cssProduct', async () => {
+            const fakePath = "/rendered/path/cssProduct";
+            const expectedParameters = {
+                account: "accountValue",
+                css_product: "cssProductValue",
+            };
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cssProductPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cssProductPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cssProductPath', () => {
+                const result = client.cssProductPath("accountValue", "cssProductValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cssProductPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromCssProductName', () => {
+                const result = client.matchAccountFromCssProductName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.cssProductPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCssProductFromCssProductName', () => {
+                const result = client.matchCssProductFromCssProductName(fakePath);
+                assert.strictEqual(result, "cssProductValue");
+                assert((client.pathTemplates.cssProductPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cssProductInput', async () => {
+            const fakePath = "/rendered/path/cssProductInput";
+            const expectedParameters = {
+                account: "accountValue",
+                css_product_input: "cssProductInputValue",
+            };
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cssProductInputPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cssProductInputPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cssProductInputPath', () => {
+                const result = client.cssProductInputPath("accountValue", "cssProductInputValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cssProductInputPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromCssProductInputName', () => {
+                const result = client.matchAccountFromCssProductInputName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.cssProductInputPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCssProductInputFromCssProductInputName', () => {
+                const result = client.matchCssProductInputFromCssProductInputName(fakePath);
+                assert.strictEqual(result, "cssProductInputValue");
+                assert((client.pathTemplates.cssProductInputPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('quotaGroup', async () => {
+            const fakePath = "/rendered/path/quotaGroup";
+            const expectedParameters = {
+                account: "accountValue",
+                quota_group: "quotaGroupValue",
+            };
+            const client = new accountsserviceModule.v1.AccountsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.quotaGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.quotaGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('quotaGroupPath', () => {
+                const result = client.quotaGroupPath("accountValue", "quotaGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.quotaGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromQuotaGroupName', () => {
+                const result = client.matchAccountFromQuotaGroupName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.quotaGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQuotaGroupFromQuotaGroupName', () => {
+                const result = client.matchQuotaGroupFromQuotaGroupName(fakePath);
+                assert.strictEqual(result, "quotaGroupValue");
+                assert((client.pathTemplates.quotaGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

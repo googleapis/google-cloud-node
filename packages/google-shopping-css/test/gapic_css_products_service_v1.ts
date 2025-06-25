@@ -29,966 +29,771 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.CssProductsServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'css.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          cssproductsserviceModule.v1.CssProductsServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'css.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          cssproductsserviceModule.v1.CssProductsServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'css.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'css.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'css.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new cssproductsserviceModule.v1.CssProductsServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'css.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'css.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new cssproductsserviceModule.v1.CssProductsServiceClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = cssproductsserviceModule.v1.CssProductsServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'css.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'css.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
-        });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new cssproductsserviceModule.v1.CssProductsServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = cssproductsserviceModule.v1.CssProductsServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.cssProductsServiceStub, undefined);
-      await client.initialize();
-      assert(client.cssProductsServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.cssProductsServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.cssProductsServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getCssProduct', () => {
-    it('invokes getCssProduct without error', async () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.GetCssProductRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.GetCssProductRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.css.v1.CssProduct()
-      );
-      client.innerApiCalls.getCssProduct = stubSimpleCall(expectedResponse);
-      const [response] = await client.getCssProduct(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCssProduct as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCssProduct as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCssProduct without error using callback', async () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.GetCssProductRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.GetCssProductRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.css.v1.CssProduct()
-      );
-      client.innerApiCalls.getCssProduct =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getCssProduct(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.shopping.css.v1.ICssProduct | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getCssProduct as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCssProduct as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCssProduct with error', async () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.GetCssProductRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.GetCssProductRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getCssProduct = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getCssProduct(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getCssProduct as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getCssProduct as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getCssProduct with closed client', async () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.GetCssProductRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.GetCssProductRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getCssProduct(request), expectedError);
-    });
-  });
-
-  describe('listCssProducts', () => {
-    it('invokes listCssProducts without error', async () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListCssProductsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListCssProductsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
-        generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
-        generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
-      ];
-      client.innerApiCalls.listCssProducts = stubSimpleCall(expectedResponse);
-      const [response] = await client.listCssProducts(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listCssProducts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCssProducts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCssProducts without error using callback', async () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListCssProductsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListCssProductsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
-        generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
-        generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
-      ];
-      client.innerApiCalls.listCssProducts =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listCssProducts(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.shopping.css.v1.ICssProduct[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listCssProducts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCssProducts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCssProducts with error', async () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListCssProductsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListCssProductsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listCssProducts = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listCssProducts(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listCssProducts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listCssProducts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCssProductsStream without error', async () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListCssProductsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListCssProductsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
-        generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
-        generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
-      ];
-      client.descriptors.page.listCssProducts.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listCssProductsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.shopping.css.v1.CssProduct[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.shopping.css.v1.CssProduct) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listCssProducts.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listCssProducts, request)
-      );
-      assert(
-        (client.descriptors.page.listCssProducts.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listCssProductsStream with error', async () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListCssProductsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListCssProductsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listCssProducts.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listCssProductsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.shopping.css.v1.CssProduct[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.shopping.css.v1.CssProduct) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listCssProducts.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listCssProducts, request)
-      );
-      assert(
-        (client.descriptors.page.listCssProducts.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listCssProducts without error', async () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListCssProductsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListCssProductsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
-        generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
-        generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
-      ];
-      client.descriptors.page.listCssProducts.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.shopping.css.v1.ICssProduct[] = [];
-      const iterable = client.listCssProductsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listCssProducts.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listCssProducts.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listCssProducts with error', async () => {
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.css.v1.ListCssProductsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.css.v1.ListCssProductsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listCssProducts.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listCssProductsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.shopping.css.v1.ICssProduct[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = cssproductsserviceModule.v1.CssProductsServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'css.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listCssProducts.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listCssProducts.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'css.example.com');
+        });
 
-  describe('Path templates', () => {
-    describe('account', async () => {
-      const fakePath = '/rendered/path/account';
-      const expectedParameters = {
-        account: 'accountValue',
-      };
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.accountPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.accountPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'css.example.com');
+        });
 
-      it('accountPath', () => {
-        const result = client.accountPath('accountValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.accountPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new cssproductsserviceModule.v1.CssProductsServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'css.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-      it('matchAccountFromAccountName', () => {
-        const result = client.matchAccountFromAccountName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.accountPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new cssproductsserviceModule.v1.CssProductsServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'css.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new cssproductsserviceModule.v1.CssProductsServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-    describe('accountLabel', async () => {
-      const fakePath = '/rendered/path/accountLabel';
-      const expectedParameters = {
-        account: 'accountValue',
-        label: 'labelValue',
-      };
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.accountLabelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.accountLabelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has port', () => {
+            const port = cssproductsserviceModule.v1.CssProductsServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('accountLabelPath', () => {
-        const result = client.accountLabelPath('accountValue', 'labelValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.accountLabelPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('should create a client with no option', () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient();
+            assert(client);
+        });
 
-      it('matchAccountFromAccountLabelName', () => {
-        const result = client.matchAccountFromAccountLabelName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.accountLabelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('should create a client with gRPC fallback', () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-      it('matchLabelFromAccountLabelName', () => {
-        const result = client.matchLabelFromAccountLabelName(fakePath);
-        assert.strictEqual(result, 'labelValue');
-        assert(
-          (client.pathTemplates.accountLabelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.cssProductsServiceStub, undefined);
+            await client.initialize();
+            assert(client.cssProductsServiceStub);
+        });
 
-    describe('cssProduct', async () => {
-      const fakePath = '/rendered/path/cssProduct';
-      const expectedParameters = {
-        account: 'accountValue',
-        css_product: 'cssProductValue',
-      };
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.cssProductPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cssProductPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('has close method for the initialized client', done => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.cssProductsServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('cssProductPath', () => {
-        const result = client.cssProductPath('accountValue', 'cssProductValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.cssProductPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('has close method for the non-initialized client', done => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.cssProductsServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('matchAccountFromCssProductName', () => {
-        const result = client.matchAccountFromCssProductName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.cssProductPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
 
-      it('matchCssProductFromCssProductName', () => {
-        const result = client.matchCssProductFromCssProductName(fakePath);
-        assert.strictEqual(result, 'cssProductValue');
-        assert(
-          (client.pathTemplates.cssProductPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    describe('cssProductInput', async () => {
-      const fakePath = '/rendered/path/cssProductInput';
-      const expectedParameters = {
-        account: 'accountValue',
-        css_product_input: 'cssProductInputValue',
-      };
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.cssProductInputPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.cssProductInputPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('getCssProduct', () => {
+        it('invokes getCssProduct without error', async () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.GetCssProductRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.GetCssProductRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.css.v1.CssProduct()
+            );
+            client.innerApiCalls.getCssProduct = stubSimpleCall(expectedResponse);
+            const [response] = await client.getCssProduct(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCssProduct as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCssProduct as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('cssProductInputPath', () => {
-        const result = client.cssProductInputPath(
-          'accountValue',
-          'cssProductInputValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.cssProductInputPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes getCssProduct without error using callback', async () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.GetCssProductRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.GetCssProductRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.css.v1.CssProduct()
+            );
+            client.innerApiCalls.getCssProduct = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getCssProduct(
+                    request,
+                    (err?: Error|null, result?: protos.google.shopping.css.v1.ICssProduct|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getCssProduct as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCssProduct as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchAccountFromCssProductInputName', () => {
-        const result = client.matchAccountFromCssProductInputName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.cssProductInputPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getCssProduct with error', async () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.GetCssProductRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.GetCssProductRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getCssProduct = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getCssProduct(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getCssProduct as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getCssProduct as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchCssProductInputFromCssProductInputName', () => {
-        const result =
-          client.matchCssProductInputFromCssProductInputName(fakePath);
-        assert.strictEqual(result, 'cssProductInputValue');
-        assert(
-          (client.pathTemplates.cssProductInputPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes getCssProduct with closed client', async () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.GetCssProductRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.GetCssProductRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getCssProduct(request), expectedError);
+        });
     });
 
-    describe('quotaGroup', async () => {
-      const fakePath = '/rendered/path/quotaGroup';
-      const expectedParameters = {
-        account: 'accountValue',
-        quota_group: 'quotaGroupValue',
-      };
-      const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.quotaGroupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.quotaGroupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('listCssProducts', () => {
+        it('invokes listCssProducts without error', async () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListCssProductsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListCssProductsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
+              generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
+              generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
+            ];
+            client.innerApiCalls.listCssProducts = stubSimpleCall(expectedResponse);
+            const [response] = await client.listCssProducts(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listCssProducts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCssProducts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('quotaGroupPath', () => {
-        const result = client.quotaGroupPath('accountValue', 'quotaGroupValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.quotaGroupPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes listCssProducts without error using callback', async () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListCssProductsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListCssProductsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
+              generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
+              generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
+            ];
+            client.innerApiCalls.listCssProducts = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listCssProducts(
+                    request,
+                    (err?: Error|null, result?: protos.google.shopping.css.v1.ICssProduct[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listCssProducts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCssProducts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchAccountFromQuotaGroupName', () => {
-        const result = client.matchAccountFromQuotaGroupName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.quotaGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listCssProducts with error', async () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListCssProductsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListCssProductsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listCssProducts = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listCssProducts(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listCssProducts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listCssProducts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchQuotaGroupFromQuotaGroupName', () => {
-        const result = client.matchQuotaGroupFromQuotaGroupName(fakePath);
-        assert.strictEqual(result, 'quotaGroupValue');
-        assert(
-          (client.pathTemplates.quotaGroupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listCssProductsStream without error', async () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListCssProductsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListCssProductsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
+              generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
+              generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
+            ];
+            client.descriptors.page.listCssProducts.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listCssProductsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.shopping.css.v1.CssProduct[] = [];
+                stream.on('data', (response: protos.google.shopping.css.v1.CssProduct) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listCssProducts.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listCssProducts, request));
+            assert(
+                (client.descriptors.page.listCssProducts.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listCssProductsStream with error', async () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListCssProductsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListCssProductsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listCssProducts.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listCssProductsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.shopping.css.v1.CssProduct[] = [];
+                stream.on('data', (response: protos.google.shopping.css.v1.CssProduct) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listCssProducts.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listCssProducts, request));
+            assert(
+                (client.descriptors.page.listCssProducts.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listCssProducts without error', async () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListCssProductsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListCssProductsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
+              generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
+              generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
+            ];
+            client.descriptors.page.listCssProducts.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.shopping.css.v1.ICssProduct[] = [];
+            const iterable = client.listCssProductsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listCssProducts.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listCssProducts.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listCssProducts with error', async () => {
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.css.v1.ListCssProductsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.css.v1.ListCssProductsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listCssProducts.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listCssProductsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.shopping.css.v1.ICssProduct[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listCssProducts.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listCssProducts.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-  });
+
+    describe('Path templates', () => {
+
+        describe('account', async () => {
+            const fakePath = "/rendered/path/account";
+            const expectedParameters = {
+                account: "accountValue",
+            };
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.accountPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.accountPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('accountPath', () => {
+                const result = client.accountPath("accountValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.accountPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromAccountName', () => {
+                const result = client.matchAccountFromAccountName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.accountPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('accountLabel', async () => {
+            const fakePath = "/rendered/path/accountLabel";
+            const expectedParameters = {
+                account: "accountValue",
+                label: "labelValue",
+            };
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.accountLabelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.accountLabelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('accountLabelPath', () => {
+                const result = client.accountLabelPath("accountValue", "labelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.accountLabelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromAccountLabelName', () => {
+                const result = client.matchAccountFromAccountLabelName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.accountLabelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLabelFromAccountLabelName', () => {
+                const result = client.matchLabelFromAccountLabelName(fakePath);
+                assert.strictEqual(result, "labelValue");
+                assert((client.pathTemplates.accountLabelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cssProduct', async () => {
+            const fakePath = "/rendered/path/cssProduct";
+            const expectedParameters = {
+                account: "accountValue",
+                css_product: "cssProductValue",
+            };
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cssProductPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cssProductPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cssProductPath', () => {
+                const result = client.cssProductPath("accountValue", "cssProductValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cssProductPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromCssProductName', () => {
+                const result = client.matchAccountFromCssProductName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.cssProductPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCssProductFromCssProductName', () => {
+                const result = client.matchCssProductFromCssProductName(fakePath);
+                assert.strictEqual(result, "cssProductValue");
+                assert((client.pathTemplates.cssProductPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cssProductInput', async () => {
+            const fakePath = "/rendered/path/cssProductInput";
+            const expectedParameters = {
+                account: "accountValue",
+                css_product_input: "cssProductInputValue",
+            };
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cssProductInputPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cssProductInputPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cssProductInputPath', () => {
+                const result = client.cssProductInputPath("accountValue", "cssProductInputValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cssProductInputPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromCssProductInputName', () => {
+                const result = client.matchAccountFromCssProductInputName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.cssProductInputPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCssProductInputFromCssProductInputName', () => {
+                const result = client.matchCssProductInputFromCssProductInputName(fakePath);
+                assert.strictEqual(result, "cssProductInputValue");
+                assert((client.pathTemplates.cssProductInputPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('quotaGroup', async () => {
+            const fakePath = "/rendered/path/quotaGroup";
+            const expectedParameters = {
+                account: "accountValue",
+                quota_group: "quotaGroupValue",
+            };
+            const client = new cssproductsserviceModule.v1.CssProductsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.quotaGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.quotaGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('quotaGroupPath', () => {
+                const result = client.quotaGroupPath("accountValue", "quotaGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.quotaGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromQuotaGroupName', () => {
+                const result = client.matchAccountFromQuotaGroupName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.quotaGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchQuotaGroupFromQuotaGroupName', () => {
+                const result = client.matchQuotaGroupFromQuotaGroupName(fakePath);
+                assert.strictEqual(result, "quotaGroupValue");
+                assert((client.pathTemplates.quotaGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

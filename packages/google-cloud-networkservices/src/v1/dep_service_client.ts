@@ -22,7 +22,7 @@ import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOption
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -187,6 +187,9 @@ export class DepServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      authzExtensionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/authzExtensions/{authz_extension}'
+      ),
       endpointPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpointPolicies/{endpoint_policy}'
       ),
@@ -232,6 +235,12 @@ export class DepServiceClient {
       tlsRoutePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/tlsRoutes/{tls_route}'
       ),
+      wasmPluginPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/wasmPlugins/{wasm_plugin}'
+      ),
+      wasmPluginVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/wasmPlugins/{wasm_plugin}/versions/{wasm_plugin_version}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -241,10 +250,12 @@ export class DepServiceClient {
       listLbTrafficExtensions:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'lbTrafficExtensions'),
       listLbRouteExtensions:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'lbRouteExtensions')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'lbRouteExtensions'),
+      listAuthzExtensions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'authzExtensions')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -284,6 +295,18 @@ export class DepServiceClient {
       '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteLbRouteExtensionMetadata = protoFilesRoot.lookup(
       '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
+    const createAuthzExtensionResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.AuthzExtension') as gax.protobuf.Type;
+    const createAuthzExtensionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
+    const updateAuthzExtensionResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.AuthzExtension') as gax.protobuf.Type;
+    const updateAuthzExtensionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
+    const deleteAuthzExtensionResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteAuthzExtensionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createLbTrafficExtension: new this._gaxModule.LongrunningDescriptor(
@@ -309,7 +332,19 @@ export class DepServiceClient {
       deleteLbRouteExtension: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteLbRouteExtensionResponse.decode.bind(deleteLbRouteExtensionResponse),
-        deleteLbRouteExtensionMetadata.decode.bind(deleteLbRouteExtensionMetadata))
+        deleteLbRouteExtensionMetadata.decode.bind(deleteLbRouteExtensionMetadata)),
+      createAuthzExtension: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createAuthzExtensionResponse.decode.bind(createAuthzExtensionResponse),
+        createAuthzExtensionMetadata.decode.bind(createAuthzExtensionMetadata)),
+      updateAuthzExtension: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateAuthzExtensionResponse.decode.bind(updateAuthzExtensionResponse),
+        updateAuthzExtensionMetadata.decode.bind(updateAuthzExtensionMetadata)),
+      deleteAuthzExtension: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteAuthzExtensionResponse.decode.bind(deleteAuthzExtensionResponse),
+        deleteAuthzExtensionMetadata.decode.bind(deleteAuthzExtensionMetadata))
     };
 
     // Put together the default options sent with requests.
@@ -355,7 +390,7 @@ export class DepServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const depServiceStubMethods =
-        ['listLbTrafficExtensions', 'getLbTrafficExtension', 'createLbTrafficExtension', 'updateLbTrafficExtension', 'deleteLbTrafficExtension', 'listLbRouteExtensions', 'getLbRouteExtension', 'createLbRouteExtension', 'updateLbRouteExtension', 'deleteLbRouteExtension'];
+        ['listLbTrafficExtensions', 'getLbTrafficExtension', 'createLbTrafficExtension', 'updateLbTrafficExtension', 'deleteLbTrafficExtension', 'listLbRouteExtensions', 'getLbRouteExtension', 'createLbRouteExtension', 'updateLbRouteExtension', 'deleteLbRouteExtension', 'listAuthzExtensions', 'getAuthzExtension', 'createAuthzExtension', 'updateAuthzExtension', 'deleteAuthzExtension'];
     for (const methodName of depServiceStubMethods) {
       const callPromise = this.depServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -547,6 +582,12 @@ export class DepServiceClient {
       ]) => {
         this._log.info('getLbTrafficExtension response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -637,6 +678,108 @@ export class DepServiceClient {
       ]) => {
         this._log.info('getLbRouteExtension response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets details of the specified `AuthzExtension` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the `AuthzExtension` resource to get. Must be in
+ *   the format
+ *   `projects/{project}/locations/{location}/authzExtensions/{authz_extension}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networkservices.v1.AuthzExtension|AuthzExtension}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.get_authz_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_GetAuthzExtension_async
+ */
+  getAuthzExtension(
+      request?: protos.google.cloud.networkservices.v1.IGetAuthzExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkservices.v1.IAuthzExtension,
+        protos.google.cloud.networkservices.v1.IGetAuthzExtensionRequest|undefined, {}|undefined
+      ]>;
+  getAuthzExtension(
+      request: protos.google.cloud.networkservices.v1.IGetAuthzExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.networkservices.v1.IAuthzExtension,
+          protos.google.cloud.networkservices.v1.IGetAuthzExtensionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAuthzExtension(
+      request: protos.google.cloud.networkservices.v1.IGetAuthzExtensionRequest,
+      callback: Callback<
+          protos.google.cloud.networkservices.v1.IAuthzExtension,
+          protos.google.cloud.networkservices.v1.IGetAuthzExtensionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAuthzExtension(
+      request?: protos.google.cloud.networkservices.v1.IGetAuthzExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networkservices.v1.IAuthzExtension,
+          protos.google.cloud.networkservices.v1.IGetAuthzExtensionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networkservices.v1.IAuthzExtension,
+          protos.google.cloud.networkservices.v1.IGetAuthzExtensionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networkservices.v1.IAuthzExtension,
+        protos.google.cloud.networkservices.v1.IGetAuthzExtensionRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getAuthzExtension request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.networkservices.v1.IAuthzExtension,
+        protos.google.cloud.networkservices.v1.IGetAuthzExtensionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAuthzExtension response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getAuthzExtension(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networkservices.v1.IAuthzExtension,
+        protos.google.cloud.networkservices.v1.IGetAuthzExtensionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAuthzExtension response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 
@@ -658,12 +801,11 @@ export class DepServiceClient {
  *   Optional. An optional request ID to identify requests. Specify a unique
  *   request ID so that if you must retry your request, the server can ignore
  *   the request if it has already been completed. The server guarantees
- *   that for at least 60 minutes since the first request.
+ *   that for 60 minutes since the first request.
  *
  *   For example, consider a situation where you make an initial request and the
  *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, ignores the second request. This prevents
+ *   ID, the server ignores the second request This prevents
  *   clients from accidentally creating duplicate commitments.
  *
  *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -776,7 +918,7 @@ export class DepServiceClient {
  * @param {google.protobuf.FieldMask} [request.updateMask]
  *   Optional. Used to specify the fields to be overwritten in the
  *   `LbTrafficExtension` resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
+ *   The fields specified in the `update_mask` are relative to the resource, not
  *   the full request. A field is overwritten if it is in the mask. If the
  *   user does not specify a mask, then all fields are overwritten.
  * @param {google.cloud.networkservices.v1.LbTrafficExtension} request.lbTrafficExtension
@@ -785,12 +927,11 @@ export class DepServiceClient {
  *   Optional. An optional request ID to identify requests. Specify a unique
  *   request ID so that if you must retry your request, the server can ignore
  *   the request if it has already been completed. The server guarantees
- *   that for at least 60 minutes since the first request.
+ *   that for 60 minutes since the first request.
  *
  *   For example, consider a situation where you make an initial request and the
  *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, ignores the second request. This prevents
+ *   ID, the server ignores the second request This prevents
  *   clients from accidentally creating duplicate commitments.
  *
  *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -908,12 +1049,11 @@ export class DepServiceClient {
  *   Optional. An optional request ID to identify requests. Specify a unique
  *   request ID so that if you must retry your request, the server can ignore
  *   the request if it has already been completed. The server guarantees
- *   that for at least 60 minutes after the first request.
+ *   that for 60 minutes after the first request.
  *
  *   For example, consider a situation where you make an initial request and the
  *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, ignores the second request. This prevents
+ *   ID, the server ignores the second request This prevents
  *   clients from accidentally creating duplicate commitments.
  *
  *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -1035,12 +1175,11 @@ export class DepServiceClient {
  *   Optional. An optional request ID to identify requests. Specify a unique
  *   request ID so that if you must retry your request, the server can ignore
  *   the request if it has already been completed. The server guarantees
- *   that for at least 60 minutes since the first request.
+ *   that for 60 minutes since the first request.
  *
  *   For example, consider a situation where you make an initial request and the
  *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, ignores the second request. This prevents
+ *   ID, the server ignores the second request This prevents
  *   clients from accidentally creating duplicate commitments.
  *
  *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -1153,7 +1292,7 @@ export class DepServiceClient {
  * @param {google.protobuf.FieldMask} [request.updateMask]
  *   Optional. Used to specify the fields to be overwritten in the
  *   `LbRouteExtension` resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
+ *   The fields specified in the `update_mask` are relative to the resource, not
  *   the full request. A field is overwritten if it is in the mask. If the
  *   user does not specify a mask, then all fields are overwritten.
  * @param {google.cloud.networkservices.v1.LbRouteExtension} request.lbRouteExtension
@@ -1162,12 +1301,11 @@ export class DepServiceClient {
  *   Optional. An optional request ID to identify requests. Specify a unique
  *   request ID so that if you must retry your request, the server can ignore
  *   the request if it has already been completed. The server guarantees
- *   that for at least 60 minutes since the first request.
+ *   that for 60 minutes since the first request.
  *
  *   For example, consider a situation where you make an initial request and the
  *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, ignores the second request. This prevents
+ *   ID, the server ignores the second request This prevents
  *   clients from accidentally creating duplicate commitments.
  *
  *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -1285,12 +1423,11 @@ export class DepServiceClient {
  *   Optional. An optional request ID to identify requests. Specify a unique
  *   request ID so that if you must retry your request, the server can ignore
  *   the request if it has already been completed. The server guarantees
- *   that for at least 60 minutes after the first request.
+ *   that for 60 minutes after the first request.
  *
  *   For example, consider a situation where you make an initial request and the
  *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, ignores the second request. This prevents
+ *   ID, the server ignores the second request This prevents
  *   clients from accidentally creating duplicate commitments.
  *
  *   The request ID must be a valid UUID with the exception that zero UUID is
@@ -1395,6 +1532,382 @@ export class DepServiceClient {
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteLbRouteExtension, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1.OperationMetadata>;
   }
+/**
+ * Creates a new `AuthzExtension` resource in a given project
+ * and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the `AuthzExtension` resource. Must
+ *   be in the format `projects/{project}/locations/{location}`.
+ * @param {string} request.authzExtensionId
+ *   Required. User-provided ID of the `AuthzExtension` resource to be
+ *   created.
+ * @param {google.cloud.networkservices.v1.AuthzExtension} request.authzExtension
+ *   Required. `AuthzExtension` resource to be created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server can ignore
+ *   the request if it has already been completed. The server guarantees
+ *   that for 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server ignores the second request This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.create_authz_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_CreateAuthzExtension_async
+ */
+  createAuthzExtension(
+      request?: protos.google.cloud.networkservices.v1.ICreateAuthzExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createAuthzExtension(
+      request: protos.google.cloud.networkservices.v1.ICreateAuthzExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createAuthzExtension(
+      request: protos.google.cloud.networkservices.v1.ICreateAuthzExtensionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createAuthzExtension(
+      request?: protos.google.cloud.networkservices.v1.ICreateAuthzExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAuthzExtension response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAuthzExtension request %j', request);
+    return this.innerApiCalls.createAuthzExtension(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createAuthzExtension response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createAuthzExtension()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.create_authz_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_CreateAuthzExtension_async
+ */
+  async checkCreateAuthzExtensionProgress(name: string): Promise<LROperation<protos.google.cloud.networkservices.v1.AuthzExtension, protos.google.cloud.networkservices.v1.OperationMetadata>>{
+    this._log.info('createAuthzExtension long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAuthzExtension, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networkservices.v1.AuthzExtension, protos.google.cloud.networkservices.v1.OperationMetadata>;
+  }
+/**
+ * Updates the parameters of the specified `AuthzExtension`
+ * resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Used to specify the fields to be overwritten in the
+ *   `AuthzExtension` resource by the update.
+ *   The fields specified in the `update_mask` are relative to the resource, not
+ *   the full request. A field is overwritten if it is in the mask. If the
+ *   user does not specify a mask, then all fields are overwritten.
+ * @param {google.cloud.networkservices.v1.AuthzExtension} request.authzExtension
+ *   Required. `AuthzExtension` resource being updated.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server can ignore
+ *   the request if it has already been completed. The server guarantees
+ *   that for 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server ignores the second request This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.update_authz_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_UpdateAuthzExtension_async
+ */
+  updateAuthzExtension(
+      request?: protos.google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateAuthzExtension(
+      request: protos.google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateAuthzExtension(
+      request: protos.google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateAuthzExtension(
+      request?: protos.google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'authz_extension.name': request.authzExtension!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAuthzExtension response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAuthzExtension request %j', request);
+    return this.innerApiCalls.updateAuthzExtension(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networkservices.v1.IAuthzExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateAuthzExtension response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateAuthzExtension()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.update_authz_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_UpdateAuthzExtension_async
+ */
+  async checkUpdateAuthzExtensionProgress(name: string): Promise<LROperation<protos.google.cloud.networkservices.v1.AuthzExtension, protos.google.cloud.networkservices.v1.OperationMetadata>>{
+    this._log.info('updateAuthzExtension long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAuthzExtension, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networkservices.v1.AuthzExtension, protos.google.cloud.networkservices.v1.OperationMetadata>;
+  }
+/**
+ * Deletes the specified `AuthzExtension` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the `AuthzExtension` resource to delete. Must
+ *   be in the format
+ *   `projects/{project}/locations/{location}/authzExtensions/{authz_extension}`.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server can ignore
+ *   the request if it has already been completed. The server guarantees
+ *   that for 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server ignores the second request This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.delete_authz_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_DeleteAuthzExtension_async
+ */
+  deleteAuthzExtension(
+      request?: protos.google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteAuthzExtension(
+      request: protos.google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteAuthzExtension(
+      request: protos.google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteAuthzExtension(
+      request?: protos.google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAuthzExtension response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAuthzExtension request %j', request);
+    return this.innerApiCalls.deleteAuthzExtension(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteAuthzExtension response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteAuthzExtension()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.delete_authz_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_DeleteAuthzExtension_async
+ */
+  async checkDeleteAuthzExtensionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1.OperationMetadata>>{
+    this._log.info('deleteAuthzExtension long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAuthzExtension, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1.OperationMetadata>;
+  }
  /**
  * Lists `LbTrafficExtension` resources in a given project and location.
  *
@@ -1402,7 +1915,7 @@ export class DepServiceClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The project and location from which the `LbTrafficExtension`
- *   resources are listed, specified in the following format:
+ *   resources are listed. These values are specified in the following format:
  *   `projects/{project}/locations/{location}`.
  * @param {number} [request.pageSize]
  *   Optional. Requested page size. The server might return fewer items than
@@ -1412,7 +1925,7 @@ export class DepServiceClient {
  * @param {string} [request.filter]
  *   Optional. Filtering results.
  * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results.
+ *   Optional. Hint about how to order the results.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1507,7 +2020,7 @@ export class DepServiceClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The project and location from which the `LbTrafficExtension`
- *   resources are listed, specified in the following format:
+ *   resources are listed. These values are specified in the following format:
  *   `projects/{project}/locations/{location}`.
  * @param {number} [request.pageSize]
  *   Optional. Requested page size. The server might return fewer items than
@@ -1517,7 +2030,7 @@ export class DepServiceClient {
  * @param {string} [request.filter]
  *   Optional. Filtering results.
  * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results.
+ *   Optional. Hint about how to order the results.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1561,7 +2074,7 @@ export class DepServiceClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The project and location from which the `LbTrafficExtension`
- *   resources are listed, specified in the following format:
+ *   resources are listed. These values are specified in the following format:
  *   `projects/{project}/locations/{location}`.
  * @param {number} [request.pageSize]
  *   Optional. Requested page size. The server might return fewer items than
@@ -1571,7 +2084,7 @@ export class DepServiceClient {
  * @param {string} [request.filter]
  *   Optional. Filtering results.
  * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results.
+ *   Optional. Hint about how to order the results.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -1614,7 +2127,7 @@ export class DepServiceClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The project and location from which the `LbRouteExtension`
- *   resources are listed, specified in the following format:
+ *   resources are listed. These values are specified in the following format:
  *   `projects/{project}/locations/{location}`.
  * @param {number} [request.pageSize]
  *   Optional. Requested page size. The server might return fewer items than
@@ -1624,7 +2137,7 @@ export class DepServiceClient {
  * @param {string} [request.filter]
  *   Optional. Filtering results.
  * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results.
+ *   Optional. Hint about how to order the results.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1719,7 +2232,7 @@ export class DepServiceClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The project and location from which the `LbRouteExtension`
- *   resources are listed, specified in the following format:
+ *   resources are listed. These values are specified in the following format:
  *   `projects/{project}/locations/{location}`.
  * @param {number} [request.pageSize]
  *   Optional. Requested page size. The server might return fewer items than
@@ -1729,7 +2242,7 @@ export class DepServiceClient {
  * @param {string} [request.filter]
  *   Optional. Filtering results.
  * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results.
+ *   Optional. Hint about how to order the results.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1773,7 +2286,7 @@ export class DepServiceClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The project and location from which the `LbRouteExtension`
- *   resources are listed, specified in the following format:
+ *   resources are listed. These values are specified in the following format:
  *   `projects/{project}/locations/{location}`.
  * @param {number} [request.pageSize]
  *   Optional. Requested page size. The server might return fewer items than
@@ -1783,7 +2296,7 @@ export class DepServiceClient {
  * @param {string} [request.filter]
  *   Optional. Filtering results.
  * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results.
+ *   Optional. Hint about how to order the results.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -1818,6 +2331,218 @@ export class DepServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.networkservices.v1.ILbRouteExtension>;
+  }
+ /**
+ * Lists `AuthzExtension` resources in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `AuthzExtension`
+ *   resources are listed. These values are specified in the following format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server might return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results that the server returns.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint about how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networkservices.v1.AuthzExtension|AuthzExtension}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAuthzExtensionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listAuthzExtensions(
+      request?: protos.google.cloud.networkservices.v1.IListAuthzExtensionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkservices.v1.IAuthzExtension[],
+        protos.google.cloud.networkservices.v1.IListAuthzExtensionsRequest|null,
+        protos.google.cloud.networkservices.v1.IListAuthzExtensionsResponse
+      ]>;
+  listAuthzExtensions(
+      request: protos.google.cloud.networkservices.v1.IListAuthzExtensionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListAuthzExtensionsRequest,
+          protos.google.cloud.networkservices.v1.IListAuthzExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.IAuthzExtension>): void;
+  listAuthzExtensions(
+      request: protos.google.cloud.networkservices.v1.IListAuthzExtensionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListAuthzExtensionsRequest,
+          protos.google.cloud.networkservices.v1.IListAuthzExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.IAuthzExtension>): void;
+  listAuthzExtensions(
+      request?: protos.google.cloud.networkservices.v1.IListAuthzExtensionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListAuthzExtensionsRequest,
+          protos.google.cloud.networkservices.v1.IListAuthzExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.IAuthzExtension>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListAuthzExtensionsRequest,
+          protos.google.cloud.networkservices.v1.IListAuthzExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.IAuthzExtension>):
+      Promise<[
+        protos.google.cloud.networkservices.v1.IAuthzExtension[],
+        protos.google.cloud.networkservices.v1.IListAuthzExtensionsRequest|null,
+        protos.google.cloud.networkservices.v1.IListAuthzExtensionsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networkservices.v1.IListAuthzExtensionsRequest,
+      protos.google.cloud.networkservices.v1.IListAuthzExtensionsResponse|null|undefined,
+      protos.google.cloud.networkservices.v1.IAuthzExtension>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAuthzExtensions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAuthzExtensions request %j', request);
+    return this.innerApiCalls
+      .listAuthzExtensions(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networkservices.v1.IAuthzExtension[],
+        protos.google.cloud.networkservices.v1.IListAuthzExtensionsRequest|null,
+        protos.google.cloud.networkservices.v1.IListAuthzExtensionsResponse
+      ]) => {
+        this._log.info('listAuthzExtensions values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listAuthzExtensions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `AuthzExtension`
+ *   resources are listed. These values are specified in the following format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server might return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results that the server returns.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint about how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networkservices.v1.AuthzExtension|AuthzExtension} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAuthzExtensionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listAuthzExtensionsStream(
+      request?: protos.google.cloud.networkservices.v1.IListAuthzExtensionsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listAuthzExtensions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listAuthzExtensions stream %j', request);
+    return this.descriptors.page.listAuthzExtensions.createStream(
+      this.innerApiCalls.listAuthzExtensions as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listAuthzExtensions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `AuthzExtension`
+ *   resources are listed. These values are specified in the following format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server might return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results that the server returns.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint about how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networkservices.v1.AuthzExtension|AuthzExtension}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.list_authz_extensions.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_ListAuthzExtensions_async
+ */
+  listAuthzExtensionsAsync(
+      request?: protos.google.cloud.networkservices.v1.IListAuthzExtensionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networkservices.v1.IAuthzExtension>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listAuthzExtensions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listAuthzExtensions iterate %j', request);
+    return this.descriptors.page.listAuthzExtensions.asyncIterate(
+      this.innerApiCalls['listAuthzExtensions'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.networkservices.v1.IAuthzExtension>;
   }
 /**
  * Gets the access control policy for a resource. Returns an empty policy
@@ -2262,6 +2987,55 @@ export class DepServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified authzExtension resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} authz_extension
+   * @returns {string} Resource name string.
+   */
+  authzExtensionPath(project:string,location:string,authzExtension:string) {
+    return this.pathTemplates.authzExtensionPathTemplate.render({
+      project: project,
+      location: location,
+      authz_extension: authzExtension,
+    });
+  }
+
+  /**
+   * Parse the project from AuthzExtension resource.
+   *
+   * @param {string} authzExtensionName
+   *   A fully-qualified path representing AuthzExtension resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAuthzExtensionName(authzExtensionName: string) {
+    return this.pathTemplates.authzExtensionPathTemplate.match(authzExtensionName).project;
+  }
+
+  /**
+   * Parse the location from AuthzExtension resource.
+   *
+   * @param {string} authzExtensionName
+   *   A fully-qualified path representing AuthzExtension resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAuthzExtensionName(authzExtensionName: string) {
+    return this.pathTemplates.authzExtensionPathTemplate.match(authzExtensionName).location;
+  }
+
+  /**
+   * Parse the authz_extension from AuthzExtension resource.
+   *
+   * @param {string} authzExtensionName
+   *   A fully-qualified path representing AuthzExtension resource.
+   * @returns {string} A string representing the authz_extension.
+   */
+  matchAuthzExtensionFromAuthzExtensionName(authzExtensionName: string) {
+    return this.pathTemplates.authzExtensionPathTemplate.match(authzExtensionName).authz_extension;
+  }
 
   /**
    * Return a fully-qualified endpointPolicy resource name string.
@@ -2983,6 +3757,117 @@ export class DepServiceClient {
    */
   matchTlsRouteFromTlsRouteName(tlsRouteName: string) {
     return this.pathTemplates.tlsRoutePathTemplate.match(tlsRouteName).tls_route;
+  }
+
+  /**
+   * Return a fully-qualified wasmPlugin resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} wasm_plugin
+   * @returns {string} Resource name string.
+   */
+  wasmPluginPath(project:string,location:string,wasmPlugin:string) {
+    return this.pathTemplates.wasmPluginPathTemplate.render({
+      project: project,
+      location: location,
+      wasm_plugin: wasmPlugin,
+    });
+  }
+
+  /**
+   * Parse the project from WasmPlugin resource.
+   *
+   * @param {string} wasmPluginName
+   *   A fully-qualified path representing WasmPlugin resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromWasmPluginName(wasmPluginName: string) {
+    return this.pathTemplates.wasmPluginPathTemplate.match(wasmPluginName).project;
+  }
+
+  /**
+   * Parse the location from WasmPlugin resource.
+   *
+   * @param {string} wasmPluginName
+   *   A fully-qualified path representing WasmPlugin resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromWasmPluginName(wasmPluginName: string) {
+    return this.pathTemplates.wasmPluginPathTemplate.match(wasmPluginName).location;
+  }
+
+  /**
+   * Parse the wasm_plugin from WasmPlugin resource.
+   *
+   * @param {string} wasmPluginName
+   *   A fully-qualified path representing WasmPlugin resource.
+   * @returns {string} A string representing the wasm_plugin.
+   */
+  matchWasmPluginFromWasmPluginName(wasmPluginName: string) {
+    return this.pathTemplates.wasmPluginPathTemplate.match(wasmPluginName).wasm_plugin;
+  }
+
+  /**
+   * Return a fully-qualified wasmPluginVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} wasm_plugin
+   * @param {string} wasm_plugin_version
+   * @returns {string} Resource name string.
+   */
+  wasmPluginVersionPath(project:string,location:string,wasmPlugin:string,wasmPluginVersion:string) {
+    return this.pathTemplates.wasmPluginVersionPathTemplate.render({
+      project: project,
+      location: location,
+      wasm_plugin: wasmPlugin,
+      wasm_plugin_version: wasmPluginVersion,
+    });
+  }
+
+  /**
+   * Parse the project from WasmPluginVersion resource.
+   *
+   * @param {string} wasmPluginVersionName
+   *   A fully-qualified path representing WasmPluginVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromWasmPluginVersionName(wasmPluginVersionName: string) {
+    return this.pathTemplates.wasmPluginVersionPathTemplate.match(wasmPluginVersionName).project;
+  }
+
+  /**
+   * Parse the location from WasmPluginVersion resource.
+   *
+   * @param {string} wasmPluginVersionName
+   *   A fully-qualified path representing WasmPluginVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromWasmPluginVersionName(wasmPluginVersionName: string) {
+    return this.pathTemplates.wasmPluginVersionPathTemplate.match(wasmPluginVersionName).location;
+  }
+
+  /**
+   * Parse the wasm_plugin from WasmPluginVersion resource.
+   *
+   * @param {string} wasmPluginVersionName
+   *   A fully-qualified path representing WasmPluginVersion resource.
+   * @returns {string} A string representing the wasm_plugin.
+   */
+  matchWasmPluginFromWasmPluginVersionName(wasmPluginVersionName: string) {
+    return this.pathTemplates.wasmPluginVersionPathTemplate.match(wasmPluginVersionName).wasm_plugin;
+  }
+
+  /**
+   * Parse the wasm_plugin_version from WasmPluginVersion resource.
+   *
+   * @param {string} wasmPluginVersionName
+   *   A fully-qualified path representing WasmPluginVersion resource.
+   * @returns {string} A string representing the wasm_plugin_version.
+   */
+  matchWasmPluginVersionFromWasmPluginVersionName(wasmPluginVersionName: string) {
+    return this.pathTemplates.wasmPluginVersionPathTemplate.match(wasmPluginVersionName).wasm_plugin_version;
   }
 
   /**

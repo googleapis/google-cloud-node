@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -108,41 +101,20 @@ export class ApplicationsClient {
    *     const client = new ApplicationsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ApplicationsClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'appengine.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +140,7 @@ export class ApplicationsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +154,10 @@ export class ApplicationsClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -208,82 +183,51 @@ export class ApplicationsClient {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=apps/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=apps/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=apps/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=apps/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=apps/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=apps/*}/locations',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=apps/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=apps/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createApplicationResponse = protoFilesRoot.lookup(
-      '.google.appengine.v1.Application'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.Application') as gax.protobuf.Type;
     const createApplicationMetadata = protoFilesRoot.lookup(
-      '.google.appengine.v1.OperationMetadataV1'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.OperationMetadataV1') as gax.protobuf.Type;
     const updateApplicationResponse = protoFilesRoot.lookup(
-      '.google.appengine.v1.Application'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.Application') as gax.protobuf.Type;
     const updateApplicationMetadata = protoFilesRoot.lookup(
-      '.google.appengine.v1.OperationMetadataV1'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.OperationMetadataV1') as gax.protobuf.Type;
     const repairApplicationResponse = protoFilesRoot.lookup(
-      '.google.appengine.v1.Application'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.Application') as gax.protobuf.Type;
     const repairApplicationMetadata = protoFilesRoot.lookup(
-      '.google.appengine.v1.OperationMetadataV1'
-    ) as gax.protobuf.Type;
+      '.google.appengine.v1.OperationMetadataV1') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createApplication: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createApplicationResponse.decode.bind(createApplicationResponse),
-        createApplicationMetadata.decode.bind(createApplicationMetadata)
-      ),
+        createApplicationMetadata.decode.bind(createApplicationMetadata)),
       updateApplication: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateApplicationResponse.decode.bind(updateApplicationResponse),
-        updateApplicationMetadata.decode.bind(updateApplicationMetadata)
-      ),
+        updateApplicationMetadata.decode.bind(updateApplicationMetadata)),
       repairApplication: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         repairApplicationResponse.decode.bind(repairApplicationResponse),
-        repairApplicationMetadata.decode.bind(repairApplicationMetadata)
-      ),
+        repairApplicationMetadata.decode.bind(repairApplicationMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.appengine.v1.Applications',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.appengine.v1.Applications', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -314,40 +258,32 @@ export class ApplicationsClient {
     // Put together the "service stub" for
     // google.appengine.v1.Applications.
     this.applicationsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.appengine.v1.Applications'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.appengine.v1.Applications') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.appengine.v1.Applications,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const applicationsStubMethods = [
-      'getApplication',
-      'createApplication',
-      'updateApplication',
-      'repairApplication',
-    ];
+    const applicationsStubMethods =
+        ['getApplication', 'createApplication', 'updateApplication', 'repairApplication'];
     for (const methodName of applicationsStubMethods) {
       const callPromise = this.applicationsStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -367,14 +303,8 @@ export class ApplicationsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'appengine.googleapis.com';
   }
@@ -385,14 +315,8 @@ export class ApplicationsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'appengine.googleapis.com';
   }
@@ -426,7 +350,7 @@ export class ApplicationsClient {
     return [
       'https://www.googleapis.com/auth/appengine.admin',
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/cloud-platform.read-only',
+      'https://www.googleapis.com/auth/cloud-platform.read-only'
     ];
   }
 
@@ -436,9 +360,8 @@ export class ApplicationsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -449,641 +372,440 @@ export class ApplicationsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets information about an application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the Application resource to get. Example: `apps/myapp`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.appengine.v1.Application|Application}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/applications.get_application.js</caption>
-   * region_tag:appengine_v1_generated_Applications_GetApplication_async
-   */
+/**
+ * Gets information about an application.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Name of the Application resource to get. Example: `apps/myapp`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.appengine.v1.Application|Application}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/applications.get_application.js</caption>
+ * region_tag:appengine_v1_generated_Applications_GetApplication_async
+ */
   getApplication(
-    request?: protos.google.appengine.v1.IGetApplicationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.appengine.v1.IApplication,
-      protos.google.appengine.v1.IGetApplicationRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IGetApplicationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.appengine.v1.IApplication,
+        protos.google.appengine.v1.IGetApplicationRequest|undefined, {}|undefined
+      ]>;
   getApplication(
-    request: protos.google.appengine.v1.IGetApplicationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.appengine.v1.IApplication,
-      protos.google.appengine.v1.IGetApplicationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getApplication(
-    request: protos.google.appengine.v1.IGetApplicationRequest,
-    callback: Callback<
-      protos.google.appengine.v1.IApplication,
-      protos.google.appengine.v1.IGetApplicationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getApplication(
-    request?: protos.google.appengine.v1.IGetApplicationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.appengine.v1.IGetApplicationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.appengine.v1.IApplication,
-          protos.google.appengine.v1.IGetApplicationRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.appengine.v1.IApplication,
-      protos.google.appengine.v1.IGetApplicationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.appengine.v1.IApplication,
-      protos.google.appengine.v1.IGetApplicationRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.appengine.v1.IGetApplicationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getApplication(
+      request: protos.google.appengine.v1.IGetApplicationRequest,
+      callback: Callback<
+          protos.google.appengine.v1.IApplication,
+          protos.google.appengine.v1.IGetApplicationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getApplication(
+      request?: protos.google.appengine.v1.IGetApplicationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.appengine.v1.IApplication,
+          protos.google.appengine.v1.IGetApplicationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.appengine.v1.IApplication,
+          protos.google.appengine.v1.IGetApplicationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.appengine.v1.IApplication,
+        protos.google.appengine.v1.IGetApplicationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getApplication request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.appengine.v1.IApplication,
-          protos.google.appengine.v1.IGetApplicationRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.appengine.v1.IApplication,
+        protos.google.appengine.v1.IGetApplicationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getApplication response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getApplication(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.appengine.v1.IApplication,
-          protos.google.appengine.v1.IGetApplicationRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getApplication response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getApplication(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.appengine.v1.IApplication,
+        protos.google.appengine.v1.IGetApplicationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getApplication response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates an App Engine application for a Google Cloud Platform project.
-   * Required fields:
-   *
-   * * `id` - The ID of the target Cloud Platform project.
-   * * *location* - The [region](https://cloud.google.com/appengine/docs/locations) where you want the App Engine application located.
-   *
-   * For more information about App Engine applications, see [Managing Projects, Applications, and Billing](https://cloud.google.com/appengine/docs/standard/python/console/).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.appengine.v1.Application} request.application
-   *   Application configuration.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/applications.create_application.js</caption>
-   * region_tag:appengine_v1_generated_Applications_CreateApplication_async
-   */
+/**
+ * Creates an App Engine application for a Google Cloud Platform project.
+ * Required fields:
+ *
+ * * `id` - The ID of the target Cloud Platform project.
+ * * *location* - The [region](https://cloud.google.com/appengine/docs/locations) where you want the App Engine application located.
+ *
+ * For more information about App Engine applications, see [Managing Projects, Applications, and Billing](https://cloud.google.com/appengine/docs/standard/python/console/).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.appengine.v1.Application} request.application
+ *   Application configuration.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/applications.create_application.js</caption>
+ * region_tag:appengine_v1_generated_Applications_CreateApplication_async
+ */
   createApplication(
-    request?: protos.google.appengine.v1.ICreateApplicationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IApplication,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.ICreateApplicationRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createApplication(
-    request: protos.google.appengine.v1.ICreateApplicationRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IApplication,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.ICreateApplicationRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createApplication(
-    request: protos.google.appengine.v1.ICreateApplicationRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IApplication,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.ICreateApplicationRequest,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createApplication(
-    request?: protos.google.appengine.v1.ICreateApplicationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IApplication,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.appengine.v1.IApplication,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IApplication,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.appengine.v1.ICreateApplicationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IApplication,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createApplication response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createApplication request %j', request);
-    return this.innerApiCalls
-      .createApplication(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.appengine.v1.IApplication,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createApplication response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createApplication(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createApplication response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createApplication()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/applications.create_application.js</caption>
-   * region_tag:appengine_v1_generated_Applications_CreateApplication_async
-   */
-  async checkCreateApplicationProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.appengine.v1.Application,
-      protos.google.appengine.v1.OperationMetadataV1
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createApplication()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/applications.create_application.js</caption>
+ * region_tag:appengine_v1_generated_Applications_CreateApplication_async
+ */
+  async checkCreateApplicationProgress(name: string): Promise<LROperation<protos.google.appengine.v1.Application, protos.google.appengine.v1.OperationMetadataV1>>{
     this._log.info('createApplication long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createApplication,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.appengine.v1.Application,
-      protos.google.appengine.v1.OperationMetadataV1
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createApplication, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.appengine.v1.Application, protos.google.appengine.v1.OperationMetadataV1>;
   }
-  /**
-   * Updates the specified Application resource.
-   * You can update the following fields:
-   *
-   * * `auth_domain` - Google authentication domain for controlling user access to the application.
-   * * `default_cookie_expiration` - Cookie expiration policy for the application.
-   * * `iap` - Identity-Aware Proxy properties for the application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the Application resource to update. Example: `apps/myapp`.
-   * @param {google.appengine.v1.Application} request.application
-   *   An Application containing the updated resource.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Standard field mask for the set of fields to be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/applications.update_application.js</caption>
-   * region_tag:appengine_v1_generated_Applications_UpdateApplication_async
-   */
+/**
+ * Updates the specified Application resource.
+ * You can update the following fields:
+ *
+ * * `auth_domain` - Google authentication domain for controlling user access to the application.
+ * * `default_cookie_expiration` - Cookie expiration policy for the application.
+ * * `iap` - Identity-Aware Proxy properties for the application.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Name of the Application resource to update. Example: `apps/myapp`.
+ * @param {google.appengine.v1.Application} request.application
+ *   An Application containing the updated resource.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Standard field mask for the set of fields to be updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/applications.update_application.js</caption>
+ * region_tag:appengine_v1_generated_Applications_UpdateApplication_async
+ */
   updateApplication(
-    request?: protos.google.appengine.v1.IUpdateApplicationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IApplication,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IUpdateApplicationRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateApplication(
-    request: protos.google.appengine.v1.IUpdateApplicationRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IApplication,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IUpdateApplicationRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateApplication(
-    request: protos.google.appengine.v1.IUpdateApplicationRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IApplication,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IUpdateApplicationRequest,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateApplication(
-    request?: protos.google.appengine.v1.IUpdateApplicationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IApplication,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.appengine.v1.IApplication,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IApplication,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.appengine.v1.IUpdateApplicationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IApplication,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateApplication response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateApplication request %j', request);
-    return this.innerApiCalls
-      .updateApplication(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.appengine.v1.IApplication,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateApplication response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateApplication(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateApplication response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateApplication()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/applications.update_application.js</caption>
-   * region_tag:appengine_v1_generated_Applications_UpdateApplication_async
-   */
-  async checkUpdateApplicationProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.appengine.v1.Application,
-      protos.google.appengine.v1.OperationMetadataV1
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateApplication()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/applications.update_application.js</caption>
+ * region_tag:appengine_v1_generated_Applications_UpdateApplication_async
+ */
+  async checkUpdateApplicationProgress(name: string): Promise<LROperation<protos.google.appengine.v1.Application, protos.google.appengine.v1.OperationMetadataV1>>{
     this._log.info('updateApplication long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateApplication,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.appengine.v1.Application,
-      protos.google.appengine.v1.OperationMetadataV1
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateApplication, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.appengine.v1.Application, protos.google.appengine.v1.OperationMetadataV1>;
   }
-  /**
-   * Recreates the required App Engine features for the specified App Engine
-   * application, for example a Cloud Storage bucket or App Engine service
-   * account.
-   * Use this method if you receive an error message about a missing feature,
-   * for example, *Error retrieving the App Engine service account*.
-   * If you have deleted your App Engine service account, this will
-   * not be able to recreate it. Instead, you should attempt to use the
-   * IAM undelete API if possible at https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/undelete?apix_params=%7B"name"%3A"projects%2F-%2FserviceAccounts%2Funique_id"%2C"resource"%3A%7B%7D%7D .
-   * If the deletion was recent, the numeric ID can be found in the Cloud
-   * Console Activity Log.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the application to repair. Example: `apps/myapp`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/applications.repair_application.js</caption>
-   * region_tag:appengine_v1_generated_Applications_RepairApplication_async
-   */
+/**
+ * Recreates the required App Engine features for the specified App Engine
+ * application, for example a Cloud Storage bucket or App Engine service
+ * account.
+ * Use this method if you receive an error message about a missing feature,
+ * for example, *Error retrieving the App Engine service account*.
+ * If you have deleted your App Engine service account, this will
+ * not be able to recreate it. Instead, you should attempt to use the
+ * IAM undelete API if possible at https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/undelete?apix_params=%7B"name"%3A"projects%2F-%2FserviceAccounts%2Funique_id"%2C"resource"%3A%7B%7D%7D .
+ * If the deletion was recent, the numeric ID can be found in the Cloud
+ * Console Activity Log.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Name of the application to repair. Example: `apps/myapp`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/applications.repair_application.js</caption>
+ * region_tag:appengine_v1_generated_Applications_RepairApplication_async
+ */
   repairApplication(
-    request?: protos.google.appengine.v1.IRepairApplicationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IApplication,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.appengine.v1.IRepairApplicationRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   repairApplication(
-    request: protos.google.appengine.v1.IRepairApplicationRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IApplication,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IRepairApplicationRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   repairApplication(
-    request: protos.google.appengine.v1.IRepairApplicationRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.appengine.v1.IApplication,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.appengine.v1.IRepairApplicationRequest,
+      callback: Callback<
+          LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   repairApplication(
-    request?: protos.google.appengine.v1.IRepairApplicationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IApplication,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.appengine.v1.IApplication,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.appengine.v1.IApplication,
-        protos.google.appengine.v1.IOperationMetadataV1
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.appengine.v1.IRepairApplicationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.appengine.v1.IApplication,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('repairApplication response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('repairApplication request %j', request);
-    return this.innerApiCalls
-      .repairApplication(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.appengine.v1.IApplication,
-            protos.google.appengine.v1.IOperationMetadataV1
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('repairApplication response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.repairApplication(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.appengine.v1.IApplication, protos.google.appengine.v1.IOperationMetadataV1>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('repairApplication response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `repairApplication()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/applications.repair_application.js</caption>
-   * region_tag:appengine_v1_generated_Applications_RepairApplication_async
-   */
-  async checkRepairApplicationProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.appengine.v1.Application,
-      protos.google.appengine.v1.OperationMetadataV1
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `repairApplication()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/applications.repair_application.js</caption>
+ * region_tag:appengine_v1_generated_Applications_RepairApplication_async
+ */
+  async checkRepairApplicationProgress(name: string): Promise<LROperation<protos.google.appengine.v1.Application, protos.google.appengine.v1.OperationMetadataV1>>{
     this._log.info('repairApplication long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.repairApplication,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.appengine.v1.Application,
-      protos.google.appengine.v1.OperationMetadataV1
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.repairApplication, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.appengine.v1.Application, protos.google.appengine.v1.OperationMetadataV1>;
   }
   // --------------------
   // -- Path templates --
@@ -1098,12 +820,7 @@ export class ApplicationsClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(
-    app: string,
-    service: string,
-    version: string,
-    instance: string
-  ) {
+  instancePath(app:string,service:string,version:string,instance:string) {
     return this.pathTemplates.instancePathTemplate.render({
       app: app,
       service: service,

@@ -41,37 +41,7 @@ type RetrieverServiceClient = v1beta.RetrieverServiceClient;
 const TextServiceClient = v1beta.TextServiceClient;
 type TextServiceClient = v1beta.TextServiceClient;
 
-export {
-  v1,
-  v1alpha,
-  v1beta,
-  v1beta2,
-  v1beta3,
-  CacheServiceClient,
-  DiscussServiceClient,
-  FileServiceClient,
-  GenerativeServiceClient,
-  ModelServiceClient,
-  PermissionServiceClient,
-  PredictionServiceClient,
-  RetrieverServiceClient,
-  TextServiceClient,
-};
-export default {
-  v1,
-  v1alpha,
-  v1beta,
-  v1beta2,
-  v1beta3,
-  CacheServiceClient,
-  DiscussServiceClient,
-  FileServiceClient,
-  GenerativeServiceClient,
-  ModelServiceClient,
-  PermissionServiceClient,
-  PredictionServiceClient,
-  RetrieverServiceClient,
-  TextServiceClient,
-};
+export {v1, v1alpha, v1beta, v1beta2, v1beta3, CacheServiceClient, DiscussServiceClient, FileServiceClient, GenerativeServiceClient, ModelServiceClient, PermissionServiceClient, PredictionServiceClient, RetrieverServiceClient, TextServiceClient};
+export default {v1, v1alpha, v1beta, v1beta2, v1beta3, CacheServiceClient, DiscussServiceClient, FileServiceClient, GenerativeServiceClient, ModelServiceClient, PermissionServiceClient, PredictionServiceClient, RetrieverServiceClient, TextServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

@@ -29,4302 +29,3358 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.LineageClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new lineageModule.v1.LineageClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'datalineage.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new lineageModule.v1.LineageClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = lineageModule.v1.LineageClient.servicePath;
-        assert.strictEqual(servicePath, 'datalineage.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = lineageModule.v1.LineageClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'datalineage.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new lineageModule.v1.LineageClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'datalineage.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new lineageModule.v1.LineageClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'datalineage.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new lineageModule.v1.LineageClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'datalineage.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new lineageModule.v1.LineageClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'datalineage.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new lineageModule.v1.LineageClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'datalineage.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new lineageModule.v1.LineageClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new lineageModule.v1.LineageClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = lineageModule.v1.LineageClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new lineageModule.v1.LineageClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new lineageModule.v1.LineageClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.lineageStub, undefined);
-      await client.initialize();
-      assert(client.lineageStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.lineageStub);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.lineageStub, undefined);
-      client.close().then(() => {
-        done();
-      });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('processOpenLineageRunEvent', () => {
-    it('invokes processOpenLineageRunEvent without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse()
-      );
-      client.innerApiCalls.processOpenLineageRunEvent =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.processOpenLineageRunEvent(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.processOpenLineageRunEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.processOpenLineageRunEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes processOpenLineageRunEvent without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse()
-      );
-      client.innerApiCalls.processOpenLineageRunEvent =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.processOpenLineageRunEvent(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.processOpenLineageRunEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.processOpenLineageRunEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes processOpenLineageRunEvent with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.processOpenLineageRunEvent = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.processOpenLineageRunEvent(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.processOpenLineageRunEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.processOpenLineageRunEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes processOpenLineageRunEvent with closed client', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.processOpenLineageRunEvent(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('createProcess', () => {
-    it('invokes createProcess without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.CreateProcessRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.CreateProcessRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.Process()
-      );
-      client.innerApiCalls.createProcess = stubSimpleCall(expectedResponse);
-      const [response] = await client.createProcess(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createProcess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createProcess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createProcess without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.CreateProcessRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.CreateProcessRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.Process()
-      );
-      client.innerApiCalls.createProcess =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createProcess(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.lineage.v1.IProcess | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createProcess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createProcess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createProcess with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.CreateProcessRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.CreateProcessRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createProcess = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createProcess(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createProcess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createProcess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createProcess with closed client', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.CreateProcessRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.CreateProcessRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.createProcess(request), expectedError);
-    });
-  });
-
-  describe('updateProcess', () => {
-    it('invokes updateProcess without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest()
-      );
-      request.process ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest',
-        ['process', 'name']
-      );
-      request.process.name = defaultValue1;
-      const expectedHeaderRequestParams = `process.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.Process()
-      );
-      client.innerApiCalls.updateProcess = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateProcess(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateProcess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateProcess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateProcess without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest()
-      );
-      request.process ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest',
-        ['process', 'name']
-      );
-      request.process.name = defaultValue1;
-      const expectedHeaderRequestParams = `process.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.Process()
-      );
-      client.innerApiCalls.updateProcess =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateProcess(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.lineage.v1.IProcess | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateProcess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateProcess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateProcess with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest()
-      );
-      request.process ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest',
-        ['process', 'name']
-      );
-      request.process.name = defaultValue1;
-      const expectedHeaderRequestParams = `process.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateProcess = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateProcess(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateProcess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateProcess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateProcess with closed client', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest()
-      );
-      request.process ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest',
-        ['process', 'name']
-      );
-      request.process.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updateProcess(request), expectedError);
-    });
-  });
-
-  describe('getProcess', () => {
-    it('invokes getProcess without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.GetProcessRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.GetProcessRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.Process()
-      );
-      client.innerApiCalls.getProcess = stubSimpleCall(expectedResponse);
-      const [response] = await client.getProcess(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getProcess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getProcess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getProcess without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.GetProcessRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.GetProcessRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.Process()
-      );
-      client.innerApiCalls.getProcess =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getProcess(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.lineage.v1.IProcess | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getProcess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getProcess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getProcess with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.GetProcessRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.GetProcessRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getProcess = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getProcess(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getProcess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getProcess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getProcess with closed client', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.GetProcessRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.GetProcessRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getProcess(request), expectedError);
-    });
-  });
-
-  describe('createRun', () => {
-    it('invokes createRun without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.CreateRunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.CreateRunRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.Run()
-      );
-      client.innerApiCalls.createRun = stubSimpleCall(expectedResponse);
-      const [response] = await client.createRun(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createRun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRun without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.CreateRunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.CreateRunRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.Run()
-      );
-      client.innerApiCalls.createRun =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createRun(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.lineage.v1.IRun | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createRun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRun with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.CreateRunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.CreateRunRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createRun = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.createRun(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createRun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRun with closed client', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.CreateRunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.CreateRunRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.createRun(request), expectedError);
-    });
-  });
-
-  describe('updateRun', () => {
-    it('invokes updateRun without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.UpdateRunRequest()
-      );
-      request.run ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.UpdateRunRequest',
-        ['run', 'name']
-      );
-      request.run.name = defaultValue1;
-      const expectedHeaderRequestParams = `run.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.Run()
-      );
-      client.innerApiCalls.updateRun = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateRun(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateRun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRun without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.UpdateRunRequest()
-      );
-      request.run ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.UpdateRunRequest',
-        ['run', 'name']
-      );
-      request.run.name = defaultValue1;
-      const expectedHeaderRequestParams = `run.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.Run()
-      );
-      client.innerApiCalls.updateRun =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateRun(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.lineage.v1.IRun | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateRun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRun with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.UpdateRunRequest()
-      );
-      request.run ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.UpdateRunRequest',
-        ['run', 'name']
-      );
-      request.run.name = defaultValue1;
-      const expectedHeaderRequestParams = `run.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateRun = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.updateRun(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateRun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRun with closed client', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.UpdateRunRequest()
-      );
-      request.run ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.UpdateRunRequest',
-        ['run', 'name']
-      );
-      request.run.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updateRun(request), expectedError);
-    });
-  });
-
-  describe('getRun', () => {
-    it('invokes getRun without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.GetRunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.GetRunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.Run()
-      );
-      client.innerApiCalls.getRun = stubSimpleCall(expectedResponse);
-      const [response] = await client.getRun(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getRun as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRun without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.GetRunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.GetRunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.Run()
-      );
-      client.innerApiCalls.getRun =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getRun(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.lineage.v1.IRun | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (client.innerApiCalls.getRun as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRun with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.GetRunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.GetRunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getRun = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getRun(request), expectedError);
-      const actualRequest = (client.innerApiCalls.getRun as SinonStub).getCall(
-        0
-      ).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRun with closed client', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.GetRunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.GetRunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getRun(request), expectedError);
-    });
-  });
-
-  describe('createLineageEvent', () => {
-    it('invokes createLineageEvent without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-      );
-      client.innerApiCalls.createLineageEvent =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createLineageEvent(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createLineageEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLineageEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLineageEvent without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-      );
-      client.innerApiCalls.createLineageEvent =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createLineageEvent(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.lineage.v1.ILineageEvent | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createLineageEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLineageEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLineageEvent with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createLineageEvent = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createLineageEvent(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createLineageEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createLineageEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createLineageEvent with closed client', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.createLineageEvent(request), expectedError);
-    });
-  });
-
-  describe('getLineageEvent', () => {
-    it('invokes getLineageEvent without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-      );
-      client.innerApiCalls.getLineageEvent = stubSimpleCall(expectedResponse);
-      const [response] = await client.getLineageEvent(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getLineageEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLineageEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLineageEvent without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-      );
-      client.innerApiCalls.getLineageEvent =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLineageEvent(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.lineage.v1.ILineageEvent | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getLineageEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLineageEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLineageEvent with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getLineageEvent = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getLineageEvent(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getLineageEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getLineageEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getLineageEvent with closed client', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getLineageEvent(request), expectedError);
-    });
-  });
-
-  describe('deleteLineageEvent', () => {
-    it('invokes deleteLineageEvent without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteLineageEvent =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteLineageEvent(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteLineageEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLineageEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLineageEvent without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteLineageEvent =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteLineageEvent(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteLineageEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLineageEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLineageEvent with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteLineageEvent = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteLineageEvent(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteLineageEvent as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLineageEvent as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLineageEvent with closed client', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.deleteLineageEvent(request), expectedError);
-    });
-  });
-
-  describe('deleteProcess', () => {
-    it('invokes deleteProcess without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteProcess =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteProcess(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteProcess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteProcess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteProcess without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteProcess =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteProcess(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteProcess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteProcess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteProcess with call error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteProcess = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteProcess(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteProcess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteProcess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteProcess with LRO error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteProcess = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteProcess(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteProcess as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteProcess as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteProcessProgress without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteProcessProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteProcessProgress with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteProcessProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteRun', () => {
-    it('invokes deleteRun without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.DeleteRunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.DeleteRunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteRun = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteRun(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteRun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRun without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.DeleteRunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.DeleteRunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteRun =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteRun(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteRun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRun with call error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.DeleteRunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.DeleteRunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteRun = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteRun(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteRun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRun with LRO error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.DeleteRunRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.DeleteRunRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteRun = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteRun(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteRun as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRun as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteRunProgress without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteRunProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteRunProgress with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteRunProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listProcesses', () => {
-    it('invokes listProcesses without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListProcessesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Process()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Process()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Process()
-        ),
-      ];
-      client.innerApiCalls.listProcesses = stubSimpleCall(expectedResponse);
-      const [response] = await client.listProcesses(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listProcesses as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listProcesses as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listProcesses without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListProcessesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Process()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Process()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Process()
-        ),
-      ];
-      client.innerApiCalls.listProcesses =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listProcesses(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.datacatalog.lineage.v1.IProcess[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listProcesses as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listProcesses as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listProcesses with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListProcessesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listProcesses = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listProcesses(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listProcesses as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listProcesses as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listProcessesStream without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListProcessesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Process()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Process()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Process()
-        ),
-      ];
-      client.descriptors.page.listProcesses.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listProcessesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.lineage.v1.Process[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datacatalog.lineage.v1.Process) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listProcesses.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listProcesses, request)
-      );
-      assert(
-        (client.descriptors.page.listProcesses.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listProcessesStream with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListProcessesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listProcesses.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listProcessesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.lineage.v1.Process[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datacatalog.lineage.v1.Process) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listProcesses.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listProcesses, request)
-      );
-      assert(
-        (client.descriptors.page.listProcesses.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listProcesses without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListProcessesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Process()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Process()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Process()
-        ),
-      ];
-      client.descriptors.page.listProcesses.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.datacatalog.lineage.v1.IProcess[] =
-        [];
-      const iterable = client.listProcessesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listProcesses.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listProcesses.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listProcesses with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListProcessesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listProcesses.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listProcessesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.datacatalog.lineage.v1.IProcess[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = lineageModule.v1.LineageClient.servicePath;
+                assert.strictEqual(servicePath, 'datalineage.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = lineageModule.v1.LineageClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'datalineage.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listProcesses.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listProcesses.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listRuns', () => {
-    it('invokes listRuns without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListRunsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Run()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Run()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Run()
-        ),
-      ];
-      client.innerApiCalls.listRuns = stubSimpleCall(expectedResponse);
-      const [response] = await client.listRuns(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRuns as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRuns as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRuns without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListRunsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Run()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Run()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Run()
-        ),
-      ];
-      client.innerApiCalls.listRuns =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listRuns(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.lineage.v1.IRun[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRuns as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRuns as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRuns with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListRunsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listRuns = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.listRuns(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listRuns as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRuns as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRunsStream without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListRunsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Run()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Run()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Run()
-        ),
-      ];
-      client.descriptors.page.listRuns.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listRunsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.lineage.v1.Run[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datacatalog.lineage.v1.Run) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new lineageModule.v1.LineageClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'datalineage.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listRuns.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRuns, request)
-      );
-      assert(
-        (client.descriptors.page.listRuns.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listRunsStream with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListRunsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRuns.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listRunsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.lineage.v1.Run[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datacatalog.lineage.v1.Run) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new lineageModule.v1.LineageClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'datalineage.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listRuns.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRuns, request)
-      );
-      assert(
-        (client.descriptors.page.listRuns.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listRuns without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListRunsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Run()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Run()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Run()
-        ),
-      ];
-      client.descriptors.page.listRuns.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.datacatalog.lineage.v1.IRun[] = [];
-      const iterable = client.listRunsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listRuns.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listRuns.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new lineageModule.v1.LineageClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'datalineage.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listRuns with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListRunsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRuns.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listRunsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.datacatalog.lineage.v1.IRun[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new lineageModule.v1.LineageClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'datalineage.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listRuns.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listRuns.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new lineageModule.v1.LineageClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listLineageEvents', () => {
-    it('invokes listLineageEvents without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-        ),
-      ];
-      client.innerApiCalls.listLineageEvents = stubSimpleCall(expectedResponse);
-      const [response] = await client.listLineageEvents(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLineageEvents as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLineageEvents as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = lineageModule.v1.LineageClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new lineageModule.v1.LineageClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new lineageModule.v1.LineageClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.lineageStub, undefined);
+            await client.initialize();
+            assert(client.lineageStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.lineageStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.lineageStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listLineageEvents without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-        ),
-      ];
-      client.innerApiCalls.listLineageEvents =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listLineageEvents(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.datacatalog.lineage.v1.ILineageEvent[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('processOpenLineageRunEvent', () => {
+        it('invokes processOpenLineageRunEvent without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse()
+            );
+            client.innerApiCalls.processOpenLineageRunEvent = stubSimpleCall(expectedResponse);
+            const [response] = await client.processOpenLineageRunEvent(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.processOpenLineageRunEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.processOpenLineageRunEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes processOpenLineageRunEvent without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse()
+            );
+            client.innerApiCalls.processOpenLineageRunEvent = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.processOpenLineageRunEvent(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.processOpenLineageRunEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.processOpenLineageRunEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes processOpenLineageRunEvent with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.processOpenLineageRunEvent = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.processOpenLineageRunEvent(request), expectedError);
+            const actualRequest = (client.innerApiCalls.processOpenLineageRunEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.processOpenLineageRunEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes processOpenLineageRunEvent with closed client', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.processOpenLineageRunEvent(request), expectedError);
+        });
+    });
+
+    describe('createProcess', () => {
+        it('invokes createProcess without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.CreateProcessRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.CreateProcessRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.Process()
+            );
+            client.innerApiCalls.createProcess = stubSimpleCall(expectedResponse);
+            const [response] = await client.createProcess(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createProcess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createProcess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createProcess without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.CreateProcessRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.CreateProcessRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.Process()
+            );
+            client.innerApiCalls.createProcess = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createProcess(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.lineage.v1.IProcess|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createProcess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createProcess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createProcess with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.CreateProcessRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.CreateProcessRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createProcess = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createProcess(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createProcess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createProcess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createProcess with closed client', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.CreateProcessRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.CreateProcessRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createProcess(request), expectedError);
+        });
+    });
+
+    describe('updateProcess', () => {
+        it('invokes updateProcess without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest()
+            );
+            request.process ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest', ['process', 'name']);
+            request.process.name = defaultValue1;
+            const expectedHeaderRequestParams = `process.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.Process()
+            );
+            client.innerApiCalls.updateProcess = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateProcess(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateProcess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateProcess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateProcess without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest()
+            );
+            request.process ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest', ['process', 'name']);
+            request.process.name = defaultValue1;
+            const expectedHeaderRequestParams = `process.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.Process()
+            );
+            client.innerApiCalls.updateProcess = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateProcess(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.lineage.v1.IProcess|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateProcess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateProcess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateProcess with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest()
+            );
+            request.process ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest', ['process', 'name']);
+            request.process.name = defaultValue1;
+            const expectedHeaderRequestParams = `process.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateProcess = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateProcess(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateProcess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateProcess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateProcess with closed client', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest()
+            );
+            request.process ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.UpdateProcessRequest', ['process', 'name']);
+            request.process.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateProcess(request), expectedError);
+        });
+    });
+
+    describe('getProcess', () => {
+        it('invokes getProcess without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.GetProcessRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.GetProcessRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.Process()
+            );
+            client.innerApiCalls.getProcess = stubSimpleCall(expectedResponse);
+            const [response] = await client.getProcess(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getProcess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getProcess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getProcess without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.GetProcessRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.GetProcessRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.Process()
+            );
+            client.innerApiCalls.getProcess = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getProcess(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.lineage.v1.IProcess|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getProcess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getProcess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getProcess with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.GetProcessRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.GetProcessRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getProcess = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getProcess(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getProcess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getProcess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getProcess with closed client', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.GetProcessRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.GetProcessRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getProcess(request), expectedError);
+        });
+    });
+
+    describe('createRun', () => {
+        it('invokes createRun without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.CreateRunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.CreateRunRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.Run()
+            );
+            client.innerApiCalls.createRun = stubSimpleCall(expectedResponse);
+            const [response] = await client.createRun(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createRun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createRun without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.CreateRunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.CreateRunRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.Run()
+            );
+            client.innerApiCalls.createRun = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createRun(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.lineage.v1.IRun|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createRun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createRun with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.CreateRunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.CreateRunRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createRun = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createRun(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createRun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createRun with closed client', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.CreateRunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.CreateRunRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createRun(request), expectedError);
+        });
+    });
+
+    describe('updateRun', () => {
+        it('invokes updateRun without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.UpdateRunRequest()
+            );
+            request.run ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.UpdateRunRequest', ['run', 'name']);
+            request.run.name = defaultValue1;
+            const expectedHeaderRequestParams = `run.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.Run()
+            );
+            client.innerApiCalls.updateRun = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateRun(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRun without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.UpdateRunRequest()
+            );
+            request.run ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.UpdateRunRequest', ['run', 'name']);
+            request.run.name = defaultValue1;
+            const expectedHeaderRequestParams = `run.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.Run()
+            );
+            client.innerApiCalls.updateRun = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateRun(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.lineage.v1.IRun|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRun with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.UpdateRunRequest()
+            );
+            request.run ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.UpdateRunRequest', ['run', 'name']);
+            request.run.name = defaultValue1;
+            const expectedHeaderRequestParams = `run.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateRun = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateRun(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateRun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRun with closed client', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.UpdateRunRequest()
+            );
+            request.run ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.UpdateRunRequest', ['run', 'name']);
+            request.run.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateRun(request), expectedError);
+        });
+    });
+
+    describe('getRun', () => {
+        it('invokes getRun without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.GetRunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.GetRunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.Run()
+            );
+            client.innerApiCalls.getRun = stubSimpleCall(expectedResponse);
+            const [response] = await client.getRun(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRun without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.GetRunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.GetRunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.Run()
+            );
+            client.innerApiCalls.getRun = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getRun(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.lineage.v1.IRun|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRun with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.GetRunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.GetRunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getRun = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getRun(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getRun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRun with closed client', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.GetRunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.GetRunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getRun(request), expectedError);
+        });
+    });
+
+    describe('createLineageEvent', () => {
+        it('invokes createLineageEvent without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
+            );
+            client.innerApiCalls.createLineageEvent = stubSimpleCall(expectedResponse);
+            const [response] = await client.createLineageEvent(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createLineageEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLineageEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLineageEvent without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
+            );
+            client.innerApiCalls.createLineageEvent = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createLineageEvent(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.lineage.v1.ILineageEvent|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createLineageEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLineageEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLineageEvent with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createLineageEvent = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createLineageEvent(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createLineageEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createLineageEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createLineageEvent with closed client', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.CreateLineageEventRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createLineageEvent(request), expectedError);
+        });
+    });
+
+    describe('getLineageEvent', () => {
+        it('invokes getLineageEvent without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
+            );
+            client.innerApiCalls.getLineageEvent = stubSimpleCall(expectedResponse);
+            const [response] = await client.getLineageEvent(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLineageEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLineageEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLineageEvent without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
+            );
+            client.innerApiCalls.getLineageEvent = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLineageEvent(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.lineage.v1.ILineageEvent|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getLineageEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLineageEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLineageEvent with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getLineageEvent = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLineageEvent(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getLineageEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getLineageEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getLineageEvent with closed client', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.GetLineageEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getLineageEvent(request), expectedError);
+        });
+    });
+
+    describe('deleteLineageEvent', () => {
+        it('invokes deleteLineageEvent without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteLineageEvent = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteLineageEvent(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteLineageEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLineageEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLineageEvent without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteLineageEvent = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteLineageEvent(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteLineageEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLineageEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLineageEvent with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteLineageEvent = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteLineageEvent(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteLineageEvent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLineageEvent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLineageEvent with closed client', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.DeleteLineageEventRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteLineageEvent(request), expectedError);
+        });
+    });
+
+    describe('deleteProcess', () => {
+        it('invokes deleteProcess without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteProcess = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteProcess(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteProcess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteProcess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteProcess without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteProcess = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteProcess(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteProcess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteProcess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteProcess with call error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteProcess = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteProcess(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteProcess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteProcess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteProcess with LRO error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.DeleteProcessRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteProcess = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteProcess(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteProcess as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteProcess as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteProcessProgress without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteProcessProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteProcessProgress with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteProcessProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteRun', () => {
+        it('invokes deleteRun without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.DeleteRunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.DeleteRunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteRun = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteRun(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteRun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteRun without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.DeleteRunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.DeleteRunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteRun = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteRun(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datacatalog.lineage.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteRun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteRun with call error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.DeleteRunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.DeleteRunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteRun = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteRun(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteRun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteRun with LRO error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.DeleteRunRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.DeleteRunRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteRun = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteRun(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteRun as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRun as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteRunProgress without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteRunProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteRunProgress with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteRunProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listProcesses', () => {
+        it('invokes listProcesses without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListProcessesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Process()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Process()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Process()),
+            ];
+            client.innerApiCalls.listProcesses = stubSimpleCall(expectedResponse);
+            const [response] = await client.listProcesses(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listProcesses as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listProcesses as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listProcesses without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListProcessesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Process()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Process()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Process()),
+            ];
+            client.innerApiCalls.listProcesses = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listProcesses(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.lineage.v1.IProcess[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listProcesses as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listProcesses as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listProcesses with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListProcessesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listProcesses = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listProcesses(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listProcesses as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listProcesses as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listProcessesStream without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListProcessesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Process()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Process()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Process()),
+            ];
+            client.descriptors.page.listProcesses.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listProcessesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datacatalog.lineage.v1.Process[] = [];
+                stream.on('data', (response: protos.google.cloud.datacatalog.lineage.v1.Process) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listProcesses.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listProcesses, request));
+            assert(
+                (client.descriptors.page.listProcesses.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listProcessesStream with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListProcessesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listProcesses.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listProcessesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datacatalog.lineage.v1.Process[] = [];
+                stream.on('data', (response: protos.google.cloud.datacatalog.lineage.v1.Process) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listProcesses.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listProcesses, request));
+            assert(
+                (client.descriptors.page.listProcesses.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listProcesses without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListProcessesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Process()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Process()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Process()),
+            ];
+            client.descriptors.page.listProcesses.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.datacatalog.lineage.v1.IProcess[] = [];
+            const iterable = client.listProcessesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLineageEvents as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLineageEvents as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLineageEvents with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listLineageEvents = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listLineageEvents(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listLineageEvents as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLineageEvents as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLineageEventsStream without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-        ),
-      ];
-      client.descriptors.page.listLineageEvents.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listLineageEventsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.lineage.v1.LineageEvent[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.datacatalog.lineage.v1.LineageEvent
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listProcesses.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listProcesses.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listProcesses with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListProcessesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListProcessesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listProcesses.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listProcessesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.datacatalog.lineage.v1.IProcess[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listProcesses.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listProcesses.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listLineageEvents.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLineageEvents, request)
-      );
-      assert(
-        (client.descriptors.page.listLineageEvents.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listLineageEventsStream with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLineageEvents.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listLineageEventsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.lineage.v1.LineageEvent[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.datacatalog.lineage.v1.LineageEvent
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listRuns', () => {
+        it('invokes listRuns without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListRunsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Run()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Run()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Run()),
+            ];
+            client.innerApiCalls.listRuns = stubSimpleCall(expectedResponse);
+            const [response] = await client.listRuns(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRuns as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRuns as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listRuns without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListRunsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Run()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Run()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Run()),
+            ];
+            client.innerApiCalls.listRuns = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listRuns(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.lineage.v1.IRun[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRuns as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRuns as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listLineageEvents.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLineageEvents, request)
-      );
-      assert(
-        (client.descriptors.page.listLineageEvents.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listLineageEvents without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()
-        ),
-      ];
-      client.descriptors.page.listLineageEvents.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.datacatalog.lineage.v1.ILineageEvent[] =
-        [];
-      const iterable = client.listLineageEventsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listLineageEvents.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listLineageEvents.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listRuns with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListRunsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listRuns = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listRuns(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listRuns as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRuns as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listLineageEvents with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLineageEvents.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLineageEventsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.datacatalog.lineage.v1.ILineageEvent[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listLineageEvents.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listLineageEvents.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listRunsStream without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListRunsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Run()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Run()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Run()),
+            ];
+            client.descriptors.page.listRuns.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listRunsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datacatalog.lineage.v1.Run[] = [];
+                stream.on('data', (response: protos.google.cloud.datacatalog.lineage.v1.Run) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listRuns.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRuns, request));
+            assert(
+                (client.descriptors.page.listRuns.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('searchLinks', () => {
-    it('invokes searchLinks without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.SearchLinksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Link()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Link()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Link()
-        ),
-      ];
-      client.innerApiCalls.searchLinks = stubSimpleCall(expectedResponse);
-      const [response] = await client.searchLinks(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.searchLinks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchLinks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listRunsStream with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListRunsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRuns.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listRunsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datacatalog.lineage.v1.Run[] = [];
+                stream.on('data', (response: protos.google.cloud.datacatalog.lineage.v1.Run) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listRuns.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRuns, request));
+            assert(
+                (client.descriptors.page.listRuns.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes searchLinks without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.SearchLinksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Link()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Link()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Link()
-        ),
-      ];
-      client.innerApiCalls.searchLinks =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.searchLinks(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.lineage.v1.ILink[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listRuns without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListRunsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Run()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Run()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Run()),
+            ];
+            client.descriptors.page.listRuns.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.datacatalog.lineage.v1.IRun[] = [];
+            const iterable = client.listRunsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.searchLinks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchLinks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes searchLinks with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.SearchLinksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.searchLinks = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.searchLinks(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.searchLinks as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.searchLinks as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes searchLinksStream without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.SearchLinksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Link()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Link()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Link()
-        ),
-      ];
-      client.descriptors.page.searchLinks.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.searchLinksStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.lineage.v1.Link[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datacatalog.lineage.v1.Link) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRuns.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRuns.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listRuns with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListRunsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListRunsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRuns.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listRunsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.datacatalog.lineage.v1.IRun[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRuns.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRuns.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.searchLinks.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchLinks, request)
-      );
-      assert(
-        (client.descriptors.page.searchLinks.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes searchLinksStream with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.SearchLinksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchLinks.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.searchLinksStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.lineage.v1.Link[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.datacatalog.lineage.v1.Link) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listLineageEvents', () => {
+        it('invokes listLineageEvents without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()),
+            ];
+            client.innerApiCalls.listLineageEvents = stubSimpleCall(expectedResponse);
+            const [response] = await client.listLineageEvents(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLineageEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLineageEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listLineageEvents without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()),
+            ];
+            client.innerApiCalls.listLineageEvents = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listLineageEvents(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.lineage.v1.ILineageEvent[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLineageEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLineageEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.searchLinks.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.searchLinks, request)
-      );
-      assert(
-        (client.descriptors.page.searchLinks.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with searchLinks without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.SearchLinksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Link()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Link()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.Link()
-        ),
-      ];
-      client.descriptors.page.searchLinks.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.datacatalog.lineage.v1.ILink[] = [];
-      const iterable = client.searchLinksAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.searchLinks.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.searchLinks.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listLineageEvents with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listLineageEvents = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listLineageEvents(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listLineageEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLineageEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with searchLinks with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.SearchLinksRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.searchLinks.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.searchLinksAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.datacatalog.lineage.v1.ILink[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.searchLinks.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.searchLinks.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listLineageEventsStream without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()),
+            ];
+            client.descriptors.page.listLineageEvents.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listLineageEventsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datacatalog.lineage.v1.LineageEvent[] = [];
+                stream.on('data', (response: protos.google.cloud.datacatalog.lineage.v1.LineageEvent) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listLineageEvents.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLineageEvents, request));
+            assert(
+                (client.descriptors.page.listLineageEvents.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('batchSearchLinkProcesses', () => {
-    it('invokes batchSearchLinkProcesses without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
-        ),
-      ];
-      client.innerApiCalls.batchSearchLinkProcesses =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.batchSearchLinkProcesses(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchSearchLinkProcesses as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchSearchLinkProcesses as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listLineageEventsStream with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLineageEvents.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listLineageEventsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datacatalog.lineage.v1.LineageEvent[] = [];
+                stream.on('data', (response: protos.google.cloud.datacatalog.lineage.v1.LineageEvent) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listLineageEvents.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLineageEvents, request));
+            assert(
+                (client.descriptors.page.listLineageEvents.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes batchSearchLinkProcesses without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
-        ),
-      ];
-      client.innerApiCalls.batchSearchLinkProcesses =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.batchSearchLinkProcesses(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.datacatalog.lineage.v1.IProcessLinks[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listLineageEvents without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.LineageEvent()),
+            ];
+            client.descriptors.page.listLineageEvents.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.datacatalog.lineage.v1.ILineageEvent[] = [];
+            const iterable = client.listLineageEventsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.batchSearchLinkProcesses as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchSearchLinkProcesses as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchSearchLinkProcesses with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.batchSearchLinkProcesses = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.batchSearchLinkProcesses(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.batchSearchLinkProcesses as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.batchSearchLinkProcesses as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes batchSearchLinkProcessesStream without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
-        ),
-      ];
-      client.descriptors.page.batchSearchLinkProcesses.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.batchSearchLinkProcessesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.lineage.v1.ProcessLinks[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.datacatalog.lineage.v1.ProcessLinks
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLineageEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLineageEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listLineageEvents with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.ListLineageEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLineageEvents.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLineageEventsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.datacatalog.lineage.v1.ILineageEvent[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLineageEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLineageEvents.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.batchSearchLinkProcesses
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.batchSearchLinkProcesses, request)
-      );
-      assert(
-        (
-          client.descriptors.page.batchSearchLinkProcesses
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes batchSearchLinkProcessesStream with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.batchSearchLinkProcesses.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.batchSearchLinkProcessesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.lineage.v1.ProcessLinks[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.datacatalog.lineage.v1.ProcessLinks
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('searchLinks', () => {
+        it('invokes searchLinks without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.SearchLinksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Link()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Link()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Link()),
+            ];
+            client.innerApiCalls.searchLinks = stubSimpleCall(expectedResponse);
+            const [response] = await client.searchLinks(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchLinks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchLinks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes searchLinks without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.SearchLinksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Link()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Link()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Link()),
+            ];
+            client.innerApiCalls.searchLinks = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.searchLinks(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.lineage.v1.ILink[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchLinks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchLinks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.batchSearchLinkProcesses
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.batchSearchLinkProcesses, request)
-      );
-      assert(
-        (
-          client.descriptors.page.batchSearchLinkProcesses
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with batchSearchLinkProcesses without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()
-        ),
-      ];
-      client.descriptors.page.batchSearchLinkProcesses.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.datacatalog.lineage.v1.IProcessLinks[] =
-        [];
-      const iterable = client.batchSearchLinkProcessesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.batchSearchLinkProcesses
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.batchSearchLinkProcesses
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        it('invokes searchLinks with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.SearchLinksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.searchLinks = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.searchLinks(request), expectedError);
+            const actualRequest = (client.innerApiCalls.searchLinks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchLinks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with batchSearchLinkProcesses with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.batchSearchLinkProcesses.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.batchSearchLinkProcessesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.datacatalog.lineage.v1.IProcessLinks[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.batchSearchLinkProcesses
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.batchSearchLinkProcesses
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('invokes searchLinksStream without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.SearchLinksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Link()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Link()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Link()),
+            ];
+            client.descriptors.page.searchLinks.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.searchLinksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datacatalog.lineage.v1.Link[] = [];
+                stream.on('data', (response: protos.google.cloud.datacatalog.lineage.v1.Link) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.searchLinks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchLinks, request));
+            assert(
+                (client.descriptors.page.searchLinks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes searchLinksStream with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.SearchLinksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchLinks.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.searchLinksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datacatalog.lineage.v1.Link[] = [];
+                stream.on('data', (response: protos.google.cloud.datacatalog.lineage.v1.Link) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.searchLinks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.searchLinks, request));
+            assert(
+                (client.descriptors.page.searchLinks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with searchLinks without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.SearchLinksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Link()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Link()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.Link()),
+            ];
+            client.descriptors.page.searchLinks.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.datacatalog.lineage.v1.ILink[] = [];
+            const iterable = client.searchLinksAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchLinks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.searchLinks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with searchLinks with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.SearchLinksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.searchLinks.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.searchLinksAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.datacatalog.lineage.v1.ILink[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.searchLinks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.searchLinks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getOperation with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+
+    describe('batchSearchLinkProcesses', () => {
+        it('invokes batchSearchLinkProcesses without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()),
+            ];
+            client.innerApiCalls.batchSearchLinkProcesses = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchSearchLinkProcesses(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchSearchLinkProcesses as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchSearchLinkProcesses as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchSearchLinkProcesses without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()),
+            ];
+            client.innerApiCalls.batchSearchLinkProcesses = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchSearchLinkProcesses(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.datacatalog.lineage.v1.IProcessLinks[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchSearchLinkProcesses as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchSearchLinkProcesses as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchSearchLinkProcesses with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchSearchLinkProcesses = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchSearchLinkProcesses(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchSearchLinkProcesses as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchSearchLinkProcesses as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchSearchLinkProcessesStream without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()),
+            ];
+            client.descriptors.page.batchSearchLinkProcesses.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.batchSearchLinkProcessesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datacatalog.lineage.v1.ProcessLinks[] = [];
+                stream.on('data', (response: protos.google.cloud.datacatalog.lineage.v1.ProcessLinks) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.batchSearchLinkProcesses.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.batchSearchLinkProcesses, request));
+            assert(
+                (client.descriptors.page.batchSearchLinkProcesses.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes batchSearchLinkProcessesStream with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.batchSearchLinkProcesses.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.batchSearchLinkProcessesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.datacatalog.lineage.v1.ProcessLinks[] = [];
+                stream.on('data', (response: protos.google.cloud.datacatalog.lineage.v1.ProcessLinks) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.batchSearchLinkProcesses.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.batchSearchLinkProcesses, request));
+            assert(
+                (client.descriptors.page.batchSearchLinkProcesses.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with batchSearchLinkProcesses without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()),
+              generateSampleMessage(new protos.google.cloud.datacatalog.lineage.v1.ProcessLinks()),
+            ];
+            client.descriptors.page.batchSearchLinkProcesses.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.datacatalog.lineage.v1.IProcessLinks[] = [];
+            const iterable = client.batchSearchLinkProcessesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.batchSearchLinkProcesses.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.batchSearchLinkProcesses.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with batchSearchLinkProcesses with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.batchSearchLinkProcesses.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.batchSearchLinkProcessesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.datacatalog.lineage.v1.IProcessLinks[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.batchSearchLinkProcesses.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.batchSearchLinkProcesses.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes cancelOperation with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('lineageEvent', async () => {
-      const fakePath = '/rendered/path/lineageEvent';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        process: 'processValue',
-        run: 'runValue',
-        lineage_event: 'lineageEventValue',
-      };
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.lineageEventPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.lineageEventPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('lineageEventPath', () => {
-        const result = client.lineageEventPath(
-          'projectValue',
-          'locationValue',
-          'processValue',
-          'runValue',
-          'lineageEventValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.lineageEventPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLineageEventName', () => {
-        const result = client.matchProjectFromLineageEventName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.lineageEventPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLineageEventName', () => {
-        const result = client.matchLocationFromLineageEventName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.lineageEventPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchProcessFromLineageEventName', () => {
-        const result = client.matchProcessFromLineageEventName(fakePath);
-        assert.strictEqual(result, 'processValue');
-        assert(
-          (client.pathTemplates.lineageEventPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRunFromLineageEventName', () => {
-        const result = client.matchRunFromLineageEventName(fakePath);
-        assert.strictEqual(result, 'runValue');
-        assert(
-          (client.pathTemplates.lineageEventPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLineageEventFromLineageEventName', () => {
-        const result = client.matchLineageEventFromLineageEventName(fakePath);
-        assert.strictEqual(result, 'lineageEventValue');
-        assert(
-          (client.pathTemplates.lineageEventPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('lineageEvent', async () => {
+            const fakePath = "/rendered/path/lineageEvent";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                process: "processValue",
+                run: "runValue",
+                lineage_event: "lineageEventValue",
+            };
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.lineageEventPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.lineageEventPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('lineageEventPath', () => {
+                const result = client.lineageEventPath("projectValue", "locationValue", "processValue", "runValue", "lineageEventValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.lineageEventPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromLineageEventName', () => {
+                const result = client.matchProjectFromLineageEventName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.lineageEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLineageEventName', () => {
+                const result = client.matchLocationFromLineageEventName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.lineageEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchProcessFromLineageEventName', () => {
+                const result = client.matchProcessFromLineageEventName(fakePath);
+                assert.strictEqual(result, "processValue");
+                assert((client.pathTemplates.lineageEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRunFromLineageEventName', () => {
+                const result = client.matchRunFromLineageEventName(fakePath);
+                assert.strictEqual(result, "runValue");
+                assert((client.pathTemplates.lineageEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLineageEventFromLineageEventName', () => {
+                const result = client.matchLineageEventFromLineageEventName(fakePath);
+                assert.strictEqual(result, "lineageEventValue");
+                assert((client.pathTemplates.lineageEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('process', async () => {
+            const fakePath = "/rendered/path/process";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                process: "processValue",
+            };
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.processPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.processPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('processPath', () => {
+                const result = client.processPath("projectValue", "locationValue", "processValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.processPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProcessName', () => {
+                const result = client.matchProjectFromProcessName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.processPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProcessName', () => {
+                const result = client.matchLocationFromProcessName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.processPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchProcessFromProcessName', () => {
+                const result = client.matchProcessFromProcessName(fakePath);
+                assert.strictEqual(result, "processValue");
+                assert((client.pathTemplates.processPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('project', async () => {
+            const fakePath = "/rendered/path/project";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPath', () => {
+                const result = client.projectPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectName', () => {
+                const result = client.matchProjectFromProjectName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('run', async () => {
+            const fakePath = "/rendered/path/run";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                process: "processValue",
+                run: "runValue",
+            };
+            const client = new lineageModule.v1.LineageClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.runPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.runPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('runPath', () => {
+                const result = client.runPath("projectValue", "locationValue", "processValue", "runValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.runPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRunName', () => {
+                const result = client.matchProjectFromRunName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.runPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRunName', () => {
+                const result = client.matchLocationFromRunName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.runPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchProcessFromRunName', () => {
+                const result = client.matchProcessFromRunName(fakePath);
+                assert.strictEqual(result, "processValue");
+                assert((client.pathTemplates.runPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRunFromRunName', () => {
+                const result = client.matchRunFromRunName(fakePath);
+                assert.strictEqual(result, "runValue");
+                assert((client.pathTemplates.runPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('process', async () => {
-      const fakePath = '/rendered/path/process';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        process: 'processValue',
-      };
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.processPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.processPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('processPath', () => {
-        const result = client.processPath(
-          'projectValue',
-          'locationValue',
-          'processValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.processPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProcessName', () => {
-        const result = client.matchProjectFromProcessName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.processPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromProcessName', () => {
-        const result = client.matchLocationFromProcessName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.processPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchProcessFromProcessName', () => {
-        const result = client.matchProcessFromProcessName(fakePath);
-        assert.strictEqual(result, 'processValue');
-        assert(
-          (client.pathTemplates.processPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('project', async () => {
-      const fakePath = '/rendered/path/project';
-      const expectedParameters = {
-        project: 'projectValue',
-      };
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('run', async () => {
-      const fakePath = '/rendered/path/run';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        process: 'processValue',
-        run: 'runValue',
-      };
-      const client = new lineageModule.v1.LineageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.runPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.runPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('runPath', () => {
-        const result = client.runPath(
-          'projectValue',
-          'locationValue',
-          'processValue',
-          'runValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.runPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromRunName', () => {
-        const result = client.matchProjectFromRunName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.runPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromRunName', () => {
-        const result = client.matchLocationFromRunName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.runPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchProcessFromRunName', () => {
-        const result = client.matchProcessFromRunName(fakePath);
-        assert.strictEqual(result, 'processValue');
-        assert(
-          (client.pathTemplates.runPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRunFromRunName', () => {
-        const result = client.matchRunFromRunName(fakePath);
-        assert.strictEqual(result, 'runValue');
-        assert(
-          (client.pathTemplates.runPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

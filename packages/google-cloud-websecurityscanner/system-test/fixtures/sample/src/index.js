@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const websecurityscanner = require('@google-cloud/web-security-scanner');
 
 function main() {
-  const webSecurityScannerClient =
-    new websecurityscanner.WebSecurityScannerClient();
+  const webSecurityScannerClient = new websecurityscanner.WebSecurityScannerClient();
 }
 
 main();

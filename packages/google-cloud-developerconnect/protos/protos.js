@@ -560,7 +560,953 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|listAccountConnectors}.
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @typedef ListAccountConnectorsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.developerconnect.v1.ListAccountConnectorsResponse} [response] ListAccountConnectorsResponse
+                         */
+    
+                        /**
+                         * Calls ListAccountConnectors.
+                         * @function listAccountConnectors
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IListAccountConnectorsRequest} request ListAccountConnectorsRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.DeveloperConnect.ListAccountConnectorsCallback} callback Node-style callback called with the error, if any, and ListAccountConnectorsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DeveloperConnect.prototype.listAccountConnectors = function listAccountConnectors(request, callback) {
+                            return this.rpcCall(listAccountConnectors, $root.google.cloud.developerconnect.v1.ListAccountConnectorsRequest, $root.google.cloud.developerconnect.v1.ListAccountConnectorsResponse, request, callback);
+                        }, "name", { value: "ListAccountConnectors" });
+    
+                        /**
+                         * Calls ListAccountConnectors.
+                         * @function listAccountConnectors
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IListAccountConnectorsRequest} request ListAccountConnectorsRequest message or plain object
+                         * @returns {Promise<google.cloud.developerconnect.v1.ListAccountConnectorsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|getAccountConnector}.
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @typedef GetAccountConnectorCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.developerconnect.v1.AccountConnector} [response] AccountConnector
+                         */
+    
+                        /**
+                         * Calls GetAccountConnector.
+                         * @function getAccountConnector
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IGetAccountConnectorRequest} request GetAccountConnectorRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.DeveloperConnect.GetAccountConnectorCallback} callback Node-style callback called with the error, if any, and AccountConnector
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DeveloperConnect.prototype.getAccountConnector = function getAccountConnector(request, callback) {
+                            return this.rpcCall(getAccountConnector, $root.google.cloud.developerconnect.v1.GetAccountConnectorRequest, $root.google.cloud.developerconnect.v1.AccountConnector, request, callback);
+                        }, "name", { value: "GetAccountConnector" });
+    
+                        /**
+                         * Calls GetAccountConnector.
+                         * @function getAccountConnector
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IGetAccountConnectorRequest} request GetAccountConnectorRequest message or plain object
+                         * @returns {Promise<google.cloud.developerconnect.v1.AccountConnector>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|createAccountConnector}.
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @typedef CreateAccountConnectorCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateAccountConnector.
+                         * @function createAccountConnector
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.ICreateAccountConnectorRequest} request CreateAccountConnectorRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.DeveloperConnect.CreateAccountConnectorCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DeveloperConnect.prototype.createAccountConnector = function createAccountConnector(request, callback) {
+                            return this.rpcCall(createAccountConnector, $root.google.cloud.developerconnect.v1.CreateAccountConnectorRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateAccountConnector" });
+    
+                        /**
+                         * Calls CreateAccountConnector.
+                         * @function createAccountConnector
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.ICreateAccountConnectorRequest} request CreateAccountConnectorRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|updateAccountConnector}.
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @typedef UpdateAccountConnectorCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateAccountConnector.
+                         * @function updateAccountConnector
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest} request UpdateAccountConnectorRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.DeveloperConnect.UpdateAccountConnectorCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DeveloperConnect.prototype.updateAccountConnector = function updateAccountConnector(request, callback) {
+                            return this.rpcCall(updateAccountConnector, $root.google.cloud.developerconnect.v1.UpdateAccountConnectorRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateAccountConnector" });
+    
+                        /**
+                         * Calls UpdateAccountConnector.
+                         * @function updateAccountConnector
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest} request UpdateAccountConnectorRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|deleteAccountConnector}.
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @typedef DeleteAccountConnectorCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteAccountConnector.
+                         * @function deleteAccountConnector
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest} request DeleteAccountConnectorRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.DeveloperConnect.DeleteAccountConnectorCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DeveloperConnect.prototype.deleteAccountConnector = function deleteAccountConnector(request, callback) {
+                            return this.rpcCall(deleteAccountConnector, $root.google.cloud.developerconnect.v1.DeleteAccountConnectorRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteAccountConnector" });
+    
+                        /**
+                         * Calls DeleteAccountConnector.
+                         * @function deleteAccountConnector
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest} request DeleteAccountConnectorRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|fetchAccessToken}.
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @typedef FetchAccessTokenCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.developerconnect.v1.FetchAccessTokenResponse} [response] FetchAccessTokenResponse
+                         */
+    
+                        /**
+                         * Calls FetchAccessToken.
+                         * @function fetchAccessToken
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IFetchAccessTokenRequest} request FetchAccessTokenRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.DeveloperConnect.FetchAccessTokenCallback} callback Node-style callback called with the error, if any, and FetchAccessTokenResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DeveloperConnect.prototype.fetchAccessToken = function fetchAccessToken(request, callback) {
+                            return this.rpcCall(fetchAccessToken, $root.google.cloud.developerconnect.v1.FetchAccessTokenRequest, $root.google.cloud.developerconnect.v1.FetchAccessTokenResponse, request, callback);
+                        }, "name", { value: "FetchAccessToken" });
+    
+                        /**
+                         * Calls FetchAccessToken.
+                         * @function fetchAccessToken
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IFetchAccessTokenRequest} request FetchAccessTokenRequest message or plain object
+                         * @returns {Promise<google.cloud.developerconnect.v1.FetchAccessTokenResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|listUsers}.
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @typedef ListUsersCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.developerconnect.v1.ListUsersResponse} [response] ListUsersResponse
+                         */
+    
+                        /**
+                         * Calls ListUsers.
+                         * @function listUsers
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IListUsersRequest} request ListUsersRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.DeveloperConnect.ListUsersCallback} callback Node-style callback called with the error, if any, and ListUsersResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DeveloperConnect.prototype.listUsers = function listUsers(request, callback) {
+                            return this.rpcCall(listUsers, $root.google.cloud.developerconnect.v1.ListUsersRequest, $root.google.cloud.developerconnect.v1.ListUsersResponse, request, callback);
+                        }, "name", { value: "ListUsers" });
+    
+                        /**
+                         * Calls ListUsers.
+                         * @function listUsers
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IListUsersRequest} request ListUsersRequest message or plain object
+                         * @returns {Promise<google.cloud.developerconnect.v1.ListUsersResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|deleteUser}.
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @typedef DeleteUserCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteUser.
+                         * @function deleteUser
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IDeleteUserRequest} request DeleteUserRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.DeveloperConnect.DeleteUserCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DeveloperConnect.prototype.deleteUser = function deleteUser(request, callback) {
+                            return this.rpcCall(deleteUser, $root.google.cloud.developerconnect.v1.DeleteUserRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteUser" });
+    
+                        /**
+                         * Calls DeleteUser.
+                         * @function deleteUser
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IDeleteUserRequest} request DeleteUserRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|fetchSelf}.
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @typedef FetchSelfCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.developerconnect.v1.User} [response] User
+                         */
+    
+                        /**
+                         * Calls FetchSelf.
+                         * @function fetchSelf
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IFetchSelfRequest} request FetchSelfRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.DeveloperConnect.FetchSelfCallback} callback Node-style callback called with the error, if any, and User
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DeveloperConnect.prototype.fetchSelf = function fetchSelf(request, callback) {
+                            return this.rpcCall(fetchSelf, $root.google.cloud.developerconnect.v1.FetchSelfRequest, $root.google.cloud.developerconnect.v1.User, request, callback);
+                        }, "name", { value: "FetchSelf" });
+    
+                        /**
+                         * Calls FetchSelf.
+                         * @function fetchSelf
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IFetchSelfRequest} request FetchSelfRequest message or plain object
+                         * @returns {Promise<google.cloud.developerconnect.v1.User>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|deleteSelf}.
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @typedef DeleteSelfCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteSelf.
+                         * @function deleteSelf
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IDeleteSelfRequest} request DeleteSelfRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.DeveloperConnect.DeleteSelfCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DeveloperConnect.prototype.deleteSelf = function deleteSelf(request, callback) {
+                            return this.rpcCall(deleteSelf, $root.google.cloud.developerconnect.v1.DeleteSelfRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteSelf" });
+    
+                        /**
+                         * Calls DeleteSelf.
+                         * @function deleteSelf
+                         * @memberof google.cloud.developerconnect.v1.DeveloperConnect
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IDeleteSelfRequest} request DeleteSelfRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return DeveloperConnect;
+                    })();
+    
+                    /**
+                     * SystemProvider enum.
+                     * @name google.cloud.developerconnect.v1.SystemProvider
+                     * @enum {number}
+                     * @property {number} SYSTEM_PROVIDER_UNSPECIFIED=0 SYSTEM_PROVIDER_UNSPECIFIED value
+                     * @property {number} GITHUB=1 GITHUB value
+                     * @property {number} GITLAB=2 GITLAB value
+                     * @property {number} GOOGLE=3 GOOGLE value
+                     * @property {number} SENTRY=4 SENTRY value
+                     * @property {number} ROVO=5 ROVO value
+                     * @property {number} NEW_RELIC=6 NEW_RELIC value
+                     * @property {number} DATASTAX=7 DATASTAX value
+                     * @property {number} DYNATRACE=8 DYNATRACE value
+                     */
+                    v1.SystemProvider = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SYSTEM_PROVIDER_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "GITHUB"] = 1;
+                        values[valuesById[2] = "GITLAB"] = 2;
+                        values[valuesById[3] = "GOOGLE"] = 3;
+                        values[valuesById[4] = "SENTRY"] = 4;
+                        values[valuesById[5] = "ROVO"] = 5;
+                        values[valuesById[6] = "NEW_RELIC"] = 6;
+                        values[valuesById[7] = "DATASTAX"] = 7;
+                        values[valuesById[8] = "DYNATRACE"] = 8;
+                        return values;
+                    })();
+    
+                    v1.ListUsersRequest = (function() {
+    
+                        /**
+                         * Properties of a ListUsersRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IListUsersRequest
+                         * @property {string|null} [parent] ListUsersRequest parent
+                         * @property {number|null} [pageSize] ListUsersRequest pageSize
+                         * @property {string|null} [pageToken] ListUsersRequest pageToken
+                         * @property {string|null} [filter] ListUsersRequest filter
+                         * @property {string|null} [orderBy] ListUsersRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListUsersRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a ListUsersRequest.
+                         * @implements IListUsersRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IListUsersRequest=} [properties] Properties to set
+                         */
+                        function ListUsersRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListUsersRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.developerconnect.v1.ListUsersRequest
+                         * @instance
+                         */
+                        ListUsersRequest.prototype.parent = "";
+    
+                        /**
+                         * ListUsersRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.developerconnect.v1.ListUsersRequest
+                         * @instance
+                         */
+                        ListUsersRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListUsersRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.developerconnect.v1.ListUsersRequest
+                         * @instance
+                         */
+                        ListUsersRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListUsersRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.developerconnect.v1.ListUsersRequest
+                         * @instance
+                         */
+                        ListUsersRequest.prototype.filter = "";
+    
+                        /**
+                         * ListUsersRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.developerconnect.v1.ListUsersRequest
+                         * @instance
+                         */
+                        ListUsersRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListUsersRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.ListUsersRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListUsersRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.ListUsersRequest} ListUsersRequest instance
+                         */
+                        ListUsersRequest.create = function create(properties) {
+                            return new ListUsersRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListUsersRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.ListUsersRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.ListUsersRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListUsersRequest} message ListUsersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListUsersRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListUsersRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListUsersRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListUsersRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListUsersRequest} message ListUsersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListUsersRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListUsersRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.ListUsersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.ListUsersRequest} ListUsersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListUsersRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ListUsersRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListUsersRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListUsersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.ListUsersRequest} ListUsersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListUsersRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListUsersRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.ListUsersRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListUsersRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListUsersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.ListUsersRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.ListUsersRequest} ListUsersRequest
+                         */
+                        ListUsersRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.ListUsersRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.ListUsersRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListUsersRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.ListUsersRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ListUsersRequest} message ListUsersRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListUsersRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListUsersRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.ListUsersRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListUsersRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListUsersRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.ListUsersRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListUsersRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.ListUsersRequest";
+                        };
+    
+                        return ListUsersRequest;
+                    })();
+    
+                    v1.ListUsersResponse = (function() {
+    
+                        /**
+                         * Properties of a ListUsersResponse.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IListUsersResponse
+                         * @property {Array.<google.cloud.developerconnect.v1.IUser>|null} [users] ListUsersResponse users
+                         * @property {string|null} [nextPageToken] ListUsersResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListUsersResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListUsersResponse.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a ListUsersResponse.
+                         * @implements IListUsersResponse
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IListUsersResponse=} [properties] Properties to set
+                         */
+                        function ListUsersResponse(properties) {
+                            this.users = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListUsersResponse users.
+                         * @member {Array.<google.cloud.developerconnect.v1.IUser>} users
+                         * @memberof google.cloud.developerconnect.v1.ListUsersResponse
+                         * @instance
+                         */
+                        ListUsersResponse.prototype.users = $util.emptyArray;
+    
+                        /**
+                         * ListUsersResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.developerconnect.v1.ListUsersResponse
+                         * @instance
+                         */
+                        ListUsersResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListUsersResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.developerconnect.v1.ListUsersResponse
+                         * @instance
+                         */
+                        ListUsersResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListUsersResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.ListUsersResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListUsersResponse=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.ListUsersResponse} ListUsersResponse instance
+                         */
+                        ListUsersResponse.create = function create(properties) {
+                            return new ListUsersResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListUsersResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.ListUsersResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.ListUsersResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListUsersResponse} message ListUsersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListUsersResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.users != null && message.users.length)
+                                for (var i = 0; i < message.users.length; ++i)
+                                    $root.google.cloud.developerconnect.v1.User.encode(message.users[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListUsersResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListUsersResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListUsersResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListUsersResponse} message ListUsersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListUsersResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListUsersResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.ListUsersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.ListUsersResponse} ListUsersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListUsersResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ListUsersResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.users && message.users.length))
+                                            message.users = [];
+                                        message.users.push($root.google.cloud.developerconnect.v1.User.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListUsersResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListUsersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.ListUsersResponse} ListUsersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListUsersResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListUsersResponse message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.ListUsersResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListUsersResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.users != null && message.hasOwnProperty("users")) {
+                                if (!Array.isArray(message.users))
+                                    return "users: array expected";
+                                for (var i = 0; i < message.users.length; ++i) {
+                                    var error = $root.google.cloud.developerconnect.v1.User.verify(message.users[i]);
+                                    if (error)
+                                        return "users." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListUsersResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.ListUsersResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.ListUsersResponse} ListUsersResponse
+                         */
+                        ListUsersResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.ListUsersResponse)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.ListUsersResponse();
+                            if (object.users) {
+                                if (!Array.isArray(object.users))
+                                    throw TypeError(".google.cloud.developerconnect.v1.ListUsersResponse.users: array expected");
+                                message.users = [];
+                                for (var i = 0; i < object.users.length; ++i) {
+                                    if (typeof object.users[i] !== "object")
+                                        throw TypeError(".google.cloud.developerconnect.v1.ListUsersResponse.users: object expected");
+                                    message.users[i] = $root.google.cloud.developerconnect.v1.User.fromObject(object.users[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.developerconnect.v1.ListUsersResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListUsersResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.ListUsersResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ListUsersResponse} message ListUsersResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListUsersResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.users = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.users && message.users.length) {
+                                object.users = [];
+                                for (var j = 0; j < message.users.length; ++j)
+                                    object.users[j] = $root.google.cloud.developerconnect.v1.User.toObject(message.users[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListUsersResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.ListUsersResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListUsersResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListUsersResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.ListUsersResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListUsersResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.ListUsersResponse";
+                        };
+    
+                        return ListUsersResponse;
                     })();
     
                     v1.Connection = (function() {
@@ -573,6 +1519,8 @@
                          * @property {google.cloud.developerconnect.v1.IGitHubEnterpriseConfig|null} [githubEnterpriseConfig] Connection githubEnterpriseConfig
                          * @property {google.cloud.developerconnect.v1.IGitLabConfig|null} [gitlabConfig] Connection gitlabConfig
                          * @property {google.cloud.developerconnect.v1.IGitLabEnterpriseConfig|null} [gitlabEnterpriseConfig] Connection gitlabEnterpriseConfig
+                         * @property {google.cloud.developerconnect.v1.IBitbucketDataCenterConfig|null} [bitbucketDataCenterConfig] Connection bitbucketDataCenterConfig
+                         * @property {google.cloud.developerconnect.v1.IBitbucketCloudConfig|null} [bitbucketCloudConfig] Connection bitbucketCloudConfig
                          * @property {string|null} [name] Connection name
                          * @property {google.protobuf.ITimestamp|null} [createTime] Connection createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Connection updateTime
@@ -585,6 +1533,7 @@
                          * @property {string|null} [etag] Connection etag
                          * @property {string|null} [uid] Connection uid
                          * @property {google.cloud.developerconnect.v1.ICryptoKeyConfig|null} [cryptoKeyConfig] Connection cryptoKeyConfig
+                         * @property {google.cloud.developerconnect.v1.IGitProxyConfig|null} [gitProxyConfig] Connection gitProxyConfig
                          */
     
                         /**
@@ -635,6 +1584,22 @@
                          * @instance
                          */
                         Connection.prototype.gitlabEnterpriseConfig = null;
+    
+                        /**
+                         * Connection bitbucketDataCenterConfig.
+                         * @member {google.cloud.developerconnect.v1.IBitbucketDataCenterConfig|null|undefined} bitbucketDataCenterConfig
+                         * @memberof google.cloud.developerconnect.v1.Connection
+                         * @instance
+                         */
+                        Connection.prototype.bitbucketDataCenterConfig = null;
+    
+                        /**
+                         * Connection bitbucketCloudConfig.
+                         * @member {google.cloud.developerconnect.v1.IBitbucketCloudConfig|null|undefined} bitbucketCloudConfig
+                         * @memberof google.cloud.developerconnect.v1.Connection
+                         * @instance
+                         */
+                        Connection.prototype.bitbucketCloudConfig = null;
     
                         /**
                          * Connection name.
@@ -732,17 +1697,25 @@
                          */
                         Connection.prototype.cryptoKeyConfig = null;
     
+                        /**
+                         * Connection gitProxyConfig.
+                         * @member {google.cloud.developerconnect.v1.IGitProxyConfig|null|undefined} gitProxyConfig
+                         * @memberof google.cloud.developerconnect.v1.Connection
+                         * @instance
+                         */
+                        Connection.prototype.gitProxyConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Connection connectionConfig.
-                         * @member {"githubConfig"|"githubEnterpriseConfig"|"gitlabConfig"|"gitlabEnterpriseConfig"|undefined} connectionConfig
+                         * @member {"githubConfig"|"githubEnterpriseConfig"|"gitlabConfig"|"gitlabEnterpriseConfig"|"bitbucketDataCenterConfig"|"bitbucketCloudConfig"|undefined} connectionConfig
                          * @memberof google.cloud.developerconnect.v1.Connection
                          * @instance
                          */
                         Object.defineProperty(Connection.prototype, "connectionConfig", {
-                            get: $util.oneOfGetter($oneOfFields = ["githubConfig", "githubEnterpriseConfig", "gitlabConfig", "gitlabEnterpriseConfig"]),
+                            get: $util.oneOfGetter($oneOfFields = ["githubConfig", "githubEnterpriseConfig", "gitlabConfig", "gitlabEnterpriseConfig", "bitbucketDataCenterConfig", "bitbucketCloudConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -804,6 +1777,12 @@
                                 $root.google.cloud.developerconnect.v1.CryptoKeyConfig.encode(message.cryptoKeyConfig, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             if (message.gitlabEnterpriseConfig != null && Object.hasOwnProperty.call(message, "gitlabEnterpriseConfig"))
                                 $root.google.cloud.developerconnect.v1.GitLabEnterpriseConfig.encode(message.gitlabEnterpriseConfig, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.bitbucketDataCenterConfig != null && Object.hasOwnProperty.call(message, "bitbucketDataCenterConfig"))
+                                $root.google.cloud.developerconnect.v1.BitbucketDataCenterConfig.encode(message.bitbucketDataCenterConfig, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            if (message.bitbucketCloudConfig != null && Object.hasOwnProperty.call(message, "bitbucketCloudConfig"))
+                                $root.google.cloud.developerconnect.v1.BitbucketCloudConfig.encode(message.bitbucketCloudConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                            if (message.gitProxyConfig != null && Object.hasOwnProperty.call(message, "gitProxyConfig"))
+                                $root.google.cloud.developerconnect.v1.GitProxyConfig.encode(message.gitProxyConfig, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             return writer;
                         };
     
@@ -831,12 +1810,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Connection.decode = function decode(reader, length) {
+                        Connection.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.Connection(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 5: {
                                         message.githubConfig = $root.google.cloud.developerconnect.v1.GitHubConfig.decode(reader, reader.uint32());
@@ -852,6 +1833,14 @@
                                     }
                                 case 16: {
                                         message.gitlabEnterpriseConfig = $root.google.cloud.developerconnect.v1.GitLabEnterpriseConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 17: {
+                                        message.bitbucketDataCenterConfig = $root.google.cloud.developerconnect.v1.BitbucketDataCenterConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 18: {
+                                        message.bitbucketCloudConfig = $root.google.cloud.developerconnect.v1.BitbucketCloudConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -940,6 +1929,10 @@
                                         message.cryptoKeyConfig = $root.google.cloud.developerconnect.v1.CryptoKeyConfig.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 19: {
+                                        message.gitProxyConfig = $root.google.cloud.developerconnect.v1.GitProxyConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1014,6 +2007,26 @@
                                         return "gitlabEnterpriseConfig." + error;
                                 }
                             }
+                            if (message.bitbucketDataCenterConfig != null && message.hasOwnProperty("bitbucketDataCenterConfig")) {
+                                if (properties.connectionConfig === 1)
+                                    return "connectionConfig: multiple values";
+                                properties.connectionConfig = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.BitbucketDataCenterConfig.verify(message.bitbucketDataCenterConfig);
+                                    if (error)
+                                        return "bitbucketDataCenterConfig." + error;
+                                }
+                            }
+                            if (message.bitbucketCloudConfig != null && message.hasOwnProperty("bitbucketCloudConfig")) {
+                                if (properties.connectionConfig === 1)
+                                    return "connectionConfig: multiple values";
+                                properties.connectionConfig = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.BitbucketCloudConfig.verify(message.bitbucketCloudConfig);
+                                    if (error)
+                                        return "bitbucketCloudConfig." + error;
+                                }
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -1070,6 +2083,11 @@
                                 if (error)
                                     return "cryptoKeyConfig." + error;
                             }
+                            if (message.gitProxyConfig != null && message.hasOwnProperty("gitProxyConfig")) {
+                                var error = $root.google.cloud.developerconnect.v1.GitProxyConfig.verify(message.gitProxyConfig);
+                                if (error)
+                                    return "gitProxyConfig." + error;
+                            }
                             return null;
                         };
     
@@ -1104,6 +2122,16 @@
                                 if (typeof object.gitlabEnterpriseConfig !== "object")
                                     throw TypeError(".google.cloud.developerconnect.v1.Connection.gitlabEnterpriseConfig: object expected");
                                 message.gitlabEnterpriseConfig = $root.google.cloud.developerconnect.v1.GitLabEnterpriseConfig.fromObject(object.gitlabEnterpriseConfig);
+                            }
+                            if (object.bitbucketDataCenterConfig != null) {
+                                if (typeof object.bitbucketDataCenterConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.Connection.bitbucketDataCenterConfig: object expected");
+                                message.bitbucketDataCenterConfig = $root.google.cloud.developerconnect.v1.BitbucketDataCenterConfig.fromObject(object.bitbucketDataCenterConfig);
+                            }
+                            if (object.bitbucketCloudConfig != null) {
+                                if (typeof object.bitbucketCloudConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.Connection.bitbucketCloudConfig: object expected");
+                                message.bitbucketCloudConfig = $root.google.cloud.developerconnect.v1.BitbucketCloudConfig.fromObject(object.bitbucketCloudConfig);
                             }
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -1154,6 +2182,11 @@
                                     throw TypeError(".google.cloud.developerconnect.v1.Connection.cryptoKeyConfig: object expected");
                                 message.cryptoKeyConfig = $root.google.cloud.developerconnect.v1.CryptoKeyConfig.fromObject(object.cryptoKeyConfig);
                             }
+                            if (object.gitProxyConfig != null) {
+                                if (typeof object.gitProxyConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.Connection.gitProxyConfig: object expected");
+                                message.gitProxyConfig = $root.google.cloud.developerconnect.v1.GitProxyConfig.fromObject(object.gitProxyConfig);
+                            }
                             return message;
                         };
     
@@ -1185,6 +2218,7 @@
                                 object.deleteTime = null;
                                 object.uid = "";
                                 object.cryptoKeyConfig = null;
+                                object.gitProxyConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1237,6 +2271,18 @@
                                 if (options.oneofs)
                                     object.connectionConfig = "gitlabEnterpriseConfig";
                             }
+                            if (message.bitbucketDataCenterConfig != null && message.hasOwnProperty("bitbucketDataCenterConfig")) {
+                                object.bitbucketDataCenterConfig = $root.google.cloud.developerconnect.v1.BitbucketDataCenterConfig.toObject(message.bitbucketDataCenterConfig, options);
+                                if (options.oneofs)
+                                    object.connectionConfig = "bitbucketDataCenterConfig";
+                            }
+                            if (message.bitbucketCloudConfig != null && message.hasOwnProperty("bitbucketCloudConfig")) {
+                                object.bitbucketCloudConfig = $root.google.cloud.developerconnect.v1.BitbucketCloudConfig.toObject(message.bitbucketCloudConfig, options);
+                                if (options.oneofs)
+                                    object.connectionConfig = "bitbucketCloudConfig";
+                            }
+                            if (message.gitProxyConfig != null && message.hasOwnProperty("gitProxyConfig"))
+                                object.gitProxyConfig = $root.google.cloud.developerconnect.v1.GitProxyConfig.toObject(message.gitProxyConfig, options);
                             return object;
                         };
     
@@ -1354,12 +2400,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CryptoKeyConfig.decode = function decode(reader, length) {
+                        CryptoKeyConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.CryptoKeyConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.keyReference = reader.string();
@@ -1472,6 +2520,211 @@
                         return CryptoKeyConfig;
                     })();
     
+                    v1.GitProxyConfig = (function() {
+    
+                        /**
+                         * Properties of a GitProxyConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IGitProxyConfig
+                         * @property {boolean|null} [enabled] GitProxyConfig enabled
+                         */
+    
+                        /**
+                         * Constructs a new GitProxyConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a GitProxyConfig.
+                         * @implements IGitProxyConfig
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IGitProxyConfig=} [properties] Properties to set
+                         */
+                        function GitProxyConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GitProxyConfig enabled.
+                         * @member {boolean} enabled
+                         * @memberof google.cloud.developerconnect.v1.GitProxyConfig
+                         * @instance
+                         */
+                        GitProxyConfig.prototype.enabled = false;
+    
+                        /**
+                         * Creates a new GitProxyConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.GitProxyConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGitProxyConfig=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.GitProxyConfig} GitProxyConfig instance
+                         */
+                        GitProxyConfig.create = function create(properties) {
+                            return new GitProxyConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GitProxyConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.GitProxyConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.GitProxyConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGitProxyConfig} message GitProxyConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitProxyConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GitProxyConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GitProxyConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GitProxyConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGitProxyConfig} message GitProxyConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitProxyConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GitProxyConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.GitProxyConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.GitProxyConfig} GitProxyConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitProxyConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GitProxyConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.enabled = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GitProxyConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GitProxyConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.GitProxyConfig} GitProxyConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitProxyConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GitProxyConfig message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.GitProxyConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GitProxyConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                if (typeof message.enabled !== "boolean")
+                                    return "enabled: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GitProxyConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.GitProxyConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.GitProxyConfig} GitProxyConfig
+                         */
+                        GitProxyConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.GitProxyConfig)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.GitProxyConfig();
+                            if (object.enabled != null)
+                                message.enabled = Boolean(object.enabled);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GitProxyConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.GitProxyConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.GitProxyConfig} message GitProxyConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GitProxyConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.enabled = false;
+                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                object.enabled = message.enabled;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GitProxyConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.GitProxyConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GitProxyConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GitProxyConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.GitProxyConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GitProxyConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.GitProxyConfig";
+                        };
+    
+                        return GitProxyConfig;
+                    })();
+    
                     v1.InstallationState = (function() {
     
                         /**
@@ -1579,12 +2832,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InstallationState.decode = function decode(reader, length) {
+                        InstallationState.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.InstallationState();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.stage = reader.int32();
@@ -1894,12 +3149,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitHubConfig.decode = function decode(reader, length) {
+                        GitHubConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GitHubConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.githubApp = reader.int32();
@@ -2292,12 +3549,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitHubEnterpriseConfig.decode = function decode(reader, length) {
+                        GitHubEnterpriseConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GitHubEnterpriseConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hostUri = reader.string();
@@ -2637,12 +3896,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ServiceDirectoryConfig.decode = function decode(reader, length) {
+                        ServiceDirectoryConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.service = reader.string();
@@ -2851,12 +4112,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OAuthCredential.decode = function decode(reader, length) {
+                        OAuthCredential.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.OAuthCredential();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.oauthTokenSecretVersion = reader.string();
@@ -3089,12 +4352,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitLabConfig.decode = function decode(reader, length) {
+                        GitLabConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GitLabConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.webhookSecretSecretVersion = reader.string();
@@ -3338,12 +4603,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UserCredential.decode = function decode(reader, length) {
+                        UserCredential.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.UserCredential();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.userTokenSecretVersion = reader.string();
@@ -3620,12 +4887,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitLabEnterpriseConfig.decode = function decode(reader, length) {
+                        GitLabEnterpriseConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GitLabEnterpriseConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hostUri = reader.string();
@@ -3826,6 +5095,650 @@
                         return GitLabEnterpriseConfig;
                     })();
     
+                    v1.BitbucketDataCenterConfig = (function() {
+    
+                        /**
+                         * Properties of a BitbucketDataCenterConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IBitbucketDataCenterConfig
+                         * @property {string|null} [hostUri] BitbucketDataCenterConfig hostUri
+                         * @property {string|null} [webhookSecretSecretVersion] BitbucketDataCenterConfig webhookSecretSecretVersion
+                         * @property {google.cloud.developerconnect.v1.IUserCredential|null} [readAuthorizerCredential] BitbucketDataCenterConfig readAuthorizerCredential
+                         * @property {google.cloud.developerconnect.v1.IUserCredential|null} [authorizerCredential] BitbucketDataCenterConfig authorizerCredential
+                         * @property {google.cloud.developerconnect.v1.IServiceDirectoryConfig|null} [serviceDirectoryConfig] BitbucketDataCenterConfig serviceDirectoryConfig
+                         * @property {string|null} [sslCaCertificate] BitbucketDataCenterConfig sslCaCertificate
+                         * @property {string|null} [serverVersion] BitbucketDataCenterConfig serverVersion
+                         */
+    
+                        /**
+                         * Constructs a new BitbucketDataCenterConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a BitbucketDataCenterConfig.
+                         * @implements IBitbucketDataCenterConfig
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IBitbucketDataCenterConfig=} [properties] Properties to set
+                         */
+                        function BitbucketDataCenterConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BitbucketDataCenterConfig hostUri.
+                         * @member {string} hostUri
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @instance
+                         */
+                        BitbucketDataCenterConfig.prototype.hostUri = "";
+    
+                        /**
+                         * BitbucketDataCenterConfig webhookSecretSecretVersion.
+                         * @member {string} webhookSecretSecretVersion
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @instance
+                         */
+                        BitbucketDataCenterConfig.prototype.webhookSecretSecretVersion = "";
+    
+                        /**
+                         * BitbucketDataCenterConfig readAuthorizerCredential.
+                         * @member {google.cloud.developerconnect.v1.IUserCredential|null|undefined} readAuthorizerCredential
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @instance
+                         */
+                        BitbucketDataCenterConfig.prototype.readAuthorizerCredential = null;
+    
+                        /**
+                         * BitbucketDataCenterConfig authorizerCredential.
+                         * @member {google.cloud.developerconnect.v1.IUserCredential|null|undefined} authorizerCredential
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @instance
+                         */
+                        BitbucketDataCenterConfig.prototype.authorizerCredential = null;
+    
+                        /**
+                         * BitbucketDataCenterConfig serviceDirectoryConfig.
+                         * @member {google.cloud.developerconnect.v1.IServiceDirectoryConfig|null|undefined} serviceDirectoryConfig
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @instance
+                         */
+                        BitbucketDataCenterConfig.prototype.serviceDirectoryConfig = null;
+    
+                        /**
+                         * BitbucketDataCenterConfig sslCaCertificate.
+                         * @member {string} sslCaCertificate
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @instance
+                         */
+                        BitbucketDataCenterConfig.prototype.sslCaCertificate = "";
+    
+                        /**
+                         * BitbucketDataCenterConfig serverVersion.
+                         * @member {string} serverVersion
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @instance
+                         */
+                        BitbucketDataCenterConfig.prototype.serverVersion = "";
+    
+                        /**
+                         * Creates a new BitbucketDataCenterConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IBitbucketDataCenterConfig=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.BitbucketDataCenterConfig} BitbucketDataCenterConfig instance
+                         */
+                        BitbucketDataCenterConfig.create = function create(properties) {
+                            return new BitbucketDataCenterConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BitbucketDataCenterConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.BitbucketDataCenterConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IBitbucketDataCenterConfig} message BitbucketDataCenterConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BitbucketDataCenterConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.hostUri != null && Object.hasOwnProperty.call(message, "hostUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.hostUri);
+                            if (message.webhookSecretSecretVersion != null && Object.hasOwnProperty.call(message, "webhookSecretSecretVersion"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.webhookSecretSecretVersion);
+                            if (message.readAuthorizerCredential != null && Object.hasOwnProperty.call(message, "readAuthorizerCredential"))
+                                $root.google.cloud.developerconnect.v1.UserCredential.encode(message.readAuthorizerCredential, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.authorizerCredential != null && Object.hasOwnProperty.call(message, "authorizerCredential"))
+                                $root.google.cloud.developerconnect.v1.UserCredential.encode(message.authorizerCredential, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.serviceDirectoryConfig != null && Object.hasOwnProperty.call(message, "serviceDirectoryConfig"))
+                                $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.encode(message.serviceDirectoryConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.sslCaCertificate != null && Object.hasOwnProperty.call(message, "sslCaCertificate"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.sslCaCertificate);
+                            if (message.serverVersion != null && Object.hasOwnProperty.call(message, "serverVersion"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.serverVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BitbucketDataCenterConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.BitbucketDataCenterConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IBitbucketDataCenterConfig} message BitbucketDataCenterConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BitbucketDataCenterConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BitbucketDataCenterConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.BitbucketDataCenterConfig} BitbucketDataCenterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BitbucketDataCenterConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.BitbucketDataCenterConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.hostUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.webhookSecretSecretVersion = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.readAuthorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.authorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.serviceDirectoryConfig = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.sslCaCertificate = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.serverVersion = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BitbucketDataCenterConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.BitbucketDataCenterConfig} BitbucketDataCenterConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BitbucketDataCenterConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BitbucketDataCenterConfig message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BitbucketDataCenterConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.hostUri != null && message.hasOwnProperty("hostUri"))
+                                if (!$util.isString(message.hostUri))
+                                    return "hostUri: string expected";
+                            if (message.webhookSecretSecretVersion != null && message.hasOwnProperty("webhookSecretSecretVersion"))
+                                if (!$util.isString(message.webhookSecretSecretVersion))
+                                    return "webhookSecretSecretVersion: string expected";
+                            if (message.readAuthorizerCredential != null && message.hasOwnProperty("readAuthorizerCredential")) {
+                                var error = $root.google.cloud.developerconnect.v1.UserCredential.verify(message.readAuthorizerCredential);
+                                if (error)
+                                    return "readAuthorizerCredential." + error;
+                            }
+                            if (message.authorizerCredential != null && message.hasOwnProperty("authorizerCredential")) {
+                                var error = $root.google.cloud.developerconnect.v1.UserCredential.verify(message.authorizerCredential);
+                                if (error)
+                                    return "authorizerCredential." + error;
+                            }
+                            if (message.serviceDirectoryConfig != null && message.hasOwnProperty("serviceDirectoryConfig")) {
+                                var error = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.verify(message.serviceDirectoryConfig);
+                                if (error)
+                                    return "serviceDirectoryConfig." + error;
+                            }
+                            if (message.sslCaCertificate != null && message.hasOwnProperty("sslCaCertificate"))
+                                if (!$util.isString(message.sslCaCertificate))
+                                    return "sslCaCertificate: string expected";
+                            if (message.serverVersion != null && message.hasOwnProperty("serverVersion"))
+                                if (!$util.isString(message.serverVersion))
+                                    return "serverVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BitbucketDataCenterConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.BitbucketDataCenterConfig} BitbucketDataCenterConfig
+                         */
+                        BitbucketDataCenterConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.BitbucketDataCenterConfig)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.BitbucketDataCenterConfig();
+                            if (object.hostUri != null)
+                                message.hostUri = String(object.hostUri);
+                            if (object.webhookSecretSecretVersion != null)
+                                message.webhookSecretSecretVersion = String(object.webhookSecretSecretVersion);
+                            if (object.readAuthorizerCredential != null) {
+                                if (typeof object.readAuthorizerCredential !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.BitbucketDataCenterConfig.readAuthorizerCredential: object expected");
+                                message.readAuthorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.fromObject(object.readAuthorizerCredential);
+                            }
+                            if (object.authorizerCredential != null) {
+                                if (typeof object.authorizerCredential !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.BitbucketDataCenterConfig.authorizerCredential: object expected");
+                                message.authorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.fromObject(object.authorizerCredential);
+                            }
+                            if (object.serviceDirectoryConfig != null) {
+                                if (typeof object.serviceDirectoryConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.BitbucketDataCenterConfig.serviceDirectoryConfig: object expected");
+                                message.serviceDirectoryConfig = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.fromObject(object.serviceDirectoryConfig);
+                            }
+                            if (object.sslCaCertificate != null)
+                                message.sslCaCertificate = String(object.sslCaCertificate);
+                            if (object.serverVersion != null)
+                                message.serverVersion = String(object.serverVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BitbucketDataCenterConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.BitbucketDataCenterConfig} message BitbucketDataCenterConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BitbucketDataCenterConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.hostUri = "";
+                                object.webhookSecretSecretVersion = "";
+                                object.readAuthorizerCredential = null;
+                                object.authorizerCredential = null;
+                                object.serviceDirectoryConfig = null;
+                                object.sslCaCertificate = "";
+                                object.serverVersion = "";
+                            }
+                            if (message.hostUri != null && message.hasOwnProperty("hostUri"))
+                                object.hostUri = message.hostUri;
+                            if (message.webhookSecretSecretVersion != null && message.hasOwnProperty("webhookSecretSecretVersion"))
+                                object.webhookSecretSecretVersion = message.webhookSecretSecretVersion;
+                            if (message.readAuthorizerCredential != null && message.hasOwnProperty("readAuthorizerCredential"))
+                                object.readAuthorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.toObject(message.readAuthorizerCredential, options);
+                            if (message.authorizerCredential != null && message.hasOwnProperty("authorizerCredential"))
+                                object.authorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.toObject(message.authorizerCredential, options);
+                            if (message.serviceDirectoryConfig != null && message.hasOwnProperty("serviceDirectoryConfig"))
+                                object.serviceDirectoryConfig = $root.google.cloud.developerconnect.v1.ServiceDirectoryConfig.toObject(message.serviceDirectoryConfig, options);
+                            if (message.sslCaCertificate != null && message.hasOwnProperty("sslCaCertificate"))
+                                object.sslCaCertificate = message.sslCaCertificate;
+                            if (message.serverVersion != null && message.hasOwnProperty("serverVersion"))
+                                object.serverVersion = message.serverVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BitbucketDataCenterConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BitbucketDataCenterConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BitbucketDataCenterConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.BitbucketDataCenterConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BitbucketDataCenterConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.BitbucketDataCenterConfig";
+                        };
+    
+                        return BitbucketDataCenterConfig;
+                    })();
+    
+                    v1.BitbucketCloudConfig = (function() {
+    
+                        /**
+                         * Properties of a BitbucketCloudConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IBitbucketCloudConfig
+                         * @property {string|null} [workspace] BitbucketCloudConfig workspace
+                         * @property {string|null} [webhookSecretSecretVersion] BitbucketCloudConfig webhookSecretSecretVersion
+                         * @property {google.cloud.developerconnect.v1.IUserCredential|null} [readAuthorizerCredential] BitbucketCloudConfig readAuthorizerCredential
+                         * @property {google.cloud.developerconnect.v1.IUserCredential|null} [authorizerCredential] BitbucketCloudConfig authorizerCredential
+                         */
+    
+                        /**
+                         * Constructs a new BitbucketCloudConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a BitbucketCloudConfig.
+                         * @implements IBitbucketCloudConfig
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IBitbucketCloudConfig=} [properties] Properties to set
+                         */
+                        function BitbucketCloudConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BitbucketCloudConfig workspace.
+                         * @member {string} workspace
+                         * @memberof google.cloud.developerconnect.v1.BitbucketCloudConfig
+                         * @instance
+                         */
+                        BitbucketCloudConfig.prototype.workspace = "";
+    
+                        /**
+                         * BitbucketCloudConfig webhookSecretSecretVersion.
+                         * @member {string} webhookSecretSecretVersion
+                         * @memberof google.cloud.developerconnect.v1.BitbucketCloudConfig
+                         * @instance
+                         */
+                        BitbucketCloudConfig.prototype.webhookSecretSecretVersion = "";
+    
+                        /**
+                         * BitbucketCloudConfig readAuthorizerCredential.
+                         * @member {google.cloud.developerconnect.v1.IUserCredential|null|undefined} readAuthorizerCredential
+                         * @memberof google.cloud.developerconnect.v1.BitbucketCloudConfig
+                         * @instance
+                         */
+                        BitbucketCloudConfig.prototype.readAuthorizerCredential = null;
+    
+                        /**
+                         * BitbucketCloudConfig authorizerCredential.
+                         * @member {google.cloud.developerconnect.v1.IUserCredential|null|undefined} authorizerCredential
+                         * @memberof google.cloud.developerconnect.v1.BitbucketCloudConfig
+                         * @instance
+                         */
+                        BitbucketCloudConfig.prototype.authorizerCredential = null;
+    
+                        /**
+                         * Creates a new BitbucketCloudConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.BitbucketCloudConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IBitbucketCloudConfig=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.BitbucketCloudConfig} BitbucketCloudConfig instance
+                         */
+                        BitbucketCloudConfig.create = function create(properties) {
+                            return new BitbucketCloudConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BitbucketCloudConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.BitbucketCloudConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.BitbucketCloudConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IBitbucketCloudConfig} message BitbucketCloudConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BitbucketCloudConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workspace != null && Object.hasOwnProperty.call(message, "workspace"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.workspace);
+                            if (message.webhookSecretSecretVersion != null && Object.hasOwnProperty.call(message, "webhookSecretSecretVersion"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.webhookSecretSecretVersion);
+                            if (message.readAuthorizerCredential != null && Object.hasOwnProperty.call(message, "readAuthorizerCredential"))
+                                $root.google.cloud.developerconnect.v1.UserCredential.encode(message.readAuthorizerCredential, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.authorizerCredential != null && Object.hasOwnProperty.call(message, "authorizerCredential"))
+                                $root.google.cloud.developerconnect.v1.UserCredential.encode(message.authorizerCredential, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BitbucketCloudConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.BitbucketCloudConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.BitbucketCloudConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IBitbucketCloudConfig} message BitbucketCloudConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BitbucketCloudConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BitbucketCloudConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.BitbucketCloudConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.BitbucketCloudConfig} BitbucketCloudConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BitbucketCloudConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.BitbucketCloudConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.workspace = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.webhookSecretSecretVersion = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.readAuthorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.authorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BitbucketCloudConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.BitbucketCloudConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.BitbucketCloudConfig} BitbucketCloudConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BitbucketCloudConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BitbucketCloudConfig message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.BitbucketCloudConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BitbucketCloudConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workspace != null && message.hasOwnProperty("workspace"))
+                                if (!$util.isString(message.workspace))
+                                    return "workspace: string expected";
+                            if (message.webhookSecretSecretVersion != null && message.hasOwnProperty("webhookSecretSecretVersion"))
+                                if (!$util.isString(message.webhookSecretSecretVersion))
+                                    return "webhookSecretSecretVersion: string expected";
+                            if (message.readAuthorizerCredential != null && message.hasOwnProperty("readAuthorizerCredential")) {
+                                var error = $root.google.cloud.developerconnect.v1.UserCredential.verify(message.readAuthorizerCredential);
+                                if (error)
+                                    return "readAuthorizerCredential." + error;
+                            }
+                            if (message.authorizerCredential != null && message.hasOwnProperty("authorizerCredential")) {
+                                var error = $root.google.cloud.developerconnect.v1.UserCredential.verify(message.authorizerCredential);
+                                if (error)
+                                    return "authorizerCredential." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BitbucketCloudConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.BitbucketCloudConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.BitbucketCloudConfig} BitbucketCloudConfig
+                         */
+                        BitbucketCloudConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.BitbucketCloudConfig)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.BitbucketCloudConfig();
+                            if (object.workspace != null)
+                                message.workspace = String(object.workspace);
+                            if (object.webhookSecretSecretVersion != null)
+                                message.webhookSecretSecretVersion = String(object.webhookSecretSecretVersion);
+                            if (object.readAuthorizerCredential != null) {
+                                if (typeof object.readAuthorizerCredential !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.BitbucketCloudConfig.readAuthorizerCredential: object expected");
+                                message.readAuthorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.fromObject(object.readAuthorizerCredential);
+                            }
+                            if (object.authorizerCredential != null) {
+                                if (typeof object.authorizerCredential !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.BitbucketCloudConfig.authorizerCredential: object expected");
+                                message.authorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.fromObject(object.authorizerCredential);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BitbucketCloudConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.BitbucketCloudConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.BitbucketCloudConfig} message BitbucketCloudConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BitbucketCloudConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.workspace = "";
+                                object.webhookSecretSecretVersion = "";
+                                object.readAuthorizerCredential = null;
+                                object.authorizerCredential = null;
+                            }
+                            if (message.workspace != null && message.hasOwnProperty("workspace"))
+                                object.workspace = message.workspace;
+                            if (message.webhookSecretSecretVersion != null && message.hasOwnProperty("webhookSecretSecretVersion"))
+                                object.webhookSecretSecretVersion = message.webhookSecretSecretVersion;
+                            if (message.readAuthorizerCredential != null && message.hasOwnProperty("readAuthorizerCredential"))
+                                object.readAuthorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.toObject(message.readAuthorizerCredential, options);
+                            if (message.authorizerCredential != null && message.hasOwnProperty("authorizerCredential"))
+                                object.authorizerCredential = $root.google.cloud.developerconnect.v1.UserCredential.toObject(message.authorizerCredential, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BitbucketCloudConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.BitbucketCloudConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BitbucketCloudConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BitbucketCloudConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.BitbucketCloudConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BitbucketCloudConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.BitbucketCloudConfig";
+                        };
+    
+                        return BitbucketCloudConfig;
+                    })();
+    
                     v1.ListConnectionsRequest = (function() {
     
                         /**
@@ -3955,12 +5868,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConnectionsRequest.decode = function decode(reader, length) {
+                        ListConnectionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ListConnectionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -4233,12 +6148,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConnectionsResponse.decode = function decode(reader, length) {
+                        ListConnectionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ListConnectionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.connections && message.connections.length))
@@ -4495,12 +6412,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetConnectionRequest.decode = function decode(reader, length) {
+                        GetConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GetConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -4742,12 +6661,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateConnectionRequest.decode = function decode(reader, length) {
+                        CreateConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.CreateConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -5043,12 +6964,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateConnectionRequest.decode = function decode(reader, length) {
+                        UpdateConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.UpdateConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -5338,12 +7261,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteConnectionRequest.decode = function decode(reader, length) {
+                        DeleteConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.DeleteConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -5491,6 +7416,1983 @@
                         };
     
                         return DeleteConnectionRequest;
+                    })();
+    
+                    v1.ListAccountConnectorsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAccountConnectorsRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IListAccountConnectorsRequest
+                         * @property {string|null} [parent] ListAccountConnectorsRequest parent
+                         * @property {number|null} [pageSize] ListAccountConnectorsRequest pageSize
+                         * @property {string|null} [pageToken] ListAccountConnectorsRequest pageToken
+                         * @property {string|null} [filter] ListAccountConnectorsRequest filter
+                         * @property {string|null} [orderBy] ListAccountConnectorsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListAccountConnectorsRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a ListAccountConnectorsRequest.
+                         * @implements IListAccountConnectorsRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IListAccountConnectorsRequest=} [properties] Properties to set
+                         */
+                        function ListAccountConnectorsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAccountConnectorsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsRequest
+                         * @instance
+                         */
+                        ListAccountConnectorsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListAccountConnectorsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsRequest
+                         * @instance
+                         */
+                        ListAccountConnectorsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAccountConnectorsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsRequest
+                         * @instance
+                         */
+                        ListAccountConnectorsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListAccountConnectorsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsRequest
+                         * @instance
+                         */
+                        ListAccountConnectorsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListAccountConnectorsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsRequest
+                         * @instance
+                         */
+                        ListAccountConnectorsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListAccountConnectorsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListAccountConnectorsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.ListAccountConnectorsRequest} ListAccountConnectorsRequest instance
+                         */
+                        ListAccountConnectorsRequest.create = function create(properties) {
+                            return new ListAccountConnectorsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAccountConnectorsRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.ListAccountConnectorsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListAccountConnectorsRequest} message ListAccountConnectorsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAccountConnectorsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAccountConnectorsRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListAccountConnectorsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListAccountConnectorsRequest} message ListAccountConnectorsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAccountConnectorsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAccountConnectorsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.ListAccountConnectorsRequest} ListAccountConnectorsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAccountConnectorsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ListAccountConnectorsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAccountConnectorsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.ListAccountConnectorsRequest} ListAccountConnectorsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAccountConnectorsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAccountConnectorsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAccountConnectorsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAccountConnectorsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.ListAccountConnectorsRequest} ListAccountConnectorsRequest
+                         */
+                        ListAccountConnectorsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.ListAccountConnectorsRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.ListAccountConnectorsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAccountConnectorsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ListAccountConnectorsRequest} message ListAccountConnectorsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAccountConnectorsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAccountConnectorsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAccountConnectorsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAccountConnectorsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAccountConnectorsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.ListAccountConnectorsRequest";
+                        };
+    
+                        return ListAccountConnectorsRequest;
+                    })();
+    
+                    v1.ListAccountConnectorsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAccountConnectorsResponse.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IListAccountConnectorsResponse
+                         * @property {Array.<google.cloud.developerconnect.v1.IAccountConnector>|null} [accountConnectors] ListAccountConnectorsResponse accountConnectors
+                         * @property {string|null} [nextPageToken] ListAccountConnectorsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListAccountConnectorsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListAccountConnectorsResponse.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a ListAccountConnectorsResponse.
+                         * @implements IListAccountConnectorsResponse
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IListAccountConnectorsResponse=} [properties] Properties to set
+                         */
+                        function ListAccountConnectorsResponse(properties) {
+                            this.accountConnectors = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAccountConnectorsResponse accountConnectors.
+                         * @member {Array.<google.cloud.developerconnect.v1.IAccountConnector>} accountConnectors
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsResponse
+                         * @instance
+                         */
+                        ListAccountConnectorsResponse.prototype.accountConnectors = $util.emptyArray;
+    
+                        /**
+                         * ListAccountConnectorsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsResponse
+                         * @instance
+                         */
+                        ListAccountConnectorsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListAccountConnectorsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsResponse
+                         * @instance
+                         */
+                        ListAccountConnectorsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListAccountConnectorsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListAccountConnectorsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.ListAccountConnectorsResponse} ListAccountConnectorsResponse instance
+                         */
+                        ListAccountConnectorsResponse.create = function create(properties) {
+                            return new ListAccountConnectorsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAccountConnectorsResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.ListAccountConnectorsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListAccountConnectorsResponse} message ListAccountConnectorsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAccountConnectorsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.accountConnectors != null && message.accountConnectors.length)
+                                for (var i = 0; i < message.accountConnectors.length; ++i)
+                                    $root.google.cloud.developerconnect.v1.AccountConnector.encode(message.accountConnectors[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAccountConnectorsResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListAccountConnectorsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListAccountConnectorsResponse} message ListAccountConnectorsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAccountConnectorsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAccountConnectorsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.ListAccountConnectorsResponse} ListAccountConnectorsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAccountConnectorsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ListAccountConnectorsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.accountConnectors && message.accountConnectors.length))
+                                            message.accountConnectors = [];
+                                        message.accountConnectors.push($root.google.cloud.developerconnect.v1.AccountConnector.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAccountConnectorsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.ListAccountConnectorsResponse} ListAccountConnectorsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAccountConnectorsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAccountConnectorsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAccountConnectorsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.accountConnectors != null && message.hasOwnProperty("accountConnectors")) {
+                                if (!Array.isArray(message.accountConnectors))
+                                    return "accountConnectors: array expected";
+                                for (var i = 0; i < message.accountConnectors.length; ++i) {
+                                    var error = $root.google.cloud.developerconnect.v1.AccountConnector.verify(message.accountConnectors[i]);
+                                    if (error)
+                                        return "accountConnectors." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAccountConnectorsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.ListAccountConnectorsResponse} ListAccountConnectorsResponse
+                         */
+                        ListAccountConnectorsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.ListAccountConnectorsResponse)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.ListAccountConnectorsResponse();
+                            if (object.accountConnectors) {
+                                if (!Array.isArray(object.accountConnectors))
+                                    throw TypeError(".google.cloud.developerconnect.v1.ListAccountConnectorsResponse.accountConnectors: array expected");
+                                message.accountConnectors = [];
+                                for (var i = 0; i < object.accountConnectors.length; ++i) {
+                                    if (typeof object.accountConnectors[i] !== "object")
+                                        throw TypeError(".google.cloud.developerconnect.v1.ListAccountConnectorsResponse.accountConnectors: object expected");
+                                    message.accountConnectors[i] = $root.google.cloud.developerconnect.v1.AccountConnector.fromObject(object.accountConnectors[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.developerconnect.v1.ListAccountConnectorsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAccountConnectorsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ListAccountConnectorsResponse} message ListAccountConnectorsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAccountConnectorsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.accountConnectors = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.accountConnectors && message.accountConnectors.length) {
+                                object.accountConnectors = [];
+                                for (var j = 0; j < message.accountConnectors.length; ++j)
+                                    object.accountConnectors[j] = $root.google.cloud.developerconnect.v1.AccountConnector.toObject(message.accountConnectors[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAccountConnectorsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAccountConnectorsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAccountConnectorsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.ListAccountConnectorsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAccountConnectorsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.ListAccountConnectorsResponse";
+                        };
+    
+                        return ListAccountConnectorsResponse;
+                    })();
+    
+                    v1.GetAccountConnectorRequest = (function() {
+    
+                        /**
+                         * Properties of a GetAccountConnectorRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IGetAccountConnectorRequest
+                         * @property {string|null} [name] GetAccountConnectorRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetAccountConnectorRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a GetAccountConnectorRequest.
+                         * @implements IGetAccountConnectorRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IGetAccountConnectorRequest=} [properties] Properties to set
+                         */
+                        function GetAccountConnectorRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetAccountConnectorRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.developerconnect.v1.GetAccountConnectorRequest
+                         * @instance
+                         */
+                        GetAccountConnectorRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetAccountConnectorRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.GetAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGetAccountConnectorRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.GetAccountConnectorRequest} GetAccountConnectorRequest instance
+                         */
+                        GetAccountConnectorRequest.create = function create(properties) {
+                            return new GetAccountConnectorRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetAccountConnectorRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.GetAccountConnectorRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.GetAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGetAccountConnectorRequest} message GetAccountConnectorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAccountConnectorRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetAccountConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GetAccountConnectorRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GetAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGetAccountConnectorRequest} message GetAccountConnectorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAccountConnectorRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetAccountConnectorRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.GetAccountConnectorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.GetAccountConnectorRequest} GetAccountConnectorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAccountConnectorRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GetAccountConnectorRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetAccountConnectorRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GetAccountConnectorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.GetAccountConnectorRequest} GetAccountConnectorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAccountConnectorRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetAccountConnectorRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.GetAccountConnectorRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetAccountConnectorRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetAccountConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.GetAccountConnectorRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.GetAccountConnectorRequest} GetAccountConnectorRequest
+                         */
+                        GetAccountConnectorRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.GetAccountConnectorRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.GetAccountConnectorRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetAccountConnectorRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.GetAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.GetAccountConnectorRequest} message GetAccountConnectorRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetAccountConnectorRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetAccountConnectorRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.GetAccountConnectorRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetAccountConnectorRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetAccountConnectorRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.GetAccountConnectorRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetAccountConnectorRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.GetAccountConnectorRequest";
+                        };
+    
+                        return GetAccountConnectorRequest;
+                    })();
+    
+                    v1.CreateAccountConnectorRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateAccountConnectorRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface ICreateAccountConnectorRequest
+                         * @property {string|null} [parent] CreateAccountConnectorRequest parent
+                         * @property {string|null} [accountConnectorId] CreateAccountConnectorRequest accountConnectorId
+                         * @property {google.cloud.developerconnect.v1.IAccountConnector|null} [accountConnector] CreateAccountConnectorRequest accountConnector
+                         * @property {string|null} [requestId] CreateAccountConnectorRequest requestId
+                         * @property {boolean|null} [validateOnly] CreateAccountConnectorRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new CreateAccountConnectorRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a CreateAccountConnectorRequest.
+                         * @implements ICreateAccountConnectorRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.ICreateAccountConnectorRequest=} [properties] Properties to set
+                         */
+                        function CreateAccountConnectorRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateAccountConnectorRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.developerconnect.v1.CreateAccountConnectorRequest
+                         * @instance
+                         */
+                        CreateAccountConnectorRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateAccountConnectorRequest accountConnectorId.
+                         * @member {string} accountConnectorId
+                         * @memberof google.cloud.developerconnect.v1.CreateAccountConnectorRequest
+                         * @instance
+                         */
+                        CreateAccountConnectorRequest.prototype.accountConnectorId = "";
+    
+                        /**
+                         * CreateAccountConnectorRequest accountConnector.
+                         * @member {google.cloud.developerconnect.v1.IAccountConnector|null|undefined} accountConnector
+                         * @memberof google.cloud.developerconnect.v1.CreateAccountConnectorRequest
+                         * @instance
+                         */
+                        CreateAccountConnectorRequest.prototype.accountConnector = null;
+    
+                        /**
+                         * CreateAccountConnectorRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.developerconnect.v1.CreateAccountConnectorRequest
+                         * @instance
+                         */
+                        CreateAccountConnectorRequest.prototype.requestId = "";
+    
+                        /**
+                         * CreateAccountConnectorRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.developerconnect.v1.CreateAccountConnectorRequest
+                         * @instance
+                         */
+                        CreateAccountConnectorRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new CreateAccountConnectorRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.CreateAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ICreateAccountConnectorRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.CreateAccountConnectorRequest} CreateAccountConnectorRequest instance
+                         */
+                        CreateAccountConnectorRequest.create = function create(properties) {
+                            return new CreateAccountConnectorRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAccountConnectorRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.CreateAccountConnectorRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.CreateAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ICreateAccountConnectorRequest} message CreateAccountConnectorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAccountConnectorRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.accountConnectorId != null && Object.hasOwnProperty.call(message, "accountConnectorId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.accountConnectorId);
+                            if (message.accountConnector != null && Object.hasOwnProperty.call(message, "accountConnector"))
+                                $root.google.cloud.developerconnect.v1.AccountConnector.encode(message.accountConnector, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAccountConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.CreateAccountConnectorRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.CreateAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ICreateAccountConnectorRequest} message CreateAccountConnectorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAccountConnectorRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateAccountConnectorRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.CreateAccountConnectorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.CreateAccountConnectorRequest} CreateAccountConnectorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAccountConnectorRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.CreateAccountConnectorRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.accountConnectorId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.accountConnector = $root.google.cloud.developerconnect.v1.AccountConnector.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateAccountConnectorRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.CreateAccountConnectorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.CreateAccountConnectorRequest} CreateAccountConnectorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAccountConnectorRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateAccountConnectorRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.CreateAccountConnectorRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateAccountConnectorRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.accountConnectorId != null && message.hasOwnProperty("accountConnectorId"))
+                                if (!$util.isString(message.accountConnectorId))
+                                    return "accountConnectorId: string expected";
+                            if (message.accountConnector != null && message.hasOwnProperty("accountConnector")) {
+                                var error = $root.google.cloud.developerconnect.v1.AccountConnector.verify(message.accountConnector);
+                                if (error)
+                                    return "accountConnector." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateAccountConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.CreateAccountConnectorRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.CreateAccountConnectorRequest} CreateAccountConnectorRequest
+                         */
+                        CreateAccountConnectorRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.CreateAccountConnectorRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.CreateAccountConnectorRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.accountConnectorId != null)
+                                message.accountConnectorId = String(object.accountConnectorId);
+                            if (object.accountConnector != null) {
+                                if (typeof object.accountConnector !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.CreateAccountConnectorRequest.accountConnector: object expected");
+                                message.accountConnector = $root.google.cloud.developerconnect.v1.AccountConnector.fromObject(object.accountConnector);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateAccountConnectorRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.CreateAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.CreateAccountConnectorRequest} message CreateAccountConnectorRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateAccountConnectorRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.accountConnectorId = "";
+                                object.accountConnector = null;
+                                object.requestId = "";
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.accountConnectorId != null && message.hasOwnProperty("accountConnectorId"))
+                                object.accountConnectorId = message.accountConnectorId;
+                            if (message.accountConnector != null && message.hasOwnProperty("accountConnector"))
+                                object.accountConnector = $root.google.cloud.developerconnect.v1.AccountConnector.toObject(message.accountConnector, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateAccountConnectorRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.CreateAccountConnectorRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateAccountConnectorRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateAccountConnectorRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.CreateAccountConnectorRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateAccountConnectorRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.CreateAccountConnectorRequest";
+                        };
+    
+                        return CreateAccountConnectorRequest;
+                    })();
+    
+                    v1.UpdateAccountConnectorRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateAccountConnectorRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IUpdateAccountConnectorRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateAccountConnectorRequest updateMask
+                         * @property {google.cloud.developerconnect.v1.IAccountConnector|null} [accountConnector] UpdateAccountConnectorRequest accountConnector
+                         * @property {string|null} [requestId] UpdateAccountConnectorRequest requestId
+                         * @property {boolean|null} [allowMissing] UpdateAccountConnectorRequest allowMissing
+                         * @property {boolean|null} [validateOnly] UpdateAccountConnectorRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new UpdateAccountConnectorRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents an UpdateAccountConnectorRequest.
+                         * @implements IUpdateAccountConnectorRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest=} [properties] Properties to set
+                         */
+                        function UpdateAccountConnectorRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateAccountConnectorRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.developerconnect.v1.UpdateAccountConnectorRequest
+                         * @instance
+                         */
+                        UpdateAccountConnectorRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateAccountConnectorRequest accountConnector.
+                         * @member {google.cloud.developerconnect.v1.IAccountConnector|null|undefined} accountConnector
+                         * @memberof google.cloud.developerconnect.v1.UpdateAccountConnectorRequest
+                         * @instance
+                         */
+                        UpdateAccountConnectorRequest.prototype.accountConnector = null;
+    
+                        /**
+                         * UpdateAccountConnectorRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.developerconnect.v1.UpdateAccountConnectorRequest
+                         * @instance
+                         */
+                        UpdateAccountConnectorRequest.prototype.requestId = "";
+    
+                        /**
+                         * UpdateAccountConnectorRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.developerconnect.v1.UpdateAccountConnectorRequest
+                         * @instance
+                         */
+                        UpdateAccountConnectorRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * UpdateAccountConnectorRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.developerconnect.v1.UpdateAccountConnectorRequest
+                         * @instance
+                         */
+                        UpdateAccountConnectorRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new UpdateAccountConnectorRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.UpdateAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.UpdateAccountConnectorRequest} UpdateAccountConnectorRequest instance
+                         */
+                        UpdateAccountConnectorRequest.create = function create(properties) {
+                            return new UpdateAccountConnectorRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAccountConnectorRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.UpdateAccountConnectorRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.UpdateAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest} message UpdateAccountConnectorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAccountConnectorRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.accountConnector != null && Object.hasOwnProperty.call(message, "accountConnector"))
+                                $root.google.cloud.developerconnect.v1.AccountConnector.encode(message.accountConnector, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.allowMissing);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAccountConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.UpdateAccountConnectorRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.UpdateAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest} message UpdateAccountConnectorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAccountConnectorRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateAccountConnectorRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.UpdateAccountConnectorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.UpdateAccountConnectorRequest} UpdateAccountConnectorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAccountConnectorRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.UpdateAccountConnectorRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.accountConnector = $root.google.cloud.developerconnect.v1.AccountConnector.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateAccountConnectorRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.UpdateAccountConnectorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.UpdateAccountConnectorRequest} UpdateAccountConnectorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAccountConnectorRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateAccountConnectorRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.UpdateAccountConnectorRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateAccountConnectorRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.accountConnector != null && message.hasOwnProperty("accountConnector")) {
+                                var error = $root.google.cloud.developerconnect.v1.AccountConnector.verify(message.accountConnector);
+                                if (error)
+                                    return "accountConnector." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateAccountConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.UpdateAccountConnectorRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.UpdateAccountConnectorRequest} UpdateAccountConnectorRequest
+                         */
+                        UpdateAccountConnectorRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.UpdateAccountConnectorRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.UpdateAccountConnectorRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.UpdateAccountConnectorRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.accountConnector != null) {
+                                if (typeof object.accountConnector !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.UpdateAccountConnectorRequest.accountConnector: object expected");
+                                message.accountConnector = $root.google.cloud.developerconnect.v1.AccountConnector.fromObject(object.accountConnector);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateAccountConnectorRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.UpdateAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.UpdateAccountConnectorRequest} message UpdateAccountConnectorRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateAccountConnectorRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.accountConnector = null;
+                                object.requestId = "";
+                                object.allowMissing = false;
+                                object.validateOnly = false;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.accountConnector != null && message.hasOwnProperty("accountConnector"))
+                                object.accountConnector = $root.google.cloud.developerconnect.v1.AccountConnector.toObject(message.accountConnector, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateAccountConnectorRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.UpdateAccountConnectorRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateAccountConnectorRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateAccountConnectorRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.UpdateAccountConnectorRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateAccountConnectorRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.UpdateAccountConnectorRequest";
+                        };
+    
+                        return UpdateAccountConnectorRequest;
+                    })();
+    
+                    v1.DeleteAccountConnectorRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteAccountConnectorRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IDeleteAccountConnectorRequest
+                         * @property {string|null} [name] DeleteAccountConnectorRequest name
+                         * @property {string|null} [requestId] DeleteAccountConnectorRequest requestId
+                         * @property {boolean|null} [validateOnly] DeleteAccountConnectorRequest validateOnly
+                         * @property {string|null} [etag] DeleteAccountConnectorRequest etag
+                         * @property {boolean|null} [force] DeleteAccountConnectorRequest force
+                         */
+    
+                        /**
+                         * Constructs a new DeleteAccountConnectorRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a DeleteAccountConnectorRequest.
+                         * @implements IDeleteAccountConnectorRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest=} [properties] Properties to set
+                         */
+                        function DeleteAccountConnectorRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteAccountConnectorRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.developerconnect.v1.DeleteAccountConnectorRequest
+                         * @instance
+                         */
+                        DeleteAccountConnectorRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteAccountConnectorRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.developerconnect.v1.DeleteAccountConnectorRequest
+                         * @instance
+                         */
+                        DeleteAccountConnectorRequest.prototype.requestId = "";
+    
+                        /**
+                         * DeleteAccountConnectorRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.developerconnect.v1.DeleteAccountConnectorRequest
+                         * @instance
+                         */
+                        DeleteAccountConnectorRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * DeleteAccountConnectorRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.developerconnect.v1.DeleteAccountConnectorRequest
+                         * @instance
+                         */
+                        DeleteAccountConnectorRequest.prototype.etag = "";
+    
+                        /**
+                         * DeleteAccountConnectorRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.developerconnect.v1.DeleteAccountConnectorRequest
+                         * @instance
+                         */
+                        DeleteAccountConnectorRequest.prototype.force = false;
+    
+                        /**
+                         * Creates a new DeleteAccountConnectorRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.DeleteAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.DeleteAccountConnectorRequest} DeleteAccountConnectorRequest instance
+                         */
+                        DeleteAccountConnectorRequest.create = function create(properties) {
+                            return new DeleteAccountConnectorRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAccountConnectorRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteAccountConnectorRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.DeleteAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest} message DeleteAccountConnectorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAccountConnectorRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.etag);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.force);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAccountConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteAccountConnectorRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.DeleteAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest} message DeleteAccountConnectorRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAccountConnectorRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteAccountConnectorRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.DeleteAccountConnectorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.DeleteAccountConnectorRequest} DeleteAccountConnectorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAccountConnectorRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.DeleteAccountConnectorRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteAccountConnectorRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.DeleteAccountConnectorRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.DeleteAccountConnectorRequest} DeleteAccountConnectorRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAccountConnectorRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteAccountConnectorRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.DeleteAccountConnectorRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteAccountConnectorRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteAccountConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.DeleteAccountConnectorRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.DeleteAccountConnectorRequest} DeleteAccountConnectorRequest
+                         */
+                        DeleteAccountConnectorRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.DeleteAccountConnectorRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.DeleteAccountConnectorRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteAccountConnectorRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.DeleteAccountConnectorRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.DeleteAccountConnectorRequest} message DeleteAccountConnectorRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteAccountConnectorRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                                object.validateOnly = false;
+                                object.etag = "";
+                                object.force = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteAccountConnectorRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.DeleteAccountConnectorRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteAccountConnectorRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteAccountConnectorRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.DeleteAccountConnectorRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteAccountConnectorRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.DeleteAccountConnectorRequest";
+                        };
+    
+                        return DeleteAccountConnectorRequest;
+                    })();
+    
+                    v1.DeleteUserRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteUserRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IDeleteUserRequest
+                         * @property {string|null} [name] DeleteUserRequest name
+                         * @property {string|null} [requestId] DeleteUserRequest requestId
+                         * @property {boolean|null} [validateOnly] DeleteUserRequest validateOnly
+                         * @property {string|null} [etag] DeleteUserRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new DeleteUserRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a DeleteUserRequest.
+                         * @implements IDeleteUserRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IDeleteUserRequest=} [properties] Properties to set
+                         */
+                        function DeleteUserRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteUserRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.developerconnect.v1.DeleteUserRequest
+                         * @instance
+                         */
+                        DeleteUserRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteUserRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.developerconnect.v1.DeleteUserRequest
+                         * @instance
+                         */
+                        DeleteUserRequest.prototype.requestId = "";
+    
+                        /**
+                         * DeleteUserRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.developerconnect.v1.DeleteUserRequest
+                         * @instance
+                         */
+                        DeleteUserRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * DeleteUserRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.developerconnect.v1.DeleteUserRequest
+                         * @instance
+                         */
+                        DeleteUserRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new DeleteUserRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.DeleteUserRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IDeleteUserRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.DeleteUserRequest} DeleteUserRequest instance
+                         */
+                        DeleteUserRequest.create = function create(properties) {
+                            return new DeleteUserRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteUserRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteUserRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.DeleteUserRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IDeleteUserRequest} message DeleteUserRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteUserRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteUserRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteUserRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.DeleteUserRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IDeleteUserRequest} message DeleteUserRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteUserRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteUserRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.DeleteUserRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.DeleteUserRequest} DeleteUserRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteUserRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.DeleteUserRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteUserRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.DeleteUserRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.DeleteUserRequest} DeleteUserRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteUserRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteUserRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.DeleteUserRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteUserRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteUserRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.DeleteUserRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.DeleteUserRequest} DeleteUserRequest
+                         */
+                        DeleteUserRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.DeleteUserRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.DeleteUserRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteUserRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.DeleteUserRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.DeleteUserRequest} message DeleteUserRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteUserRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                                object.validateOnly = false;
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteUserRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.DeleteUserRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteUserRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteUserRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.DeleteUserRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteUserRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.DeleteUserRequest";
+                        };
+    
+                        return DeleteUserRequest;
                     })();
     
                     v1.OperationMetadata = (function() {
@@ -5644,12 +9546,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OperationMetadata.decode = function decode(reader, length) {
+                        OperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.OperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -5845,6 +9749,1152 @@
                         return OperationMetadata;
                     })();
     
+                    v1.FetchSelfRequest = (function() {
+    
+                        /**
+                         * Properties of a FetchSelfRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IFetchSelfRequest
+                         * @property {string|null} [name] FetchSelfRequest name
+                         */
+    
+                        /**
+                         * Constructs a new FetchSelfRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a FetchSelfRequest.
+                         * @implements IFetchSelfRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IFetchSelfRequest=} [properties] Properties to set
+                         */
+                        function FetchSelfRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FetchSelfRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.developerconnect.v1.FetchSelfRequest
+                         * @instance
+                         */
+                        FetchSelfRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new FetchSelfRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.FetchSelfRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IFetchSelfRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.FetchSelfRequest} FetchSelfRequest instance
+                         */
+                        FetchSelfRequest.create = function create(properties) {
+                            return new FetchSelfRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FetchSelfRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.FetchSelfRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.FetchSelfRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IFetchSelfRequest} message FetchSelfRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchSelfRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FetchSelfRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FetchSelfRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.FetchSelfRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IFetchSelfRequest} message FetchSelfRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchSelfRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FetchSelfRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.FetchSelfRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.FetchSelfRequest} FetchSelfRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchSelfRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FetchSelfRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FetchSelfRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.FetchSelfRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.FetchSelfRequest} FetchSelfRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchSelfRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FetchSelfRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.FetchSelfRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FetchSelfRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FetchSelfRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.FetchSelfRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.FetchSelfRequest} FetchSelfRequest
+                         */
+                        FetchSelfRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.FetchSelfRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.FetchSelfRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FetchSelfRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.FetchSelfRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.FetchSelfRequest} message FetchSelfRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FetchSelfRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FetchSelfRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.FetchSelfRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FetchSelfRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FetchSelfRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.FetchSelfRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FetchSelfRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.FetchSelfRequest";
+                        };
+    
+                        return FetchSelfRequest;
+                    })();
+    
+                    v1.DeleteSelfRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteSelfRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IDeleteSelfRequest
+                         * @property {string|null} [name] DeleteSelfRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSelfRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a DeleteSelfRequest.
+                         * @implements IDeleteSelfRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IDeleteSelfRequest=} [properties] Properties to set
+                         */
+                        function DeleteSelfRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteSelfRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.developerconnect.v1.DeleteSelfRequest
+                         * @instance
+                         */
+                        DeleteSelfRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteSelfRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.DeleteSelfRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IDeleteSelfRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.DeleteSelfRequest} DeleteSelfRequest instance
+                         */
+                        DeleteSelfRequest.create = function create(properties) {
+                            return new DeleteSelfRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSelfRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteSelfRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.DeleteSelfRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IDeleteSelfRequest} message DeleteSelfRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSelfRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSelfRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteSelfRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.DeleteSelfRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IDeleteSelfRequest} message DeleteSelfRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSelfRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSelfRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.DeleteSelfRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.DeleteSelfRequest} DeleteSelfRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSelfRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.DeleteSelfRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSelfRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.DeleteSelfRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.DeleteSelfRequest} DeleteSelfRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSelfRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSelfRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.DeleteSelfRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSelfRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSelfRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.DeleteSelfRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.DeleteSelfRequest} DeleteSelfRequest
+                         */
+                        DeleteSelfRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.DeleteSelfRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.DeleteSelfRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSelfRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.DeleteSelfRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.DeleteSelfRequest} message DeleteSelfRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSelfRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteSelfRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.DeleteSelfRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSelfRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteSelfRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.DeleteSelfRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteSelfRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.DeleteSelfRequest";
+                        };
+    
+                        return DeleteSelfRequest;
+                    })();
+    
+                    v1.FetchAccessTokenRequest = (function() {
+    
+                        /**
+                         * Properties of a FetchAccessTokenRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IFetchAccessTokenRequest
+                         * @property {string|null} [accountConnector] FetchAccessTokenRequest accountConnector
+                         */
+    
+                        /**
+                         * Constructs a new FetchAccessTokenRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a FetchAccessTokenRequest.
+                         * @implements IFetchAccessTokenRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IFetchAccessTokenRequest=} [properties] Properties to set
+                         */
+                        function FetchAccessTokenRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FetchAccessTokenRequest accountConnector.
+                         * @member {string} accountConnector
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenRequest
+                         * @instance
+                         */
+                        FetchAccessTokenRequest.prototype.accountConnector = "";
+    
+                        /**
+                         * Creates a new FetchAccessTokenRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IFetchAccessTokenRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.FetchAccessTokenRequest} FetchAccessTokenRequest instance
+                         */
+                        FetchAccessTokenRequest.create = function create(properties) {
+                            return new FetchAccessTokenRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FetchAccessTokenRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.FetchAccessTokenRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IFetchAccessTokenRequest} message FetchAccessTokenRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchAccessTokenRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.accountConnector != null && Object.hasOwnProperty.call(message, "accountConnector"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.accountConnector);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FetchAccessTokenRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FetchAccessTokenRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IFetchAccessTokenRequest} message FetchAccessTokenRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchAccessTokenRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FetchAccessTokenRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.FetchAccessTokenRequest} FetchAccessTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchAccessTokenRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FetchAccessTokenRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.accountConnector = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FetchAccessTokenRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.FetchAccessTokenRequest} FetchAccessTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchAccessTokenRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FetchAccessTokenRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FetchAccessTokenRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.accountConnector != null && message.hasOwnProperty("accountConnector"))
+                                if (!$util.isString(message.accountConnector))
+                                    return "accountConnector: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FetchAccessTokenRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.FetchAccessTokenRequest} FetchAccessTokenRequest
+                         */
+                        FetchAccessTokenRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.FetchAccessTokenRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.FetchAccessTokenRequest();
+                            if (object.accountConnector != null)
+                                message.accountConnector = String(object.accountConnector);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FetchAccessTokenRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.FetchAccessTokenRequest} message FetchAccessTokenRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FetchAccessTokenRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.accountConnector = "";
+                            if (message.accountConnector != null && message.hasOwnProperty("accountConnector"))
+                                object.accountConnector = message.accountConnector;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FetchAccessTokenRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FetchAccessTokenRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FetchAccessTokenRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FetchAccessTokenRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.FetchAccessTokenRequest";
+                        };
+    
+                        return FetchAccessTokenRequest;
+                    })();
+    
+                    v1.FetchAccessTokenResponse = (function() {
+    
+                        /**
+                         * Properties of a FetchAccessTokenResponse.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IFetchAccessTokenResponse
+                         * @property {string|null} [token] FetchAccessTokenResponse token
+                         * @property {google.protobuf.ITimestamp|null} [expirationTime] FetchAccessTokenResponse expirationTime
+                         * @property {Array.<string>|null} [scopes] FetchAccessTokenResponse scopes
+                         * @property {google.cloud.developerconnect.v1.IExchangeError|null} [exchangeError] FetchAccessTokenResponse exchangeError
+                         */
+    
+                        /**
+                         * Constructs a new FetchAccessTokenResponse.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a FetchAccessTokenResponse.
+                         * @implements IFetchAccessTokenResponse
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IFetchAccessTokenResponse=} [properties] Properties to set
+                         */
+                        function FetchAccessTokenResponse(properties) {
+                            this.scopes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FetchAccessTokenResponse token.
+                         * @member {string} token
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenResponse
+                         * @instance
+                         */
+                        FetchAccessTokenResponse.prototype.token = "";
+    
+                        /**
+                         * FetchAccessTokenResponse expirationTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} expirationTime
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenResponse
+                         * @instance
+                         */
+                        FetchAccessTokenResponse.prototype.expirationTime = null;
+    
+                        /**
+                         * FetchAccessTokenResponse scopes.
+                         * @member {Array.<string>} scopes
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenResponse
+                         * @instance
+                         */
+                        FetchAccessTokenResponse.prototype.scopes = $util.emptyArray;
+    
+                        /**
+                         * FetchAccessTokenResponse exchangeError.
+                         * @member {google.cloud.developerconnect.v1.IExchangeError|null|undefined} exchangeError
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenResponse
+                         * @instance
+                         */
+                        FetchAccessTokenResponse.prototype.exchangeError = null;
+    
+                        /**
+                         * Creates a new FetchAccessTokenResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IFetchAccessTokenResponse=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.FetchAccessTokenResponse} FetchAccessTokenResponse instance
+                         */
+                        FetchAccessTokenResponse.create = function create(properties) {
+                            return new FetchAccessTokenResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FetchAccessTokenResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.FetchAccessTokenResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IFetchAccessTokenResponse} message FetchAccessTokenResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchAccessTokenResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.token != null && Object.hasOwnProperty.call(message, "token"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.token);
+                            if (message.expirationTime != null && Object.hasOwnProperty.call(message, "expirationTime"))
+                                $root.google.protobuf.Timestamp.encode(message.expirationTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.scopes != null && message.scopes.length)
+                                for (var i = 0; i < message.scopes.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.scopes[i]);
+                            if (message.exchangeError != null && Object.hasOwnProperty.call(message, "exchangeError"))
+                                $root.google.cloud.developerconnect.v1.ExchangeError.encode(message.exchangeError, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FetchAccessTokenResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FetchAccessTokenResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IFetchAccessTokenResponse} message FetchAccessTokenResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchAccessTokenResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FetchAccessTokenResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.FetchAccessTokenResponse} FetchAccessTokenResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchAccessTokenResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FetchAccessTokenResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.token = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.expirationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.scopes && message.scopes.length))
+                                            message.scopes = [];
+                                        message.scopes.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.exchangeError = $root.google.cloud.developerconnect.v1.ExchangeError.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FetchAccessTokenResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.FetchAccessTokenResponse} FetchAccessTokenResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchAccessTokenResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FetchAccessTokenResponse message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FetchAccessTokenResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.token != null && message.hasOwnProperty("token"))
+                                if (!$util.isString(message.token))
+                                    return "token: string expected";
+                            if (message.expirationTime != null && message.hasOwnProperty("expirationTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.expirationTime);
+                                if (error)
+                                    return "expirationTime." + error;
+                            }
+                            if (message.scopes != null && message.hasOwnProperty("scopes")) {
+                                if (!Array.isArray(message.scopes))
+                                    return "scopes: array expected";
+                                for (var i = 0; i < message.scopes.length; ++i)
+                                    if (!$util.isString(message.scopes[i]))
+                                        return "scopes: string[] expected";
+                            }
+                            if (message.exchangeError != null && message.hasOwnProperty("exchangeError")) {
+                                var error = $root.google.cloud.developerconnect.v1.ExchangeError.verify(message.exchangeError);
+                                if (error)
+                                    return "exchangeError." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FetchAccessTokenResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.FetchAccessTokenResponse} FetchAccessTokenResponse
+                         */
+                        FetchAccessTokenResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.FetchAccessTokenResponse)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.FetchAccessTokenResponse();
+                            if (object.token != null)
+                                message.token = String(object.token);
+                            if (object.expirationTime != null) {
+                                if (typeof object.expirationTime !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.FetchAccessTokenResponse.expirationTime: object expected");
+                                message.expirationTime = $root.google.protobuf.Timestamp.fromObject(object.expirationTime);
+                            }
+                            if (object.scopes) {
+                                if (!Array.isArray(object.scopes))
+                                    throw TypeError(".google.cloud.developerconnect.v1.FetchAccessTokenResponse.scopes: array expected");
+                                message.scopes = [];
+                                for (var i = 0; i < object.scopes.length; ++i)
+                                    message.scopes[i] = String(object.scopes[i]);
+                            }
+                            if (object.exchangeError != null) {
+                                if (typeof object.exchangeError !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.FetchAccessTokenResponse.exchangeError: object expected");
+                                message.exchangeError = $root.google.cloud.developerconnect.v1.ExchangeError.fromObject(object.exchangeError);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FetchAccessTokenResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.FetchAccessTokenResponse} message FetchAccessTokenResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FetchAccessTokenResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.scopes = [];
+                            if (options.defaults) {
+                                object.token = "";
+                                object.expirationTime = null;
+                                object.exchangeError = null;
+                            }
+                            if (message.token != null && message.hasOwnProperty("token"))
+                                object.token = message.token;
+                            if (message.expirationTime != null && message.hasOwnProperty("expirationTime"))
+                                object.expirationTime = $root.google.protobuf.Timestamp.toObject(message.expirationTime, options);
+                            if (message.scopes && message.scopes.length) {
+                                object.scopes = [];
+                                for (var j = 0; j < message.scopes.length; ++j)
+                                    object.scopes[j] = message.scopes[j];
+                            }
+                            if (message.exchangeError != null && message.hasOwnProperty("exchangeError"))
+                                object.exchangeError = $root.google.cloud.developerconnect.v1.ExchangeError.toObject(message.exchangeError, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FetchAccessTokenResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FetchAccessTokenResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FetchAccessTokenResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.FetchAccessTokenResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FetchAccessTokenResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.FetchAccessTokenResponse";
+                        };
+    
+                        return FetchAccessTokenResponse;
+                    })();
+    
+                    v1.ExchangeError = (function() {
+    
+                        /**
+                         * Properties of an ExchangeError.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IExchangeError
+                         * @property {string|null} [code] ExchangeError code
+                         * @property {string|null} [description] ExchangeError description
+                         */
+    
+                        /**
+                         * Constructs a new ExchangeError.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents an ExchangeError.
+                         * @implements IExchangeError
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IExchangeError=} [properties] Properties to set
+                         */
+                        function ExchangeError(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExchangeError code.
+                         * @member {string} code
+                         * @memberof google.cloud.developerconnect.v1.ExchangeError
+                         * @instance
+                         */
+                        ExchangeError.prototype.code = "";
+    
+                        /**
+                         * ExchangeError description.
+                         * @member {string} description
+                         * @memberof google.cloud.developerconnect.v1.ExchangeError
+                         * @instance
+                         */
+                        ExchangeError.prototype.description = "";
+    
+                        /**
+                         * Creates a new ExchangeError instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.ExchangeError
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IExchangeError=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.ExchangeError} ExchangeError instance
+                         */
+                        ExchangeError.create = function create(properties) {
+                            return new ExchangeError(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExchangeError message. Does not implicitly {@link google.cloud.developerconnect.v1.ExchangeError.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.ExchangeError
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IExchangeError} message ExchangeError message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExchangeError.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.code);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExchangeError message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ExchangeError.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ExchangeError
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IExchangeError} message ExchangeError message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExchangeError.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExchangeError message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.ExchangeError
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.ExchangeError} ExchangeError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExchangeError.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ExchangeError();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.code = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExchangeError message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ExchangeError
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.ExchangeError} ExchangeError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExchangeError.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExchangeError message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.ExchangeError
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExchangeError.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.code != null && message.hasOwnProperty("code"))
+                                if (!$util.isString(message.code))
+                                    return "code: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExchangeError message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.ExchangeError
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.ExchangeError} ExchangeError
+                         */
+                        ExchangeError.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.ExchangeError)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.ExchangeError();
+                            if (object.code != null)
+                                message.code = String(object.code);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExchangeError message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.ExchangeError
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ExchangeError} message ExchangeError
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExchangeError.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.code = "";
+                                object.description = "";
+                            }
+                            if (message.code != null && message.hasOwnProperty("code"))
+                                object.code = message.code;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExchangeError to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.ExchangeError
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExchangeError.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExchangeError
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.ExchangeError
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExchangeError.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.ExchangeError";
+                        };
+    
+                        return ExchangeError;
+                    })();
+    
                     v1.GitRepositoryLink = (function() {
     
                         /**
@@ -5862,6 +10912,7 @@
                          * @property {Object.<string,string>|null} [annotations] GitRepositoryLink annotations
                          * @property {string|null} [uid] GitRepositoryLink uid
                          * @property {string|null} [webhookId] GitRepositoryLink webhookId
+                         * @property {string|null} [gitProxyUri] GitRepositoryLink gitProxyUri
                          */
     
                         /**
@@ -5970,6 +11021,14 @@
                         GitRepositoryLink.prototype.webhookId = "";
     
                         /**
+                         * GitRepositoryLink gitProxyUri.
+                         * @member {string} gitProxyUri
+                         * @memberof google.cloud.developerconnect.v1.GitRepositoryLink
+                         * @instance
+                         */
+                        GitRepositoryLink.prototype.gitProxyUri = "";
+    
+                        /**
                          * Creates a new GitRepositoryLink instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.developerconnect.v1.GitRepositoryLink
@@ -6017,6 +11076,8 @@
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.uid);
                             if (message.webhookId != null && Object.hasOwnProperty.call(message, "webhookId"))
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.webhookId);
+                            if (message.gitProxyUri != null && Object.hasOwnProperty.call(message, "gitProxyUri"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.gitProxyUri);
                             return writer;
                         };
     
@@ -6044,12 +11105,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitRepositoryLink.decode = function decode(reader, length) {
+                        GitRepositoryLink.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GitRepositoryLink(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -6131,6 +11194,10 @@
                                     }
                                 case 11: {
                                         message.webhookId = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.gitProxyUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -6217,6 +11284,9 @@
                             if (message.webhookId != null && message.hasOwnProperty("webhookId"))
                                 if (!$util.isString(message.webhookId))
                                     return "webhookId: string expected";
+                            if (message.gitProxyUri != null && message.hasOwnProperty("gitProxyUri"))
+                                if (!$util.isString(message.gitProxyUri))
+                                    return "gitProxyUri: string expected";
                             return null;
                         };
     
@@ -6273,6 +11343,8 @@
                                 message.uid = String(object.uid);
                             if (object.webhookId != null)
                                 message.webhookId = String(object.webhookId);
+                            if (object.gitProxyUri != null)
+                                message.gitProxyUri = String(object.gitProxyUri);
                             return message;
                         };
     
@@ -6303,6 +11375,7 @@
                                 object.reconciling = false;
                                 object.uid = "";
                                 object.webhookId = "";
+                                object.gitProxyUri = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -6333,6 +11406,8 @@
                                 object.uid = message.uid;
                             if (message.webhookId != null && message.hasOwnProperty("webhookId"))
                                 object.webhookId = message.webhookId;
+                            if (message.gitProxyUri != null && message.hasOwnProperty("gitProxyUri"))
+                                object.gitProxyUri = message.gitProxyUri;
                             return object;
                         };
     
@@ -6494,12 +11569,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateGitRepositoryLinkRequest.decode = function decode(reader, length) {
+                        CreateGitRepositoryLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.CreateGitRepositoryLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -6784,12 +11861,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteGitRepositoryLinkRequest.decode = function decode(reader, length) {
+                        DeleteGitRepositoryLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.DeleteGitRepositoryLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -7068,12 +12147,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListGitRepositoryLinksRequest.decode = function decode(reader, length) {
+                        ListGitRepositoryLinksRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ListGitRepositoryLinksRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -7346,12 +12427,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListGitRepositoryLinksResponse.decode = function decode(reader, length) {
+                        ListGitRepositoryLinksResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ListGitRepositoryLinksResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.gitRepositoryLinks && message.gitRepositoryLinks.length))
@@ -7608,12 +12691,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetGitRepositoryLinkRequest.decode = function decode(reader, length) {
+                        GetGitRepositoryLinkRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GetGitRepositoryLinkRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -7811,12 +12896,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchReadWriteTokenRequest.decode = function decode(reader, length) {
+                        FetchReadWriteTokenRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FetchReadWriteTokenRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.gitRepositoryLink = reader.string();
@@ -8014,12 +13101,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchReadTokenRequest.decode = function decode(reader, length) {
+                        FetchReadTokenRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FetchReadTokenRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.gitRepositoryLink = reader.string();
@@ -8239,12 +13328,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchReadTokenResponse.decode = function decode(reader, length) {
+                        FetchReadTokenResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FetchReadTokenResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.token = reader.string();
@@ -8494,12 +13585,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchReadWriteTokenResponse.decode = function decode(reader, length) {
+                        FetchReadWriteTokenResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FetchReadWriteTokenResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.token = reader.string();
@@ -8749,12 +13842,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchLinkableGitRepositoriesRequest.decode = function decode(reader, length) {
+                        FetchLinkableGitRepositoriesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FetchLinkableGitRepositoriesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.connection = reader.string();
@@ -8990,12 +14085,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchLinkableGitRepositoriesResponse.decode = function decode(reader, length) {
+                        FetchLinkableGitRepositoriesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FetchLinkableGitRepositoriesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.linkableGitRepositories && message.linkableGitRepositories.length))
@@ -9225,12 +14322,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LinkableGitRepository.decode = function decode(reader, length) {
+                        LinkableGitRepository.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.LinkableGitRepository();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.cloneUri = reader.string();
@@ -9428,12 +14527,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchGitHubInstallationsRequest.decode = function decode(reader, length) {
+                        FetchGitHubInstallationsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FetchGitHubInstallationsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.connection = reader.string();
@@ -9633,12 +14734,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchGitHubInstallationsResponse.decode = function decode(reader, length) {
+                        FetchGitHubInstallationsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FetchGitHubInstallationsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.installations && message.installations.length))
@@ -9874,12 +14977,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Installation.decode = function decode(reader, length) {
+                            Installation.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FetchGitHubInstallationsResponse.Installation();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.id = reader.int64();
@@ -10152,12 +15257,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchGitRefsRequest.decode = function decode(reader, length) {
+                        FetchGitRefsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FetchGitRefsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.gitRepositoryLink = reader.string();
@@ -10445,12 +15552,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchGitRefsResponse.decode = function decode(reader, length) {
+                        FetchGitRefsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.FetchGitRefsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.refNames && message.refNames.length))
@@ -10590,6 +15699,5130 @@
                         return FetchGitRefsResponse;
                     })();
     
+                    v1.AccountConnector = (function() {
+    
+                        /**
+                         * Properties of an AccountConnector.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IAccountConnector
+                         * @property {google.cloud.developerconnect.v1.IProviderOAuthConfig|null} [providerOauthConfig] AccountConnector providerOauthConfig
+                         * @property {string|null} [name] AccountConnector name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] AccountConnector createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] AccountConnector updateTime
+                         * @property {Object.<string,string>|null} [annotations] AccountConnector annotations
+                         * @property {string|null} [etag] AccountConnector etag
+                         * @property {Object.<string,string>|null} [labels] AccountConnector labels
+                         * @property {string|null} [oauthStartUri] AccountConnector oauthStartUri
+                         */
+    
+                        /**
+                         * Constructs a new AccountConnector.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents an AccountConnector.
+                         * @implements IAccountConnector
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IAccountConnector=} [properties] Properties to set
+                         */
+                        function AccountConnector(properties) {
+                            this.annotations = {};
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AccountConnector providerOauthConfig.
+                         * @member {google.cloud.developerconnect.v1.IProviderOAuthConfig|null|undefined} providerOauthConfig
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @instance
+                         */
+                        AccountConnector.prototype.providerOauthConfig = null;
+    
+                        /**
+                         * AccountConnector name.
+                         * @member {string} name
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @instance
+                         */
+                        AccountConnector.prototype.name = "";
+    
+                        /**
+                         * AccountConnector createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @instance
+                         */
+                        AccountConnector.prototype.createTime = null;
+    
+                        /**
+                         * AccountConnector updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @instance
+                         */
+                        AccountConnector.prototype.updateTime = null;
+    
+                        /**
+                         * AccountConnector annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @instance
+                         */
+                        AccountConnector.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * AccountConnector etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @instance
+                         */
+                        AccountConnector.prototype.etag = "";
+    
+                        /**
+                         * AccountConnector labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @instance
+                         */
+                        AccountConnector.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * AccountConnector oauthStartUri.
+                         * @member {string} oauthStartUri
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @instance
+                         */
+                        AccountConnector.prototype.oauthStartUri = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AccountConnector accountConnectorConfig.
+                         * @member {"providerOauthConfig"|undefined} accountConnectorConfig
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @instance
+                         */
+                        Object.defineProperty(AccountConnector.prototype, "accountConnectorConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["providerOauthConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AccountConnector instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IAccountConnector=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.AccountConnector} AccountConnector instance
+                         */
+                        AccountConnector.create = function create(properties) {
+                            return new AccountConnector(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AccountConnector message. Does not implicitly {@link google.cloud.developerconnect.v1.AccountConnector.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IAccountConnector} message AccountConnector message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccountConnector.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.providerOauthConfig != null && Object.hasOwnProperty.call(message, "providerOauthConfig"))
+                                $root.google.cloud.developerconnect.v1.ProviderOAuthConfig.encode(message.providerOauthConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.etag);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.oauthStartUri != null && Object.hasOwnProperty.call(message, "oauthStartUri"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.oauthStartUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AccountConnector message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.AccountConnector.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IAccountConnector} message AccountConnector message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccountConnector.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AccountConnector message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.AccountConnector} AccountConnector
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccountConnector.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.AccountConnector(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 5: {
+                                        message.providerOauthConfig = $root.google.cloud.developerconnect.v1.ProviderOAuthConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 7: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 10: {
+                                        message.oauthStartUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AccountConnector message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.AccountConnector} AccountConnector
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccountConnector.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AccountConnector message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AccountConnector.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.providerOauthConfig != null && message.hasOwnProperty("providerOauthConfig")) {
+                                properties.accountConnectorConfig = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.ProviderOAuthConfig.verify(message.providerOauthConfig);
+                                    if (error)
+                                        return "providerOauthConfig." + error;
+                                }
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.oauthStartUri != null && message.hasOwnProperty("oauthStartUri"))
+                                if (!$util.isString(message.oauthStartUri))
+                                    return "oauthStartUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AccountConnector message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.AccountConnector} AccountConnector
+                         */
+                        AccountConnector.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.AccountConnector)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.AccountConnector();
+                            if (object.providerOauthConfig != null) {
+                                if (typeof object.providerOauthConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.AccountConnector.providerOauthConfig: object expected");
+                                message.providerOauthConfig = $root.google.cloud.developerconnect.v1.ProviderOAuthConfig.fromObject(object.providerOauthConfig);
+                            }
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.AccountConnector.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.AccountConnector.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.AccountConnector.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.AccountConnector.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.oauthStartUri != null)
+                                message.oauthStartUri = String(object.oauthStartUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AccountConnector message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.AccountConnector} message AccountConnector
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AccountConnector.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults) {
+                                object.annotations = {};
+                                object.labels = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.etag = "";
+                                object.oauthStartUri = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.providerOauthConfig != null && message.hasOwnProperty("providerOauthConfig")) {
+                                object.providerOauthConfig = $root.google.cloud.developerconnect.v1.ProviderOAuthConfig.toObject(message.providerOauthConfig, options);
+                                if (options.oneofs)
+                                    object.accountConnectorConfig = "providerOauthConfig";
+                            }
+                            var keys2;
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.oauthStartUri != null && message.hasOwnProperty("oauthStartUri"))
+                                object.oauthStartUri = message.oauthStartUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AccountConnector to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AccountConnector.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AccountConnector
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.AccountConnector
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AccountConnector.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.AccountConnector";
+                        };
+    
+                        return AccountConnector;
+                    })();
+    
+                    v1.User = (function() {
+    
+                        /**
+                         * Properties of a User.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IUser
+                         * @property {string|null} [name] User name
+                         * @property {string|null} [displayName] User displayName
+                         * @property {google.protobuf.ITimestamp|null} [createTime] User createTime
+                         * @property {google.protobuf.ITimestamp|null} [lastTokenRequestTime] User lastTokenRequestTime
+                         */
+    
+                        /**
+                         * Constructs a new User.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a User.
+                         * @implements IUser
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IUser=} [properties] Properties to set
+                         */
+                        function User(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * User name.
+                         * @member {string} name
+                         * @memberof google.cloud.developerconnect.v1.User
+                         * @instance
+                         */
+                        User.prototype.name = "";
+    
+                        /**
+                         * User displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.developerconnect.v1.User
+                         * @instance
+                         */
+                        User.prototype.displayName = "";
+    
+                        /**
+                         * User createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.developerconnect.v1.User
+                         * @instance
+                         */
+                        User.prototype.createTime = null;
+    
+                        /**
+                         * User lastTokenRequestTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastTokenRequestTime
+                         * @memberof google.cloud.developerconnect.v1.User
+                         * @instance
+                         */
+                        User.prototype.lastTokenRequestTime = null;
+    
+                        /**
+                         * Creates a new User instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.User
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IUser=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.User} User instance
+                         */
+                        User.create = function create(properties) {
+                            return new User(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified User message. Does not implicitly {@link google.cloud.developerconnect.v1.User.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.User
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IUser} message User message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        User.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.lastTokenRequestTime != null && Object.hasOwnProperty.call(message, "lastTokenRequestTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastTokenRequestTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified User message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.User.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.User
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IUser} message User message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        User.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a User message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.User
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.User} User
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        User.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.User();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.lastTokenRequestTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a User message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.User
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.User} User
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        User.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a User message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.User
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        User.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.lastTokenRequestTime != null && message.hasOwnProperty("lastTokenRequestTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastTokenRequestTime);
+                                if (error)
+                                    return "lastTokenRequestTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a User message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.User
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.User} User
+                         */
+                        User.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.User)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.User();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.User.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.lastTokenRequestTime != null) {
+                                if (typeof object.lastTokenRequestTime !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.User.lastTokenRequestTime: object expected");
+                                message.lastTokenRequestTime = $root.google.protobuf.Timestamp.fromObject(object.lastTokenRequestTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a User message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.User
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.User} message User
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        User.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.createTime = null;
+                                object.lastTokenRequestTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.lastTokenRequestTime != null && message.hasOwnProperty("lastTokenRequestTime"))
+                                object.lastTokenRequestTime = $root.google.protobuf.Timestamp.toObject(message.lastTokenRequestTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this User to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.User
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        User.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for User
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.User
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        User.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.User";
+                        };
+    
+                        return User;
+                    })();
+    
+                    v1.ProviderOAuthConfig = (function() {
+    
+                        /**
+                         * Properties of a ProviderOAuthConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IProviderOAuthConfig
+                         * @property {google.cloud.developerconnect.v1.SystemProvider|null} [systemProviderId] ProviderOAuthConfig systemProviderId
+                         * @property {Array.<string>|null} [scopes] ProviderOAuthConfig scopes
+                         */
+    
+                        /**
+                         * Constructs a new ProviderOAuthConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a ProviderOAuthConfig.
+                         * @implements IProviderOAuthConfig
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IProviderOAuthConfig=} [properties] Properties to set
+                         */
+                        function ProviderOAuthConfig(properties) {
+                            this.scopes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ProviderOAuthConfig systemProviderId.
+                         * @member {google.cloud.developerconnect.v1.SystemProvider|null|undefined} systemProviderId
+                         * @memberof google.cloud.developerconnect.v1.ProviderOAuthConfig
+                         * @instance
+                         */
+                        ProviderOAuthConfig.prototype.systemProviderId = null;
+    
+                        /**
+                         * ProviderOAuthConfig scopes.
+                         * @member {Array.<string>} scopes
+                         * @memberof google.cloud.developerconnect.v1.ProviderOAuthConfig
+                         * @instance
+                         */
+                        ProviderOAuthConfig.prototype.scopes = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ProviderOAuthConfig oauthProviderId.
+                         * @member {"systemProviderId"|undefined} oauthProviderId
+                         * @memberof google.cloud.developerconnect.v1.ProviderOAuthConfig
+                         * @instance
+                         */
+                        Object.defineProperty(ProviderOAuthConfig.prototype, "oauthProviderId", {
+                            get: $util.oneOfGetter($oneOfFields = ["systemProviderId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ProviderOAuthConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.ProviderOAuthConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IProviderOAuthConfig=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.ProviderOAuthConfig} ProviderOAuthConfig instance
+                         */
+                        ProviderOAuthConfig.create = function create(properties) {
+                            return new ProviderOAuthConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ProviderOAuthConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.ProviderOAuthConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.ProviderOAuthConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IProviderOAuthConfig} message ProviderOAuthConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProviderOAuthConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.systemProviderId != null && Object.hasOwnProperty.call(message, "systemProviderId"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.systemProviderId);
+                            if (message.scopes != null && message.scopes.length)
+                                for (var i = 0; i < message.scopes.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.scopes[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ProviderOAuthConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ProviderOAuthConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ProviderOAuthConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IProviderOAuthConfig} message ProviderOAuthConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProviderOAuthConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ProviderOAuthConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.ProviderOAuthConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.ProviderOAuthConfig} ProviderOAuthConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProviderOAuthConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ProviderOAuthConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.systemProviderId = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.scopes && message.scopes.length))
+                                            message.scopes = [];
+                                        message.scopes.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ProviderOAuthConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ProviderOAuthConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.ProviderOAuthConfig} ProviderOAuthConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProviderOAuthConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ProviderOAuthConfig message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.ProviderOAuthConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ProviderOAuthConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.systemProviderId != null && message.hasOwnProperty("systemProviderId")) {
+                                properties.oauthProviderId = 1;
+                                switch (message.systemProviderId) {
+                                default:
+                                    return "systemProviderId: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                    break;
+                                }
+                            }
+                            if (message.scopes != null && message.hasOwnProperty("scopes")) {
+                                if (!Array.isArray(message.scopes))
+                                    return "scopes: array expected";
+                                for (var i = 0; i < message.scopes.length; ++i)
+                                    if (!$util.isString(message.scopes[i]))
+                                        return "scopes: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ProviderOAuthConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.ProviderOAuthConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.ProviderOAuthConfig} ProviderOAuthConfig
+                         */
+                        ProviderOAuthConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.ProviderOAuthConfig)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.ProviderOAuthConfig();
+                            switch (object.systemProviderId) {
+                            default:
+                                if (typeof object.systemProviderId === "number") {
+                                    message.systemProviderId = object.systemProviderId;
+                                    break;
+                                }
+                                break;
+                            case "SYSTEM_PROVIDER_UNSPECIFIED":
+                            case 0:
+                                message.systemProviderId = 0;
+                                break;
+                            case "GITHUB":
+                            case 1:
+                                message.systemProviderId = 1;
+                                break;
+                            case "GITLAB":
+                            case 2:
+                                message.systemProviderId = 2;
+                                break;
+                            case "GOOGLE":
+                            case 3:
+                                message.systemProviderId = 3;
+                                break;
+                            case "SENTRY":
+                            case 4:
+                                message.systemProviderId = 4;
+                                break;
+                            case "ROVO":
+                            case 5:
+                                message.systemProviderId = 5;
+                                break;
+                            case "NEW_RELIC":
+                            case 6:
+                                message.systemProviderId = 6;
+                                break;
+                            case "DATASTAX":
+                            case 7:
+                                message.systemProviderId = 7;
+                                break;
+                            case "DYNATRACE":
+                            case 8:
+                                message.systemProviderId = 8;
+                                break;
+                            }
+                            if (object.scopes) {
+                                if (!Array.isArray(object.scopes))
+                                    throw TypeError(".google.cloud.developerconnect.v1.ProviderOAuthConfig.scopes: array expected");
+                                message.scopes = [];
+                                for (var i = 0; i < object.scopes.length; ++i)
+                                    message.scopes[i] = String(object.scopes[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ProviderOAuthConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.ProviderOAuthConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ProviderOAuthConfig} message ProviderOAuthConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ProviderOAuthConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.scopes = [];
+                            if (message.systemProviderId != null && message.hasOwnProperty("systemProviderId")) {
+                                object.systemProviderId = options.enums === String ? $root.google.cloud.developerconnect.v1.SystemProvider[message.systemProviderId] === undefined ? message.systemProviderId : $root.google.cloud.developerconnect.v1.SystemProvider[message.systemProviderId] : message.systemProviderId;
+                                if (options.oneofs)
+                                    object.oauthProviderId = "systemProviderId";
+                            }
+                            if (message.scopes && message.scopes.length) {
+                                object.scopes = [];
+                                for (var j = 0; j < message.scopes.length; ++j)
+                                    object.scopes[j] = message.scopes[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ProviderOAuthConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.ProviderOAuthConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ProviderOAuthConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ProviderOAuthConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.ProviderOAuthConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ProviderOAuthConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.ProviderOAuthConfig";
+                        };
+    
+                        return ProviderOAuthConfig;
+                    })();
+    
+                    v1.InsightsConfigService = (function() {
+    
+                        /**
+                         * Constructs a new InsightsConfigService service.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents an InsightsConfigService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function InsightsConfigService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (InsightsConfigService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = InsightsConfigService;
+    
+                        /**
+                         * Creates new InsightsConfigService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {InsightsConfigService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        InsightsConfigService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.InsightsConfigService|listInsightsConfigs}.
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @typedef ListInsightsConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.developerconnect.v1.ListInsightsConfigsResponse} [response] ListInsightsConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListInsightsConfigs.
+                         * @function listInsightsConfigs
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IListInsightsConfigsRequest} request ListInsightsConfigsRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.InsightsConfigService.ListInsightsConfigsCallback} callback Node-style callback called with the error, if any, and ListInsightsConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(InsightsConfigService.prototype.listInsightsConfigs = function listInsightsConfigs(request, callback) {
+                            return this.rpcCall(listInsightsConfigs, $root.google.cloud.developerconnect.v1.ListInsightsConfigsRequest, $root.google.cloud.developerconnect.v1.ListInsightsConfigsResponse, request, callback);
+                        }, "name", { value: "ListInsightsConfigs" });
+    
+                        /**
+                         * Calls ListInsightsConfigs.
+                         * @function listInsightsConfigs
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IListInsightsConfigsRequest} request ListInsightsConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.developerconnect.v1.ListInsightsConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.InsightsConfigService|createInsightsConfig}.
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @typedef CreateInsightsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateInsightsConfig.
+                         * @function createInsightsConfig
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.ICreateInsightsConfigRequest} request CreateInsightsConfigRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.InsightsConfigService.CreateInsightsConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(InsightsConfigService.prototype.createInsightsConfig = function createInsightsConfig(request, callback) {
+                            return this.rpcCall(createInsightsConfig, $root.google.cloud.developerconnect.v1.CreateInsightsConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateInsightsConfig" });
+    
+                        /**
+                         * Calls CreateInsightsConfig.
+                         * @function createInsightsConfig
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.ICreateInsightsConfigRequest} request CreateInsightsConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.InsightsConfigService|getInsightsConfig}.
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @typedef GetInsightsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.developerconnect.v1.InsightsConfig} [response] InsightsConfig
+                         */
+    
+                        /**
+                         * Calls GetInsightsConfig.
+                         * @function getInsightsConfig
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IGetInsightsConfigRequest} request GetInsightsConfigRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.InsightsConfigService.GetInsightsConfigCallback} callback Node-style callback called with the error, if any, and InsightsConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(InsightsConfigService.prototype.getInsightsConfig = function getInsightsConfig(request, callback) {
+                            return this.rpcCall(getInsightsConfig, $root.google.cloud.developerconnect.v1.GetInsightsConfigRequest, $root.google.cloud.developerconnect.v1.InsightsConfig, request, callback);
+                        }, "name", { value: "GetInsightsConfig" });
+    
+                        /**
+                         * Calls GetInsightsConfig.
+                         * @function getInsightsConfig
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IGetInsightsConfigRequest} request GetInsightsConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.developerconnect.v1.InsightsConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.InsightsConfigService|updateInsightsConfig}.
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @typedef UpdateInsightsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateInsightsConfig.
+                         * @function updateInsightsConfig
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest} request UpdateInsightsConfigRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.InsightsConfigService.UpdateInsightsConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(InsightsConfigService.prototype.updateInsightsConfig = function updateInsightsConfig(request, callback) {
+                            return this.rpcCall(updateInsightsConfig, $root.google.cloud.developerconnect.v1.UpdateInsightsConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateInsightsConfig" });
+    
+                        /**
+                         * Calls UpdateInsightsConfig.
+                         * @function updateInsightsConfig
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest} request UpdateInsightsConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.developerconnect.v1.InsightsConfigService|deleteInsightsConfig}.
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @typedef DeleteInsightsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteInsightsConfig.
+                         * @function deleteInsightsConfig
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest} request DeleteInsightsConfigRequest message or plain object
+                         * @param {google.cloud.developerconnect.v1.InsightsConfigService.DeleteInsightsConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(InsightsConfigService.prototype.deleteInsightsConfig = function deleteInsightsConfig(request, callback) {
+                            return this.rpcCall(deleteInsightsConfig, $root.google.cloud.developerconnect.v1.DeleteInsightsConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteInsightsConfig" });
+    
+                        /**
+                         * Calls DeleteInsightsConfig.
+                         * @function deleteInsightsConfig
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfigService
+                         * @instance
+                         * @param {google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest} request DeleteInsightsConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        return InsightsConfigService;
+                    })();
+    
+                    v1.InsightsConfig = (function() {
+    
+                        /**
+                         * Properties of an InsightsConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IInsightsConfig
+                         * @property {string|null} [appHubApplication] InsightsConfig appHubApplication
+                         * @property {string|null} [name] InsightsConfig name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] InsightsConfig createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] InsightsConfig updateTime
+                         * @property {Array.<google.cloud.developerconnect.v1.IRuntimeConfig>|null} [runtimeConfigs] InsightsConfig runtimeConfigs
+                         * @property {Array.<google.cloud.developerconnect.v1.IArtifactConfig>|null} [artifactConfigs] InsightsConfig artifactConfigs
+                         * @property {google.cloud.developerconnect.v1.InsightsConfig.State|null} [state] InsightsConfig state
+                         * @property {Object.<string,string>|null} [annotations] InsightsConfig annotations
+                         * @property {Object.<string,string>|null} [labels] InsightsConfig labels
+                         * @property {boolean|null} [reconciling] InsightsConfig reconciling
+                         * @property {Array.<google.rpc.IStatus>|null} [errors] InsightsConfig errors
+                         */
+    
+                        /**
+                         * Constructs a new InsightsConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents an InsightsConfig.
+                         * @implements IInsightsConfig
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IInsightsConfig=} [properties] Properties to set
+                         */
+                        function InsightsConfig(properties) {
+                            this.runtimeConfigs = [];
+                            this.artifactConfigs = [];
+                            this.annotations = {};
+                            this.labels = {};
+                            this.errors = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InsightsConfig appHubApplication.
+                         * @member {string|null|undefined} appHubApplication
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @instance
+                         */
+                        InsightsConfig.prototype.appHubApplication = null;
+    
+                        /**
+                         * InsightsConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @instance
+                         */
+                        InsightsConfig.prototype.name = "";
+    
+                        /**
+                         * InsightsConfig createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @instance
+                         */
+                        InsightsConfig.prototype.createTime = null;
+    
+                        /**
+                         * InsightsConfig updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @instance
+                         */
+                        InsightsConfig.prototype.updateTime = null;
+    
+                        /**
+                         * InsightsConfig runtimeConfigs.
+                         * @member {Array.<google.cloud.developerconnect.v1.IRuntimeConfig>} runtimeConfigs
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @instance
+                         */
+                        InsightsConfig.prototype.runtimeConfigs = $util.emptyArray;
+    
+                        /**
+                         * InsightsConfig artifactConfigs.
+                         * @member {Array.<google.cloud.developerconnect.v1.IArtifactConfig>} artifactConfigs
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @instance
+                         */
+                        InsightsConfig.prototype.artifactConfigs = $util.emptyArray;
+    
+                        /**
+                         * InsightsConfig state.
+                         * @member {google.cloud.developerconnect.v1.InsightsConfig.State} state
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @instance
+                         */
+                        InsightsConfig.prototype.state = 0;
+    
+                        /**
+                         * InsightsConfig annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @instance
+                         */
+                        InsightsConfig.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * InsightsConfig labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @instance
+                         */
+                        InsightsConfig.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * InsightsConfig reconciling.
+                         * @member {boolean} reconciling
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @instance
+                         */
+                        InsightsConfig.prototype.reconciling = false;
+    
+                        /**
+                         * InsightsConfig errors.
+                         * @member {Array.<google.rpc.IStatus>} errors
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @instance
+                         */
+                        InsightsConfig.prototype.errors = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * InsightsConfig insightsConfigContext.
+                         * @member {"appHubApplication"|undefined} insightsConfigContext
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @instance
+                         */
+                        Object.defineProperty(InsightsConfig.prototype, "insightsConfigContext", {
+                            get: $util.oneOfGetter($oneOfFields = ["appHubApplication"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new InsightsConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IInsightsConfig=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.InsightsConfig} InsightsConfig instance
+                         */
+                        InsightsConfig.create = function create(properties) {
+                            return new InsightsConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InsightsConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.InsightsConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IInsightsConfig} message InsightsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InsightsConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.appHubApplication != null && Object.hasOwnProperty.call(message, "appHubApplication"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.appHubApplication);
+                            if (message.runtimeConfigs != null && message.runtimeConfigs.length)
+                                for (var i = 0; i < message.runtimeConfigs.length; ++i)
+                                    $root.google.cloud.developerconnect.v1.RuntimeConfig.encode(message.runtimeConfigs[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.artifactConfigs != null && message.artifactConfigs.length)
+                                for (var i = 0; i < message.artifactConfigs.length; ++i)
+                                    $root.google.cloud.developerconnect.v1.ArtifactConfig.encode(message.artifactConfigs[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.state);
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.reconciling != null && Object.hasOwnProperty.call(message, "reconciling"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.reconciling);
+                            if (message.errors != null && message.errors.length)
+                                for (var i = 0; i < message.errors.length; ++i)
+                                    $root.google.rpc.Status.encode(message.errors[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InsightsConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.InsightsConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IInsightsConfig} message InsightsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InsightsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InsightsConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.InsightsConfig} InsightsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InsightsConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.InsightsConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 4: {
+                                        message.appHubApplication = reader.string();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.runtimeConfigs && message.runtimeConfigs.length))
+                                            message.runtimeConfigs = [];
+                                        message.runtimeConfigs.push($root.google.cloud.developerconnect.v1.RuntimeConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.artifactConfigs && message.artifactConfigs.length))
+                                            message.artifactConfigs = [];
+                                        message.artifactConfigs.push($root.google.cloud.developerconnect.v1.ArtifactConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 7: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 9: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 10: {
+                                        message.reconciling = reader.bool();
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.errors && message.errors.length))
+                                            message.errors = [];
+                                        message.errors.push($root.google.rpc.Status.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InsightsConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.InsightsConfig} InsightsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InsightsConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InsightsConfig message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InsightsConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.appHubApplication != null && message.hasOwnProperty("appHubApplication")) {
+                                properties.insightsConfigContext = 1;
+                                if (!$util.isString(message.appHubApplication))
+                                    return "appHubApplication: string expected";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.runtimeConfigs != null && message.hasOwnProperty("runtimeConfigs")) {
+                                if (!Array.isArray(message.runtimeConfigs))
+                                    return "runtimeConfigs: array expected";
+                                for (var i = 0; i < message.runtimeConfigs.length; ++i) {
+                                    var error = $root.google.cloud.developerconnect.v1.RuntimeConfig.verify(message.runtimeConfigs[i]);
+                                    if (error)
+                                        return "runtimeConfigs." + error;
+                                }
+                            }
+                            if (message.artifactConfigs != null && message.hasOwnProperty("artifactConfigs")) {
+                                if (!Array.isArray(message.artifactConfigs))
+                                    return "artifactConfigs: array expected";
+                                for (var i = 0; i < message.artifactConfigs.length; ++i) {
+                                    var error = $root.google.cloud.developerconnect.v1.ArtifactConfig.verify(message.artifactConfigs[i]);
+                                    if (error)
+                                        return "artifactConfigs." + error;
+                                }
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 5:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.reconciling != null && message.hasOwnProperty("reconciling"))
+                                if (typeof message.reconciling !== "boolean")
+                                    return "reconciling: boolean expected";
+                            if (message.errors != null && message.hasOwnProperty("errors")) {
+                                if (!Array.isArray(message.errors))
+                                    return "errors: array expected";
+                                for (var i = 0; i < message.errors.length; ++i) {
+                                    var error = $root.google.rpc.Status.verify(message.errors[i]);
+                                    if (error)
+                                        return "errors." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InsightsConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.InsightsConfig} InsightsConfig
+                         */
+                        InsightsConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.InsightsConfig)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.InsightsConfig();
+                            if (object.appHubApplication != null)
+                                message.appHubApplication = String(object.appHubApplication);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.InsightsConfig.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.InsightsConfig.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.runtimeConfigs) {
+                                if (!Array.isArray(object.runtimeConfigs))
+                                    throw TypeError(".google.cloud.developerconnect.v1.InsightsConfig.runtimeConfigs: array expected");
+                                message.runtimeConfigs = [];
+                                for (var i = 0; i < object.runtimeConfigs.length; ++i) {
+                                    if (typeof object.runtimeConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.developerconnect.v1.InsightsConfig.runtimeConfigs: object expected");
+                                    message.runtimeConfigs[i] = $root.google.cloud.developerconnect.v1.RuntimeConfig.fromObject(object.runtimeConfigs[i]);
+                                }
+                            }
+                            if (object.artifactConfigs) {
+                                if (!Array.isArray(object.artifactConfigs))
+                                    throw TypeError(".google.cloud.developerconnect.v1.InsightsConfig.artifactConfigs: array expected");
+                                message.artifactConfigs = [];
+                                for (var i = 0; i < object.artifactConfigs.length; ++i) {
+                                    if (typeof object.artifactConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.developerconnect.v1.InsightsConfig.artifactConfigs: object expected");
+                                    message.artifactConfigs[i] = $root.google.cloud.developerconnect.v1.ArtifactConfig.fromObject(object.artifactConfigs[i]);
+                                }
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "PENDING":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "COMPLETE":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "ERROR":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.InsightsConfig.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.InsightsConfig.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.reconciling != null)
+                                message.reconciling = Boolean(object.reconciling);
+                            if (object.errors) {
+                                if (!Array.isArray(object.errors))
+                                    throw TypeError(".google.cloud.developerconnect.v1.InsightsConfig.errors: array expected");
+                                message.errors = [];
+                                for (var i = 0; i < object.errors.length; ++i) {
+                                    if (typeof object.errors[i] !== "object")
+                                        throw TypeError(".google.cloud.developerconnect.v1.InsightsConfig.errors: object expected");
+                                    message.errors[i] = $root.google.rpc.Status.fromObject(object.errors[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InsightsConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.InsightsConfig} message InsightsConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InsightsConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.runtimeConfigs = [];
+                                object.artifactConfigs = [];
+                                object.errors = [];
+                            }
+                            if (options.objects || options.defaults) {
+                                object.annotations = {};
+                                object.labels = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.reconciling = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.appHubApplication != null && message.hasOwnProperty("appHubApplication")) {
+                                object.appHubApplication = message.appHubApplication;
+                                if (options.oneofs)
+                                    object.insightsConfigContext = "appHubApplication";
+                            }
+                            if (message.runtimeConfigs && message.runtimeConfigs.length) {
+                                object.runtimeConfigs = [];
+                                for (var j = 0; j < message.runtimeConfigs.length; ++j)
+                                    object.runtimeConfigs[j] = $root.google.cloud.developerconnect.v1.RuntimeConfig.toObject(message.runtimeConfigs[j], options);
+                            }
+                            if (message.artifactConfigs && message.artifactConfigs.length) {
+                                object.artifactConfigs = [];
+                                for (var j = 0; j < message.artifactConfigs.length; ++j)
+                                    object.artifactConfigs[j] = $root.google.cloud.developerconnect.v1.ArtifactConfig.toObject(message.artifactConfigs[j], options);
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.developerconnect.v1.InsightsConfig.State[message.state] === undefined ? message.state : $root.google.cloud.developerconnect.v1.InsightsConfig.State[message.state] : message.state;
+                            var keys2;
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.reconciling != null && message.hasOwnProperty("reconciling"))
+                                object.reconciling = message.reconciling;
+                            if (message.errors && message.errors.length) {
+                                object.errors = [];
+                                for (var j = 0; j < message.errors.length; ++j)
+                                    object.errors[j] = $root.google.rpc.Status.toObject(message.errors[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InsightsConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InsightsConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InsightsConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.InsightsConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InsightsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.InsightsConfig";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.developerconnect.v1.InsightsConfig.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} PENDING=5 PENDING value
+                         * @property {number} COMPLETE=3 COMPLETE value
+                         * @property {number} ERROR=4 ERROR value
+                         */
+                        InsightsConfig.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[5] = "PENDING"] = 5;
+                            values[valuesById[3] = "COMPLETE"] = 3;
+                            values[valuesById[4] = "ERROR"] = 4;
+                            return values;
+                        })();
+    
+                        return InsightsConfig;
+                    })();
+    
+                    v1.RuntimeConfig = (function() {
+    
+                        /**
+                         * Properties of a RuntimeConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IRuntimeConfig
+                         * @property {google.cloud.developerconnect.v1.IGKEWorkload|null} [gkeWorkload] RuntimeConfig gkeWorkload
+                         * @property {google.cloud.developerconnect.v1.IAppHubWorkload|null} [appHubWorkload] RuntimeConfig appHubWorkload
+                         * @property {string|null} [uri] RuntimeConfig uri
+                         * @property {google.cloud.developerconnect.v1.RuntimeConfig.State|null} [state] RuntimeConfig state
+                         */
+    
+                        /**
+                         * Constructs a new RuntimeConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a RuntimeConfig.
+                         * @implements IRuntimeConfig
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IRuntimeConfig=} [properties] Properties to set
+                         */
+                        function RuntimeConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RuntimeConfig gkeWorkload.
+                         * @member {google.cloud.developerconnect.v1.IGKEWorkload|null|undefined} gkeWorkload
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @instance
+                         */
+                        RuntimeConfig.prototype.gkeWorkload = null;
+    
+                        /**
+                         * RuntimeConfig appHubWorkload.
+                         * @member {google.cloud.developerconnect.v1.IAppHubWorkload|null|undefined} appHubWorkload
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @instance
+                         */
+                        RuntimeConfig.prototype.appHubWorkload = null;
+    
+                        /**
+                         * RuntimeConfig uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @instance
+                         */
+                        RuntimeConfig.prototype.uri = "";
+    
+                        /**
+                         * RuntimeConfig state.
+                         * @member {google.cloud.developerconnect.v1.RuntimeConfig.State} state
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @instance
+                         */
+                        RuntimeConfig.prototype.state = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RuntimeConfig runtime.
+                         * @member {"gkeWorkload"|undefined} runtime
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @instance
+                         */
+                        Object.defineProperty(RuntimeConfig.prototype, "runtime", {
+                            get: $util.oneOfGetter($oneOfFields = ["gkeWorkload"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * RuntimeConfig derivedFrom.
+                         * @member {"appHubWorkload"|undefined} derivedFrom
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @instance
+                         */
+                        Object.defineProperty(RuntimeConfig.prototype, "derivedFrom", {
+                            get: $util.oneOfGetter($oneOfFields = ["appHubWorkload"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new RuntimeConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IRuntimeConfig=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.RuntimeConfig} RuntimeConfig instance
+                         */
+                        RuntimeConfig.create = function create(properties) {
+                            return new RuntimeConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RuntimeConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.RuntimeConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IRuntimeConfig} message RuntimeConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RuntimeConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                            if (message.gkeWorkload != null && Object.hasOwnProperty.call(message, "gkeWorkload"))
+                                $root.google.cloud.developerconnect.v1.GKEWorkload.encode(message.gkeWorkload, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.appHubWorkload != null && Object.hasOwnProperty.call(message, "appHubWorkload"))
+                                $root.google.cloud.developerconnect.v1.AppHubWorkload.encode(message.appHubWorkload, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RuntimeConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.RuntimeConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IRuntimeConfig} message RuntimeConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RuntimeConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RuntimeConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.RuntimeConfig} RuntimeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RuntimeConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.RuntimeConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 3: {
+                                        message.gkeWorkload = $root.google.cloud.developerconnect.v1.GKEWorkload.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.appHubWorkload = $root.google.cloud.developerconnect.v1.AppHubWorkload.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RuntimeConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.RuntimeConfig} RuntimeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RuntimeConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RuntimeConfig message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RuntimeConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gkeWorkload != null && message.hasOwnProperty("gkeWorkload")) {
+                                properties.runtime = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.GKEWorkload.verify(message.gkeWorkload);
+                                    if (error)
+                                        return "gkeWorkload." + error;
+                                }
+                            }
+                            if (message.appHubWorkload != null && message.hasOwnProperty("appHubWorkload")) {
+                                properties.derivedFrom = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.AppHubWorkload.verify(message.appHubWorkload);
+                                    if (error)
+                                        return "appHubWorkload." + error;
+                                }
+                            }
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RuntimeConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.RuntimeConfig} RuntimeConfig
+                         */
+                        RuntimeConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.RuntimeConfig)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.RuntimeConfig();
+                            if (object.gkeWorkload != null) {
+                                if (typeof object.gkeWorkload !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.RuntimeConfig.gkeWorkload: object expected");
+                                message.gkeWorkload = $root.google.cloud.developerconnect.v1.GKEWorkload.fromObject(object.gkeWorkload);
+                            }
+                            if (object.appHubWorkload != null) {
+                                if (typeof object.appHubWorkload !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.RuntimeConfig.appHubWorkload: object expected");
+                                message.appHubWorkload = $root.google.cloud.developerconnect.v1.AppHubWorkload.fromObject(object.appHubWorkload);
+                            }
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "LINKED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "UNLINKED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RuntimeConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.RuntimeConfig} message RuntimeConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RuntimeConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.uri = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.developerconnect.v1.RuntimeConfig.State[message.state] === undefined ? message.state : $root.google.cloud.developerconnect.v1.RuntimeConfig.State[message.state] : message.state;
+                            if (message.gkeWorkload != null && message.hasOwnProperty("gkeWorkload")) {
+                                object.gkeWorkload = $root.google.cloud.developerconnect.v1.GKEWorkload.toObject(message.gkeWorkload, options);
+                                if (options.oneofs)
+                                    object.runtime = "gkeWorkload";
+                            }
+                            if (message.appHubWorkload != null && message.hasOwnProperty("appHubWorkload")) {
+                                object.appHubWorkload = $root.google.cloud.developerconnect.v1.AppHubWorkload.toObject(message.appHubWorkload, options);
+                                if (options.oneofs)
+                                    object.derivedFrom = "appHubWorkload";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RuntimeConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RuntimeConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RuntimeConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.RuntimeConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RuntimeConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.RuntimeConfig";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.developerconnect.v1.RuntimeConfig.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} LINKED=1 LINKED value
+                         * @property {number} UNLINKED=2 UNLINKED value
+                         */
+                        RuntimeConfig.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "LINKED"] = 1;
+                            values[valuesById[2] = "UNLINKED"] = 2;
+                            return values;
+                        })();
+    
+                        return RuntimeConfig;
+                    })();
+    
+                    v1.GKEWorkload = (function() {
+    
+                        /**
+                         * Properties of a GKEWorkload.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IGKEWorkload
+                         * @property {string|null} [cluster] GKEWorkload cluster
+                         * @property {string|null} [deployment] GKEWorkload deployment
+                         */
+    
+                        /**
+                         * Constructs a new GKEWorkload.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a GKEWorkload.
+                         * @implements IGKEWorkload
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IGKEWorkload=} [properties] Properties to set
+                         */
+                        function GKEWorkload(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GKEWorkload cluster.
+                         * @member {string} cluster
+                         * @memberof google.cloud.developerconnect.v1.GKEWorkload
+                         * @instance
+                         */
+                        GKEWorkload.prototype.cluster = "";
+    
+                        /**
+                         * GKEWorkload deployment.
+                         * @member {string} deployment
+                         * @memberof google.cloud.developerconnect.v1.GKEWorkload
+                         * @instance
+                         */
+                        GKEWorkload.prototype.deployment = "";
+    
+                        /**
+                         * Creates a new GKEWorkload instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.GKEWorkload
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGKEWorkload=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.GKEWorkload} GKEWorkload instance
+                         */
+                        GKEWorkload.create = function create(properties) {
+                            return new GKEWorkload(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GKEWorkload message. Does not implicitly {@link google.cloud.developerconnect.v1.GKEWorkload.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.GKEWorkload
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGKEWorkload} message GKEWorkload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GKEWorkload.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.cluster != null && Object.hasOwnProperty.call(message, "cluster"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.cluster);
+                            if (message.deployment != null && Object.hasOwnProperty.call(message, "deployment"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.deployment);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GKEWorkload message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GKEWorkload.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GKEWorkload
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGKEWorkload} message GKEWorkload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GKEWorkload.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GKEWorkload message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.GKEWorkload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.GKEWorkload} GKEWorkload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GKEWorkload.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GKEWorkload();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.cluster = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.deployment = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GKEWorkload message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GKEWorkload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.GKEWorkload} GKEWorkload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GKEWorkload.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GKEWorkload message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.GKEWorkload
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GKEWorkload.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.cluster != null && message.hasOwnProperty("cluster"))
+                                if (!$util.isString(message.cluster))
+                                    return "cluster: string expected";
+                            if (message.deployment != null && message.hasOwnProperty("deployment"))
+                                if (!$util.isString(message.deployment))
+                                    return "deployment: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GKEWorkload message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.GKEWorkload
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.GKEWorkload} GKEWorkload
+                         */
+                        GKEWorkload.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.GKEWorkload)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.GKEWorkload();
+                            if (object.cluster != null)
+                                message.cluster = String(object.cluster);
+                            if (object.deployment != null)
+                                message.deployment = String(object.deployment);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GKEWorkload message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.GKEWorkload
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.GKEWorkload} message GKEWorkload
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GKEWorkload.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.cluster = "";
+                                object.deployment = "";
+                            }
+                            if (message.cluster != null && message.hasOwnProperty("cluster"))
+                                object.cluster = message.cluster;
+                            if (message.deployment != null && message.hasOwnProperty("deployment"))
+                                object.deployment = message.deployment;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GKEWorkload to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.GKEWorkload
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GKEWorkload.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GKEWorkload
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.GKEWorkload
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GKEWorkload.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.GKEWorkload";
+                        };
+    
+                        return GKEWorkload;
+                    })();
+    
+                    v1.AppHubWorkload = (function() {
+    
+                        /**
+                         * Properties of an AppHubWorkload.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IAppHubWorkload
+                         * @property {string|null} [workload] AppHubWorkload workload
+                         * @property {string|null} [criticality] AppHubWorkload criticality
+                         * @property {string|null} [environment] AppHubWorkload environment
+                         */
+    
+                        /**
+                         * Constructs a new AppHubWorkload.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents an AppHubWorkload.
+                         * @implements IAppHubWorkload
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IAppHubWorkload=} [properties] Properties to set
+                         */
+                        function AppHubWorkload(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AppHubWorkload workload.
+                         * @member {string} workload
+                         * @memberof google.cloud.developerconnect.v1.AppHubWorkload
+                         * @instance
+                         */
+                        AppHubWorkload.prototype.workload = "";
+    
+                        /**
+                         * AppHubWorkload criticality.
+                         * @member {string} criticality
+                         * @memberof google.cloud.developerconnect.v1.AppHubWorkload
+                         * @instance
+                         */
+                        AppHubWorkload.prototype.criticality = "";
+    
+                        /**
+                         * AppHubWorkload environment.
+                         * @member {string} environment
+                         * @memberof google.cloud.developerconnect.v1.AppHubWorkload
+                         * @instance
+                         */
+                        AppHubWorkload.prototype.environment = "";
+    
+                        /**
+                         * Creates a new AppHubWorkload instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.AppHubWorkload
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IAppHubWorkload=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.AppHubWorkload} AppHubWorkload instance
+                         */
+                        AppHubWorkload.create = function create(properties) {
+                            return new AppHubWorkload(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AppHubWorkload message. Does not implicitly {@link google.cloud.developerconnect.v1.AppHubWorkload.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.AppHubWorkload
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IAppHubWorkload} message AppHubWorkload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AppHubWorkload.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workload != null && Object.hasOwnProperty.call(message, "workload"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.workload);
+                            if (message.criticality != null && Object.hasOwnProperty.call(message, "criticality"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.criticality);
+                            if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.environment);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AppHubWorkload message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.AppHubWorkload.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.AppHubWorkload
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IAppHubWorkload} message AppHubWorkload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AppHubWorkload.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AppHubWorkload message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.AppHubWorkload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.AppHubWorkload} AppHubWorkload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AppHubWorkload.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.AppHubWorkload();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.workload = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.criticality = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.environment = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AppHubWorkload message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.AppHubWorkload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.AppHubWorkload} AppHubWorkload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AppHubWorkload.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AppHubWorkload message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.AppHubWorkload
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AppHubWorkload.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workload != null && message.hasOwnProperty("workload"))
+                                if (!$util.isString(message.workload))
+                                    return "workload: string expected";
+                            if (message.criticality != null && message.hasOwnProperty("criticality"))
+                                if (!$util.isString(message.criticality))
+                                    return "criticality: string expected";
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                if (!$util.isString(message.environment))
+                                    return "environment: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AppHubWorkload message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.AppHubWorkload
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.AppHubWorkload} AppHubWorkload
+                         */
+                        AppHubWorkload.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.AppHubWorkload)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.AppHubWorkload();
+                            if (object.workload != null)
+                                message.workload = String(object.workload);
+                            if (object.criticality != null)
+                                message.criticality = String(object.criticality);
+                            if (object.environment != null)
+                                message.environment = String(object.environment);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AppHubWorkload message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.AppHubWorkload
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.AppHubWorkload} message AppHubWorkload
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AppHubWorkload.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.workload = "";
+                                object.criticality = "";
+                                object.environment = "";
+                            }
+                            if (message.workload != null && message.hasOwnProperty("workload"))
+                                object.workload = message.workload;
+                            if (message.criticality != null && message.hasOwnProperty("criticality"))
+                                object.criticality = message.criticality;
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                object.environment = message.environment;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AppHubWorkload to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.AppHubWorkload
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AppHubWorkload.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AppHubWorkload
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.AppHubWorkload
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AppHubWorkload.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.AppHubWorkload";
+                        };
+    
+                        return AppHubWorkload;
+                    })();
+    
+                    v1.ArtifactConfig = (function() {
+    
+                        /**
+                         * Properties of an ArtifactConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IArtifactConfig
+                         * @property {google.cloud.developerconnect.v1.IGoogleArtifactRegistry|null} [googleArtifactRegistry] ArtifactConfig googleArtifactRegistry
+                         * @property {google.cloud.developerconnect.v1.IGoogleArtifactAnalysis|null} [googleArtifactAnalysis] ArtifactConfig googleArtifactAnalysis
+                         * @property {string|null} [uri] ArtifactConfig uri
+                         */
+    
+                        /**
+                         * Constructs a new ArtifactConfig.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents an ArtifactConfig.
+                         * @implements IArtifactConfig
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IArtifactConfig=} [properties] Properties to set
+                         */
+                        function ArtifactConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ArtifactConfig googleArtifactRegistry.
+                         * @member {google.cloud.developerconnect.v1.IGoogleArtifactRegistry|null|undefined} googleArtifactRegistry
+                         * @memberof google.cloud.developerconnect.v1.ArtifactConfig
+                         * @instance
+                         */
+                        ArtifactConfig.prototype.googleArtifactRegistry = null;
+    
+                        /**
+                         * ArtifactConfig googleArtifactAnalysis.
+                         * @member {google.cloud.developerconnect.v1.IGoogleArtifactAnalysis|null|undefined} googleArtifactAnalysis
+                         * @memberof google.cloud.developerconnect.v1.ArtifactConfig
+                         * @instance
+                         */
+                        ArtifactConfig.prototype.googleArtifactAnalysis = null;
+    
+                        /**
+                         * ArtifactConfig uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.developerconnect.v1.ArtifactConfig
+                         * @instance
+                         */
+                        ArtifactConfig.prototype.uri = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ArtifactConfig artifactStorage.
+                         * @member {"googleArtifactRegistry"|undefined} artifactStorage
+                         * @memberof google.cloud.developerconnect.v1.ArtifactConfig
+                         * @instance
+                         */
+                        Object.defineProperty(ArtifactConfig.prototype, "artifactStorage", {
+                            get: $util.oneOfGetter($oneOfFields = ["googleArtifactRegistry"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * ArtifactConfig artifactMetadataStorage.
+                         * @member {"googleArtifactAnalysis"|undefined} artifactMetadataStorage
+                         * @memberof google.cloud.developerconnect.v1.ArtifactConfig
+                         * @instance
+                         */
+                        Object.defineProperty(ArtifactConfig.prototype, "artifactMetadataStorage", {
+                            get: $util.oneOfGetter($oneOfFields = ["googleArtifactAnalysis"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ArtifactConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.ArtifactConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IArtifactConfig=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.ArtifactConfig} ArtifactConfig instance
+                         */
+                        ArtifactConfig.create = function create(properties) {
+                            return new ArtifactConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ArtifactConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.ArtifactConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.ArtifactConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IArtifactConfig} message ArtifactConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ArtifactConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            if (message.googleArtifactRegistry != null && Object.hasOwnProperty.call(message, "googleArtifactRegistry"))
+                                $root.google.cloud.developerconnect.v1.GoogleArtifactRegistry.encode(message.googleArtifactRegistry, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.googleArtifactAnalysis != null && Object.hasOwnProperty.call(message, "googleArtifactAnalysis"))
+                                $root.google.cloud.developerconnect.v1.GoogleArtifactAnalysis.encode(message.googleArtifactAnalysis, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ArtifactConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ArtifactConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ArtifactConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IArtifactConfig} message ArtifactConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ArtifactConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ArtifactConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.ArtifactConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.ArtifactConfig} ArtifactConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ArtifactConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ArtifactConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.googleArtifactRegistry = $root.google.cloud.developerconnect.v1.GoogleArtifactRegistry.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.googleArtifactAnalysis = $root.google.cloud.developerconnect.v1.GoogleArtifactAnalysis.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ArtifactConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ArtifactConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.ArtifactConfig} ArtifactConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ArtifactConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ArtifactConfig message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.ArtifactConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ArtifactConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.googleArtifactRegistry != null && message.hasOwnProperty("googleArtifactRegistry")) {
+                                properties.artifactStorage = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.GoogleArtifactRegistry.verify(message.googleArtifactRegistry);
+                                    if (error)
+                                        return "googleArtifactRegistry." + error;
+                                }
+                            }
+                            if (message.googleArtifactAnalysis != null && message.hasOwnProperty("googleArtifactAnalysis")) {
+                                properties.artifactMetadataStorage = 1;
+                                {
+                                    var error = $root.google.cloud.developerconnect.v1.GoogleArtifactAnalysis.verify(message.googleArtifactAnalysis);
+                                    if (error)
+                                        return "googleArtifactAnalysis." + error;
+                                }
+                            }
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ArtifactConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.ArtifactConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.ArtifactConfig} ArtifactConfig
+                         */
+                        ArtifactConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.ArtifactConfig)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.ArtifactConfig();
+                            if (object.googleArtifactRegistry != null) {
+                                if (typeof object.googleArtifactRegistry !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.ArtifactConfig.googleArtifactRegistry: object expected");
+                                message.googleArtifactRegistry = $root.google.cloud.developerconnect.v1.GoogleArtifactRegistry.fromObject(object.googleArtifactRegistry);
+                            }
+                            if (object.googleArtifactAnalysis != null) {
+                                if (typeof object.googleArtifactAnalysis !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.ArtifactConfig.googleArtifactAnalysis: object expected");
+                                message.googleArtifactAnalysis = $root.google.cloud.developerconnect.v1.GoogleArtifactAnalysis.fromObject(object.googleArtifactAnalysis);
+                            }
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ArtifactConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.ArtifactConfig
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ArtifactConfig} message ArtifactConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ArtifactConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.uri = "";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.googleArtifactRegistry != null && message.hasOwnProperty("googleArtifactRegistry")) {
+                                object.googleArtifactRegistry = $root.google.cloud.developerconnect.v1.GoogleArtifactRegistry.toObject(message.googleArtifactRegistry, options);
+                                if (options.oneofs)
+                                    object.artifactStorage = "googleArtifactRegistry";
+                            }
+                            if (message.googleArtifactAnalysis != null && message.hasOwnProperty("googleArtifactAnalysis")) {
+                                object.googleArtifactAnalysis = $root.google.cloud.developerconnect.v1.GoogleArtifactAnalysis.toObject(message.googleArtifactAnalysis, options);
+                                if (options.oneofs)
+                                    object.artifactMetadataStorage = "googleArtifactAnalysis";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ArtifactConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.ArtifactConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ArtifactConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ArtifactConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.ArtifactConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ArtifactConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.ArtifactConfig";
+                        };
+    
+                        return ArtifactConfig;
+                    })();
+    
+                    v1.GoogleArtifactAnalysis = (function() {
+    
+                        /**
+                         * Properties of a GoogleArtifactAnalysis.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IGoogleArtifactAnalysis
+                         * @property {string|null} [projectId] GoogleArtifactAnalysis projectId
+                         */
+    
+                        /**
+                         * Constructs a new GoogleArtifactAnalysis.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a GoogleArtifactAnalysis.
+                         * @implements IGoogleArtifactAnalysis
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IGoogleArtifactAnalysis=} [properties] Properties to set
+                         */
+                        function GoogleArtifactAnalysis(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GoogleArtifactAnalysis projectId.
+                         * @member {string} projectId
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactAnalysis
+                         * @instance
+                         */
+                        GoogleArtifactAnalysis.prototype.projectId = "";
+    
+                        /**
+                         * Creates a new GoogleArtifactAnalysis instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactAnalysis
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGoogleArtifactAnalysis=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.GoogleArtifactAnalysis} GoogleArtifactAnalysis instance
+                         */
+                        GoogleArtifactAnalysis.create = function create(properties) {
+                            return new GoogleArtifactAnalysis(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleArtifactAnalysis message. Does not implicitly {@link google.cloud.developerconnect.v1.GoogleArtifactAnalysis.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactAnalysis
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGoogleArtifactAnalysis} message GoogleArtifactAnalysis message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleArtifactAnalysis.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleArtifactAnalysis message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GoogleArtifactAnalysis.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactAnalysis
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGoogleArtifactAnalysis} message GoogleArtifactAnalysis message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleArtifactAnalysis.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GoogleArtifactAnalysis message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactAnalysis
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.GoogleArtifactAnalysis} GoogleArtifactAnalysis
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleArtifactAnalysis.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GoogleArtifactAnalysis();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.projectId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GoogleArtifactAnalysis message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactAnalysis
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.GoogleArtifactAnalysis} GoogleArtifactAnalysis
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleArtifactAnalysis.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GoogleArtifactAnalysis message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactAnalysis
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GoogleArtifactAnalysis.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GoogleArtifactAnalysis message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactAnalysis
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.GoogleArtifactAnalysis} GoogleArtifactAnalysis
+                         */
+                        GoogleArtifactAnalysis.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.GoogleArtifactAnalysis)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.GoogleArtifactAnalysis();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GoogleArtifactAnalysis message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactAnalysis
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.GoogleArtifactAnalysis} message GoogleArtifactAnalysis
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GoogleArtifactAnalysis.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.projectId = "";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GoogleArtifactAnalysis to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactAnalysis
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GoogleArtifactAnalysis.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GoogleArtifactAnalysis
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactAnalysis
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GoogleArtifactAnalysis.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.GoogleArtifactAnalysis";
+                        };
+    
+                        return GoogleArtifactAnalysis;
+                    })();
+    
+                    v1.GoogleArtifactRegistry = (function() {
+    
+                        /**
+                         * Properties of a GoogleArtifactRegistry.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IGoogleArtifactRegistry
+                         * @property {string|null} [projectId] GoogleArtifactRegistry projectId
+                         * @property {string|null} [artifactRegistryPackage] GoogleArtifactRegistry artifactRegistryPackage
+                         */
+    
+                        /**
+                         * Constructs a new GoogleArtifactRegistry.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a GoogleArtifactRegistry.
+                         * @implements IGoogleArtifactRegistry
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IGoogleArtifactRegistry=} [properties] Properties to set
+                         */
+                        function GoogleArtifactRegistry(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GoogleArtifactRegistry projectId.
+                         * @member {string} projectId
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactRegistry
+                         * @instance
+                         */
+                        GoogleArtifactRegistry.prototype.projectId = "";
+    
+                        /**
+                         * GoogleArtifactRegistry artifactRegistryPackage.
+                         * @member {string} artifactRegistryPackage
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactRegistry
+                         * @instance
+                         */
+                        GoogleArtifactRegistry.prototype.artifactRegistryPackage = "";
+    
+                        /**
+                         * Creates a new GoogleArtifactRegistry instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactRegistry
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGoogleArtifactRegistry=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.GoogleArtifactRegistry} GoogleArtifactRegistry instance
+                         */
+                        GoogleArtifactRegistry.create = function create(properties) {
+                            return new GoogleArtifactRegistry(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleArtifactRegistry message. Does not implicitly {@link google.cloud.developerconnect.v1.GoogleArtifactRegistry.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactRegistry
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGoogleArtifactRegistry} message GoogleArtifactRegistry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleArtifactRegistry.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
+                            if (message.artifactRegistryPackage != null && Object.hasOwnProperty.call(message, "artifactRegistryPackage"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.artifactRegistryPackage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleArtifactRegistry message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GoogleArtifactRegistry.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactRegistry
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGoogleArtifactRegistry} message GoogleArtifactRegistry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleArtifactRegistry.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GoogleArtifactRegistry message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactRegistry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.GoogleArtifactRegistry} GoogleArtifactRegistry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleArtifactRegistry.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GoogleArtifactRegistry();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.projectId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.artifactRegistryPackage = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GoogleArtifactRegistry message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactRegistry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.GoogleArtifactRegistry} GoogleArtifactRegistry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleArtifactRegistry.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GoogleArtifactRegistry message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactRegistry
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GoogleArtifactRegistry.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.artifactRegistryPackage != null && message.hasOwnProperty("artifactRegistryPackage"))
+                                if (!$util.isString(message.artifactRegistryPackage))
+                                    return "artifactRegistryPackage: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GoogleArtifactRegistry message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactRegistry
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.GoogleArtifactRegistry} GoogleArtifactRegistry
+                         */
+                        GoogleArtifactRegistry.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.GoogleArtifactRegistry)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.GoogleArtifactRegistry();
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.artifactRegistryPackage != null)
+                                message.artifactRegistryPackage = String(object.artifactRegistryPackage);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GoogleArtifactRegistry message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactRegistry
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.GoogleArtifactRegistry} message GoogleArtifactRegistry
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GoogleArtifactRegistry.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.projectId = "";
+                                object.artifactRegistryPackage = "";
+                            }
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.artifactRegistryPackage != null && message.hasOwnProperty("artifactRegistryPackage"))
+                                object.artifactRegistryPackage = message.artifactRegistryPackage;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GoogleArtifactRegistry to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactRegistry
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GoogleArtifactRegistry.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GoogleArtifactRegistry
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.GoogleArtifactRegistry
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GoogleArtifactRegistry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.GoogleArtifactRegistry";
+                        };
+    
+                        return GoogleArtifactRegistry;
+                    })();
+    
+                    v1.CreateInsightsConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateInsightsConfigRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface ICreateInsightsConfigRequest
+                         * @property {string|null} [parent] CreateInsightsConfigRequest parent
+                         * @property {string|null} [insightsConfigId] CreateInsightsConfigRequest insightsConfigId
+                         * @property {google.cloud.developerconnect.v1.IInsightsConfig|null} [insightsConfig] CreateInsightsConfigRequest insightsConfig
+                         * @property {boolean|null} [validateOnly] CreateInsightsConfigRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new CreateInsightsConfigRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a CreateInsightsConfigRequest.
+                         * @implements ICreateInsightsConfigRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.ICreateInsightsConfigRequest=} [properties] Properties to set
+                         */
+                        function CreateInsightsConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateInsightsConfigRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.developerconnect.v1.CreateInsightsConfigRequest
+                         * @instance
+                         */
+                        CreateInsightsConfigRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateInsightsConfigRequest insightsConfigId.
+                         * @member {string} insightsConfigId
+                         * @memberof google.cloud.developerconnect.v1.CreateInsightsConfigRequest
+                         * @instance
+                         */
+                        CreateInsightsConfigRequest.prototype.insightsConfigId = "";
+    
+                        /**
+                         * CreateInsightsConfigRequest insightsConfig.
+                         * @member {google.cloud.developerconnect.v1.IInsightsConfig|null|undefined} insightsConfig
+                         * @memberof google.cloud.developerconnect.v1.CreateInsightsConfigRequest
+                         * @instance
+                         */
+                        CreateInsightsConfigRequest.prototype.insightsConfig = null;
+    
+                        /**
+                         * CreateInsightsConfigRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.developerconnect.v1.CreateInsightsConfigRequest
+                         * @instance
+                         */
+                        CreateInsightsConfigRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new CreateInsightsConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.CreateInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ICreateInsightsConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.CreateInsightsConfigRequest} CreateInsightsConfigRequest instance
+                         */
+                        CreateInsightsConfigRequest.create = function create(properties) {
+                            return new CreateInsightsConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateInsightsConfigRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.CreateInsightsConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.CreateInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ICreateInsightsConfigRequest} message CreateInsightsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateInsightsConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.insightsConfigId != null && Object.hasOwnProperty.call(message, "insightsConfigId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.insightsConfigId);
+                            if (message.insightsConfig != null && Object.hasOwnProperty.call(message, "insightsConfig"))
+                                $root.google.cloud.developerconnect.v1.InsightsConfig.encode(message.insightsConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateInsightsConfigRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.CreateInsightsConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.CreateInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ICreateInsightsConfigRequest} message CreateInsightsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateInsightsConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateInsightsConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.CreateInsightsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.CreateInsightsConfigRequest} CreateInsightsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateInsightsConfigRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.CreateInsightsConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.insightsConfigId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.insightsConfig = $root.google.cloud.developerconnect.v1.InsightsConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateInsightsConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.CreateInsightsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.CreateInsightsConfigRequest} CreateInsightsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateInsightsConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateInsightsConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.CreateInsightsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateInsightsConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.insightsConfigId != null && message.hasOwnProperty("insightsConfigId"))
+                                if (!$util.isString(message.insightsConfigId))
+                                    return "insightsConfigId: string expected";
+                            if (message.insightsConfig != null && message.hasOwnProperty("insightsConfig")) {
+                                var error = $root.google.cloud.developerconnect.v1.InsightsConfig.verify(message.insightsConfig);
+                                if (error)
+                                    return "insightsConfig." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateInsightsConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.CreateInsightsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.CreateInsightsConfigRequest} CreateInsightsConfigRequest
+                         */
+                        CreateInsightsConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.CreateInsightsConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.CreateInsightsConfigRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.insightsConfigId != null)
+                                message.insightsConfigId = String(object.insightsConfigId);
+                            if (object.insightsConfig != null) {
+                                if (typeof object.insightsConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.CreateInsightsConfigRequest.insightsConfig: object expected");
+                                message.insightsConfig = $root.google.cloud.developerconnect.v1.InsightsConfig.fromObject(object.insightsConfig);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateInsightsConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.CreateInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.CreateInsightsConfigRequest} message CreateInsightsConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateInsightsConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.insightsConfigId = "";
+                                object.insightsConfig = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.insightsConfigId != null && message.hasOwnProperty("insightsConfigId"))
+                                object.insightsConfigId = message.insightsConfigId;
+                            if (message.insightsConfig != null && message.hasOwnProperty("insightsConfig"))
+                                object.insightsConfig = $root.google.cloud.developerconnect.v1.InsightsConfig.toObject(message.insightsConfig, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateInsightsConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.CreateInsightsConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateInsightsConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateInsightsConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.CreateInsightsConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateInsightsConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.CreateInsightsConfigRequest";
+                        };
+    
+                        return CreateInsightsConfigRequest;
+                    })();
+    
+                    v1.GetInsightsConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetInsightsConfigRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IGetInsightsConfigRequest
+                         * @property {string|null} [name] GetInsightsConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetInsightsConfigRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a GetInsightsConfigRequest.
+                         * @implements IGetInsightsConfigRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IGetInsightsConfigRequest=} [properties] Properties to set
+                         */
+                        function GetInsightsConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetInsightsConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.developerconnect.v1.GetInsightsConfigRequest
+                         * @instance
+                         */
+                        GetInsightsConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetInsightsConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.GetInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGetInsightsConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.GetInsightsConfigRequest} GetInsightsConfigRequest instance
+                         */
+                        GetInsightsConfigRequest.create = function create(properties) {
+                            return new GetInsightsConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetInsightsConfigRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.GetInsightsConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.GetInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGetInsightsConfigRequest} message GetInsightsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetInsightsConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetInsightsConfigRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GetInsightsConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GetInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IGetInsightsConfigRequest} message GetInsightsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetInsightsConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetInsightsConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.GetInsightsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.GetInsightsConfigRequest} GetInsightsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetInsightsConfigRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.GetInsightsConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetInsightsConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.GetInsightsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.GetInsightsConfigRequest} GetInsightsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetInsightsConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetInsightsConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.GetInsightsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetInsightsConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetInsightsConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.GetInsightsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.GetInsightsConfigRequest} GetInsightsConfigRequest
+                         */
+                        GetInsightsConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.GetInsightsConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.GetInsightsConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetInsightsConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.GetInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.GetInsightsConfigRequest} message GetInsightsConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetInsightsConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetInsightsConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.GetInsightsConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetInsightsConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetInsightsConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.GetInsightsConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetInsightsConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.GetInsightsConfigRequest";
+                        };
+    
+                        return GetInsightsConfigRequest;
+                    })();
+    
+                    v1.ListInsightsConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListInsightsConfigsRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IListInsightsConfigsRequest
+                         * @property {string|null} [parent] ListInsightsConfigsRequest parent
+                         * @property {number|null} [pageSize] ListInsightsConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ListInsightsConfigsRequest pageToken
+                         * @property {string|null} [filter] ListInsightsConfigsRequest filter
+                         * @property {string|null} [orderBy] ListInsightsConfigsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListInsightsConfigsRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a ListInsightsConfigsRequest.
+                         * @implements IListInsightsConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IListInsightsConfigsRequest=} [properties] Properties to set
+                         */
+                        function ListInsightsConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListInsightsConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsRequest
+                         * @instance
+                         */
+                        ListInsightsConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListInsightsConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsRequest
+                         * @instance
+                         */
+                        ListInsightsConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListInsightsConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsRequest
+                         * @instance
+                         */
+                        ListInsightsConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListInsightsConfigsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsRequest
+                         * @instance
+                         */
+                        ListInsightsConfigsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListInsightsConfigsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsRequest
+                         * @instance
+                         */
+                        ListInsightsConfigsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListInsightsConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListInsightsConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.ListInsightsConfigsRequest} ListInsightsConfigsRequest instance
+                         */
+                        ListInsightsConfigsRequest.create = function create(properties) {
+                            return new ListInsightsConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListInsightsConfigsRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.ListInsightsConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListInsightsConfigsRequest} message ListInsightsConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInsightsConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListInsightsConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListInsightsConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListInsightsConfigsRequest} message ListInsightsConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInsightsConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListInsightsConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.ListInsightsConfigsRequest} ListInsightsConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInsightsConfigsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ListInsightsConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListInsightsConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.ListInsightsConfigsRequest} ListInsightsConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInsightsConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListInsightsConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListInsightsConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListInsightsConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.ListInsightsConfigsRequest} ListInsightsConfigsRequest
+                         */
+                        ListInsightsConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.ListInsightsConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.ListInsightsConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListInsightsConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ListInsightsConfigsRequest} message ListInsightsConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListInsightsConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListInsightsConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListInsightsConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListInsightsConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListInsightsConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.ListInsightsConfigsRequest";
+                        };
+    
+                        return ListInsightsConfigsRequest;
+                    })();
+    
+                    v1.ListInsightsConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListInsightsConfigsResponse.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IListInsightsConfigsResponse
+                         * @property {Array.<google.cloud.developerconnect.v1.IInsightsConfig>|null} [insightsConfigs] ListInsightsConfigsResponse insightsConfigs
+                         * @property {string|null} [nextPageToken] ListInsightsConfigsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListInsightsConfigsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListInsightsConfigsResponse.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a ListInsightsConfigsResponse.
+                         * @implements IListInsightsConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IListInsightsConfigsResponse=} [properties] Properties to set
+                         */
+                        function ListInsightsConfigsResponse(properties) {
+                            this.insightsConfigs = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListInsightsConfigsResponse insightsConfigs.
+                         * @member {Array.<google.cloud.developerconnect.v1.IInsightsConfig>} insightsConfigs
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsResponse
+                         * @instance
+                         */
+                        ListInsightsConfigsResponse.prototype.insightsConfigs = $util.emptyArray;
+    
+                        /**
+                         * ListInsightsConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsResponse
+                         * @instance
+                         */
+                        ListInsightsConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListInsightsConfigsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsResponse
+                         * @instance
+                         */
+                        ListInsightsConfigsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListInsightsConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListInsightsConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.ListInsightsConfigsResponse} ListInsightsConfigsResponse instance
+                         */
+                        ListInsightsConfigsResponse.create = function create(properties) {
+                            return new ListInsightsConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListInsightsConfigsResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.ListInsightsConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListInsightsConfigsResponse} message ListInsightsConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInsightsConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.insightsConfigs != null && message.insightsConfigs.length)
+                                for (var i = 0; i < message.insightsConfigs.length; ++i)
+                                    $root.google.cloud.developerconnect.v1.InsightsConfig.encode(message.insightsConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListInsightsConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListInsightsConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IListInsightsConfigsResponse} message ListInsightsConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInsightsConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListInsightsConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.ListInsightsConfigsResponse} ListInsightsConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInsightsConfigsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.ListInsightsConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.insightsConfigs && message.insightsConfigs.length))
+                                            message.insightsConfigs = [];
+                                        message.insightsConfigs.push($root.google.cloud.developerconnect.v1.InsightsConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListInsightsConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.ListInsightsConfigsResponse} ListInsightsConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInsightsConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListInsightsConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListInsightsConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.insightsConfigs != null && message.hasOwnProperty("insightsConfigs")) {
+                                if (!Array.isArray(message.insightsConfigs))
+                                    return "insightsConfigs: array expected";
+                                for (var i = 0; i < message.insightsConfigs.length; ++i) {
+                                    var error = $root.google.cloud.developerconnect.v1.InsightsConfig.verify(message.insightsConfigs[i]);
+                                    if (error)
+                                        return "insightsConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListInsightsConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.ListInsightsConfigsResponse} ListInsightsConfigsResponse
+                         */
+                        ListInsightsConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.ListInsightsConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.ListInsightsConfigsResponse();
+                            if (object.insightsConfigs) {
+                                if (!Array.isArray(object.insightsConfigs))
+                                    throw TypeError(".google.cloud.developerconnect.v1.ListInsightsConfigsResponse.insightsConfigs: array expected");
+                                message.insightsConfigs = [];
+                                for (var i = 0; i < object.insightsConfigs.length; ++i) {
+                                    if (typeof object.insightsConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.developerconnect.v1.ListInsightsConfigsResponse.insightsConfigs: object expected");
+                                    message.insightsConfigs[i] = $root.google.cloud.developerconnect.v1.InsightsConfig.fromObject(object.insightsConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.developerconnect.v1.ListInsightsConfigsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListInsightsConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsResponse
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.ListInsightsConfigsResponse} message ListInsightsConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListInsightsConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.insightsConfigs = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.insightsConfigs && message.insightsConfigs.length) {
+                                object.insightsConfigs = [];
+                                for (var j = 0; j < message.insightsConfigs.length; ++j)
+                                    object.insightsConfigs[j] = $root.google.cloud.developerconnect.v1.InsightsConfig.toObject(message.insightsConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListInsightsConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListInsightsConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListInsightsConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.ListInsightsConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListInsightsConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.ListInsightsConfigsResponse";
+                        };
+    
+                        return ListInsightsConfigsResponse;
+                    })();
+    
+                    v1.DeleteInsightsConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteInsightsConfigRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IDeleteInsightsConfigRequest
+                         * @property {string|null} [name] DeleteInsightsConfigRequest name
+                         * @property {string|null} [requestId] DeleteInsightsConfigRequest requestId
+                         * @property {boolean|null} [validateOnly] DeleteInsightsConfigRequest validateOnly
+                         * @property {string|null} [etag] DeleteInsightsConfigRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new DeleteInsightsConfigRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents a DeleteInsightsConfigRequest.
+                         * @implements IDeleteInsightsConfigRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest=} [properties] Properties to set
+                         */
+                        function DeleteInsightsConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteInsightsConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.developerconnect.v1.DeleteInsightsConfigRequest
+                         * @instance
+                         */
+                        DeleteInsightsConfigRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteInsightsConfigRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.developerconnect.v1.DeleteInsightsConfigRequest
+                         * @instance
+                         */
+                        DeleteInsightsConfigRequest.prototype.requestId = "";
+    
+                        /**
+                         * DeleteInsightsConfigRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.developerconnect.v1.DeleteInsightsConfigRequest
+                         * @instance
+                         */
+                        DeleteInsightsConfigRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * DeleteInsightsConfigRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.developerconnect.v1.DeleteInsightsConfigRequest
+                         * @instance
+                         */
+                        DeleteInsightsConfigRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new DeleteInsightsConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.DeleteInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.DeleteInsightsConfigRequest} DeleteInsightsConfigRequest instance
+                         */
+                        DeleteInsightsConfigRequest.create = function create(properties) {
+                            return new DeleteInsightsConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteInsightsConfigRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteInsightsConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.DeleteInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest} message DeleteInsightsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteInsightsConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.validateOnly);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteInsightsConfigRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteInsightsConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.DeleteInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest} message DeleteInsightsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteInsightsConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteInsightsConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.DeleteInsightsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.DeleteInsightsConfigRequest} DeleteInsightsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteInsightsConfigRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.DeleteInsightsConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteInsightsConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.DeleteInsightsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.DeleteInsightsConfigRequest} DeleteInsightsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteInsightsConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteInsightsConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.DeleteInsightsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteInsightsConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteInsightsConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.DeleteInsightsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.DeleteInsightsConfigRequest} DeleteInsightsConfigRequest
+                         */
+                        DeleteInsightsConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.DeleteInsightsConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.DeleteInsightsConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteInsightsConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.DeleteInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.DeleteInsightsConfigRequest} message DeleteInsightsConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteInsightsConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                                object.validateOnly = false;
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteInsightsConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.DeleteInsightsConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteInsightsConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteInsightsConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.DeleteInsightsConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteInsightsConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.DeleteInsightsConfigRequest";
+                        };
+    
+                        return DeleteInsightsConfigRequest;
+                    })();
+    
+                    v1.UpdateInsightsConfigRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateInsightsConfigRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @interface IUpdateInsightsConfigRequest
+                         * @property {google.cloud.developerconnect.v1.IInsightsConfig|null} [insightsConfig] UpdateInsightsConfigRequest insightsConfig
+                         * @property {string|null} [requestId] UpdateInsightsConfigRequest requestId
+                         * @property {boolean|null} [allowMissing] UpdateInsightsConfigRequest allowMissing
+                         * @property {boolean|null} [validateOnly] UpdateInsightsConfigRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new UpdateInsightsConfigRequest.
+                         * @memberof google.cloud.developerconnect.v1
+                         * @classdesc Represents an UpdateInsightsConfigRequest.
+                         * @implements IUpdateInsightsConfigRequest
+                         * @constructor
+                         * @param {google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest=} [properties] Properties to set
+                         */
+                        function UpdateInsightsConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateInsightsConfigRequest insightsConfig.
+                         * @member {google.cloud.developerconnect.v1.IInsightsConfig|null|undefined} insightsConfig
+                         * @memberof google.cloud.developerconnect.v1.UpdateInsightsConfigRequest
+                         * @instance
+                         */
+                        UpdateInsightsConfigRequest.prototype.insightsConfig = null;
+    
+                        /**
+                         * UpdateInsightsConfigRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.developerconnect.v1.UpdateInsightsConfigRequest
+                         * @instance
+                         */
+                        UpdateInsightsConfigRequest.prototype.requestId = "";
+    
+                        /**
+                         * UpdateInsightsConfigRequest allowMissing.
+                         * @member {boolean} allowMissing
+                         * @memberof google.cloud.developerconnect.v1.UpdateInsightsConfigRequest
+                         * @instance
+                         */
+                        UpdateInsightsConfigRequest.prototype.allowMissing = false;
+    
+                        /**
+                         * UpdateInsightsConfigRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.developerconnect.v1.UpdateInsightsConfigRequest
+                         * @instance
+                         */
+                        UpdateInsightsConfigRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new UpdateInsightsConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.developerconnect.v1.UpdateInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.developerconnect.v1.UpdateInsightsConfigRequest} UpdateInsightsConfigRequest instance
+                         */
+                        UpdateInsightsConfigRequest.create = function create(properties) {
+                            return new UpdateInsightsConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateInsightsConfigRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.UpdateInsightsConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.developerconnect.v1.UpdateInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest} message UpdateInsightsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateInsightsConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.insightsConfig != null && Object.hasOwnProperty.call(message, "insightsConfig"))
+                                $root.google.cloud.developerconnect.v1.InsightsConfig.encode(message.insightsConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.allowMissing);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateInsightsConfigRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.UpdateInsightsConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.UpdateInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest} message UpdateInsightsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateInsightsConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateInsightsConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.developerconnect.v1.UpdateInsightsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.developerconnect.v1.UpdateInsightsConfigRequest} UpdateInsightsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateInsightsConfigRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.developerconnect.v1.UpdateInsightsConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.insightsConfig = $root.google.cloud.developerconnect.v1.InsightsConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.allowMissing = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateInsightsConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.developerconnect.v1.UpdateInsightsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.developerconnect.v1.UpdateInsightsConfigRequest} UpdateInsightsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateInsightsConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateInsightsConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.developerconnect.v1.UpdateInsightsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateInsightsConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.insightsConfig != null && message.hasOwnProperty("insightsConfig")) {
+                                var error = $root.google.cloud.developerconnect.v1.InsightsConfig.verify(message.insightsConfig);
+                                if (error)
+                                    return "insightsConfig." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                if (typeof message.allowMissing !== "boolean")
+                                    return "allowMissing: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateInsightsConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.developerconnect.v1.UpdateInsightsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.developerconnect.v1.UpdateInsightsConfigRequest} UpdateInsightsConfigRequest
+                         */
+                        UpdateInsightsConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.developerconnect.v1.UpdateInsightsConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.developerconnect.v1.UpdateInsightsConfigRequest();
+                            if (object.insightsConfig != null) {
+                                if (typeof object.insightsConfig !== "object")
+                                    throw TypeError(".google.cloud.developerconnect.v1.UpdateInsightsConfigRequest.insightsConfig: object expected");
+                                message.insightsConfig = $root.google.cloud.developerconnect.v1.InsightsConfig.fromObject(object.insightsConfig);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.allowMissing != null)
+                                message.allowMissing = Boolean(object.allowMissing);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateInsightsConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.developerconnect.v1.UpdateInsightsConfigRequest
+                         * @static
+                         * @param {google.cloud.developerconnect.v1.UpdateInsightsConfigRequest} message UpdateInsightsConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateInsightsConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.insightsConfig = null;
+                                object.requestId = "";
+                                object.allowMissing = false;
+                                object.validateOnly = false;
+                            }
+                            if (message.insightsConfig != null && message.hasOwnProperty("insightsConfig"))
+                                object.insightsConfig = $root.google.cloud.developerconnect.v1.InsightsConfig.toObject(message.insightsConfig, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                object.allowMissing = message.allowMissing;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateInsightsConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.developerconnect.v1.UpdateInsightsConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateInsightsConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateInsightsConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.developerconnect.v1.UpdateInsightsConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateInsightsConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.developerconnect.v1.UpdateInsightsConfigRequest";
+                        };
+    
+                        return UpdateInsightsConfigRequest;
+                    })();
+    
                     return v1;
                 })();
     
@@ -10706,12 +20939,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -11056,12 +21291,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -11440,12 +21677,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -11672,12 +21911,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -12041,12 +22282,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -12570,12 +22813,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -13021,12 +23266,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -13288,12 +23535,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -13496,12 +23745,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -13704,12 +23955,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -13912,12 +24165,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -14185,12 +24440,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -14564,12 +24821,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -14772,12 +25031,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -15004,12 +25265,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -15282,12 +25545,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -15636,12 +25901,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldInfo.decode = function decode(reader, length) {
+                FieldInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.format = reader.int32();
@@ -15966,12 +26233,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -16361,12 +26630,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -16591,12 +26862,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -16991,12 +27264,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -17658,12 +27933,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -18143,12 +28420,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -18387,12 +28666,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -18643,12 +28924,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -18988,12 +29271,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -19367,12 +29652,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -19892,12 +30179,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -20163,12 +30452,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -20482,12 +30773,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -20723,12 +31016,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -20980,12 +31275,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -21288,12 +31585,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -21792,12 +32091,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -22412,12 +32713,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -22903,12 +33206,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -23651,12 +33956,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -23947,12 +34254,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -24233,12 +34542,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -24545,12 +34856,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -24867,12 +35180,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -25226,12 +35541,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -25660,12 +35977,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -25999,12 +36318,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -26275,12 +36596,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -26810,12 +37133,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -27194,12 +37519,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -27484,12 +37811,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -27759,12 +38088,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -28070,12 +38401,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -28338,12 +38671,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -28664,12 +38999,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -28905,12 +39242,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length) {
+                Any.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type_url = reader.string();
@@ -29119,12 +39458,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -29307,12 +39648,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -29535,12 +39878,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -30035,12 +40380,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Operation.decode = function decode(reader, length) {
+                Operation.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -30315,12 +40662,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetOperationRequest.decode = function decode(reader, length) {
+                GetOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -30551,12 +40900,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsRequest.decode = function decode(reader, length) {
+                ListOperationsRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 4: {
                                 message.name = reader.string();
@@ -30804,12 +41155,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsResponse.decode = function decode(reader, length) {
+                ListOperationsResponse.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.operations && message.operations.length))
@@ -31039,12 +41392,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelOperationRequest.decode = function decode(reader, length) {
+                CancelOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -31242,12 +41597,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DeleteOperationRequest.decode = function decode(reader, length) {
+                DeleteOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -31456,12 +41813,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                WaitOperationRequest.decode = function decode(reader, length) {
+                WaitOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -31688,12 +42047,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OperationInfo.decode = function decode(reader, length) {
+                OperationInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.responseType = reader.string();
@@ -31940,12 +42301,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Status.decode = function decode(reader, length) {
+                Status.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.code = reader.int32();

@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -125,41 +114,20 @@ export class ArtifactRegistryClient {
    *     const client = new ArtifactRegistryClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ArtifactRegistryClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'artifactregistry.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -185,7 +153,7 @@ export class ArtifactRegistryClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -201,9 +169,13 @@ export class ArtifactRegistryClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -284,212 +256,131 @@ export class ArtifactRegistryClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDockerImages: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'dockerImages'
-      ),
-      listMavenArtifacts: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'mavenArtifacts'
-      ),
-      listNpmPackages: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'npmPackages'
-      ),
-      listPythonPackages: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'pythonPackages'
-      ),
-      listRepositories: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'repositories'
-      ),
-      listPackages: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'packages'
-      ),
-      listVersions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'versions'
-      ),
-      listFiles: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'files'
-      ),
-      listTags: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'tags'
-      ),
-      listRules: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'rules'
-      ),
-      listAttachments: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'attachments'
-      ),
+      listDockerImages:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dockerImages'),
+      listMavenArtifacts:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'mavenArtifacts'),
+      listNpmPackages:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'npmPackages'),
+      listPythonPackages:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'pythonPackages'),
+      listRepositories:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'repositories'),
+      listPackages:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'packages'),
+      listVersions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'versions'),
+      listFiles:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'files'),
+      listTags:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tags'),
+      listRules:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'rules'),
+      listAttachments:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'attachments')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const importAptArtifactsResponse = protoFilesRoot.lookup(
-      '.google.devtools.artifactregistry.v1.ImportAptArtifactsResponse'
-    ) as gax.protobuf.Type;
+      '.google.devtools.artifactregistry.v1.ImportAptArtifactsResponse') as gax.protobuf.Type;
     const importAptArtifactsMetadata = protoFilesRoot.lookup(
-      '.google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata') as gax.protobuf.Type;
     const importYumArtifactsResponse = protoFilesRoot.lookup(
-      '.google.devtools.artifactregistry.v1.ImportYumArtifactsResponse'
-    ) as gax.protobuf.Type;
+      '.google.devtools.artifactregistry.v1.ImportYumArtifactsResponse') as gax.protobuf.Type;
     const importYumArtifactsMetadata = protoFilesRoot.lookup(
-      '.google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata') as gax.protobuf.Type;
     const createRepositoryResponse = protoFilesRoot.lookup(
-      '.google.devtools.artifactregistry.v1.Repository'
-    ) as gax.protobuf.Type;
+      '.google.devtools.artifactregistry.v1.Repository') as gax.protobuf.Type;
     const createRepositoryMetadata = protoFilesRoot.lookup(
-      '.google.devtools.artifactregistry.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.artifactregistry.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteRepositoryResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteRepositoryMetadata = protoFilesRoot.lookup(
-      '.google.devtools.artifactregistry.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.artifactregistry.v1.OperationMetadata') as gax.protobuf.Type;
     const deletePackageResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deletePackageMetadata = protoFilesRoot.lookup(
-      '.google.devtools.artifactregistry.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.artifactregistry.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteVersionResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteVersionMetadata = protoFilesRoot.lookup(
-      '.google.devtools.artifactregistry.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.artifactregistry.v1.OperationMetadata') as gax.protobuf.Type;
     const batchDeleteVersionsResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const batchDeleteVersionsMetadata = protoFilesRoot.lookup(
-      '.google.devtools.artifactregistry.v1.BatchDeleteVersionsMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.artifactregistry.v1.BatchDeleteVersionsMetadata') as gax.protobuf.Type;
     const deleteFileResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteFileMetadata = protoFilesRoot.lookup(
-      '.google.devtools.artifactregistry.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.artifactregistry.v1.OperationMetadata') as gax.protobuf.Type;
     const createAttachmentResponse = protoFilesRoot.lookup(
-      '.google.devtools.artifactregistry.v1.Attachment'
-    ) as gax.protobuf.Type;
+      '.google.devtools.artifactregistry.v1.Attachment') as gax.protobuf.Type;
     const createAttachmentMetadata = protoFilesRoot.lookup(
-      '.google.devtools.artifactregistry.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.artifactregistry.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteAttachmentResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteAttachmentMetadata = protoFilesRoot.lookup(
-      '.google.devtools.artifactregistry.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.artifactregistry.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       importAptArtifacts: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importAptArtifactsResponse.decode.bind(importAptArtifactsResponse),
-        importAptArtifactsMetadata.decode.bind(importAptArtifactsMetadata)
-      ),
+        importAptArtifactsMetadata.decode.bind(importAptArtifactsMetadata)),
       importYumArtifacts: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importYumArtifactsResponse.decode.bind(importYumArtifactsResponse),
-        importYumArtifactsMetadata.decode.bind(importYumArtifactsMetadata)
-      ),
+        importYumArtifactsMetadata.decode.bind(importYumArtifactsMetadata)),
       createRepository: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createRepositoryResponse.decode.bind(createRepositoryResponse),
-        createRepositoryMetadata.decode.bind(createRepositoryMetadata)
-      ),
+        createRepositoryMetadata.decode.bind(createRepositoryMetadata)),
       deleteRepository: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteRepositoryResponse.decode.bind(deleteRepositoryResponse),
-        deleteRepositoryMetadata.decode.bind(deleteRepositoryMetadata)
-      ),
+        deleteRepositoryMetadata.decode.bind(deleteRepositoryMetadata)),
       deletePackage: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deletePackageResponse.decode.bind(deletePackageResponse),
-        deletePackageMetadata.decode.bind(deletePackageMetadata)
-      ),
+        deletePackageMetadata.decode.bind(deletePackageMetadata)),
       deleteVersion: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteVersionResponse.decode.bind(deleteVersionResponse),
-        deleteVersionMetadata.decode.bind(deleteVersionMetadata)
-      ),
+        deleteVersionMetadata.decode.bind(deleteVersionMetadata)),
       batchDeleteVersions: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchDeleteVersionsResponse.decode.bind(batchDeleteVersionsResponse),
-        batchDeleteVersionsMetadata.decode.bind(batchDeleteVersionsMetadata)
-      ),
+        batchDeleteVersionsMetadata.decode.bind(batchDeleteVersionsMetadata)),
       deleteFile: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteFileResponse.decode.bind(deleteFileResponse),
-        deleteFileMetadata.decode.bind(deleteFileMetadata)
-      ),
+        deleteFileMetadata.decode.bind(deleteFileMetadata)),
       createAttachment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAttachmentResponse.decode.bind(createAttachmentResponse),
-        createAttachmentMetadata.decode.bind(createAttachmentMetadata)
-      ),
+        createAttachmentMetadata.decode.bind(createAttachmentMetadata)),
       deleteAttachment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteAttachmentResponse.decode.bind(deleteAttachmentResponse),
-        deleteAttachmentMetadata.decode.bind(deleteAttachmentMetadata)
-      ),
+        deleteAttachmentMetadata.decode.bind(deleteAttachmentMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.devtools.artifactregistry.v1.ArtifactRegistry',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.devtools.artifactregistry.v1.ArtifactRegistry', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -520,84 +411,28 @@ export class ArtifactRegistryClient {
     // Put together the "service stub" for
     // google.devtools.artifactregistry.v1.ArtifactRegistry.
     this.artifactRegistryStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.devtools.artifactregistry.v1.ArtifactRegistry'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.devtools.artifactregistry.v1
-            .ArtifactRegistry,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.devtools.artifactregistry.v1.ArtifactRegistry') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.devtools.artifactregistry.v1.ArtifactRegistry,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const artifactRegistryStubMethods = [
-      'listDockerImages',
-      'getDockerImage',
-      'listMavenArtifacts',
-      'getMavenArtifact',
-      'listNpmPackages',
-      'getNpmPackage',
-      'listPythonPackages',
-      'getPythonPackage',
-      'importAptArtifacts',
-      'importYumArtifacts',
-      'listRepositories',
-      'getRepository',
-      'createRepository',
-      'updateRepository',
-      'deleteRepository',
-      'listPackages',
-      'getPackage',
-      'deletePackage',
-      'listVersions',
-      'getVersion',
-      'deleteVersion',
-      'batchDeleteVersions',
-      'updateVersion',
-      'listFiles',
-      'getFile',
-      'deleteFile',
-      'updateFile',
-      'listTags',
-      'getTag',
-      'createTag',
-      'updateTag',
-      'deleteTag',
-      'createRule',
-      'listRules',
-      'getRule',
-      'updateRule',
-      'deleteRule',
-      'setIamPolicy',
-      'getIamPolicy',
-      'testIamPermissions',
-      'getProjectSettings',
-      'updateProjectSettings',
-      'getVpcscConfig',
-      'updateVpcscConfig',
-      'updatePackage',
-      'listAttachments',
-      'getAttachment',
-      'createAttachment',
-      'deleteAttachment',
-    ];
+    const artifactRegistryStubMethods =
+        ['listDockerImages', 'getDockerImage', 'listMavenArtifacts', 'getMavenArtifact', 'listNpmPackages', 'getNpmPackage', 'listPythonPackages', 'getPythonPackage', 'importAptArtifacts', 'importYumArtifacts', 'listRepositories', 'getRepository', 'createRepository', 'updateRepository', 'deleteRepository', 'listPackages', 'getPackage', 'deletePackage', 'listVersions', 'getVersion', 'deleteVersion', 'batchDeleteVersions', 'updateVersion', 'listFiles', 'getFile', 'deleteFile', 'updateFile', 'listTags', 'getTag', 'createTag', 'updateTag', 'deleteTag', 'createRule', 'listRules', 'getRule', 'updateRule', 'deleteRule', 'setIamPolicy', 'getIamPolicy', 'testIamPermissions', 'getProjectSettings', 'updateProjectSettings', 'getVpcscConfig', 'updateVpcscConfig', 'updatePackage', 'listAttachments', 'getAttachment', 'createAttachment', 'deleteAttachment'];
     for (const methodName of artifactRegistryStubMethods) {
       const callPromise = this.artifactRegistryStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -622,14 +457,8 @@ export class ArtifactRegistryClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'artifactregistry.googleapis.com';
   }
@@ -640,14 +469,8 @@ export class ArtifactRegistryClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'artifactregistry.googleapis.com';
   }
@@ -680,7 +503,7 @@ export class ArtifactRegistryClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/cloud-platform.read-only',
+      'https://www.googleapis.com/auth/cloud-platform.read-only'
     ];
   }
 
@@ -690,9 +513,8 @@ export class ArtifactRegistryClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -703,5330 +525,3893 @@ export class ArtifactRegistryClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets a docker image.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the docker images.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.DockerImage|DockerImage}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.get_docker_image.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetDockerImage_async
-   */
+/**
+ * Gets a docker image.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the docker images.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.DockerImage|DockerImage}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.get_docker_image.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetDockerImage_async
+ */
   getDockerImage(
-    request?: protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IDockerImage,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IDockerImage,
+        protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest|undefined, {}|undefined
+      ]>;
   getDockerImage(
-    request: protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IDockerImage,
-      | protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDockerImage(
-    request: protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IDockerImage,
-      | protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDockerImage(
-    request?: protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IDockerImage,
-          | protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IDockerImage,
-      | protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IDockerImage,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDockerImage(
+      request: protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IDockerImage,
+          protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDockerImage(
+      request?: protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IDockerImage,
+          protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IDockerImage,
+          protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IDockerImage,
+        protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDockerImage request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IDockerImage,
-          | protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IDockerImage,
+        protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDockerImage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDockerImage(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IDockerImage,
-          (
-            | protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDockerImage response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDockerImage(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IDockerImage,
+        protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDockerImage response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a maven artifact.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the maven artifact.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.MavenArtifact|MavenArtifact}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.get_maven_artifact.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetMavenArtifact_async
-   */
+/**
+ * Gets a maven artifact.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the maven artifact.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.MavenArtifact|MavenArtifact}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.get_maven_artifact.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetMavenArtifact_async
+ */
   getMavenArtifact(
-    request?: protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IMavenArtifact,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IMavenArtifact,
+        protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest|undefined, {}|undefined
+      ]>;
   getMavenArtifact(
-    request: protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IMavenArtifact,
-      | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMavenArtifact(
-    request: protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IMavenArtifact,
-      | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMavenArtifact(
-    request?: protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IMavenArtifact,
-          | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IMavenArtifact,
-      | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IMavenArtifact,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMavenArtifact(
+      request: protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IMavenArtifact,
+          protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMavenArtifact(
+      request?: protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IMavenArtifact,
+          protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IMavenArtifact,
+          protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IMavenArtifact,
+        protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getMavenArtifact request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IMavenArtifact,
-          | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IMavenArtifact,
+        protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMavenArtifact response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getMavenArtifact(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IMavenArtifact,
-          (
-            | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getMavenArtifact response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getMavenArtifact(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IMavenArtifact,
+        protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getMavenArtifact response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a npm package.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the npm package.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.NpmPackage|NpmPackage}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.get_npm_package.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetNpmPackage_async
-   */
+/**
+ * Gets a npm package.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the npm package.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.NpmPackage|NpmPackage}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.get_npm_package.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetNpmPackage_async
+ */
   getNpmPackage(
-    request?: protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.INpmPackage,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.INpmPackage,
+        protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest|undefined, {}|undefined
+      ]>;
   getNpmPackage(
-    request: protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.INpmPackage,
-      | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNpmPackage(
-    request: protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.INpmPackage,
-      | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNpmPackage(
-    request?: protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.INpmPackage,
-          | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.INpmPackage,
-      | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.INpmPackage,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNpmPackage(
+      request: protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.INpmPackage,
+          protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNpmPackage(
+      request?: protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.INpmPackage,
+          protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.INpmPackage,
+          protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.INpmPackage,
+        protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getNpmPackage request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.INpmPackage,
-          | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.INpmPackage,
+        protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNpmPackage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getNpmPackage(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.INpmPackage,
-          (
-            | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getNpmPackage response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getNpmPackage(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.INpmPackage,
+        protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getNpmPackage response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a python package.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the python package.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.PythonPackage|PythonPackage}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.get_python_package.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetPythonPackage_async
-   */
+/**
+ * Gets a python package.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the python package.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.PythonPackage|PythonPackage}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.get_python_package.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetPythonPackage_async
+ */
   getPythonPackage(
-    request?: protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IPythonPackage,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IPythonPackage,
+        protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest|undefined, {}|undefined
+      ]>;
   getPythonPackage(
-    request: protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IPythonPackage,
-      | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPythonPackage(
-    request: protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IPythonPackage,
-      | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPythonPackage(
-    request?: protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IPythonPackage,
-          | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IPythonPackage,
-      | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IPythonPackage,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPythonPackage(
+      request: protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IPythonPackage,
+          protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPythonPackage(
+      request?: protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IPythonPackage,
+          protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IPythonPackage,
+          protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IPythonPackage,
+        protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPythonPackage request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IPythonPackage,
-          | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IPythonPackage,
+        protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPythonPackage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPythonPackage(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IPythonPackage,
-          (
-            | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getPythonPackage response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getPythonPackage(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IPythonPackage,
+        protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPythonPackage response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the repository to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Repository|Repository}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.get_repository.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetRepository_async
-   */
+/**
+ * Gets a repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the repository to retrieve.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Repository|Repository}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.get_repository.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetRepository_async
+ */
   getRepository(
-    request?: protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IRepository,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IRepository,
+        protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest|undefined, {}|undefined
+      ]>;
   getRepository(
-    request: protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IRepository,
-      | protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRepository(
-    request: protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IRepository,
-      | protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRepository(
-    request?: protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IRepository,
-          | protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IRepository,
-      | protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IRepository,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRepository(
+      request: protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IRepository,
+          protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRepository(
+      request?: protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IRepository,
+          protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IRepository,
+          protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IRepository,
+        protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getRepository request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IRepository,
-          | protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IRepository,
+        protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRepository response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getRepository(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IRepository,
-          (
-            | protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getRepository response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getRepository(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IRepository,
+        protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRepository response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.devtools.artifactregistry.v1.Repository} request.repository
-   *   The repository that replaces the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Repository|Repository}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.update_repository.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateRepository_async
-   */
+/**
+ * Updates a repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.devtools.artifactregistry.v1.Repository} request.repository
+ *   The repository that replaces the resource on the server.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The update mask applies to the resource. For the `FieldMask` definition,
+ *   see
+ *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Repository|Repository}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.update_repository.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateRepository_async
+ */
   updateRepository(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IRepository,
-      (
-        | protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IRepository,
+        protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest|undefined, {}|undefined
+      ]>;
   updateRepository(
-    request: protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IRepository,
-      | protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateRepository(
-    request: protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IRepository,
-      | protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateRepository(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IRepository,
-          | protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IRepository,
-      | protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IRepository,
-      (
-        | protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRepository(
+      request: protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IRepository,
+          protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRepository(
+      request?: protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IRepository,
+          protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IRepository,
+          protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IRepository,
+        protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'repository.name': request.repository!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'repository.name': request.repository!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateRepository request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IRepository,
-          | protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IRepository,
+        protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateRepository response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateRepository(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IRepository,
-          (
-            | protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateRepository response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateRepository(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IRepository,
+        protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateRepository response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a package.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the package to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Package|Package}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.get_package.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetPackage_async
-   */
+/**
+ * Gets a package.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the package to retrieve.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Package|Package}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.get_package.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetPackage_async
+ */
   getPackage(
-    request?: protos.google.devtools.artifactregistry.v1.IGetPackageRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IPackage,
-      protos.google.devtools.artifactregistry.v1.IGetPackageRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IGetPackageRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IPackage,
+        protos.google.devtools.artifactregistry.v1.IGetPackageRequest|undefined, {}|undefined
+      ]>;
   getPackage(
-    request: protos.google.devtools.artifactregistry.v1.IGetPackageRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IPackage,
-      | protos.google.devtools.artifactregistry.v1.IGetPackageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPackage(
-    request: protos.google.devtools.artifactregistry.v1.IGetPackageRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IPackage,
-      | protos.google.devtools.artifactregistry.v1.IGetPackageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPackage(
-    request?: protos.google.devtools.artifactregistry.v1.IGetPackageRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IGetPackageRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IPackage,
-          | protos.google.devtools.artifactregistry.v1.IGetPackageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IPackage,
-      | protos.google.devtools.artifactregistry.v1.IGetPackageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IPackage,
-      protos.google.devtools.artifactregistry.v1.IGetPackageRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IGetPackageRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPackage(
+      request: protos.google.devtools.artifactregistry.v1.IGetPackageRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IPackage,
+          protos.google.devtools.artifactregistry.v1.IGetPackageRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPackage(
+      request?: protos.google.devtools.artifactregistry.v1.IGetPackageRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IPackage,
+          protos.google.devtools.artifactregistry.v1.IGetPackageRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IPackage,
+          protos.google.devtools.artifactregistry.v1.IGetPackageRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IPackage,
+        protos.google.devtools.artifactregistry.v1.IGetPackageRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPackage request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IPackage,
-          | protos.google.devtools.artifactregistry.v1.IGetPackageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IPackage,
+        protos.google.devtools.artifactregistry.v1.IGetPackageRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPackage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPackage(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IPackage,
-          (
-            | protos.google.devtools.artifactregistry.v1.IGetPackageRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getPackage response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getPackage(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IPackage,
+        protos.google.devtools.artifactregistry.v1.IGetPackageRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPackage response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a version
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the version to retrieve.
-   * @param {google.devtools.artifactregistry.v1.VersionView} request.view
-   *   The view that should be returned in the response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Version|Version}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.get_version.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetVersion_async
-   */
+/**
+ * Gets a version
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name of the version to retrieve.
+ * @param {google.devtools.artifactregistry.v1.VersionView} request.view
+ *   The view that should be returned in the response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Version|Version}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.get_version.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetVersion_async
+ */
   getVersion(
-    request?: protos.google.devtools.artifactregistry.v1.IGetVersionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IVersion,
-      protos.google.devtools.artifactregistry.v1.IGetVersionRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IGetVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IVersion,
+        protos.google.devtools.artifactregistry.v1.IGetVersionRequest|undefined, {}|undefined
+      ]>;
   getVersion(
-    request: protos.google.devtools.artifactregistry.v1.IGetVersionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IVersion,
-      | protos.google.devtools.artifactregistry.v1.IGetVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getVersion(
-    request: protos.google.devtools.artifactregistry.v1.IGetVersionRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IVersion,
-      | protos.google.devtools.artifactregistry.v1.IGetVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getVersion(
-    request?: protos.google.devtools.artifactregistry.v1.IGetVersionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IGetVersionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IVersion,
-          | protos.google.devtools.artifactregistry.v1.IGetVersionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IVersion,
-      | protos.google.devtools.artifactregistry.v1.IGetVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IVersion,
-      protos.google.devtools.artifactregistry.v1.IGetVersionRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IGetVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getVersion(
+      request: protos.google.devtools.artifactregistry.v1.IGetVersionRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IVersion,
+          protos.google.devtools.artifactregistry.v1.IGetVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getVersion(
+      request?: protos.google.devtools.artifactregistry.v1.IGetVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IVersion,
+          protos.google.devtools.artifactregistry.v1.IGetVersionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IVersion,
+          protos.google.devtools.artifactregistry.v1.IGetVersionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IVersion,
+        protos.google.devtools.artifactregistry.v1.IGetVersionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getVersion request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IVersion,
-          | protos.google.devtools.artifactregistry.v1.IGetVersionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IVersion,
+        protos.google.devtools.artifactregistry.v1.IGetVersionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getVersion(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IVersion,
-          (
-            | protos.google.devtools.artifactregistry.v1.IGetVersionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getVersion response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getVersion(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IVersion,
+        protos.google.devtools.artifactregistry.v1.IGetVersionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getVersion response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a version.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.devtools.artifactregistry.v1.Version} request.version
-   *   Required. The Version that replaces the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Version|Version}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.update_version.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateVersion_async
-   */
+/**
+ * Updates a version.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.devtools.artifactregistry.v1.Version} request.version
+ *   Required. The Version that replaces the resource on the server.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The update mask applies to the resource. For the `FieldMask` definition,
+ *   see
+ *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Version|Version}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.update_version.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateVersion_async
+ */
   updateVersion(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IVersion,
-      (
-        | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IVersion,
+        protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest|undefined, {}|undefined
+      ]>;
   updateVersion(
-    request: protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IVersion,
-      | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateVersion(
-    request: protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IVersion,
-      | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateVersion(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IVersion,
-          | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IVersion,
-      | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IVersion,
-      (
-        | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateVersion(
+      request: protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IVersion,
+          protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateVersion(
+      request?: protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IVersion,
+          protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IVersion,
+          protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IVersion,
+        protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'version.name': request.version!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'version.name': request.version!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateVersion request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IVersion,
-          | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IVersion,
+        protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateVersion(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IVersion,
-          (
-            | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateVersion response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateVersion(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IVersion,
+        protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateVersion response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a file.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the file to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.File|File}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.get_file.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetFile_async
-   */
+/**
+ * Gets a file.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the file to retrieve.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.File|File}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.get_file.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetFile_async
+ */
   getFile(
-    request?: protos.google.devtools.artifactregistry.v1.IGetFileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IFile,
-      protos.google.devtools.artifactregistry.v1.IGetFileRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IGetFileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IFile,
+        protos.google.devtools.artifactregistry.v1.IGetFileRequest|undefined, {}|undefined
+      ]>;
   getFile(
-    request: protos.google.devtools.artifactregistry.v1.IGetFileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IFile,
-      | protos.google.devtools.artifactregistry.v1.IGetFileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFile(
-    request: protos.google.devtools.artifactregistry.v1.IGetFileRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IFile,
-      | protos.google.devtools.artifactregistry.v1.IGetFileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getFile(
-    request?: protos.google.devtools.artifactregistry.v1.IGetFileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IGetFileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IFile,
-          | protos.google.devtools.artifactregistry.v1.IGetFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IFile,
-      | protos.google.devtools.artifactregistry.v1.IGetFileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IFile,
-      protos.google.devtools.artifactregistry.v1.IGetFileRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IGetFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getFile(
+      request: protos.google.devtools.artifactregistry.v1.IGetFileRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IFile,
+          protos.google.devtools.artifactregistry.v1.IGetFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  getFile(
+      request?: protos.google.devtools.artifactregistry.v1.IGetFileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IFile,
+          protos.google.devtools.artifactregistry.v1.IGetFileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IFile,
+          protos.google.devtools.artifactregistry.v1.IGetFileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IFile,
+        protos.google.devtools.artifactregistry.v1.IGetFileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getFile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IFile,
-          | protos.google.devtools.artifactregistry.v1.IGetFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IFile,
+        protos.google.devtools.artifactregistry.v1.IGetFileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getFile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IFile,
-          (
-            | protos.google.devtools.artifactregistry.v1.IGetFileRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getFile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getFile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IFile,
+        protos.google.devtools.artifactregistry.v1.IGetFileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getFile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a file.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.devtools.artifactregistry.v1.File} request.file
-   *   Required. The File that replaces the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. For the `FieldMask`
-   *   definition, see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.File|File}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.update_file.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateFile_async
-   */
+/**
+ * Updates a file.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.devtools.artifactregistry.v1.File} request.file
+ *   Required. The File that replaces the resource on the server.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The update mask applies to the resource. For the `FieldMask`
+ *   definition, see
+ *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.File|File}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.update_file.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateFile_async
+ */
   updateFile(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdateFileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IFile,
-      protos.google.devtools.artifactregistry.v1.IUpdateFileRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IUpdateFileRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IFile,
+        protos.google.devtools.artifactregistry.v1.IUpdateFileRequest|undefined, {}|undefined
+      ]>;
   updateFile(
-    request: protos.google.devtools.artifactregistry.v1.IUpdateFileRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IFile,
-      | protos.google.devtools.artifactregistry.v1.IUpdateFileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateFile(
-    request: protos.google.devtools.artifactregistry.v1.IUpdateFileRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IFile,
-      | protos.google.devtools.artifactregistry.v1.IUpdateFileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateFile(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdateFileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IUpdateFileRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IFile,
-          | protos.google.devtools.artifactregistry.v1.IUpdateFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IFile,
-      | protos.google.devtools.artifactregistry.v1.IUpdateFileRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IFile,
-      protos.google.devtools.artifactregistry.v1.IUpdateFileRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IUpdateFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateFile(
+      request: protos.google.devtools.artifactregistry.v1.IUpdateFileRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IFile,
+          protos.google.devtools.artifactregistry.v1.IUpdateFileRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateFile(
+      request?: protos.google.devtools.artifactregistry.v1.IUpdateFileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IFile,
+          protos.google.devtools.artifactregistry.v1.IUpdateFileRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IFile,
+          protos.google.devtools.artifactregistry.v1.IUpdateFileRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IFile,
+        protos.google.devtools.artifactregistry.v1.IUpdateFileRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'file.name': request.file!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'file.name': request.file!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateFile request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IFile,
-          | protos.google.devtools.artifactregistry.v1.IUpdateFileRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IFile,
+        protos.google.devtools.artifactregistry.v1.IUpdateFileRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateFile response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateFile(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IFile,
-          (
-            | protos.google.devtools.artifactregistry.v1.IUpdateFileRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateFile response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateFile(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IFile,
+        protos.google.devtools.artifactregistry.v1.IUpdateFileRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateFile response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a tag.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the tag to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Tag|Tag}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.get_tag.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetTag_async
-   */
+/**
+ * Gets a tag.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name of the tag to retrieve.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Tag|Tag}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.get_tag.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetTag_async
+ */
   getTag(
-    request?: protos.google.devtools.artifactregistry.v1.IGetTagRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.ITag,
-      protos.google.devtools.artifactregistry.v1.IGetTagRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IGetTagRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.ITag,
+        protos.google.devtools.artifactregistry.v1.IGetTagRequest|undefined, {}|undefined
+      ]>;
   getTag(
-    request: protos.google.devtools.artifactregistry.v1.IGetTagRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.ITag,
-      | protos.google.devtools.artifactregistry.v1.IGetTagRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTag(
-    request: protos.google.devtools.artifactregistry.v1.IGetTagRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.ITag,
-      | protos.google.devtools.artifactregistry.v1.IGetTagRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTag(
-    request?: protos.google.devtools.artifactregistry.v1.IGetTagRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IGetTagRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.ITag,
-          | protos.google.devtools.artifactregistry.v1.IGetTagRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.ITag,
-      | protos.google.devtools.artifactregistry.v1.IGetTagRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.ITag,
-      protos.google.devtools.artifactregistry.v1.IGetTagRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IGetTagRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTag(
+      request: protos.google.devtools.artifactregistry.v1.IGetTagRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.ITag,
+          protos.google.devtools.artifactregistry.v1.IGetTagRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTag(
+      request?: protos.google.devtools.artifactregistry.v1.IGetTagRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.ITag,
+          protos.google.devtools.artifactregistry.v1.IGetTagRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.ITag,
+          protos.google.devtools.artifactregistry.v1.IGetTagRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.ITag,
+        protos.google.devtools.artifactregistry.v1.IGetTagRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getTag request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.ITag,
-          | protos.google.devtools.artifactregistry.v1.IGetTagRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.ITag,
+        protos.google.devtools.artifactregistry.v1.IGetTagRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTag response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getTag(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.ITag,
-          protos.google.devtools.artifactregistry.v1.IGetTagRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getTag response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getTag(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.ITag,
+        protos.google.devtools.artifactregistry.v1.IGetTagRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getTag response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a tag.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the parent resource where the tag will be created.
-   * @param {string} request.tagId
-   *   The tag id to use for this repository.
-   * @param {google.devtools.artifactregistry.v1.Tag} request.tag
-   *   The tag to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Tag|Tag}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.create_tag.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_CreateTag_async
-   */
+/**
+ * Creates a tag.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the parent resource where the tag will be created.
+ * @param {string} request.tagId
+ *   The tag id to use for this repository.
+ * @param {google.devtools.artifactregistry.v1.Tag} request.tag
+ *   The tag to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Tag|Tag}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.create_tag.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_CreateTag_async
+ */
   createTag(
-    request?: protos.google.devtools.artifactregistry.v1.ICreateTagRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.ITag,
-      protos.google.devtools.artifactregistry.v1.ICreateTagRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.ICreateTagRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.ITag,
+        protos.google.devtools.artifactregistry.v1.ICreateTagRequest|undefined, {}|undefined
+      ]>;
   createTag(
-    request: protos.google.devtools.artifactregistry.v1.ICreateTagRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.ITag,
-      | protos.google.devtools.artifactregistry.v1.ICreateTagRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createTag(
-    request: protos.google.devtools.artifactregistry.v1.ICreateTagRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.ITag,
-      | protos.google.devtools.artifactregistry.v1.ICreateTagRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createTag(
-    request?: protos.google.devtools.artifactregistry.v1.ICreateTagRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.ICreateTagRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.ITag,
-          | protos.google.devtools.artifactregistry.v1.ICreateTagRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.ITag,
-      | protos.google.devtools.artifactregistry.v1.ICreateTagRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.ITag,
-      protos.google.devtools.artifactregistry.v1.ICreateTagRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.ICreateTagRequest|null|undefined,
+          {}|null|undefined>): void;
+  createTag(
+      request: protos.google.devtools.artifactregistry.v1.ICreateTagRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.ITag,
+          protos.google.devtools.artifactregistry.v1.ICreateTagRequest|null|undefined,
+          {}|null|undefined>): void;
+  createTag(
+      request?: protos.google.devtools.artifactregistry.v1.ICreateTagRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.ITag,
+          protos.google.devtools.artifactregistry.v1.ICreateTagRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.ITag,
+          protos.google.devtools.artifactregistry.v1.ICreateTagRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.ITag,
+        protos.google.devtools.artifactregistry.v1.ICreateTagRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createTag request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.ITag,
-          | protos.google.devtools.artifactregistry.v1.ICreateTagRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.ITag,
+        protos.google.devtools.artifactregistry.v1.ICreateTagRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createTag response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createTag(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.ITag,
-          (
-            | protos.google.devtools.artifactregistry.v1.ICreateTagRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createTag response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createTag(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.ITag,
+        protos.google.devtools.artifactregistry.v1.ICreateTagRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createTag response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a tag.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.devtools.artifactregistry.v1.Tag} request.tag
-   *   The tag that replaces the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Tag|Tag}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.update_tag.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateTag_async
-   */
+/**
+ * Updates a tag.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.devtools.artifactregistry.v1.Tag} request.tag
+ *   The tag that replaces the resource on the server.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The update mask applies to the resource. For the `FieldMask` definition,
+ *   see
+ *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Tag|Tag}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.update_tag.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateTag_async
+ */
   updateTag(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdateTagRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.ITag,
-      protos.google.devtools.artifactregistry.v1.IUpdateTagRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IUpdateTagRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.ITag,
+        protos.google.devtools.artifactregistry.v1.IUpdateTagRequest|undefined, {}|undefined
+      ]>;
   updateTag(
-    request: protos.google.devtools.artifactregistry.v1.IUpdateTagRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.ITag,
-      | protos.google.devtools.artifactregistry.v1.IUpdateTagRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateTag(
-    request: protos.google.devtools.artifactregistry.v1.IUpdateTagRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.ITag,
-      | protos.google.devtools.artifactregistry.v1.IUpdateTagRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateTag(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdateTagRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IUpdateTagRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.ITag,
-          | protos.google.devtools.artifactregistry.v1.IUpdateTagRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.ITag,
-      | protos.google.devtools.artifactregistry.v1.IUpdateTagRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.ITag,
-      protos.google.devtools.artifactregistry.v1.IUpdateTagRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IUpdateTagRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateTag(
+      request: protos.google.devtools.artifactregistry.v1.IUpdateTagRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.ITag,
+          protos.google.devtools.artifactregistry.v1.IUpdateTagRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateTag(
+      request?: protos.google.devtools.artifactregistry.v1.IUpdateTagRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.ITag,
+          protos.google.devtools.artifactregistry.v1.IUpdateTagRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.ITag,
+          protos.google.devtools.artifactregistry.v1.IUpdateTagRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.ITag,
+        protos.google.devtools.artifactregistry.v1.IUpdateTagRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'tag.name': request.tag!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'tag.name': request.tag!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateTag request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.ITag,
-          | protos.google.devtools.artifactregistry.v1.IUpdateTagRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.ITag,
+        protos.google.devtools.artifactregistry.v1.IUpdateTagRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateTag response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateTag(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.ITag,
-          (
-            | protos.google.devtools.artifactregistry.v1.IUpdateTagRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateTag response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateTag(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.ITag,
+        protos.google.devtools.artifactregistry.v1.IUpdateTagRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateTag response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a tag.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the tag to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.delete_tag.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteTag_async
-   */
+/**
+ * Deletes a tag.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name of the tag to delete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.delete_tag.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteTag_async
+ */
   deleteTag(
-    request?: protos.google.devtools.artifactregistry.v1.IDeleteTagRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.devtools.artifactregistry.v1.IDeleteTagRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IDeleteTagRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IDeleteTagRequest|undefined, {}|undefined
+      ]>;
   deleteTag(
-    request: protos.google.devtools.artifactregistry.v1.IDeleteTagRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.devtools.artifactregistry.v1.IDeleteTagRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteTag(
-    request: protos.google.devtools.artifactregistry.v1.IDeleteTagRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.devtools.artifactregistry.v1.IDeleteTagRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteTag(
-    request?: protos.google.devtools.artifactregistry.v1.IDeleteTagRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IDeleteTagRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.devtools.artifactregistry.v1.IDeleteTagRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.devtools.artifactregistry.v1.IDeleteTagRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.devtools.artifactregistry.v1.IDeleteTagRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IDeleteTagRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteTag(
+      request: protos.google.devtools.artifactregistry.v1.IDeleteTagRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.devtools.artifactregistry.v1.IDeleteTagRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteTag(
+      request?: protos.google.devtools.artifactregistry.v1.IDeleteTagRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.devtools.artifactregistry.v1.IDeleteTagRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.devtools.artifactregistry.v1.IDeleteTagRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IDeleteTagRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteTag request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.devtools.artifactregistry.v1.IDeleteTagRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IDeleteTagRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteTag response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteTag(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.devtools.artifactregistry.v1.IDeleteTagRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteTag response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteTag(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IDeleteTagRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteTag response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a rule.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource where the rule will be created.
-   * @param {string} request.ruleId
-   *   The rule id to use for this repository.
-   * @param {google.devtools.artifactregistry.v1.Rule} request.rule
-   *   The rule to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Rule|Rule}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.create_rule.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_CreateRule_async
-   */
+/**
+ * Creates a rule.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource where the rule will be created.
+ * @param {string} request.ruleId
+ *   The rule id to use for this repository.
+ * @param {google.devtools.artifactregistry.v1.Rule} request.rule
+ *   The rule to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Rule|Rule}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.create_rule.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_CreateRule_async
+ */
   createRule(
-    request?: protos.google.devtools.artifactregistry.v1.ICreateRuleRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IRule,
-      protos.google.devtools.artifactregistry.v1.ICreateRuleRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.ICreateRuleRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IRule,
+        protos.google.devtools.artifactregistry.v1.ICreateRuleRequest|undefined, {}|undefined
+      ]>;
   createRule(
-    request: protos.google.devtools.artifactregistry.v1.ICreateRuleRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IRule,
-      | protos.google.devtools.artifactregistry.v1.ICreateRuleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createRule(
-    request: protos.google.devtools.artifactregistry.v1.ICreateRuleRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IRule,
-      | protos.google.devtools.artifactregistry.v1.ICreateRuleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createRule(
-    request?: protos.google.devtools.artifactregistry.v1.ICreateRuleRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.ICreateRuleRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IRule,
-          | protos.google.devtools.artifactregistry.v1.ICreateRuleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IRule,
-      | protos.google.devtools.artifactregistry.v1.ICreateRuleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IRule,
-      protos.google.devtools.artifactregistry.v1.ICreateRuleRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.ICreateRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  createRule(
+      request: protos.google.devtools.artifactregistry.v1.ICreateRuleRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IRule,
+          protos.google.devtools.artifactregistry.v1.ICreateRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  createRule(
+      request?: protos.google.devtools.artifactregistry.v1.ICreateRuleRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IRule,
+          protos.google.devtools.artifactregistry.v1.ICreateRuleRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IRule,
+          protos.google.devtools.artifactregistry.v1.ICreateRuleRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IRule,
+        protos.google.devtools.artifactregistry.v1.ICreateRuleRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createRule request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IRule,
-          | protos.google.devtools.artifactregistry.v1.ICreateRuleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IRule,
+        protos.google.devtools.artifactregistry.v1.ICreateRuleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createRule(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IRule,
-          (
-            | protos.google.devtools.artifactregistry.v1.ICreateRuleRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createRule response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createRule(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IRule,
+        protos.google.devtools.artifactregistry.v1.ICreateRuleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createRule response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a rule.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the rule to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Rule|Rule}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.get_rule.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetRule_async
-   */
+/**
+ * Gets a rule.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the rule to retrieve.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Rule|Rule}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.get_rule.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetRule_async
+ */
   getRule(
-    request?: protos.google.devtools.artifactregistry.v1.IGetRuleRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IRule,
-      protos.google.devtools.artifactregistry.v1.IGetRuleRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IGetRuleRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IRule,
+        protos.google.devtools.artifactregistry.v1.IGetRuleRequest|undefined, {}|undefined
+      ]>;
   getRule(
-    request: protos.google.devtools.artifactregistry.v1.IGetRuleRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IRule,
-      | protos.google.devtools.artifactregistry.v1.IGetRuleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRule(
-    request: protos.google.devtools.artifactregistry.v1.IGetRuleRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IRule,
-      | protos.google.devtools.artifactregistry.v1.IGetRuleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRule(
-    request?: protos.google.devtools.artifactregistry.v1.IGetRuleRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IGetRuleRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IRule,
-          | protos.google.devtools.artifactregistry.v1.IGetRuleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IRule,
-      | protos.google.devtools.artifactregistry.v1.IGetRuleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IRule,
-      protos.google.devtools.artifactregistry.v1.IGetRuleRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IGetRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRule(
+      request: protos.google.devtools.artifactregistry.v1.IGetRuleRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IRule,
+          protos.google.devtools.artifactregistry.v1.IGetRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRule(
+      request?: protos.google.devtools.artifactregistry.v1.IGetRuleRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IRule,
+          protos.google.devtools.artifactregistry.v1.IGetRuleRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IRule,
+          protos.google.devtools.artifactregistry.v1.IGetRuleRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IRule,
+        protos.google.devtools.artifactregistry.v1.IGetRuleRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getRule request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IRule,
-          | protos.google.devtools.artifactregistry.v1.IGetRuleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IRule,
+        protos.google.devtools.artifactregistry.v1.IGetRuleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getRule(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IRule,
-          (
-            | protos.google.devtools.artifactregistry.v1.IGetRuleRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getRule response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getRule(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IRule,
+        protos.google.devtools.artifactregistry.v1.IGetRuleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRule response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a rule.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.devtools.artifactregistry.v1.Rule} request.rule
-   *   The rule that replaces the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Rule|Rule}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.update_rule.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateRule_async
-   */
+/**
+ * Updates a rule.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.devtools.artifactregistry.v1.Rule} request.rule
+ *   The rule that replaces the resource on the server.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The update mask applies to the resource. For the `FieldMask` definition,
+ *   see
+ *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Rule|Rule}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.update_rule.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateRule_async
+ */
   updateRule(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IRule,
-      protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IRule,
+        protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest|undefined, {}|undefined
+      ]>;
   updateRule(
-    request: protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IRule,
-      | protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateRule(
-    request: protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IRule,
-      | protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateRule(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IRule,
-          | protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IRule,
-      | protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IRule,
-      protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRule(
+      request: protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IRule,
+          protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRule(
+      request?: protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IRule,
+          protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IRule,
+          protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IRule,
+        protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'rule.name': request.rule!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'rule.name': request.rule!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateRule request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IRule,
-          | protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IRule,
+        protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateRule(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IRule,
-          (
-            | protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateRule response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateRule(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IRule,
+        protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateRule response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a rule.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the rule to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.delete_rule.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteRule_async
-   */
+/**
+ * Deletes a rule.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the rule to delete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.delete_rule.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteRule_async
+ */
   deleteRule(
-    request?: protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest|undefined, {}|undefined
+      ]>;
   deleteRule(
-    request: protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteRule(
-    request: protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteRule(
-    request?: protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteRule(
+      request: protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteRule(
+      request?: protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteRule request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteRule(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteRule response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteRule(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteRule response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the IAM policy for a given resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-   *   the fields in the mask will be modified. If no mask is provided, the
-   *   following default mask is used:
-   *
-   *   `paths: "bindings, etag"`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.set_iam_policy.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_SetIamPolicy_async
-   */
+/**
+ * Updates the IAM policy for a given resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being specified.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.Policy} request.policy
+ *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is a
+ *   valid policy but certain Cloud Platform services (such as Projects)
+ *   might reject them.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+ *   the fields in the mask will be modified. If no mask is provided, the
+ *   following default mask is used:
+ *
+ *   `paths: "bindings, etag"`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.set_iam_policy.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_SetIamPolicy_async
+ */
   setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the IAM policy for a given resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.get_iam_policy.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetIamPolicy_async
-   */
+/**
+ * Gets the IAM policy for a given resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.GetPolicyOptions} request.options
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.get_iam_policy.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetIamPolicy_async
+ */
   getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Tests if the caller has a list of permissions on a resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.test_iam_permissions.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_TestIamPermissions_async
-   */
+/**
+ * Tests if the caller has a list of permissions on a resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.test_iam_permissions.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_TestIamPermissions_async
+ */
   testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      callback: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .testIamPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('testIamPermissions response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Retrieves the Settings for the Project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the projectSettings resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.ProjectSettings|ProjectSettings}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.get_project_settings.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetProjectSettings_async
-   */
+/**
+ * Retrieves the Settings for the Project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the projectSettings resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.ProjectSettings|ProjectSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.get_project_settings.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetProjectSettings_async
+ */
   getProjectSettings(
-    request?: protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IProjectSettings,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IProjectSettings,
+        protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest|undefined, {}|undefined
+      ]>;
   getProjectSettings(
-    request: protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IProjectSettings,
-      | protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getProjectSettings(
-    request: protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IProjectSettings,
-      | protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getProjectSettings(
-    request?: protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IProjectSettings,
-          | protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IProjectSettings,
-      | protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IProjectSettings,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getProjectSettings(
+      request: protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IProjectSettings,
+          protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getProjectSettings(
+      request?: protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IProjectSettings,
+          protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IProjectSettings,
+          protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IProjectSettings,
+        protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getProjectSettings request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IProjectSettings,
-          | protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IProjectSettings,
+        protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getProjectSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getProjectSettings(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IProjectSettings,
-          (
-            | protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getProjectSettings response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getProjectSettings(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IProjectSettings,
+        protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getProjectSettings response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the Settings for the Project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.devtools.artifactregistry.v1.ProjectSettings} request.projectSettings
-   *   The project settings.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Field mask to support partial updates.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.ProjectSettings|ProjectSettings}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.update_project_settings.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateProjectSettings_async
-   */
+/**
+ * Updates the Settings for the Project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.devtools.artifactregistry.v1.ProjectSettings} request.projectSettings
+ *   The project settings.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Field mask to support partial updates.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.ProjectSettings|ProjectSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.update_project_settings.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateProjectSettings_async
+ */
   updateProjectSettings(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IProjectSettings,
-      (
-        | protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IProjectSettings,
+        protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest|undefined, {}|undefined
+      ]>;
   updateProjectSettings(
-    request: protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IProjectSettings,
-      | protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateProjectSettings(
-    request: protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IProjectSettings,
-      | protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateProjectSettings(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IProjectSettings,
-          | protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IProjectSettings,
-      | protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IProjectSettings,
-      (
-        | protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateProjectSettings(
+      request: protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IProjectSettings,
+          protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateProjectSettings(
+      request?: protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IProjectSettings,
+          protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IProjectSettings,
+          protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IProjectSettings,
+        protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'project_settings.name': request.projectSettings!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project_settings.name': request.projectSettings!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateProjectSettings request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IProjectSettings,
-          | protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IProjectSettings,
+        protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateProjectSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateProjectSettings(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IProjectSettings,
-          (
-            | protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateProjectSettings response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateProjectSettings(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IProjectSettings,
+        protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateProjectSettings response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Retrieves the VPCSC Config for the Project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the VPCSCConfig resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.VPCSCConfig|VPCSCConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.get_v_p_c_s_c_config.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetVPCSCConfig_async
-   */
+/**
+ * Retrieves the VPCSC Config for the Project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the VPCSCConfig resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.VPCSCConfig|VPCSCConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.get_v_p_c_s_c_config.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetVPCSCConfig_async
+ */
   getVPCSCConfig(
-    request?: protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+        protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest|undefined, {}|undefined
+      ]>;
   getVPCSCConfig(
-    request: protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-      | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getVPCSCConfig(
-    request: protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-      | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getVPCSCConfig(
-    request?: protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-          | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-      | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getVPCSCConfig(
+      request: protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+          protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getVPCSCConfig(
+      request?: protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+          protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+          protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+        protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getVPCSCConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-          | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+        protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getVPCSCConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getVpcscConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-          (
-            | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getVPCSCConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getVpcscConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+        protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getVPCSCConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the VPCSC Config for the Project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.devtools.artifactregistry.v1.VPCSCConfig} request.vpcscConfig
-   *   The project config.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Field mask to support partial updates.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.VPCSCConfig|VPCSCConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.update_v_p_c_s_c_config.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateVPCSCConfig_async
-   */
+/**
+ * Updates the VPCSC Config for the Project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.devtools.artifactregistry.v1.VPCSCConfig} request.vpcscConfig
+ *   The project config.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Field mask to support partial updates.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.VPCSCConfig|VPCSCConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.update_v_p_c_s_c_config.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdateVPCSCConfig_async
+ */
   updateVPCSCConfig(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-      (
-        | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+        protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest|undefined, {}|undefined
+      ]>;
   updateVPCSCConfig(
-    request: protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-      | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateVPCSCConfig(
-    request: protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-      | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateVPCSCConfig(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-          | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-      | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-      (
-        | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateVPCSCConfig(
+      request: protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+          protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateVPCSCConfig(
+      request?: protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+          protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+          protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+        protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'vpcsc_config.name': request.vpcscConfig!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'vpcsc_config.name': request.vpcscConfig!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateVPCSCConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-          | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+        protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateVPCSCConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateVpcscConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
-          (
-            | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateVPCSCConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateVpcscConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+        protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateVPCSCConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a package.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.devtools.artifactregistry.v1.Package} request.package
-   *   The package that replaces the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Package|Package}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.update_package.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdatePackage_async
-   */
+/**
+ * Updates a package.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.devtools.artifactregistry.v1.Package} request.package
+ *   The package that replaces the resource on the server.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The update mask applies to the resource. For the `FieldMask` definition,
+ *   see
+ *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Package|Package}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.update_package.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_UpdatePackage_async
+ */
   updatePackage(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IPackage,
-      (
-        | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IPackage,
+        protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest|undefined, {}|undefined
+      ]>;
   updatePackage(
-    request: protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IPackage,
-      | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updatePackage(
-    request: protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IPackage,
-      | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updatePackage(
-    request?: protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IPackage,
-          | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IPackage,
-      | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IPackage,
-      (
-        | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest|null|undefined,
+          {}|null|undefined>): void;
+  updatePackage(
+      request: protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IPackage,
+          protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest|null|undefined,
+          {}|null|undefined>): void;
+  updatePackage(
+      request?: protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IPackage,
+          protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IPackage,
+          protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IPackage,
+        protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'package.name': request.package!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'package.name': request.package!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updatePackage request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IPackage,
-          | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IPackage,
+        protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updatePackage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updatePackage(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IPackage,
-          (
-            | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updatePackage response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updatePackage(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IPackage,
+        protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updatePackage response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an attachment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the attachment to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Attachment|Attachment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.get_attachment.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetAttachment_async
-   */
+/**
+ * Gets an attachment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the attachment to retrieve.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.artifactregistry.v1.Attachment|Attachment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.get_attachment.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_GetAttachment_async
+ */
   getAttachment(
-    request?: protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IAttachment,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IAttachment,
+        protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest|undefined, {}|undefined
+      ]>;
   getAttachment(
-    request: protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IAttachment,
-      | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAttachment(
-    request: protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest,
-    callback: Callback<
-      protos.google.devtools.artifactregistry.v1.IAttachment,
-      | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAttachment(
-    request?: protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.artifactregistry.v1.IAttachment,
-          | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.artifactregistry.v1.IAttachment,
-      | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IAttachment,
-      (
-        | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAttachment(
+      request: protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest,
+      callback: Callback<
+          protos.google.devtools.artifactregistry.v1.IAttachment,
+          protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAttachment(
+      request?: protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.artifactregistry.v1.IAttachment,
+          protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.artifactregistry.v1.IAttachment,
+          protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IAttachment,
+        protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAttachment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.artifactregistry.v1.IAttachment,
-          | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.artifactregistry.v1.IAttachment,
+        protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAttachment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAttachment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.artifactregistry.v1.IAttachment,
-          (
-            | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getAttachment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getAttachment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.artifactregistry.v1.IAttachment,
+        protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAttachment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Imports Apt artifacts. The returned Operation will complete once the
-   * resources are imported. Package, Version, and File resources are created
-   * based on the imported artifacts. Imported artifacts that conflict with
-   * existing resources are ignored.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource} request.gcsSource
-   *   Google Cloud Storage location where input content is located.
-   * @param {string} request.parent
-   *   The name of the parent resource where the artifacts will be imported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.import_apt_artifacts.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ImportAptArtifacts_async
-   */
+/**
+ * Imports Apt artifacts. The returned Operation will complete once the
+ * resources are imported. Package, Version, and File resources are created
+ * based on the imported artifacts. Imported artifacts that conflict with
+ * existing resources are ignored.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.devtools.artifactregistry.v1.ImportAptArtifactsGcsSource} request.gcsSource
+ *   Google Cloud Storage location where input content is located.
+ * @param {string} request.parent
+ *   The name of the parent resource where the artifacts will be imported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.import_apt_artifacts.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ImportAptArtifacts_async
+ */
   importAptArtifacts(
-    request?: protos.google.devtools.artifactregistry.v1.IImportAptArtifactsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse,
-        protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IImportAptArtifactsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   importAptArtifacts(
-    request: protos.google.devtools.artifactregistry.v1.IImportAptArtifactsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse,
-        protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IImportAptArtifactsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   importAptArtifacts(
-    request: protos.google.devtools.artifactregistry.v1.IImportAptArtifactsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse,
-        protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IImportAptArtifactsRequest,
+      callback: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   importAptArtifacts(
-    request?: protos.google.devtools.artifactregistry.v1.IImportAptArtifactsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse,
-            protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse,
-        protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse,
-        protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.artifactregistry.v1.IImportAptArtifactsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse,
-            protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('importAptArtifacts response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('importAptArtifacts request %j', request);
-    return this.innerApiCalls
-      .importAptArtifacts(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse,
-            protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('importAptArtifacts response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.importAptArtifacts(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('importAptArtifacts response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `importAptArtifacts()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.import_apt_artifacts.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ImportAptArtifacts_async
-   */
-  async checkImportAptArtifactsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.devtools.artifactregistry.v1.ImportAptArtifactsResponse,
-      protos.google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `importAptArtifacts()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.import_apt_artifacts.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ImportAptArtifacts_async
+ */
+  async checkImportAptArtifactsProgress(name: string): Promise<LROperation<protos.google.devtools.artifactregistry.v1.ImportAptArtifactsResponse, protos.google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata>>{
     this._log.info('importAptArtifacts long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.importAptArtifacts,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.devtools.artifactregistry.v1.ImportAptArtifactsResponse,
-      protos.google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importAptArtifacts, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.devtools.artifactregistry.v1.ImportAptArtifactsResponse, protos.google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata>;
   }
-  /**
-   * Imports Yum (RPM) artifacts. The returned Operation will complete once the
-   * resources are imported. Package, Version, and File resources are created
-   * based on the imported artifacts. Imported artifacts that conflict with
-   * existing resources are ignored.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource} request.gcsSource
-   *   Google Cloud Storage location where input content is located.
-   * @param {string} request.parent
-   *   The name of the parent resource where the artifacts will be imported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.import_yum_artifacts.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ImportYumArtifacts_async
-   */
+/**
+ * Imports Yum (RPM) artifacts. The returned Operation will complete once the
+ * resources are imported. Package, Version, and File resources are created
+ * based on the imported artifacts. Imported artifacts that conflict with
+ * existing resources are ignored.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.devtools.artifactregistry.v1.ImportYumArtifactsGcsSource} request.gcsSource
+ *   Google Cloud Storage location where input content is located.
+ * @param {string} request.parent
+ *   The name of the parent resource where the artifacts will be imported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.import_yum_artifacts.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ImportYumArtifacts_async
+ */
   importYumArtifacts(
-    request?: protos.google.devtools.artifactregistry.v1.IImportYumArtifactsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse,
-        protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IImportYumArtifactsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   importYumArtifacts(
-    request: protos.google.devtools.artifactregistry.v1.IImportYumArtifactsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse,
-        protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IImportYumArtifactsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   importYumArtifacts(
-    request: protos.google.devtools.artifactregistry.v1.IImportYumArtifactsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse,
-        protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IImportYumArtifactsRequest,
+      callback: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   importYumArtifacts(
-    request?: protos.google.devtools.artifactregistry.v1.IImportYumArtifactsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse,
-            protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse,
-        protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse,
-        protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.artifactregistry.v1.IImportYumArtifactsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse,
-            protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('importYumArtifacts response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('importYumArtifacts request %j', request);
-    return this.innerApiCalls
-      .importYumArtifacts(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse,
-            protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('importYumArtifacts response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.importYumArtifacts(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse, protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('importYumArtifacts response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `importYumArtifacts()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.import_yum_artifacts.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ImportYumArtifacts_async
-   */
-  async checkImportYumArtifactsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.devtools.artifactregistry.v1.ImportYumArtifactsResponse,
-      protos.google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `importYumArtifacts()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.import_yum_artifacts.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ImportYumArtifacts_async
+ */
+  async checkImportYumArtifactsProgress(name: string): Promise<LROperation<protos.google.devtools.artifactregistry.v1.ImportYumArtifactsResponse, protos.google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata>>{
     this._log.info('importYumArtifacts long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.importYumArtifacts,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.devtools.artifactregistry.v1.ImportYumArtifactsResponse,
-      protos.google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importYumArtifacts, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.devtools.artifactregistry.v1.ImportYumArtifactsResponse, protos.google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata>;
   }
-  /**
-   * Creates a repository. The returned Operation will finish once the
-   * repository has been created. Its response will be the created Repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource where the repository will be
-   *   created.
-   * @param {string} request.repositoryId
-   *   Required. The repository id to use for this repository.
-   * @param {google.devtools.artifactregistry.v1.Repository} request.repository
-   *   Required. The repository to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.create_repository.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async
-   */
+/**
+ * Creates a repository. The returned Operation will finish once the
+ * repository has been created. Its response will be the created Repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource where the repository will be
+ *   created.
+ * @param {string} request.repositoryId
+ *   Required. The repository id to use for this repository.
+ * @param {google.devtools.artifactregistry.v1.Repository} request.repository
+ *   Required. The repository to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.create_repository.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async
+ */
   createRepository(
-    request?: protos.google.devtools.artifactregistry.v1.ICreateRepositoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IRepository,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.ICreateRepositoryRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.devtools.artifactregistry.v1.IRepository, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createRepository(
-    request: protos.google.devtools.artifactregistry.v1.ICreateRepositoryRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IRepository,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.ICreateRepositoryRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IRepository, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createRepository(
-    request: protos.google.devtools.artifactregistry.v1.ICreateRepositoryRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IRepository,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.ICreateRepositoryRequest,
+      callback: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IRepository, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createRepository(
-    request?: protos.google.devtools.artifactregistry.v1.ICreateRepositoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.devtools.artifactregistry.v1.IRepository,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IRepository,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IRepository,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.artifactregistry.v1.ICreateRepositoryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IRepository, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IRepository, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.devtools.artifactregistry.v1.IRepository, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.devtools.artifactregistry.v1.IRepository,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IRepository, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createRepository response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createRepository request %j', request);
-    return this.innerApiCalls
-      .createRepository(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.devtools.artifactregistry.v1.IRepository,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createRepository response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createRepository(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.devtools.artifactregistry.v1.IRepository, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createRepository response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createRepository()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.create_repository.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async
-   */
-  async checkCreateRepositoryProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.devtools.artifactregistry.v1.Repository,
-      protos.google.devtools.artifactregistry.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createRepository()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.create_repository.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async
+ */
+  async checkCreateRepositoryProgress(name: string): Promise<LROperation<protos.google.devtools.artifactregistry.v1.Repository, protos.google.devtools.artifactregistry.v1.OperationMetadata>>{
     this._log.info('createRepository long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createRepository,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.devtools.artifactregistry.v1.Repository,
-      protos.google.devtools.artifactregistry.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createRepository, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.devtools.artifactregistry.v1.Repository, protos.google.devtools.artifactregistry.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a repository and all of its contents. The returned Operation will
-   * finish once the repository has been deleted. It will not have any Operation
-   * metadata and will return a google.protobuf.Empty response.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the repository to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.delete_repository.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteRepository_async
-   */
+/**
+ * Deletes a repository and all of its contents. The returned Operation will
+ * finish once the repository has been deleted. It will not have any Operation
+ * metadata and will return a google.protobuf.Empty response.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the repository to delete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.delete_repository.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteRepository_async
+ */
   deleteRepository(
-    request?: protos.google.devtools.artifactregistry.v1.IDeleteRepositoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IDeleteRepositoryRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteRepository(
-    request: protos.google.devtools.artifactregistry.v1.IDeleteRepositoryRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IDeleteRepositoryRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteRepository(
-    request: protos.google.devtools.artifactregistry.v1.IDeleteRepositoryRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IDeleteRepositoryRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteRepository(
-    request?: protos.google.devtools.artifactregistry.v1.IDeleteRepositoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.artifactregistry.v1.IDeleteRepositoryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteRepository response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteRepository request %j', request);
-    return this.innerApiCalls
-      .deleteRepository(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteRepository response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteRepository(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteRepository response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteRepository()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.delete_repository.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteRepository_async
-   */
-  async checkDeleteRepositoryProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.artifactregistry.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteRepository()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.delete_repository.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteRepository_async
+ */
+  async checkDeleteRepositoryProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.devtools.artifactregistry.v1.OperationMetadata>>{
     this._log.info('deleteRepository long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteRepository,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.artifactregistry.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteRepository, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.devtools.artifactregistry.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a package and all of its versions and tags. The returned operation
-   * will complete once the package has been deleted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the package to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.delete_package.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeletePackage_async
-   */
+/**
+ * Deletes a package and all of its versions and tags. The returned operation
+ * will complete once the package has been deleted.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the package to delete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.delete_package.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeletePackage_async
+ */
   deletePackage(
-    request?: protos.google.devtools.artifactregistry.v1.IDeletePackageRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IDeletePackageRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deletePackage(
-    request: protos.google.devtools.artifactregistry.v1.IDeletePackageRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IDeletePackageRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deletePackage(
-    request: protos.google.devtools.artifactregistry.v1.IDeletePackageRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IDeletePackageRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deletePackage(
-    request?: protos.google.devtools.artifactregistry.v1.IDeletePackageRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.artifactregistry.v1.IDeletePackageRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deletePackage response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deletePackage request %j', request);
-    return this.innerApiCalls
-      .deletePackage(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deletePackage response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deletePackage(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deletePackage response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deletePackage()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.delete_package.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeletePackage_async
-   */
-  async checkDeletePackageProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.artifactregistry.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deletePackage()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.delete_package.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeletePackage_async
+ */
+  async checkDeletePackageProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.devtools.artifactregistry.v1.OperationMetadata>>{
     this._log.info('deletePackage long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deletePackage,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.artifactregistry.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deletePackage, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.devtools.artifactregistry.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a version and all of its content. The returned operation will
-   * complete once the version has been deleted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the version to delete.
-   * @param {boolean} request.force
-   *   By default, a version that is tagged may not be deleted. If force=true, the
-   *   version and any tags pointing to the version are deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.delete_version.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteVersion_async
-   */
+/**
+ * Deletes a version and all of its content. The returned operation will
+ * complete once the version has been deleted.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name of the version to delete.
+ * @param {boolean} request.force
+ *   By default, a version that is tagged may not be deleted. If force=true, the
+ *   version and any tags pointing to the version are deleted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.delete_version.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteVersion_async
+ */
   deleteVersion(
-    request?: protos.google.devtools.artifactregistry.v1.IDeleteVersionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IDeleteVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteVersion(
-    request: protos.google.devtools.artifactregistry.v1.IDeleteVersionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IDeleteVersionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteVersion(
-    request: protos.google.devtools.artifactregistry.v1.IDeleteVersionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IDeleteVersionRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteVersion(
-    request?: protos.google.devtools.artifactregistry.v1.IDeleteVersionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.artifactregistry.v1.IDeleteVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteVersion response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteVersion request %j', request);
-    return this.innerApiCalls
-      .deleteVersion(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteVersion response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteVersion(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteVersion response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteVersion()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.delete_version.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteVersion_async
-   */
-  async checkDeleteVersionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.artifactregistry.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteVersion()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.delete_version.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteVersion_async
+ */
+  async checkDeleteVersionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.devtools.artifactregistry.v1.OperationMetadata>>{
     this._log.info('deleteVersion long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteVersion,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.artifactregistry.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteVersion, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.devtools.artifactregistry.v1.OperationMetadata>;
   }
-  /**
-   * Deletes multiple versions across a repository. The returned operation will
-   * complete once the versions have been deleted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the repository holding all requested versions.
-   * @param {string[]} request.names
-   *   Required. The names of the versions to delete.
-   *   The maximum number of versions deleted per batch is determined by the
-   *   service and is dependent on the available resources in the region.
-   * @param {boolean} request.validateOnly
-   *   If true, the request is performed without deleting data, following AIP-163.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.batch_delete_versions.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_BatchDeleteVersions_async
-   */
+/**
+ * Deletes multiple versions across a repository. The returned operation will
+ * complete once the versions have been deleted.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the repository holding all requested versions.
+ * @param {string[]} request.names
+ *   Required. The names of the versions to delete.
+ *   The maximum number of versions deleted per batch is determined by the
+ *   service and is dependent on the available resources in the region.
+ * @param {boolean} request.validateOnly
+ *   If true, the request is performed without deleting data, following AIP-163.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.batch_delete_versions.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_BatchDeleteVersions_async
+ */
   batchDeleteVersions(
-    request?: protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   batchDeleteVersions(
-    request: protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   batchDeleteVersions(
-    request: protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   batchDeleteVersions(
-    request?: protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('batchDeleteVersions response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('batchDeleteVersions request %j', request);
-    return this.innerApiCalls
-      .batchDeleteVersions(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('batchDeleteVersions response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.batchDeleteVersions(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('batchDeleteVersions response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `batchDeleteVersions()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.batch_delete_versions.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_BatchDeleteVersions_async
-   */
-  async checkBatchDeleteVersionsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.artifactregistry.v1.BatchDeleteVersionsMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `batchDeleteVersions()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.batch_delete_versions.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_BatchDeleteVersions_async
+ */
+  async checkBatchDeleteVersionsProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.devtools.artifactregistry.v1.BatchDeleteVersionsMetadata>>{
     this._log.info('batchDeleteVersions long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.batchDeleteVersions,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.artifactregistry.v1.BatchDeleteVersionsMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchDeleteVersions, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.devtools.artifactregistry.v1.BatchDeleteVersionsMetadata>;
   }
-  /**
-   * Deletes a file and all of its content. It is only allowed on generic
-   * repositories. The returned operation will complete once the file has been
-   * deleted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the file to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.delete_file.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteFile_async
-   */
+/**
+ * Deletes a file and all of its content. It is only allowed on generic
+ * repositories. The returned operation will complete once the file has been
+ * deleted.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the file to delete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.delete_file.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteFile_async
+ */
   deleteFile(
-    request?: protos.google.devtools.artifactregistry.v1.IDeleteFileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IDeleteFileRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteFile(
-    request: protos.google.devtools.artifactregistry.v1.IDeleteFileRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IDeleteFileRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteFile(
-    request: protos.google.devtools.artifactregistry.v1.IDeleteFileRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IDeleteFileRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteFile(
-    request?: protos.google.devtools.artifactregistry.v1.IDeleteFileRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.artifactregistry.v1.IDeleteFileRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteFile response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteFile request %j', request);
-    return this.innerApiCalls
-      .deleteFile(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteFile response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteFile(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteFile response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteFile()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.delete_file.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteFile_async
-   */
-  async checkDeleteFileProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.artifactregistry.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteFile()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.delete_file.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteFile_async
+ */
+  async checkDeleteFileProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.devtools.artifactregistry.v1.OperationMetadata>>{
     this._log.info('deleteFile long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteFile,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.artifactregistry.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteFile, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.devtools.artifactregistry.v1.OperationMetadata>;
   }
-  /**
-   * Creates an attachment. The returned Operation will finish once the
-   * attachment has been created. Its response will be the created attachment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource where the attachment will be
-   *   created.
-   * @param {string} request.attachmentId
-   *   Required. The attachment id to use for this attachment.
-   * @param {google.devtools.artifactregistry.v1.Attachment} request.attachment
-   *   Required. The attachment to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.create_attachment.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_CreateAttachment_async
-   */
+/**
+ * Creates an attachment. The returned Operation will finish once the
+ * attachment has been created. Its response will be the created attachment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource where the attachment will be
+ *   created.
+ * @param {string} request.attachmentId
+ *   Required. The attachment id to use for this attachment.
+ * @param {google.devtools.artifactregistry.v1.Attachment} request.attachment
+ *   Required. The attachment to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.create_attachment.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_CreateAttachment_async
+ */
   createAttachment(
-    request?: protos.google.devtools.artifactregistry.v1.ICreateAttachmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IAttachment,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.ICreateAttachmentRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.devtools.artifactregistry.v1.IAttachment, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createAttachment(
-    request: protos.google.devtools.artifactregistry.v1.ICreateAttachmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IAttachment,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.ICreateAttachmentRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IAttachment, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAttachment(
-    request: protos.google.devtools.artifactregistry.v1.ICreateAttachmentRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IAttachment,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.ICreateAttachmentRequest,
+      callback: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IAttachment, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAttachment(
-    request?: protos.google.devtools.artifactregistry.v1.ICreateAttachmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.devtools.artifactregistry.v1.IAttachment,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IAttachment,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.artifactregistry.v1.IAttachment,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.artifactregistry.v1.ICreateAttachmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IAttachment, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IAttachment, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.devtools.artifactregistry.v1.IAttachment, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.devtools.artifactregistry.v1.IAttachment,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.devtools.artifactregistry.v1.IAttachment, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAttachment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAttachment request %j', request);
-    return this.innerApiCalls
-      .createAttachment(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.devtools.artifactregistry.v1.IAttachment,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createAttachment response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createAttachment(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.devtools.artifactregistry.v1.IAttachment, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createAttachment response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createAttachment()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.create_attachment.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_CreateAttachment_async
-   */
-  async checkCreateAttachmentProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.devtools.artifactregistry.v1.Attachment,
-      protos.google.devtools.artifactregistry.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createAttachment()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.create_attachment.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_CreateAttachment_async
+ */
+  async checkCreateAttachmentProgress(name: string): Promise<LROperation<protos.google.devtools.artifactregistry.v1.Attachment, protos.google.devtools.artifactregistry.v1.OperationMetadata>>{
     this._log.info('createAttachment long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createAttachment,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.devtools.artifactregistry.v1.Attachment,
-      protos.google.devtools.artifactregistry.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAttachment, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.devtools.artifactregistry.v1.Attachment, protos.google.devtools.artifactregistry.v1.OperationMetadata>;
   }
-  /**
-   * Deletes an attachment. The returned Operation will
-   * finish once the attachments has been deleted. It will not have any
-   * Operation metadata and will return a `google.protobuf.Empty` response.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the attachment to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.delete_attachment.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteAttachment_async
-   */
+/**
+ * Deletes an attachment. The returned Operation will
+ * finish once the attachments has been deleted. It will not have any
+ * Operation metadata and will return a `google.protobuf.Empty` response.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the attachment to delete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.delete_attachment.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteAttachment_async
+ */
   deleteAttachment(
-    request?: protos.google.devtools.artifactregistry.v1.IDeleteAttachmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IDeleteAttachmentRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteAttachment(
-    request: protos.google.devtools.artifactregistry.v1.IDeleteAttachmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IDeleteAttachmentRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAttachment(
-    request: protos.google.devtools.artifactregistry.v1.IDeleteAttachmentRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.artifactregistry.v1.IDeleteAttachmentRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAttachment(
-    request?: protos.google.devtools.artifactregistry.v1.IDeleteAttachmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.artifactregistry.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.artifactregistry.v1.IDeleteAttachmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteAttachment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteAttachment request %j', request);
-    return this.innerApiCalls
-      .deleteAttachment(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.artifactregistry.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAttachment response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteAttachment(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.artifactregistry.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteAttachment response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteAttachment()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.delete_attachment.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteAttachment_async
-   */
-  async checkDeleteAttachmentProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.artifactregistry.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteAttachment()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.delete_attachment.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_DeleteAttachment_async
+ */
+  async checkDeleteAttachmentProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.devtools.artifactregistry.v1.OperationMetadata>>{
     this._log.info('deleteAttachment long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteAttachment,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.artifactregistry.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAttachment, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.devtools.artifactregistry.v1.OperationMetadata>;
   }
-  /**
-   * Lists docker images.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose docker images will be
-   *   listed.
-   * @param {number} request.pageSize
-   *   The maximum number of artifacts to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {string} request.orderBy
-   *   The field to order the results by.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.DockerImage|DockerImage}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDockerImagesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists docker images.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose docker images will be
+ *   listed.
+ * @param {number} request.pageSize
+ *   The maximum number of artifacts to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {string} request.orderBy
+ *   The field to order the results by.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.DockerImage|DockerImage}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDockerImagesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDockerImages(
-    request?: protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IDockerImage[],
-      protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IDockerImage[],
+        protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse
+      ]>;
   listDockerImages(
-    request: protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IDockerImage
-    >
-  ): void;
-  listDockerImages(
-    request: protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IDockerImage
-    >
-  ): void;
-  listDockerImages(
-    request?: protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
-          | protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IDockerImage
-        >,
-    callback?: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IDockerImage
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IDockerImage[],
-      protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IDockerImage>): void;
+  listDockerImages(
+      request: protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
+      callback: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
+          protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IDockerImage>): void;
+  listDockerImages(
+      request?: protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
+          protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IDockerImage>,
+      callback?: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
+          protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IDockerImage>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IDockerImage[],
+        protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
-          | protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IDockerImage
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
+      protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse|null|undefined,
+      protos.google.devtools.artifactregistry.v1.IDockerImage>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDockerImages values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6035,59 +4420,56 @@ export class ArtifactRegistryClient {
     this._log.info('listDockerImages request %j', request);
     return this.innerApiCalls
       .listDockerImages(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.devtools.artifactregistry.v1.IDockerImage[],
-          protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest | null,
-          protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse,
-        ]) => {
-          this._log.info('listDockerImages values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.devtools.artifactregistry.v1.IDockerImage[],
+        protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse
+      ]) => {
+        this._log.info('listDockerImages values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDockerImages`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose docker images will be
-   *   listed.
-   * @param {number} request.pageSize
-   *   The maximum number of artifacts to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {string} request.orderBy
-   *   The field to order the results by.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.DockerImage|DockerImage} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDockerImagesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDockerImages`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose docker images will be
+ *   listed.
+ * @param {number} request.pageSize
+ *   The maximum number of artifacts to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {string} request.orderBy
+ *   The field to order the results by.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.DockerImage|DockerImage} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDockerImagesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDockerImagesStream(
-    request?: protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDockerImages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDockerImages stream %j', request);
     return this.descriptors.page.listDockerImages.createStream(
       this.innerApiCalls.listDockerImages as GaxCall,
@@ -6096,50 +4478,49 @@ export class ArtifactRegistryClient {
     );
   }
 
-  /**
-   * Equivalent to `listDockerImages`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose docker images will be
-   *   listed.
-   * @param {number} request.pageSize
-   *   The maximum number of artifacts to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {string} request.orderBy
-   *   The field to order the results by.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.devtools.artifactregistry.v1.DockerImage|DockerImage}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.list_docker_images.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListDockerImages_async
-   */
+/**
+ * Equivalent to `listDockerImages`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose docker images will be
+ *   listed.
+ * @param {number} request.pageSize
+ *   The maximum number of artifacts to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {string} request.orderBy
+ *   The field to order the results by.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.devtools.artifactregistry.v1.DockerImage|DockerImage}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.list_docker_images.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListDockerImages_async
+ */
   listDockerImagesAsync(
-    request?: protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.IDockerImage> {
+      request?: protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.devtools.artifactregistry.v1.IDockerImage>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDockerImages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDockerImages iterate %j', request);
     return this.descriptors.page.listDockerImages.asyncIterate(
       this.innerApiCalls['listDockerImages'] as GaxCall,
@@ -6147,113 +4528,88 @@ export class ArtifactRegistryClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IDockerImage>;
   }
-  /**
-   * Lists maven artifacts.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose maven artifacts will be
-   *   listed.
-   * @param {number} request.pageSize
-   *   The maximum number of artifacts to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.MavenArtifact|MavenArtifact}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listMavenArtifactsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists maven artifacts.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose maven artifacts will be
+ *   listed.
+ * @param {number} request.pageSize
+ *   The maximum number of artifacts to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.MavenArtifact|MavenArtifact}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listMavenArtifactsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listMavenArtifacts(
-    request?: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IMavenArtifact[],
-      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IMavenArtifact[],
+        protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse
+      ]>;
   listMavenArtifacts(
-    request: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
-      | protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IMavenArtifact
-    >
-  ): void;
-  listMavenArtifacts(
-    request: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
-      | protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IMavenArtifact
-    >
-  ): void;
-  listMavenArtifacts(
-    request?: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
-          | protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IMavenArtifact
-        >,
-    callback?: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
-      | protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IMavenArtifact
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IMavenArtifact[],
-      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IMavenArtifact>): void;
+  listMavenArtifacts(
+      request: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+      callback: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+          protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IMavenArtifact>): void;
+  listMavenArtifacts(
+      request?: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+          protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IMavenArtifact>,
+      callback?: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+          protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IMavenArtifact>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IMavenArtifact[],
+        protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
-          | protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IMavenArtifact
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+      protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse|null|undefined,
+      protos.google.devtools.artifactregistry.v1.IMavenArtifact>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMavenArtifacts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6262,57 +4618,54 @@ export class ArtifactRegistryClient {
     this._log.info('listMavenArtifacts request %j', request);
     return this.innerApiCalls
       .listMavenArtifacts(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.devtools.artifactregistry.v1.IMavenArtifact[],
-          protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest | null,
-          protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse,
-        ]) => {
-          this._log.info('listMavenArtifacts values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.devtools.artifactregistry.v1.IMavenArtifact[],
+        protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse
+      ]) => {
+        this._log.info('listMavenArtifacts values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listMavenArtifacts`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose maven artifacts will be
-   *   listed.
-   * @param {number} request.pageSize
-   *   The maximum number of artifacts to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.MavenArtifact|MavenArtifact} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listMavenArtifactsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listMavenArtifacts`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose maven artifacts will be
+ *   listed.
+ * @param {number} request.pageSize
+ *   The maximum number of artifacts to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.MavenArtifact|MavenArtifact} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listMavenArtifactsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listMavenArtifactsStream(
-    request?: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listMavenArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listMavenArtifacts stream %j', request);
     return this.descriptors.page.listMavenArtifacts.createStream(
       this.innerApiCalls.listMavenArtifacts as GaxCall,
@@ -6321,48 +4674,47 @@ export class ArtifactRegistryClient {
     );
   }
 
-  /**
-   * Equivalent to `listMavenArtifacts`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose maven artifacts will be
-   *   listed.
-   * @param {number} request.pageSize
-   *   The maximum number of artifacts to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.devtools.artifactregistry.v1.MavenArtifact|MavenArtifact}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.list_maven_artifacts.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListMavenArtifacts_async
-   */
+/**
+ * Equivalent to `listMavenArtifacts`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose maven artifacts will be
+ *   listed.
+ * @param {number} request.pageSize
+ *   The maximum number of artifacts to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.devtools.artifactregistry.v1.MavenArtifact|MavenArtifact}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.list_maven_artifacts.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListMavenArtifacts_async
+ */
   listMavenArtifactsAsync(
-    request?: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.IMavenArtifact> {
+      request?: protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.devtools.artifactregistry.v1.IMavenArtifact>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listMavenArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listMavenArtifacts iterate %j', request);
     return this.descriptors.page.listMavenArtifacts.asyncIterate(
       this.innerApiCalls['listMavenArtifacts'] as GaxCall,
@@ -6370,113 +4722,88 @@ export class ArtifactRegistryClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IMavenArtifact>;
   }
-  /**
-   * Lists npm packages.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose npm packages will be
-   *   listed.
-   * @param {number} request.pageSize
-   *   The maximum number of artifacts to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.NpmPackage|NpmPackage}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listNpmPackagesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists npm packages.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose npm packages will be
+ *   listed.
+ * @param {number} request.pageSize
+ *   The maximum number of artifacts to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.NpmPackage|NpmPackage}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listNpmPackagesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNpmPackages(
-    request?: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.INpmPackage[],
-      protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.INpmPackage[],
+        protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse
+      ]>;
   listNpmPackages(
-    request: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.INpmPackage
-    >
-  ): void;
-  listNpmPackages(
-    request: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.INpmPackage
-    >
-  ): void;
-  listNpmPackages(
-    request?: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
-          | protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.INpmPackage
-        >,
-    callback?: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.INpmPackage
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.INpmPackage[],
-      protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.INpmPackage>): void;
+  listNpmPackages(
+      request: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+      callback: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+          protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.INpmPackage>): void;
+  listNpmPackages(
+      request?: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+          protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.INpmPackage>,
+      callback?: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+          protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.INpmPackage>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.INpmPackage[],
+        protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
-          | protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.INpmPackage
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+      protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse|null|undefined,
+      protos.google.devtools.artifactregistry.v1.INpmPackage>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listNpmPackages values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6485,57 +4812,54 @@ export class ArtifactRegistryClient {
     this._log.info('listNpmPackages request %j', request);
     return this.innerApiCalls
       .listNpmPackages(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.devtools.artifactregistry.v1.INpmPackage[],
-          protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest | null,
-          protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse,
-        ]) => {
-          this._log.info('listNpmPackages values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.devtools.artifactregistry.v1.INpmPackage[],
+        protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse
+      ]) => {
+        this._log.info('listNpmPackages values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listNpmPackages`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose npm packages will be
-   *   listed.
-   * @param {number} request.pageSize
-   *   The maximum number of artifacts to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.NpmPackage|NpmPackage} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listNpmPackagesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listNpmPackages`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose npm packages will be
+ *   listed.
+ * @param {number} request.pageSize
+ *   The maximum number of artifacts to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.NpmPackage|NpmPackage} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listNpmPackagesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNpmPackagesStream(
-    request?: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listNpmPackages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listNpmPackages stream %j', request);
     return this.descriptors.page.listNpmPackages.createStream(
       this.innerApiCalls.listNpmPackages as GaxCall,
@@ -6544,48 +4868,47 @@ export class ArtifactRegistryClient {
     );
   }
 
-  /**
-   * Equivalent to `listNpmPackages`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose npm packages will be
-   *   listed.
-   * @param {number} request.pageSize
-   *   The maximum number of artifacts to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.devtools.artifactregistry.v1.NpmPackage|NpmPackage}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.list_npm_packages.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListNpmPackages_async
-   */
+/**
+ * Equivalent to `listNpmPackages`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose npm packages will be
+ *   listed.
+ * @param {number} request.pageSize
+ *   The maximum number of artifacts to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.devtools.artifactregistry.v1.NpmPackage|NpmPackage}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.list_npm_packages.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListNpmPackages_async
+ */
   listNpmPackagesAsync(
-    request?: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.INpmPackage> {
+      request?: protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.devtools.artifactregistry.v1.INpmPackage>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listNpmPackages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listNpmPackages iterate %j', request);
     return this.descriptors.page.listNpmPackages.asyncIterate(
       this.innerApiCalls['listNpmPackages'] as GaxCall,
@@ -6593,113 +4916,88 @@ export class ArtifactRegistryClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.INpmPackage>;
   }
-  /**
-   * Lists python packages.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose python packages will be
-   *   listed.
-   * @param {number} request.pageSize
-   *   The maximum number of artifacts to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.PythonPackage|PythonPackage}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPythonPackagesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists python packages.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose python packages will be
+ *   listed.
+ * @param {number} request.pageSize
+ *   The maximum number of artifacts to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.PythonPackage|PythonPackage}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPythonPackagesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPythonPackages(
-    request?: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IPythonPackage[],
-      protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IPythonPackage[],
+        protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse
+      ]>;
   listPythonPackages(
-    request: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IPythonPackage
-    >
-  ): void;
-  listPythonPackages(
-    request: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IPythonPackage
-    >
-  ): void;
-  listPythonPackages(
-    request?: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
-          | protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IPythonPackage
-        >,
-    callback?: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IPythonPackage
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IPythonPackage[],
-      protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IPythonPackage>): void;
+  listPythonPackages(
+      request: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+      callback: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+          protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IPythonPackage>): void;
+  listPythonPackages(
+      request?: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+          protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IPythonPackage>,
+      callback?: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+          protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IPythonPackage>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IPythonPackage[],
+        protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
-          | protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IPythonPackage
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+      protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse|null|undefined,
+      protos.google.devtools.artifactregistry.v1.IPythonPackage>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPythonPackages values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6708,57 +5006,54 @@ export class ArtifactRegistryClient {
     this._log.info('listPythonPackages request %j', request);
     return this.innerApiCalls
       .listPythonPackages(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.devtools.artifactregistry.v1.IPythonPackage[],
-          protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest | null,
-          protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse,
-        ]) => {
-          this._log.info('listPythonPackages values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.devtools.artifactregistry.v1.IPythonPackage[],
+        protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse
+      ]) => {
+        this._log.info('listPythonPackages values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listPythonPackages`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose python packages will be
-   *   listed.
-   * @param {number} request.pageSize
-   *   The maximum number of artifacts to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.PythonPackage|PythonPackage} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPythonPackagesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listPythonPackages`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose python packages will be
+ *   listed.
+ * @param {number} request.pageSize
+ *   The maximum number of artifacts to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.PythonPackage|PythonPackage} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPythonPackagesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPythonPackagesStream(
-    request?: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPythonPackages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPythonPackages stream %j', request);
     return this.descriptors.page.listPythonPackages.createStream(
       this.innerApiCalls.listPythonPackages as GaxCall,
@@ -6767,48 +5062,47 @@ export class ArtifactRegistryClient {
     );
   }
 
-  /**
-   * Equivalent to `listPythonPackages`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose python packages will be
-   *   listed.
-   * @param {number} request.pageSize
-   *   The maximum number of artifacts to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.devtools.artifactregistry.v1.PythonPackage|PythonPackage}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.list_python_packages.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListPythonPackages_async
-   */
+/**
+ * Equivalent to `listPythonPackages`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose python packages will be
+ *   listed.
+ * @param {number} request.pageSize
+ *   The maximum number of artifacts to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.devtools.artifactregistry.v1.PythonPackage|PythonPackage}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.list_python_packages.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListPythonPackages_async
+ */
   listPythonPackagesAsync(
-    request?: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.IPythonPackage> {
+      request?: protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.devtools.artifactregistry.v1.IPythonPackage>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPythonPackages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPythonPackages iterate %j', request);
     return this.descriptors.page.listPythonPackages.asyncIterate(
       this.innerApiCalls['listPythonPackages'] as GaxCall,
@@ -6816,135 +5110,110 @@ export class ArtifactRegistryClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IPythonPackage>;
   }
-  /**
-   * Lists repositories.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose repositories will be
-   *   listed.
-   * @param {number} request.pageSize
-   *   The maximum number of repositories to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Filter
-   *   rules are case insensitive. The fields eligible for filtering are:
-   *
-   *     * `name`
-   *
-   *    Examples of using a filter:
-   *
-   *   To filter the results of your request to repositories with the name
-   *   `my-repo` in project `my-project` in the `us-central` region, append the
-   *   following filter expression to your request:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo"`
-   *
-   *    You can also use wildcards to match any number of characters before or
-   *    after the value:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-*"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/*repo"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/*repo*"`
-   * @param {string} [request.orderBy]
-   *   Optional. The field to order the results by.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.Repository|Repository}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRepositoriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists repositories.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose repositories will be
+ *   listed.
+ * @param {number} request.pageSize
+ *   The maximum number of repositories to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Filter
+ *   rules are case insensitive. The fields eligible for filtering are:
+ *
+ *     * `name`
+ *
+ *    Examples of using a filter:
+ *
+ *   To filter the results of your request to repositories with the name
+ *   `my-repo` in project `my-project` in the `us-central` region, append the
+ *   following filter expression to your request:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo"`
+ *
+ *    You can also use wildcards to match any number of characters before or
+ *    after the value:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-*"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/*repo"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/*repo*"`
+ * @param {string} [request.orderBy]
+ *   Optional. The field to order the results by.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.Repository|Repository}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRepositoriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRepositories(
-    request?: protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IRepository[],
-      protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IRepository[],
+        protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse
+      ]>;
   listRepositories(
-    request: protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IRepository
-    >
-  ): void;
-  listRepositories(
-    request: protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IRepository
-    >
-  ): void;
-  listRepositories(
-    request?: protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
-          | protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IRepository
-        >,
-    callback?: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IRepository
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IRepository[],
-      protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IRepository>): void;
+  listRepositories(
+      request: protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
+      callback: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
+          protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IRepository>): void;
+  listRepositories(
+      request?: protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
+          protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IRepository>,
+      callback?: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
+          protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IRepository>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IRepository[],
+        protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
-          | protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IRepository
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
+      protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse|null|undefined,
+      protos.google.devtools.artifactregistry.v1.IRepository>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRepositories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6953,79 +5222,76 @@ export class ArtifactRegistryClient {
     this._log.info('listRepositories request %j', request);
     return this.innerApiCalls
       .listRepositories(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.devtools.artifactregistry.v1.IRepository[],
-          protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest | null,
-          protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse,
-        ]) => {
-          this._log.info('listRepositories values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.devtools.artifactregistry.v1.IRepository[],
+        protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse
+      ]) => {
+        this._log.info('listRepositories values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRepositories`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose repositories will be
-   *   listed.
-   * @param {number} request.pageSize
-   *   The maximum number of repositories to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Filter
-   *   rules are case insensitive. The fields eligible for filtering are:
-   *
-   *     * `name`
-   *
-   *    Examples of using a filter:
-   *
-   *   To filter the results of your request to repositories with the name
-   *   `my-repo` in project `my-project` in the `us-central` region, append the
-   *   following filter expression to your request:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo"`
-   *
-   *    You can also use wildcards to match any number of characters before or
-   *    after the value:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-*"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/*repo"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/*repo*"`
-   * @param {string} [request.orderBy]
-   *   Optional. The field to order the results by.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.Repository|Repository} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRepositoriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRepositories`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose repositories will be
+ *   listed.
+ * @param {number} request.pageSize
+ *   The maximum number of repositories to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Filter
+ *   rules are case insensitive. The fields eligible for filtering are:
+ *
+ *     * `name`
+ *
+ *    Examples of using a filter:
+ *
+ *   To filter the results of your request to repositories with the name
+ *   `my-repo` in project `my-project` in the `us-central` region, append the
+ *   following filter expression to your request:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo"`
+ *
+ *    You can also use wildcards to match any number of characters before or
+ *    after the value:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-*"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/*repo"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/*repo*"`
+ * @param {string} [request.orderBy]
+ *   Optional. The field to order the results by.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.Repository|Repository} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRepositoriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRepositoriesStream(
-    request?: protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRepositories stream %j', request);
     return this.descriptors.page.listRepositories.createStream(
       this.innerApiCalls.listRepositories as GaxCall,
@@ -7034,70 +5300,69 @@ export class ArtifactRegistryClient {
     );
   }
 
-  /**
-   * Equivalent to `listRepositories`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose repositories will be
-   *   listed.
-   * @param {number} request.pageSize
-   *   The maximum number of repositories to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Filter
-   *   rules are case insensitive. The fields eligible for filtering are:
-   *
-   *     * `name`
-   *
-   *    Examples of using a filter:
-   *
-   *   To filter the results of your request to repositories with the name
-   *   `my-repo` in project `my-project` in the `us-central` region, append the
-   *   following filter expression to your request:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo"`
-   *
-   *    You can also use wildcards to match any number of characters before or
-   *    after the value:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-*"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/*repo"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/*repo*"`
-   * @param {string} [request.orderBy]
-   *   Optional. The field to order the results by.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.devtools.artifactregistry.v1.Repository|Repository}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.list_repositories.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListRepositories_async
-   */
+/**
+ * Equivalent to `listRepositories`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose repositories will be
+ *   listed.
+ * @param {number} request.pageSize
+ *   The maximum number of repositories to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Filter
+ *   rules are case insensitive. The fields eligible for filtering are:
+ *
+ *     * `name`
+ *
+ *    Examples of using a filter:
+ *
+ *   To filter the results of your request to repositories with the name
+ *   `my-repo` in project `my-project` in the `us-central` region, append the
+ *   following filter expression to your request:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo"`
+ *
+ *    You can also use wildcards to match any number of characters before or
+ *    after the value:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-*"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/*repo"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/*repo*"`
+ * @param {string} [request.orderBy]
+ *   Optional. The field to order the results by.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.devtools.artifactregistry.v1.Repository|Repository}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.list_repositories.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListRepositories_async
+ */
   listRepositoriesAsync(
-    request?: protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.IRepository> {
+      request?: protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.devtools.artifactregistry.v1.IRepository>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRepositories iterate %j', request);
     return this.descriptors.page.listRepositories.asyncIterate(
       this.innerApiCalls['listRepositories'] as GaxCall,
@@ -7105,160 +5370,135 @@ export class ArtifactRegistryClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IRepository>;
   }
-  /**
-   * Lists packages.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose packages will be listed.
-   * @param {number} request.pageSize
-   *   The maximum number of packages to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Filter
-   *   rules are case insensitive. The fields eligible for filtering are:
-   *
-   *     * `name`
-   *     * `annotations`
-   *
-   *   Examples of using a filter:
-   *
-   *    To filter the results of your request to packages with the name
-   *    `my-package` in project `my-project` in the `us-central` region, in
-   *    repository `my-repo`, append the following filter expression to your
-   *    request:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package"`
-   *
-   *    You can also use wildcards to match any number of characters before or
-   *    after the value:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-*"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*package"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*pack*"`
-   *
-   *    To filter the results of your request to packages with the annotation
-   *    key-value pair [`external_link`: `external_link_value`], append the
-   *    following filter expression to your request":
-   *
-   *     * `"annotations.external_link:external_link_value"`
-   *
-   *    To filter the results just for a specific annotation key `external_link`,
-   *    append the following filter expression to your request:
-   *
-   *     * `"annotations.external_link"`
-   *
-   *    If the annotation key or value contains special characters, you can escape
-   *    them by surrounding the value with backticks. For example, to filter the
-   *    results of your request to packages with the annotation key-value pair
-   *    [`external.link`:`https://example.com/my-package`], append the following
-   *    filter expression to your request:
-   *
-   *     * `` "annotations.`external.link`:`https://example.com/my-package`" ``
-   *
-   *    You can also filter with annotations with a wildcard to
-   *    match any number of characters before or after the value:
-   *
-   *     * `` "annotations.*_link:`*example.com*`" ``
-   * @param {string} [request.orderBy]
-   *   Optional. The field to order the results by.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.Package|Package}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPackagesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists packages.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose packages will be listed.
+ * @param {number} request.pageSize
+ *   The maximum number of packages to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Filter
+ *   rules are case insensitive. The fields eligible for filtering are:
+ *
+ *     * `name`
+ *     * `annotations`
+ *
+ *   Examples of using a filter:
+ *
+ *    To filter the results of your request to packages with the name
+ *    `my-package` in project `my-project` in the `us-central` region, in
+ *    repository `my-repo`, append the following filter expression to your
+ *    request:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package"`
+ *
+ *    You can also use wildcards to match any number of characters before or
+ *    after the value:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-*"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*package"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*pack*"`
+ *
+ *    To filter the results of your request to packages with the annotation
+ *    key-value pair [`external_link`: `external_link_value`], append the
+ *    following filter expression to your request":
+ *
+ *     * `"annotations.external_link:external_link_value"`
+ *
+ *    To filter the results just for a specific annotation key `external_link`,
+ *    append the following filter expression to your request:
+ *
+ *     * `"annotations.external_link"`
+ *
+ *    If the annotation key or value contains special characters, you can escape
+ *    them by surrounding the value with backticks. For example, to filter the
+ *    results of your request to packages with the annotation key-value pair
+ *    [`external.link`:`https://example.com/my-package`], append the following
+ *    filter expression to your request:
+ *
+ *     * `` "annotations.`external.link`:`https://example.com/my-package`" ``
+ *
+ *    You can also filter with annotations with a wildcard to
+ *    match any number of characters before or after the value:
+ *
+ *     * `` "annotations.*_link:`*example.com*`" ``
+ * @param {string} [request.orderBy]
+ *   Optional. The field to order the results by.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.Package|Package}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPackagesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPackages(
-    request?: protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IPackage[],
-      protos.google.devtools.artifactregistry.v1.IListPackagesRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListPackagesResponse,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IPackage[],
+        protos.google.devtools.artifactregistry.v1.IListPackagesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListPackagesResponse
+      ]>;
   listPackages(
-    request: protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListPackagesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IPackage
-    >
-  ): void;
-  listPackages(
-    request: protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListPackagesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IPackage
-    >
-  ): void;
-  listPackages(
-    request?: protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
-          | protos.google.devtools.artifactregistry.v1.IListPackagesResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IPackage
-        >,
-    callback?: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListPackagesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IPackage
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IPackage[],
-      protos.google.devtools.artifactregistry.v1.IListPackagesRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListPackagesResponse,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IListPackagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IPackage>): void;
+  listPackages(
+      request: protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
+      callback: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
+          protos.google.devtools.artifactregistry.v1.IListPackagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IPackage>): void;
+  listPackages(
+      request?: protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
+          protos.google.devtools.artifactregistry.v1.IListPackagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IPackage>,
+      callback?: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
+          protos.google.devtools.artifactregistry.v1.IListPackagesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IPackage>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IPackage[],
+        protos.google.devtools.artifactregistry.v1.IListPackagesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListPackagesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
-          | protos.google.devtools.artifactregistry.v1.IListPackagesResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IPackage
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
+      protos.google.devtools.artifactregistry.v1.IListPackagesResponse|null|undefined,
+      protos.google.devtools.artifactregistry.v1.IPackage>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPackages values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7267,104 +5507,101 @@ export class ArtifactRegistryClient {
     this._log.info('listPackages request %j', request);
     return this.innerApiCalls
       .listPackages(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.devtools.artifactregistry.v1.IPackage[],
-          protos.google.devtools.artifactregistry.v1.IListPackagesRequest | null,
-          protos.google.devtools.artifactregistry.v1.IListPackagesResponse,
-        ]) => {
-          this._log.info('listPackages values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.devtools.artifactregistry.v1.IPackage[],
+        protos.google.devtools.artifactregistry.v1.IListPackagesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListPackagesResponse
+      ]) => {
+        this._log.info('listPackages values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listPackages`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose packages will be listed.
-   * @param {number} request.pageSize
-   *   The maximum number of packages to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Filter
-   *   rules are case insensitive. The fields eligible for filtering are:
-   *
-   *     * `name`
-   *     * `annotations`
-   *
-   *   Examples of using a filter:
-   *
-   *    To filter the results of your request to packages with the name
-   *    `my-package` in project `my-project` in the `us-central` region, in
-   *    repository `my-repo`, append the following filter expression to your
-   *    request:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package"`
-   *
-   *    You can also use wildcards to match any number of characters before or
-   *    after the value:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-*"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*package"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*pack*"`
-   *
-   *    To filter the results of your request to packages with the annotation
-   *    key-value pair [`external_link`: `external_link_value`], append the
-   *    following filter expression to your request":
-   *
-   *     * `"annotations.external_link:external_link_value"`
-   *
-   *    To filter the results just for a specific annotation key `external_link`,
-   *    append the following filter expression to your request:
-   *
-   *     * `"annotations.external_link"`
-   *
-   *    If the annotation key or value contains special characters, you can escape
-   *    them by surrounding the value with backticks. For example, to filter the
-   *    results of your request to packages with the annotation key-value pair
-   *    [`external.link`:`https://example.com/my-package`], append the following
-   *    filter expression to your request:
-   *
-   *     * `` "annotations.`external.link`:`https://example.com/my-package`" ``
-   *
-   *    You can also filter with annotations with a wildcard to
-   *    match any number of characters before or after the value:
-   *
-   *     * `` "annotations.*_link:`*example.com*`" ``
-   * @param {string} [request.orderBy]
-   *   Optional. The field to order the results by.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.Package|Package} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPackagesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listPackages`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose packages will be listed.
+ * @param {number} request.pageSize
+ *   The maximum number of packages to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Filter
+ *   rules are case insensitive. The fields eligible for filtering are:
+ *
+ *     * `name`
+ *     * `annotations`
+ *
+ *   Examples of using a filter:
+ *
+ *    To filter the results of your request to packages with the name
+ *    `my-package` in project `my-project` in the `us-central` region, in
+ *    repository `my-repo`, append the following filter expression to your
+ *    request:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package"`
+ *
+ *    You can also use wildcards to match any number of characters before or
+ *    after the value:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-*"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*package"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*pack*"`
+ *
+ *    To filter the results of your request to packages with the annotation
+ *    key-value pair [`external_link`: `external_link_value`], append the
+ *    following filter expression to your request":
+ *
+ *     * `"annotations.external_link:external_link_value"`
+ *
+ *    To filter the results just for a specific annotation key `external_link`,
+ *    append the following filter expression to your request:
+ *
+ *     * `"annotations.external_link"`
+ *
+ *    If the annotation key or value contains special characters, you can escape
+ *    them by surrounding the value with backticks. For example, to filter the
+ *    results of your request to packages with the annotation key-value pair
+ *    [`external.link`:`https://example.com/my-package`], append the following
+ *    filter expression to your request:
+ *
+ *     * `` "annotations.`external.link`:`https://example.com/my-package`" ``
+ *
+ *    You can also filter with annotations with a wildcard to
+ *    match any number of characters before or after the value:
+ *
+ *     * `` "annotations.*_link:`*example.com*`" ``
+ * @param {string} [request.orderBy]
+ *   Optional. The field to order the results by.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.Package|Package} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPackagesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPackagesStream(
-    request?: protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPackages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPackages stream %j', request);
     return this.descriptors.page.listPackages.createStream(
       this.innerApiCalls.listPackages as GaxCall,
@@ -7373,95 +5610,94 @@ export class ArtifactRegistryClient {
     );
   }
 
-  /**
-   * Equivalent to `listPackages`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose packages will be listed.
-   * @param {number} request.pageSize
-   *   The maximum number of packages to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Filter
-   *   rules are case insensitive. The fields eligible for filtering are:
-   *
-   *     * `name`
-   *     * `annotations`
-   *
-   *   Examples of using a filter:
-   *
-   *    To filter the results of your request to packages with the name
-   *    `my-package` in project `my-project` in the `us-central` region, in
-   *    repository `my-repo`, append the following filter expression to your
-   *    request:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package"`
-   *
-   *    You can also use wildcards to match any number of characters before or
-   *    after the value:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-*"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*package"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*pack*"`
-   *
-   *    To filter the results of your request to packages with the annotation
-   *    key-value pair [`external_link`: `external_link_value`], append the
-   *    following filter expression to your request":
-   *
-   *     * `"annotations.external_link:external_link_value"`
-   *
-   *    To filter the results just for a specific annotation key `external_link`,
-   *    append the following filter expression to your request:
-   *
-   *     * `"annotations.external_link"`
-   *
-   *    If the annotation key or value contains special characters, you can escape
-   *    them by surrounding the value with backticks. For example, to filter the
-   *    results of your request to packages with the annotation key-value pair
-   *    [`external.link`:`https://example.com/my-package`], append the following
-   *    filter expression to your request:
-   *
-   *     * `` "annotations.`external.link`:`https://example.com/my-package`" ``
-   *
-   *    You can also filter with annotations with a wildcard to
-   *    match any number of characters before or after the value:
-   *
-   *     * `` "annotations.*_link:`*example.com*`" ``
-   * @param {string} [request.orderBy]
-   *   Optional. The field to order the results by.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.devtools.artifactregistry.v1.Package|Package}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.list_packages.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListPackages_async
-   */
+/**
+ * Equivalent to `listPackages`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose packages will be listed.
+ * @param {number} request.pageSize
+ *   The maximum number of packages to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Filter
+ *   rules are case insensitive. The fields eligible for filtering are:
+ *
+ *     * `name`
+ *     * `annotations`
+ *
+ *   Examples of using a filter:
+ *
+ *    To filter the results of your request to packages with the name
+ *    `my-package` in project `my-project` in the `us-central` region, in
+ *    repository `my-repo`, append the following filter expression to your
+ *    request:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package"`
+ *
+ *    You can also use wildcards to match any number of characters before or
+ *    after the value:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-*"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*package"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*pack*"`
+ *
+ *    To filter the results of your request to packages with the annotation
+ *    key-value pair [`external_link`: `external_link_value`], append the
+ *    following filter expression to your request":
+ *
+ *     * `"annotations.external_link:external_link_value"`
+ *
+ *    To filter the results just for a specific annotation key `external_link`,
+ *    append the following filter expression to your request:
+ *
+ *     * `"annotations.external_link"`
+ *
+ *    If the annotation key or value contains special characters, you can escape
+ *    them by surrounding the value with backticks. For example, to filter the
+ *    results of your request to packages with the annotation key-value pair
+ *    [`external.link`:`https://example.com/my-package`], append the following
+ *    filter expression to your request:
+ *
+ *     * `` "annotations.`external.link`:`https://example.com/my-package`" ``
+ *
+ *    You can also filter with annotations with a wildcard to
+ *    match any number of characters before or after the value:
+ *
+ *     * `` "annotations.*_link:`*example.com*`" ``
+ * @param {string} [request.orderBy]
+ *   Optional. The field to order the results by.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.devtools.artifactregistry.v1.Package|Package}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.list_packages.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListPackages_async
+ */
   listPackagesAsync(
-    request?: protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.IPackage> {
+      request?: protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.devtools.artifactregistry.v1.IPackage>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPackages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPackages iterate %j', request);
     return this.descriptors.page.listPackages.asyncIterate(
       this.innerApiCalls['listPackages'] as GaxCall,
@@ -7469,162 +5705,137 @@ export class ArtifactRegistryClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IPackage>;
   }
-  /**
-   * Lists versions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the parent resource whose versions will be listed.
-   * @param {number} request.pageSize
-   *   The maximum number of versions to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {google.devtools.artifactregistry.v1.VersionView} request.view
-   *   The view that should be returned in the response.
-   * @param {string} [request.orderBy]
-   *   Optional. The field to order the results by.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Filter
-   *   rules are case insensitive. The fields eligible for filtering are:
-   *
-   *     * `name`
-   *     * `annotations`
-   *
-   *    Examples of using a filter:
-   *
-   *    To filter the results of your request to versions with the name
-   *    `my-version` in project `my-project` in the `us-central` region, in
-   *    repository `my-repo`, append the following filter expression to your
-   *    request:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my-version"`
-   *
-   *    You can also use wildcards to match any number of characters before or
-   *    after the value:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my*"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version*"`
-   *
-   *    To filter the results of your request to versions with the annotation
-   *    key-value pair [`external_link`: `external_link_value`], append the
-   *    following filter expression to your request:
-   *
-   *     * `"annotations.external_link:external_link_value"`
-   *
-   *    To filter just for a specific annotation key `external_link`, append the
-   *    following filter expression to your request:
-   *
-   *     * `"annotations.external_link"`
-   *
-   *    If the annotation key or value contains special characters, you can escape
-   *    them by surrounding the value with backticks. For example, to filter the
-   *    results of your request to versions with the annotation key-value pair
-   *    [`external.link`:`https://example.com/my-version`], append the following
-   *    filter expression to your request:
-   *
-   *     * `` "annotations.`external.link`:`https://example.com/my-version`" ``
-   *
-   *    You can also filter with annotations with a wildcard to
-   *    match any number of characters before or after the value:
-   *
-   *     * `` "annotations.*_link:`*example.com*`" ``
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.Version|Version}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists versions.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the parent resource whose versions will be listed.
+ * @param {number} request.pageSize
+ *   The maximum number of versions to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {google.devtools.artifactregistry.v1.VersionView} request.view
+ *   The view that should be returned in the response.
+ * @param {string} [request.orderBy]
+ *   Optional. The field to order the results by.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Filter
+ *   rules are case insensitive. The fields eligible for filtering are:
+ *
+ *     * `name`
+ *     * `annotations`
+ *
+ *    Examples of using a filter:
+ *
+ *    To filter the results of your request to versions with the name
+ *    `my-version` in project `my-project` in the `us-central` region, in
+ *    repository `my-repo`, append the following filter expression to your
+ *    request:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my-version"`
+ *
+ *    You can also use wildcards to match any number of characters before or
+ *    after the value:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my*"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version*"`
+ *
+ *    To filter the results of your request to versions with the annotation
+ *    key-value pair [`external_link`: `external_link_value`], append the
+ *    following filter expression to your request:
+ *
+ *     * `"annotations.external_link:external_link_value"`
+ *
+ *    To filter just for a specific annotation key `external_link`, append the
+ *    following filter expression to your request:
+ *
+ *     * `"annotations.external_link"`
+ *
+ *    If the annotation key or value contains special characters, you can escape
+ *    them by surrounding the value with backticks. For example, to filter the
+ *    results of your request to versions with the annotation key-value pair
+ *    [`external.link`:`https://example.com/my-version`], append the following
+ *    filter expression to your request:
+ *
+ *     * `` "annotations.`external.link`:`https://example.com/my-version`" ``
+ *
+ *    You can also filter with annotations with a wildcard to
+ *    match any number of characters before or after the value:
+ *
+ *     * `` "annotations.*_link:`*example.com*`" ``
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.Version|Version}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listVersions(
-    request?: protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IVersion[],
-      protos.google.devtools.artifactregistry.v1.IListVersionsRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListVersionsResponse,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IVersion[],
+        protos.google.devtools.artifactregistry.v1.IListVersionsRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListVersionsResponse
+      ]>;
   listVersions(
-    request: protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
-      | protos.google.devtools.artifactregistry.v1.IListVersionsResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IVersion
-    >
-  ): void;
-  listVersions(
-    request: protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
-      | protos.google.devtools.artifactregistry.v1.IListVersionsResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IVersion
-    >
-  ): void;
-  listVersions(
-    request?: protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
-          | protos.google.devtools.artifactregistry.v1.IListVersionsResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IVersion
-        >,
-    callback?: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
-      | protos.google.devtools.artifactregistry.v1.IListVersionsResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IVersion
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IVersion[],
-      protos.google.devtools.artifactregistry.v1.IListVersionsRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListVersionsResponse,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IListVersionsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IVersion>): void;
+  listVersions(
+      request: protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
+      callback: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
+          protos.google.devtools.artifactregistry.v1.IListVersionsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IVersion>): void;
+  listVersions(
+      request?: protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
+          protos.google.devtools.artifactregistry.v1.IListVersionsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IVersion>,
+      callback?: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
+          protos.google.devtools.artifactregistry.v1.IListVersionsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IVersion>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IVersion[],
+        protos.google.devtools.artifactregistry.v1.IListVersionsRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListVersionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
-          | protos.google.devtools.artifactregistry.v1.IListVersionsResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IVersion
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
+      protos.google.devtools.artifactregistry.v1.IListVersionsResponse|null|undefined,
+      protos.google.devtools.artifactregistry.v1.IVersion>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listVersions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7633,106 +5844,103 @@ export class ArtifactRegistryClient {
     this._log.info('listVersions request %j', request);
     return this.innerApiCalls
       .listVersions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.devtools.artifactregistry.v1.IVersion[],
-          protos.google.devtools.artifactregistry.v1.IListVersionsRequest | null,
-          protos.google.devtools.artifactregistry.v1.IListVersionsResponse,
-        ]) => {
-          this._log.info('listVersions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.devtools.artifactregistry.v1.IVersion[],
+        protos.google.devtools.artifactregistry.v1.IListVersionsRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListVersionsResponse
+      ]) => {
+        this._log.info('listVersions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listVersions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the parent resource whose versions will be listed.
-   * @param {number} request.pageSize
-   *   The maximum number of versions to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {google.devtools.artifactregistry.v1.VersionView} request.view
-   *   The view that should be returned in the response.
-   * @param {string} [request.orderBy]
-   *   Optional. The field to order the results by.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Filter
-   *   rules are case insensitive. The fields eligible for filtering are:
-   *
-   *     * `name`
-   *     * `annotations`
-   *
-   *    Examples of using a filter:
-   *
-   *    To filter the results of your request to versions with the name
-   *    `my-version` in project `my-project` in the `us-central` region, in
-   *    repository `my-repo`, append the following filter expression to your
-   *    request:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my-version"`
-   *
-   *    You can also use wildcards to match any number of characters before or
-   *    after the value:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my*"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version*"`
-   *
-   *    To filter the results of your request to versions with the annotation
-   *    key-value pair [`external_link`: `external_link_value`], append the
-   *    following filter expression to your request:
-   *
-   *     * `"annotations.external_link:external_link_value"`
-   *
-   *    To filter just for a specific annotation key `external_link`, append the
-   *    following filter expression to your request:
-   *
-   *     * `"annotations.external_link"`
-   *
-   *    If the annotation key or value contains special characters, you can escape
-   *    them by surrounding the value with backticks. For example, to filter the
-   *    results of your request to versions with the annotation key-value pair
-   *    [`external.link`:`https://example.com/my-version`], append the following
-   *    filter expression to your request:
-   *
-   *     * `` "annotations.`external.link`:`https://example.com/my-version`" ``
-   *
-   *    You can also filter with annotations with a wildcard to
-   *    match any number of characters before or after the value:
-   *
-   *     * `` "annotations.*_link:`*example.com*`" ``
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.Version|Version} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listVersions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the parent resource whose versions will be listed.
+ * @param {number} request.pageSize
+ *   The maximum number of versions to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {google.devtools.artifactregistry.v1.VersionView} request.view
+ *   The view that should be returned in the response.
+ * @param {string} [request.orderBy]
+ *   Optional. The field to order the results by.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Filter
+ *   rules are case insensitive. The fields eligible for filtering are:
+ *
+ *     * `name`
+ *     * `annotations`
+ *
+ *    Examples of using a filter:
+ *
+ *    To filter the results of your request to versions with the name
+ *    `my-version` in project `my-project` in the `us-central` region, in
+ *    repository `my-repo`, append the following filter expression to your
+ *    request:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my-version"`
+ *
+ *    You can also use wildcards to match any number of characters before or
+ *    after the value:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my*"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version*"`
+ *
+ *    To filter the results of your request to versions with the annotation
+ *    key-value pair [`external_link`: `external_link_value`], append the
+ *    following filter expression to your request:
+ *
+ *     * `"annotations.external_link:external_link_value"`
+ *
+ *    To filter just for a specific annotation key `external_link`, append the
+ *    following filter expression to your request:
+ *
+ *     * `"annotations.external_link"`
+ *
+ *    If the annotation key or value contains special characters, you can escape
+ *    them by surrounding the value with backticks. For example, to filter the
+ *    results of your request to versions with the annotation key-value pair
+ *    [`external.link`:`https://example.com/my-version`], append the following
+ *    filter expression to your request:
+ *
+ *     * `` "annotations.`external.link`:`https://example.com/my-version`" ``
+ *
+ *    You can also filter with annotations with a wildcard to
+ *    match any number of characters before or after the value:
+ *
+ *     * `` "annotations.*_link:`*example.com*`" ``
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.Version|Version} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listVersionsStream(
-    request?: protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listVersions stream %j', request);
     return this.descriptors.page.listVersions.createStream(
       this.innerApiCalls.listVersions as GaxCall,
@@ -7741,97 +5949,96 @@ export class ArtifactRegistryClient {
     );
   }
 
-  /**
-   * Equivalent to `listVersions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the parent resource whose versions will be listed.
-   * @param {number} request.pageSize
-   *   The maximum number of versions to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {google.devtools.artifactregistry.v1.VersionView} request.view
-   *   The view that should be returned in the response.
-   * @param {string} [request.orderBy]
-   *   Optional. The field to order the results by.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Filter
-   *   rules are case insensitive. The fields eligible for filtering are:
-   *
-   *     * `name`
-   *     * `annotations`
-   *
-   *    Examples of using a filter:
-   *
-   *    To filter the results of your request to versions with the name
-   *    `my-version` in project `my-project` in the `us-central` region, in
-   *    repository `my-repo`, append the following filter expression to your
-   *    request:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my-version"`
-   *
-   *    You can also use wildcards to match any number of characters before or
-   *    after the value:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my*"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version*"`
-   *
-   *    To filter the results of your request to versions with the annotation
-   *    key-value pair [`external_link`: `external_link_value`], append the
-   *    following filter expression to your request:
-   *
-   *     * `"annotations.external_link:external_link_value"`
-   *
-   *    To filter just for a specific annotation key `external_link`, append the
-   *    following filter expression to your request:
-   *
-   *     * `"annotations.external_link"`
-   *
-   *    If the annotation key or value contains special characters, you can escape
-   *    them by surrounding the value with backticks. For example, to filter the
-   *    results of your request to versions with the annotation key-value pair
-   *    [`external.link`:`https://example.com/my-version`], append the following
-   *    filter expression to your request:
-   *
-   *     * `` "annotations.`external.link`:`https://example.com/my-version`" ``
-   *
-   *    You can also filter with annotations with a wildcard to
-   *    match any number of characters before or after the value:
-   *
-   *     * `` "annotations.*_link:`*example.com*`" ``
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.devtools.artifactregistry.v1.Version|Version}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.list_versions.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListVersions_async
-   */
+/**
+ * Equivalent to `listVersions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the parent resource whose versions will be listed.
+ * @param {number} request.pageSize
+ *   The maximum number of versions to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {google.devtools.artifactregistry.v1.VersionView} request.view
+ *   The view that should be returned in the response.
+ * @param {string} [request.orderBy]
+ *   Optional. The field to order the results by.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Filter
+ *   rules are case insensitive. The fields eligible for filtering are:
+ *
+ *     * `name`
+ *     * `annotations`
+ *
+ *    Examples of using a filter:
+ *
+ *    To filter the results of your request to versions with the name
+ *    `my-version` in project `my-project` in the `us-central` region, in
+ *    repository `my-repo`, append the following filter expression to your
+ *    request:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my-version"`
+ *
+ *    You can also use wildcards to match any number of characters before or
+ *    after the value:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my*"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version*"`
+ *
+ *    To filter the results of your request to versions with the annotation
+ *    key-value pair [`external_link`: `external_link_value`], append the
+ *    following filter expression to your request:
+ *
+ *     * `"annotations.external_link:external_link_value"`
+ *
+ *    To filter just for a specific annotation key `external_link`, append the
+ *    following filter expression to your request:
+ *
+ *     * `"annotations.external_link"`
+ *
+ *    If the annotation key or value contains special characters, you can escape
+ *    them by surrounding the value with backticks. For example, to filter the
+ *    results of your request to versions with the annotation key-value pair
+ *    [`external.link`:`https://example.com/my-version`], append the following
+ *    filter expression to your request:
+ *
+ *     * `` "annotations.`external.link`:`https://example.com/my-version`" ``
+ *
+ *    You can also filter with annotations with a wildcard to
+ *    match any number of characters before or after the value:
+ *
+ *     * `` "annotations.*_link:`*example.com*`" ``
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.devtools.artifactregistry.v1.Version|Version}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.list_versions.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListVersions_async
+ */
   listVersionsAsync(
-    request?: protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.IVersion> {
+      request?: protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.devtools.artifactregistry.v1.IVersion>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listVersions iterate %j', request);
     return this.descriptors.page.listVersions.asyncIterate(
       this.innerApiCalls['listVersions'] as GaxCall,
@@ -7839,166 +6046,141 @@ export class ArtifactRegistryClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IVersion>;
   }
-  /**
-   * Lists files.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the repository whose files will be listed. For
-   *   example: "projects/p1/locations/us-central1/repositories/repo1
-   * @param {string} request.filter
-   *   An expression for filtering the results of the request. Filter rules are
-   *   case insensitive. The fields eligible for filtering are:
-   *
-   *     * `name`
-   *     * `owner`
-   *     * `annotations`
-   *
-   *   Examples of using a filter:
-   *
-   *    To filter the results of your request to files with the name `my_file.txt`
-   *    in project `my-project` in the `us-central` region, in repository
-   *    `my-repo`, append the following filter expression to your request:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-file.txt"`
-   *
-   *    You can also use wildcards to match any number of characters before or
-   *    after the value:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-*"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file.txt"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file*"`
-   *
-   *    To filter the results of your request to files owned by the version `1.0`
-   *    in package `pkg1`, append the following filter expression to your request:
-   *
-   *     * `owner="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
-   *
-   *    To filter the results of your request to files with the annotation
-   *    key-value pair [`external_link`: `external_link_value`], append the
-   *    following filter expression to your request:
-   *
-   *     * `"annotations.external_link:external_link_value"`
-   *
-   *    To filter just for a specific annotation key `external_link`, append the
-   *    following filter expression to your request:
-   *
-   *     * `"annotations.external_link"`
-   *
-   *    If the annotation key or value contains special characters, you can escape
-   *    them by surrounding the value with backticks. For example, to filter the
-   *    results of your request to files with the annotation key-value pair
-   *    [`external.link`:`https://example.com/my-file`], append the following
-   *    filter expression to your request:
-   *
-   *     * `` "annotations.`external.link`:`https://example.com/my-file`" ``
-   *
-   *    You can also filter with annotations with a wildcard to
-   *    match any number of characters before or after the value:
-   *
-   *     * `` "annotations.*_link:`*example.com*`" ``
-   * @param {number} request.pageSize
-   *   The maximum number of files to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {string} request.orderBy
-   *   The field to order the results by.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.File|File}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listFilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists files.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the repository whose files will be listed. For
+ *   example: "projects/p1/locations/us-central1/repositories/repo1
+ * @param {string} request.filter
+ *   An expression for filtering the results of the request. Filter rules are
+ *   case insensitive. The fields eligible for filtering are:
+ *
+ *     * `name`
+ *     * `owner`
+ *     * `annotations`
+ *
+ *   Examples of using a filter:
+ *
+ *    To filter the results of your request to files with the name `my_file.txt`
+ *    in project `my-project` in the `us-central` region, in repository
+ *    `my-repo`, append the following filter expression to your request:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-file.txt"`
+ *
+ *    You can also use wildcards to match any number of characters before or
+ *    after the value:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-*"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file.txt"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file*"`
+ *
+ *    To filter the results of your request to files owned by the version `1.0`
+ *    in package `pkg1`, append the following filter expression to your request:
+ *
+ *     * `owner="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
+ *
+ *    To filter the results of your request to files with the annotation
+ *    key-value pair [`external_link`: `external_link_value`], append the
+ *    following filter expression to your request:
+ *
+ *     * `"annotations.external_link:external_link_value"`
+ *
+ *    To filter just for a specific annotation key `external_link`, append the
+ *    following filter expression to your request:
+ *
+ *     * `"annotations.external_link"`
+ *
+ *    If the annotation key or value contains special characters, you can escape
+ *    them by surrounding the value with backticks. For example, to filter the
+ *    results of your request to files with the annotation key-value pair
+ *    [`external.link`:`https://example.com/my-file`], append the following
+ *    filter expression to your request:
+ *
+ *     * `` "annotations.`external.link`:`https://example.com/my-file`" ``
+ *
+ *    You can also filter with annotations with a wildcard to
+ *    match any number of characters before or after the value:
+ *
+ *     * `` "annotations.*_link:`*example.com*`" ``
+ * @param {number} request.pageSize
+ *   The maximum number of files to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {string} request.orderBy
+ *   The field to order the results by.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.File|File}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listFilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listFiles(
-    request?: protos.google.devtools.artifactregistry.v1.IListFilesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IFile[],
-      protos.google.devtools.artifactregistry.v1.IListFilesRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListFilesResponse,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IListFilesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IFile[],
+        protos.google.devtools.artifactregistry.v1.IListFilesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListFilesResponse
+      ]>;
   listFiles(
-    request: protos.google.devtools.artifactregistry.v1.IListFilesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListFilesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListFilesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IFile
-    >
-  ): void;
-  listFiles(
-    request: protos.google.devtools.artifactregistry.v1.IListFilesRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListFilesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListFilesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IFile
-    >
-  ): void;
-  listFiles(
-    request?: protos.google.devtools.artifactregistry.v1.IListFilesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.devtools.artifactregistry.v1.IListFilesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListFilesRequest,
-          | protos.google.devtools.artifactregistry.v1.IListFilesResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IFile
-        >,
-    callback?: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListFilesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListFilesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IFile
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IFile[],
-      protos.google.devtools.artifactregistry.v1.IListFilesRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListFilesResponse,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IListFilesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IFile>): void;
+  listFiles(
+      request: protos.google.devtools.artifactregistry.v1.IListFilesRequest,
+      callback: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListFilesRequest,
+          protos.google.devtools.artifactregistry.v1.IListFilesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IFile>): void;
+  listFiles(
+      request?: protos.google.devtools.artifactregistry.v1.IListFilesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListFilesRequest,
+          protos.google.devtools.artifactregistry.v1.IListFilesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IFile>,
+      callback?: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListFilesRequest,
+          protos.google.devtools.artifactregistry.v1.IListFilesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IFile>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IFile[],
+        protos.google.devtools.artifactregistry.v1.IListFilesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListFilesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.devtools.artifactregistry.v1.IListFilesRequest,
-          | protos.google.devtools.artifactregistry.v1.IListFilesResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IFile
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListFilesRequest,
+      protos.google.devtools.artifactregistry.v1.IListFilesResponse|null|undefined,
+      protos.google.devtools.artifactregistry.v1.IFile>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listFiles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8007,110 +6189,107 @@ export class ArtifactRegistryClient {
     this._log.info('listFiles request %j', request);
     return this.innerApiCalls
       .listFiles(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.devtools.artifactregistry.v1.IFile[],
-          protos.google.devtools.artifactregistry.v1.IListFilesRequest | null,
-          protos.google.devtools.artifactregistry.v1.IListFilesResponse,
-        ]) => {
-          this._log.info('listFiles values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.devtools.artifactregistry.v1.IFile[],
+        protos.google.devtools.artifactregistry.v1.IListFilesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListFilesResponse
+      ]) => {
+        this._log.info('listFiles values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listFiles`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the repository whose files will be listed. For
-   *   example: "projects/p1/locations/us-central1/repositories/repo1
-   * @param {string} request.filter
-   *   An expression for filtering the results of the request. Filter rules are
-   *   case insensitive. The fields eligible for filtering are:
-   *
-   *     * `name`
-   *     * `owner`
-   *     * `annotations`
-   *
-   *   Examples of using a filter:
-   *
-   *    To filter the results of your request to files with the name `my_file.txt`
-   *    in project `my-project` in the `us-central` region, in repository
-   *    `my-repo`, append the following filter expression to your request:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-file.txt"`
-   *
-   *    You can also use wildcards to match any number of characters before or
-   *    after the value:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-*"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file.txt"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file*"`
-   *
-   *    To filter the results of your request to files owned by the version `1.0`
-   *    in package `pkg1`, append the following filter expression to your request:
-   *
-   *     * `owner="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
-   *
-   *    To filter the results of your request to files with the annotation
-   *    key-value pair [`external_link`: `external_link_value`], append the
-   *    following filter expression to your request:
-   *
-   *     * `"annotations.external_link:external_link_value"`
-   *
-   *    To filter just for a specific annotation key `external_link`, append the
-   *    following filter expression to your request:
-   *
-   *     * `"annotations.external_link"`
-   *
-   *    If the annotation key or value contains special characters, you can escape
-   *    them by surrounding the value with backticks. For example, to filter the
-   *    results of your request to files with the annotation key-value pair
-   *    [`external.link`:`https://example.com/my-file`], append the following
-   *    filter expression to your request:
-   *
-   *     * `` "annotations.`external.link`:`https://example.com/my-file`" ``
-   *
-   *    You can also filter with annotations with a wildcard to
-   *    match any number of characters before or after the value:
-   *
-   *     * `` "annotations.*_link:`*example.com*`" ``
-   * @param {number} request.pageSize
-   *   The maximum number of files to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {string} request.orderBy
-   *   The field to order the results by.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.File|File} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listFilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listFiles`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the repository whose files will be listed. For
+ *   example: "projects/p1/locations/us-central1/repositories/repo1
+ * @param {string} request.filter
+ *   An expression for filtering the results of the request. Filter rules are
+ *   case insensitive. The fields eligible for filtering are:
+ *
+ *     * `name`
+ *     * `owner`
+ *     * `annotations`
+ *
+ *   Examples of using a filter:
+ *
+ *    To filter the results of your request to files with the name `my_file.txt`
+ *    in project `my-project` in the `us-central` region, in repository
+ *    `my-repo`, append the following filter expression to your request:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-file.txt"`
+ *
+ *    You can also use wildcards to match any number of characters before or
+ *    after the value:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-*"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file.txt"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file*"`
+ *
+ *    To filter the results of your request to files owned by the version `1.0`
+ *    in package `pkg1`, append the following filter expression to your request:
+ *
+ *     * `owner="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
+ *
+ *    To filter the results of your request to files with the annotation
+ *    key-value pair [`external_link`: `external_link_value`], append the
+ *    following filter expression to your request:
+ *
+ *     * `"annotations.external_link:external_link_value"`
+ *
+ *    To filter just for a specific annotation key `external_link`, append the
+ *    following filter expression to your request:
+ *
+ *     * `"annotations.external_link"`
+ *
+ *    If the annotation key or value contains special characters, you can escape
+ *    them by surrounding the value with backticks. For example, to filter the
+ *    results of your request to files with the annotation key-value pair
+ *    [`external.link`:`https://example.com/my-file`], append the following
+ *    filter expression to your request:
+ *
+ *     * `` "annotations.`external.link`:`https://example.com/my-file`" ``
+ *
+ *    You can also filter with annotations with a wildcard to
+ *    match any number of characters before or after the value:
+ *
+ *     * `` "annotations.*_link:`*example.com*`" ``
+ * @param {number} request.pageSize
+ *   The maximum number of files to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {string} request.orderBy
+ *   The field to order the results by.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.File|File} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listFilesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listFilesStream(
-    request?: protos.google.devtools.artifactregistry.v1.IListFilesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.devtools.artifactregistry.v1.IListFilesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listFiles stream %j', request);
     return this.descriptors.page.listFiles.createStream(
       this.innerApiCalls.listFiles as GaxCall,
@@ -8119,101 +6298,100 @@ export class ArtifactRegistryClient {
     );
   }
 
-  /**
-   * Equivalent to `listFiles`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the repository whose files will be listed. For
-   *   example: "projects/p1/locations/us-central1/repositories/repo1
-   * @param {string} request.filter
-   *   An expression for filtering the results of the request. Filter rules are
-   *   case insensitive. The fields eligible for filtering are:
-   *
-   *     * `name`
-   *     * `owner`
-   *     * `annotations`
-   *
-   *   Examples of using a filter:
-   *
-   *    To filter the results of your request to files with the name `my_file.txt`
-   *    in project `my-project` in the `us-central` region, in repository
-   *    `my-repo`, append the following filter expression to your request:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-file.txt"`
-   *
-   *    You can also use wildcards to match any number of characters before or
-   *    after the value:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-*"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file.txt"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file*"`
-   *
-   *    To filter the results of your request to files owned by the version `1.0`
-   *    in package `pkg1`, append the following filter expression to your request:
-   *
-   *     * `owner="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
-   *
-   *    To filter the results of your request to files with the annotation
-   *    key-value pair [`external_link`: `external_link_value`], append the
-   *    following filter expression to your request:
-   *
-   *     * `"annotations.external_link:external_link_value"`
-   *
-   *    To filter just for a specific annotation key `external_link`, append the
-   *    following filter expression to your request:
-   *
-   *     * `"annotations.external_link"`
-   *
-   *    If the annotation key or value contains special characters, you can escape
-   *    them by surrounding the value with backticks. For example, to filter the
-   *    results of your request to files with the annotation key-value pair
-   *    [`external.link`:`https://example.com/my-file`], append the following
-   *    filter expression to your request:
-   *
-   *     * `` "annotations.`external.link`:`https://example.com/my-file`" ``
-   *
-   *    You can also filter with annotations with a wildcard to
-   *    match any number of characters before or after the value:
-   *
-   *     * `` "annotations.*_link:`*example.com*`" ``
-   * @param {number} request.pageSize
-   *   The maximum number of files to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {string} request.orderBy
-   *   The field to order the results by.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.devtools.artifactregistry.v1.File|File}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.list_files.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListFiles_async
-   */
+/**
+ * Equivalent to `listFiles`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the repository whose files will be listed. For
+ *   example: "projects/p1/locations/us-central1/repositories/repo1
+ * @param {string} request.filter
+ *   An expression for filtering the results of the request. Filter rules are
+ *   case insensitive. The fields eligible for filtering are:
+ *
+ *     * `name`
+ *     * `owner`
+ *     * `annotations`
+ *
+ *   Examples of using a filter:
+ *
+ *    To filter the results of your request to files with the name `my_file.txt`
+ *    in project `my-project` in the `us-central` region, in repository
+ *    `my-repo`, append the following filter expression to your request:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-file.txt"`
+ *
+ *    You can also use wildcards to match any number of characters before or
+ *    after the value:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-*"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file.txt"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file*"`
+ *
+ *    To filter the results of your request to files owned by the version `1.0`
+ *    in package `pkg1`, append the following filter expression to your request:
+ *
+ *     * `owner="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
+ *
+ *    To filter the results of your request to files with the annotation
+ *    key-value pair [`external_link`: `external_link_value`], append the
+ *    following filter expression to your request:
+ *
+ *     * `"annotations.external_link:external_link_value"`
+ *
+ *    To filter just for a specific annotation key `external_link`, append the
+ *    following filter expression to your request:
+ *
+ *     * `"annotations.external_link"`
+ *
+ *    If the annotation key or value contains special characters, you can escape
+ *    them by surrounding the value with backticks. For example, to filter the
+ *    results of your request to files with the annotation key-value pair
+ *    [`external.link`:`https://example.com/my-file`], append the following
+ *    filter expression to your request:
+ *
+ *     * `` "annotations.`external.link`:`https://example.com/my-file`" ``
+ *
+ *    You can also filter with annotations with a wildcard to
+ *    match any number of characters before or after the value:
+ *
+ *     * `` "annotations.*_link:`*example.com*`" ``
+ * @param {number} request.pageSize
+ *   The maximum number of files to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {string} request.orderBy
+ *   The field to order the results by.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.devtools.artifactregistry.v1.File|File}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.list_files.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListFiles_async
+ */
   listFilesAsync(
-    request?: protos.google.devtools.artifactregistry.v1.IListFilesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.IFile> {
+      request?: protos.google.devtools.artifactregistry.v1.IListFilesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.devtools.artifactregistry.v1.IFile>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listFiles iterate %j', request);
     return this.descriptors.page.listFiles.asyncIterate(
       this.innerApiCalls['listFiles'] as GaxCall,
@@ -8221,142 +6399,117 @@ export class ArtifactRegistryClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IFile>;
   }
-  /**
-   * Lists tags.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the parent package whose tags will be listed.
-   *   For example:
-   *   `projects/p1/locations/us-central1/repositories/repo1/packages/pkg1`.
-   * @param {string} request.filter
-   *   An expression for filtering the results of the request. Filter rules are
-   *   case insensitive. The fields eligible for filtering are:
-   *
-   *     * `name`
-   *     * `version`
-   *
-   *    Examples of using a filter:
-   *
-   *    To filter the results of your request to tags with the name `my-tag` in
-   *    package `my-package` in repository `my-repo` in project "`y-project` in
-   *    the us-central region, append the following filter expression to your
-   *    request:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my-tag"`
-   *
-   *    You can also use wildcards to match any number of characters before or
-   *    after the value:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my*"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag*"`
-   *
-   *    To filter the results of your request to tags applied to the version
-   *    `1.0` in package `my-package`, append the following filter expression to
-   *    your request:
-   *
-   *     * `version="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
-   * @param {number} request.pageSize
-   *   The maximum number of tags to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.Tag|Tag}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listTagsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists tags.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the parent package whose tags will be listed.
+ *   For example:
+ *   `projects/p1/locations/us-central1/repositories/repo1/packages/pkg1`.
+ * @param {string} request.filter
+ *   An expression for filtering the results of the request. Filter rules are
+ *   case insensitive. The fields eligible for filtering are:
+ *
+ *     * `name`
+ *     * `version`
+ *
+ *    Examples of using a filter:
+ *
+ *    To filter the results of your request to tags with the name `my-tag` in
+ *    package `my-package` in repository `my-repo` in project "`y-project` in
+ *    the us-central region, append the following filter expression to your
+ *    request:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my-tag"`
+ *
+ *    You can also use wildcards to match any number of characters before or
+ *    after the value:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my*"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag*"`
+ *
+ *    To filter the results of your request to tags applied to the version
+ *    `1.0` in package `my-package`, append the following filter expression to
+ *    your request:
+ *
+ *     * `version="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
+ * @param {number} request.pageSize
+ *   The maximum number of tags to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.Tag|Tag}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listTagsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTags(
-    request?: protos.google.devtools.artifactregistry.v1.IListTagsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.ITag[],
-      protos.google.devtools.artifactregistry.v1.IListTagsRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListTagsResponse,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IListTagsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.ITag[],
+        protos.google.devtools.artifactregistry.v1.IListTagsRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListTagsResponse
+      ]>;
   listTags(
-    request: protos.google.devtools.artifactregistry.v1.IListTagsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListTagsRequest,
-      | protos.google.devtools.artifactregistry.v1.IListTagsResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.ITag
-    >
-  ): void;
-  listTags(
-    request: protos.google.devtools.artifactregistry.v1.IListTagsRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListTagsRequest,
-      | protos.google.devtools.artifactregistry.v1.IListTagsResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.ITag
-    >
-  ): void;
-  listTags(
-    request?: protos.google.devtools.artifactregistry.v1.IListTagsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.devtools.artifactregistry.v1.IListTagsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListTagsRequest,
-          | protos.google.devtools.artifactregistry.v1.IListTagsResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.ITag
-        >,
-    callback?: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListTagsRequest,
-      | protos.google.devtools.artifactregistry.v1.IListTagsResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.ITag
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.ITag[],
-      protos.google.devtools.artifactregistry.v1.IListTagsRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListTagsResponse,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IListTagsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.ITag>): void;
+  listTags(
+      request: protos.google.devtools.artifactregistry.v1.IListTagsRequest,
+      callback: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListTagsRequest,
+          protos.google.devtools.artifactregistry.v1.IListTagsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.ITag>): void;
+  listTags(
+      request?: protos.google.devtools.artifactregistry.v1.IListTagsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListTagsRequest,
+          protos.google.devtools.artifactregistry.v1.IListTagsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.ITag>,
+      callback?: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListTagsRequest,
+          protos.google.devtools.artifactregistry.v1.IListTagsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.ITag>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.ITag[],
+        protos.google.devtools.artifactregistry.v1.IListTagsRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListTagsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.devtools.artifactregistry.v1.IListTagsRequest,
-          | protos.google.devtools.artifactregistry.v1.IListTagsResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.ITag
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListTagsRequest,
+      protos.google.devtools.artifactregistry.v1.IListTagsResponse|null|undefined,
+      protos.google.devtools.artifactregistry.v1.ITag>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTags values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8365,86 +6518,83 @@ export class ArtifactRegistryClient {
     this._log.info('listTags request %j', request);
     return this.innerApiCalls
       .listTags(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.devtools.artifactregistry.v1.ITag[],
-          protos.google.devtools.artifactregistry.v1.IListTagsRequest | null,
-          protos.google.devtools.artifactregistry.v1.IListTagsResponse,
-        ]) => {
-          this._log.info('listTags values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.devtools.artifactregistry.v1.ITag[],
+        protos.google.devtools.artifactregistry.v1.IListTagsRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListTagsResponse
+      ]) => {
+        this._log.info('listTags values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listTags`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the parent package whose tags will be listed.
-   *   For example:
-   *   `projects/p1/locations/us-central1/repositories/repo1/packages/pkg1`.
-   * @param {string} request.filter
-   *   An expression for filtering the results of the request. Filter rules are
-   *   case insensitive. The fields eligible for filtering are:
-   *
-   *     * `name`
-   *     * `version`
-   *
-   *    Examples of using a filter:
-   *
-   *    To filter the results of your request to tags with the name `my-tag` in
-   *    package `my-package` in repository `my-repo` in project "`y-project` in
-   *    the us-central region, append the following filter expression to your
-   *    request:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my-tag"`
-   *
-   *    You can also use wildcards to match any number of characters before or
-   *    after the value:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my*"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag*"`
-   *
-   *    To filter the results of your request to tags applied to the version
-   *    `1.0` in package `my-package`, append the following filter expression to
-   *    your request:
-   *
-   *     * `version="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
-   * @param {number} request.pageSize
-   *   The maximum number of tags to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.Tag|Tag} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listTagsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listTags`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the parent package whose tags will be listed.
+ *   For example:
+ *   `projects/p1/locations/us-central1/repositories/repo1/packages/pkg1`.
+ * @param {string} request.filter
+ *   An expression for filtering the results of the request. Filter rules are
+ *   case insensitive. The fields eligible for filtering are:
+ *
+ *     * `name`
+ *     * `version`
+ *
+ *    Examples of using a filter:
+ *
+ *    To filter the results of your request to tags with the name `my-tag` in
+ *    package `my-package` in repository `my-repo` in project "`y-project` in
+ *    the us-central region, append the following filter expression to your
+ *    request:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my-tag"`
+ *
+ *    You can also use wildcards to match any number of characters before or
+ *    after the value:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my*"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag*"`
+ *
+ *    To filter the results of your request to tags applied to the version
+ *    `1.0` in package `my-package`, append the following filter expression to
+ *    your request:
+ *
+ *     * `version="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
+ * @param {number} request.pageSize
+ *   The maximum number of tags to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.Tag|Tag} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listTagsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTagsStream(
-    request?: protos.google.devtools.artifactregistry.v1.IListTagsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.devtools.artifactregistry.v1.IListTagsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTags'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTags stream %j', request);
     return this.descriptors.page.listTags.createStream(
       this.innerApiCalls.listTags as GaxCall,
@@ -8453,77 +6603,76 @@ export class ArtifactRegistryClient {
     );
   }
 
-  /**
-   * Equivalent to `listTags`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the parent package whose tags will be listed.
-   *   For example:
-   *   `projects/p1/locations/us-central1/repositories/repo1/packages/pkg1`.
-   * @param {string} request.filter
-   *   An expression for filtering the results of the request. Filter rules are
-   *   case insensitive. The fields eligible for filtering are:
-   *
-   *     * `name`
-   *     * `version`
-   *
-   *    Examples of using a filter:
-   *
-   *    To filter the results of your request to tags with the name `my-tag` in
-   *    package `my-package` in repository `my-repo` in project "`y-project` in
-   *    the us-central region, append the following filter expression to your
-   *    request:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my-tag"`
-   *
-   *    You can also use wildcards to match any number of characters before or
-   *    after the value:
-   *
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my*"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag"`
-   *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag*"`
-   *
-   *    To filter the results of your request to tags applied to the version
-   *    `1.0` in package `my-package`, append the following filter expression to
-   *    your request:
-   *
-   *     * `version="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
-   * @param {number} request.pageSize
-   *   The maximum number of tags to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.devtools.artifactregistry.v1.Tag|Tag}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.list_tags.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListTags_async
-   */
+/**
+ * Equivalent to `listTags`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   The name of the parent package whose tags will be listed.
+ *   For example:
+ *   `projects/p1/locations/us-central1/repositories/repo1/packages/pkg1`.
+ * @param {string} request.filter
+ *   An expression for filtering the results of the request. Filter rules are
+ *   case insensitive. The fields eligible for filtering are:
+ *
+ *     * `name`
+ *     * `version`
+ *
+ *    Examples of using a filter:
+ *
+ *    To filter the results of your request to tags with the name `my-tag` in
+ *    package `my-package` in repository `my-repo` in project "`y-project` in
+ *    the us-central region, append the following filter expression to your
+ *    request:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my-tag"`
+ *
+ *    You can also use wildcards to match any number of characters before or
+ *    after the value:
+ *
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/my*"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag"`
+ *     * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/tags/*tag*"`
+ *
+ *    To filter the results of your request to tags applied to the version
+ *    `1.0` in package `my-package`, append the following filter expression to
+ *    your request:
+ *
+ *     * `version="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
+ * @param {number} request.pageSize
+ *   The maximum number of tags to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.devtools.artifactregistry.v1.Tag|Tag}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.list_tags.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListTags_async
+ */
   listTagsAsync(
-    request?: protos.google.devtools.artifactregistry.v1.IListTagsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.ITag> {
+      request?: protos.google.devtools.artifactregistry.v1.IListTagsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.devtools.artifactregistry.v1.ITag>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listTags'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTags iterate %j', request);
     return this.descriptors.page.listTags.asyncIterate(
       this.innerApiCalls['listTags'] as GaxCall,
@@ -8531,114 +6680,89 @@ export class ArtifactRegistryClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.ITag>;
   }
-  /**
-   * Lists rules.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent repository whose rules will be listed.
-   *   For example:
-   *   `projects/p1/locations/us-central1/repositories/repo1`.
-   * @param {number} request.pageSize
-   *   The maximum number of rules to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.Rule|Rule}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRulesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists rules.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent repository whose rules will be listed.
+ *   For example:
+ *   `projects/p1/locations/us-central1/repositories/repo1`.
+ * @param {number} request.pageSize
+ *   The maximum number of rules to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.Rule|Rule}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRulesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRules(
-    request?: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IRule[],
-      protos.google.devtools.artifactregistry.v1.IListRulesRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListRulesResponse,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IRule[],
+        protos.google.devtools.artifactregistry.v1.IListRulesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListRulesResponse
+      ]>;
   listRules(
-    request: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListRulesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListRulesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IRule
-    >
-  ): void;
-  listRules(
-    request: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListRulesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListRulesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IRule
-    >
-  ): void;
-  listRules(
-    request?: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListRulesRequest,
-          | protos.google.devtools.artifactregistry.v1.IListRulesResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IRule
-        >,
-    callback?: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListRulesRequest,
-      | protos.google.devtools.artifactregistry.v1.IListRulesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IRule
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IRule[],
-      protos.google.devtools.artifactregistry.v1.IListRulesRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListRulesResponse,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IListRulesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IRule>): void;
+  listRules(
+      request: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+      callback: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+          protos.google.devtools.artifactregistry.v1.IListRulesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IRule>): void;
+  listRules(
+      request?: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+          protos.google.devtools.artifactregistry.v1.IListRulesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IRule>,
+      callback?: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+          protos.google.devtools.artifactregistry.v1.IListRulesResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IRule>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IRule[],
+        protos.google.devtools.artifactregistry.v1.IListRulesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListRulesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.devtools.artifactregistry.v1.IListRulesRequest,
-          | protos.google.devtools.artifactregistry.v1.IListRulesResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IRule
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+      protos.google.devtools.artifactregistry.v1.IListRulesResponse|null|undefined,
+      protos.google.devtools.artifactregistry.v1.IRule>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRules values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8647,58 +6771,55 @@ export class ArtifactRegistryClient {
     this._log.info('listRules request %j', request);
     return this.innerApiCalls
       .listRules(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.devtools.artifactregistry.v1.IRule[],
-          protos.google.devtools.artifactregistry.v1.IListRulesRequest | null,
-          protos.google.devtools.artifactregistry.v1.IListRulesResponse,
-        ]) => {
-          this._log.info('listRules values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.devtools.artifactregistry.v1.IRule[],
+        protos.google.devtools.artifactregistry.v1.IListRulesRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListRulesResponse
+      ]) => {
+        this._log.info('listRules values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRules`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent repository whose rules will be listed.
-   *   For example:
-   *   `projects/p1/locations/us-central1/repositories/repo1`.
-   * @param {number} request.pageSize
-   *   The maximum number of rules to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.Rule|Rule} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRulesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRules`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent repository whose rules will be listed.
+ *   For example:
+ *   `projects/p1/locations/us-central1/repositories/repo1`.
+ * @param {number} request.pageSize
+ *   The maximum number of rules to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.Rule|Rule} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRulesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRulesStream(
-    request?: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRules stream %j', request);
     return this.descriptors.page.listRules.createStream(
       this.innerApiCalls.listRules as GaxCall,
@@ -8707,49 +6828,48 @@ export class ArtifactRegistryClient {
     );
   }
 
-  /**
-   * Equivalent to `listRules`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent repository whose rules will be listed.
-   *   For example:
-   *   `projects/p1/locations/us-central1/repositories/repo1`.
-   * @param {number} request.pageSize
-   *   The maximum number of rules to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.devtools.artifactregistry.v1.Rule|Rule}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.list_rules.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListRules_async
-   */
+/**
+ * Equivalent to `listRules`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent repository whose rules will be listed.
+ *   For example:
+ *   `projects/p1/locations/us-central1/repositories/repo1`.
+ * @param {number} request.pageSize
+ *   The maximum number of rules to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.devtools.artifactregistry.v1.Rule|Rule}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.list_rules.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListRules_async
+ */
   listRulesAsync(
-    request?: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.IRule> {
+      request?: protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.devtools.artifactregistry.v1.IRule>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRules iterate %j', request);
     return this.descriptors.page.listRules.asyncIterate(
       this.innerApiCalls['listRules'] as GaxCall,
@@ -8757,119 +6877,94 @@ export class ArtifactRegistryClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IRule>;
   }
-  /**
-   * Lists attachments.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose attachments will be listed.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Filter
-   *   rules are case insensitive. The fields eligible for filtering are:
-   *
-   *     * `target`
-   *     * `type`
-   *     * `attachment_namespace`
-   * @param {number} request.pageSize
-   *   The maximum number of attachments to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.Attachment|Attachment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAttachmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists attachments.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose attachments will be listed.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Filter
+ *   rules are case insensitive. The fields eligible for filtering are:
+ *
+ *     * `target`
+ *     * `type`
+ *     * `attachment_namespace`
+ * @param {number} request.pageSize
+ *   The maximum number of attachments to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.devtools.artifactregistry.v1.Attachment|Attachment}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAttachmentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAttachments(
-    request?: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IAttachment[],
-      protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse,
-    ]
-  >;
+      request?: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IAttachment[],
+        protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse
+      ]>;
   listAttachments(
-    request: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
-      | protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IAttachment
-    >
-  ): void;
-  listAttachments(
-    request: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
-      | protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IAttachment
-    >
-  ): void;
-  listAttachments(
-    request?: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
-          | protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IAttachment
-        >,
-    callback?: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
-      | protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1.IAttachment
-    >
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1.IAttachment[],
-      protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest | null,
-      protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse,
-    ]
-  > | void {
+          protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IAttachment>): void;
+  listAttachments(
+      request: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+      callback: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+          protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IAttachment>): void;
+  listAttachments(
+      request?: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+          protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IAttachment>,
+      callback?: PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+          protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse|null|undefined,
+          protos.google.devtools.artifactregistry.v1.IAttachment>):
+      Promise<[
+        protos.google.devtools.artifactregistry.v1.IAttachment[],
+        protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
-          | protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse
-          | null
-          | undefined,
-          protos.google.devtools.artifactregistry.v1.IAttachment
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+      protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse|null|undefined,
+      protos.google.devtools.artifactregistry.v1.IAttachment>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAttachments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -8878,63 +6973,60 @@ export class ArtifactRegistryClient {
     this._log.info('listAttachments request %j', request);
     return this.innerApiCalls
       .listAttachments(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.devtools.artifactregistry.v1.IAttachment[],
-          protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest | null,
-          protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse,
-        ]) => {
-          this._log.info('listAttachments values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.devtools.artifactregistry.v1.IAttachment[],
+        protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest|null,
+        protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse
+      ]) => {
+        this._log.info('listAttachments values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAttachments`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose attachments will be listed.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Filter
-   *   rules are case insensitive. The fields eligible for filtering are:
-   *
-   *     * `target`
-   *     * `type`
-   *     * `attachment_namespace`
-   * @param {number} request.pageSize
-   *   The maximum number of attachments to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.Attachment|Attachment} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAttachmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAttachments`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose attachments will be listed.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Filter
+ *   rules are case insensitive. The fields eligible for filtering are:
+ *
+ *     * `target`
+ *     * `type`
+ *     * `attachment_namespace`
+ * @param {number} request.pageSize
+ *   The maximum number of attachments to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.devtools.artifactregistry.v1.Attachment|Attachment} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAttachmentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAttachmentsStream(
-    request?: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAttachments stream %j', request);
     return this.descriptors.page.listAttachments.createStream(
       this.innerApiCalls.listAttachments as GaxCall,
@@ -8943,54 +7035,53 @@ export class ArtifactRegistryClient {
     );
   }
 
-  /**
-   * Equivalent to `listAttachments`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the parent resource whose attachments will be listed.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. Filter
-   *   rules are case insensitive. The fields eligible for filtering are:
-   *
-   *     * `target`
-   *     * `type`
-   *     * `attachment_namespace`
-   * @param {number} request.pageSize
-   *   The maximum number of attachments to return. Maximum page size is 1,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.devtools.artifactregistry.v1.Attachment|Attachment}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/artifact_registry.list_attachments.js</caption>
-   * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListAttachments_async
-   */
+/**
+ * Equivalent to `listAttachments`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the parent resource whose attachments will be listed.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. Filter
+ *   rules are case insensitive. The fields eligible for filtering are:
+ *
+ *     * `target`
+ *     * `type`
+ *     * `attachment_namespace`
+ * @param {number} request.pageSize
+ *   The maximum number of attachments to return. Maximum page size is 1,000.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous list request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.devtools.artifactregistry.v1.Attachment|Attachment}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/artifact_registry.list_attachments.js</caption>
+ * region_tag:artifactregistry_v1_generated_ArtifactRegistry_ListAttachments_async
+ */
   listAttachmentsAsync(
-    request?: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.devtools.artifactregistry.v1.IAttachment> {
+      request?: protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.devtools.artifactregistry.v1.IAttachment>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAttachments iterate %j', request);
     return this.descriptors.page.listAttachments.asyncIterate(
       this.innerApiCalls['listAttachments'] as GaxCall,
@@ -8998,7 +7089,7 @@ export class ArtifactRegistryClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1.IAttachment>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -9038,7 +7129,7 @@ export class ArtifactRegistryClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -9076,7 +7167,7 @@ export class ArtifactRegistryClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -9121,20 +7212,20 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -9171,13 +7262,13 @@ export class ArtifactRegistryClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -9211,7 +7302,7 @@ export class ArtifactRegistryClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -9226,20 +7317,20 @@ export class ArtifactRegistryClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -9283,20 +7374,20 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -9313,12 +7404,7 @@ export class ArtifactRegistryClient {
    * @param {string} apt_artifact
    * @returns {string} Resource name string.
    */
-  aptArtifactPath(
-    project: string,
-    location: string,
-    repository: string,
-    aptArtifact: string
-  ) {
+  aptArtifactPath(project:string,location:string,repository:string,aptArtifact:string) {
     return this.pathTemplates.aptArtifactPathTemplate.render({
       project: project,
       location: location,
@@ -9335,8 +7421,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAptArtifactName(aptArtifactName: string) {
-    return this.pathTemplates.aptArtifactPathTemplate.match(aptArtifactName)
-      .project;
+    return this.pathTemplates.aptArtifactPathTemplate.match(aptArtifactName).project;
   }
 
   /**
@@ -9347,8 +7432,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAptArtifactName(aptArtifactName: string) {
-    return this.pathTemplates.aptArtifactPathTemplate.match(aptArtifactName)
-      .location;
+    return this.pathTemplates.aptArtifactPathTemplate.match(aptArtifactName).location;
   }
 
   /**
@@ -9359,8 +7443,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromAptArtifactName(aptArtifactName: string) {
-    return this.pathTemplates.aptArtifactPathTemplate.match(aptArtifactName)
-      .repository;
+    return this.pathTemplates.aptArtifactPathTemplate.match(aptArtifactName).repository;
   }
 
   /**
@@ -9371,8 +7454,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the apt_artifact.
    */
   matchAptArtifactFromAptArtifactName(aptArtifactName: string) {
-    return this.pathTemplates.aptArtifactPathTemplate.match(aptArtifactName)
-      .apt_artifact;
+    return this.pathTemplates.aptArtifactPathTemplate.match(aptArtifactName).apt_artifact;
   }
 
   /**
@@ -9384,12 +7466,7 @@ export class ArtifactRegistryClient {
    * @param {string} attachment
    * @returns {string} Resource name string.
    */
-  attachmentPath(
-    project: string,
-    location: string,
-    repository: string,
-    attachment: string
-  ) {
+  attachmentPath(project:string,location:string,repository:string,attachment:string) {
     return this.pathTemplates.attachmentPathTemplate.render({
       project: project,
       location: location,
@@ -9406,8 +7483,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttachmentName(attachmentName: string) {
-    return this.pathTemplates.attachmentPathTemplate.match(attachmentName)
-      .project;
+    return this.pathTemplates.attachmentPathTemplate.match(attachmentName).project;
   }
 
   /**
@@ -9418,8 +7494,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttachmentName(attachmentName: string) {
-    return this.pathTemplates.attachmentPathTemplate.match(attachmentName)
-      .location;
+    return this.pathTemplates.attachmentPathTemplate.match(attachmentName).location;
   }
 
   /**
@@ -9430,8 +7505,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromAttachmentName(attachmentName: string) {
-    return this.pathTemplates.attachmentPathTemplate.match(attachmentName)
-      .repository;
+    return this.pathTemplates.attachmentPathTemplate.match(attachmentName).repository;
   }
 
   /**
@@ -9442,8 +7516,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the attachment.
    */
   matchAttachmentFromAttachmentName(attachmentName: string) {
-    return this.pathTemplates.attachmentPathTemplate.match(attachmentName)
-      .attachment;
+    return this.pathTemplates.attachmentPathTemplate.match(attachmentName).attachment;
   }
 
   /**
@@ -9455,12 +7528,7 @@ export class ArtifactRegistryClient {
    * @param {string} docker_image
    * @returns {string} Resource name string.
    */
-  dockerImagePath(
-    project: string,
-    location: string,
-    repository: string,
-    dockerImage: string
-  ) {
+  dockerImagePath(project:string,location:string,repository:string,dockerImage:string) {
     return this.pathTemplates.dockerImagePathTemplate.render({
       project: project,
       location: location,
@@ -9477,8 +7545,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDockerImageName(dockerImageName: string) {
-    return this.pathTemplates.dockerImagePathTemplate.match(dockerImageName)
-      .project;
+    return this.pathTemplates.dockerImagePathTemplate.match(dockerImageName).project;
   }
 
   /**
@@ -9489,8 +7556,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDockerImageName(dockerImageName: string) {
-    return this.pathTemplates.dockerImagePathTemplate.match(dockerImageName)
-      .location;
+    return this.pathTemplates.dockerImagePathTemplate.match(dockerImageName).location;
   }
 
   /**
@@ -9501,8 +7567,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromDockerImageName(dockerImageName: string) {
-    return this.pathTemplates.dockerImagePathTemplate.match(dockerImageName)
-      .repository;
+    return this.pathTemplates.dockerImagePathTemplate.match(dockerImageName).repository;
   }
 
   /**
@@ -9513,8 +7578,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the docker_image.
    */
   matchDockerImageFromDockerImageName(dockerImageName: string) {
-    return this.pathTemplates.dockerImagePathTemplate.match(dockerImageName)
-      .docker_image;
+    return this.pathTemplates.dockerImagePathTemplate.match(dockerImageName).docker_image;
   }
 
   /**
@@ -9526,12 +7590,7 @@ export class ArtifactRegistryClient {
    * @param {string} file
    * @returns {string} Resource name string.
    */
-  filePath(
-    project: string,
-    location: string,
-    repository: string,
-    file: string
-  ) {
+  filePath(project:string,location:string,repository:string,file:string) {
     return this.pathTemplates.filePathTemplate.render({
       project: project,
       location: location,
@@ -9593,12 +7652,7 @@ export class ArtifactRegistryClient {
    * @param {string} generic_artifact
    * @returns {string} Resource name string.
    */
-  genericArtifactPath(
-    project: string,
-    location: string,
-    repository: string,
-    genericArtifact: string
-  ) {
+  genericArtifactPath(project:string,location:string,repository:string,genericArtifact:string) {
     return this.pathTemplates.genericArtifactPathTemplate.render({
       project: project,
       location: location,
@@ -9615,9 +7669,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGenericArtifactName(genericArtifactName: string) {
-    return this.pathTemplates.genericArtifactPathTemplate.match(
-      genericArtifactName
-    ).project;
+    return this.pathTemplates.genericArtifactPathTemplate.match(genericArtifactName).project;
   }
 
   /**
@@ -9628,9 +7680,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGenericArtifactName(genericArtifactName: string) {
-    return this.pathTemplates.genericArtifactPathTemplate.match(
-      genericArtifactName
-    ).location;
+    return this.pathTemplates.genericArtifactPathTemplate.match(genericArtifactName).location;
   }
 
   /**
@@ -9641,9 +7691,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromGenericArtifactName(genericArtifactName: string) {
-    return this.pathTemplates.genericArtifactPathTemplate.match(
-      genericArtifactName
-    ).repository;
+    return this.pathTemplates.genericArtifactPathTemplate.match(genericArtifactName).repository;
   }
 
   /**
@@ -9654,9 +7702,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the generic_artifact.
    */
   matchGenericArtifactFromGenericArtifactName(genericArtifactName: string) {
-    return this.pathTemplates.genericArtifactPathTemplate.match(
-      genericArtifactName
-    ).generic_artifact;
+    return this.pathTemplates.genericArtifactPathTemplate.match(genericArtifactName).generic_artifact;
   }
 
   /**
@@ -9668,12 +7714,7 @@ export class ArtifactRegistryClient {
    * @param {string} go_module
    * @returns {string} Resource name string.
    */
-  goModulePath(
-    project: string,
-    location: string,
-    repository: string,
-    goModule: string
-  ) {
+  goModulePath(project:string,location:string,repository:string,goModule:string) {
     return this.pathTemplates.goModulePathTemplate.render({
       project: project,
       location: location,
@@ -9712,8 +7753,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromGoModuleName(goModuleName: string) {
-    return this.pathTemplates.goModulePathTemplate.match(goModuleName)
-      .repository;
+    return this.pathTemplates.goModulePathTemplate.match(goModuleName).repository;
   }
 
   /**
@@ -9724,8 +7764,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the go_module.
    */
   matchGoModuleFromGoModuleName(goModuleName: string) {
-    return this.pathTemplates.goModulePathTemplate.match(goModuleName)
-      .go_module;
+    return this.pathTemplates.goModulePathTemplate.match(goModuleName).go_module;
   }
 
   /**
@@ -9737,12 +7776,7 @@ export class ArtifactRegistryClient {
    * @param {string} kfp_artifact
    * @returns {string} Resource name string.
    */
-  kfpArtifactPath(
-    project: string,
-    location: string,
-    repository: string,
-    kfpArtifact: string
-  ) {
+  kfpArtifactPath(project:string,location:string,repository:string,kfpArtifact:string) {
     return this.pathTemplates.kfpArtifactPathTemplate.render({
       project: project,
       location: location,
@@ -9759,8 +7793,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromKfpArtifactName(kfpArtifactName: string) {
-    return this.pathTemplates.kfpArtifactPathTemplate.match(kfpArtifactName)
-      .project;
+    return this.pathTemplates.kfpArtifactPathTemplate.match(kfpArtifactName).project;
   }
 
   /**
@@ -9771,8 +7804,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromKfpArtifactName(kfpArtifactName: string) {
-    return this.pathTemplates.kfpArtifactPathTemplate.match(kfpArtifactName)
-      .location;
+    return this.pathTemplates.kfpArtifactPathTemplate.match(kfpArtifactName).location;
   }
 
   /**
@@ -9783,8 +7815,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromKfpArtifactName(kfpArtifactName: string) {
-    return this.pathTemplates.kfpArtifactPathTemplate.match(kfpArtifactName)
-      .repository;
+    return this.pathTemplates.kfpArtifactPathTemplate.match(kfpArtifactName).repository;
   }
 
   /**
@@ -9795,8 +7826,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the kfp_artifact.
    */
   matchKfpArtifactFromKfpArtifactName(kfpArtifactName: string) {
-    return this.pathTemplates.kfpArtifactPathTemplate.match(kfpArtifactName)
-      .kfp_artifact;
+    return this.pathTemplates.kfpArtifactPathTemplate.match(kfpArtifactName).kfp_artifact;
   }
 
   /**
@@ -9808,12 +7838,7 @@ export class ArtifactRegistryClient {
    * @param {string} maven_artifact
    * @returns {string} Resource name string.
    */
-  mavenArtifactPath(
-    project: string,
-    location: string,
-    repository: string,
-    mavenArtifact: string
-  ) {
+  mavenArtifactPath(project:string,location:string,repository:string,mavenArtifact:string) {
     return this.pathTemplates.mavenArtifactPathTemplate.render({
       project: project,
       location: location,
@@ -9830,8 +7855,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMavenArtifactName(mavenArtifactName: string) {
-    return this.pathTemplates.mavenArtifactPathTemplate.match(mavenArtifactName)
-      .project;
+    return this.pathTemplates.mavenArtifactPathTemplate.match(mavenArtifactName).project;
   }
 
   /**
@@ -9842,8 +7866,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMavenArtifactName(mavenArtifactName: string) {
-    return this.pathTemplates.mavenArtifactPathTemplate.match(mavenArtifactName)
-      .location;
+    return this.pathTemplates.mavenArtifactPathTemplate.match(mavenArtifactName).location;
   }
 
   /**
@@ -9854,8 +7877,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromMavenArtifactName(mavenArtifactName: string) {
-    return this.pathTemplates.mavenArtifactPathTemplate.match(mavenArtifactName)
-      .repository;
+    return this.pathTemplates.mavenArtifactPathTemplate.match(mavenArtifactName).repository;
   }
 
   /**
@@ -9866,8 +7888,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the maven_artifact.
    */
   matchMavenArtifactFromMavenArtifactName(mavenArtifactName: string) {
-    return this.pathTemplates.mavenArtifactPathTemplate.match(mavenArtifactName)
-      .maven_artifact;
+    return this.pathTemplates.mavenArtifactPathTemplate.match(mavenArtifactName).maven_artifact;
   }
 
   /**
@@ -9879,12 +7900,7 @@ export class ArtifactRegistryClient {
    * @param {string} npm_package
    * @returns {string} Resource name string.
    */
-  npmPackagePath(
-    project: string,
-    location: string,
-    repository: string,
-    npmPackage: string
-  ) {
+  npmPackagePath(project:string,location:string,repository:string,npmPackage:string) {
     return this.pathTemplates.npmPackagePathTemplate.render({
       project: project,
       location: location,
@@ -9901,8 +7917,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNpmPackageName(npmPackageName: string) {
-    return this.pathTemplates.npmPackagePathTemplate.match(npmPackageName)
-      .project;
+    return this.pathTemplates.npmPackagePathTemplate.match(npmPackageName).project;
   }
 
   /**
@@ -9913,8 +7928,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNpmPackageName(npmPackageName: string) {
-    return this.pathTemplates.npmPackagePathTemplate.match(npmPackageName)
-      .location;
+    return this.pathTemplates.npmPackagePathTemplate.match(npmPackageName).location;
   }
 
   /**
@@ -9925,8 +7939,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromNpmPackageName(npmPackageName: string) {
-    return this.pathTemplates.npmPackagePathTemplate.match(npmPackageName)
-      .repository;
+    return this.pathTemplates.npmPackagePathTemplate.match(npmPackageName).repository;
   }
 
   /**
@@ -9937,8 +7950,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the npm_package.
    */
   matchNpmPackageFromNpmPackageName(npmPackageName: string) {
-    return this.pathTemplates.npmPackagePathTemplate.match(npmPackageName)
-      .npm_package;
+    return this.pathTemplates.npmPackagePathTemplate.match(npmPackageName).npm_package;
   }
 
   /**
@@ -9950,12 +7962,7 @@ export class ArtifactRegistryClient {
    * @param {string} packageParam
    * @returns {string} Resource name string.
    */
-  packagePath(
-    project: string,
-    location: string,
-    repository: string,
-    packageParam: string
-  ) {
+  packagePath(project:string,location:string,repository:string,packageParam:string) {
     return this.pathTemplates.packagePathTemplate.render({
       project: project,
       location: location,
@@ -10014,7 +8021,7 @@ export class ArtifactRegistryClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectSettingsPath(project: string) {
+  projectSettingsPath(project:string) {
     return this.pathTemplates.projectSettingsPathTemplate.render({
       project: project,
     });
@@ -10028,9 +8035,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectSettingsName(projectSettingsName: string) {
-    return this.pathTemplates.projectSettingsPathTemplate.match(
-      projectSettingsName
-    ).project;
+    return this.pathTemplates.projectSettingsPathTemplate.match(projectSettingsName).project;
   }
 
   /**
@@ -10042,12 +8047,7 @@ export class ArtifactRegistryClient {
    * @param {string} python_package
    * @returns {string} Resource name string.
    */
-  pythonPackagePath(
-    project: string,
-    location: string,
-    repository: string,
-    pythonPackage: string
-  ) {
+  pythonPackagePath(project:string,location:string,repository:string,pythonPackage:string) {
     return this.pathTemplates.pythonPackagePathTemplate.render({
       project: project,
       location: location,
@@ -10064,8 +8064,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPythonPackageName(pythonPackageName: string) {
-    return this.pathTemplates.pythonPackagePathTemplate.match(pythonPackageName)
-      .project;
+    return this.pathTemplates.pythonPackagePathTemplate.match(pythonPackageName).project;
   }
 
   /**
@@ -10076,8 +8075,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPythonPackageName(pythonPackageName: string) {
-    return this.pathTemplates.pythonPackagePathTemplate.match(pythonPackageName)
-      .location;
+    return this.pathTemplates.pythonPackagePathTemplate.match(pythonPackageName).location;
   }
 
   /**
@@ -10088,8 +8086,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromPythonPackageName(pythonPackageName: string) {
-    return this.pathTemplates.pythonPackagePathTemplate.match(pythonPackageName)
-      .repository;
+    return this.pathTemplates.pythonPackagePathTemplate.match(pythonPackageName).repository;
   }
 
   /**
@@ -10100,8 +8097,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the python_package.
    */
   matchPythonPackageFromPythonPackageName(pythonPackageName: string) {
-    return this.pathTemplates.pythonPackagePathTemplate.match(pythonPackageName)
-      .python_package;
+    return this.pathTemplates.pythonPackagePathTemplate.match(pythonPackageName).python_package;
   }
 
   /**
@@ -10112,7 +8108,7 @@ export class ArtifactRegistryClient {
    * @param {string} repository
    * @returns {string} Resource name string.
    */
-  repositoryPath(project: string, location: string, repository: string) {
+  repositoryPath(project:string,location:string,repository:string) {
     return this.pathTemplates.repositoryPathTemplate.render({
       project: project,
       location: location,
@@ -10128,8 +8124,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
-      .project;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).project;
   }
 
   /**
@@ -10140,8 +8135,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
-      .location;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).location;
   }
 
   /**
@@ -10152,8 +8146,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
-      .repository;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).repository;
   }
 
   /**
@@ -10165,12 +8158,7 @@ export class ArtifactRegistryClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  rulePath(
-    project: string,
-    location: string,
-    repository: string,
-    rule: string
-  ) {
+  rulePath(project:string,location:string,repository:string,rule:string) {
     return this.pathTemplates.rulePathTemplate.render({
       project: project,
       location: location,
@@ -10233,13 +8221,7 @@ export class ArtifactRegistryClient {
    * @param {string} tag
    * @returns {string} Resource name string.
    */
-  tagPath(
-    project: string,
-    location: string,
-    repository: string,
-    packageParam: string,
-    tag: string
-  ) {
+  tagPath(project:string,location:string,repository:string,packageParam:string,tag:string) {
     return this.pathTemplates.tagPathTemplate.render({
       project: project,
       location: location,
@@ -10314,13 +8296,7 @@ export class ArtifactRegistryClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  versionPath(
-    project: string,
-    location: string,
-    repository: string,
-    packageParam: string,
-    version: string
-  ) {
+  versionPath(project:string,location:string,repository:string,packageParam:string,version:string) {
     return this.pathTemplates.versionPathTemplate.render({
       project: project,
       location: location,
@@ -10392,7 +8368,7 @@ export class ArtifactRegistryClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  vpcscConfigPath(project: string, location: string) {
+  vpcscConfigPath(project:string,location:string) {
     return this.pathTemplates.vpcscConfigPathTemplate.render({
       project: project,
       location: location,
@@ -10407,8 +8383,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromVpcscConfigName(vpcscConfigName: string) {
-    return this.pathTemplates.vpcscConfigPathTemplate.match(vpcscConfigName)
-      .project;
+    return this.pathTemplates.vpcscConfigPathTemplate.match(vpcscConfigName).project;
   }
 
   /**
@@ -10419,8 +8394,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromVpcscConfigName(vpcscConfigName: string) {
-    return this.pathTemplates.vpcscConfigPathTemplate.match(vpcscConfigName)
-      .location;
+    return this.pathTemplates.vpcscConfigPathTemplate.match(vpcscConfigName).location;
   }
 
   /**
@@ -10432,12 +8406,7 @@ export class ArtifactRegistryClient {
    * @param {string} yum_artifact
    * @returns {string} Resource name string.
    */
-  yumArtifactPath(
-    project: string,
-    location: string,
-    repository: string,
-    yumArtifact: string
-  ) {
+  yumArtifactPath(project:string,location:string,repository:string,yumArtifact:string) {
     return this.pathTemplates.yumArtifactPathTemplate.render({
       project: project,
       location: location,
@@ -10454,8 +8423,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromYumArtifactName(yumArtifactName: string) {
-    return this.pathTemplates.yumArtifactPathTemplate.match(yumArtifactName)
-      .project;
+    return this.pathTemplates.yumArtifactPathTemplate.match(yumArtifactName).project;
   }
 
   /**
@@ -10466,8 +8434,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromYumArtifactName(yumArtifactName: string) {
-    return this.pathTemplates.yumArtifactPathTemplate.match(yumArtifactName)
-      .location;
+    return this.pathTemplates.yumArtifactPathTemplate.match(yumArtifactName).location;
   }
 
   /**
@@ -10478,8 +8445,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromYumArtifactName(yumArtifactName: string) {
-    return this.pathTemplates.yumArtifactPathTemplate.match(yumArtifactName)
-      .repository;
+    return this.pathTemplates.yumArtifactPathTemplate.match(yumArtifactName).repository;
   }
 
   /**
@@ -10490,8 +8456,7 @@ export class ArtifactRegistryClient {
    * @returns {string} A string representing the yum_artifact.
    */
   matchYumArtifactFromYumArtifactName(yumArtifactName: string) {
-    return this.pathTemplates.yumArtifactPathTemplate.match(yumArtifactName)
-      .yum_artifact;
+    return this.pathTemplates.yumArtifactPathTemplate.match(yumArtifactName).yum_artifact;
   }
 
   /**
@@ -10506,9 +8471,7 @@ export class ArtifactRegistryClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

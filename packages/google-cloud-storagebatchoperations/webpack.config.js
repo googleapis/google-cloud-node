@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,27 +36,27 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /node_modules[\\/]@grpc[\\/]grpc-js/,
-        use: 'null-loader',
+        use: 'null-loader'
       },
       {
         test: /node_modules[\\/]grpc/,
-        use: 'null-loader',
+        use: 'null-loader'
       },
       {
         test: /node_modules[\\/]retry-request/,
-        use: 'null-loader',
+        use: 'null-loader'
       },
       {
         test: /node_modules[\\/]https?-proxy-agent/,
-        use: 'null-loader',
+        use: 'null-loader'
       },
       {
         test: /node_modules[\\/]gtoken/,
-        use: 'null-loader',
+        use: 'null-loader'
       },
     ],
   },

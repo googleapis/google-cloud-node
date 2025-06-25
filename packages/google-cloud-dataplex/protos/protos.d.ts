@@ -3482,7 +3482,7 @@ export namespace google {
                     description?: (string|null);
 
                     /** Asset state */
-                    state?: (google.cloud.dataplex.v1.Asset.SecurityStatus.State|keyof typeof google.cloud.dataplex.v1.Asset.SecurityStatus.State|null);
+                    state?: (google.cloud.dataplex.v1.Asset.DiscoveryStatus.State|keyof typeof google.cloud.dataplex.v1.Asset.DiscoveryStatus.State|null);
 
                     /** Asset resourceSpec */
                     resourceSpec?: (google.cloud.dataplex.v1.Asset.IResourceSpec|null);
@@ -3531,7 +3531,7 @@ export namespace google {
                     public description: string;
 
                     /** Asset state. */
-                    public state: (google.cloud.dataplex.v1.Asset.SecurityStatus.State|keyof typeof google.cloud.dataplex.v1.Asset.SecurityStatus.State);
+                    public state: (google.cloud.dataplex.v1.Asset.DiscoveryStatus.State|keyof typeof google.cloud.dataplex.v1.Asset.DiscoveryStatus.State);
 
                     /** Asset resourceSpec. */
                     public resourceSpec?: (google.cloud.dataplex.v1.Asset.IResourceSpec|null);
@@ -24551,9 +24551,6 @@ export namespace google {
                     /** DataQualityResult postScanActionsResult. */
                     public postScanActionsResult?: (google.cloud.dataplex.v1.DataQualityResult.IPostScanActionsResult|null);
 
-                    /** DataQualityResult _score. */
-                    public _score?: "score";
-
                     /**
                      * Creates a new DataQualityResult instance using the specified properties.
                      * @param [properties] Properties to set
@@ -25018,9 +25015,6 @@ export namespace google {
 
                     /** DataQualityDimensionResult score. */
                     public score?: (number|null);
-
-                    /** DataQualityDimensionResult _score. */
-                    public _score?: "score";
 
                     /**
                      * Creates a new DataQualityDimensionResult instance using the specified properties.
@@ -26328,9 +26322,6 @@ export namespace google {
 
                     /** DataQualityColumnResult score. */
                     public score?: (number|null);
-
-                    /** DataQualityColumnResult _score. */
-                    public _score?: "score";
 
                     /**
                      * Creates a new DataQualityColumnResult instance using the specified properties.
@@ -32951,9 +32942,6 @@ export namespace google {
                     /** GovernanceEvent entity. */
                     public entity?: (google.cloud.dataplex.v1.GovernanceEvent.IEntity|null);
 
-                    /** GovernanceEvent _entity. */
-                    public _entity?: "entity";
-
                     /**
                      * Creates a new GovernanceEvent instance using the specified properties.
                      * @param [properties] Properties to set
@@ -38307,6 +38295,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -38347,6 +38338,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -42412,6 +42406,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -42663,7 +42660,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -42694,7 +42691,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -43936,7 +43933,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -43952,7 +43949,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -46250,7 +46247,7 @@ export namespace google {
                 auditConfigs?: (google.iam.v1.IAuditConfig[]|null);
 
                 /** Policy etag */
-                etag?: (Uint8Array|string|null);
+                etag?: (Uint8Array|Buffer|string|null);
             }
 
             /** Represents a Policy. */
@@ -46272,7 +46269,7 @@ export namespace google {
                 public auditConfigs: google.iam.v1.IAuditConfig[];
 
                 /** Policy etag. */
-                public etag: (Uint8Array|string);
+                public etag: (Uint8Array|Buffer|string);
 
                 /**
                  * Creates a new Policy instance using the specified properties.

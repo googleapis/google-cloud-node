@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class DataLabelingServiceClient {
    *     const client = new DataLabelingServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataLabelingServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'datalabeling.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class DataLabelingServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +154,10 @@ export class DataLabelingServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -238,162 +211,95 @@ export class DataLabelingServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDatasets: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'datasets'
-      ),
-      listDataItems: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'dataItems'
-      ),
-      listAnnotatedDatasets: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'annotatedDatasets'
-      ),
-      listExamples: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'examples'
-      ),
-      listAnnotationSpecSets: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'annotationSpecSets'
-      ),
-      listInstructions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'instructions'
-      ),
-      searchEvaluations: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'evaluations'
-      ),
-      searchExampleComparisons: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'exampleComparisons'
-      ),
-      listEvaluationJobs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'evaluationJobs'
-      ),
+      listDatasets:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'datasets'),
+      listDataItems:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataItems'),
+      listAnnotatedDatasets:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'annotatedDatasets'),
+      listExamples:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'examples'),
+      listAnnotationSpecSets:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'annotationSpecSets'),
+      listInstructions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'instructions'),
+      searchEvaluations:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'evaluations'),
+      searchExampleComparisons:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'exampleComparisons'),
+      listEvaluationJobs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'evaluationJobs')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          get: '/v1beta1/{name=projects/*/operations/*}:cancel',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1beta1/{name=projects/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1beta1/{name=projects/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1beta1/{name=projects/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.CancelOperation',get: '/v1beta1/{name=projects/*/operations/*}:cancel',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1beta1/{name=projects/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta1/{name=projects/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta1/{name=projects/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const importDataResponse = protoFilesRoot.lookup(
-      '.google.cloud.datalabeling.v1beta1.ImportDataOperationResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datalabeling.v1beta1.ImportDataOperationResponse') as gax.protobuf.Type;
     const importDataMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datalabeling.v1beta1.ImportDataOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datalabeling.v1beta1.ImportDataOperationMetadata') as gax.protobuf.Type;
     const exportDataResponse = protoFilesRoot.lookup(
-      '.google.cloud.datalabeling.v1beta1.ExportDataOperationResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datalabeling.v1beta1.ExportDataOperationResponse') as gax.protobuf.Type;
     const exportDataMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datalabeling.v1beta1.ExportDataOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datalabeling.v1beta1.ExportDataOperationMetadata') as gax.protobuf.Type;
     const labelImageResponse = protoFilesRoot.lookup(
-      '.google.cloud.datalabeling.v1beta1.AnnotatedDataset'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datalabeling.v1beta1.AnnotatedDataset') as gax.protobuf.Type;
     const labelImageMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datalabeling.v1beta1.LabelOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datalabeling.v1beta1.LabelOperationMetadata') as gax.protobuf.Type;
     const labelVideoResponse = protoFilesRoot.lookup(
-      '.google.cloud.datalabeling.v1beta1.AnnotatedDataset'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datalabeling.v1beta1.AnnotatedDataset') as gax.protobuf.Type;
     const labelVideoMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datalabeling.v1beta1.LabelOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datalabeling.v1beta1.LabelOperationMetadata') as gax.protobuf.Type;
     const labelTextResponse = protoFilesRoot.lookup(
-      '.google.cloud.datalabeling.v1beta1.AnnotatedDataset'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datalabeling.v1beta1.AnnotatedDataset') as gax.protobuf.Type;
     const labelTextMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datalabeling.v1beta1.LabelOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datalabeling.v1beta1.LabelOperationMetadata') as gax.protobuf.Type;
     const createInstructionResponse = protoFilesRoot.lookup(
-      '.google.cloud.datalabeling.v1beta1.Instruction'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datalabeling.v1beta1.Instruction') as gax.protobuf.Type;
     const createInstructionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datalabeling.v1beta1.CreateInstructionMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.datalabeling.v1beta1.CreateInstructionMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       importData: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importDataResponse.decode.bind(importDataResponse),
-        importDataMetadata.decode.bind(importDataMetadata)
-      ),
+        importDataMetadata.decode.bind(importDataMetadata)),
       exportData: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportDataResponse.decode.bind(exportDataResponse),
-        exportDataMetadata.decode.bind(exportDataMetadata)
-      ),
+        exportDataMetadata.decode.bind(exportDataMetadata)),
       labelImage: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         labelImageResponse.decode.bind(labelImageResponse),
-        labelImageMetadata.decode.bind(labelImageMetadata)
-      ),
+        labelImageMetadata.decode.bind(labelImageMetadata)),
       labelVideo: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         labelVideoResponse.decode.bind(labelVideoResponse),
-        labelVideoMetadata.decode.bind(labelVideoMetadata)
-      ),
+        labelVideoMetadata.decode.bind(labelVideoMetadata)),
       labelText: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         labelTextResponse.decode.bind(labelTextResponse),
-        labelTextMetadata.decode.bind(labelTextMetadata)
-      ),
+        labelTextMetadata.decode.bind(labelTextMetadata)),
       createInstruction: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createInstructionResponse.decode.bind(createInstructionResponse),
-        createInstructionMetadata.decode.bind(createInstructionMetadata)
-      ),
+        createInstructionMetadata.decode.bind(createInstructionMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.datalabeling.v1beta1.DataLabelingService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.datalabeling.v1beta1.DataLabelingService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -424,69 +330,28 @@ export class DataLabelingServiceClient {
     // Put together the "service stub" for
     // google.cloud.datalabeling.v1beta1.DataLabelingService.
     this.dataLabelingServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.datalabeling.v1beta1.DataLabelingService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.datalabeling.v1beta1
-            .DataLabelingService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.datalabeling.v1beta1.DataLabelingService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.datalabeling.v1beta1.DataLabelingService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dataLabelingServiceStubMethods = [
-      'createDataset',
-      'getDataset',
-      'listDatasets',
-      'deleteDataset',
-      'importData',
-      'exportData',
-      'getDataItem',
-      'listDataItems',
-      'getAnnotatedDataset',
-      'listAnnotatedDatasets',
-      'deleteAnnotatedDataset',
-      'labelImage',
-      'labelVideo',
-      'labelText',
-      'getExample',
-      'listExamples',
-      'createAnnotationSpecSet',
-      'getAnnotationSpecSet',
-      'listAnnotationSpecSets',
-      'deleteAnnotationSpecSet',
-      'createInstruction',
-      'getInstruction',
-      'listInstructions',
-      'deleteInstruction',
-      'getEvaluation',
-      'searchEvaluations',
-      'searchExampleComparisons',
-      'createEvaluationJob',
-      'updateEvaluationJob',
-      'getEvaluationJob',
-      'pauseEvaluationJob',
-      'resumeEvaluationJob',
-      'deleteEvaluationJob',
-      'listEvaluationJobs',
-    ];
+    const dataLabelingServiceStubMethods =
+        ['createDataset', 'getDataset', 'listDatasets', 'deleteDataset', 'importData', 'exportData', 'getDataItem', 'listDataItems', 'getAnnotatedDataset', 'listAnnotatedDatasets', 'deleteAnnotatedDataset', 'labelImage', 'labelVideo', 'labelText', 'getExample', 'listExamples', 'createAnnotationSpecSet', 'getAnnotationSpecSet', 'listAnnotationSpecSets', 'deleteAnnotationSpecSet', 'createInstruction', 'getInstruction', 'listInstructions', 'deleteInstruction', 'getEvaluation', 'searchEvaluations', 'searchExampleComparisons', 'createEvaluationJob', 'updateEvaluationJob', 'getEvaluationJob', 'pauseEvaluationJob', 'resumeEvaluationJob', 'deleteEvaluationJob', 'listEvaluationJobs'];
     for (const methodName of dataLabelingServiceStubMethods) {
       const callPromise = this.dataLabelingServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -511,14 +376,8 @@ export class DataLabelingServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'datalabeling.googleapis.com';
   }
@@ -529,14 +388,8 @@ export class DataLabelingServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'datalabeling.googleapis.com';
   }
@@ -567,7 +420,9 @@ export class DataLabelingServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -576,9 +431,8 @@ export class DataLabelingServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -589,3672 +443,2666 @@ export class DataLabelingServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates dataset. If success return a Dataset resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Dataset resource parent, format:
-   *   projects/{project_id}
-   * @param {google.cloud.datalabeling.v1beta1.Dataset} request.dataset
-   *   Required. The dataset to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.Dataset|Dataset}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.create_dataset.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_CreateDataset_async
-   */
+/**
+ * Creates dataset. If success return a Dataset resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Dataset resource parent, format:
+ *   projects/{project_id}
+ * @param {google.cloud.datalabeling.v1beta1.Dataset} request.dataset
+ *   Required. The dataset to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.Dataset|Dataset}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.create_dataset.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_CreateDataset_async
+ */
   createDataset(
-    request?: protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IDataset,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IDataset,
+        protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest|undefined, {}|undefined
+      ]>;
   createDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IDataset,
-      | protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IDataset,
-      | protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDataset(
-    request?: protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datalabeling.v1beta1.IDataset,
-          | protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IDataset,
-      | protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IDataset,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDataset(
+      request: protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest,
+      callback: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IDataset,
+          protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDataset(
+      request?: protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datalabeling.v1beta1.IDataset,
+          protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IDataset,
+          protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IDataset,
+        protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createDataset request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datalabeling.v1beta1.IDataset,
-          | protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datalabeling.v1beta1.IDataset,
+        protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDataset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createDataset(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datalabeling.v1beta1.IDataset,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createDataset response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createDataset(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datalabeling.v1beta1.IDataset,
+        protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDataset response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets dataset by resource name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Dataset resource name, format:
-   *   projects/{project_id}/datasets/{dataset_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.Dataset|Dataset}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_dataset.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetDataset_async
-   */
+/**
+ * Gets dataset by resource name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Dataset resource name, format:
+ *   projects/{project_id}/datasets/{dataset_id}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.Dataset|Dataset}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_dataset.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetDataset_async
+ */
   getDataset(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IDataset,
-      protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IDataset,
+        protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest|undefined, {}|undefined
+      ]>;
   getDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IDataset,
-      | protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IDataset,
-      | protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataset(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datalabeling.v1beta1.IDataset,
-          | protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IDataset,
-      | protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IDataset,
-      protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataset(
+      request: protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest,
+      callback: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IDataset,
+          protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataset(
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datalabeling.v1beta1.IDataset,
+          protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IDataset,
+          protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IDataset,
+        protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDataset request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datalabeling.v1beta1.IDataset,
-          | protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datalabeling.v1beta1.IDataset,
+        protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDataset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDataset(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datalabeling.v1beta1.IDataset,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDataset response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDataset(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datalabeling.v1beta1.IDataset,
+        protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDataset response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a dataset by resource name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Dataset resource name, format:
-   *   projects/{project_id}/datasets/{dataset_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.delete_dataset.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_DeleteDataset_async
-   */
+/**
+ * Deletes a dataset by resource name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Dataset resource name, format:
+ *   projects/{project_id}/datasets/{dataset_id}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.delete_dataset.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_DeleteDataset_async
+ */
   deleteDataset(
-    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest|undefined, {}|undefined
+      ]>;
   deleteDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDataset(
-    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDataset(
+      request: protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDataset(
+      request?: protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteDataset request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDataset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteDataset(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDataset response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteDataset(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteDataset response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a data item in a dataset by resource name. This API can be
-   * called after data are imported into dataset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the data item to get, format:
-   *   projects/{project_id}/datasets/{dataset_id}/dataItems/{data_item_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.DataItem|DataItem}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_data_item.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetDataItem_async
-   */
+/**
+ * Gets a data item in a dataset by resource name. This API can be
+ * called after data are imported into dataset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the data item to get, format:
+ *   projects/{project_id}/datasets/{dataset_id}/dataItems/{data_item_id}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.DataItem|DataItem}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_data_item.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetDataItem_async
+ */
   getDataItem(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IDataItem,
-      protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IDataItem,
+        protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest|undefined, {}|undefined
+      ]>;
   getDataItem(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IDataItem,
-      | protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataItem(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IDataItem,
-      | protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataItem(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datalabeling.v1beta1.IDataItem,
-          | protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IDataItem,
-      | protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IDataItem,
-      protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataItem(
+      request: protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest,
+      callback: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IDataItem,
+          protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataItem(
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datalabeling.v1beta1.IDataItem,
+          protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IDataItem,
+          protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IDataItem,
+        protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDataItem request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datalabeling.v1beta1.IDataItem,
-          | protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datalabeling.v1beta1.IDataItem,
+        protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDataItem response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDataItem(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datalabeling.v1beta1.IDataItem,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDataItem response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDataItem(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datalabeling.v1beta1.IDataItem,
+        protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDataItem response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an annotated dataset by resource name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the annotated dataset to get, format:
-   *   projects/{project_id}/datasets/{dataset_id}/annotatedDatasets/
-   *   {annotated_dataset_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset|AnnotatedDataset}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_annotated_dataset.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetAnnotatedDataset_async
-   */
+/**
+ * Gets an annotated dataset by resource name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the annotated dataset to get, format:
+ *   projects/{project_id}/datasets/{dataset_id}/annotatedDatasets/
+ *   {annotated_dataset_id}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset|AnnotatedDataset}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_annotated_dataset.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetAnnotatedDataset_async
+ */
   getAnnotatedDataset(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
+        protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest|undefined, {}|undefined
+      ]>;
   getAnnotatedDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-      | protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAnnotatedDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-      | protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAnnotatedDataset(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-          | protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-      | protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAnnotatedDataset(
+      request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest,
+      callback: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
+          protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAnnotatedDataset(
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
+          protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
+          protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
+        protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAnnotatedDataset request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-          | protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
+        protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAnnotatedDataset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAnnotatedDataset(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getAnnotatedDataset response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getAnnotatedDataset(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
+        protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAnnotatedDataset response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes an annotated dataset by resource name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the annotated dataset to delete, format:
-   *   projects/{project_id}/datasets/{dataset_id}/annotatedDatasets/
-   *   {annotated_dataset_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.delete_annotated_dataset.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_DeleteAnnotatedDataset_async
-   */
+/**
+ * Deletes an annotated dataset by resource name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the annotated dataset to delete, format:
+ *   projects/{project_id}/datasets/{dataset_id}/annotatedDatasets/
+ *   {annotated_dataset_id}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.delete_annotated_dataset.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_DeleteAnnotatedDataset_async
+ */
   deleteAnnotatedDataset(
-    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest|undefined, {}|undefined
+      ]>;
   deleteAnnotatedDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAnnotatedDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAnnotatedDataset(
-    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAnnotatedDataset(
+      request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAnnotatedDataset(
+      request?: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteAnnotatedDataset request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteAnnotatedDataset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteAnnotatedDataset(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAnnotatedDataset response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteAnnotatedDataset(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteAnnotatedDataset response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an example by resource name, including both data and annotation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of example, format:
-   *   projects/{project_id}/datasets/{dataset_id}/annotatedDatasets/
-   *   {annotated_dataset_id}/examples/{example_id}
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering Examples. Filter by
-   *   annotation_spec.display_name is supported. Format
-   *   "annotation_spec.display_name = {display_name}"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.Example|Example}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_example.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetExample_async
-   */
+/**
+ * Gets an example by resource name, including both data and annotation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of example, format:
+ *   projects/{project_id}/datasets/{dataset_id}/annotatedDatasets/
+ *   {annotated_dataset_id}/examples/{example_id}
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering Examples. Filter by
+ *   annotation_spec.display_name is supported. Format
+ *   "annotation_spec.display_name = {display_name}"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.Example|Example}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_example.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetExample_async
+ */
   getExample(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IExample,
-      protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IExample,
+        protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest|undefined, {}|undefined
+      ]>;
   getExample(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IExample,
-      | protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getExample(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IExample,
-      | protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getExample(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datalabeling.v1beta1.IExample,
-          | protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IExample,
-      | protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IExample,
-      protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest|null|undefined,
+          {}|null|undefined>): void;
+  getExample(
+      request: protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest,
+      callback: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IExample,
+          protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest|null|undefined,
+          {}|null|undefined>): void;
+  getExample(
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datalabeling.v1beta1.IExample,
+          protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IExample,
+          protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IExample,
+        protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getExample request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datalabeling.v1beta1.IExample,
-          | protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datalabeling.v1beta1.IExample,
+        protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getExample response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getExample(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datalabeling.v1beta1.IExample,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getExample response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getExample(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datalabeling.v1beta1.IExample,
+        protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getExample response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates an annotation spec set by providing a set of labels.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. AnnotationSpecSet resource parent, format:
-   *   projects/{project_id}
-   * @param {google.cloud.datalabeling.v1beta1.AnnotationSpecSet} request.annotationSpecSet
-   *   Required. Annotation spec set to create. Annotation specs must be included.
-   *   Only one annotation spec will be accepted for annotation specs with same
-   *   display_name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet|AnnotationSpecSet}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.create_annotation_spec_set.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_CreateAnnotationSpecSet_async
-   */
+/**
+ * Creates an annotation spec set by providing a set of labels.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. AnnotationSpecSet resource parent, format:
+ *   projects/{project_id}
+ * @param {google.cloud.datalabeling.v1beta1.AnnotationSpecSet} request.annotationSpecSet
+ *   Required. Annotation spec set to create. Annotation specs must be included.
+ *   Only one annotation spec will be accepted for annotation specs with same
+ *   display_name.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet|AnnotationSpecSet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.create_annotation_spec_set.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_CreateAnnotationSpecSet_async
+ */
   createAnnotationSpecSet(
-    request?: protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
+        protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest|undefined, {}|undefined
+      ]>;
   createAnnotationSpecSet(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-      | protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createAnnotationSpecSet(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-      | protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createAnnotationSpecSet(
-    request?: protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-          | protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-      | protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  createAnnotationSpecSet(
+      request: protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest,
+      callback: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
+          protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  createAnnotationSpecSet(
+      request?: protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
+          protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
+          protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
+        protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createAnnotationSpecSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-          | protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
+        protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createAnnotationSpecSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createAnnotationSpecSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createAnnotationSpecSet response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createAnnotationSpecSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
+        protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createAnnotationSpecSet response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an annotation spec set by resource name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. AnnotationSpecSet resource name, format:
-   *   projects/{project_id}/annotationSpecSets/{annotation_spec_set_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet|AnnotationSpecSet}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_annotation_spec_set.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetAnnotationSpecSet_async
-   */
+/**
+ * Gets an annotation spec set by resource name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. AnnotationSpecSet resource name, format:
+ *   projects/{project_id}/annotationSpecSets/{annotation_spec_set_id}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet|AnnotationSpecSet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_annotation_spec_set.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetAnnotationSpecSet_async
+ */
   getAnnotationSpecSet(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
+        protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest|undefined, {}|undefined
+      ]>;
   getAnnotationSpecSet(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-      | protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAnnotationSpecSet(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-      | protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAnnotationSpecSet(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-          | protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-      | protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAnnotationSpecSet(
+      request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest,
+      callback: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
+          protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAnnotationSpecSet(
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
+          protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
+          protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
+        protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAnnotationSpecSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-          | protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
+        protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAnnotationSpecSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAnnotationSpecSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getAnnotationSpecSet response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getAnnotationSpecSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet,
+        protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAnnotationSpecSet response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes an annotation spec set by resource name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. AnnotationSpec resource name, format:
-   *   `projects/{project_id}/annotationSpecSets/{annotation_spec_set_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.delete_annotation_spec_set.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_DeleteAnnotationSpecSet_async
-   */
+/**
+ * Deletes an annotation spec set by resource name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. AnnotationSpec resource name, format:
+ *   `projects/{project_id}/annotationSpecSets/{annotation_spec_set_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.delete_annotation_spec_set.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_DeleteAnnotationSpecSet_async
+ */
   deleteAnnotationSpecSet(
-    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest|undefined, {}|undefined
+      ]>;
   deleteAnnotationSpecSet(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAnnotationSpecSet(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAnnotationSpecSet(
-    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAnnotationSpecSet(
+      request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAnnotationSpecSet(
+      request?: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteAnnotationSpecSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteAnnotationSpecSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteAnnotationSpecSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAnnotationSpecSet response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteAnnotationSpecSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteAnnotationSpecSet response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an instruction by resource name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Instruction resource name, format:
-   *   projects/{project_id}/instructions/{instruction_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.Instruction|Instruction}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_instruction.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetInstruction_async
-   */
+/**
+ * Gets an instruction by resource name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Instruction resource name, format:
+ *   projects/{project_id}/instructions/{instruction_id}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.Instruction|Instruction}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_instruction.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetInstruction_async
+ */
   getInstruction(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IInstruction,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IInstruction,
+        protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest|undefined, {}|undefined
+      ]>;
   getInstruction(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IInstruction,
-      | protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInstruction(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IInstruction,
-      | protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getInstruction(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datalabeling.v1beta1.IInstruction,
-          | protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IInstruction,
-      | protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IInstruction,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInstruction(
+      request: protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest,
+      callback: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IInstruction,
+          protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getInstruction(
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datalabeling.v1beta1.IInstruction,
+          protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IInstruction,
+          protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IInstruction,
+        protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getInstruction request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datalabeling.v1beta1.IInstruction,
-          | protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datalabeling.v1beta1.IInstruction,
+        protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getInstruction response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getInstruction(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datalabeling.v1beta1.IInstruction,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getInstruction response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getInstruction(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datalabeling.v1beta1.IInstruction,
+        protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getInstruction response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes an instruction object by resource name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Instruction resource name, format:
-   *   projects/{project_id}/instructions/{instruction_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.delete_instruction.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_DeleteInstruction_async
-   */
+/**
+ * Deletes an instruction object by resource name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Instruction resource name, format:
+ *   projects/{project_id}/instructions/{instruction_id}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.delete_instruction.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_DeleteInstruction_async
+ */
   deleteInstruction(
-    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest|undefined, {}|undefined
+      ]>;
   deleteInstruction(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteInstruction(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteInstruction(
-    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteInstruction(
+      request: protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteInstruction(
+      request?: protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteInstruction request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteInstruction response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteInstruction(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteInstruction response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteInstruction(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteInstruction response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an evaluation by resource name (to search, use
-   * {@link protos.google.cloud.datalabeling.v1beta1.DataLabelingService.SearchEvaluations|projects.evaluations.search}).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the evaluation. Format:
-   *
-   *   "projects/<var>{project_id}</var>/datasets/<var>{dataset_id}</var>/evaluations/<var>{evaluation_id}</var>'
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|Evaluation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_evaluation.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetEvaluation_async
-   */
+/**
+ * Gets an evaluation by resource name (to search, use
+ * {@link protos.google.cloud.datalabeling.v1beta1.DataLabelingService.SearchEvaluations|projects.evaluations.search}).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the evaluation. Format:
+ *
+ *   "projects/<var>{project_id}</var>/datasets/<var>{dataset_id}</var>/evaluations/<var>{evaluation_id}</var>'
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|Evaluation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_evaluation.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetEvaluation_async
+ */
   getEvaluation(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IEvaluation,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IEvaluation,
+        protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest|undefined, {}|undefined
+      ]>;
   getEvaluation(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IEvaluation,
-      | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEvaluation(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IEvaluation,
-      | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEvaluation(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datalabeling.v1beta1.IEvaluation,
-          | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IEvaluation,
-      | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IEvaluation,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEvaluation(
+      request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest,
+      callback: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IEvaluation,
+          protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEvaluation(
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datalabeling.v1beta1.IEvaluation,
+          protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IEvaluation,
+          protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IEvaluation,
+        protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEvaluation request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datalabeling.v1beta1.IEvaluation,
-          | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datalabeling.v1beta1.IEvaluation,
+        protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEvaluation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEvaluation(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datalabeling.v1beta1.IEvaluation,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getEvaluation response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getEvaluation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datalabeling.v1beta1.IEvaluation,
+        protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEvaluation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates an evaluation job.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Evaluation job resource parent. Format:
-   *   "projects/<var>{project_id}</var>"
-   * @param {google.cloud.datalabeling.v1beta1.EvaluationJob} request.job
-   *   Required. The evaluation job to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob|EvaluationJob}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.create_evaluation_job.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_CreateEvaluationJob_async
-   */
+/**
+ * Creates an evaluation job.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Evaluation job resource parent. Format:
+ *   "projects/<var>{project_id}</var>"
+ * @param {google.cloud.datalabeling.v1beta1.EvaluationJob} request.job
+ *   Required. The evaluation job to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob|EvaluationJob}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.create_evaluation_job.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_CreateEvaluationJob_async
+ */
   createEvaluationJob(
-    request?: protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+        protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest|undefined, {}|undefined
+      ]>;
   createEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-      | protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-      | protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createEvaluationJob(
-    request?: protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-          | protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-      | protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  createEvaluationJob(
+      request: protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest,
+      callback: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+          protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  createEvaluationJob(
+      request?: protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+          protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+          protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+        protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createEvaluationJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-          | protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+        protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createEvaluationJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createEvaluationJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createEvaluationJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createEvaluationJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+        protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createEvaluationJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates an evaluation job. You can only update certain fields of the job's
-   * {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJobConfig|EvaluationJobConfig}: `humanAnnotationConfig.instruction`,
-   * `exampleCount`, and `exampleSamplePercentage`.
-   *
-   * If you want to change any other aspect of the evaluation job, you must
-   * delete the job and create a new one.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.datalabeling.v1beta1.EvaluationJob} request.evaluationJob
-   *   Required. Evaluation job that is going to be updated.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Mask for which fields to update. You can only provide the
-   *   following fields:
-   *
-   *   * `evaluationJobConfig.humanAnnotationConfig.instruction`
-   *   * `evaluationJobConfig.exampleCount`
-   *   * `evaluationJobConfig.exampleSamplePercentage`
-   *
-   *   You can provide more than one of these fields by separating them with
-   *   commas.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob|EvaluationJob}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.update_evaluation_job.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_UpdateEvaluationJob_async
-   */
+/**
+ * Updates an evaluation job. You can only update certain fields of the job's
+ * {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJobConfig|EvaluationJobConfig}: `humanAnnotationConfig.instruction`,
+ * `exampleCount`, and `exampleSamplePercentage`.
+ *
+ * If you want to change any other aspect of the evaluation job, you must
+ * delete the job and create a new one.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.datalabeling.v1beta1.EvaluationJob} request.evaluationJob
+ *   Required. Evaluation job that is going to be updated.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Mask for which fields to update. You can only provide the
+ *   following fields:
+ *
+ *   * `evaluationJobConfig.humanAnnotationConfig.instruction`
+ *   * `evaluationJobConfig.exampleCount`
+ *   * `evaluationJobConfig.exampleSamplePercentage`
+ *
+ *   You can provide more than one of these fields by separating them with
+ *   commas.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob|EvaluationJob}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.update_evaluation_job.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_UpdateEvaluationJob_async
+ */
   updateEvaluationJob(
-    request?: protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+        protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest|undefined, {}|undefined
+      ]>;
   updateEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-      | protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-      | protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEvaluationJob(
-    request?: protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-          | protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-      | protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateEvaluationJob(
+      request: protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest,
+      callback: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+          protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateEvaluationJob(
+      request?: protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+          protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+          protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+        protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'evaluation_job.name': request.evaluationJob!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'evaluation_job.name': request.evaluationJob!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateEvaluationJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-          | protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+        protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateEvaluationJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateEvaluationJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateEvaluationJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateEvaluationJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+        protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateEvaluationJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an evaluation job by resource name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the evaluation job. Format:
-   *
-   *   "projects/<var>{project_id}</var>/evaluationJobs/<var>{evaluation_job_id}</var>"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob|EvaluationJob}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_evaluation_job.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetEvaluationJob_async
-   */
+/**
+ * Gets an evaluation job by resource name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the evaluation job. Format:
+ *
+ *   "projects/<var>{project_id}</var>/evaluationJobs/<var>{evaluation_job_id}</var>"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob|EvaluationJob}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.get_evaluation_job.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_GetEvaluationJob_async
+ */
   getEvaluationJob(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+        protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest|undefined, {}|undefined
+      ]>;
   getEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-      | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest,
-    callback: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-      | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEvaluationJob(
-    request?: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-          | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-      | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEvaluationJob(
+      request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest,
+      callback: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+          protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEvaluationJob(
+      request?: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+          protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+          protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+        protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEvaluationJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-          | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+        protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEvaluationJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEvaluationJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getEvaluationJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getEvaluationJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.datalabeling.v1beta1.IEvaluationJob,
+        protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEvaluationJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Pauses an evaluation job. Pausing an evaluation job that is already in a
-   * `PAUSED` state is a no-op.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the evaluation job that is going to be paused. Format:
-   *
-   *   "projects/<var>{project_id}</var>/evaluationJobs/<var>{evaluation_job_id}</var>"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.pause_evaluation_job.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_PauseEvaluationJob_async
-   */
+/**
+ * Pauses an evaluation job. Pausing an evaluation job that is already in a
+ * `PAUSED` state is a no-op.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the evaluation job that is going to be paused. Format:
+ *
+ *   "projects/<var>{project_id}</var>/evaluationJobs/<var>{evaluation_job_id}</var>"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.pause_evaluation_job.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_PauseEvaluationJob_async
+ */
   pauseEvaluationJob(
-    request?: protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest|undefined, {}|undefined
+      ]>;
   pauseEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  pauseEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  pauseEvaluationJob(
-    request?: protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  pauseEvaluationJob(
+      request: protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  pauseEvaluationJob(
+      request?: protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('pauseEvaluationJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('pauseEvaluationJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .pauseEvaluationJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('pauseEvaluationJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.pauseEvaluationJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('pauseEvaluationJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Resumes a paused evaluation job. A deleted evaluation job can't be resumed.
-   * Resuming a running or scheduled evaluation job is a no-op.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the evaluation job that is going to be resumed. Format:
-   *
-   *   "projects/<var>{project_id}</var>/evaluationJobs/<var>{evaluation_job_id}</var>"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.resume_evaluation_job.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ResumeEvaluationJob_async
-   */
+/**
+ * Resumes a paused evaluation job. A deleted evaluation job can't be resumed.
+ * Resuming a running or scheduled evaluation job is a no-op.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the evaluation job that is going to be resumed. Format:
+ *
+ *   "projects/<var>{project_id}</var>/evaluationJobs/<var>{evaluation_job_id}</var>"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.resume_evaluation_job.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ResumeEvaluationJob_async
+ */
   resumeEvaluationJob(
-    request?: protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest|undefined, {}|undefined
+      ]>;
   resumeEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resumeEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resumeEvaluationJob(
-    request?: protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  resumeEvaluationJob(
+      request: protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  resumeEvaluationJob(
+      request?: protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('resumeEvaluationJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('resumeEvaluationJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .resumeEvaluationJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('resumeEvaluationJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.resumeEvaluationJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('resumeEvaluationJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Stops and deletes an evaluation job.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the evaluation job that is going to be deleted. Format:
-   *
-   *   "projects/<var>{project_id}</var>/evaluationJobs/<var>{evaluation_job_id}</var>"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.delete_evaluation_job.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_DeleteEvaluationJob_async
-   */
+/**
+ * Stops and deletes an evaluation job.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the evaluation job that is going to be deleted. Format:
+ *
+ *   "projects/<var>{project_id}</var>/evaluationJobs/<var>{evaluation_job_id}</var>"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.delete_evaluation_job.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_DeleteEvaluationJob_async
+ */
   deleteEvaluationJob(
-    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest|undefined, {}|undefined
+      ]>;
   deleteEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteEvaluationJob(
-    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteEvaluationJob(
+      request: protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteEvaluationJob(
+      request?: protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteEvaluationJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteEvaluationJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteEvaluationJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteEvaluationJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteEvaluationJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteEvaluationJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Imports data into dataset based on source locations defined in request.
-   * It can be called multiple times for the same dataset. Each dataset can
-   * only have one long running operation running on it. For example, no
-   * labeling task (also long running operation) can be started while
-   * importing is still ongoing. Vice versa.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Dataset resource name, format:
-   *   projects/{project_id}/datasets/{dataset_id}
-   * @param {google.cloud.datalabeling.v1beta1.InputConfig} request.inputConfig
-   *   Required. Specify the input source of the data.
-   * @param {string} request.userEmailAddress
-   *   Email of the user who started the import task and should be notified by
-   *   email. If empty no notification will be sent.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.import_data.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ImportData_async
-   */
+/**
+ * Imports data into dataset based on source locations defined in request.
+ * It can be called multiple times for the same dataset. Each dataset can
+ * only have one long running operation running on it. For example, no
+ * labeling task (also long running operation) can be started while
+ * importing is still ongoing. Vice versa.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Dataset resource name, format:
+ *   projects/{project_id}/datasets/{dataset_id}
+ * @param {google.cloud.datalabeling.v1beta1.InputConfig} request.inputConfig
+ *   Required. Specify the input source of the data.
+ * @param {string} request.userEmailAddress
+ *   Email of the user who started the import task and should be notified by
+ *   email. If empty no notification will be sent.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.import_data.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ImportData_async
+ */
   importData(
-    request?: protos.google.cloud.datalabeling.v1beta1.IImportDataRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse,
-        protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IImportDataRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   importData(
-    request: protos.google.cloud.datalabeling.v1beta1.IImportDataRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse,
-        protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datalabeling.v1beta1.IImportDataRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   importData(
-    request: protos.google.cloud.datalabeling.v1beta1.IImportDataRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse,
-        protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datalabeling.v1beta1.IImportDataRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   importData(
-    request?: protos.google.cloud.datalabeling.v1beta1.IImportDataRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse,
-            protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse,
-        protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse,
-        protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datalabeling.v1beta1.IImportDataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse,
-            protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('importData response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('importData request %j', request);
-    return this.innerApiCalls
-      .importData(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse,
-            protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('importData response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.importData(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.datalabeling.v1beta1.IImportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IImportDataOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('importData response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `importData()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.import_data.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ImportData_async
-   */
-  async checkImportDataProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.datalabeling.v1beta1.ImportDataOperationResponse,
-      protos.google.cloud.datalabeling.v1beta1.ImportDataOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `importData()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.import_data.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ImportData_async
+ */
+  async checkImportDataProgress(name: string): Promise<LROperation<protos.google.cloud.datalabeling.v1beta1.ImportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.ImportDataOperationMetadata>>{
     this._log.info('importData long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.importData,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.datalabeling.v1beta1.ImportDataOperationResponse,
-      protos.google.cloud.datalabeling.v1beta1.ImportDataOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importData, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.datalabeling.v1beta1.ImportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.ImportDataOperationMetadata>;
   }
-  /**
-   * Exports data and annotations from dataset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Dataset resource name, format:
-   *   projects/{project_id}/datasets/{dataset_id}
-   * @param {string} request.annotatedDataset
-   *   Required. Annotated dataset resource name. DataItem in
-   *   Dataset and their annotations in specified annotated dataset will be
-   *   exported. It's in format of
-   *   projects/{project_id}/datasets/{dataset_id}/annotatedDatasets/
-   *   {annotated_dataset_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter is not supported at this moment.
-   * @param {google.cloud.datalabeling.v1beta1.OutputConfig} request.outputConfig
-   *   Required. Specify the output destination.
-   * @param {string} request.userEmailAddress
-   *   Email of the user who started the export task and should be notified by
-   *   email. If empty no notification will be sent.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.export_data.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ExportData_async
-   */
+/**
+ * Exports data and annotations from dataset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Dataset resource name, format:
+ *   projects/{project_id}/datasets/{dataset_id}
+ * @param {string} request.annotatedDataset
+ *   Required. Annotated dataset resource name. DataItem in
+ *   Dataset and their annotations in specified annotated dataset will be
+ *   exported. It's in format of
+ *   projects/{project_id}/datasets/{dataset_id}/annotatedDatasets/
+ *   {annotated_dataset_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter is not supported at this moment.
+ * @param {google.cloud.datalabeling.v1beta1.OutputConfig} request.outputConfig
+ *   Required. Specify the output destination.
+ * @param {string} request.userEmailAddress
+ *   Email of the user who started the export task and should be notified by
+ *   email. If empty no notification will be sent.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.export_data.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ExportData_async
+ */
   exportData(
-    request?: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse,
-        protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   exportData(
-    request: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse,
-        protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportData(
-    request: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse,
-        protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportData(
-    request?: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse,
-            protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse,
-        protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse,
-        protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse,
-            protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportData response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportData request %j', request);
-    return this.innerApiCalls
-      .exportData(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse,
-            protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('exportData response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.exportData(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.datalabeling.v1beta1.IExportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.IExportDataOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('exportData response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `exportData()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.export_data.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ExportData_async
-   */
-  async checkExportDataProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.datalabeling.v1beta1.ExportDataOperationResponse,
-      protos.google.cloud.datalabeling.v1beta1.ExportDataOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `exportData()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.export_data.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ExportData_async
+ */
+  async checkExportDataProgress(name: string): Promise<LROperation<protos.google.cloud.datalabeling.v1beta1.ExportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.ExportDataOperationMetadata>>{
     this._log.info('exportData long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.exportData,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.datalabeling.v1beta1.ExportDataOperationResponse,
-      protos.google.cloud.datalabeling.v1beta1.ExportDataOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportData, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.datalabeling.v1beta1.ExportDataOperationResponse, protos.google.cloud.datalabeling.v1beta1.ExportDataOperationMetadata>;
   }
-  /**
-   * Starts a labeling task for image. The type of image labeling task is
-   * configured by feature in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.datalabeling.v1beta1.ImageClassificationConfig} request.imageClassificationConfig
-   *   Configuration for image classification task.
-   *   One of image_classification_config, bounding_poly_config,
-   *   polyline_config and segmentation_config are required.
-   * @param {google.cloud.datalabeling.v1beta1.BoundingPolyConfig} request.boundingPolyConfig
-   *   Configuration for bounding box and bounding poly task.
-   *   One of image_classification_config, bounding_poly_config,
-   *   polyline_config and segmentation_config are required.
-   * @param {google.cloud.datalabeling.v1beta1.PolylineConfig} request.polylineConfig
-   *   Configuration for polyline task.
-   *   One of image_classification_config, bounding_poly_config,
-   *   polyline_config and segmentation_config are required.
-   * @param {google.cloud.datalabeling.v1beta1.SegmentationConfig} request.segmentationConfig
-   *   Configuration for segmentation task.
-   *   One of image_classification_config, bounding_poly_config,
-   *   polyline_config and segmentation_config are required.
-   * @param {string} request.parent
-   *   Required. Name of the dataset to request labeling task, format:
-   *   projects/{project_id}/datasets/{dataset_id}
-   * @param {google.cloud.datalabeling.v1beta1.HumanAnnotationConfig} request.basicConfig
-   *   Required. Basic human annotation config.
-   * @param {google.cloud.datalabeling.v1beta1.LabelImageRequest.Feature} request.feature
-   *   Required. The type of image labeling task.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.label_image.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_LabelImage_async
-   */
+/**
+ * Starts a labeling task for image. The type of image labeling task is
+ * configured by feature in the request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.datalabeling.v1beta1.ImageClassificationConfig} request.imageClassificationConfig
+ *   Configuration for image classification task.
+ *   One of image_classification_config, bounding_poly_config,
+ *   polyline_config and segmentation_config are required.
+ * @param {google.cloud.datalabeling.v1beta1.BoundingPolyConfig} request.boundingPolyConfig
+ *   Configuration for bounding box and bounding poly task.
+ *   One of image_classification_config, bounding_poly_config,
+ *   polyline_config and segmentation_config are required.
+ * @param {google.cloud.datalabeling.v1beta1.PolylineConfig} request.polylineConfig
+ *   Configuration for polyline task.
+ *   One of image_classification_config, bounding_poly_config,
+ *   polyline_config and segmentation_config are required.
+ * @param {google.cloud.datalabeling.v1beta1.SegmentationConfig} request.segmentationConfig
+ *   Configuration for segmentation task.
+ *   One of image_classification_config, bounding_poly_config,
+ *   polyline_config and segmentation_config are required.
+ * @param {string} request.parent
+ *   Required. Name of the dataset to request labeling task, format:
+ *   projects/{project_id}/datasets/{dataset_id}
+ * @param {google.cloud.datalabeling.v1beta1.HumanAnnotationConfig} request.basicConfig
+ *   Required. Basic human annotation config.
+ * @param {google.cloud.datalabeling.v1beta1.LabelImageRequest.Feature} request.feature
+ *   Required. The type of image labeling task.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.label_image.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_LabelImage_async
+ */
   labelImage(
-    request?: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-        protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   labelImage(
-    request: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-        protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   labelImage(
-    request: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-        protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   labelImage(
-    request?: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-            protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-        protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-        protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-            protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('labelImage response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('labelImage request %j', request);
-    return this.innerApiCalls
-      .labelImage(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-            protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('labelImage response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.labelImage(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('labelImage response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `labelImage()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.label_image.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_LabelImage_async
-   */
-  async checkLabelImageProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset,
-      protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `labelImage()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.label_image.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_LabelImage_async
+ */
+  async checkLabelImageProgress(name: string): Promise<LROperation<protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata>>{
     this._log.info('labelImage long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.labelImage,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset,
-      protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.labelImage, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata>;
   }
-  /**
-   * Starts a labeling task for video. The type of video labeling task is
-   * configured by feature in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.datalabeling.v1beta1.VideoClassificationConfig} request.videoClassificationConfig
-   *   Configuration for video classification task.
-   *   One of video_classification_config, object_detection_config,
-   *   object_tracking_config and event_config is required.
-   * @param {google.cloud.datalabeling.v1beta1.ObjectDetectionConfig} request.objectDetectionConfig
-   *   Configuration for video object detection task.
-   *   One of video_classification_config, object_detection_config,
-   *   object_tracking_config and event_config is required.
-   * @param {google.cloud.datalabeling.v1beta1.ObjectTrackingConfig} request.objectTrackingConfig
-   *   Configuration for video object tracking task.
-   *   One of video_classification_config, object_detection_config,
-   *   object_tracking_config and event_config is required.
-   * @param {google.cloud.datalabeling.v1beta1.EventConfig} request.eventConfig
-   *   Configuration for video event task.
-   *   One of video_classification_config, object_detection_config,
-   *   object_tracking_config and event_config is required.
-   * @param {string} request.parent
-   *   Required. Name of the dataset to request labeling task, format:
-   *   projects/{project_id}/datasets/{dataset_id}
-   * @param {google.cloud.datalabeling.v1beta1.HumanAnnotationConfig} request.basicConfig
-   *   Required. Basic human annotation config.
-   * @param {google.cloud.datalabeling.v1beta1.LabelVideoRequest.Feature} request.feature
-   *   Required. The type of video labeling task.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.label_video.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_LabelVideo_async
-   */
+/**
+ * Starts a labeling task for video. The type of video labeling task is
+ * configured by feature in the request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.datalabeling.v1beta1.VideoClassificationConfig} request.videoClassificationConfig
+ *   Configuration for video classification task.
+ *   One of video_classification_config, object_detection_config,
+ *   object_tracking_config and event_config is required.
+ * @param {google.cloud.datalabeling.v1beta1.ObjectDetectionConfig} request.objectDetectionConfig
+ *   Configuration for video object detection task.
+ *   One of video_classification_config, object_detection_config,
+ *   object_tracking_config and event_config is required.
+ * @param {google.cloud.datalabeling.v1beta1.ObjectTrackingConfig} request.objectTrackingConfig
+ *   Configuration for video object tracking task.
+ *   One of video_classification_config, object_detection_config,
+ *   object_tracking_config and event_config is required.
+ * @param {google.cloud.datalabeling.v1beta1.EventConfig} request.eventConfig
+ *   Configuration for video event task.
+ *   One of video_classification_config, object_detection_config,
+ *   object_tracking_config and event_config is required.
+ * @param {string} request.parent
+ *   Required. Name of the dataset to request labeling task, format:
+ *   projects/{project_id}/datasets/{dataset_id}
+ * @param {google.cloud.datalabeling.v1beta1.HumanAnnotationConfig} request.basicConfig
+ *   Required. Basic human annotation config.
+ * @param {google.cloud.datalabeling.v1beta1.LabelVideoRequest.Feature} request.feature
+ *   Required. The type of video labeling task.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.label_video.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_LabelVideo_async
+ */
   labelVideo(
-    request?: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-        protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   labelVideo(
-    request: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-        protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   labelVideo(
-    request: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-        protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   labelVideo(
-    request?: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-            protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-        protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-        protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-            protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('labelVideo response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('labelVideo request %j', request);
-    return this.innerApiCalls
-      .labelVideo(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-            protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('labelVideo response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.labelVideo(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('labelVideo response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `labelVideo()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.label_video.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_LabelVideo_async
-   */
-  async checkLabelVideoProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset,
-      protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `labelVideo()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.label_video.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_LabelVideo_async
+ */
+  async checkLabelVideoProgress(name: string): Promise<LROperation<protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata>>{
     this._log.info('labelVideo long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.labelVideo,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset,
-      protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.labelVideo, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata>;
   }
-  /**
-   * Starts a labeling task for text. The type of text labeling task is
-   * configured by feature in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.datalabeling.v1beta1.TextClassificationConfig} request.textClassificationConfig
-   *   Configuration for text classification task.
-   *   One of text_classification_config and text_entity_extraction_config
-   *   is required.
-   * @param {google.cloud.datalabeling.v1beta1.TextEntityExtractionConfig} request.textEntityExtractionConfig
-   *   Configuration for entity extraction task.
-   *   One of text_classification_config and text_entity_extraction_config
-   *   is required.
-   * @param {string} request.parent
-   *   Required. Name of the data set to request labeling task, format:
-   *   projects/{project_id}/datasets/{dataset_id}
-   * @param {google.cloud.datalabeling.v1beta1.HumanAnnotationConfig} request.basicConfig
-   *   Required. Basic human annotation config.
-   * @param {google.cloud.datalabeling.v1beta1.LabelTextRequest.Feature} request.feature
-   *   Required. The type of text labeling task.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.label_text.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_LabelText_async
-   */
+/**
+ * Starts a labeling task for text. The type of text labeling task is
+ * configured by feature in the request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.datalabeling.v1beta1.TextClassificationConfig} request.textClassificationConfig
+ *   Configuration for text classification task.
+ *   One of text_classification_config and text_entity_extraction_config
+ *   is required.
+ * @param {google.cloud.datalabeling.v1beta1.TextEntityExtractionConfig} request.textEntityExtractionConfig
+ *   Configuration for entity extraction task.
+ *   One of text_classification_config and text_entity_extraction_config
+ *   is required.
+ * @param {string} request.parent
+ *   Required. Name of the data set to request labeling task, format:
+ *   projects/{project_id}/datasets/{dataset_id}
+ * @param {google.cloud.datalabeling.v1beta1.HumanAnnotationConfig} request.basicConfig
+ *   Required. Basic human annotation config.
+ * @param {google.cloud.datalabeling.v1beta1.LabelTextRequest.Feature} request.feature
+ *   Required. The type of text labeling task.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.label_text.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_LabelText_async
+ */
   labelText(
-    request?: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-        protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   labelText(
-    request: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-        protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   labelText(
-    request: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-        protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   labelText(
-    request?: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-            protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-        protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-        protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-            protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('labelText response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('labelText request %j', request);
-    return this.innerApiCalls
-      .labelText(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset,
-            protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('labelText response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.labelText(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.ILabelOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('labelText response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `labelText()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.label_text.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_LabelText_async
-   */
-  async checkLabelTextProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset,
-      protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `labelText()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.label_text.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_LabelText_async
+ */
+  async checkLabelTextProgress(name: string): Promise<LROperation<protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata>>{
     this._log.info('labelText long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.labelText,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset,
-      protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.labelText, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset, protos.google.cloud.datalabeling.v1beta1.LabelOperationMetadata>;
   }
-  /**
-   * Creates an instruction for how data should be labeled.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Instruction resource parent, format:
-   *   projects/{project_id}
-   * @param {google.cloud.datalabeling.v1beta1.Instruction} request.instruction
-   *   Required. Instruction of how to perform the labeling task.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.create_instruction.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_CreateInstruction_async
-   */
+/**
+ * Creates an instruction for how data should be labeled.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Instruction resource parent, format:
+ *   projects/{project_id}
+ * @param {google.cloud.datalabeling.v1beta1.Instruction} request.instruction
+ *   Required. Instruction of how to perform the labeling task.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.create_instruction.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_CreateInstruction_async
+ */
   createInstruction(
-    request?: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IInstruction,
-        protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.datalabeling.v1beta1.IInstruction, protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createInstruction(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IInstruction,
-        protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IInstruction, protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createInstruction(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IInstruction,
-        protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IInstruction, protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createInstruction(
-    request?: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IInstruction,
-            protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IInstruction,
-        protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datalabeling.v1beta1.IInstruction,
-        protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IInstruction, protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IInstruction, protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.datalabeling.v1beta1.IInstruction, protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IInstruction,
-            protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.datalabeling.v1beta1.IInstruction, protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createInstruction response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createInstruction request %j', request);
-    return this.innerApiCalls
-      .createInstruction(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.datalabeling.v1beta1.IInstruction,
-            protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createInstruction response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createInstruction(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.datalabeling.v1beta1.IInstruction, protos.google.cloud.datalabeling.v1beta1.ICreateInstructionMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createInstruction response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createInstruction()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.create_instruction.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_CreateInstruction_async
-   */
-  async checkCreateInstructionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.datalabeling.v1beta1.Instruction,
-      protos.google.cloud.datalabeling.v1beta1.CreateInstructionMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createInstruction()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.create_instruction.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_CreateInstruction_async
+ */
+  async checkCreateInstructionProgress(name: string): Promise<LROperation<protos.google.cloud.datalabeling.v1beta1.Instruction, protos.google.cloud.datalabeling.v1beta1.CreateInstructionMetadata>>{
     this._log.info('createInstruction long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createInstruction,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.datalabeling.v1beta1.Instruction,
-      protos.google.cloud.datalabeling.v1beta1.CreateInstructionMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createInstruction, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.datalabeling.v1beta1.Instruction, protos.google.cloud.datalabeling.v1beta1.CreateInstructionMetadata>;
   }
-  /**
-   * Lists datasets under a project. Pagination is supported.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Dataset resource parent, format:
-   *   projects/{project_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter on dataset is not supported at this moment.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListDatasetsResponse.next_page_token|ListDatasetsResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListDatasets] call.
-   *   Returns the first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.Dataset|Dataset}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDatasetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists datasets under a project. Pagination is supported.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Dataset resource parent, format:
+ *   projects/{project_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter on dataset is not supported at this moment.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListDatasetsResponse.next_page_token|ListDatasetsResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListDatasets] call.
+ *   Returns the first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.Dataset|Dataset}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDatasetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDatasets(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IDataset[],
-      protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IDataset[],
+        protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse
+      ]>;
   listDatasets(
-    request: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IDataset
-    >
-  ): void;
-  listDatasets(
-    request: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IDataset
-    >
-  ): void;
-  listDatasets(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IDataset
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IDataset
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IDataset[],
-      protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IDataset>): void;
+  listDatasets(
+      request: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IDataset>): void;
+  listDatasets(
+      request?: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IDataset>,
+      callback?: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IDataset>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IDataset[],
+        protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IDataset
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
+      protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse|null|undefined,
+      protos.google.cloud.datalabeling.v1beta1.IDataset>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDatasets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4263,64 +3111,61 @@ export class DataLabelingServiceClient {
     this._log.info('listDatasets request %j', request);
     return this.innerApiCalls
       .listDatasets(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.datalabeling.v1beta1.IDataset[],
-          protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest | null,
-          protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse,
-        ]) => {
-          this._log.info('listDatasets values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.datalabeling.v1beta1.IDataset[],
+        protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListDatasetsResponse
+      ]) => {
+        this._log.info('listDatasets values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDatasets`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Dataset resource parent, format:
-   *   projects/{project_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter on dataset is not supported at this moment.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListDatasetsResponse.next_page_token|ListDatasetsResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListDatasets] call.
-   *   Returns the first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.Dataset|Dataset} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDatasetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDatasets`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Dataset resource parent, format:
+ *   projects/{project_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter on dataset is not supported at this moment.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListDatasetsResponse.next_page_token|ListDatasetsResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListDatasets] call.
+ *   Returns the first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.Dataset|Dataset} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDatasetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDatasetsStream(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDatasets stream %j', request);
     return this.descriptors.page.listDatasets.createStream(
       this.innerApiCalls.listDatasets as GaxCall,
@@ -4329,55 +3174,54 @@ export class DataLabelingServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listDatasets`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Dataset resource parent, format:
-   *   projects/{project_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter on dataset is not supported at this moment.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListDatasetsResponse.next_page_token|ListDatasetsResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListDatasets] call.
-   *   Returns the first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.datalabeling.v1beta1.Dataset|Dataset}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.list_datasets.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ListDatasets_async
-   */
+/**
+ * Equivalent to `listDatasets`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Dataset resource parent, format:
+ *   projects/{project_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter on dataset is not supported at this moment.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListDatasetsResponse.next_page_token|ListDatasetsResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListDatasets] call.
+ *   Returns the first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.datalabeling.v1beta1.Dataset|Dataset}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.list_datasets.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ListDatasets_async
+ */
   listDatasetsAsync(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IDataset> {
+      request?: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IDataset>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDatasets iterate %j', request);
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,
@@ -4385,121 +3229,96 @@ export class DataLabelingServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IDataset>;
   }
-  /**
-   * Lists data items in a dataset. This API can be called after data
-   * are imported into dataset. Pagination is supported.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the dataset to list data items, format:
-   *   projects/{project_id}/datasets/{dataset_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter is not supported at this moment.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListDataItemsResponse.next_page_token|ListDataItemsResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListDataItems] call.
-   *   Return first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.DataItem|DataItem}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDataItemsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists data items in a dataset. This API can be called after data
+ * are imported into dataset. Pagination is supported.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the dataset to list data items, format:
+ *   projects/{project_id}/datasets/{dataset_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter is not supported at this moment.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListDataItemsResponse.next_page_token|ListDataItemsResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListDataItems] call.
+ *   Return first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.DataItem|DataItem}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDataItemsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDataItems(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IDataItem[],
-      protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IDataItem[],
+        protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse
+      ]>;
   listDataItems(
-    request: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IDataItem
-    >
-  ): void;
-  listDataItems(
-    request: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IDataItem
-    >
-  ): void;
-  listDataItems(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IDataItem
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IDataItem
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IDataItem[],
-      protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IDataItem>): void;
+  listDataItems(
+      request: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IDataItem>): void;
+  listDataItems(
+      request?: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IDataItem>,
+      callback?: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IDataItem>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IDataItem[],
+        protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IDataItem
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
+      protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse|null|undefined,
+      protos.google.cloud.datalabeling.v1beta1.IDataItem>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDataItems values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4508,64 +3327,61 @@ export class DataLabelingServiceClient {
     this._log.info('listDataItems request %j', request);
     return this.innerApiCalls
       .listDataItems(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.datalabeling.v1beta1.IDataItem[],
-          protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest | null,
-          protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse,
-        ]) => {
-          this._log.info('listDataItems values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.datalabeling.v1beta1.IDataItem[],
+        protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListDataItemsResponse
+      ]) => {
+        this._log.info('listDataItems values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDataItems`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the dataset to list data items, format:
-   *   projects/{project_id}/datasets/{dataset_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter is not supported at this moment.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListDataItemsResponse.next_page_token|ListDataItemsResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListDataItems] call.
-   *   Return first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.DataItem|DataItem} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDataItemsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDataItems`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the dataset to list data items, format:
+ *   projects/{project_id}/datasets/{dataset_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter is not supported at this moment.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListDataItemsResponse.next_page_token|ListDataItemsResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListDataItems] call.
+ *   Return first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.DataItem|DataItem} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDataItemsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDataItemsStream(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDataItems'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDataItems stream %j', request);
     return this.descriptors.page.listDataItems.createStream(
       this.innerApiCalls.listDataItems as GaxCall,
@@ -4574,55 +3390,54 @@ export class DataLabelingServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listDataItems`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the dataset to list data items, format:
-   *   projects/{project_id}/datasets/{dataset_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter is not supported at this moment.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListDataItemsResponse.next_page_token|ListDataItemsResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListDataItems] call.
-   *   Return first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.datalabeling.v1beta1.DataItem|DataItem}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.list_data_items.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ListDataItems_async
-   */
+/**
+ * Equivalent to `listDataItems`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the dataset to list data items, format:
+ *   projects/{project_id}/datasets/{dataset_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter is not supported at this moment.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListDataItemsResponse.next_page_token|ListDataItemsResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListDataItems] call.
+ *   Return first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.datalabeling.v1beta1.DataItem|DataItem}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.list_data_items.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ListDataItems_async
+ */
   listDataItemsAsync(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IDataItem> {
+      request?: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IDataItem>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDataItems'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDataItems iterate %j', request);
     return this.descriptors.page.listDataItems.asyncIterate(
       this.innerApiCalls['listDataItems'] as GaxCall,
@@ -4630,120 +3445,95 @@ export class DataLabelingServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IDataItem>;
   }
-  /**
-   * Lists annotated datasets for a dataset. Pagination is supported.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the dataset to list annotated datasets, format:
-   *   projects/{project_id}/datasets/{dataset_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter is not supported at this moment.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsResponse.next_page_token|ListAnnotatedDatasetsResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListAnnotatedDatasets] call.
-   *   Return first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset|AnnotatedDataset}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAnnotatedDatasetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists annotated datasets for a dataset. Pagination is supported.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the dataset to list annotated datasets, format:
+ *   projects/{project_id}/datasets/{dataset_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter is not supported at this moment.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsResponse.next_page_token|ListAnnotatedDatasetsResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListAnnotatedDatasets] call.
+ *   Return first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset|AnnotatedDataset}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAnnotatedDatasetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAnnotatedDatasets(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset[],
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset[],
+        protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse
+      ]>;
   listAnnotatedDatasets(
-    request: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset
-    >
-  ): void;
-  listAnnotatedDatasets(
-    request: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset
-    >
-  ): void;
-  listAnnotatedDatasets(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset[],
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset>): void;
+  listAnnotatedDatasets(
+      request: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset>): void;
+  listAnnotatedDatasets(
+      request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset>,
+      callback?: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset[],
+        protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
+      protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse|null|undefined,
+      protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAnnotatedDatasets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4752,64 +3542,61 @@ export class DataLabelingServiceClient {
     this._log.info('listAnnotatedDatasets request %j', request);
     return this.innerApiCalls
       .listAnnotatedDatasets(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset[],
-          protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest | null,
-          protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse,
-        ]) => {
-          this._log.info('listAnnotatedDatasets values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset[],
+        protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsResponse
+      ]) => {
+        this._log.info('listAnnotatedDatasets values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAnnotatedDatasets`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the dataset to list annotated datasets, format:
-   *   projects/{project_id}/datasets/{dataset_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter is not supported at this moment.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsResponse.next_page_token|ListAnnotatedDatasetsResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListAnnotatedDatasets] call.
-   *   Return first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset|AnnotatedDataset} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAnnotatedDatasetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAnnotatedDatasets`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the dataset to list annotated datasets, format:
+ *   projects/{project_id}/datasets/{dataset_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter is not supported at this moment.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsResponse.next_page_token|ListAnnotatedDatasetsResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListAnnotatedDatasets] call.
+ *   Return first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset|AnnotatedDataset} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAnnotatedDatasetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAnnotatedDatasetsStream(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAnnotatedDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAnnotatedDatasets stream %j', request);
     return this.descriptors.page.listAnnotatedDatasets.createStream(
       this.innerApiCalls.listAnnotatedDatasets as GaxCall,
@@ -4818,55 +3605,54 @@ export class DataLabelingServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listAnnotatedDatasets`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the dataset to list annotated datasets, format:
-   *   projects/{project_id}/datasets/{dataset_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter is not supported at this moment.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsResponse.next_page_token|ListAnnotatedDatasetsResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListAnnotatedDatasets] call.
-   *   Return first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset|AnnotatedDataset}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.list_annotated_datasets.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ListAnnotatedDatasets_async
-   */
+/**
+ * Equivalent to `listAnnotatedDatasets`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the dataset to list annotated datasets, format:
+ *   projects/{project_id}/datasets/{dataset_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter is not supported at this moment.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsResponse.next_page_token|ListAnnotatedDatasetsResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListAnnotatedDatasets] call.
+ *   Return first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.datalabeling.v1beta1.AnnotatedDataset|AnnotatedDataset}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.list_annotated_datasets.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ListAnnotatedDatasets_async
+ */
   listAnnotatedDatasetsAsync(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset> {
+      request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAnnotatedDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAnnotatedDatasets iterate %j', request);
     return this.descriptors.page.listAnnotatedDatasets.asyncIterate(
       this.innerApiCalls['listAnnotatedDatasets'] as GaxCall,
@@ -4874,122 +3660,97 @@ export class DataLabelingServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset>;
   }
-  /**
-   * Lists examples in an annotated dataset. Pagination is supported.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Example resource parent.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering Examples. For annotated datasets that
-   *   have annotation spec set, filter by
-   *   annotation_spec.display_name is supported. Format
-   *   "annotation_spec.display_name = {display_name}"
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListExamplesResponse.next_page_token|ListExamplesResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListExamples] call.
-   *   Return first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.Example|Example}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listExamplesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists examples in an annotated dataset. Pagination is supported.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Example resource parent.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering Examples. For annotated datasets that
+ *   have annotation spec set, filter by
+ *   annotation_spec.display_name is supported. Format
+ *   "annotation_spec.display_name = {display_name}"
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListExamplesResponse.next_page_token|ListExamplesResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListExamples] call.
+ *   Return first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.Example|Example}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listExamplesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listExamples(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IExample[],
-      protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IExample[],
+        protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse
+      ]>;
   listExamples(
-    request: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IExample
-    >
-  ): void;
-  listExamples(
-    request: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IExample
-    >
-  ): void;
-  listExamples(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-          | protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IExample
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IExample
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IExample[],
-      protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IExample>): void;
+  listExamples(
+      request: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IExample>): void;
+  listExamples(
+      request?: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IExample>,
+      callback?: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IExample>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IExample[],
+        protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-          | protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IExample
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
+      protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse|null|undefined,
+      protos.google.cloud.datalabeling.v1beta1.IExample>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listExamples values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4998,66 +3759,63 @@ export class DataLabelingServiceClient {
     this._log.info('listExamples request %j', request);
     return this.innerApiCalls
       .listExamples(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.datalabeling.v1beta1.IExample[],
-          protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest | null,
-          protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse,
-        ]) => {
-          this._log.info('listExamples values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.datalabeling.v1beta1.IExample[],
+        protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListExamplesResponse
+      ]) => {
+        this._log.info('listExamples values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listExamples`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Example resource parent.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering Examples. For annotated datasets that
-   *   have annotation spec set, filter by
-   *   annotation_spec.display_name is supported. Format
-   *   "annotation_spec.display_name = {display_name}"
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListExamplesResponse.next_page_token|ListExamplesResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListExamples] call.
-   *   Return first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.Example|Example} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listExamplesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listExamples`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Example resource parent.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering Examples. For annotated datasets that
+ *   have annotation spec set, filter by
+ *   annotation_spec.display_name is supported. Format
+ *   "annotation_spec.display_name = {display_name}"
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListExamplesResponse.next_page_token|ListExamplesResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListExamples] call.
+ *   Return first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.Example|Example} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listExamplesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listExamplesStream(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listExamples'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listExamples stream %j', request);
     return this.descriptors.page.listExamples.createStream(
       this.innerApiCalls.listExamples as GaxCall,
@@ -5066,57 +3824,56 @@ export class DataLabelingServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listExamples`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Example resource parent.
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering Examples. For annotated datasets that
-   *   have annotation spec set, filter by
-   *   annotation_spec.display_name is supported. Format
-   *   "annotation_spec.display_name = {display_name}"
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListExamplesResponse.next_page_token|ListExamplesResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListExamples] call.
-   *   Return first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.datalabeling.v1beta1.Example|Example}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.list_examples.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ListExamples_async
-   */
+/**
+ * Equivalent to `listExamples`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Example resource parent.
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering Examples. For annotated datasets that
+ *   have annotation spec set, filter by
+ *   annotation_spec.display_name is supported. Format
+ *   "annotation_spec.display_name = {display_name}"
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListExamplesResponse.next_page_token|ListExamplesResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListExamples] call.
+ *   Return first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.datalabeling.v1beta1.Example|Example}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.list_examples.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ListExamples_async
+ */
   listExamplesAsync(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IExample> {
+      request?: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IExample>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listExamples'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listExamples iterate %j', request);
     return this.descriptors.page.listExamples.asyncIterate(
       this.innerApiCalls['listExamples'] as GaxCall,
@@ -5124,120 +3881,95 @@ export class DataLabelingServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IExample>;
   }
-  /**
-   * Lists annotation spec sets for a project. Pagination is supported.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent of AnnotationSpecSet resource, format:
-   *   projects/{project_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter is not supported at this moment.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsResponse.next_page_token|ListAnnotationSpecSetsResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListAnnotationSpecSets] call.
-   *   Return first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet|AnnotationSpecSet}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAnnotationSpecSetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists annotation spec sets for a project. Pagination is supported.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent of AnnotationSpecSet resource, format:
+ *   projects/{project_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter is not supported at this moment.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsResponse.next_page_token|ListAnnotationSpecSetsResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListAnnotationSpecSets] call.
+ *   Return first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet|AnnotationSpecSet}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAnnotationSpecSetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAnnotationSpecSets(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet[],
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet[],
+        protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse
+      ]>;
   listAnnotationSpecSets(
-    request: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet
-    >
-  ): void;
-  listAnnotationSpecSets(
-    request: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet
-    >
-  ): void;
-  listAnnotationSpecSets(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet[],
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet>): void;
+  listAnnotationSpecSets(
+      request: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet>): void;
+  listAnnotationSpecSets(
+      request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet>,
+      callback?: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet[],
+        protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
+      protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse|null|undefined,
+      protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAnnotationSpecSets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5246,64 +3978,61 @@ export class DataLabelingServiceClient {
     this._log.info('listAnnotationSpecSets request %j', request);
     return this.innerApiCalls
       .listAnnotationSpecSets(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet[],
-          protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest | null,
-          protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse,
-        ]) => {
-          this._log.info('listAnnotationSpecSets values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet[],
+        protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsResponse
+      ]) => {
+        this._log.info('listAnnotationSpecSets values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAnnotationSpecSets`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent of AnnotationSpecSet resource, format:
-   *   projects/{project_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter is not supported at this moment.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsResponse.next_page_token|ListAnnotationSpecSetsResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListAnnotationSpecSets] call.
-   *   Return first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet|AnnotationSpecSet} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAnnotationSpecSetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAnnotationSpecSets`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent of AnnotationSpecSet resource, format:
+ *   projects/{project_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter is not supported at this moment.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsResponse.next_page_token|ListAnnotationSpecSetsResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListAnnotationSpecSets] call.
+ *   Return first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet|AnnotationSpecSet} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAnnotationSpecSetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAnnotationSpecSetsStream(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAnnotationSpecSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAnnotationSpecSets stream %j', request);
     return this.descriptors.page.listAnnotationSpecSets.createStream(
       this.innerApiCalls.listAnnotationSpecSets as GaxCall,
@@ -5312,55 +4041,54 @@ export class DataLabelingServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listAnnotationSpecSets`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent of AnnotationSpecSet resource, format:
-   *   projects/{project_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter is not supported at this moment.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsResponse.next_page_token|ListAnnotationSpecSetsResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListAnnotationSpecSets] call.
-   *   Return first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet|AnnotationSpecSet}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.list_annotation_spec_sets.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ListAnnotationSpecSets_async
-   */
+/**
+ * Equivalent to `listAnnotationSpecSets`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent of AnnotationSpecSet resource, format:
+ *   projects/{project_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter is not supported at this moment.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsResponse.next_page_token|ListAnnotationSpecSetsResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListAnnotationSpecSets] call.
+ *   Return first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpecSet|AnnotationSpecSet}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.list_annotation_spec_sets.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ListAnnotationSpecSets_async
+ */
   listAnnotationSpecSetsAsync(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet> {
+      request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAnnotationSpecSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAnnotationSpecSets iterate %j', request);
     return this.descriptors.page.listAnnotationSpecSets.asyncIterate(
       this.innerApiCalls['listAnnotationSpecSets'] as GaxCall,
@@ -5368,120 +4096,95 @@ export class DataLabelingServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet>;
   }
-  /**
-   * Lists instructions for a project. Pagination is supported.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Instruction resource parent, format:
-   *   projects/{project_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter is not supported at this moment.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListInstructionsResponse.next_page_token|ListInstructionsResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListInstructions] call.
-   *   Return first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.Instruction|Instruction}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listInstructionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists instructions for a project. Pagination is supported.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Instruction resource parent, format:
+ *   projects/{project_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter is not supported at this moment.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListInstructionsResponse.next_page_token|ListInstructionsResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListInstructions] call.
+ *   Return first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.Instruction|Instruction}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listInstructionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listInstructions(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IInstruction[],
-      protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IInstruction[],
+        protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse
+      ]>;
   listInstructions(
-    request: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IInstruction
-    >
-  ): void;
-  listInstructions(
-    request: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IInstruction
-    >
-  ): void;
-  listInstructions(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IInstruction
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IInstruction
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IInstruction[],
-      protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IInstruction>): void;
+  listInstructions(
+      request: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IInstruction>): void;
+  listInstructions(
+      request?: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IInstruction>,
+      callback?: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IInstruction>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IInstruction[],
+        protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IInstruction
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
+      protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse|null|undefined,
+      protos.google.cloud.datalabeling.v1beta1.IInstruction>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listInstructions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5490,64 +4193,61 @@ export class DataLabelingServiceClient {
     this._log.info('listInstructions request %j', request);
     return this.innerApiCalls
       .listInstructions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.datalabeling.v1beta1.IInstruction[],
-          protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest | null,
-          protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse,
-        ]) => {
-          this._log.info('listInstructions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.datalabeling.v1beta1.IInstruction[],
+        protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListInstructionsResponse
+      ]) => {
+        this._log.info('listInstructions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listInstructions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Instruction resource parent, format:
-   *   projects/{project_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter is not supported at this moment.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListInstructionsResponse.next_page_token|ListInstructionsResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListInstructions] call.
-   *   Return first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.Instruction|Instruction} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listInstructionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listInstructions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Instruction resource parent, format:
+ *   projects/{project_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter is not supported at this moment.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListInstructionsResponse.next_page_token|ListInstructionsResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListInstructions] call.
+ *   Return first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.Instruction|Instruction} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listInstructionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listInstructionsStream(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listInstructions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listInstructions stream %j', request);
     return this.descriptors.page.listInstructions.createStream(
       this.innerApiCalls.listInstructions as GaxCall,
@@ -5556,55 +4256,54 @@ export class DataLabelingServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listInstructions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Instruction resource parent, format:
-   *   projects/{project_id}
-   * @param {string} [request.filter]
-   *   Optional. Filter is not supported at this moment.
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListInstructionsResponse.next_page_token|ListInstructionsResponse.next_page_token} of the previous
-   *   [DataLabelingService.ListInstructions] call.
-   *   Return first page if empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.datalabeling.v1beta1.Instruction|Instruction}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.list_instructions.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ListInstructions_async
-   */
+/**
+ * Equivalent to `listInstructions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Instruction resource parent, format:
+ *   projects/{project_id}
+ * @param {string} [request.filter]
+ *   Optional. Filter is not supported at this moment.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListInstructionsResponse.next_page_token|ListInstructionsResponse.next_page_token} of the previous
+ *   [DataLabelingService.ListInstructions] call.
+ *   Return first page if empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.datalabeling.v1beta1.Instruction|Instruction}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.list_instructions.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ListInstructions_async
+ */
   listInstructionsAsync(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IInstruction> {
+      request?: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IInstruction>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listInstructions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listInstructions iterate %j', request);
     return this.descriptors.page.listInstructions.asyncIterate(
       this.innerApiCalls['listInstructions'] as GaxCall,
@@ -5612,152 +4311,127 @@ export class DataLabelingServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IInstruction>;
   }
-  /**
-   * Searches {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|evaluations} within a project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Evaluation search parent (project ID). Format:
-   *   "projects/<var>{project_id}</var>"
-   * @param {string} [request.filter]
-   *   Optional. To search evaluations, you can filter by the following:
-   *
-   *   * evaluation<span>_</span>job.evaluation_job_id (the last part of
-   *     {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.name|EvaluationJob.name})
-   *   * evaluation<span>_</span>job.model_id (the <var>{model_name}</var> portion
-   *     of {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion})
-   *   * evaluation<span>_</span>job.evaluation_job_run_time_start (Minimum
-   *     threshold for the
-   *     {@link protos.google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
-   *     the evaluation)
-   *   * evaluation<span>_</span>job.evaluation_job_run_time_end (Maximum
-   *     threshold for the
-   *     {@link protos.google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
-   *     the evaluation)
-   *   * evaluation<span>_</span>job.job_state ({@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state})
-   *   * annotation<span>_</span>spec.display_name (the Evaluation contains a
-   *     metric for the annotation spec with this
-   *     {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpec.display_name|displayName})
-   *
-   *   To filter by multiple critiera, use the `AND` operator or the `OR`
-   *   operator. The following examples shows a string that filters by several
-   *   critiera:
-   *
-   *   "evaluation<span>_</span>job.evaluation_job_id =
-   *   <var>{evaluation_job_id}</var> AND evaluation<span>_</span>job.model_id =
-   *   <var>{model_name}</var> AND
-   *   evaluation<span>_</span>job.evaluation_job_run_time_start =
-   *   <var>{timestamp_1}</var> AND
-   *   evaluation<span>_</span>job.evaluation_job_run_time_end =
-   *   <var>{timestamp_2}</var> AND annotation<span>_</span>spec.display_name =
-   *   <var>{display_name}</var>"
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by the
-   *   {@link protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsResponse.next_page_token|nextPageToken} of the response
-   *   to a previous search request.
-   *
-   *   If you don't specify this field, the API call requests the first page of
-   *   the search.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|Evaluation}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchEvaluationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Searches {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|evaluations} within a project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Evaluation search parent (project ID). Format:
+ *   "projects/<var>{project_id}</var>"
+ * @param {string} [request.filter]
+ *   Optional. To search evaluations, you can filter by the following:
+ *
+ *   * evaluation<span>_</span>job.evaluation_job_id (the last part of
+ *     {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.name|EvaluationJob.name})
+ *   * evaluation<span>_</span>job.model_id (the <var>{model_name}</var> portion
+ *     of {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion})
+ *   * evaluation<span>_</span>job.evaluation_job_run_time_start (Minimum
+ *     threshold for the
+ *     {@link protos.google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
+ *     the evaluation)
+ *   * evaluation<span>_</span>job.evaluation_job_run_time_end (Maximum
+ *     threshold for the
+ *     {@link protos.google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
+ *     the evaluation)
+ *   * evaluation<span>_</span>job.job_state ({@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state})
+ *   * annotation<span>_</span>spec.display_name (the Evaluation contains a
+ *     metric for the annotation spec with this
+ *     {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpec.display_name|displayName})
+ *
+ *   To filter by multiple critiera, use the `AND` operator or the `OR`
+ *   operator. The following examples shows a string that filters by several
+ *   critiera:
+ *
+ *   "evaluation<span>_</span>job.evaluation_job_id =
+ *   <var>{evaluation_job_id}</var> AND evaluation<span>_</span>job.model_id =
+ *   <var>{model_name}</var> AND
+ *   evaluation<span>_</span>job.evaluation_job_run_time_start =
+ *   <var>{timestamp_1}</var> AND
+ *   evaluation<span>_</span>job.evaluation_job_run_time_end =
+ *   <var>{timestamp_2}</var> AND annotation<span>_</span>spec.display_name =
+ *   <var>{display_name}</var>"
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by the
+ *   {@link protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsResponse.next_page_token|nextPageToken} of the response
+ *   to a previous search request.
+ *
+ *   If you don't specify this field, the API call requests the first page of
+ *   the search.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|Evaluation}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchEvaluationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchEvaluations(
-    request?: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IEvaluation[],
-      protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IEvaluation[],
+        protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse
+      ]>;
   searchEvaluations(
-    request: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IEvaluation
-    >
-  ): void;
-  searchEvaluations(
-    request: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IEvaluation
-    >
-  ): void;
-  searchEvaluations(
-    request?: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IEvaluation
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IEvaluation
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IEvaluation[],
-      protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IEvaluation>): void;
+  searchEvaluations(
+      request: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
+          protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IEvaluation>): void;
+  searchEvaluations(
+      request?: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
+          protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IEvaluation>,
+      callback?: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
+          protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IEvaluation>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IEvaluation[],
+        protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IEvaluation
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
+      protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse|null|undefined,
+      protos.google.cloud.datalabeling.v1beta1.IEvaluation>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchEvaluations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5766,96 +4440,93 @@ export class DataLabelingServiceClient {
     this._log.info('searchEvaluations request %j', request);
     return this.innerApiCalls
       .searchEvaluations(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.datalabeling.v1beta1.IEvaluation[],
-          protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest | null,
-          protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse,
-        ]) => {
-          this._log.info('searchEvaluations values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.datalabeling.v1beta1.IEvaluation[],
+        protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsResponse
+      ]) => {
+        this._log.info('searchEvaluations values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchEvaluations`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Evaluation search parent (project ID). Format:
-   *   "projects/<var>{project_id}</var>"
-   * @param {string} [request.filter]
-   *   Optional. To search evaluations, you can filter by the following:
-   *
-   *   * evaluation<span>_</span>job.evaluation_job_id (the last part of
-   *     {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.name|EvaluationJob.name})
-   *   * evaluation<span>_</span>job.model_id (the <var>{model_name}</var> portion
-   *     of {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion})
-   *   * evaluation<span>_</span>job.evaluation_job_run_time_start (Minimum
-   *     threshold for the
-   *     {@link protos.google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
-   *     the evaluation)
-   *   * evaluation<span>_</span>job.evaluation_job_run_time_end (Maximum
-   *     threshold for the
-   *     {@link protos.google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
-   *     the evaluation)
-   *   * evaluation<span>_</span>job.job_state ({@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state})
-   *   * annotation<span>_</span>spec.display_name (the Evaluation contains a
-   *     metric for the annotation spec with this
-   *     {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpec.display_name|displayName})
-   *
-   *   To filter by multiple critiera, use the `AND` operator or the `OR`
-   *   operator. The following examples shows a string that filters by several
-   *   critiera:
-   *
-   *   "evaluation<span>_</span>job.evaluation_job_id =
-   *   <var>{evaluation_job_id}</var> AND evaluation<span>_</span>job.model_id =
-   *   <var>{model_name}</var> AND
-   *   evaluation<span>_</span>job.evaluation_job_run_time_start =
-   *   <var>{timestamp_1}</var> AND
-   *   evaluation<span>_</span>job.evaluation_job_run_time_end =
-   *   <var>{timestamp_2}</var> AND annotation<span>_</span>spec.display_name =
-   *   <var>{display_name}</var>"
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by the
-   *   {@link protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsResponse.next_page_token|nextPageToken} of the response
-   *   to a previous search request.
-   *
-   *   If you don't specify this field, the API call requests the first page of
-   *   the search.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|Evaluation} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchEvaluationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchEvaluations`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Evaluation search parent (project ID). Format:
+ *   "projects/<var>{project_id}</var>"
+ * @param {string} [request.filter]
+ *   Optional. To search evaluations, you can filter by the following:
+ *
+ *   * evaluation<span>_</span>job.evaluation_job_id (the last part of
+ *     {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.name|EvaluationJob.name})
+ *   * evaluation<span>_</span>job.model_id (the <var>{model_name}</var> portion
+ *     of {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion})
+ *   * evaluation<span>_</span>job.evaluation_job_run_time_start (Minimum
+ *     threshold for the
+ *     {@link protos.google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
+ *     the evaluation)
+ *   * evaluation<span>_</span>job.evaluation_job_run_time_end (Maximum
+ *     threshold for the
+ *     {@link protos.google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
+ *     the evaluation)
+ *   * evaluation<span>_</span>job.job_state ({@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state})
+ *   * annotation<span>_</span>spec.display_name (the Evaluation contains a
+ *     metric for the annotation spec with this
+ *     {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpec.display_name|displayName})
+ *
+ *   To filter by multiple critiera, use the `AND` operator or the `OR`
+ *   operator. The following examples shows a string that filters by several
+ *   critiera:
+ *
+ *   "evaluation<span>_</span>job.evaluation_job_id =
+ *   <var>{evaluation_job_id}</var> AND evaluation<span>_</span>job.model_id =
+ *   <var>{model_name}</var> AND
+ *   evaluation<span>_</span>job.evaluation_job_run_time_start =
+ *   <var>{timestamp_1}</var> AND
+ *   evaluation<span>_</span>job.evaluation_job_run_time_end =
+ *   <var>{timestamp_2}</var> AND annotation<span>_</span>spec.display_name =
+ *   <var>{display_name}</var>"
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by the
+ *   {@link protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsResponse.next_page_token|nextPageToken} of the response
+ *   to a previous search request.
+ *
+ *   If you don't specify this field, the API call requests the first page of
+ *   the search.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|Evaluation} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchEvaluationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchEvaluationsStream(
-    request?: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchEvaluations stream %j', request);
     return this.descriptors.page.searchEvaluations.createStream(
       this.innerApiCalls.searchEvaluations as GaxCall,
@@ -5864,87 +4535,86 @@ export class DataLabelingServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `searchEvaluations`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Evaluation search parent (project ID). Format:
-   *   "projects/<var>{project_id}</var>"
-   * @param {string} [request.filter]
-   *   Optional. To search evaluations, you can filter by the following:
-   *
-   *   * evaluation<span>_</span>job.evaluation_job_id (the last part of
-   *     {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.name|EvaluationJob.name})
-   *   * evaluation<span>_</span>job.model_id (the <var>{model_name}</var> portion
-   *     of {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion})
-   *   * evaluation<span>_</span>job.evaluation_job_run_time_start (Minimum
-   *     threshold for the
-   *     {@link protos.google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
-   *     the evaluation)
-   *   * evaluation<span>_</span>job.evaluation_job_run_time_end (Maximum
-   *     threshold for the
-   *     {@link protos.google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
-   *     the evaluation)
-   *   * evaluation<span>_</span>job.job_state ({@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state})
-   *   * annotation<span>_</span>spec.display_name (the Evaluation contains a
-   *     metric for the annotation spec with this
-   *     {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpec.display_name|displayName})
-   *
-   *   To filter by multiple critiera, use the `AND` operator or the `OR`
-   *   operator. The following examples shows a string that filters by several
-   *   critiera:
-   *
-   *   "evaluation<span>_</span>job.evaluation_job_id =
-   *   <var>{evaluation_job_id}</var> AND evaluation<span>_</span>job.model_id =
-   *   <var>{model_name}</var> AND
-   *   evaluation<span>_</span>job.evaluation_job_run_time_start =
-   *   <var>{timestamp_1}</var> AND
-   *   evaluation<span>_</span>job.evaluation_job_run_time_end =
-   *   <var>{timestamp_2}</var> AND annotation<span>_</span>spec.display_name =
-   *   <var>{display_name}</var>"
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by the
-   *   {@link protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsResponse.next_page_token|nextPageToken} of the response
-   *   to a previous search request.
-   *
-   *   If you don't specify this field, the API call requests the first page of
-   *   the search.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|Evaluation}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.search_evaluations.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_SearchEvaluations_async
-   */
+/**
+ * Equivalent to `searchEvaluations`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Evaluation search parent (project ID). Format:
+ *   "projects/<var>{project_id}</var>"
+ * @param {string} [request.filter]
+ *   Optional. To search evaluations, you can filter by the following:
+ *
+ *   * evaluation<span>_</span>job.evaluation_job_id (the last part of
+ *     {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.name|EvaluationJob.name})
+ *   * evaluation<span>_</span>job.model_id (the <var>{model_name}</var> portion
+ *     of {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion})
+ *   * evaluation<span>_</span>job.evaluation_job_run_time_start (Minimum
+ *     threshold for the
+ *     {@link protos.google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
+ *     the evaluation)
+ *   * evaluation<span>_</span>job.evaluation_job_run_time_end (Maximum
+ *     threshold for the
+ *     {@link protos.google.cloud.datalabeling.v1beta1.Evaluation.evaluation_job_run_time|evaluationJobRunTime} that created
+ *     the evaluation)
+ *   * evaluation<span>_</span>job.job_state ({@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state})
+ *   * annotation<span>_</span>spec.display_name (the Evaluation contains a
+ *     metric for the annotation spec with this
+ *     {@link protos.google.cloud.datalabeling.v1beta1.AnnotationSpec.display_name|displayName})
+ *
+ *   To filter by multiple critiera, use the `AND` operator or the `OR`
+ *   operator. The following examples shows a string that filters by several
+ *   critiera:
+ *
+ *   "evaluation<span>_</span>job.evaluation_job_id =
+ *   <var>{evaluation_job_id}</var> AND evaluation<span>_</span>job.model_id =
+ *   <var>{model_name}</var> AND
+ *   evaluation<span>_</span>job.evaluation_job_run_time_start =
+ *   <var>{timestamp_1}</var> AND
+ *   evaluation<span>_</span>job.evaluation_job_run_time_end =
+ *   <var>{timestamp_2}</var> AND annotation<span>_</span>spec.display_name =
+ *   <var>{display_name}</var>"
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by the
+ *   {@link protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsResponse.next_page_token|nextPageToken} of the response
+ *   to a previous search request.
+ *
+ *   If you don't specify this field, the API call requests the first page of
+ *   the search.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|Evaluation}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.search_evaluations.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_SearchEvaluations_async
+ */
   searchEvaluationsAsync(
-    request?: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IEvaluation> {
+      request?: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IEvaluation>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchEvaluations iterate %j', request);
     return this.descriptors.page.searchEvaluations.asyncIterate(
       this.innerApiCalls['searchEvaluations'] as GaxCall,
@@ -5952,124 +4622,99 @@ export class DataLabelingServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IEvaluation>;
   }
-  /**
-   * Searches example comparisons from an evaluation. The return format is a
-   * list of example comparisons that show ground truth and prediction(s) for
-   * a single input. Search by providing an evaluation ID.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|Evaluation} resource to search for example
-   *   comparisons from. Format:
-   *
-   *   "projects/<var>{project_id}</var>/datasets/<var>{dataset_id}</var>/evaluations/<var>{evaluation_id}</var>"
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by the
-   *   {@link protos.SearchExampleComparisons.next_page_token|nextPageToken} of the response
-   *   to a previous search rquest.
-   *
-   *   If you don't specify this field, the API call requests the first page of
-   *   the search.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison|ExampleComparison}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchExampleComparisonsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Searches example comparisons from an evaluation. The return format is a
+ * list of example comparisons that show ground truth and prediction(s) for
+ * a single input. Search by providing an evaluation ID.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|Evaluation} resource to search for example
+ *   comparisons from. Format:
+ *
+ *   "projects/<var>{project_id}</var>/datasets/<var>{dataset_id}</var>/evaluations/<var>{evaluation_id}</var>"
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by the
+ *   {@link protos.SearchExampleComparisons.next_page_token|nextPageToken} of the response
+ *   to a previous search rquest.
+ *
+ *   If you don't specify this field, the API call requests the first page of
+ *   the search.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison|ExampleComparison}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchExampleComparisonsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchExampleComparisons(
-    request?: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison[],
-      protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison[],
+        protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse
+      ]>;
   searchExampleComparisons(
-    request: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison
-    >
-  ): void;
-  searchExampleComparisons(
-    request: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison
-    >
-  ): void;
-  searchExampleComparisons(
-    request?: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison[],
-      protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison>): void;
+  searchExampleComparisons(
+      request: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
+          protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison>): void;
+  searchExampleComparisons(
+      request?: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
+          protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison>,
+      callback?: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
+          protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison[],
+        protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
+      protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse|null|undefined,
+      protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchExampleComparisons values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6078,66 +4723,63 @@ export class DataLabelingServiceClient {
     this._log.info('searchExampleComparisons request %j', request);
     return this.innerApiCalls
       .searchExampleComparisons(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison[],
-          protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest | null,
-          protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse,
-        ]) => {
-          this._log.info('searchExampleComparisons values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison[],
+        protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsResponse
+      ]) => {
+        this._log.info('searchExampleComparisons values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchExampleComparisons`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|Evaluation} resource to search for example
-   *   comparisons from. Format:
-   *
-   *   "projects/<var>{project_id}</var>/datasets/<var>{dataset_id}</var>/evaluations/<var>{evaluation_id}</var>"
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by the
-   *   {@link protos.SearchExampleComparisons.next_page_token|nextPageToken} of the response
-   *   to a previous search rquest.
-   *
-   *   If you don't specify this field, the API call requests the first page of
-   *   the search.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison|ExampleComparison} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchExampleComparisonsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchExampleComparisons`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|Evaluation} resource to search for example
+ *   comparisons from. Format:
+ *
+ *   "projects/<var>{project_id}</var>/datasets/<var>{dataset_id}</var>/evaluations/<var>{evaluation_id}</var>"
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by the
+ *   {@link protos.SearchExampleComparisons.next_page_token|nextPageToken} of the response
+ *   to a previous search rquest.
+ *
+ *   If you don't specify this field, the API call requests the first page of
+ *   the search.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison|ExampleComparison} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchExampleComparisonsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchExampleComparisonsStream(
-    request?: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchExampleComparisons'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchExampleComparisons stream %j', request);
     return this.descriptors.page.searchExampleComparisons.createStream(
       this.innerApiCalls.searchExampleComparisons as GaxCall,
@@ -6146,57 +4788,56 @@ export class DataLabelingServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `searchExampleComparisons`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|Evaluation} resource to search for example
-   *   comparisons from. Format:
-   *
-   *   "projects/<var>{project_id}</var>/datasets/<var>{dataset_id}</var>/evaluations/<var>{evaluation_id}</var>"
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by the
-   *   {@link protos.SearchExampleComparisons.next_page_token|nextPageToken} of the response
-   *   to a previous search rquest.
-   *
-   *   If you don't specify this field, the API call requests the first page of
-   *   the search.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison|ExampleComparison}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.search_example_comparisons.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_SearchExampleComparisons_async
-   */
+/**
+ * Equivalent to `searchExampleComparisons`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Name of the {@link protos.google.cloud.datalabeling.v1beta1.Evaluation|Evaluation} resource to search for example
+ *   comparisons from. Format:
+ *
+ *   "projects/<var>{project_id}</var>/datasets/<var>{dataset_id}</var>/evaluations/<var>{evaluation_id}</var>"
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by the
+ *   {@link protos.SearchExampleComparisons.next_page_token|nextPageToken} of the response
+ *   to a previous search rquest.
+ *
+ *   If you don't specify this field, the API call requests the first page of
+ *   the search.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison|ExampleComparison}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.search_example_comparisons.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_SearchExampleComparisons_async
+ */
   searchExampleComparisonsAsync(
-    request?: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison> {
+      request?: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchExampleComparisons'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchExampleComparisons iterate %j', request);
     return this.descriptors.page.searchExampleComparisons.asyncIterate(
       this.innerApiCalls['searchExampleComparisons'] as GaxCall,
@@ -6204,128 +4845,103 @@ export class DataLabelingServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison>;
   }
-  /**
-   * Lists all evaluation jobs within a project with possible filters.
-   * Pagination is supported.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Evaluation job resource parent. Format:
-   *   "projects/<var>{project_id}</var>"
-   * @param {string} [request.filter]
-   *   Optional. You can filter the jobs to list by model_id (also known as
-   *   model_name, as described in
-   *   {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion}) or by
-   *   evaluation job state (as described in {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state}). To filter
-   *   by both criteria, use the `AND` operator or the `OR` operator. For example,
-   *   you can use the following string for your filter:
-   *   "evaluation<span>_</span>job.model_id = <var>{model_name}</var> AND
-   *   evaluation<span>_</span>job.state = <var>{evaluation_job_state}</var>"
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by the
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsResponse.next_page_token|nextPageToken} in the response
-   *   to the previous request. The request returns the first page if this is
-   *   empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob|EvaluationJob}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEvaluationJobsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all evaluation jobs within a project with possible filters.
+ * Pagination is supported.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Evaluation job resource parent. Format:
+ *   "projects/<var>{project_id}</var>"
+ * @param {string} [request.filter]
+ *   Optional. You can filter the jobs to list by model_id (also known as
+ *   model_name, as described in
+ *   {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion}) or by
+ *   evaluation job state (as described in {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state}). To filter
+ *   by both criteria, use the `AND` operator or the `OR` operator. For example,
+ *   you can use the following string for your filter:
+ *   "evaluation<span>_</span>job.model_id = <var>{model_name}</var> AND
+ *   evaluation<span>_</span>job.state = <var>{evaluation_job_state}</var>"
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by the
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsResponse.next_page_token|nextPageToken} in the response
+ *   to the previous request. The request returns the first page if this is
+ *   empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob|EvaluationJob}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listEvaluationJobsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEvaluationJobs(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[],
-      protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[],
+        protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse
+      ]>;
   listEvaluationJobs(
-    request: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob
-    >
-  ): void;
-  listEvaluationJobs(
-    request: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob
-    >
-  ): void;
-  listEvaluationJobs(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-      | protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob
-    >
-  ): Promise<
-    [
-      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[],
-      protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest | null,
-      protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse,
-    ]
-  > | void {
+          protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob>): void;
+  listEvaluationJobs(
+      request: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob>): void;
+  listEvaluationJobs(
+      request?: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob>,
+      callback?: PaginationCallback<
+          protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
+          protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse|null|undefined,
+          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob>):
+      Promise<[
+        protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[],
+        protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-          | protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse
-          | null
-          | undefined,
-          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
+      protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse|null|undefined,
+      protos.google.cloud.datalabeling.v1beta1.IEvaluationJob>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEvaluationJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6334,71 +4950,68 @@ export class DataLabelingServiceClient {
     this._log.info('listEvaluationJobs request %j', request);
     return this.innerApiCalls
       .listEvaluationJobs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[],
-          protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest | null,
-          protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse,
-        ]) => {
-          this._log.info('listEvaluationJobs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[],
+        protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest|null,
+        protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsResponse
+      ]) => {
+        this._log.info('listEvaluationJobs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listEvaluationJobs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Evaluation job resource parent. Format:
-   *   "projects/<var>{project_id}</var>"
-   * @param {string} [request.filter]
-   *   Optional. You can filter the jobs to list by model_id (also known as
-   *   model_name, as described in
-   *   {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion}) or by
-   *   evaluation job state (as described in {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state}). To filter
-   *   by both criteria, use the `AND` operator or the `OR` operator. For example,
-   *   you can use the following string for your filter:
-   *   "evaluation<span>_</span>job.model_id = <var>{model_name}</var> AND
-   *   evaluation<span>_</span>job.state = <var>{evaluation_job_state}</var>"
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by the
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsResponse.next_page_token|nextPageToken} in the response
-   *   to the previous request. The request returns the first page if this is
-   *   empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob|EvaluationJob} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEvaluationJobsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listEvaluationJobs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Evaluation job resource parent. Format:
+ *   "projects/<var>{project_id}</var>"
+ * @param {string} [request.filter]
+ *   Optional. You can filter the jobs to list by model_id (also known as
+ *   model_name, as described in
+ *   {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion}) or by
+ *   evaluation job state (as described in {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state}). To filter
+ *   by both criteria, use the `AND` operator or the `OR` operator. For example,
+ *   you can use the following string for your filter:
+ *   "evaluation<span>_</span>job.model_id = <var>{model_name}</var> AND
+ *   evaluation<span>_</span>job.state = <var>{evaluation_job_state}</var>"
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by the
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsResponse.next_page_token|nextPageToken} in the response
+ *   to the previous request. The request returns the first page if this is
+ *   empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob|EvaluationJob} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listEvaluationJobsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEvaluationJobsStream(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEvaluationJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEvaluationJobs stream %j', request);
     return this.descriptors.page.listEvaluationJobs.createStream(
       this.innerApiCalls.listEvaluationJobs as GaxCall,
@@ -6407,62 +5020,61 @@ export class DataLabelingServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listEvaluationJobs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Evaluation job resource parent. Format:
-   *   "projects/<var>{project_id}</var>"
-   * @param {string} [request.filter]
-   *   Optional. You can filter the jobs to list by model_id (also known as
-   *   model_name, as described in
-   *   {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion}) or by
-   *   evaluation job state (as described in {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state}). To filter
-   *   by both criteria, use the `AND` operator or the `OR` operator. For example,
-   *   you can use the following string for your filter:
-   *   "evaluation<span>_</span>job.model_id = <var>{model_name}</var> AND
-   *   evaluation<span>_</span>job.state = <var>{evaluation_job_state}</var>"
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer results than
-   *   requested. Default value is 100.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results for the server to return.
-   *   Typically obtained by the
-   *   {@link protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsResponse.next_page_token|nextPageToken} in the response
-   *   to the previous request. The request returns the first page if this is
-   *   empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob|EvaluationJob}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/data_labeling_service.list_evaluation_jobs.js</caption>
-   * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ListEvaluationJobs_async
-   */
+/**
+ * Equivalent to `listEvaluationJobs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Evaluation job resource parent. Format:
+ *   "projects/<var>{project_id}</var>"
+ * @param {string} [request.filter]
+ *   Optional. You can filter the jobs to list by model_id (also known as
+ *   model_name, as described in
+ *   {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.model_version|EvaluationJob.modelVersion}) or by
+ *   evaluation job state (as described in {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob.state|EvaluationJob.state}). To filter
+ *   by both criteria, use the `AND` operator or the `OR` operator. For example,
+ *   you can use the following string for your filter:
+ *   "evaluation<span>_</span>job.model_id = <var>{model_name}</var> AND
+ *   evaluation<span>_</span>job.state = <var>{evaluation_job_state}</var>"
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by the
+ *   {@link protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsResponse.next_page_token|nextPageToken} in the response
+ *   to the previous request. The request returns the first page if this is
+ *   empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.datalabeling.v1beta1.EvaluationJob|EvaluationJob}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/data_labeling_service.list_evaluation_jobs.js</caption>
+ * region_tag:datalabeling_v1beta1_generated_DataLabelingService_ListEvaluationJobs_async
+ */
   listEvaluationJobsAsync(
-    request?: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IEvaluationJob> {
+      request?: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IEvaluationJob>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEvaluationJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEvaluationJobs iterate %j', request);
     return this.descriptors.page.listEvaluationJobs.asyncIterate(
       this.innerApiCalls['listEvaluationJobs'] as GaxCall,
@@ -6482,11 +5094,7 @@ export class DataLabelingServiceClient {
    * @param {string} annotated_dataset
    * @returns {string} Resource name string.
    */
-  annotatedDatasetPath(
-    project: string,
-    dataset: string,
-    annotatedDataset: string
-  ) {
+  annotatedDatasetPath(project:string,dataset:string,annotatedDataset:string) {
     return this.pathTemplates.annotatedDatasetPathTemplate.render({
       project: project,
       dataset: dataset,
@@ -6502,9 +5110,7 @@ export class DataLabelingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotatedDatasetName(annotatedDatasetName: string) {
-    return this.pathTemplates.annotatedDatasetPathTemplate.match(
-      annotatedDatasetName
-    ).project;
+    return this.pathTemplates.annotatedDatasetPathTemplate.match(annotatedDatasetName).project;
   }
 
   /**
@@ -6515,9 +5121,7 @@ export class DataLabelingServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotatedDatasetName(annotatedDatasetName: string) {
-    return this.pathTemplates.annotatedDatasetPathTemplate.match(
-      annotatedDatasetName
-    ).dataset;
+    return this.pathTemplates.annotatedDatasetPathTemplate.match(annotatedDatasetName).dataset;
   }
 
   /**
@@ -6528,9 +5132,7 @@ export class DataLabelingServiceClient {
    * @returns {string} A string representing the annotated_dataset.
    */
   matchAnnotatedDatasetFromAnnotatedDatasetName(annotatedDatasetName: string) {
-    return this.pathTemplates.annotatedDatasetPathTemplate.match(
-      annotatedDatasetName
-    ).annotated_dataset;
+    return this.pathTemplates.annotatedDatasetPathTemplate.match(annotatedDatasetName).annotated_dataset;
   }
 
   /**
@@ -6540,7 +5142,7 @@ export class DataLabelingServiceClient {
    * @param {string} annotation_spec_set
    * @returns {string} Resource name string.
    */
-  annotationSpecSetPath(project: string, annotationSpecSet: string) {
+  annotationSpecSetPath(project:string,annotationSpecSet:string) {
     return this.pathTemplates.annotationSpecSetPathTemplate.render({
       project: project,
       annotation_spec_set: annotationSpecSet,
@@ -6555,9 +5157,7 @@ export class DataLabelingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationSpecSetName(annotationSpecSetName: string) {
-    return this.pathTemplates.annotationSpecSetPathTemplate.match(
-      annotationSpecSetName
-    ).project;
+    return this.pathTemplates.annotationSpecSetPathTemplate.match(annotationSpecSetName).project;
   }
 
   /**
@@ -6567,12 +5167,8 @@ export class DataLabelingServiceClient {
    *   A fully-qualified path representing AnnotationSpecSet resource.
    * @returns {string} A string representing the annotation_spec_set.
    */
-  matchAnnotationSpecSetFromAnnotationSpecSetName(
-    annotationSpecSetName: string
-  ) {
-    return this.pathTemplates.annotationSpecSetPathTemplate.match(
-      annotationSpecSetName
-    ).annotation_spec_set;
+  matchAnnotationSpecSetFromAnnotationSpecSetName(annotationSpecSetName: string) {
+    return this.pathTemplates.annotationSpecSetPathTemplate.match(annotationSpecSetName).annotation_spec_set;
   }
 
   /**
@@ -6583,7 +5179,7 @@ export class DataLabelingServiceClient {
    * @param {string} data_item
    * @returns {string} Resource name string.
    */
-  dataItemPath(project: string, dataset: string, dataItem: string) {
+  dataItemPath(project:string,dataset:string,dataItem:string) {
     return this.pathTemplates.dataItemPathTemplate.render({
       project: project,
       dataset: dataset,
@@ -6621,8 +5217,7 @@ export class DataLabelingServiceClient {
    * @returns {string} A string representing the data_item.
    */
   matchDataItemFromDataItemName(dataItemName: string) {
-    return this.pathTemplates.dataItemPathTemplate.match(dataItemName)
-      .data_item;
+    return this.pathTemplates.dataItemPathTemplate.match(dataItemName).data_item;
   }
 
   /**
@@ -6632,7 +5227,7 @@ export class DataLabelingServiceClient {
    * @param {string} dataset
    * @returns {string} Resource name string.
    */
-  datasetPath(project: string, dataset: string) {
+  datasetPath(project:string,dataset:string) {
     return this.pathTemplates.datasetPathTemplate.render({
       project: project,
       dataset: dataset,
@@ -6669,7 +5264,7 @@ export class DataLabelingServiceClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  evaluationPath(project: string, dataset: string, evaluation: string) {
+  evaluationPath(project:string,dataset:string,evaluation:string) {
     return this.pathTemplates.evaluationPathTemplate.render({
       project: project,
       dataset: dataset,
@@ -6685,8 +5280,7 @@ export class DataLabelingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
-      .project;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).project;
   }
 
   /**
@@ -6697,8 +5291,7 @@ export class DataLabelingServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
-      .dataset;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).dataset;
   }
 
   /**
@@ -6709,8 +5302,7 @@ export class DataLabelingServiceClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
-      .evaluation;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).evaluation;
   }
 
   /**
@@ -6720,7 +5312,7 @@ export class DataLabelingServiceClient {
    * @param {string} evaluation_job
    * @returns {string} Resource name string.
    */
-  evaluationJobPath(project: string, evaluationJob: string) {
+  evaluationJobPath(project:string,evaluationJob:string) {
     return this.pathTemplates.evaluationJobPathTemplate.render({
       project: project,
       evaluation_job: evaluationJob,
@@ -6735,8 +5327,7 @@ export class DataLabelingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEvaluationJobName(evaluationJobName: string) {
-    return this.pathTemplates.evaluationJobPathTemplate.match(evaluationJobName)
-      .project;
+    return this.pathTemplates.evaluationJobPathTemplate.match(evaluationJobName).project;
   }
 
   /**
@@ -6747,8 +5338,7 @@ export class DataLabelingServiceClient {
    * @returns {string} A string representing the evaluation_job.
    */
   matchEvaluationJobFromEvaluationJobName(evaluationJobName: string) {
-    return this.pathTemplates.evaluationJobPathTemplate.match(evaluationJobName)
-      .evaluation_job;
+    return this.pathTemplates.evaluationJobPathTemplate.match(evaluationJobName).evaluation_job;
   }
 
   /**
@@ -6760,12 +5350,7 @@ export class DataLabelingServiceClient {
    * @param {string} example
    * @returns {string} Resource name string.
    */
-  examplePath(
-    project: string,
-    dataset: string,
-    annotatedDataset: string,
-    example: string
-  ) {
+  examplePath(project:string,dataset:string,annotatedDataset:string,example:string) {
     return this.pathTemplates.examplePathTemplate.render({
       project: project,
       dataset: dataset,
@@ -6804,8 +5389,7 @@ export class DataLabelingServiceClient {
    * @returns {string} A string representing the annotated_dataset.
    */
   matchAnnotatedDatasetFromExampleName(exampleName: string) {
-    return this.pathTemplates.examplePathTemplate.match(exampleName)
-      .annotated_dataset;
+    return this.pathTemplates.examplePathTemplate.match(exampleName).annotated_dataset;
   }
 
   /**
@@ -6826,7 +5410,7 @@ export class DataLabelingServiceClient {
    * @param {string} instruction
    * @returns {string} Resource name string.
    */
-  instructionPath(project: string, instruction: string) {
+  instructionPath(project:string,instruction:string) {
     return this.pathTemplates.instructionPathTemplate.render({
       project: project,
       instruction: instruction,
@@ -6841,8 +5425,7 @@ export class DataLabelingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromInstructionName(instructionName: string) {
-    return this.pathTemplates.instructionPathTemplate.match(instructionName)
-      .project;
+    return this.pathTemplates.instructionPathTemplate.match(instructionName).project;
   }
 
   /**
@@ -6853,8 +5436,7 @@ export class DataLabelingServiceClient {
    * @returns {string} A string representing the instruction.
    */
   matchInstructionFromInstructionName(instructionName: string) {
-    return this.pathTemplates.instructionPathTemplate.match(instructionName)
-      .instruction;
+    return this.pathTemplates.instructionPathTemplate.match(instructionName).instruction;
   }
 
   /**
@@ -6863,7 +5445,7 @@ export class DataLabelingServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -6892,7 +5474,7 @@ export class DataLabelingServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.operationsClient.close();
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

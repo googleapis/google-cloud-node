@@ -18,24 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  IamClient,
-  IamProtos,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -116,41 +103,20 @@ export class RepositoryManagerClient {
    *     const client = new RepositoryManagerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof RepositoryManagerClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'cloudbuild.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -176,7 +142,7 @@ export class RepositoryManagerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -189,14 +155,18 @@ export class RepositoryManagerClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-
+  
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -241,143 +211,83 @@ export class RepositoryManagerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listConnections: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'connections'
-      ),
-      listRepositories: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'repositories'
-      ),
-      fetchLinkableRepositories: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'repositories'
-      ),
+      listConnections:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'connections'),
+      listRepositories:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'repositories'),
+      fetchLinkableRepositories:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'repositories')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v2/{resource=projects/*/locations/*/connections/*}:getIamPolicy',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v2/{resource=projects/*/locations/*/connections/*}:setIamPolicy',
-          body: '*',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v2/{resource=projects/*/locations/*/connections/*}:testIamPermissions',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v2/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2/{name=projects/*/locations/*/operations/*}',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v2/{resource=projects/*/locations/*/connections/*}:getIamPolicy',},{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v2/{resource=projects/*/locations/*/connections/*}:setIamPolicy',body: '*',},{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v2/{resource=projects/*/locations/*/connections/*}:testIamPermissions',body: '*',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v2/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v2/{name=projects/*/locations/*/operations/*}',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createConnectionResponse = protoFilesRoot.lookup(
-      '.google.devtools.cloudbuild.v2.Connection'
-    ) as gax.protobuf.Type;
+      '.google.devtools.cloudbuild.v2.Connection') as gax.protobuf.Type;
     const createConnectionMetadata = protoFilesRoot.lookup(
-      '.google.devtools.cloudbuild.v2.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.cloudbuild.v2.OperationMetadata') as gax.protobuf.Type;
     const updateConnectionResponse = protoFilesRoot.lookup(
-      '.google.devtools.cloudbuild.v2.Connection'
-    ) as gax.protobuf.Type;
+      '.google.devtools.cloudbuild.v2.Connection') as gax.protobuf.Type;
     const updateConnectionMetadata = protoFilesRoot.lookup(
-      '.google.devtools.cloudbuild.v2.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.cloudbuild.v2.OperationMetadata') as gax.protobuf.Type;
     const deleteConnectionResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteConnectionMetadata = protoFilesRoot.lookup(
-      '.google.devtools.cloudbuild.v2.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.cloudbuild.v2.OperationMetadata') as gax.protobuf.Type;
     const createRepositoryResponse = protoFilesRoot.lookup(
-      '.google.devtools.cloudbuild.v2.Repository'
-    ) as gax.protobuf.Type;
+      '.google.devtools.cloudbuild.v2.Repository') as gax.protobuf.Type;
     const createRepositoryMetadata = protoFilesRoot.lookup(
-      '.google.devtools.cloudbuild.v2.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.cloudbuild.v2.OperationMetadata') as gax.protobuf.Type;
     const batchCreateRepositoriesResponse = protoFilesRoot.lookup(
-      '.google.devtools.cloudbuild.v2.BatchCreateRepositoriesResponse'
-    ) as gax.protobuf.Type;
+      '.google.devtools.cloudbuild.v2.BatchCreateRepositoriesResponse') as gax.protobuf.Type;
     const batchCreateRepositoriesMetadata = protoFilesRoot.lookup(
-      '.google.devtools.cloudbuild.v2.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.cloudbuild.v2.OperationMetadata') as gax.protobuf.Type;
     const deleteRepositoryResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteRepositoryMetadata = protoFilesRoot.lookup(
-      '.google.devtools.cloudbuild.v2.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.devtools.cloudbuild.v2.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createConnection: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createConnectionResponse.decode.bind(createConnectionResponse),
-        createConnectionMetadata.decode.bind(createConnectionMetadata)
-      ),
+        createConnectionMetadata.decode.bind(createConnectionMetadata)),
       updateConnection: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateConnectionResponse.decode.bind(updateConnectionResponse),
-        updateConnectionMetadata.decode.bind(updateConnectionMetadata)
-      ),
+        updateConnectionMetadata.decode.bind(updateConnectionMetadata)),
       deleteConnection: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteConnectionResponse.decode.bind(deleteConnectionResponse),
-        deleteConnectionMetadata.decode.bind(deleteConnectionMetadata)
-      ),
+        deleteConnectionMetadata.decode.bind(deleteConnectionMetadata)),
       createRepository: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createRepositoryResponse.decode.bind(createRepositoryResponse),
-        createRepositoryMetadata.decode.bind(createRepositoryMetadata)
-      ),
+        createRepositoryMetadata.decode.bind(createRepositoryMetadata)),
       batchCreateRepositories: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        batchCreateRepositoriesResponse.decode.bind(
-          batchCreateRepositoriesResponse
-        ),
-        batchCreateRepositoriesMetadata.decode.bind(
-          batchCreateRepositoriesMetadata
-        )
-      ),
+        batchCreateRepositoriesResponse.decode.bind(batchCreateRepositoriesResponse),
+        batchCreateRepositoriesMetadata.decode.bind(batchCreateRepositoriesMetadata)),
       deleteRepository: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteRepositoryResponse.decode.bind(deleteRepositoryResponse),
-        deleteRepositoryMetadata.decode.bind(deleteRepositoryMetadata)
-      ),
+        deleteRepositoryMetadata.decode.bind(deleteRepositoryMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.devtools.cloudbuild.v2.RepositoryManager',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.devtools.cloudbuild.v2.RepositoryManager', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -408,48 +318,28 @@ export class RepositoryManagerClient {
     // Put together the "service stub" for
     // google.devtools.cloudbuild.v2.RepositoryManager.
     this.repositoryManagerStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.devtools.cloudbuild.v2.RepositoryManager'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.devtools.cloudbuild.v2.RepositoryManager') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.devtools.cloudbuild.v2.RepositoryManager,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const repositoryManagerStubMethods = [
-      'createConnection',
-      'getConnection',
-      'listConnections',
-      'updateConnection',
-      'deleteConnection',
-      'createRepository',
-      'batchCreateRepositories',
-      'getRepository',
-      'listRepositories',
-      'deleteRepository',
-      'fetchReadWriteToken',
-      'fetchReadToken',
-      'fetchLinkableRepositories',
-      'fetchGitRefs',
-    ];
+    const repositoryManagerStubMethods =
+        ['createConnection', 'getConnection', 'listConnections', 'updateConnection', 'deleteConnection', 'createRepository', 'batchCreateRepositories', 'getRepository', 'listRepositories', 'deleteRepository', 'fetchReadWriteToken', 'fetchReadToken', 'fetchLinkableRepositories', 'fetchGitRefs'];
     for (const methodName of repositoryManagerStubMethods) {
       const callPromise = this.repositoryManagerStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -474,14 +364,8 @@ export class RepositoryManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudbuild.googleapis.com';
   }
@@ -492,14 +376,8 @@ export class RepositoryManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudbuild.googleapis.com';
   }
@@ -530,7 +408,9 @@ export class RepositoryManagerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -539,9 +419,8 @@ export class RepositoryManagerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -552,1791 +431,1256 @@ export class RepositoryManagerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of a single connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Connection to retrieve.
-   *   Format: `projects/* /locations/* /connections/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.cloudbuild.v2.Connection|Connection}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.get_connection.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_GetConnection_async
-   */
+/**
+ * Gets details of a single connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Connection to retrieve.
+ *   Format: `projects/* /locations/* /connections/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.cloudbuild.v2.Connection|Connection}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.get_connection.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_GetConnection_async
+ */
   getConnection(
-    request?: protos.google.devtools.cloudbuild.v2.IGetConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IConnection,
-      protos.google.devtools.cloudbuild.v2.IGetConnectionRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.cloudbuild.v2.IGetConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IConnection,
+        protos.google.devtools.cloudbuild.v2.IGetConnectionRequest|undefined, {}|undefined
+      ]>;
   getConnection(
-    request: protos.google.devtools.cloudbuild.v2.IGetConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v2.IConnection,
-      | protos.google.devtools.cloudbuild.v2.IGetConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConnection(
-    request: protos.google.devtools.cloudbuild.v2.IGetConnectionRequest,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v2.IConnection,
-      | protos.google.devtools.cloudbuild.v2.IGetConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConnection(
-    request?: protos.google.devtools.cloudbuild.v2.IGetConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.cloudbuild.v2.IGetConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.cloudbuild.v2.IConnection,
-          | protos.google.devtools.cloudbuild.v2.IGetConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.cloudbuild.v2.IConnection,
-      | protos.google.devtools.cloudbuild.v2.IGetConnectionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IConnection,
-      protos.google.devtools.cloudbuild.v2.IGetConnectionRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.cloudbuild.v2.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConnection(
+      request: protos.google.devtools.cloudbuild.v2.IGetConnectionRequest,
+      callback: Callback<
+          protos.google.devtools.cloudbuild.v2.IConnection,
+          protos.google.devtools.cloudbuild.v2.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConnection(
+      request?: protos.google.devtools.cloudbuild.v2.IGetConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.cloudbuild.v2.IConnection,
+          protos.google.devtools.cloudbuild.v2.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.cloudbuild.v2.IConnection,
+          protos.google.devtools.cloudbuild.v2.IGetConnectionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IConnection,
+        protos.google.devtools.cloudbuild.v2.IGetConnectionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getConnection request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.cloudbuild.v2.IConnection,
-          | protos.google.devtools.cloudbuild.v2.IGetConnectionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.cloudbuild.v2.IConnection,
+        protos.google.devtools.cloudbuild.v2.IGetConnectionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.cloudbuild.v2.IConnection,
-          (
-            | protos.google.devtools.cloudbuild.v2.IGetConnectionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getConnection response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getConnection(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.cloudbuild.v2.IConnection,
+        protos.google.devtools.cloudbuild.v2.IGetConnectionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getConnection response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Repository to retrieve.
-   *   Format: `projects/* /locations/* /connections/* /repositories/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.cloudbuild.v2.Repository|Repository}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.get_repository.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_GetRepository_async
-   */
+/**
+ * Gets details of a single repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Repository to retrieve.
+ *   Format: `projects/* /locations/* /connections/* /repositories/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.cloudbuild.v2.Repository|Repository}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.get_repository.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_GetRepository_async
+ */
   getRepository(
-    request?: protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IRepository,
-      protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IRepository,
+        protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest|undefined, {}|undefined
+      ]>;
   getRepository(
-    request: protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v2.IRepository,
-      | protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRepository(
-    request: protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v2.IRepository,
-      | protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRepository(
-    request?: protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.cloudbuild.v2.IRepository,
-          | protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.cloudbuild.v2.IRepository,
-      | protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IRepository,
-      protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRepository(
+      request: protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest,
+      callback: Callback<
+          protos.google.devtools.cloudbuild.v2.IRepository,
+          protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRepository(
+      request?: protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.cloudbuild.v2.IRepository,
+          protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.cloudbuild.v2.IRepository,
+          protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IRepository,
+        protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getRepository request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.cloudbuild.v2.IRepository,
-          | protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.cloudbuild.v2.IRepository,
+        protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRepository response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getRepository(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.cloudbuild.v2.IRepository,
-          (
-            | protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getRepository response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getRepository(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.cloudbuild.v2.IRepository,
+        protos.google.devtools.cloudbuild.v2.IGetRepositoryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRepository response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetches read/write token of a given repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.repository
-   *   Required. The resource name of the repository in the format
-   *   `projects/* /locations/* /connections/* /repositories/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenResponse|FetchReadWriteTokenResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.fetch_read_write_token.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_FetchReadWriteToken_async
-   */
+/**
+ * Fetches read/write token of a given repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.repository
+ *   Required. The resource name of the repository in the format
+ *   `projects/* /locations/* /connections/* /repositories/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenResponse|FetchReadWriteTokenResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.fetch_read_write_token.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_FetchReadWriteToken_async
+ */
   fetchReadWriteToken(
-    request?: protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
-      (
-        | protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
+        protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest|undefined, {}|undefined
+      ]>;
   fetchReadWriteToken(
-    request: protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
-      | protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchReadWriteToken(
-    request: protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
-      | protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchReadWriteToken(
-    request?: protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
-          | protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
-      | protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
-      (
-        | protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchReadWriteToken(
+      request: protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest,
+      callback: Callback<
+          protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
+          protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchReadWriteToken(
+      request?: protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
+          protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
+          protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
+        protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        repository: request.repository ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'repository': request.repository ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchReadWriteToken request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
-          | protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
+        protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('fetchReadWriteToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .fetchReadWriteToken(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
-          (
-            | protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('fetchReadWriteToken response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.fetchReadWriteToken(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenResponse,
+        protos.google.devtools.cloudbuild.v2.IFetchReadWriteTokenRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchReadWriteToken response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetches read token of a given repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.repository
-   *   Required. The resource name of the repository in the format
-   *   `projects/* /locations/* /connections/* /repositories/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.cloudbuild.v2.FetchReadTokenResponse|FetchReadTokenResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.fetch_read_token.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_FetchReadToken_async
-   */
+/**
+ * Fetches read token of a given repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.repository
+ *   Required. The resource name of the repository in the format
+ *   `projects/* /locations/* /connections/* /repositories/*`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.cloudbuild.v2.FetchReadTokenResponse|FetchReadTokenResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.fetch_read_token.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_FetchReadToken_async
+ */
   fetchReadToken(
-    request?: protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
-      protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
+        protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest|undefined, {}|undefined
+      ]>;
   fetchReadToken(
-    request: protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
-      | protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchReadToken(
-    request: protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
-      | protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchReadToken(
-    request?: protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
-          | protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
-      | protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
-      protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchReadToken(
+      request: protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest,
+      callback: Callback<
+          protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
+          protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchReadToken(
+      request?: protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
+          protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
+          protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
+        protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        repository: request.repository ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'repository': request.repository ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchReadToken request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
-          | protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
+        protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('fetchReadToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .fetchReadToken(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
-          (
-            | protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('fetchReadToken response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.fetchReadToken(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.cloudbuild.v2.IFetchReadTokenResponse,
+        protos.google.devtools.cloudbuild.v2.IFetchReadTokenRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchReadToken response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Fetch the list of branches or tags for a given repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.repository
-   *   Required. The resource name of the repository in the format
-   *   `projects/* /locations/* /connections/* /repositories/*`.
-   * @param {google.devtools.cloudbuild.v2.FetchGitRefsRequest.RefType} request.refType
-   *   Type of refs to fetch
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.devtools.cloudbuild.v2.FetchGitRefsResponse|FetchGitRefsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.fetch_git_refs.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_FetchGitRefs_async
-   */
+/**
+ * Fetch the list of branches or tags for a given repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.repository
+ *   Required. The resource name of the repository in the format
+ *   `projects/* /locations/* /connections/* /repositories/*`.
+ * @param {google.devtools.cloudbuild.v2.FetchGitRefsRequest.RefType} request.refType
+ *   Type of refs to fetch
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.devtools.cloudbuild.v2.FetchGitRefsResponse|FetchGitRefsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.fetch_git_refs.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_FetchGitRefs_async
+ */
   fetchGitRefs(
-    request?: protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
-      protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
+        protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest|undefined, {}|undefined
+      ]>;
   fetchGitRefs(
-    request: protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
-      | protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchGitRefs(
-    request: protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
-      | protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  fetchGitRefs(
-    request?: protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
-          | protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
-      | protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
-      protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchGitRefs(
+      request: protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest,
+      callback: Callback<
+          protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
+          protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest|null|undefined,
+          {}|null|undefined>): void;
+  fetchGitRefs(
+      request?: protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
+          protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
+          protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
+        protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        repository: request.repository ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'repository': request.repository ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchGitRefs request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
-          | protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
+        protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('fetchGitRefs response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .fetchGitRefs(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
-          protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('fetchGitRefs response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.fetchGitRefs(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.devtools.cloudbuild.v2.IFetchGitRefsResponse,
+        protos.google.devtools.cloudbuild.v2.IFetchGitRefsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('fetchGitRefs response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a Connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location where the connection will be created.
-   *   Format: `projects/* /locations/*`.
-   * @param {google.devtools.cloudbuild.v2.Connection} request.connection
-   *   Required. The Connection to create.
-   * @param {string} request.connectionId
-   *   Required. The ID to use for the Connection, which will become the final
-   *   component of the Connection's resource name. Names must be unique
-   *   per-project per-location. Allows alphanumeric characters and any of
-   *   -._~%!$&'()*+,;=@.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.create_connection.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_CreateConnection_async
-   */
+/**
+ * Creates a Connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project and location where the connection will be created.
+ *   Format: `projects/* /locations/*`.
+ * @param {google.devtools.cloudbuild.v2.Connection} request.connection
+ *   Required. The Connection to create.
+ * @param {string} request.connectionId
+ *   Required. The ID to use for the Connection, which will become the final
+ *   component of the Connection's resource name. Names must be unique
+ *   per-project per-location. Allows alphanumeric characters and any of
+ *   -._~%!$&'()*+,;=@.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.create_connection.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_CreateConnection_async
+ */
   createConnection(
-    request?: protos.google.devtools.cloudbuild.v2.ICreateConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IConnection,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.cloudbuild.v2.ICreateConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createConnection(
-    request: protos.google.devtools.cloudbuild.v2.ICreateConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IConnection,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.cloudbuild.v2.ICreateConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createConnection(
-    request: protos.google.devtools.cloudbuild.v2.ICreateConnectionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IConnection,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.cloudbuild.v2.ICreateConnectionRequest,
+      callback: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createConnection(
-    request?: protos.google.devtools.cloudbuild.v2.ICreateConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.devtools.cloudbuild.v2.IConnection,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IConnection,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IConnection,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.cloudbuild.v2.ICreateConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.devtools.cloudbuild.v2.IConnection,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createConnection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createConnection request %j', request);
-    return this.innerApiCalls
-      .createConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.devtools.cloudbuild.v2.IConnection,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createConnection response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createConnection(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createConnection response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createConnection()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.create_connection.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_CreateConnection_async
-   */
-  async checkCreateConnectionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.devtools.cloudbuild.v2.Connection,
-      protos.google.devtools.cloudbuild.v2.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createConnection()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.create_connection.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_CreateConnection_async
+ */
+  async checkCreateConnectionProgress(name: string): Promise<LROperation<protos.google.devtools.cloudbuild.v2.Connection, protos.google.devtools.cloudbuild.v2.OperationMetadata>>{
     this._log.info('createConnection long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createConnection,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.devtools.cloudbuild.v2.Connection,
-      protos.google.devtools.cloudbuild.v2.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createConnection, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.devtools.cloudbuild.v2.Connection, protos.google.devtools.cloudbuild.v2.OperationMetadata>;
   }
-  /**
-   * Updates a single connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.devtools.cloudbuild.v2.Connection} request.connection
-   *   Required. The Connection to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated.
-   * @param {boolean} request.allowMissing
-   *   If set to true, and the connection is not found a new connection
-   *   will be created. In this situation `update_mask` is ignored.
-   *   The creation will succeed only if the input connection has all the
-   *   necessary information (e.g a github_config with both  user_oauth_token and
-   *   installation_id properties).
-   * @param {string} request.etag
-   *   The current etag of the connection.
-   *   If an etag is provided and does not match the current etag of the
-   *   connection, update will be blocked and an ABORTED error will be returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.update_connection.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_UpdateConnection_async
-   */
+/**
+ * Updates a single connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.devtools.cloudbuild.v2.Connection} request.connection
+ *   Required. The Connection to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The list of fields to be updated.
+ * @param {boolean} request.allowMissing
+ *   If set to true, and the connection is not found a new connection
+ *   will be created. In this situation `update_mask` is ignored.
+ *   The creation will succeed only if the input connection has all the
+ *   necessary information (e.g a github_config with both  user_oauth_token and
+ *   installation_id properties).
+ * @param {string} request.etag
+ *   The current etag of the connection.
+ *   If an etag is provided and does not match the current etag of the
+ *   connection, update will be blocked and an ABORTED error will be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.update_connection.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_UpdateConnection_async
+ */
   updateConnection(
-    request?: protos.google.devtools.cloudbuild.v2.IUpdateConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IConnection,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.cloudbuild.v2.IUpdateConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateConnection(
-    request: protos.google.devtools.cloudbuild.v2.IUpdateConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IConnection,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.cloudbuild.v2.IUpdateConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateConnection(
-    request: protos.google.devtools.cloudbuild.v2.IUpdateConnectionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IConnection,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.cloudbuild.v2.IUpdateConnectionRequest,
+      callback: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateConnection(
-    request?: protos.google.devtools.cloudbuild.v2.IUpdateConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.devtools.cloudbuild.v2.IConnection,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IConnection,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IConnection,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.cloudbuild.v2.IUpdateConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'connection.name': request.connection!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'connection.name': request.connection!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.devtools.cloudbuild.v2.IConnection,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateConnection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateConnection request %j', request);
-    return this.innerApiCalls
-      .updateConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.devtools.cloudbuild.v2.IConnection,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateConnection response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateConnection(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.devtools.cloudbuild.v2.IConnection, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateConnection response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateConnection()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.update_connection.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_UpdateConnection_async
-   */
-  async checkUpdateConnectionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.devtools.cloudbuild.v2.Connection,
-      protos.google.devtools.cloudbuild.v2.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateConnection()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.update_connection.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_UpdateConnection_async
+ */
+  async checkUpdateConnectionProgress(name: string): Promise<LROperation<protos.google.devtools.cloudbuild.v2.Connection, protos.google.devtools.cloudbuild.v2.OperationMetadata>>{
     this._log.info('updateConnection long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateConnection,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.devtools.cloudbuild.v2.Connection,
-      protos.google.devtools.cloudbuild.v2.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateConnection, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.devtools.cloudbuild.v2.Connection, protos.google.devtools.cloudbuild.v2.OperationMetadata>;
   }
-  /**
-   * Deletes a single connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Connection to delete.
-   *   Format: `projects/* /locations/* /connections/*`.
-   * @param {string} request.etag
-   *   The current etag of the connection.
-   *   If an etag is provided and does not match the current etag of the
-   *   connection, deletion will be blocked and an ABORTED error will be returned.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request, but do not actually post it.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.delete_connection.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_DeleteConnection_async
-   */
+/**
+ * Deletes a single connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Connection to delete.
+ *   Format: `projects/* /locations/* /connections/*`.
+ * @param {string} request.etag
+ *   The current etag of the connection.
+ *   If an etag is provided and does not match the current etag of the
+ *   connection, deletion will be blocked and an ABORTED error will be returned.
+ * @param {boolean} request.validateOnly
+ *   If set, validate the request, but do not actually post it.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.delete_connection.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_DeleteConnection_async
+ */
   deleteConnection(
-    request?: protos.google.devtools.cloudbuild.v2.IDeleteConnectionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.cloudbuild.v2.IDeleteConnectionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteConnection(
-    request: protos.google.devtools.cloudbuild.v2.IDeleteConnectionRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.cloudbuild.v2.IDeleteConnectionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteConnection(
-    request: protos.google.devtools.cloudbuild.v2.IDeleteConnectionRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.cloudbuild.v2.IDeleteConnectionRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteConnection(
-    request?: protos.google.devtools.cloudbuild.v2.IDeleteConnectionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.cloudbuild.v2.IDeleteConnectionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteConnection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteConnection request %j', request);
-    return this.innerApiCalls
-      .deleteConnection(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteConnection response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteConnection(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteConnection response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteConnection()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.delete_connection.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_DeleteConnection_async
-   */
-  async checkDeleteConnectionProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.cloudbuild.v2.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteConnection()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.delete_connection.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_DeleteConnection_async
+ */
+  async checkDeleteConnectionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.devtools.cloudbuild.v2.OperationMetadata>>{
     this._log.info('deleteConnection long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteConnection,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.cloudbuild.v2.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteConnection, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.devtools.cloudbuild.v2.OperationMetadata>;
   }
-  /**
-   * Creates a Repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The connection to contain the repository. If the request is part
-   *   of a BatchCreateRepositoriesRequest, this field should be empty or match
-   *   the parent specified there.
-   * @param {google.devtools.cloudbuild.v2.Repository} request.repository
-   *   Required. The repository to create.
-   * @param {string} request.repositoryId
-   *   Required. The ID to use for the repository, which will become the final
-   *   component of the repository's resource name. This ID should be unique in
-   *   the connection. Allows alphanumeric characters and any of
-   *   -._~%!$&'()*+,;=@.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.create_repository.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_CreateRepository_async
-   */
+/**
+ * Creates a Repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The connection to contain the repository. If the request is part
+ *   of a BatchCreateRepositoriesRequest, this field should be empty or match
+ *   the parent specified there.
+ * @param {google.devtools.cloudbuild.v2.Repository} request.repository
+ *   Required. The repository to create.
+ * @param {string} request.repositoryId
+ *   Required. The ID to use for the repository, which will become the final
+ *   component of the repository's resource name. This ID should be unique in
+ *   the connection. Allows alphanumeric characters and any of
+ *   -._~%!$&'()*+,;=@.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.create_repository.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_CreateRepository_async
+ */
   createRepository(
-    request?: protos.google.devtools.cloudbuild.v2.ICreateRepositoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IRepository,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.cloudbuild.v2.ICreateRepositoryRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.devtools.cloudbuild.v2.IRepository, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createRepository(
-    request: protos.google.devtools.cloudbuild.v2.ICreateRepositoryRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IRepository,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.cloudbuild.v2.ICreateRepositoryRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IRepository, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createRepository(
-    request: protos.google.devtools.cloudbuild.v2.ICreateRepositoryRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IRepository,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.cloudbuild.v2.ICreateRepositoryRequest,
+      callback: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IRepository, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createRepository(
-    request?: protos.google.devtools.cloudbuild.v2.ICreateRepositoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.devtools.cloudbuild.v2.IRepository,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IRepository,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IRepository,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.cloudbuild.v2.ICreateRepositoryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IRepository, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IRepository, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.devtools.cloudbuild.v2.IRepository, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.devtools.cloudbuild.v2.IRepository,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IRepository, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createRepository response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createRepository request %j', request);
-    return this.innerApiCalls
-      .createRepository(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.devtools.cloudbuild.v2.IRepository,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createRepository response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createRepository(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.devtools.cloudbuild.v2.IRepository, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createRepository response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createRepository()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.create_repository.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_CreateRepository_async
-   */
-  async checkCreateRepositoryProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.devtools.cloudbuild.v2.Repository,
-      protos.google.devtools.cloudbuild.v2.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createRepository()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.create_repository.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_CreateRepository_async
+ */
+  async checkCreateRepositoryProgress(name: string): Promise<LROperation<protos.google.devtools.cloudbuild.v2.Repository, protos.google.devtools.cloudbuild.v2.OperationMetadata>>{
     this._log.info('createRepository long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createRepository,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.devtools.cloudbuild.v2.Repository,
-      protos.google.devtools.cloudbuild.v2.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createRepository, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.devtools.cloudbuild.v2.Repository, protos.google.devtools.cloudbuild.v2.OperationMetadata>;
   }
-  /**
-   * Creates multiple repositories inside a connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The connection to contain all the repositories being created.
-   *   Format: projects/* /locations/* /connections/*
-   *   The parent field in the CreateRepositoryRequest messages
-   *   must either be empty or match this field.
-   * @param {number[]} request.requests
-   *   Required. The request messages specifying the repositories to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.batch_create_repositories.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_BatchCreateRepositories_async
-   */
+/**
+ * Creates multiple repositories inside a connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The connection to contain all the repositories being created.
+ *   Format: projects/* /locations/* /connections/*
+ *   The parent field in the CreateRepositoryRequest messages
+ *   must either be empty or match this field.
+ * @param {number[]} request.requests
+ *   Required. The request messages specifying the repositories to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.batch_create_repositories.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_BatchCreateRepositories_async
+ */
   batchCreateRepositories(
-    request?: protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   batchCreateRepositories(
-    request: protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   batchCreateRepositories(
-    request: protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesRequest,
+      callback: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   batchCreateRepositories(
-    request?: protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('batchCreateRepositories response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('batchCreateRepositories request %j', request);
-    return this.innerApiCalls
-      .batchCreateRepositories(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('batchCreateRepositories response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.batchCreateRepositories(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.devtools.cloudbuild.v2.IBatchCreateRepositoriesResponse, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('batchCreateRepositories response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `batchCreateRepositories()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.batch_create_repositories.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_BatchCreateRepositories_async
-   */
-  async checkBatchCreateRepositoriesProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.devtools.cloudbuild.v2.BatchCreateRepositoriesResponse,
-      protos.google.devtools.cloudbuild.v2.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `batchCreateRepositories()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.batch_create_repositories.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_BatchCreateRepositories_async
+ */
+  async checkBatchCreateRepositoriesProgress(name: string): Promise<LROperation<protos.google.devtools.cloudbuild.v2.BatchCreateRepositoriesResponse, protos.google.devtools.cloudbuild.v2.OperationMetadata>>{
     this._log.info('batchCreateRepositories long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.batchCreateRepositories,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.devtools.cloudbuild.v2.BatchCreateRepositoriesResponse,
-      protos.google.devtools.cloudbuild.v2.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchCreateRepositories, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.devtools.cloudbuild.v2.BatchCreateRepositoriesResponse, protos.google.devtools.cloudbuild.v2.OperationMetadata>;
   }
-  /**
-   * Deletes a single repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Repository to delete.
-   *   Format: `projects/* /locations/* /connections/* /repositories/*`.
-   * @param {string} request.etag
-   *   The current etag of the repository.
-   *   If an etag is provided and does not match the current etag of the
-   *   repository, deletion will be blocked and an ABORTED error will be returned.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request, but do not actually post it.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.delete_repository.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_DeleteRepository_async
-   */
+/**
+ * Deletes a single repository.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Repository to delete.
+ *   Format: `projects/* /locations/* /connections/* /repositories/*`.
+ * @param {string} request.etag
+ *   The current etag of the repository.
+ *   If an etag is provided and does not match the current etag of the
+ *   repository, deletion will be blocked and an ABORTED error will be returned.
+ * @param {boolean} request.validateOnly
+ *   If set, validate the request, but do not actually post it.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.delete_repository.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_DeleteRepository_async
+ */
   deleteRepository(
-    request?: protos.google.devtools.cloudbuild.v2.IDeleteRepositoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.devtools.cloudbuild.v2.IDeleteRepositoryRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteRepository(
-    request: protos.google.devtools.cloudbuild.v2.IDeleteRepositoryRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.cloudbuild.v2.IDeleteRepositoryRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteRepository(
-    request: protos.google.devtools.cloudbuild.v2.IDeleteRepositoryRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.devtools.cloudbuild.v2.IDeleteRepositoryRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteRepository(
-    request?: protos.google.devtools.cloudbuild.v2.IDeleteRepositoryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.devtools.cloudbuild.v2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.devtools.cloudbuild.v2.IDeleteRepositoryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteRepository response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteRepository request %j', request);
-    return this.innerApiCalls
-      .deleteRepository(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.devtools.cloudbuild.v2.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteRepository response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteRepository(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.devtools.cloudbuild.v2.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteRepository response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteRepository()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.delete_repository.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_DeleteRepository_async
-   */
-  async checkDeleteRepositoryProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.cloudbuild.v2.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteRepository()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.delete_repository.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_DeleteRepository_async
+ */
+  async checkDeleteRepositoryProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.devtools.cloudbuild.v2.OperationMetadata>>{
     this._log.info('deleteRepository long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteRepository,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.devtools.cloudbuild.v2.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteRepository, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.devtools.cloudbuild.v2.OperationMetadata>;
   }
-  /**
-   * Lists Connections in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of Connections.
-   *   Format: `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Number of results to return in the list.
-   * @param {string} request.pageToken
-   *   Page start.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.devtools.cloudbuild.v2.Connection|Connection}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listConnectionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Connections in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of Connections.
+ *   Format: `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Number of results to return in the list.
+ * @param {string} request.pageToken
+ *   Page start.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.devtools.cloudbuild.v2.Connection|Connection}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listConnectionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConnections(
-    request?: protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IConnection[],
-      protos.google.devtools.cloudbuild.v2.IListConnectionsRequest | null,
-      protos.google.devtools.cloudbuild.v2.IListConnectionsResponse,
-    ]
-  >;
+      request?: protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IConnection[],
+        protos.google.devtools.cloudbuild.v2.IListConnectionsRequest|null,
+        protos.google.devtools.cloudbuild.v2.IListConnectionsResponse
+      ]>;
   listConnections(
-    request: protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
-      | protos.google.devtools.cloudbuild.v2.IListConnectionsResponse
-      | null
-      | undefined,
-      protos.google.devtools.cloudbuild.v2.IConnection
-    >
-  ): void;
-  listConnections(
-    request: protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
-      | protos.google.devtools.cloudbuild.v2.IListConnectionsResponse
-      | null
-      | undefined,
-      protos.google.devtools.cloudbuild.v2.IConnection
-    >
-  ): void;
-  listConnections(
-    request?: protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
-          | protos.google.devtools.cloudbuild.v2.IListConnectionsResponse
-          | null
-          | undefined,
-          protos.google.devtools.cloudbuild.v2.IConnection
-        >,
-    callback?: PaginationCallback<
-      protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
-      | protos.google.devtools.cloudbuild.v2.IListConnectionsResponse
-      | null
-      | undefined,
-      protos.google.devtools.cloudbuild.v2.IConnection
-    >
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IConnection[],
-      protos.google.devtools.cloudbuild.v2.IListConnectionsRequest | null,
-      protos.google.devtools.cloudbuild.v2.IListConnectionsResponse,
-    ]
-  > | void {
+          protos.google.devtools.cloudbuild.v2.IListConnectionsResponse|null|undefined,
+          protos.google.devtools.cloudbuild.v2.IConnection>): void;
+  listConnections(
+      request: protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
+      callback: PaginationCallback<
+          protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
+          protos.google.devtools.cloudbuild.v2.IListConnectionsResponse|null|undefined,
+          protos.google.devtools.cloudbuild.v2.IConnection>): void;
+  listConnections(
+      request?: protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
+          protos.google.devtools.cloudbuild.v2.IListConnectionsResponse|null|undefined,
+          protos.google.devtools.cloudbuild.v2.IConnection>,
+      callback?: PaginationCallback<
+          protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
+          protos.google.devtools.cloudbuild.v2.IListConnectionsResponse|null|undefined,
+          protos.google.devtools.cloudbuild.v2.IConnection>):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IConnection[],
+        protos.google.devtools.cloudbuild.v2.IListConnectionsRequest|null,
+        protos.google.devtools.cloudbuild.v2.IListConnectionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
-          | protos.google.devtools.cloudbuild.v2.IListConnectionsResponse
-          | null
-          | undefined,
-          protos.google.devtools.cloudbuild.v2.IConnection
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
+      protos.google.devtools.cloudbuild.v2.IListConnectionsResponse|null|undefined,
+      protos.google.devtools.cloudbuild.v2.IConnection>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listConnections values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2345,57 +1689,54 @@ export class RepositoryManagerClient {
     this._log.info('listConnections request %j', request);
     return this.innerApiCalls
       .listConnections(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.devtools.cloudbuild.v2.IConnection[],
-          protos.google.devtools.cloudbuild.v2.IListConnectionsRequest | null,
-          protos.google.devtools.cloudbuild.v2.IListConnectionsResponse,
-        ]) => {
-          this._log.info('listConnections values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.devtools.cloudbuild.v2.IConnection[],
+        protos.google.devtools.cloudbuild.v2.IListConnectionsRequest|null,
+        protos.google.devtools.cloudbuild.v2.IListConnectionsResponse
+      ]) => {
+        this._log.info('listConnections values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listConnections`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of Connections.
-   *   Format: `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Number of results to return in the list.
-   * @param {string} request.pageToken
-   *   Page start.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.devtools.cloudbuild.v2.Connection|Connection} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listConnectionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listConnections`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of Connections.
+ *   Format: `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Number of results to return in the list.
+ * @param {string} request.pageToken
+ *   Page start.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.devtools.cloudbuild.v2.Connection|Connection} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listConnectionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listConnectionsStream(
-    request?: protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConnections stream %j', request);
     return this.descriptors.page.listConnections.createStream(
       this.innerApiCalls.listConnections as GaxCall,
@@ -2404,48 +1745,47 @@ export class RepositoryManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listConnections`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of Connections.
-   *   Format: `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Number of results to return in the list.
-   * @param {string} request.pageToken
-   *   Page start.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.devtools.cloudbuild.v2.Connection|Connection}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.list_connections.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_ListConnections_async
-   */
+/**
+ * Equivalent to `listConnections`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of Connections.
+ *   Format: `projects/* /locations/*`.
+ * @param {number} request.pageSize
+ *   Number of results to return in the list.
+ * @param {string} request.pageToken
+ *   Page start.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.devtools.cloudbuild.v2.Connection|Connection}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.list_connections.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_ListConnections_async
+ */
   listConnectionsAsync(
-    request?: protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.devtools.cloudbuild.v2.IConnection> {
+      request?: protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.devtools.cloudbuild.v2.IConnection>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listConnections iterate %j', request);
     return this.descriptors.page.listConnections.asyncIterate(
       this.innerApiCalls['listConnections'] as GaxCall,
@@ -2453,118 +1793,93 @@ export class RepositoryManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.cloudbuild.v2.IConnection>;
   }
-  /**
-   * Lists Repositories in a given connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of Repositories.
-   *   Format: `projects/* /locations/* /connections/*`.
-   * @param {number} request.pageSize
-   *   Number of results to return in the list.
-   * @param {string} request.pageToken
-   *   Page start.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response.
-   *   Expressions must follow API improvement proposal
-   *   [AIP-160](https://google.aip.dev/160). e.g.
-   *   `remote_uri:"https://github.com*"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.devtools.cloudbuild.v2.Repository|Repository}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRepositoriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Repositories in a given connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of Repositories.
+ *   Format: `projects/* /locations/* /connections/*`.
+ * @param {number} request.pageSize
+ *   Number of results to return in the list.
+ * @param {string} request.pageToken
+ *   Page start.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response.
+ *   Expressions must follow API improvement proposal
+ *   [AIP-160](https://google.aip.dev/160). e.g.
+ *   `remote_uri:"https://github.com*"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.devtools.cloudbuild.v2.Repository|Repository}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRepositoriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRepositories(
-    request?: protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IRepository[],
-      protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest | null,
-      protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse,
-    ]
-  >;
+      request?: protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IRepository[],
+        protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest|null,
+        protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse
+      ]>;
   listRepositories(
-    request: protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
-      | protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse
-      | null
-      | undefined,
-      protos.google.devtools.cloudbuild.v2.IRepository
-    >
-  ): void;
-  listRepositories(
-    request: protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
-      | protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse
-      | null
-      | undefined,
-      protos.google.devtools.cloudbuild.v2.IRepository
-    >
-  ): void;
-  listRepositories(
-    request?: protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
-          | protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse
-          | null
-          | undefined,
-          protos.google.devtools.cloudbuild.v2.IRepository
-        >,
-    callback?: PaginationCallback<
-      protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
-      | protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse
-      | null
-      | undefined,
-      protos.google.devtools.cloudbuild.v2.IRepository
-    >
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IRepository[],
-      protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest | null,
-      protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse,
-    ]
-  > | void {
+          protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse|null|undefined,
+          protos.google.devtools.cloudbuild.v2.IRepository>): void;
+  listRepositories(
+      request: protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
+      callback: PaginationCallback<
+          protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
+          protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse|null|undefined,
+          protos.google.devtools.cloudbuild.v2.IRepository>): void;
+  listRepositories(
+      request?: protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
+          protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse|null|undefined,
+          protos.google.devtools.cloudbuild.v2.IRepository>,
+      callback?: PaginationCallback<
+          protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
+          protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse|null|undefined,
+          protos.google.devtools.cloudbuild.v2.IRepository>):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IRepository[],
+        protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest|null,
+        protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
-          | protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse
-          | null
-          | undefined,
-          protos.google.devtools.cloudbuild.v2.IRepository
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
+      protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse|null|undefined,
+      protos.google.devtools.cloudbuild.v2.IRepository>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRepositories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2573,62 +1888,59 @@ export class RepositoryManagerClient {
     this._log.info('listRepositories request %j', request);
     return this.innerApiCalls
       .listRepositories(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.devtools.cloudbuild.v2.IRepository[],
-          protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest | null,
-          protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse,
-        ]) => {
-          this._log.info('listRepositories values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.devtools.cloudbuild.v2.IRepository[],
+        protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest|null,
+        protos.google.devtools.cloudbuild.v2.IListRepositoriesResponse
+      ]) => {
+        this._log.info('listRepositories values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRepositories`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of Repositories.
-   *   Format: `projects/* /locations/* /connections/*`.
-   * @param {number} request.pageSize
-   *   Number of results to return in the list.
-   * @param {string} request.pageToken
-   *   Page start.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response.
-   *   Expressions must follow API improvement proposal
-   *   [AIP-160](https://google.aip.dev/160). e.g.
-   *   `remote_uri:"https://github.com*"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.devtools.cloudbuild.v2.Repository|Repository} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRepositoriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRepositories`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of Repositories.
+ *   Format: `projects/* /locations/* /connections/*`.
+ * @param {number} request.pageSize
+ *   Number of results to return in the list.
+ * @param {string} request.pageToken
+ *   Page start.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response.
+ *   Expressions must follow API improvement proposal
+ *   [AIP-160](https://google.aip.dev/160). e.g.
+ *   `remote_uri:"https://github.com*"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.devtools.cloudbuild.v2.Repository|Repository} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRepositoriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRepositoriesStream(
-    request?: protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRepositories stream %j', request);
     return this.descriptors.page.listRepositories.createStream(
       this.innerApiCalls.listRepositories as GaxCall,
@@ -2637,53 +1949,52 @@ export class RepositoryManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listRepositories`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of Repositories.
-   *   Format: `projects/* /locations/* /connections/*`.
-   * @param {number} request.pageSize
-   *   Number of results to return in the list.
-   * @param {string} request.pageToken
-   *   Page start.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response.
-   *   Expressions must follow API improvement proposal
-   *   [AIP-160](https://google.aip.dev/160). e.g.
-   *   `remote_uri:"https://github.com*"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.devtools.cloudbuild.v2.Repository|Repository}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.list_repositories.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_ListRepositories_async
-   */
+/**
+ * Equivalent to `listRepositories`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of Repositories.
+ *   Format: `projects/* /locations/* /connections/*`.
+ * @param {number} request.pageSize
+ *   Number of results to return in the list.
+ * @param {string} request.pageToken
+ *   Page start.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response.
+ *   Expressions must follow API improvement proposal
+ *   [AIP-160](https://google.aip.dev/160). e.g.
+ *   `remote_uri:"https://github.com*"`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.devtools.cloudbuild.v2.Repository|Repository}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.list_repositories.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_ListRepositories_async
+ */
   listRepositoriesAsync(
-    request?: protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.devtools.cloudbuild.v2.IRepository> {
+      request?: protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.devtools.cloudbuild.v2.IRepository>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRepositories iterate %j', request);
     return this.descriptors.page.listRepositories.asyncIterate(
       this.innerApiCalls['listRepositories'] as GaxCall,
@@ -2691,114 +2002,89 @@ export class RepositoryManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.cloudbuild.v2.IRepository>;
   }
-  /**
-   * FetchLinkableRepositories get repositories from SCM that are
-   * accessible and could be added to the connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.connection
-   *   Required. The name of the Connection.
-   *   Format: `projects/* /locations/* /connections/*`.
-   * @param {number} request.pageSize
-   *   Number of results to return in the list. Default to 20.
-   * @param {string} request.pageToken
-   *   Page start.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.devtools.cloudbuild.v2.Repository|Repository}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `fetchLinkableRepositoriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * FetchLinkableRepositories get repositories from SCM that are
+ * accessible and could be added to the connection.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.connection
+ *   Required. The name of the Connection.
+ *   Format: `projects/* /locations/* /connections/*`.
+ * @param {number} request.pageSize
+ *   Number of results to return in the list. Default to 20.
+ * @param {string} request.pageToken
+ *   Page start.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.devtools.cloudbuild.v2.Repository|Repository}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `fetchLinkableRepositoriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   fetchLinkableRepositories(
-    request?: protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IRepository[],
-      protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest | null,
-      protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse,
-    ]
-  >;
+      request?: protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IRepository[],
+        protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest|null,
+        protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse
+      ]>;
   fetchLinkableRepositories(
-    request: protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
-      | protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse
-      | null
-      | undefined,
-      protos.google.devtools.cloudbuild.v2.IRepository
-    >
-  ): void;
-  fetchLinkableRepositories(
-    request: protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
-      | protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse
-      | null
-      | undefined,
-      protos.google.devtools.cloudbuild.v2.IRepository
-    >
-  ): void;
-  fetchLinkableRepositories(
-    request?: protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
-          | protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse
-          | null
-          | undefined,
-          protos.google.devtools.cloudbuild.v2.IRepository
-        >,
-    callback?: PaginationCallback<
-      protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
-      | protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse
-      | null
-      | undefined,
-      protos.google.devtools.cloudbuild.v2.IRepository
-    >
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v2.IRepository[],
-      protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest | null,
-      protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse,
-    ]
-  > | void {
+          protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse|null|undefined,
+          protos.google.devtools.cloudbuild.v2.IRepository>): void;
+  fetchLinkableRepositories(
+      request: protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
+      callback: PaginationCallback<
+          protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
+          protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse|null|undefined,
+          protos.google.devtools.cloudbuild.v2.IRepository>): void;
+  fetchLinkableRepositories(
+      request?: protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
+          protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse|null|undefined,
+          protos.google.devtools.cloudbuild.v2.IRepository>,
+      callback?: PaginationCallback<
+          protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
+          protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse|null|undefined,
+          protos.google.devtools.cloudbuild.v2.IRepository>):
+      Promise<[
+        protos.google.devtools.cloudbuild.v2.IRepository[],
+        protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest|null,
+        protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        connection: request.connection ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'connection': request.connection ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
-          | protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse
-          | null
-          | undefined,
-          protos.google.devtools.cloudbuild.v2.IRepository
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
+      protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse|null|undefined,
+      protos.google.devtools.cloudbuild.v2.IRepository>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('fetchLinkableRepositories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2807,57 +2093,54 @@ export class RepositoryManagerClient {
     this._log.info('fetchLinkableRepositories request %j', request);
     return this.innerApiCalls
       .fetchLinkableRepositories(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.devtools.cloudbuild.v2.IRepository[],
-          protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest | null,
-          protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse,
-        ]) => {
-          this._log.info('fetchLinkableRepositories values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.devtools.cloudbuild.v2.IRepository[],
+        protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest|null,
+        protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesResponse
+      ]) => {
+        this._log.info('fetchLinkableRepositories values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `fetchLinkableRepositories`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.connection
-   *   Required. The name of the Connection.
-   *   Format: `projects/* /locations/* /connections/*`.
-   * @param {number} request.pageSize
-   *   Number of results to return in the list. Default to 20.
-   * @param {string} request.pageToken
-   *   Page start.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.devtools.cloudbuild.v2.Repository|Repository} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `fetchLinkableRepositoriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `fetchLinkableRepositories`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.connection
+ *   Required. The name of the Connection.
+ *   Format: `projects/* /locations/* /connections/*`.
+ * @param {number} request.pageSize
+ *   Number of results to return in the list. Default to 20.
+ * @param {string} request.pageToken
+ *   Page start.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.devtools.cloudbuild.v2.Repository|Repository} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `fetchLinkableRepositoriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   fetchLinkableRepositoriesStream(
-    request?: protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        connection: request.connection ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'connection': request.connection ?? '',
+    });
     const defaultCallSettings = this._defaults['fetchLinkableRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchLinkableRepositories stream %j', request);
     return this.descriptors.page.fetchLinkableRepositories.createStream(
       this.innerApiCalls.fetchLinkableRepositories as GaxCall,
@@ -2866,48 +2149,47 @@ export class RepositoryManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `fetchLinkableRepositories`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.connection
-   *   Required. The name of the Connection.
-   *   Format: `projects/* /locations/* /connections/*`.
-   * @param {number} request.pageSize
-   *   Number of results to return in the list. Default to 20.
-   * @param {string} request.pageToken
-   *   Page start.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.devtools.cloudbuild.v2.Repository|Repository}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/repository_manager.fetch_linkable_repositories.js</caption>
-   * region_tag:cloudbuild_v2_generated_RepositoryManager_FetchLinkableRepositories_async
-   */
+/**
+ * Equivalent to `fetchLinkableRepositories`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.connection
+ *   Required. The name of the Connection.
+ *   Format: `projects/* /locations/* /connections/*`.
+ * @param {number} request.pageSize
+ *   Number of results to return in the list. Default to 20.
+ * @param {string} request.pageToken
+ *   Page start.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.devtools.cloudbuild.v2.Repository|Repository}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/repository_manager.fetch_linkable_repositories.js</caption>
+ * region_tag:cloudbuild_v2_generated_RepositoryManager_FetchLinkableRepositories_async
+ */
   fetchLinkableRepositoriesAsync(
-    request?: protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.devtools.cloudbuild.v2.IRepository> {
+      request?: protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.devtools.cloudbuild.v2.IRepository>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        connection: request.connection ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'connection': request.connection ?? '',
+    });
     const defaultCallSettings = this._defaults['fetchLinkableRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchLinkableRepositories iterate %j', request);
     return this.descriptors.page.fetchLinkableRepositories.asyncIterate(
       this.innerApiCalls['fetchLinkableRepositories'] as GaxCall,
@@ -2915,31 +2197,31 @@ export class RepositoryManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.cloudbuild.v2.IRepository>;
   }
-  /**
-   * Gets the access control policy for a resource. Returns an empty policy
-   * if the resource exists and does not have a policy set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {Object} [request.options]
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   *
-   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Gets the access control policy for a resource. Returns an empty policy
+ * if the resource exists and does not have a policy set.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {Object} [request.options]
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -2954,39 +2236,39 @@ export class RepositoryManagerClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -3001,40 +2283,40 @@ export class RepositoryManagerClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+  ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-  /**
-   * Returns permissions that a caller has on the specified resource. If the
-   * resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * Note: This operation is designed to be used for building
-   * permission-aware UIs and command-line tools, not for authorization
-   * checking. This operation may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   */
+/**
+ * Returns permissions that a caller has on the specified resource. If the
+ * resource does not exist, this will return an empty set of
+ * permissions, not a NOT_FOUND error.
+ *
+ * Note: This operation is designed to be used for building
+ * permission-aware UIs and command-line tools, not for authorization
+ * checking. This operation may "fail open" without warning.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+ * @param {Object} [options]
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+ * @param {function(?Error, ?Object)} [callback]
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -3049,11 +2331,11 @@ export class RepositoryManagerClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -3093,7 +2375,7 @@ export class RepositoryManagerClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -3131,7 +2413,7 @@ export class RepositoryManagerClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -3176,20 +2458,20 @@ export class RepositoryManagerClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -3226,13 +2508,13 @@ export class RepositoryManagerClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3266,7 +2548,7 @@ export class RepositoryManagerClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -3281,20 +2563,20 @@ export class RepositoryManagerClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -3338,20 +2620,20 @@ export class RepositoryManagerClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3367,7 +2649,7 @@ export class RepositoryManagerClient {
    * @param {string} connection
    * @returns {string} Resource name string.
    */
-  connectionPath(project: string, location: string, connection: string) {
+  connectionPath(project:string,location:string,connection:string) {
     return this.pathTemplates.connectionPathTemplate.render({
       project: project,
       location: location,
@@ -3383,8 +2665,7 @@ export class RepositoryManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConnectionName(connectionName: string) {
-    return this.pathTemplates.connectionPathTemplate.match(connectionName)
-      .project;
+    return this.pathTemplates.connectionPathTemplate.match(connectionName).project;
   }
 
   /**
@@ -3395,8 +2676,7 @@ export class RepositoryManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConnectionName(connectionName: string) {
-    return this.pathTemplates.connectionPathTemplate.match(connectionName)
-      .location;
+    return this.pathTemplates.connectionPathTemplate.match(connectionName).location;
   }
 
   /**
@@ -3407,8 +2687,7 @@ export class RepositoryManagerClient {
    * @returns {string} A string representing the connection.
    */
   matchConnectionFromConnectionName(connectionName: string) {
-    return this.pathTemplates.connectionPathTemplate.match(connectionName)
-      .connection;
+    return this.pathTemplates.connectionPathTemplate.match(connectionName).connection;
   }
 
   /**
@@ -3418,7 +2697,7 @@ export class RepositoryManagerClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3453,7 +2732,7 @@ export class RepositoryManagerClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -3479,12 +2758,7 @@ export class RepositoryManagerClient {
    * @param {string} repository
    * @returns {string} Resource name string.
    */
-  repositoryPath(
-    project: string,
-    location: string,
-    connection: string,
-    repository: string
-  ) {
+  repositoryPath(project:string,location:string,connection:string,repository:string) {
     return this.pathTemplates.repositoryPathTemplate.render({
       project: project,
       location: location,
@@ -3501,8 +2775,7 @@ export class RepositoryManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
-      .project;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).project;
   }
 
   /**
@@ -3513,8 +2786,7 @@ export class RepositoryManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
-      .location;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).location;
   }
 
   /**
@@ -3525,8 +2797,7 @@ export class RepositoryManagerClient {
    * @returns {string} A string representing the connection.
    */
   matchConnectionFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
-      .connection;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).connection;
   }
 
   /**
@@ -3537,8 +2808,7 @@ export class RepositoryManagerClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
-      .repository;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).repository;
   }
 
   /**
@@ -3549,7 +2819,7 @@ export class RepositoryManagerClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  secretVersionPath(project: string, secret: string, version: string) {
+  secretVersionPath(project:string,secret:string,version:string) {
     return this.pathTemplates.secretVersionPathTemplate.render({
       project: project,
       secret: secret,
@@ -3565,8 +2835,7 @@ export class RepositoryManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSecretVersionName(secretVersionName: string) {
-    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
-      .project;
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName).project;
   }
 
   /**
@@ -3577,8 +2846,7 @@ export class RepositoryManagerClient {
    * @returns {string} A string representing the secret.
    */
   matchSecretFromSecretVersionName(secretVersionName: string) {
-    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
-      .secret;
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName).secret;
   }
 
   /**
@@ -3589,8 +2857,7 @@ export class RepositoryManagerClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromSecretVersionName(secretVersionName: string) {
-    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
-      .version;
+    return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName).version;
   }
 
   /**
@@ -3602,12 +2869,7 @@ export class RepositoryManagerClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  servicePath(
-    project: string,
-    location: string,
-    namespace: string,
-    service: string
-  ) {
+  servicePath(project:string,location:string,namespace:string,service:string) {
     return this.pathTemplates.servicePathTemplate.render({
       project: project,
       location: location,
@@ -3672,12 +2934,8 @@ export class RepositoryManagerClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {
-          throw err;
-        });
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.iamClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }
