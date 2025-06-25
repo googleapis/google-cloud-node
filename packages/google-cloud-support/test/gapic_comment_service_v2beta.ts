@@ -29,1311 +29,941 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v2beta.CommentServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'cloudsupport.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          commentserviceModule.v2beta.CommentServiceClient.servicePath;
-        assert.strictEqual(servicePath, 'cloudsupport.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          commentserviceModule.v2beta.CommentServiceClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'cloudsupport.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudsupport.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'cloudsupport.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new commentserviceModule.v2beta.CommentServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'cloudsupport.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'cloudsupport.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new commentserviceModule.v2beta.CommentServiceClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'cloudsupport.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new commentserviceModule.v2beta.CommentServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = commentserviceModule.v2beta.CommentServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = commentserviceModule.v2beta.CommentServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'cloudsupport.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
 
-    it('should create a client with no option', () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.commentServiceStub, undefined);
-      await client.initialize();
-      assert(client.commentServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.commentServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.commentServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('createComment', () => {
-    it('invokes createComment without error', async () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.support.v2beta.CreateCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2beta.CreateCommentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.support.v2beta.Comment()
-      );
-      client.innerApiCalls.createComment = stubSimpleCall(expectedResponse);
-      const [response] = await client.createComment(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createComment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createComment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createComment without error using callback', async () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.support.v2beta.CreateCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2beta.CreateCommentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.support.v2beta.Comment()
-      );
-      client.innerApiCalls.createComment =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createComment(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.support.v2beta.IComment | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createComment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createComment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createComment with error', async () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.support.v2beta.CreateCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2beta.CreateCommentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createComment = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createComment(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createComment as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createComment as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createComment with closed client', async () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.support.v2beta.CreateCommentRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2beta.CreateCommentRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.createComment(request), expectedError);
-    });
-  });
-
-  describe('listComments', () => {
-    it('invokes listComments without error', async () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.support.v2beta.ListCommentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2beta.ListCommentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
-        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
-        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
-      ];
-      client.innerApiCalls.listComments = stubSimpleCall(expectedResponse);
-      const [response] = await client.listComments(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listComments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listComments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listComments without error using callback', async () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.support.v2beta.ListCommentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2beta.ListCommentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
-        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
-        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
-      ];
-      client.innerApiCalls.listComments =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listComments(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.support.v2beta.IComment[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listComments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listComments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listComments with error', async () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.support.v2beta.ListCommentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2beta.ListCommentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listComments = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listComments(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listComments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listComments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listCommentsStream without error', async () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.support.v2beta.ListCommentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2beta.ListCommentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
-        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
-        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
-      ];
-      client.descriptors.page.listComments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listCommentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.support.v2beta.Comment[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.support.v2beta.Comment) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listComments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listComments, request)
-      );
-      assert(
-        (client.descriptors.page.listComments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listCommentsStream with error', async () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.support.v2beta.ListCommentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2beta.ListCommentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listComments.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listCommentsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.support.v2beta.Comment[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.support.v2beta.Comment) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listComments.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listComments, request)
-      );
-      assert(
-        (client.descriptors.page.listComments.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listComments without error', async () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.support.v2beta.ListCommentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2beta.ListCommentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
-        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
-        generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
-      ];
-      client.descriptors.page.listComments.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.support.v2beta.IComment[] = [];
-      const iterable = client.listCommentsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listComments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listComments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listComments with error', async () => {
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.support.v2beta.ListCommentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.support.v2beta.ListCommentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listComments.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listCommentsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.support.v2beta.IComment[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = commentserviceModule.v2beta.CommentServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'cloudsupport.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listComments.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listComments.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudsupport.example.com');
+        });
 
-  describe('Path templates', () => {
-    describe('organizationCase', async () => {
-      const fakePath = '/rendered/path/organizationCase';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        case: 'caseValue',
-      };
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationCasePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationCasePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'cloudsupport.example.com');
+        });
 
-      it('organizationCasePath', () => {
-        const result = client.organizationCasePath(
-          'organizationValue',
-          'caseValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationCasePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new commentserviceModule.v2beta.CommentServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudsupport.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-      it('matchOrganizationFromOrganizationCaseName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationCaseName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (client.pathTemplates.organizationCasePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new commentserviceModule.v2beta.CommentServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'cloudsupport.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new commentserviceModule.v2beta.CommentServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-      it('matchCaseFromOrganizationCaseName', () => {
-        const result = client.matchCaseFromOrganizationCaseName(fakePath);
-        assert.strictEqual(result, 'caseValue');
-        assert(
-          (client.pathTemplates.organizationCasePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
+        it('has port', () => {
+            const port = commentserviceModule.v2beta.CommentServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-    describe('organizationCaseAttachmentId', async () => {
-      const fakePath = '/rendered/path/organizationCaseAttachmentId';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        case: 'caseValue',
-        attachment_id: 'attachmentIdValue',
-      };
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationCaseAttachmentIdPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationCaseAttachmentIdPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
+        it('should create a client with no option', () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient();
+            assert(client);
+        });
 
-      it('organizationCaseAttachmentIdPath', () => {
-        const result = client.organizationCaseAttachmentIdPath(
-          'organizationValue',
-          'caseValue',
-          'attachmentIdValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationCaseAttachmentIdPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('should create a client with gRPC fallback', () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-      it('matchOrganizationFromOrganizationCaseAttachmentIdName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationCaseAttachmentIdName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationCaseAttachmentIdPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.commentServiceStub, undefined);
+            await client.initialize();
+            assert(client.commentServiceStub);
+        });
 
-      it('matchCaseFromOrganizationCaseAttachmentIdName', () => {
-        const result =
-          client.matchCaseFromOrganizationCaseAttachmentIdName(fakePath);
-        assert.strictEqual(result, 'caseValue');
-        assert(
-          (
-            client.pathTemplates.organizationCaseAttachmentIdPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has close method for the initialized client', done => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.commentServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
 
-      it('matchAttachmentIdFromOrganizationCaseAttachmentIdName', () => {
-        const result =
-          client.matchAttachmentIdFromOrganizationCaseAttachmentIdName(
-            fakePath
-          );
-        assert.strictEqual(result, 'attachmentIdValue');
-        assert(
-          (
-            client.pathTemplates.organizationCaseAttachmentIdPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has close method for the non-initialized client', done => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.commentServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    describe('organizationCaseComment', async () => {
-      const fakePath = '/rendered/path/organizationCaseComment';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        case: 'caseValue',
-        comment: 'commentValue',
-      };
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationCaseCommentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.organizationCaseCommentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('createComment', () => {
+        it('invokes createComment without error', async () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.CreateCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.support.v2beta.CreateCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.Comment()
+            );
+            client.innerApiCalls.createComment = stubSimpleCall(expectedResponse);
+            const [response] = await client.createComment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('organizationCaseCommentPath', () => {
-        const result = client.organizationCaseCommentPath(
-          'organizationValue',
-          'caseValue',
-          'commentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationCaseCommentPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes createComment without error using callback', async () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.CreateCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.support.v2beta.CreateCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.Comment()
+            );
+            client.innerApiCalls.createComment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createComment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.support.v2beta.IComment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchOrganizationFromOrganizationCaseCommentName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationCaseCommentName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationCaseCommentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createComment with error', async () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.CreateCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.support.v2beta.CreateCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createComment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createComment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchCaseFromOrganizationCaseCommentName', () => {
-        const result =
-          client.matchCaseFromOrganizationCaseCommentName(fakePath);
-        assert.strictEqual(result, 'caseValue');
-        assert(
-          (
-            client.pathTemplates.organizationCaseCommentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCommentFromOrganizationCaseCommentName', () => {
-        const result =
-          client.matchCommentFromOrganizationCaseCommentName(fakePath);
-        assert.strictEqual(result, 'commentValue');
-        assert(
-          (
-            client.pathTemplates.organizationCaseCommentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes createComment with closed client', async () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.CreateCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.support.v2beta.CreateCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createComment(request), expectedError);
+        });
     });
 
-    describe('organizationCaseEmailMessage', async () => {
-      const fakePath = '/rendered/path/organizationCaseEmailMessage';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        case: 'caseValue',
-        email_message: 'emailMessageValue',
-      };
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.organizationCaseEmailMessagePathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.organizationCaseEmailMessagePathTemplate.match =
-        sinon.stub().returns(expectedParameters);
+    describe('listComments', () => {
+        it('invokes listComments without error', async () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.ListCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.support.v2beta.ListCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+              generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+              generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+            ];
+            client.innerApiCalls.listComments = stubSimpleCall(expectedResponse);
+            const [response] = await client.listComments(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('organizationCaseEmailMessagePath', () => {
-        const result = client.organizationCaseEmailMessagePath(
-          'organizationValue',
-          'caseValue',
-          'emailMessageValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.organizationCaseEmailMessagePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('invokes listComments without error using callback', async () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.ListCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.support.v2beta.ListCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+              generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+              generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+            ];
+            client.innerApiCalls.listComments = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listComments(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.support.v2beta.IComment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchOrganizationFromOrganizationCaseEmailMessageName', () => {
-        const result =
-          client.matchOrganizationFromOrganizationCaseEmailMessageName(
-            fakePath
-          );
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.organizationCaseEmailMessagePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listComments with error', async () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.ListCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.support.v2beta.ListCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listComments = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listComments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-      it('matchCaseFromOrganizationCaseEmailMessageName', () => {
-        const result =
-          client.matchCaseFromOrganizationCaseEmailMessageName(fakePath);
-        assert.strictEqual(result, 'caseValue');
-        assert(
-          (
-            client.pathTemplates.organizationCaseEmailMessagePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listCommentsStream without error', async () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.ListCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.support.v2beta.ListCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+              generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+              generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+            ];
+            client.descriptors.page.listComments.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listCommentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.support.v2beta.Comment[] = [];
+                stream.on('data', (response: protos.google.cloud.support.v2beta.Comment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listComments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listComments, request));
+            assert(
+                (client.descriptors.page.listComments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-      it('matchEmailMessageFromOrganizationCaseEmailMessageName', () => {
-        const result =
-          client.matchEmailMessageFromOrganizationCaseEmailMessageName(
-            fakePath
-          );
-        assert.strictEqual(result, 'emailMessageValue');
-        assert(
-          (
-            client.pathTemplates.organizationCaseEmailMessagePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('invokes listCommentsStream with error', async () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.ListCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.support.v2beta.ListCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listComments.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listCommentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.support.v2beta.Comment[] = [];
+                stream.on('data', (response: protos.google.cloud.support.v2beta.Comment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listComments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listComments, request));
+            assert(
+                (client.descriptors.page.listComments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listComments without error', async () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.ListCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.support.v2beta.ListCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+              generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+              generateSampleMessage(new protos.google.cloud.support.v2beta.Comment()),
+            ];
+            client.descriptors.page.listComments.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.support.v2beta.IComment[] = [];
+            const iterable = client.listCommentsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listComments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listComments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listComments with error', async () => {
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.support.v2beta.ListCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.support.v2beta.ListCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listComments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listCommentsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.support.v2beta.IComment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listComments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listComments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    describe('projectCase', async () => {
-      const fakePath = '/rendered/path/projectCase';
-      const expectedParameters = {
-        project: 'projectValue',
-        case: 'caseValue',
-      };
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectCasePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectCasePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('projectCasePath', () => {
-        const result = client.projectCasePath('projectValue', 'caseValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.projectCasePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('organizationCase', async () => {
+            const fakePath = "/rendered/path/organizationCase";
+            const expectedParameters = {
+                organization: "organizationValue",
+                case: "caseValue",
+            };
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationCasePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationCasePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromProjectCaseName', () => {
-        const result = client.matchProjectFromProjectCaseName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.projectCasePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('organizationCasePath', () => {
+                const result = client.organizationCasePath("organizationValue", "caseValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationCasePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchCaseFromProjectCaseName', () => {
-        const result = client.matchCaseFromProjectCaseName(fakePath);
-        assert.strictEqual(result, 'caseValue');
-        assert(
-          (client.pathTemplates.projectCasePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchOrganizationFromOrganizationCaseName', () => {
+                const result = client.matchOrganizationFromOrganizationCaseName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationCasePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCaseFromOrganizationCaseName', () => {
+                const result = client.matchCaseFromOrganizationCaseName(fakePath);
+                assert.strictEqual(result, "caseValue");
+                assert((client.pathTemplates.organizationCasePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationCaseAttachmentId', async () => {
+            const fakePath = "/rendered/path/organizationCaseAttachmentId";
+            const expectedParameters = {
+                organization: "organizationValue",
+                case: "caseValue",
+                attachment_id: "attachmentIdValue",
+            };
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationCaseAttachmentIdPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationCaseAttachmentIdPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationCaseAttachmentIdPath', () => {
+                const result = client.organizationCaseAttachmentIdPath("organizationValue", "caseValue", "attachmentIdValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationCaseAttachmentIdPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationCaseAttachmentIdName', () => {
+                const result = client.matchOrganizationFromOrganizationCaseAttachmentIdName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationCaseAttachmentIdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCaseFromOrganizationCaseAttachmentIdName', () => {
+                const result = client.matchCaseFromOrganizationCaseAttachmentIdName(fakePath);
+                assert.strictEqual(result, "caseValue");
+                assert((client.pathTemplates.organizationCaseAttachmentIdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAttachmentIdFromOrganizationCaseAttachmentIdName', () => {
+                const result = client.matchAttachmentIdFromOrganizationCaseAttachmentIdName(fakePath);
+                assert.strictEqual(result, "attachmentIdValue");
+                assert((client.pathTemplates.organizationCaseAttachmentIdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationCaseComment', async () => {
+            const fakePath = "/rendered/path/organizationCaseComment";
+            const expectedParameters = {
+                organization: "organizationValue",
+                case: "caseValue",
+                comment: "commentValue",
+            };
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationCaseCommentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationCaseCommentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationCaseCommentPath', () => {
+                const result = client.organizationCaseCommentPath("organizationValue", "caseValue", "commentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationCaseCommentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationCaseCommentName', () => {
+                const result = client.matchOrganizationFromOrganizationCaseCommentName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationCaseCommentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCaseFromOrganizationCaseCommentName', () => {
+                const result = client.matchCaseFromOrganizationCaseCommentName(fakePath);
+                assert.strictEqual(result, "caseValue");
+                assert((client.pathTemplates.organizationCaseCommentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCommentFromOrganizationCaseCommentName', () => {
+                const result = client.matchCommentFromOrganizationCaseCommentName(fakePath);
+                assert.strictEqual(result, "commentValue");
+                assert((client.pathTemplates.organizationCaseCommentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationCaseEmailMessages', async () => {
+            const fakePath = "/rendered/path/organizationCaseEmailMessages";
+            const expectedParameters = {
+                organization: "organizationValue",
+                case: "caseValue",
+                email_message: "emailMessageValue",
+            };
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationCaseEmailMessagesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationCaseEmailMessagesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationCaseEmailMessagesPath', () => {
+                const result = client.organizationCaseEmailMessagesPath("organizationValue", "caseValue", "emailMessageValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationCaseEmailMessagesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationCaseEmailMessagesName', () => {
+                const result = client.matchOrganizationFromOrganizationCaseEmailMessagesName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationCaseEmailMessagesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCaseFromOrganizationCaseEmailMessagesName', () => {
+                const result = client.matchCaseFromOrganizationCaseEmailMessagesName(fakePath);
+                assert.strictEqual(result, "caseValue");
+                assert((client.pathTemplates.organizationCaseEmailMessagesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEmailMessageFromOrganizationCaseEmailMessagesName', () => {
+                const result = client.matchEmailMessageFromOrganizationCaseEmailMessagesName(fakePath);
+                assert.strictEqual(result, "emailMessageValue");
+                assert((client.pathTemplates.organizationCaseEmailMessagesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectCase', async () => {
+            const fakePath = "/rendered/path/projectCase";
+            const expectedParameters = {
+                project: "projectValue",
+                case: "caseValue",
+            };
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectCasePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectCasePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectCasePath', () => {
+                const result = client.projectCasePath("projectValue", "caseValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectCasePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectCaseName', () => {
+                const result = client.matchProjectFromProjectCaseName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectCasePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCaseFromProjectCaseName', () => {
+                const result = client.matchCaseFromProjectCaseName(fakePath);
+                assert.strictEqual(result, "caseValue");
+                assert((client.pathTemplates.projectCasePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectCaseAttachmentId', async () => {
+            const fakePath = "/rendered/path/projectCaseAttachmentId";
+            const expectedParameters = {
+                project: "projectValue",
+                case: "caseValue",
+                attachment_id: "attachmentIdValue",
+            };
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectCaseAttachmentIdPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectCaseAttachmentIdPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectCaseAttachmentIdPath', () => {
+                const result = client.projectCaseAttachmentIdPath("projectValue", "caseValue", "attachmentIdValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectCaseAttachmentIdPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectCaseAttachmentIdName', () => {
+                const result = client.matchProjectFromProjectCaseAttachmentIdName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectCaseAttachmentIdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCaseFromProjectCaseAttachmentIdName', () => {
+                const result = client.matchCaseFromProjectCaseAttachmentIdName(fakePath);
+                assert.strictEqual(result, "caseValue");
+                assert((client.pathTemplates.projectCaseAttachmentIdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAttachmentIdFromProjectCaseAttachmentIdName', () => {
+                const result = client.matchAttachmentIdFromProjectCaseAttachmentIdName(fakePath);
+                assert.strictEqual(result, "attachmentIdValue");
+                assert((client.pathTemplates.projectCaseAttachmentIdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectCaseComment', async () => {
+            const fakePath = "/rendered/path/projectCaseComment";
+            const expectedParameters = {
+                project: "projectValue",
+                case: "caseValue",
+                comment: "commentValue",
+            };
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectCaseCommentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectCaseCommentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectCaseCommentPath', () => {
+                const result = client.projectCaseCommentPath("projectValue", "caseValue", "commentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectCaseCommentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectCaseCommentName', () => {
+                const result = client.matchProjectFromProjectCaseCommentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectCaseCommentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCaseFromProjectCaseCommentName', () => {
+                const result = client.matchCaseFromProjectCaseCommentName(fakePath);
+                assert.strictEqual(result, "caseValue");
+                assert((client.pathTemplates.projectCaseCommentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCommentFromProjectCaseCommentName', () => {
+                const result = client.matchCommentFromProjectCaseCommentName(fakePath);
+                assert.strictEqual(result, "commentValue");
+                assert((client.pathTemplates.projectCaseCommentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectCaseEmailMessages', async () => {
+            const fakePath = "/rendered/path/projectCaseEmailMessages";
+            const expectedParameters = {
+                project: "projectValue",
+                case: "caseValue",
+                email_message: "emailMessageValue",
+            };
+            const client = new commentserviceModule.v2beta.CommentServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectCaseEmailMessagesPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectCaseEmailMessagesPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectCaseEmailMessagesPath', () => {
+                const result = client.projectCaseEmailMessagesPath("projectValue", "caseValue", "emailMessageValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectCaseEmailMessagesPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectCaseEmailMessagesName', () => {
+                const result = client.matchProjectFromProjectCaseEmailMessagesName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectCaseEmailMessagesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCaseFromProjectCaseEmailMessagesName', () => {
+                const result = client.matchCaseFromProjectCaseEmailMessagesName(fakePath);
+                assert.strictEqual(result, "caseValue");
+                assert((client.pathTemplates.projectCaseEmailMessagesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEmailMessageFromProjectCaseEmailMessagesName', () => {
+                const result = client.matchEmailMessageFromProjectCaseEmailMessagesName(fakePath);
+                assert.strictEqual(result, "emailMessageValue");
+                assert((client.pathTemplates.projectCaseEmailMessagesPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('projectCaseAttachmentId', async () => {
-      const fakePath = '/rendered/path/projectCaseAttachmentId';
-      const expectedParameters = {
-        project: 'projectValue',
-        case: 'caseValue',
-        attachment_id: 'attachmentIdValue',
-      };
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectCaseAttachmentIdPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectCaseAttachmentIdPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectCaseAttachmentIdPath', () => {
-        const result = client.projectCaseAttachmentIdPath(
-          'projectValue',
-          'caseValue',
-          'attachmentIdValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectCaseAttachmentIdPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectCaseAttachmentIdName', () => {
-        const result =
-          client.matchProjectFromProjectCaseAttachmentIdName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectCaseAttachmentIdPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCaseFromProjectCaseAttachmentIdName', () => {
-        const result =
-          client.matchCaseFromProjectCaseAttachmentIdName(fakePath);
-        assert.strictEqual(result, 'caseValue');
-        assert(
-          (
-            client.pathTemplates.projectCaseAttachmentIdPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAttachmentIdFromProjectCaseAttachmentIdName', () => {
-        const result =
-          client.matchAttachmentIdFromProjectCaseAttachmentIdName(fakePath);
-        assert.strictEqual(result, 'attachmentIdValue');
-        assert(
-          (
-            client.pathTemplates.projectCaseAttachmentIdPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectCaseComment', async () => {
-      const fakePath = '/rendered/path/projectCaseComment';
-      const expectedParameters = {
-        project: 'projectValue',
-        case: 'caseValue',
-        comment: 'commentValue',
-      };
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectCaseCommentPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectCaseCommentPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectCaseCommentPath', () => {
-        const result = client.projectCaseCommentPath(
-          'projectValue',
-          'caseValue',
-          'commentValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectCaseCommentPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectCaseCommentName', () => {
-        const result = client.matchProjectFromProjectCaseCommentName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectCaseCommentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCaseFromProjectCaseCommentName', () => {
-        const result = client.matchCaseFromProjectCaseCommentName(fakePath);
-        assert.strictEqual(result, 'caseValue');
-        assert(
-          (
-            client.pathTemplates.projectCaseCommentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCommentFromProjectCaseCommentName', () => {
-        const result = client.matchCommentFromProjectCaseCommentName(fakePath);
-        assert.strictEqual(result, 'commentValue');
-        assert(
-          (
-            client.pathTemplates.projectCaseCommentPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('projectCaseEmailMessage', async () => {
-      const fakePath = '/rendered/path/projectCaseEmailMessage';
-      const expectedParameters = {
-        project: 'projectValue',
-        case: 'caseValue',
-        email_message: 'emailMessageValue',
-      };
-      const client = new commentserviceModule.v2beta.CommentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.projectCaseEmailMessagePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectCaseEmailMessagePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('projectCaseEmailMessagePath', () => {
-        const result = client.projectCaseEmailMessagePath(
-          'projectValue',
-          'caseValue',
-          'emailMessageValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.projectCaseEmailMessagePathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromProjectCaseEmailMessageName', () => {
-        const result =
-          client.matchProjectFromProjectCaseEmailMessageName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.projectCaseEmailMessagePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCaseFromProjectCaseEmailMessageName', () => {
-        const result =
-          client.matchCaseFromProjectCaseEmailMessageName(fakePath);
-        assert.strictEqual(result, 'caseValue');
-        assert(
-          (
-            client.pathTemplates.projectCaseEmailMessagePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchEmailMessageFromProjectCaseEmailMessageName', () => {
-        const result =
-          client.matchEmailMessageFromProjectCaseEmailMessageName(fakePath);
-        assert.strictEqual(result, 'emailMessageValue');
-        assert(
-          (
-            client.pathTemplates.projectCaseEmailMessagePathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

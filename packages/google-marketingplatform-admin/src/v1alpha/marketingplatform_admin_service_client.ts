@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,42 +100,20 @@ export class MarketingplatformAdminServiceClient {
    *     const client = new MarketingplatformAdminServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof MarketingplatformAdminServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof MarketingplatformAdminServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'marketingplatformadmin.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +139,7 @@ export class MarketingplatformAdminServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +153,10 @@ export class MarketingplatformAdminServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -218,20 +192,14 @@ export class MarketingplatformAdminServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAnalyticsAccountLinks: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'analyticsAccountLinks'
-      ),
+      listAnalyticsAccountLinks:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'analyticsAccountLinks')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.marketingplatform.admin.v1alpha.MarketingplatformAdminService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.marketingplatform.admin.v1alpha.MarketingplatformAdminService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -262,42 +230,32 @@ export class MarketingplatformAdminServiceClient {
     // Put together the "service stub" for
     // google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.
     this.marketingplatformAdminServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.marketingplatform.admin.v1alpha.MarketingplatformAdminService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.marketingplatform.admin.v1alpha
-            .MarketingplatformAdminService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.marketingplatform.admin.v1alpha.MarketingplatformAdminService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.marketingplatform.admin.v1alpha.MarketingplatformAdminService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const marketingplatformAdminServiceStubMethods = [
-      'getOrganization',
-      'listAnalyticsAccountLinks',
-      'createAnalyticsAccountLink',
-      'deleteAnalyticsAccountLink',
-      'setPropertyServiceLevel',
-    ];
+    const marketingplatformAdminServiceStubMethods =
+        ['getOrganization', 'listAnalyticsAccountLinks', 'createAnalyticsAccountLink', 'deleteAnalyticsAccountLink', 'setPropertyServiceLevel'];
     for (const methodName of marketingplatformAdminServiceStubMethods) {
       const callPromise = this.marketingplatformAdminServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -317,14 +275,8 @@ export class MarketingplatformAdminServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'marketingplatformadmin.googleapis.com';
   }
@@ -335,14 +287,8 @@ export class MarketingplatformAdminServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'marketingplatformadmin.googleapis.com';
   }
@@ -375,7 +321,7 @@ export class MarketingplatformAdminServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/marketingplatformadmin.analytics.read',
-      'https://www.googleapis.com/auth/marketingplatformadmin.analytics.update',
+      'https://www.googleapis.com/auth/marketingplatformadmin.analytics.update'
     ];
   }
 
@@ -385,9 +331,8 @@ export class MarketingplatformAdminServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -398,656 +343,499 @@ export class MarketingplatformAdminServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Lookup for a single organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Organization to retrieve.
-   *   Format: organizations/{org_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.Organization|Organization}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.get_organization.js</caption>
-   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_GetOrganization_async
-   */
+/**
+ * Lookup for a single organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Organization to retrieve.
+ *   Format: organizations/{org_id}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.Organization|Organization}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.get_organization.js</caption>
+ * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_GetOrganization_async
+ */
   getOrganization(
-    request?: protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.marketingplatform.admin.v1alpha.IOrganization,
-      (
-        | protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.marketingplatform.admin.v1alpha.IOrganization,
+        protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest|undefined, {}|undefined
+      ]>;
   getOrganization(
-    request: protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.marketingplatform.admin.v1alpha.IOrganization,
-      | protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOrganization(
-    request: protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest,
-    callback: Callback<
-      protos.google.marketingplatform.admin.v1alpha.IOrganization,
-      | protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOrganization(
-    request?: protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.marketingplatform.admin.v1alpha.IOrganization,
-          | protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.marketingplatform.admin.v1alpha.IOrganization,
-      | protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.marketingplatform.admin.v1alpha.IOrganization,
-      (
-        | protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOrganization(
+      request: protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest,
+      callback: Callback<
+          protos.google.marketingplatform.admin.v1alpha.IOrganization,
+          protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOrganization(
+      request?: protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.marketingplatform.admin.v1alpha.IOrganization,
+          protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.marketingplatform.admin.v1alpha.IOrganization,
+          protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.marketingplatform.admin.v1alpha.IOrganization,
+        protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getOrganization request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.marketingplatform.admin.v1alpha.IOrganization,
-          | protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.marketingplatform.admin.v1alpha.IOrganization,
+        protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getOrganization response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getOrganization(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.marketingplatform.admin.v1alpha.IOrganization,
-          (
-            | protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getOrganization response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getOrganization(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.marketingplatform.admin.v1alpha.IOrganization,
+        protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getOrganization response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates the link between the Analytics account and the Google Marketing
-   * Platform organization.
-   *
-   * User needs to be an org user, and admin on the Analytics account to create
-   * the link. If the account is already linked to an organization, user needs
-   * to unlink the account from the current organization, then try link again.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this Analytics account link will be
-   *   created. Format: organizations/{org_id}
-   * @param {google.marketingplatform.admin.v1alpha.AnalyticsAccountLink} request.analyticsAccountLink
-   *   Required. The Analytics account link to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.AnalyticsAccountLink|AnalyticsAccountLink}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.create_analytics_account_link.js</caption>
-   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_CreateAnalyticsAccountLink_async
-   */
+/**
+ * Creates the link between the Analytics account and the Google Marketing
+ * Platform organization.
+ *
+ * User needs to be an org user, and admin on the Analytics account to create
+ * the link. If the account is already linked to an organization, user needs
+ * to unlink the account from the current organization, then try link again.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this Analytics account link will be
+ *   created. Format: organizations/{org_id}
+ * @param {google.marketingplatform.admin.v1alpha.AnalyticsAccountLink} request.analyticsAccountLink
+ *   Required. The Analytics account link to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.AnalyticsAccountLink|AnalyticsAccountLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.create_analytics_account_link.js</caption>
+ * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_CreateAnalyticsAccountLink_async
+ */
   createAnalyticsAccountLink(
-    request?: protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
-      (
-        | protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
+        protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest|undefined, {}|undefined
+      ]>;
   createAnalyticsAccountLink(
-    request: protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
-      | protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createAnalyticsAccountLink(
-    request: protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest,
-    callback: Callback<
-      protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
-      | protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createAnalyticsAccountLink(
-    request?: protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
-          | protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
-      | protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
-      (
-        | protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  createAnalyticsAccountLink(
+      request: protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest,
+      callback: Callback<
+          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
+          protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  createAnalyticsAccountLink(
+      request?: protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
+          protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
+          protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
+        protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createAnalyticsAccountLink request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
-          | protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
+        protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createAnalyticsAccountLink response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createAnalyticsAccountLink(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
-          (
-            | protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createAnalyticsAccountLink response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createAnalyticsAccountLink(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
+        protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createAnalyticsAccountLink response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes the AnalyticsAccountLink, which detaches the Analytics account from
-   * the Google Marketing Platform organization.
-   *
-   * User needs to be an org user, and admin on the Analytics account in order
-   * to delete the link.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Analytics account link to delete.
-   *   Format:
-   *   organizations/{org_id}/analyticsAccountLinks/{analytics_account_link_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.delete_analytics_account_link.js</caption>
-   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_DeleteAnalyticsAccountLink_async
-   */
+/**
+ * Deletes the AnalyticsAccountLink, which detaches the Analytics account from
+ * the Google Marketing Platform organization.
+ *
+ * User needs to be an org user, and admin on the Analytics account in order
+ * to delete the link.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Analytics account link to delete.
+ *   Format:
+ *   organizations/{org_id}/analyticsAccountLinks/{analytics_account_link_id}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.delete_analytics_account_link.js</caption>
+ * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_DeleteAnalyticsAccountLink_async
+ */
   deleteAnalyticsAccountLink(
-    request?: protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest|undefined, {}|undefined
+      ]>;
   deleteAnalyticsAccountLink(
-    request: protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAnalyticsAccountLink(
-    request: protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteAnalyticsAccountLink(
-    request?: protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAnalyticsAccountLink(
+      request: protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteAnalyticsAccountLink(
+      request?: protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteAnalyticsAccountLink request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteAnalyticsAccountLink response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteAnalyticsAccountLink(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAnalyticsAccountLink response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteAnalyticsAccountLink(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteAnalyticsAccountLink response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the service level for an Analytics property.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.analyticsAccountLink
-   *   Required. The parent AnalyticsAccountLink scope where this property is in.
-   *   Format:
-   *   organizations/{org_id}/analyticsAccountLinks/{analytics_account_link_id}
-   * @param {string} request.analyticsProperty
-   *   Required. The Analytics property to change the ServiceLevel setting. This
-   *   field is the name of the Google Analytics Admin API property resource.
-   *
-   *   Format: analyticsadmin.googleapis.com/properties/{property_id}
-   * @param {google.marketingplatform.admin.v1alpha.AnalyticsServiceLevel} request.serviceLevel
-   *   Required. The service level to set for this property.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.SetPropertyServiceLevelResponse|SetPropertyServiceLevelResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.set_property_service_level.js</caption>
-   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_SetPropertyServiceLevel_async
-   */
+/**
+ * Updates the service level for an Analytics property.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.analyticsAccountLink
+ *   Required. The parent AnalyticsAccountLink scope where this property is in.
+ *   Format:
+ *   organizations/{org_id}/analyticsAccountLinks/{analytics_account_link_id}
+ * @param {string} request.analyticsProperty
+ *   Required. The Analytics property to change the ServiceLevel setting. This
+ *   field is the name of the Google Analytics Admin API property resource.
+ *
+ *   Format: analyticsadmin.googleapis.com/properties/{property_id}
+ * @param {google.marketingplatform.admin.v1alpha.AnalyticsServiceLevel} request.serviceLevel
+ *   Required. The service level to set for this property.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.marketingplatform.admin.v1alpha.SetPropertyServiceLevelResponse|SetPropertyServiceLevelResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.set_property_service_level.js</caption>
+ * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_SetPropertyServiceLevel_async
+ */
   setPropertyServiceLevel(
-    request?: protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
-      (
-        | protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
+        protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest|undefined, {}|undefined
+      ]>;
   setPropertyServiceLevel(
-    request: protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
-      | protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setPropertyServiceLevel(
-    request: protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest,
-    callback: Callback<
-      protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
-      | protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setPropertyServiceLevel(
-    request?: protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
-          | protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
-      | protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
-      (
-        | protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest|null|undefined,
+          {}|null|undefined>): void;
+  setPropertyServiceLevel(
+      request: protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest,
+      callback: Callback<
+          protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
+          protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest|null|undefined,
+          {}|null|undefined>): void;
+  setPropertyServiceLevel(
+      request?: protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
+          protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
+          protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
+        protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        analytics_account_link: request.analyticsAccountLink ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'analytics_account_link': request.analyticsAccountLink ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setPropertyServiceLevel request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
-          | protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
+        protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setPropertyServiceLevel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setPropertyServiceLevel(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
-          (
-            | protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('setPropertyServiceLevel response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setPropertyServiceLevel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
+        protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setPropertyServiceLevel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists the Google Analytics accounts link to the specified Google Marketing
-   * Platform organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent organization, which owns this collection of Analytics
-   *   account links. Format: organizations/{org_id}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of Analytics account links to return in one
-   *   call. The service may return fewer than this value.
-   *
-   *   If unspecified, at most 50 Analytics account links will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous ListAnalyticsAccountLinks
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListAnalyticsAccountLinks` must match the call that provided the page
-   *   token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.marketingplatform.admin.v1alpha.AnalyticsAccountLink|AnalyticsAccountLink}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAnalyticsAccountLinksAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the Google Analytics accounts link to the specified Google Marketing
+ * Platform organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent organization, which owns this collection of Analytics
+ *   account links. Format: organizations/{org_id}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of Analytics account links to return in one
+ *   call. The service may return fewer than this value.
+ *
+ *   If unspecified, at most 50 Analytics account links will be returned. The
+ *   maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous ListAnalyticsAccountLinks
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListAnalyticsAccountLinks` must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.marketingplatform.admin.v1alpha.AnalyticsAccountLink|AnalyticsAccountLink}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAnalyticsAccountLinksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAnalyticsAccountLinks(
-    request?: protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink[],
-      protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest | null,
-      protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse,
-    ]
-  >;
+      request?: protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink[],
+        protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest|null,
+        protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse
+      ]>;
   listAnalyticsAccountLinks(
-    request: protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
-      | protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse
-      | null
-      | undefined,
-      protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink
-    >
-  ): void;
-  listAnalyticsAccountLinks(
-    request: protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
-    callback: PaginationCallback<
-      protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
-      | protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse
-      | null
-      | undefined,
-      protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink
-    >
-  ): void;
-  listAnalyticsAccountLinks(
-    request?: protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
-          | protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse
-          | null
-          | undefined,
-          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink
-        >,
-    callback?: PaginationCallback<
-      protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
-      | protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse
-      | null
-      | undefined,
-      protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink
-    >
-  ): Promise<
-    [
-      protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink[],
-      protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest | null,
-      protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse,
-    ]
-  > | void {
+          protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse|null|undefined,
+          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink>): void;
+  listAnalyticsAccountLinks(
+      request: protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
+      callback: PaginationCallback<
+          protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
+          protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse|null|undefined,
+          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink>): void;
+  listAnalyticsAccountLinks(
+      request?: protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
+          protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse|null|undefined,
+          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink>,
+      callback?: PaginationCallback<
+          protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
+          protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse|null|undefined,
+          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink>):
+      Promise<[
+        protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink[],
+        protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest|null,
+        protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
-          | protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse
-          | null
-          | undefined,
-          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
+      protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse|null|undefined,
+      protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAnalyticsAccountLinks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1056,66 +844,63 @@ export class MarketingplatformAdminServiceClient {
     this._log.info('listAnalyticsAccountLinks request %j', request);
     return this.innerApiCalls
       .listAnalyticsAccountLinks(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink[],
-          protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest | null,
-          protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse,
-        ]) => {
-          this._log.info('listAnalyticsAccountLinks values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink[],
+        protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest|null,
+        protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse
+      ]) => {
+        this._log.info('listAnalyticsAccountLinks values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAnalyticsAccountLinks`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent organization, which owns this collection of Analytics
-   *   account links. Format: organizations/{org_id}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of Analytics account links to return in one
-   *   call. The service may return fewer than this value.
-   *
-   *   If unspecified, at most 50 Analytics account links will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous ListAnalyticsAccountLinks
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListAnalyticsAccountLinks` must match the call that provided the page
-   *   token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.marketingplatform.admin.v1alpha.AnalyticsAccountLink|AnalyticsAccountLink} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAnalyticsAccountLinksAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAnalyticsAccountLinks`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent organization, which owns this collection of Analytics
+ *   account links. Format: organizations/{org_id}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of Analytics account links to return in one
+ *   call. The service may return fewer than this value.
+ *
+ *   If unspecified, at most 50 Analytics account links will be returned. The
+ *   maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous ListAnalyticsAccountLinks
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListAnalyticsAccountLinks` must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.marketingplatform.admin.v1alpha.AnalyticsAccountLink|AnalyticsAccountLink} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAnalyticsAccountLinksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAnalyticsAccountLinksStream(
-    request?: protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAnalyticsAccountLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAnalyticsAccountLinks stream %j', request);
     return this.descriptors.page.listAnalyticsAccountLinks.createStream(
       this.innerApiCalls.listAnalyticsAccountLinks as GaxCall,
@@ -1124,57 +909,56 @@ export class MarketingplatformAdminServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listAnalyticsAccountLinks`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent organization, which owns this collection of Analytics
-   *   account links. Format: organizations/{org_id}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of Analytics account links to return in one
-   *   call. The service may return fewer than this value.
-   *
-   *   If unspecified, at most 50 Analytics account links will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous ListAnalyticsAccountLinks
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   `ListAnalyticsAccountLinks` must match the call that provided the page
-   *   token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.marketingplatform.admin.v1alpha.AnalyticsAccountLink|AnalyticsAccountLink}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.list_analytics_account_links.js</caption>
-   * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_ListAnalyticsAccountLinks_async
-   */
+/**
+ * Equivalent to `listAnalyticsAccountLinks`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent organization, which owns this collection of Analytics
+ *   account links. Format: organizations/{org_id}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of Analytics account links to return in one
+ *   call. The service may return fewer than this value.
+ *
+ *   If unspecified, at most 50 Analytics account links will be returned. The
+ *   maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous ListAnalyticsAccountLinks
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   `ListAnalyticsAccountLinks` must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.marketingplatform.admin.v1alpha.AnalyticsAccountLink|AnalyticsAccountLink}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1alpha/marketingplatform_admin_service.list_analytics_account_links.js</caption>
+ * region_tag:marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_ListAnalyticsAccountLinks_async
+ */
   listAnalyticsAccountLinksAsync(
-    request?: protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink> {
+      request?: protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAnalyticsAccountLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAnalyticsAccountLinks iterate %j', request);
     return this.descriptors.page.listAnalyticsAccountLinks.asyncIterate(
       this.innerApiCalls['listAnalyticsAccountLinks'] as GaxCall,
@@ -1193,7 +977,7 @@ export class MarketingplatformAdminServiceClient {
    * @param {string} analytics_account_link
    * @returns {string} Resource name string.
    */
-  analyticsAccountLinkPath(organization: string, analyticsAccountLink: string) {
+  analyticsAccountLinkPath(organization:string,analyticsAccountLink:string) {
     return this.pathTemplates.analyticsAccountLinkPathTemplate.render({
       organization: organization,
       analytics_account_link: analyticsAccountLink,
@@ -1207,12 +991,8 @@ export class MarketingplatformAdminServiceClient {
    *   A fully-qualified path representing AnalyticsAccountLink resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromAnalyticsAccountLinkName(
-    analyticsAccountLinkName: string
-  ) {
-    return this.pathTemplates.analyticsAccountLinkPathTemplate.match(
-      analyticsAccountLinkName
-    ).organization;
+  matchOrganizationFromAnalyticsAccountLinkName(analyticsAccountLinkName: string) {
+    return this.pathTemplates.analyticsAccountLinkPathTemplate.match(analyticsAccountLinkName).organization;
   }
 
   /**
@@ -1222,12 +1002,8 @@ export class MarketingplatformAdminServiceClient {
    *   A fully-qualified path representing AnalyticsAccountLink resource.
    * @returns {string} A string representing the analytics_account_link.
    */
-  matchAnalyticsAccountLinkFromAnalyticsAccountLinkName(
-    analyticsAccountLinkName: string
-  ) {
-    return this.pathTemplates.analyticsAccountLinkPathTemplate.match(
-      analyticsAccountLinkName
-    ).analytics_account_link;
+  matchAnalyticsAccountLinkFromAnalyticsAccountLinkName(analyticsAccountLinkName: string) {
+    return this.pathTemplates.analyticsAccountLinkPathTemplate.match(analyticsAccountLinkName).analytics_account_link;
   }
 
   /**
@@ -1236,7 +1012,7 @@ export class MarketingplatformAdminServiceClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization: string) {
+  organizationPath(organization:string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -1250,8 +1026,7 @@ export class MarketingplatformAdminServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName)
-      .organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
   }
 
   /**
@@ -1260,7 +1035,7 @@ export class MarketingplatformAdminServiceClient {
    * @param {string} property
    * @returns {string} Resource name string.
    */
-  propertyPath(property: string) {
+  propertyPath(property:string) {
     return this.pathTemplates.propertyPathTemplate.render({
       property: property,
     });

@@ -29,462 +29,382 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubServerStreamingCall<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // write something to the stream to trigger transformStub and send the response back to the client
-  setImmediate(() => {
-    mockStream.write({});
-  });
-  setImmediate(() => {
-    mockStream.end();
-  });
-  return sinon.stub().returns(mockStream);
+function stubServerStreamingCall<ResponseType>(response?: ResponseType, error?: Error) {
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // write something to the stream to trigger transformStub and send the response back to the client
+    setImmediate(() => { mockStream.write({}); });
+    setImmediate(() => { mockStream.end(); });
+    return sinon.stub().returns(mockStream);
 }
 
 describe('v2.RoutesClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new routesModule.v2.RoutesClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'routes.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new routesModule.v2.RoutesClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = routesModule.v2.RoutesClient.servicePath;
-        assert.strictEqual(servicePath, 'routes.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = routesModule.v2.RoutesClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'routes.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new routesModule.v2.RoutesClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'routes.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new routesModule.v2.RoutesClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'routes.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new routesModule.v2.RoutesClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'routes.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new routesModule.v2.RoutesClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'routes.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new routesModule.v2.RoutesClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'routes.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new routesModule.v2.RoutesClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new routesModule.v2.RoutesClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = routesModule.v2.RoutesClient.servicePath;
+                assert.strictEqual(servicePath, 'routes.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = routesModule.v2.RoutesClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'routes.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new routesModule.v2.RoutesClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'routes.example.com');
         });
-      });
-    });
 
-    it('has port', () => {
-      const port = routesModule.v2.RoutesClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new routesModule.v2.RoutesClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'routes.example.com');
+        });
 
-    it('should create a client with no option', () => {
-      const client = new routesModule.v2.RoutesClient();
-      assert(client);
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new routesModule.v2.RoutesClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'routes.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('should create a client with gRPC fallback', () => {
-      const client = new routesModule.v2.RoutesClient({
-        fallback: true,
-      });
-      assert(client);
-    });
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new routesModule.v2.RoutesClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'routes.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new routesModule.v2.RoutesClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new routesModule.v2.RoutesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.routesStub, undefined);
-      await client.initialize();
-      assert(client.routesStub);
-    });
+        it('has port', () => {
+            const port = routesModule.v2.RoutesClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-    it('has close method for the initialized client', done => {
-      const client = new routesModule.v2.RoutesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.routesStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+        it('should create a client with no option', () => {
+            const client = new routesModule.v2.RoutesClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new routesModule.v2.RoutesClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new routesModule.v2.RoutesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.routesStub, undefined);
+            await client.initialize();
+            assert(client.routesStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new routesModule.v2.RoutesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.routesStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new routesModule.v2.RoutesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.routesStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new routesModule.v2.RoutesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new routesModule.v2.RoutesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
         });
     });
 
-    it('has close method for the non-initialized client', done => {
-      const client = new routesModule.v2.RoutesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.routesStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+    describe('computeRoutes', () => {
+        it('invokes computeRoutes without error', async () => {
+            const client = new routesModule.v2.RoutesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routing.v2.ComputeRoutesRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.maps.routing.v2.ComputeRoutesResponse()
+            );
+            client.innerApiCalls.computeRoutes = stubSimpleCall(expectedResponse);
+            const [response] = await client.computeRoutes(request);
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes computeRoutes without error using callback', async () => {
+            const client = new routesModule.v2.RoutesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routing.v2.ComputeRoutesRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.maps.routing.v2.ComputeRoutesResponse()
+            );
+            client.innerApiCalls.computeRoutes = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.computeRoutes(
+                    request,
+                    (err?: Error|null, result?: protos.google.maps.routing.v2.IComputeRoutesResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes computeRoutes with error', async () => {
+            const client = new routesModule.v2.RoutesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routing.v2.ComputeRoutesRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.computeRoutes = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.computeRoutes(request), expectedError);
+        });
+
+        it('invokes computeRoutes with closed client', async () => {
+            const client = new routesModule.v2.RoutesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routing.v2.ComputeRoutesRequest()
+            );
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.computeRoutes(request), expectedError);
         });
     });
 
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new routesModule.v2.RoutesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new routesModule.v2.RoutesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
+    describe('computeRouteMatrix', () => {
+        it('invokes computeRouteMatrix without error', async () => {
+            const client = new routesModule.v2.RoutesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routing.v2.ComputeRouteMatrixRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.maps.routing.v2.RouteMatrixElement()
+            );
+            client.innerApiCalls.computeRouteMatrix = stubServerStreamingCall(expectedResponse);
+            const stream = client.computeRouteMatrix(request);
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.maps.routing.v2.RouteMatrixElement) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
         });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
 
-  describe('computeRoutes', () => {
-    it('invokes computeRoutes without error', async () => {
-      const client = new routesModule.v2.RoutesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.routing.v2.ComputeRoutesRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.maps.routing.v2.ComputeRoutesResponse()
-      );
-      client.innerApiCalls.computeRoutes = stubSimpleCall(expectedResponse);
-      const [response] = await client.computeRoutes(request);
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes computeRoutes without error using callback', async () => {
-      const client = new routesModule.v2.RoutesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.routing.v2.ComputeRoutesRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.maps.routing.v2.ComputeRoutesResponse()
-      );
-      client.innerApiCalls.computeRoutes =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.computeRoutes(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.maps.routing.v2.IComputeRoutesResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes computeRoutes with error', async () => {
-      const client = new routesModule.v2.RoutesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.routing.v2.ComputeRoutesRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.computeRoutes = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.computeRoutes(request), expectedError);
-    });
-
-    it('invokes computeRoutes with closed client', async () => {
-      const client = new routesModule.v2.RoutesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.routing.v2.ComputeRoutesRequest()
-      );
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.computeRoutes(request), expectedError);
-    });
-  });
-
-  describe('computeRouteMatrix', () => {
-    it('invokes computeRouteMatrix without error', async () => {
-      const client = new routesModule.v2.RoutesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.routing.v2.ComputeRouteMatrixRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.maps.routing.v2.RouteMatrixElement()
-      );
-      client.innerApiCalls.computeRouteMatrix =
-        stubServerStreamingCall(expectedResponse);
-      const stream = client.computeRouteMatrix(request);
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (response: protos.google.maps.routing.v2.RouteMatrixElement) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
+        it('invokes computeRouteMatrix without error and gaxServerStreamingRetries enabled', async () => {
+            const client = new routesModule.v2.RoutesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+              gaxServerStreamingRetries: true
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routing.v2.ComputeRouteMatrixRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.maps.routing.v2.RouteMatrixElement()
+            );
+            client.innerApiCalls.computeRouteMatrix = stubServerStreamingCall(expectedResponse);
+            const stream = client.computeRouteMatrix(request);
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.maps.routing.v2.RouteMatrixElement) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
         });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
 
-    it('invokes computeRouteMatrix without error and gaxServerStreamingRetries enabled', async () => {
-      const client = new routesModule.v2.RoutesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-        gaxServerStreamingRetries: true,
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.routing.v2.ComputeRouteMatrixRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.maps.routing.v2.RouteMatrixElement()
-      );
-      client.innerApiCalls.computeRouteMatrix =
-        stubServerStreamingCall(expectedResponse);
-      const stream = client.computeRouteMatrix(request);
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (response: protos.google.maps.routing.v2.RouteMatrixElement) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
+        it('invokes computeRouteMatrix with error', async () => {
+            const client = new routesModule.v2.RoutesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routing.v2.ComputeRouteMatrixRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.computeRouteMatrix = stubServerStreamingCall(undefined, expectedError);
+            const stream = client.computeRouteMatrix(request);
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.maps.routing.v2.RouteMatrixElement) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
         });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
 
-    it('invokes computeRouteMatrix with error', async () => {
-      const client = new routesModule.v2.RoutesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.routing.v2.ComputeRouteMatrixRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.computeRouteMatrix = stubServerStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.computeRouteMatrix(request);
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (response: protos.google.maps.routing.v2.RouteMatrixElement) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
+        it('invokes computeRouteMatrix with closed client', async () => {
+            const client = new routesModule.v2.RoutesClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routing.v2.ComputeRouteMatrixRequest()
+            );
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            const stream = client.computeRouteMatrix(request, {retryRequestOptions: {noResponseRetries: 0}});
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.maps.routing.v2.RouteMatrixElement) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
         });
-      });
-      await assert.rejects(promise, expectedError);
-    });
-
-    it('invokes computeRouteMatrix with closed client', async () => {
-      const client = new routesModule.v2.RoutesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.routing.v2.ComputeRouteMatrixRequest()
-      );
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      const stream = client.computeRouteMatrix(request, {
-        retryRequestOptions: {noResponseRetries: 0},
-      });
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (response: protos.google.maps.routing.v2.RouteMatrixElement) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
+        it('should create a client with gaxServerStreamingRetries enabled', () => {
+            const client = new routesModule.v2.RoutesClient({
+                gaxServerStreamingRetries: true,
+            });
+            assert(client);
         });
-      });
-      await assert.rejects(promise, expectedError);
     });
-    it('should create a client with gaxServerStreamingRetries enabled', () => {
-      const client = new routesModule.v2.RoutesClient({
-        gaxServerStreamingRetries: true,
-      });
-      assert(client);
-    });
-  });
 });

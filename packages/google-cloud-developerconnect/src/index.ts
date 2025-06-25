@@ -20,8 +20,10 @@ import * as v1 from './v1';
 
 const DeveloperConnectClient = v1.DeveloperConnectClient;
 type DeveloperConnectClient = v1.DeveloperConnectClient;
+const InsightsConfigServiceClient = v1.InsightsConfigServiceClient;
+type InsightsConfigServiceClient = v1.InsightsConfigServiceClient;
 
-export {v1, DeveloperConnectClient};
-export default {v1, DeveloperConnectClient};
+export {v1, DeveloperConnectClient, InsightsConfigServiceClient};
+export default {v1, DeveloperConnectClient, InsightsConfigServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

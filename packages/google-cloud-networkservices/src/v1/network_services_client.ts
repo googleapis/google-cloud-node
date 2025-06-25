@@ -22,7 +22,7 @@ import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOption
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -187,6 +187,9 @@ export class NetworkServicesClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      authzExtensionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/authzExtensions/{authz_extension}'
+      ),
       endpointPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpointPolicies/{endpoint_policy}'
       ),
@@ -226,6 +229,12 @@ export class NetworkServicesClient {
       tlsRoutePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/tlsRoutes/{tls_route}'
       ),
+      wasmPluginPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/wasmPlugins/{wasm_plugin}'
+      ),
+      wasmPluginVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/wasmPlugins/{wasm_plugin}/versions/{wasm_plugin_version}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -234,6 +243,10 @@ export class NetworkServicesClient {
     this.descriptors.page = {
       listEndpointPolicies:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'endpointPolicies'),
+      listWasmPluginVersions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'wasmPluginVersions'),
+      listWasmPlugins:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'wasmPlugins'),
       listGateways:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'gateways'),
       listGrpcRoutes:
@@ -256,7 +269,7 @@ export class NetworkServicesClient {
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'meshRouteViews')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -283,6 +296,26 @@ export class NetworkServicesClient {
     const deleteEndpointPolicyResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteEndpointPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
+    const createWasmPluginVersionResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.WasmPluginVersion') as gax.protobuf.Type;
+    const createWasmPluginVersionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
+    const deleteWasmPluginVersionResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteWasmPluginVersionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
+    const createWasmPluginResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.WasmPlugin') as gax.protobuf.Type;
+    const createWasmPluginMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
+    const updateWasmPluginResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.WasmPlugin') as gax.protobuf.Type;
+    const updateWasmPluginMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
+    const deleteWasmPluginResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteWasmPluginMetadata = protoFilesRoot.lookup(
       '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
     const createGatewayResponse = protoFilesRoot.lookup(
       '.google.cloud.networkservices.v1.Gateway') as gax.protobuf.Type;
@@ -394,6 +427,26 @@ export class NetworkServicesClient {
         this.operationsClient,
         deleteEndpointPolicyResponse.decode.bind(deleteEndpointPolicyResponse),
         deleteEndpointPolicyMetadata.decode.bind(deleteEndpointPolicyMetadata)),
+      createWasmPluginVersion: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createWasmPluginVersionResponse.decode.bind(createWasmPluginVersionResponse),
+        createWasmPluginVersionMetadata.decode.bind(createWasmPluginVersionMetadata)),
+      deleteWasmPluginVersion: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteWasmPluginVersionResponse.decode.bind(deleteWasmPluginVersionResponse),
+        deleteWasmPluginVersionMetadata.decode.bind(deleteWasmPluginVersionMetadata)),
+      createWasmPlugin: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createWasmPluginResponse.decode.bind(createWasmPluginResponse),
+        createWasmPluginMetadata.decode.bind(createWasmPluginMetadata)),
+      updateWasmPlugin: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateWasmPluginResponse.decode.bind(updateWasmPluginResponse),
+        updateWasmPluginMetadata.decode.bind(updateWasmPluginMetadata)),
+      deleteWasmPlugin: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteWasmPluginResponse.decode.bind(deleteWasmPluginResponse),
+        deleteWasmPluginMetadata.decode.bind(deleteWasmPluginMetadata)),
       createGateway: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createGatewayResponse.decode.bind(createGatewayResponse),
@@ -535,7 +588,7 @@ export class NetworkServicesClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const networkServicesStubMethods =
-        ['listEndpointPolicies', 'getEndpointPolicy', 'createEndpointPolicy', 'updateEndpointPolicy', 'deleteEndpointPolicy', 'listGateways', 'getGateway', 'createGateway', 'updateGateway', 'deleteGateway', 'listGrpcRoutes', 'getGrpcRoute', 'createGrpcRoute', 'updateGrpcRoute', 'deleteGrpcRoute', 'listHttpRoutes', 'getHttpRoute', 'createHttpRoute', 'updateHttpRoute', 'deleteHttpRoute', 'listTcpRoutes', 'getTcpRoute', 'createTcpRoute', 'updateTcpRoute', 'deleteTcpRoute', 'listTlsRoutes', 'getTlsRoute', 'createTlsRoute', 'updateTlsRoute', 'deleteTlsRoute', 'listServiceBindings', 'getServiceBinding', 'createServiceBinding', 'updateServiceBinding', 'deleteServiceBinding', 'listMeshes', 'getMesh', 'createMesh', 'updateMesh', 'deleteMesh', 'listServiceLbPolicies', 'getServiceLbPolicy', 'createServiceLbPolicy', 'updateServiceLbPolicy', 'deleteServiceLbPolicy', 'getGatewayRouteView', 'getMeshRouteView', 'listGatewayRouteViews', 'listMeshRouteViews'];
+        ['listEndpointPolicies', 'getEndpointPolicy', 'createEndpointPolicy', 'updateEndpointPolicy', 'deleteEndpointPolicy', 'listWasmPluginVersions', 'getWasmPluginVersion', 'createWasmPluginVersion', 'deleteWasmPluginVersion', 'listWasmPlugins', 'getWasmPlugin', 'createWasmPlugin', 'updateWasmPlugin', 'deleteWasmPlugin', 'listGateways', 'getGateway', 'createGateway', 'updateGateway', 'deleteGateway', 'listGrpcRoutes', 'getGrpcRoute', 'createGrpcRoute', 'updateGrpcRoute', 'deleteGrpcRoute', 'listHttpRoutes', 'getHttpRoute', 'createHttpRoute', 'updateHttpRoute', 'deleteHttpRoute', 'listTcpRoutes', 'getTcpRoute', 'createTcpRoute', 'updateTcpRoute', 'deleteTcpRoute', 'listTlsRoutes', 'getTlsRoute', 'createTlsRoute', 'updateTlsRoute', 'deleteTlsRoute', 'listServiceBindings', 'getServiceBinding', 'createServiceBinding', 'updateServiceBinding', 'deleteServiceBinding', 'listMeshes', 'getMesh', 'createMesh', 'updateMesh', 'deleteMesh', 'listServiceLbPolicies', 'getServiceLbPolicy', 'createServiceLbPolicy', 'updateServiceLbPolicy', 'deleteServiceLbPolicy', 'getGatewayRouteView', 'getMeshRouteView', 'listGatewayRouteViews', 'listMeshRouteViews'];
     for (const methodName of networkServicesStubMethods) {
       const callPromise = this.networkServicesStub.then(
         stub => (...args: Array<{}>) => {
@@ -726,6 +779,206 @@ export class NetworkServicesClient {
       ]) => {
         this._log.info('getEndpointPolicy response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets details of the specified `WasmPluginVersion` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the `WasmPluginVersion` resource to get. Must be in
+ *   the format
+ *   `projects/{project}/locations/global/wasmPlugins/{wasm_plugin}/versions/{wasm_plugin_version}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networkservices.v1.WasmPluginVersion|WasmPluginVersion}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/network_services.get_wasm_plugin_version.js</caption>
+ * region_tag:networkservices_v1_generated_NetworkServices_GetWasmPluginVersion_async
+ */
+  getWasmPluginVersion(
+      request?: protos.google.cloud.networkservices.v1.IGetWasmPluginVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkservices.v1.IWasmPluginVersion,
+        protos.google.cloud.networkservices.v1.IGetWasmPluginVersionRequest|undefined, {}|undefined
+      ]>;
+  getWasmPluginVersion(
+      request: protos.google.cloud.networkservices.v1.IGetWasmPluginVersionRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.networkservices.v1.IWasmPluginVersion,
+          protos.google.cloud.networkservices.v1.IGetWasmPluginVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWasmPluginVersion(
+      request: protos.google.cloud.networkservices.v1.IGetWasmPluginVersionRequest,
+      callback: Callback<
+          protos.google.cloud.networkservices.v1.IWasmPluginVersion,
+          protos.google.cloud.networkservices.v1.IGetWasmPluginVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWasmPluginVersion(
+      request?: protos.google.cloud.networkservices.v1.IGetWasmPluginVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networkservices.v1.IWasmPluginVersion,
+          protos.google.cloud.networkservices.v1.IGetWasmPluginVersionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networkservices.v1.IWasmPluginVersion,
+          protos.google.cloud.networkservices.v1.IGetWasmPluginVersionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networkservices.v1.IWasmPluginVersion,
+        protos.google.cloud.networkservices.v1.IGetWasmPluginVersionRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getWasmPluginVersion request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.networkservices.v1.IWasmPluginVersion,
+        protos.google.cloud.networkservices.v1.IGetWasmPluginVersionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getWasmPluginVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getWasmPluginVersion(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networkservices.v1.IWasmPluginVersion,
+        protos.google.cloud.networkservices.v1.IGetWasmPluginVersionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getWasmPluginVersion response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets details of the specified `WasmPlugin` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the `WasmPlugin` resource to get. Must be in the
+ *   format `projects/{project}/locations/global/wasmPlugins/{wasm_plugin}`.
+ * @param {google.cloud.networkservices.v1.WasmPluginView} request.view
+ *   Determines how much data must be returned in the response. See
+ *   [AIP-157](https://google.aip.dev/157).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networkservices.v1.WasmPlugin|WasmPlugin}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/network_services.get_wasm_plugin.js</caption>
+ * region_tag:networkservices_v1_generated_NetworkServices_GetWasmPlugin_async
+ */
+  getWasmPlugin(
+      request?: protos.google.cloud.networkservices.v1.IGetWasmPluginRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkservices.v1.IWasmPlugin,
+        protos.google.cloud.networkservices.v1.IGetWasmPluginRequest|undefined, {}|undefined
+      ]>;
+  getWasmPlugin(
+      request: protos.google.cloud.networkservices.v1.IGetWasmPluginRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.networkservices.v1.IWasmPlugin,
+          protos.google.cloud.networkservices.v1.IGetWasmPluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWasmPlugin(
+      request: protos.google.cloud.networkservices.v1.IGetWasmPluginRequest,
+      callback: Callback<
+          protos.google.cloud.networkservices.v1.IWasmPlugin,
+          protos.google.cloud.networkservices.v1.IGetWasmPluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWasmPlugin(
+      request?: protos.google.cloud.networkservices.v1.IGetWasmPluginRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networkservices.v1.IWasmPlugin,
+          protos.google.cloud.networkservices.v1.IGetWasmPluginRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networkservices.v1.IWasmPlugin,
+          protos.google.cloud.networkservices.v1.IGetWasmPluginRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networkservices.v1.IWasmPlugin,
+        protos.google.cloud.networkservices.v1.IGetWasmPluginRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getWasmPlugin request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.networkservices.v1.IWasmPlugin,
+        protos.google.cloud.networkservices.v1.IGetWasmPluginRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getWasmPlugin response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getWasmPlugin(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networkservices.v1.IWasmPlugin,
+        protos.google.cloud.networkservices.v1.IGetWasmPluginRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getWasmPlugin response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -815,6 +1068,12 @@ export class NetworkServicesClient {
       ]) => {
         this._log.info('getGateway response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -904,6 +1163,12 @@ export class NetworkServicesClient {
       ]) => {
         this._log.info('getGrpcRoute response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -993,6 +1258,12 @@ export class NetworkServicesClient {
       ]) => {
         this._log.info('getHttpRoute response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1082,6 +1353,12 @@ export class NetworkServicesClient {
       ]) => {
         this._log.info('getTcpRoute response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1171,6 +1448,12 @@ export class NetworkServicesClient {
       ]) => {
         this._log.info('getTlsRoute response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1260,6 +1543,12 @@ export class NetworkServicesClient {
       ]) => {
         this._log.info('getServiceBinding response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1349,6 +1638,12 @@ export class NetworkServicesClient {
       ]) => {
         this._log.info('getMesh response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1438,6 +1733,12 @@ export class NetworkServicesClient {
       ]) => {
         this._log.info('getServiceLbPolicy response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1528,6 +1829,12 @@ export class NetworkServicesClient {
       ]) => {
         this._log.info('getGatewayRouteView response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1618,6 +1925,12 @@ export class NetworkServicesClient {
       ]) => {
         this._log.info('getMeshRouteView response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 
@@ -1953,6 +2266,569 @@ export class NetworkServicesClient {
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteEndpointPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1.OperationMetadata>;
+  }
+/**
+ * Creates a new `WasmPluginVersion` resource in a given project
+ * and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the `WasmPluginVersion` resource. Must be
+ *   in the format
+ *   `projects/{project}/locations/global/wasmPlugins/{wasm_plugin}`.
+ * @param {string} request.wasmPluginVersionId
+ *   Required. User-provided ID of the `WasmPluginVersion` resource to be
+ *   created.
+ * @param {google.cloud.networkservices.v1.WasmPluginVersion} request.wasmPluginVersion
+ *   Required. `WasmPluginVersion` resource to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/network_services.create_wasm_plugin_version.js</caption>
+ * region_tag:networkservices_v1_generated_NetworkServices_CreateWasmPluginVersion_async
+ */
+  createWasmPluginVersion(
+      request?: protos.google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.IWasmPluginVersion, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createWasmPluginVersion(
+      request: protos.google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IWasmPluginVersion, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createWasmPluginVersion(
+      request: protos.google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IWasmPluginVersion, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createWasmPluginVersion(
+      request?: protos.google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IWasmPluginVersion, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IWasmPluginVersion, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.IWasmPluginVersion, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IWasmPluginVersion, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createWasmPluginVersion response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createWasmPluginVersion request %j', request);
+    return this.innerApiCalls.createWasmPluginVersion(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networkservices.v1.IWasmPluginVersion, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createWasmPluginVersion response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createWasmPluginVersion()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/network_services.create_wasm_plugin_version.js</caption>
+ * region_tag:networkservices_v1_generated_NetworkServices_CreateWasmPluginVersion_async
+ */
+  async checkCreateWasmPluginVersionProgress(name: string): Promise<LROperation<protos.google.cloud.networkservices.v1.WasmPluginVersion, protos.google.cloud.networkservices.v1.OperationMetadata>>{
+    this._log.info('createWasmPluginVersion long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createWasmPluginVersion, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networkservices.v1.WasmPluginVersion, protos.google.cloud.networkservices.v1.OperationMetadata>;
+  }
+/**
+ * Deletes the specified `WasmPluginVersion` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the `WasmPluginVersion` resource to delete. Must be in
+ *   the format
+ *   `projects/{project}/locations/global/wasmPlugins/{wasm_plugin}/versions/{wasm_plugin_version}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/network_services.delete_wasm_plugin_version.js</caption>
+ * region_tag:networkservices_v1_generated_NetworkServices_DeleteWasmPluginVersion_async
+ */
+  deleteWasmPluginVersion(
+      request?: protos.google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteWasmPluginVersion(
+      request: protos.google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteWasmPluginVersion(
+      request: protos.google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteWasmPluginVersion(
+      request?: protos.google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteWasmPluginVersion response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteWasmPluginVersion request %j', request);
+    return this.innerApiCalls.deleteWasmPluginVersion(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteWasmPluginVersion response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteWasmPluginVersion()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/network_services.delete_wasm_plugin_version.js</caption>
+ * region_tag:networkservices_v1_generated_NetworkServices_DeleteWasmPluginVersion_async
+ */
+  async checkDeleteWasmPluginVersionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1.OperationMetadata>>{
+    this._log.info('deleteWasmPluginVersion long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteWasmPluginVersion, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1.OperationMetadata>;
+  }
+/**
+ * Creates a new `WasmPlugin` resource in a given project
+ * and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the `WasmPlugin` resource. Must be in the
+ *   format `projects/{project}/locations/global`.
+ * @param {string} request.wasmPluginId
+ *   Required. User-provided ID of the `WasmPlugin` resource to be created.
+ * @param {google.cloud.networkservices.v1.WasmPlugin} request.wasmPlugin
+ *   Required. `WasmPlugin` resource to be created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/network_services.create_wasm_plugin.js</caption>
+ * region_tag:networkservices_v1_generated_NetworkServices_CreateWasmPlugin_async
+ */
+  createWasmPlugin(
+      request?: protos.google.cloud.networkservices.v1.ICreateWasmPluginRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createWasmPlugin(
+      request: protos.google.cloud.networkservices.v1.ICreateWasmPluginRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createWasmPlugin(
+      request: protos.google.cloud.networkservices.v1.ICreateWasmPluginRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createWasmPlugin(
+      request?: protos.google.cloud.networkservices.v1.ICreateWasmPluginRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createWasmPlugin response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createWasmPlugin request %j', request);
+    return this.innerApiCalls.createWasmPlugin(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createWasmPlugin response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createWasmPlugin()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/network_services.create_wasm_plugin.js</caption>
+ * region_tag:networkservices_v1_generated_NetworkServices_CreateWasmPlugin_async
+ */
+  async checkCreateWasmPluginProgress(name: string): Promise<LROperation<protos.google.cloud.networkservices.v1.WasmPlugin, protos.google.cloud.networkservices.v1.OperationMetadata>>{
+    this._log.info('createWasmPlugin long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createWasmPlugin, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networkservices.v1.WasmPlugin, protos.google.cloud.networkservices.v1.OperationMetadata>;
+  }
+/**
+ * Updates the parameters of the specified `WasmPlugin` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Used to specify the fields to be overwritten in the
+ *   `WasmPlugin` resource by the update.
+ *   The fields specified in the `update_mask` field are relative to the
+ *   resource, not the full request.
+ *   An omitted `update_mask` field is treated as an implied `update_mask`
+ *   field equivalent to all fields that are populated (that have a non-empty
+ *   value).
+ *   The `update_mask` field supports a special value `*`, which means that
+ *   each field in the given `WasmPlugin` resource (including the empty ones)
+ *   replaces the current value.
+ * @param {google.cloud.networkservices.v1.WasmPlugin} request.wasmPlugin
+ *   Required. Updated `WasmPlugin` resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/network_services.update_wasm_plugin.js</caption>
+ * region_tag:networkservices_v1_generated_NetworkServices_UpdateWasmPlugin_async
+ */
+  updateWasmPlugin(
+      request?: protos.google.cloud.networkservices.v1.IUpdateWasmPluginRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateWasmPlugin(
+      request: protos.google.cloud.networkservices.v1.IUpdateWasmPluginRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateWasmPlugin(
+      request: protos.google.cloud.networkservices.v1.IUpdateWasmPluginRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateWasmPlugin(
+      request?: protos.google.cloud.networkservices.v1.IUpdateWasmPluginRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'wasm_plugin.name': request.wasmPlugin!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateWasmPlugin response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateWasmPlugin request %j', request);
+    return this.innerApiCalls.updateWasmPlugin(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networkservices.v1.IWasmPlugin, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateWasmPlugin response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateWasmPlugin()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/network_services.update_wasm_plugin.js</caption>
+ * region_tag:networkservices_v1_generated_NetworkServices_UpdateWasmPlugin_async
+ */
+  async checkUpdateWasmPluginProgress(name: string): Promise<LROperation<protos.google.cloud.networkservices.v1.WasmPlugin, protos.google.cloud.networkservices.v1.OperationMetadata>>{
+    this._log.info('updateWasmPlugin long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateWasmPlugin, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networkservices.v1.WasmPlugin, protos.google.cloud.networkservices.v1.OperationMetadata>;
+  }
+/**
+ * Deletes the specified `WasmPlugin` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the `WasmPlugin` resource to delete. Must be in the
+ *   format `projects/{project}/locations/global/wasmPlugins/{wasm_plugin}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/network_services.delete_wasm_plugin.js</caption>
+ * region_tag:networkservices_v1_generated_NetworkServices_DeleteWasmPlugin_async
+ */
+  deleteWasmPlugin(
+      request?: protos.google.cloud.networkservices.v1.IDeleteWasmPluginRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteWasmPlugin(
+      request: protos.google.cloud.networkservices.v1.IDeleteWasmPluginRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteWasmPlugin(
+      request: protos.google.cloud.networkservices.v1.IDeleteWasmPluginRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteWasmPlugin(
+      request?: protos.google.cloud.networkservices.v1.IDeleteWasmPluginRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteWasmPlugin response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteWasmPlugin request %j', request);
+    return this.innerApiCalls.deleteWasmPlugin(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteWasmPlugin response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteWasmPlugin()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/network_services.delete_wasm_plugin.js</caption>
+ * region_tag:networkservices_v1_generated_NetworkServices_DeleteWasmPlugin_async
+ */
+  async checkDeleteWasmPluginProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1.OperationMetadata>>{
+    this._log.info('deleteWasmPlugin long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteWasmPlugin, this._gaxModule.createDefaultBackoffSettings());
     return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1.OperationMetadata>;
   }
 /**
@@ -4838,6 +5714,435 @@ export class NetworkServicesClient {
     ) as AsyncIterable<protos.google.cloud.networkservices.v1.IEndpointPolicy>;
   }
  /**
+ * Lists `WasmPluginVersion` resources in a given project and
+ * location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The `WasmPlugin` resource whose `WasmPluginVersion`s
+ *   are listed, specified in the following format:
+ *   `projects/{project}/locations/global/wasmPlugins/{wasm_plugin}`.
+ * @param {number} request.pageSize
+ *   Maximum number of `WasmPluginVersion` resources to return per
+ *   call. If not specified, at most 50 `WasmPluginVersion` resources are
+ *   returned. The maximum value is 1000; values above 1000 are coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListWasmPluginVersionsResponse` call.
+ *   Indicates that this is a continuation of a prior
+ *   `ListWasmPluginVersions` call, and that the
+ *   next page of data is to be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networkservices.v1.WasmPluginVersion|WasmPluginVersion}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listWasmPluginVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listWasmPluginVersions(
+      request?: protos.google.cloud.networkservices.v1.IListWasmPluginVersionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkservices.v1.IWasmPluginVersion[],
+        protos.google.cloud.networkservices.v1.IListWasmPluginVersionsRequest|null,
+        protos.google.cloud.networkservices.v1.IListWasmPluginVersionsResponse
+      ]>;
+  listWasmPluginVersions(
+      request: protos.google.cloud.networkservices.v1.IListWasmPluginVersionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListWasmPluginVersionsRequest,
+          protos.google.cloud.networkservices.v1.IListWasmPluginVersionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.IWasmPluginVersion>): void;
+  listWasmPluginVersions(
+      request: protos.google.cloud.networkservices.v1.IListWasmPluginVersionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListWasmPluginVersionsRequest,
+          protos.google.cloud.networkservices.v1.IListWasmPluginVersionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.IWasmPluginVersion>): void;
+  listWasmPluginVersions(
+      request?: protos.google.cloud.networkservices.v1.IListWasmPluginVersionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListWasmPluginVersionsRequest,
+          protos.google.cloud.networkservices.v1.IListWasmPluginVersionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.IWasmPluginVersion>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListWasmPluginVersionsRequest,
+          protos.google.cloud.networkservices.v1.IListWasmPluginVersionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.IWasmPluginVersion>):
+      Promise<[
+        protos.google.cloud.networkservices.v1.IWasmPluginVersion[],
+        protos.google.cloud.networkservices.v1.IListWasmPluginVersionsRequest|null,
+        protos.google.cloud.networkservices.v1.IListWasmPluginVersionsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networkservices.v1.IListWasmPluginVersionsRequest,
+      protos.google.cloud.networkservices.v1.IListWasmPluginVersionsResponse|null|undefined,
+      protos.google.cloud.networkservices.v1.IWasmPluginVersion>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWasmPluginVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWasmPluginVersions request %j', request);
+    return this.innerApiCalls
+      .listWasmPluginVersions(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networkservices.v1.IWasmPluginVersion[],
+        protos.google.cloud.networkservices.v1.IListWasmPluginVersionsRequest|null,
+        protos.google.cloud.networkservices.v1.IListWasmPluginVersionsResponse
+      ]) => {
+        this._log.info('listWasmPluginVersions values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listWasmPluginVersions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The `WasmPlugin` resource whose `WasmPluginVersion`s
+ *   are listed, specified in the following format:
+ *   `projects/{project}/locations/global/wasmPlugins/{wasm_plugin}`.
+ * @param {number} request.pageSize
+ *   Maximum number of `WasmPluginVersion` resources to return per
+ *   call. If not specified, at most 50 `WasmPluginVersion` resources are
+ *   returned. The maximum value is 1000; values above 1000 are coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListWasmPluginVersionsResponse` call.
+ *   Indicates that this is a continuation of a prior
+ *   `ListWasmPluginVersions` call, and that the
+ *   next page of data is to be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networkservices.v1.WasmPluginVersion|WasmPluginVersion} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listWasmPluginVersionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listWasmPluginVersionsStream(
+      request?: protos.google.cloud.networkservices.v1.IListWasmPluginVersionsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listWasmPluginVersions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listWasmPluginVersions stream %j', request);
+    return this.descriptors.page.listWasmPluginVersions.createStream(
+      this.innerApiCalls.listWasmPluginVersions as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listWasmPluginVersions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The `WasmPlugin` resource whose `WasmPluginVersion`s
+ *   are listed, specified in the following format:
+ *   `projects/{project}/locations/global/wasmPlugins/{wasm_plugin}`.
+ * @param {number} request.pageSize
+ *   Maximum number of `WasmPluginVersion` resources to return per
+ *   call. If not specified, at most 50 `WasmPluginVersion` resources are
+ *   returned. The maximum value is 1000; values above 1000 are coerced to
+ *   1000.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListWasmPluginVersionsResponse` call.
+ *   Indicates that this is a continuation of a prior
+ *   `ListWasmPluginVersions` call, and that the
+ *   next page of data is to be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networkservices.v1.WasmPluginVersion|WasmPluginVersion}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/network_services.list_wasm_plugin_versions.js</caption>
+ * region_tag:networkservices_v1_generated_NetworkServices_ListWasmPluginVersions_async
+ */
+  listWasmPluginVersionsAsync(
+      request?: protos.google.cloud.networkservices.v1.IListWasmPluginVersionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networkservices.v1.IWasmPluginVersion>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listWasmPluginVersions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listWasmPluginVersions iterate %j', request);
+    return this.descriptors.page.listWasmPluginVersions.asyncIterate(
+      this.innerApiCalls['listWasmPluginVersions'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.networkservices.v1.IWasmPluginVersion>;
+  }
+ /**
+ * Lists `WasmPlugin` resources in a given project and
+ * location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `WasmPlugin` resources
+ *   are listed, specified in the following format:
+ *   `projects/{project}/locations/global`.
+ * @param {number} request.pageSize
+ *   Maximum number of `WasmPlugin` resources to return per call.
+ *   If not specified, at most 50 `WasmPlugin` resources are returned.
+ *   The maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListWasmPluginsResponse` call.
+ *   Indicates that this is a continuation of a prior
+ *   `ListWasmPlugins` call, and that the
+ *   next page of data is to be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networkservices.v1.WasmPlugin|WasmPlugin}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listWasmPluginsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listWasmPlugins(
+      request?: protos.google.cloud.networkservices.v1.IListWasmPluginsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkservices.v1.IWasmPlugin[],
+        protos.google.cloud.networkservices.v1.IListWasmPluginsRequest|null,
+        protos.google.cloud.networkservices.v1.IListWasmPluginsResponse
+      ]>;
+  listWasmPlugins(
+      request: protos.google.cloud.networkservices.v1.IListWasmPluginsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListWasmPluginsRequest,
+          protos.google.cloud.networkservices.v1.IListWasmPluginsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.IWasmPlugin>): void;
+  listWasmPlugins(
+      request: protos.google.cloud.networkservices.v1.IListWasmPluginsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListWasmPluginsRequest,
+          protos.google.cloud.networkservices.v1.IListWasmPluginsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.IWasmPlugin>): void;
+  listWasmPlugins(
+      request?: protos.google.cloud.networkservices.v1.IListWasmPluginsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListWasmPluginsRequest,
+          protos.google.cloud.networkservices.v1.IListWasmPluginsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.IWasmPlugin>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListWasmPluginsRequest,
+          protos.google.cloud.networkservices.v1.IListWasmPluginsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.IWasmPlugin>):
+      Promise<[
+        protos.google.cloud.networkservices.v1.IWasmPlugin[],
+        protos.google.cloud.networkservices.v1.IListWasmPluginsRequest|null,
+        protos.google.cloud.networkservices.v1.IListWasmPluginsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networkservices.v1.IListWasmPluginsRequest,
+      protos.google.cloud.networkservices.v1.IListWasmPluginsResponse|null|undefined,
+      protos.google.cloud.networkservices.v1.IWasmPlugin>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWasmPlugins values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWasmPlugins request %j', request);
+    return this.innerApiCalls
+      .listWasmPlugins(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networkservices.v1.IWasmPlugin[],
+        protos.google.cloud.networkservices.v1.IListWasmPluginsRequest|null,
+        protos.google.cloud.networkservices.v1.IListWasmPluginsResponse
+      ]) => {
+        this._log.info('listWasmPlugins values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listWasmPlugins`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `WasmPlugin` resources
+ *   are listed, specified in the following format:
+ *   `projects/{project}/locations/global`.
+ * @param {number} request.pageSize
+ *   Maximum number of `WasmPlugin` resources to return per call.
+ *   If not specified, at most 50 `WasmPlugin` resources are returned.
+ *   The maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListWasmPluginsResponse` call.
+ *   Indicates that this is a continuation of a prior
+ *   `ListWasmPlugins` call, and that the
+ *   next page of data is to be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networkservices.v1.WasmPlugin|WasmPlugin} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listWasmPluginsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listWasmPluginsStream(
+      request?: protos.google.cloud.networkservices.v1.IListWasmPluginsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listWasmPlugins'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listWasmPlugins stream %j', request);
+    return this.descriptors.page.listWasmPlugins.createStream(
+      this.innerApiCalls.listWasmPlugins as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listWasmPlugins`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `WasmPlugin` resources
+ *   are listed, specified in the following format:
+ *   `projects/{project}/locations/global`.
+ * @param {number} request.pageSize
+ *   Maximum number of `WasmPlugin` resources to return per call.
+ *   If not specified, at most 50 `WasmPlugin` resources are returned.
+ *   The maximum value is 1000; values above 1000 are coerced to 1000.
+ * @param {string} request.pageToken
+ *   The value returned by the last `ListWasmPluginsResponse` call.
+ *   Indicates that this is a continuation of a prior
+ *   `ListWasmPlugins` call, and that the
+ *   next page of data is to be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networkservices.v1.WasmPlugin|WasmPlugin}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/network_services.list_wasm_plugins.js</caption>
+ * region_tag:networkservices_v1_generated_NetworkServices_ListWasmPlugins_async
+ */
+  listWasmPluginsAsync(
+      request?: protos.google.cloud.networkservices.v1.IListWasmPluginsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networkservices.v1.IWasmPlugin>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listWasmPlugins'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listWasmPlugins iterate %j', request);
+    return this.descriptors.page.listWasmPlugins.asyncIterate(
+      this.innerApiCalls['listWasmPlugins'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.networkservices.v1.IWasmPlugin>;
+  }
+ /**
  * Lists Gateways in a given project and location.
  *
  * @param {Object} request
@@ -7351,6 +8656,55 @@ export class NetworkServicesClient {
   // --------------------
 
   /**
+   * Return a fully-qualified authzExtension resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} authz_extension
+   * @returns {string} Resource name string.
+   */
+  authzExtensionPath(project:string,location:string,authzExtension:string) {
+    return this.pathTemplates.authzExtensionPathTemplate.render({
+      project: project,
+      location: location,
+      authz_extension: authzExtension,
+    });
+  }
+
+  /**
+   * Parse the project from AuthzExtension resource.
+   *
+   * @param {string} authzExtensionName
+   *   A fully-qualified path representing AuthzExtension resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAuthzExtensionName(authzExtensionName: string) {
+    return this.pathTemplates.authzExtensionPathTemplate.match(authzExtensionName).project;
+  }
+
+  /**
+   * Parse the location from AuthzExtension resource.
+   *
+   * @param {string} authzExtensionName
+   *   A fully-qualified path representing AuthzExtension resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAuthzExtensionName(authzExtensionName: string) {
+    return this.pathTemplates.authzExtensionPathTemplate.match(authzExtensionName).location;
+  }
+
+  /**
+   * Parse the authz_extension from AuthzExtension resource.
+   *
+   * @param {string} authzExtensionName
+   *   A fully-qualified path representing AuthzExtension resource.
+   * @returns {string} A string representing the authz_extension.
+   */
+  matchAuthzExtensionFromAuthzExtensionName(authzExtensionName: string) {
+    return this.pathTemplates.authzExtensionPathTemplate.match(authzExtensionName).authz_extension;
+  }
+
+  /**
    * Return a fully-qualified endpointPolicy resource name string.
    *
    * @param {string} project
@@ -8011,6 +9365,117 @@ export class NetworkServicesClient {
    */
   matchTlsRouteFromTlsRouteName(tlsRouteName: string) {
     return this.pathTemplates.tlsRoutePathTemplate.match(tlsRouteName).tls_route;
+  }
+
+  /**
+   * Return a fully-qualified wasmPlugin resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} wasm_plugin
+   * @returns {string} Resource name string.
+   */
+  wasmPluginPath(project:string,location:string,wasmPlugin:string) {
+    return this.pathTemplates.wasmPluginPathTemplate.render({
+      project: project,
+      location: location,
+      wasm_plugin: wasmPlugin,
+    });
+  }
+
+  /**
+   * Parse the project from WasmPlugin resource.
+   *
+   * @param {string} wasmPluginName
+   *   A fully-qualified path representing WasmPlugin resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromWasmPluginName(wasmPluginName: string) {
+    return this.pathTemplates.wasmPluginPathTemplate.match(wasmPluginName).project;
+  }
+
+  /**
+   * Parse the location from WasmPlugin resource.
+   *
+   * @param {string} wasmPluginName
+   *   A fully-qualified path representing WasmPlugin resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromWasmPluginName(wasmPluginName: string) {
+    return this.pathTemplates.wasmPluginPathTemplate.match(wasmPluginName).location;
+  }
+
+  /**
+   * Parse the wasm_plugin from WasmPlugin resource.
+   *
+   * @param {string} wasmPluginName
+   *   A fully-qualified path representing WasmPlugin resource.
+   * @returns {string} A string representing the wasm_plugin.
+   */
+  matchWasmPluginFromWasmPluginName(wasmPluginName: string) {
+    return this.pathTemplates.wasmPluginPathTemplate.match(wasmPluginName).wasm_plugin;
+  }
+
+  /**
+   * Return a fully-qualified wasmPluginVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} wasm_plugin
+   * @param {string} wasm_plugin_version
+   * @returns {string} Resource name string.
+   */
+  wasmPluginVersionPath(project:string,location:string,wasmPlugin:string,wasmPluginVersion:string) {
+    return this.pathTemplates.wasmPluginVersionPathTemplate.render({
+      project: project,
+      location: location,
+      wasm_plugin: wasmPlugin,
+      wasm_plugin_version: wasmPluginVersion,
+    });
+  }
+
+  /**
+   * Parse the project from WasmPluginVersion resource.
+   *
+   * @param {string} wasmPluginVersionName
+   *   A fully-qualified path representing WasmPluginVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromWasmPluginVersionName(wasmPluginVersionName: string) {
+    return this.pathTemplates.wasmPluginVersionPathTemplate.match(wasmPluginVersionName).project;
+  }
+
+  /**
+   * Parse the location from WasmPluginVersion resource.
+   *
+   * @param {string} wasmPluginVersionName
+   *   A fully-qualified path representing WasmPluginVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromWasmPluginVersionName(wasmPluginVersionName: string) {
+    return this.pathTemplates.wasmPluginVersionPathTemplate.match(wasmPluginVersionName).location;
+  }
+
+  /**
+   * Parse the wasm_plugin from WasmPluginVersion resource.
+   *
+   * @param {string} wasmPluginVersionName
+   *   A fully-qualified path representing WasmPluginVersion resource.
+   * @returns {string} A string representing the wasm_plugin.
+   */
+  matchWasmPluginFromWasmPluginVersionName(wasmPluginVersionName: string) {
+    return this.pathTemplates.wasmPluginVersionPathTemplate.match(wasmPluginVersionName).wasm_plugin;
+  }
+
+  /**
+   * Parse the wasm_plugin_version from WasmPluginVersion resource.
+   *
+   * @param {string} wasmPluginVersionName
+   *   A fully-qualified path representing WasmPluginVersion resource.
+   * @returns {string} A string representing the wasm_plugin_version.
+   */
+  matchWasmPluginVersionFromWasmPluginVersionName(wasmPluginVersionName: string) {
+    return this.pathTemplates.wasmPluginVersionPathTemplate.match(wasmPluginVersionName).wasm_plugin_version;
   }
 
   /**

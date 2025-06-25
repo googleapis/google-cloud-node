@@ -604,12 +604,6 @@ export namespace google {
                     /** OptimizeToursRequest label. */
                     public label: string;
 
-                    /** OptimizeToursRequest _geodesicMetersPerSecond. */
-                    public _geodesicMetersPerSecond?: "geodesicMetersPerSecond";
-
-                    /** OptimizeToursRequest _maxValidationErrors. */
-                    public _maxValidationErrors?: "maxValidationErrors";
-
                     /**
                      * Creates a new OptimizeToursRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1053,9 +1047,6 @@ export namespace google {
                     /** ShipmentModel precedenceRules. */
                     public precedenceRules: google.maps.routeoptimization.v1.ShipmentModel.IPrecedenceRule[];
 
-                    /** ShipmentModel _maxActiveVehicles. */
-                    public _maxActiveVehicles?: "maxActiveVehicles";
-
                     /**
                      * Creates a new ShipmentModel instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1388,12 +1379,6 @@ export namespace google {
                         /** PrecedenceRule offsetDuration. */
                         public offsetDuration?: (google.protobuf.IDuration|null);
 
-                        /** PrecedenceRule _firstIndex. */
-                        public _firstIndex?: "firstIndex";
-
-                        /** PrecedenceRule _secondIndex. */
-                        public _secondIndex?: "secondIndex";
-
                         /**
                          * Creates a new PrecedenceRule instance using the specified properties.
                          * @param [properties] Properties to set
@@ -1569,12 +1554,6 @@ export namespace google {
 
                     /** Shipment ignore. */
                     public ignore: boolean;
-
-                    /** Shipment _penaltyCost. */
-                    public _penaltyCost?: "penaltyCost";
-
-                    /** Shipment _pickupToDeliveryRelativeDetourLimit. */
-                    public _pickupToDeliveryRelativeDetourLimit?: "pickupToDeliveryRelativeDetourLimit";
 
                     /**
                      * Creates a new Shipment instance using the specified properties.
@@ -2428,9 +2407,6 @@ export namespace google {
                     /** Vehicle ignore. */
                     public ignore: boolean;
 
-                    /** Vehicle _travelDurationMultiple. */
-                    public _travelDurationMultiple?: "travelDurationMultiple";
-
                     /**
                      * Creates a new Vehicle instance using the specified properties.
                      * @param [properties] Properties to set
@@ -2568,9 +2544,6 @@ export namespace google {
                         /** LoadLimit endLoadInterval. */
                         public endLoadInterval?: (google.maps.routeoptimization.v1.Vehicle.LoadLimit.IInterval|null);
 
-                        /** LoadLimit _maxLoad. */
-                        public _maxLoad?: "maxLoad";
-
                         /**
                          * Creates a new LoadLimit instance using the specified properties.
                          * @param [properties] Properties to set
@@ -2675,9 +2648,6 @@ export namespace google {
 
                             /** Interval max. */
                             public max?: (number|Long|string|null);
-
-                            /** Interval _max. */
-                            public _max?: "max";
 
                             /**
                              * Creates a new Interval instance using the specified properties.
@@ -2800,12 +2770,6 @@ export namespace google {
 
                         /** DurationLimit costPerSquareHourAfterQuadraticSoftMax. */
                         public costPerSquareHourAfterQuadraticSoftMax?: (number|null);
-
-                        /** DurationLimit _costPerHourAfterSoftMax. */
-                        public _costPerHourAfterSoftMax?: "costPerHourAfterSoftMax";
-
-                        /** DurationLimit _costPerSquareHourAfterQuadraticSoftMax. */
-                        public _costPerSquareHourAfterQuadraticSoftMax?: "costPerSquareHourAfterQuadraticSoftMax";
 
                         /**
                          * Creates a new DurationLimit instance using the specified properties.
@@ -2935,12 +2899,6 @@ export namespace google {
                     /** TimeWindow costPerHourAfterSoftEndTime. */
                     public costPerHourAfterSoftEndTime?: (number|null);
 
-                    /** TimeWindow _costPerHourBeforeSoftStartTime. */
-                    public _costPerHourBeforeSoftStartTime?: "costPerHourBeforeSoftStartTime";
-
-                    /** TimeWindow _costPerHourAfterSoftEndTime. */
-                    public _costPerHourAfterSoftEndTime?: "costPerHourAfterSoftEndTime";
-
                     /**
                      * Creates a new TimeWindow instance using the specified properties.
                      * @param [properties] Properties to set
@@ -3055,18 +3013,6 @@ export namespace google {
 
                     /** DistanceLimit costPerKilometerAboveSoftMax. */
                     public costPerKilometerAboveSoftMax?: (number|null);
-
-                    /** DistanceLimit _maxMeters. */
-                    public _maxMeters?: "maxMeters";
-
-                    /** DistanceLimit _softMaxMeters. */
-                    public _softMaxMeters?: "softMaxMeters";
-
-                    /** DistanceLimit _costPerKilometerBelowSoftMax. */
-                    public _costPerKilometerBelowSoftMax?: "costPerKilometerBelowSoftMax";
-
-                    /** DistanceLimit _costPerKilometerAboveSoftMax. */
-                    public _costPerKilometerAboveSoftMax?: "costPerKilometerAboveSoftMax";
 
                     /**
                      * Creates a new DistanceLimit instance using the specified properties.
@@ -3421,9 +3367,6 @@ export namespace google {
 
                     /** Location heading. */
                     public heading?: (number|null);
-
-                    /** Location _heading. */
-                    public _heading?: "heading";
 
                     /**
                      * Creates a new Location instance using the specified properties.
@@ -4721,9 +4664,6 @@ export namespace google {
 
                         /** Reason exampleExceededCapacityType. */
                         public exampleExceededCapacityType: string;
-
-                        /** Reason _exampleVehicleIndex. */
-                        public _exampleVehicleIndex?: "exampleVehicleIndex";
 
                         /**
                          * Creates a new Reason instance using the specified properties.
@@ -6615,6 +6555,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -6655,6 +6598,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -10612,6 +10558,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -10863,7 +10812,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -10894,7 +10843,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -12033,7 +11982,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -12049,7 +11998,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

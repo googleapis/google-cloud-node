@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -120,41 +111,20 @@ export class AccessContextManagerClient {
    *     const client = new AccessContextManagerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AccessContextManagerClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'accesscontextmanager.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -180,7 +150,7 @@ export class AccessContextManagerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -194,7 +164,10 @@ export class AccessContextManagerClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -236,256 +209,157 @@ export class AccessContextManagerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAccessPolicies: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'accessPolicies'
-      ),
-      listAccessLevels: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'accessLevels'
-      ),
-      listServicePerimeters: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'servicePerimeters'
-      ),
-      listGcpUserAccessBindings: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'gcpUserAccessBindings'
-      ),
+      listAccessPolicies:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'accessPolicies'),
+      listAccessLevels:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'accessLevels'),
+      listServicePerimeters:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'servicePerimeters'),
+      listGcpUserAccessBindings:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'gcpUserAccessBindings')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=operations/**}',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=operations/**}',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createAccessPolicyResponse = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessPolicy'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessPolicy') as gax.protobuf.Type;
     const createAccessPolicyMetadata = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata') as gax.protobuf.Type;
     const updateAccessPolicyResponse = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessPolicy'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessPolicy') as gax.protobuf.Type;
     const updateAccessPolicyMetadata = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata') as gax.protobuf.Type;
     const deleteAccessPolicyResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteAccessPolicyMetadata = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata') as gax.protobuf.Type;
     const createAccessLevelResponse = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessLevel'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessLevel') as gax.protobuf.Type;
     const createAccessLevelMetadata = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata') as gax.protobuf.Type;
     const updateAccessLevelResponse = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessLevel'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessLevel') as gax.protobuf.Type;
     const updateAccessLevelMetadata = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata') as gax.protobuf.Type;
     const deleteAccessLevelResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteAccessLevelMetadata = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata') as gax.protobuf.Type;
     const replaceAccessLevelsResponse = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsResponse'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsResponse') as gax.protobuf.Type;
     const replaceAccessLevelsMetadata = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata') as gax.protobuf.Type;
     const createServicePerimeterResponse = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.ServicePerimeter'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.ServicePerimeter') as gax.protobuf.Type;
     const createServicePerimeterMetadata = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata') as gax.protobuf.Type;
     const updateServicePerimeterResponse = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.ServicePerimeter'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.ServicePerimeter') as gax.protobuf.Type;
     const updateServicePerimeterMetadata = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata') as gax.protobuf.Type;
     const deleteServicePerimeterResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteServicePerimeterMetadata = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata') as gax.protobuf.Type;
     const replaceServicePerimetersResponse = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersResponse'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersResponse') as gax.protobuf.Type;
     const replaceServicePerimetersMetadata = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata') as gax.protobuf.Type;
     const commitServicePerimetersResponse = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.CommitServicePerimetersResponse'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.CommitServicePerimetersResponse') as gax.protobuf.Type;
     const commitServicePerimetersMetadata = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata') as gax.protobuf.Type;
     const createGcpUserAccessBindingResponse = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.GcpUserAccessBinding'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.GcpUserAccessBinding') as gax.protobuf.Type;
     const createGcpUserAccessBindingMetadata = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata') as gax.protobuf.Type;
     const updateGcpUserAccessBindingResponse = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.GcpUserAccessBinding'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.GcpUserAccessBinding') as gax.protobuf.Type;
     const updateGcpUserAccessBindingMetadata = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata') as gax.protobuf.Type;
     const deleteGcpUserAccessBindingResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteGcpUserAccessBindingMetadata = protoFilesRoot.lookup(
-      '.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createAccessPolicy: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAccessPolicyResponse.decode.bind(createAccessPolicyResponse),
-        createAccessPolicyMetadata.decode.bind(createAccessPolicyMetadata)
-      ),
+        createAccessPolicyMetadata.decode.bind(createAccessPolicyMetadata)),
       updateAccessPolicy: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateAccessPolicyResponse.decode.bind(updateAccessPolicyResponse),
-        updateAccessPolicyMetadata.decode.bind(updateAccessPolicyMetadata)
-      ),
+        updateAccessPolicyMetadata.decode.bind(updateAccessPolicyMetadata)),
       deleteAccessPolicy: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteAccessPolicyResponse.decode.bind(deleteAccessPolicyResponse),
-        deleteAccessPolicyMetadata.decode.bind(deleteAccessPolicyMetadata)
-      ),
+        deleteAccessPolicyMetadata.decode.bind(deleteAccessPolicyMetadata)),
       createAccessLevel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAccessLevelResponse.decode.bind(createAccessLevelResponse),
-        createAccessLevelMetadata.decode.bind(createAccessLevelMetadata)
-      ),
+        createAccessLevelMetadata.decode.bind(createAccessLevelMetadata)),
       updateAccessLevel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateAccessLevelResponse.decode.bind(updateAccessLevelResponse),
-        updateAccessLevelMetadata.decode.bind(updateAccessLevelMetadata)
-      ),
+        updateAccessLevelMetadata.decode.bind(updateAccessLevelMetadata)),
       deleteAccessLevel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteAccessLevelResponse.decode.bind(deleteAccessLevelResponse),
-        deleteAccessLevelMetadata.decode.bind(deleteAccessLevelMetadata)
-      ),
+        deleteAccessLevelMetadata.decode.bind(deleteAccessLevelMetadata)),
       replaceAccessLevels: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         replaceAccessLevelsResponse.decode.bind(replaceAccessLevelsResponse),
-        replaceAccessLevelsMetadata.decode.bind(replaceAccessLevelsMetadata)
-      ),
+        replaceAccessLevelsMetadata.decode.bind(replaceAccessLevelsMetadata)),
       createServicePerimeter: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createServicePerimeterResponse.decode.bind(
-          createServicePerimeterResponse
-        ),
-        createServicePerimeterMetadata.decode.bind(
-          createServicePerimeterMetadata
-        )
-      ),
+        createServicePerimeterResponse.decode.bind(createServicePerimeterResponse),
+        createServicePerimeterMetadata.decode.bind(createServicePerimeterMetadata)),
       updateServicePerimeter: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateServicePerimeterResponse.decode.bind(
-          updateServicePerimeterResponse
-        ),
-        updateServicePerimeterMetadata.decode.bind(
-          updateServicePerimeterMetadata
-        )
-      ),
+        updateServicePerimeterResponse.decode.bind(updateServicePerimeterResponse),
+        updateServicePerimeterMetadata.decode.bind(updateServicePerimeterMetadata)),
       deleteServicePerimeter: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteServicePerimeterResponse.decode.bind(
-          deleteServicePerimeterResponse
-        ),
-        deleteServicePerimeterMetadata.decode.bind(
-          deleteServicePerimeterMetadata
-        )
-      ),
+        deleteServicePerimeterResponse.decode.bind(deleteServicePerimeterResponse),
+        deleteServicePerimeterMetadata.decode.bind(deleteServicePerimeterMetadata)),
       replaceServicePerimeters: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        replaceServicePerimetersResponse.decode.bind(
-          replaceServicePerimetersResponse
-        ),
-        replaceServicePerimetersMetadata.decode.bind(
-          replaceServicePerimetersMetadata
-        )
-      ),
+        replaceServicePerimetersResponse.decode.bind(replaceServicePerimetersResponse),
+        replaceServicePerimetersMetadata.decode.bind(replaceServicePerimetersMetadata)),
       commitServicePerimeters: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        commitServicePerimetersResponse.decode.bind(
-          commitServicePerimetersResponse
-        ),
-        commitServicePerimetersMetadata.decode.bind(
-          commitServicePerimetersMetadata
-        )
-      ),
+        commitServicePerimetersResponse.decode.bind(commitServicePerimetersResponse),
+        commitServicePerimetersMetadata.decode.bind(commitServicePerimetersMetadata)),
       createGcpUserAccessBinding: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createGcpUserAccessBindingResponse.decode.bind(
-          createGcpUserAccessBindingResponse
-        ),
-        createGcpUserAccessBindingMetadata.decode.bind(
-          createGcpUserAccessBindingMetadata
-        )
-      ),
+        createGcpUserAccessBindingResponse.decode.bind(createGcpUserAccessBindingResponse),
+        createGcpUserAccessBindingMetadata.decode.bind(createGcpUserAccessBindingMetadata)),
       updateGcpUserAccessBinding: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateGcpUserAccessBindingResponse.decode.bind(
-          updateGcpUserAccessBindingResponse
-        ),
-        updateGcpUserAccessBindingMetadata.decode.bind(
-          updateGcpUserAccessBindingMetadata
-        )
-      ),
+        updateGcpUserAccessBindingResponse.decode.bind(updateGcpUserAccessBindingResponse),
+        updateGcpUserAccessBindingMetadata.decode.bind(updateGcpUserAccessBindingMetadata)),
       deleteGcpUserAccessBinding: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteGcpUserAccessBindingResponse.decode.bind(
-          deleteGcpUserAccessBindingResponse
-        ),
-        deleteGcpUserAccessBindingMetadata.decode.bind(
-          deleteGcpUserAccessBindingMetadata
-        )
-      ),
+        deleteGcpUserAccessBindingResponse.decode.bind(deleteGcpUserAccessBindingResponse),
+        deleteGcpUserAccessBindingMetadata.decode.bind(deleteGcpUserAccessBindingMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.identity.accesscontextmanager.v1.AccessContextManager',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.identity.accesscontextmanager.v1.AccessContextManager', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -516,61 +390,28 @@ export class AccessContextManagerClient {
     // Put together the "service stub" for
     // google.identity.accesscontextmanager.v1.AccessContextManager.
     this.accessContextManagerStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.identity.accesscontextmanager.v1.AccessContextManager'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.identity.accesscontextmanager.v1
-            .AccessContextManager,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.identity.accesscontextmanager.v1.AccessContextManager') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.identity.accesscontextmanager.v1.AccessContextManager,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const accessContextManagerStubMethods = [
-      'listAccessPolicies',
-      'getAccessPolicy',
-      'createAccessPolicy',
-      'updateAccessPolicy',
-      'deleteAccessPolicy',
-      'listAccessLevels',
-      'getAccessLevel',
-      'createAccessLevel',
-      'updateAccessLevel',
-      'deleteAccessLevel',
-      'replaceAccessLevels',
-      'listServicePerimeters',
-      'getServicePerimeter',
-      'createServicePerimeter',
-      'updateServicePerimeter',
-      'deleteServicePerimeter',
-      'replaceServicePerimeters',
-      'commitServicePerimeters',
-      'listGcpUserAccessBindings',
-      'getGcpUserAccessBinding',
-      'createGcpUserAccessBinding',
-      'updateGcpUserAccessBinding',
-      'deleteGcpUserAccessBinding',
-      'setIamPolicy',
-      'getIamPolicy',
-      'testIamPermissions',
-    ];
+    const accessContextManagerStubMethods =
+        ['listAccessPolicies', 'getAccessPolicy', 'createAccessPolicy', 'updateAccessPolicy', 'deleteAccessPolicy', 'listAccessLevels', 'getAccessLevel', 'createAccessLevel', 'updateAccessLevel', 'deleteAccessLevel', 'replaceAccessLevels', 'listServicePerimeters', 'getServicePerimeter', 'createServicePerimeter', 'updateServicePerimeter', 'deleteServicePerimeter', 'replaceServicePerimeters', 'commitServicePerimeters', 'listGcpUserAccessBindings', 'getGcpUserAccessBinding', 'createGcpUserAccessBinding', 'updateGcpUserAccessBinding', 'deleteGcpUserAccessBinding', 'setIamPolicy', 'getIamPolicy', 'testIamPermissions'];
     for (const methodName of accessContextManagerStubMethods) {
       const callPromise = this.accessContextManagerStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -595,14 +436,8 @@ export class AccessContextManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'accesscontextmanager.googleapis.com';
   }
@@ -613,14 +448,8 @@ export class AccessContextManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'accesscontextmanager.googleapis.com';
   }
@@ -651,7 +480,9 @@ export class AccessContextManagerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -660,9 +491,8 @@ export class AccessContextManagerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -673,3781 +503,2649 @@ export class AccessContextManagerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Returns an [access policy]
-   * [google.identity.accesscontextmanager.v1.AccessPolicy] based on the name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name for the access policy to get.
-   *
-   *   Format `accessPolicies/{policy_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.get_access_policy.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetAccessPolicy_async
-   */
+/**
+ * Returns an [access policy]
+ * [google.identity.accesscontextmanager.v1.AccessPolicy] based on the name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name for the access policy to get.
+ *
+ *   Format `accessPolicies/{policy_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.get_access_policy.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetAccessPolicy_async
+ */
   getAccessPolicy(
-    request?: protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-      (
-        | protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+        protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest|undefined, {}|undefined
+      ]>;
   getAccessPolicy(
-    request: protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-      | protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAccessPolicy(
-    request: protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest,
-    callback: Callback<
-      protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-      | protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAccessPolicy(
-    request?: protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-          | protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-      | protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-      (
-        | protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAccessPolicy(
+      request: protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest,
+      callback: Callback<
+          protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+          protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAccessPolicy(
+      request?: protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+          protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+          protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+        protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAccessPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-          | protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+        protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAccessPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAccessPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-          (
-            | protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getAccessPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getAccessPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+        protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAccessPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an [access level]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] based on the resource
-   * name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name for the [Access Level]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel].
-   *
-   *   Format:
-   *   `accessPolicies/{policy_id}/accessLevels/{access_level_id}`
-   * @param {google.identity.accesscontextmanager.v1.LevelFormat} request.accessLevelFormat
-   *   Whether to return `BasicLevels` in the Cloud Common Expression
-   *   Language rather than as `BasicLevels`. Defaults to AS_DEFINED, where
-   *   [Access Levels] [google.identity.accesscontextmanager.v1.AccessLevel]
-   *   are returned as `BasicLevels` or `CustomLevels` based on how they were
-   *   created. If set to CEL, all [Access Levels]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel] are returned as
-   *   `CustomLevels`. In the CEL case, `BasicLevels` are translated to equivalent
-   *   `CustomLevels`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.get_access_level.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetAccessLevel_async
-   */
+/**
+ * Gets an [access level]
+ * [google.identity.accesscontextmanager.v1.AccessLevel] based on the resource
+ * name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name for the [Access Level]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel].
+ *
+ *   Format:
+ *   `accessPolicies/{policy_id}/accessLevels/{access_level_id}`
+ * @param {google.identity.accesscontextmanager.v1.LevelFormat} request.accessLevelFormat
+ *   Whether to return `BasicLevels` in the Cloud Common Expression
+ *   Language rather than as `BasicLevels`. Defaults to AS_DEFINED, where
+ *   [Access Levels] [google.identity.accesscontextmanager.v1.AccessLevel]
+ *   are returned as `BasicLevels` or `CustomLevels` based on how they were
+ *   created. If set to CEL, all [Access Levels]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel] are returned as
+ *   `CustomLevels`. In the CEL case, `BasicLevels` are translated to equivalent
+ *   `CustomLevels`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.get_access_level.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetAccessLevel_async
+ */
   getAccessLevel(
-    request?: protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-      (
-        | protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
+        protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest|undefined, {}|undefined
+      ]>;
   getAccessLevel(
-    request: protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-      | protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAccessLevel(
-    request: protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest,
-    callback: Callback<
-      protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-      | protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAccessLevel(
-    request?: protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-          | protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-      | protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-      (
-        | protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAccessLevel(
+      request: protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest,
+      callback: Callback<
+          protos.google.identity.accesscontextmanager.v1.IAccessLevel,
+          protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAccessLevel(
+      request?: protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.identity.accesscontextmanager.v1.IAccessLevel,
+          protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.identity.accesscontextmanager.v1.IAccessLevel,
+          protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
+        protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAccessLevel request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-          | protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
+        protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAccessLevel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAccessLevel(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-          (
-            | protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getAccessLevel response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getAccessLevel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
+        protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAccessLevel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a [service perimeter]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] based on the
-   * resource name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name for the [Service Perimeter]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter].
-   *
-   *   Format:
-   *   `accessPolicies/{policy_id}/servicePerimeters/{service_perimeters_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.identity.accesscontextmanager.v1.ServicePerimeter|ServicePerimeter}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.get_service_perimeter.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetServicePerimeter_async
-   */
+/**
+ * Gets a [service perimeter]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter] based on the
+ * resource name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name for the [Service Perimeter]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter].
+ *
+ *   Format:
+ *   `accessPolicies/{policy_id}/servicePerimeters/{service_perimeters_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.identity.accesscontextmanager.v1.ServicePerimeter|ServicePerimeter}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.get_service_perimeter.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetServicePerimeter_async
+ */
   getServicePerimeter(
-    request?: protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-      (
-        | protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
+        protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest|undefined, {}|undefined
+      ]>;
   getServicePerimeter(
-    request: protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-      | protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getServicePerimeter(
-    request: protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest,
-    callback: Callback<
-      protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-      | protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getServicePerimeter(
-    request?: protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-          | protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-      | protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-      (
-        | protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest|null|undefined,
+          {}|null|undefined>): void;
+  getServicePerimeter(
+      request: protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest,
+      callback: Callback<
+          protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
+          protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest|null|undefined,
+          {}|null|undefined>): void;
+  getServicePerimeter(
+      request?: protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
+          protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
+          protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
+        protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getServicePerimeter request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-          | protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
+        protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getServicePerimeter response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getServicePerimeter(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-          (
-            | protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getServicePerimeter response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getServicePerimeter(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
+        protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getServicePerimeter response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the [GcpUserAccessBinding]
-   * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding] with
-   * the given name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Example: "organizations/256/gcpUserAccessBindings/b3-BhcX_Ud5N"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding|GcpUserAccessBinding}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.get_gcp_user_access_binding.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetGcpUserAccessBinding_async
-   */
+/**
+ * Gets the [GcpUserAccessBinding]
+ * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding] with
+ * the given name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Example: "organizations/256/gcpUserAccessBindings/b3-BhcX_Ud5N"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding|GcpUserAccessBinding}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.get_gcp_user_access_binding.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetGcpUserAccessBinding_async
+ */
   getGcpUserAccessBinding(
-    request?: protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-      (
-        | protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
+        protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest|undefined, {}|undefined
+      ]>;
   getGcpUserAccessBinding(
-    request: protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-      | protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGcpUserAccessBinding(
-    request: protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest,
-    callback: Callback<
-      protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-      | protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGcpUserAccessBinding(
-    request?: protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-          | protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-      | protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-      (
-        | protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGcpUserAccessBinding(
+      request: protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest,
+      callback: Callback<
+          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
+          protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGcpUserAccessBinding(
+      request?: protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
+          protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
+          protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
+        protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getGcpUserAccessBinding request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-          | protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
+        protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getGcpUserAccessBinding response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getGcpUserAccessBinding(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-          (
-            | protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getGcpUserAccessBinding response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getGcpUserAccessBinding(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
+        protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getGcpUserAccessBinding response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the IAM policy for the specified Access Context Manager
-   * {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|access policy}.
-   * This method replaces the existing IAM policy on the access policy. The IAM
-   * policy controls the set of users who can perform specific operations on the
-   * Access Context Manager [access
-   * policy][google.identity.accesscontextmanager.v1.AccessPolicy].
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-   *   the fields in the mask will be modified. If no mask is provided, the
-   *   following default mask is used:
-   *
-   *   `paths: "bindings, etag"`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.set_iam_policy.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_SetIamPolicy_async
-   */
+/**
+ * Sets the IAM policy for the specified Access Context Manager
+ * {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|access policy}.
+ * This method replaces the existing IAM policy on the access policy. The IAM
+ * policy controls the set of users who can perform specific operations on the
+ * Access Context Manager [access
+ * policy][google.identity.accesscontextmanager.v1.AccessPolicy].
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being specified.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.Policy} request.policy
+ *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is a
+ *   valid policy but certain Cloud Platform services (such as Projects)
+ *   might reject them.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+ *   the fields in the mask will be modified. If no mask is provided, the
+ *   following default mask is used:
+ *
+ *   `paths: "bindings, etag"`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.set_iam_policy.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_SetIamPolicy_async
+ */
   setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the IAM policy for the specified Access Context Manager
-   * {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|access policy}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.get_iam_policy.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetIamPolicy_async
-   */
+/**
+ * Gets the IAM policy for the specified Access Context Manager
+ * {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|access policy}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.GetPolicyOptions} request.options
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.get_iam_policy.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetIamPolicy_async
+ */
   getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns the IAM permissions that the caller has on the specified Access
-   * Context Manager resource. The resource can be an
-   * {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy},
-   * {@link protos.google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel}, or
-   * [ServicePerimeter][google.identity.accesscontextmanager.v1.ServicePerimeter
-   * ]. This method does not support other resources.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.test_iam_permissions.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_TestIamPermissions_async
-   */
+/**
+ * Returns the IAM permissions that the caller has on the specified Access
+ * Context Manager resource. The resource can be an
+ * {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy},
+ * {@link protos.google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel}, or
+ * [ServicePerimeter][google.identity.accesscontextmanager.v1.ServicePerimeter
+ * ]. This method does not support other resources.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.test_iam_permissions.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_TestIamPermissions_async
+ */
   testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      callback: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .testIamPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('testIamPermissions response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates an access policy. This method fails if the organization already has
-   * an access policy. The long-running operation has a successful status
-   * after the access policy propagates to long-lasting storage.
-   * Syntactic and basic semantic errors are returned in `metadata` as a
-   * BadRequest proto.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Output only. Resource name of the `AccessPolicy`. Format:
-   *   `accessPolicies/{access_policy}`
-   * @param {string} request.parent
-   *   Required. The parent of this `AccessPolicy` in the Cloud Resource
-   *   Hierarchy. Currently immutable once created. Format:
-   *   `organizations/{organization_id}`
-   * @param {string} request.title
-   *   Required. Human readable title. Does not affect behavior.
-   * @param {string[]} request.scopes
-   *   The scopes of a policy define which resources an ACM policy can restrict,
-   *   and where ACM resources can be referenced.
-   *   For example, a policy with scopes=["folders/123"] has the following
-   *   behavior:
-   *   - vpcsc perimeters can only restrict projects within folders/123
-   *   - access levels can only be referenced by resources within folders/123.
-   *   If empty, there are no limitations on which resources can be restricted by
-   *   an ACM policy, and there are no limitations on where ACM resources can be
-   *   referenced.
-   *   Only one policy can include a given scope (attempting to create a second
-   *   policy which includes "folders/123" will result in an error).
-   *   Currently, scopes cannot be modified after a policy is created.
-   *   Currently, policies can only have a single scope.
-   *   Format: list of `folders/{folder_number}` or `projects/{project_number}`
-   * @param {google.protobuf.Timestamp} request.createTime
-   *   Output only. Time the `AccessPolicy` was created in UTC.
-   * @param {google.protobuf.Timestamp} request.updateTime
-   *   Output only. Time the `AccessPolicy` was updated in UTC.
-   * @param {string} request.etag
-   *   Output only. An opaque identifier for the current version of the
-   *   `AccessPolicy`. This will always be a strongly validated etag, meaning that
-   *   two Access Polices will be identical if and only if their etags are
-   *   identical. Clients should not expect this to be in any specific format.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.create_access_policy.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateAccessPolicy_async
-   */
+/**
+ * Creates an access policy. This method fails if the organization already has
+ * an access policy. The long-running operation has a successful status
+ * after the access policy propagates to long-lasting storage.
+ * Syntactic and basic semantic errors are returned in `metadata` as a
+ * BadRequest proto.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Output only. Resource name of the `AccessPolicy`. Format:
+ *   `accessPolicies/{access_policy}`
+ * @param {string} request.parent
+ *   Required. The parent of this `AccessPolicy` in the Cloud Resource
+ *   Hierarchy. Currently immutable once created. Format:
+ *   `organizations/{organization_id}`
+ * @param {string} request.title
+ *   Required. Human readable title. Does not affect behavior.
+ * @param {string[]} request.scopes
+ *   The scopes of a policy define which resources an ACM policy can restrict,
+ *   and where ACM resources can be referenced.
+ *   For example, a policy with scopes=["folders/123"] has the following
+ *   behavior:
+ *   - vpcsc perimeters can only restrict projects within folders/123
+ *   - access levels can only be referenced by resources within folders/123.
+ *   If empty, there are no limitations on which resources can be restricted by
+ *   an ACM policy, and there are no limitations on where ACM resources can be
+ *   referenced.
+ *   Only one policy can include a given scope (attempting to create a second
+ *   policy which includes "folders/123" will result in an error).
+ *   Currently, scopes cannot be modified after a policy is created.
+ *   Currently, policies can only have a single scope.
+ *   Format: list of `folders/{folder_number}` or `projects/{project_number}`
+ * @param {google.protobuf.Timestamp} request.createTime
+ *   Output only. Time the `AccessPolicy` was created in UTC.
+ * @param {google.protobuf.Timestamp} request.updateTime
+ *   Output only. Time the `AccessPolicy` was updated in UTC.
+ * @param {string} request.etag
+ *   Output only. An opaque identifier for the current version of the
+ *   `AccessPolicy`. This will always be a strongly validated etag, meaning that
+ *   two Access Polices will be identical if and only if their etags are
+ *   identical. Clients should not expect this to be in any specific format.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.create_access_policy.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateAccessPolicy_async
+ */
   createAccessPolicy(
-    request?: protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createAccessPolicy(
-    request: protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAccessPolicy(
-    request: protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAccessPolicy(
-    request?: protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAccessPolicy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAccessPolicy request %j', request);
-    return this.innerApiCalls
-      .createAccessPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createAccessPolicy response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createAccessPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createAccessPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createAccessPolicy()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.create_access_policy.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateAccessPolicy_async
-   */
-  async checkCreateAccessPolicyProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.identity.accesscontextmanager.v1.AccessPolicy,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createAccessPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.create_access_policy.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateAccessPolicy_async
+ */
+  async checkCreateAccessPolicyProgress(name: string): Promise<LROperation<protos.google.identity.accesscontextmanager.v1.AccessPolicy, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>>{
     this._log.info('createAccessPolicy long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createAccessPolicy,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.identity.accesscontextmanager.v1.AccessPolicy,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAccessPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.identity.accesscontextmanager.v1.AccessPolicy, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>;
   }
-  /**
-   * Updates an [access policy]
-   * [google.identity.accesscontextmanager.v1.AccessPolicy]. The
-   * long-running operation from this RPC has a successful status after the
-   * changes to the [access policy]
-   * [google.identity.accesscontextmanager.v1.AccessPolicy] propagate
-   * to long-lasting storage.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.identity.accesscontextmanager.v1.AccessPolicy} request.policy
-   *   Required. The updated AccessPolicy.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask to control which fields get updated. Must be non-empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.update_access_policy.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessPolicy_async
-   */
+/**
+ * Updates an [access policy]
+ * [google.identity.accesscontextmanager.v1.AccessPolicy]. The
+ * long-running operation from this RPC has a successful status after the
+ * changes to the [access policy]
+ * [google.identity.accesscontextmanager.v1.AccessPolicy] propagate
+ * to long-lasting storage.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.identity.accesscontextmanager.v1.AccessPolicy} request.policy
+ *   Required. The updated AccessPolicy.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Mask to control which fields get updated. Must be non-empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.update_access_policy.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessPolicy_async
+ */
   updateAccessPolicy(
-    request?: protos.google.identity.accesscontextmanager.v1.IUpdateAccessPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IUpdateAccessPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateAccessPolicy(
-    request: protos.google.identity.accesscontextmanager.v1.IUpdateAccessPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IUpdateAccessPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateAccessPolicy(
-    request: protos.google.identity.accesscontextmanager.v1.IUpdateAccessPolicyRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IUpdateAccessPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateAccessPolicy(
-    request?: protos.google.identity.accesscontextmanager.v1.IUpdateAccessPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.identity.accesscontextmanager.v1.IUpdateAccessPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'policy.name': request.policy!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'policy.name': request.policy!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateAccessPolicy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateAccessPolicy request %j', request);
-    return this.innerApiCalls
-      .updateAccessPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateAccessPolicy response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateAccessPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.identity.accesscontextmanager.v1.IAccessPolicy, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateAccessPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateAccessPolicy()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.update_access_policy.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessPolicy_async
-   */
-  async checkUpdateAccessPolicyProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.identity.accesscontextmanager.v1.AccessPolicy,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateAccessPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.update_access_policy.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessPolicy_async
+ */
+  async checkUpdateAccessPolicyProgress(name: string): Promise<LROperation<protos.google.identity.accesscontextmanager.v1.AccessPolicy, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>>{
     this._log.info('updateAccessPolicy long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateAccessPolicy,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.identity.accesscontextmanager.v1.AccessPolicy,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAccessPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.identity.accesscontextmanager.v1.AccessPolicy, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>;
   }
-  /**
-   * Deletes an [access policy]
-   * [google.identity.accesscontextmanager.v1.AccessPolicy] based on the
-   * resource name. The long-running operation has a successful status after the
-   * [access policy] [google.identity.accesscontextmanager.v1.AccessPolicy]
-   * is removed from long-lasting storage.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name for the access policy to delete.
-   *
-   *   Format `accessPolicies/{policy_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.delete_access_policy.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteAccessPolicy_async
-   */
+/**
+ * Deletes an [access policy]
+ * [google.identity.accesscontextmanager.v1.AccessPolicy] based on the
+ * resource name. The long-running operation has a successful status after the
+ * [access policy] [google.identity.accesscontextmanager.v1.AccessPolicy]
+ * is removed from long-lasting storage.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name for the access policy to delete.
+ *
+ *   Format `accessPolicies/{policy_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.delete_access_policy.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteAccessPolicy_async
+ */
   deleteAccessPolicy(
-    request?: protos.google.identity.accesscontextmanager.v1.IDeleteAccessPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IDeleteAccessPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteAccessPolicy(
-    request: protos.google.identity.accesscontextmanager.v1.IDeleteAccessPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IDeleteAccessPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAccessPolicy(
-    request: protos.google.identity.accesscontextmanager.v1.IDeleteAccessPolicyRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IDeleteAccessPolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAccessPolicy(
-    request?: protos.google.identity.accesscontextmanager.v1.IDeleteAccessPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.identity.accesscontextmanager.v1.IDeleteAccessPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteAccessPolicy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteAccessPolicy request %j', request);
-    return this.innerApiCalls
-      .deleteAccessPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAccessPolicy response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteAccessPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteAccessPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteAccessPolicy()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.delete_access_policy.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteAccessPolicy_async
-   */
-  async checkDeleteAccessPolicyProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteAccessPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.delete_access_policy.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteAccessPolicy_async
+ */
+  async checkDeleteAccessPolicyProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>>{
     this._log.info('deleteAccessPolicy long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteAccessPolicy,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAccessPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>;
   }
-  /**
-   * Creates an [access level]
-   * [google.identity.accesscontextmanager.v1.AccessLevel]. The long-running
-   * operation from this RPC has a successful status after the [access
-   * level] [google.identity.accesscontextmanager.v1.AccessLevel]
-   * propagates to long-lasting storage. If [access levels]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] contain
-   * errors, an error response is returned for the first error encountered.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name for the access policy which owns this [Access
-   *   Level] [google.identity.accesscontextmanager.v1.AccessLevel].
-   *
-   *   Format: `accessPolicies/{policy_id}`
-   * @param {google.identity.accesscontextmanager.v1.AccessLevel} request.accessLevel
-   *   Required. The [Access Level]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel] to create.
-   *   Syntactic correctness of the [Access Level]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel] is a
-   *   precondition for creation.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.create_access_level.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateAccessLevel_async
-   */
+/**
+ * Creates an [access level]
+ * [google.identity.accesscontextmanager.v1.AccessLevel]. The long-running
+ * operation from this RPC has a successful status after the [access
+ * level] [google.identity.accesscontextmanager.v1.AccessLevel]
+ * propagates to long-lasting storage. If [access levels]
+ * [google.identity.accesscontextmanager.v1.AccessLevel] contain
+ * errors, an error response is returned for the first error encountered.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name for the access policy which owns this [Access
+ *   Level] [google.identity.accesscontextmanager.v1.AccessLevel].
+ *
+ *   Format: `accessPolicies/{policy_id}`
+ * @param {google.identity.accesscontextmanager.v1.AccessLevel} request.accessLevel
+ *   Required. The [Access Level]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel] to create.
+ *   Syntactic correctness of the [Access Level]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel] is a
+ *   precondition for creation.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.create_access_level.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateAccessLevel_async
+ */
   createAccessLevel(
-    request?: protos.google.identity.accesscontextmanager.v1.ICreateAccessLevelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.ICreateAccessLevelRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createAccessLevel(
-    request: protos.google.identity.accesscontextmanager.v1.ICreateAccessLevelRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.ICreateAccessLevelRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAccessLevel(
-    request: protos.google.identity.accesscontextmanager.v1.ICreateAccessLevelRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.ICreateAccessLevelRequest,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAccessLevel(
-    request?: protos.google.identity.accesscontextmanager.v1.ICreateAccessLevelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.identity.accesscontextmanager.v1.ICreateAccessLevelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAccessLevel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAccessLevel request %j', request);
-    return this.innerApiCalls
-      .createAccessLevel(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createAccessLevel response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createAccessLevel(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createAccessLevel response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createAccessLevel()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.create_access_level.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateAccessLevel_async
-   */
-  async checkCreateAccessLevelProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.identity.accesscontextmanager.v1.AccessLevel,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createAccessLevel()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.create_access_level.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateAccessLevel_async
+ */
+  async checkCreateAccessLevelProgress(name: string): Promise<LROperation<protos.google.identity.accesscontextmanager.v1.AccessLevel, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>>{
     this._log.info('createAccessLevel long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createAccessLevel,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.identity.accesscontextmanager.v1.AccessLevel,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAccessLevel, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.identity.accesscontextmanager.v1.AccessLevel, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>;
   }
-  /**
-   * Updates an [access level]
-   * [google.identity.accesscontextmanager.v1.AccessLevel]. The long-running
-   * operation from this RPC has a successful status after the changes to
-   * the [access level]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] propagate
-   * to long-lasting storage. If [access levels]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] contain
-   * errors, an error response is returned for the first error encountered.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.identity.accesscontextmanager.v1.AccessLevel} request.accessLevel
-   *   Required. The updated [Access Level]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel]. Syntactic
-   *   correctness of the [Access Level]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel] is a
-   *   precondition for creation.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask to control which fields get updated. Must be non-empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.update_access_level.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessLevel_async
-   */
+/**
+ * Updates an [access level]
+ * [google.identity.accesscontextmanager.v1.AccessLevel]. The long-running
+ * operation from this RPC has a successful status after the changes to
+ * the [access level]
+ * [google.identity.accesscontextmanager.v1.AccessLevel] propagate
+ * to long-lasting storage. If [access levels]
+ * [google.identity.accesscontextmanager.v1.AccessLevel] contain
+ * errors, an error response is returned for the first error encountered.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.identity.accesscontextmanager.v1.AccessLevel} request.accessLevel
+ *   Required. The updated [Access Level]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel]. Syntactic
+ *   correctness of the [Access Level]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel] is a
+ *   precondition for creation.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Mask to control which fields get updated. Must be non-empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.update_access_level.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessLevel_async
+ */
   updateAccessLevel(
-    request?: protos.google.identity.accesscontextmanager.v1.IUpdateAccessLevelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IUpdateAccessLevelRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateAccessLevel(
-    request: protos.google.identity.accesscontextmanager.v1.IUpdateAccessLevelRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IUpdateAccessLevelRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateAccessLevel(
-    request: protos.google.identity.accesscontextmanager.v1.IUpdateAccessLevelRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IUpdateAccessLevelRequest,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateAccessLevel(
-    request?: protos.google.identity.accesscontextmanager.v1.IUpdateAccessLevelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.identity.accesscontextmanager.v1.IUpdateAccessLevelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'access_level.name': request.accessLevel!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'access_level.name': request.accessLevel!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateAccessLevel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateAccessLevel request %j', request);
-    return this.innerApiCalls
-      .updateAccessLevel(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IAccessLevel,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateAccessLevel response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateAccessLevel(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.identity.accesscontextmanager.v1.IAccessLevel, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateAccessLevel response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateAccessLevel()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.update_access_level.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessLevel_async
-   */
-  async checkUpdateAccessLevelProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.identity.accesscontextmanager.v1.AccessLevel,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateAccessLevel()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.update_access_level.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessLevel_async
+ */
+  async checkUpdateAccessLevelProgress(name: string): Promise<LROperation<protos.google.identity.accesscontextmanager.v1.AccessLevel, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>>{
     this._log.info('updateAccessLevel long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateAccessLevel,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.identity.accesscontextmanager.v1.AccessLevel,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAccessLevel, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.identity.accesscontextmanager.v1.AccessLevel, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>;
   }
-  /**
-   * Deletes an [access level]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] based on the resource
-   * name. The long-running operation from this RPC has a successful status
-   * after the [access level]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] has been removed
-   * from long-lasting storage.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name for the [Access Level]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel].
-   *
-   *   Format:
-   *   `accessPolicies/{policy_id}/accessLevels/{access_level_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.delete_access_level.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteAccessLevel_async
-   */
+/**
+ * Deletes an [access level]
+ * [google.identity.accesscontextmanager.v1.AccessLevel] based on the resource
+ * name. The long-running operation from this RPC has a successful status
+ * after the [access level]
+ * [google.identity.accesscontextmanager.v1.AccessLevel] has been removed
+ * from long-lasting storage.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name for the [Access Level]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel].
+ *
+ *   Format:
+ *   `accessPolicies/{policy_id}/accessLevels/{access_level_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.delete_access_level.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteAccessLevel_async
+ */
   deleteAccessLevel(
-    request?: protos.google.identity.accesscontextmanager.v1.IDeleteAccessLevelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IDeleteAccessLevelRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteAccessLevel(
-    request: protos.google.identity.accesscontextmanager.v1.IDeleteAccessLevelRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IDeleteAccessLevelRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAccessLevel(
-    request: protos.google.identity.accesscontextmanager.v1.IDeleteAccessLevelRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IDeleteAccessLevelRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAccessLevel(
-    request?: protos.google.identity.accesscontextmanager.v1.IDeleteAccessLevelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.identity.accesscontextmanager.v1.IDeleteAccessLevelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteAccessLevel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteAccessLevel request %j', request);
-    return this.innerApiCalls
-      .deleteAccessLevel(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAccessLevel response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteAccessLevel(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteAccessLevel response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteAccessLevel()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.delete_access_level.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteAccessLevel_async
-   */
-  async checkDeleteAccessLevelProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteAccessLevel()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.delete_access_level.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteAccessLevel_async
+ */
+  async checkDeleteAccessLevelProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>>{
     this._log.info('deleteAccessLevel long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteAccessLevel,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAccessLevel, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>;
   }
-  /**
-   * Replaces all existing [access levels]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] in an [access
-   * policy] [google.identity.accesscontextmanager.v1.AccessPolicy] with
-   * the [access levels]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] provided. This
-   * is done atomically. The long-running operation from this RPC has a
-   * successful status after all replacements propagate to long-lasting
-   * storage. If the replacement contains errors, an error response is returned
-   * for the first error encountered.  Upon error, the replacement is cancelled,
-   * and existing [access levels]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] are not
-   * affected. The Operation.response field contains
-   * ReplaceAccessLevelsResponse. Removing [access levels]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] contained in existing
-   * [service perimeters]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] result in an
-   * error.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name for the access policy which owns these
-   *   [Access Levels]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel].
-   *
-   *   Format: `accessPolicies/{policy_id}`
-   * @param {number[]} request.accessLevels
-   *   Required. The desired [Access Levels]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel] that should
-   *   replace all existing [Access Levels]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel] in the
-   *   [Access Policy]
-   *   [google.identity.accesscontextmanager.v1.AccessPolicy].
-   * @param {string} request.etag
-   *   Optional. The etag for the version of the [Access Policy]
-   *   [google.identity.accesscontextmanager.v1.AccessPolicy] that this
-   *   replace operation is to be performed on. If, at the time of replace, the
-   *   etag for the Access Policy stored in Access Context Manager is different
-   *   from the specified etag, then the replace operation will not be performed
-   *   and the call will fail. This field is not required. If etag is not
-   *   provided, the operation will be performed as if a valid etag is provided.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.replace_access_levels.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ReplaceAccessLevels_async
-   */
+/**
+ * Replaces all existing [access levels]
+ * [google.identity.accesscontextmanager.v1.AccessLevel] in an [access
+ * policy] [google.identity.accesscontextmanager.v1.AccessPolicy] with
+ * the [access levels]
+ * [google.identity.accesscontextmanager.v1.AccessLevel] provided. This
+ * is done atomically. The long-running operation from this RPC has a
+ * successful status after all replacements propagate to long-lasting
+ * storage. If the replacement contains errors, an error response is returned
+ * for the first error encountered.  Upon error, the replacement is cancelled,
+ * and existing [access levels]
+ * [google.identity.accesscontextmanager.v1.AccessLevel] are not
+ * affected. The Operation.response field contains
+ * ReplaceAccessLevelsResponse. Removing [access levels]
+ * [google.identity.accesscontextmanager.v1.AccessLevel] contained in existing
+ * [service perimeters]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter] result in an
+ * error.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name for the access policy which owns these
+ *   [Access Levels]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel].
+ *
+ *   Format: `accessPolicies/{policy_id}`
+ * @param {number[]} request.accessLevels
+ *   Required. The desired [Access Levels]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel] that should
+ *   replace all existing [Access Levels]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel] in the
+ *   [Access Policy]
+ *   [google.identity.accesscontextmanager.v1.AccessPolicy].
+ * @param {string} request.etag
+ *   Optional. The etag for the version of the [Access Policy]
+ *   [google.identity.accesscontextmanager.v1.AccessPolicy] that this
+ *   replace operation is to be performed on. If, at the time of replace, the
+ *   etag for the Access Policy stored in Access Context Manager is different
+ *   from the specified etag, then the replace operation will not be performed
+ *   and the call will fail. This field is not required. If etag is not
+ *   provided, the operation will be performed as if a valid etag is provided.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.replace_access_levels.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ReplaceAccessLevels_async
+ */
   replaceAccessLevels(
-    request?: protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   replaceAccessLevels(
-    request: protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   replaceAccessLevels(
-    request: protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsRequest,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   replaceAccessLevels(
-    request?: protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('replaceAccessLevels response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('replaceAccessLevels request %j', request);
-    return this.innerApiCalls
-      .replaceAccessLevels(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('replaceAccessLevels response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.replaceAccessLevels(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('replaceAccessLevels response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `replaceAccessLevels()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.replace_access_levels.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ReplaceAccessLevels_async
-   */
-  async checkReplaceAccessLevelsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsResponse,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `replaceAccessLevels()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.replace_access_levels.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ReplaceAccessLevels_async
+ */
+  async checkReplaceAccessLevelsProgress(name: string): Promise<LROperation<protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsResponse, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>>{
     this._log.info('replaceAccessLevels long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.replaceAccessLevels,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsResponse,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.replaceAccessLevels, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsResponse, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>;
   }
-  /**
-   * Creates a [service perimeter]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter]. The
-   * long-running operation from this RPC has a successful status after the
-   * [service perimeter]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter]
-   * propagates to long-lasting storage. If a [service perimeter]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] contains
-   * errors, an error response is returned for the first error encountered.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name for the access policy which owns this [Service
-   *   Perimeter] [google.identity.accesscontextmanager.v1.ServicePerimeter].
-   *
-   *   Format: `accessPolicies/{policy_id}`
-   * @param {google.identity.accesscontextmanager.v1.ServicePerimeter} request.servicePerimeter
-   *   Required. The [Service Perimeter]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter] to create.
-   *   Syntactic correctness of the [Service Perimeter]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter] is a
-   *   precondition for creation.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.create_service_perimeter.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateServicePerimeter_async
-   */
+/**
+ * Creates a [service perimeter]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter]. The
+ * long-running operation from this RPC has a successful status after the
+ * [service perimeter]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter]
+ * propagates to long-lasting storage. If a [service perimeter]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter] contains
+ * errors, an error response is returned for the first error encountered.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name for the access policy which owns this [Service
+ *   Perimeter] [google.identity.accesscontextmanager.v1.ServicePerimeter].
+ *
+ *   Format: `accessPolicies/{policy_id}`
+ * @param {google.identity.accesscontextmanager.v1.ServicePerimeter} request.servicePerimeter
+ *   Required. The [Service Perimeter]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter] to create.
+ *   Syntactic correctness of the [Service Perimeter]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter] is a
+ *   precondition for creation.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.create_service_perimeter.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateServicePerimeter_async
+ */
   createServicePerimeter(
-    request?: protos.google.identity.accesscontextmanager.v1.ICreateServicePerimeterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.ICreateServicePerimeterRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createServicePerimeter(
-    request: protos.google.identity.accesscontextmanager.v1.ICreateServicePerimeterRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.ICreateServicePerimeterRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createServicePerimeter(
-    request: protos.google.identity.accesscontextmanager.v1.ICreateServicePerimeterRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.ICreateServicePerimeterRequest,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createServicePerimeter(
-    request?: protos.google.identity.accesscontextmanager.v1.ICreateServicePerimeterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.identity.accesscontextmanager.v1.ICreateServicePerimeterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createServicePerimeter response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createServicePerimeter request %j', request);
-    return this.innerApiCalls
-      .createServicePerimeter(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createServicePerimeter response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createServicePerimeter(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createServicePerimeter response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createServicePerimeter()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.create_service_perimeter.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateServicePerimeter_async
-   */
-  async checkCreateServicePerimeterProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.identity.accesscontextmanager.v1.ServicePerimeter,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createServicePerimeter()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.create_service_perimeter.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateServicePerimeter_async
+ */
+  async checkCreateServicePerimeterProgress(name: string): Promise<LROperation<protos.google.identity.accesscontextmanager.v1.ServicePerimeter, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>>{
     this._log.info('createServicePerimeter long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createServicePerimeter,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.identity.accesscontextmanager.v1.ServicePerimeter,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createServicePerimeter, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.identity.accesscontextmanager.v1.ServicePerimeter, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>;
   }
-  /**
-   * Updates a [service perimeter]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter]. The
-   * long-running operation from this RPC has a successful status after the
-   * [service perimeter]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter]
-   * propagates to long-lasting storage. If a [service perimeter]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] contains
-   * errors, an error response is returned for the first error encountered.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.identity.accesscontextmanager.v1.ServicePerimeter} request.servicePerimeter
-   *   Required. The updated `ServicePerimeter`. Syntactic correctness of the
-   *   `ServicePerimeter` is a precondition for creation.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask to control which fields get updated. Must be non-empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.update_service_perimeter.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateServicePerimeter_async
-   */
+/**
+ * Updates a [service perimeter]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter]. The
+ * long-running operation from this RPC has a successful status after the
+ * [service perimeter]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter]
+ * propagates to long-lasting storage. If a [service perimeter]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter] contains
+ * errors, an error response is returned for the first error encountered.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.identity.accesscontextmanager.v1.ServicePerimeter} request.servicePerimeter
+ *   Required. The updated `ServicePerimeter`. Syntactic correctness of the
+ *   `ServicePerimeter` is a precondition for creation.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Mask to control which fields get updated. Must be non-empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.update_service_perimeter.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateServicePerimeter_async
+ */
   updateServicePerimeter(
-    request?: protos.google.identity.accesscontextmanager.v1.IUpdateServicePerimeterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IUpdateServicePerimeterRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateServicePerimeter(
-    request: protos.google.identity.accesscontextmanager.v1.IUpdateServicePerimeterRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IUpdateServicePerimeterRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateServicePerimeter(
-    request: protos.google.identity.accesscontextmanager.v1.IUpdateServicePerimeterRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IUpdateServicePerimeterRequest,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateServicePerimeter(
-    request?: protos.google.identity.accesscontextmanager.v1.IUpdateServicePerimeterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.identity.accesscontextmanager.v1.IUpdateServicePerimeterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'service_perimeter.name': request.servicePerimeter!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service_perimeter.name': request.servicePerimeter!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateServicePerimeter response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateServicePerimeter request %j', request);
-    return this.innerApiCalls
-      .updateServicePerimeter(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateServicePerimeter response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateServicePerimeter(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.identity.accesscontextmanager.v1.IServicePerimeter, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateServicePerimeter response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateServicePerimeter()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.update_service_perimeter.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateServicePerimeter_async
-   */
-  async checkUpdateServicePerimeterProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.identity.accesscontextmanager.v1.ServicePerimeter,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateServicePerimeter()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.update_service_perimeter.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateServicePerimeter_async
+ */
+  async checkUpdateServicePerimeterProgress(name: string): Promise<LROperation<protos.google.identity.accesscontextmanager.v1.ServicePerimeter, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>>{
     this._log.info('updateServicePerimeter long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateServicePerimeter,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.identity.accesscontextmanager.v1.ServicePerimeter,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateServicePerimeter, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.identity.accesscontextmanager.v1.ServicePerimeter, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>;
   }
-  /**
-   * Deletes a [service perimeter]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] based on the
-   * resource name. The long-running operation from this RPC has a successful
-   * status after the [service perimeter]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] is removed from
-   * long-lasting storage.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name for the [Service Perimeter]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter].
-   *
-   *   Format:
-   *   `accessPolicies/{policy_id}/servicePerimeters/{service_perimeter_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.delete_service_perimeter.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteServicePerimeter_async
-   */
+/**
+ * Deletes a [service perimeter]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter] based on the
+ * resource name. The long-running operation from this RPC has a successful
+ * status after the [service perimeter]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter] is removed from
+ * long-lasting storage.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name for the [Service Perimeter]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter].
+ *
+ *   Format:
+ *   `accessPolicies/{policy_id}/servicePerimeters/{service_perimeter_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.delete_service_perimeter.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteServicePerimeter_async
+ */
   deleteServicePerimeter(
-    request?: protos.google.identity.accesscontextmanager.v1.IDeleteServicePerimeterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IDeleteServicePerimeterRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteServicePerimeter(
-    request: protos.google.identity.accesscontextmanager.v1.IDeleteServicePerimeterRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IDeleteServicePerimeterRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteServicePerimeter(
-    request: protos.google.identity.accesscontextmanager.v1.IDeleteServicePerimeterRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IDeleteServicePerimeterRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteServicePerimeter(
-    request?: protos.google.identity.accesscontextmanager.v1.IDeleteServicePerimeterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.identity.accesscontextmanager.v1.IDeleteServicePerimeterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteServicePerimeter response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteServicePerimeter request %j', request);
-    return this.innerApiCalls
-      .deleteServicePerimeter(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteServicePerimeter response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteServicePerimeter(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteServicePerimeter response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteServicePerimeter()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.delete_service_perimeter.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteServicePerimeter_async
-   */
-  async checkDeleteServicePerimeterProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteServicePerimeter()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.delete_service_perimeter.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteServicePerimeter_async
+ */
+  async checkDeleteServicePerimeterProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>>{
     this._log.info('deleteServicePerimeter long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteServicePerimeter,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteServicePerimeter, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>;
   }
-  /**
-   * Replace all existing [service perimeters]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] in an [access
-   * policy] [google.identity.accesscontextmanager.v1.AccessPolicy] with the
-   * [service perimeters]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] provided. This
-   * is done atomically. The long-running operation from this RPC has a
-   * successful status after all replacements propagate to long-lasting storage.
-   * Replacements containing errors result in an error response for the first
-   * error encountered. Upon an error, replacement are cancelled and existing
-   * [service perimeters]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] are not
-   * affected. The Operation.response field contains
-   * ReplaceServicePerimetersResponse.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name for the access policy which owns these
-   *   [Service Perimeters]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter].
-   *
-   *   Format: `accessPolicies/{policy_id}`
-   * @param {number[]} request.servicePerimeters
-   *   Required. The desired [Service Perimeters]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter] that should
-   *   replace all existing [Service Perimeters]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter] in the
-   *   [Access Policy]
-   *   [google.identity.accesscontextmanager.v1.AccessPolicy].
-   * @param {string} request.etag
-   *   Optional. The etag for the version of the [Access Policy]
-   *   [google.identity.accesscontextmanager.v1.AccessPolicy] that this
-   *   replace operation is to be performed on. If, at the time of replace, the
-   *   etag for the Access Policy stored in Access Context Manager is different
-   *   from the specified etag, then the replace operation will not be performed
-   *   and the call will fail. This field is not required. If etag is not
-   *   provided, the operation will be performed as if a valid etag is provided.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.replace_service_perimeters.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ReplaceServicePerimeters_async
-   */
+/**
+ * Replace all existing [service perimeters]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter] in an [access
+ * policy] [google.identity.accesscontextmanager.v1.AccessPolicy] with the
+ * [service perimeters]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter] provided. This
+ * is done atomically. The long-running operation from this RPC has a
+ * successful status after all replacements propagate to long-lasting storage.
+ * Replacements containing errors result in an error response for the first
+ * error encountered. Upon an error, replacement are cancelled and existing
+ * [service perimeters]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter] are not
+ * affected. The Operation.response field contains
+ * ReplaceServicePerimetersResponse.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name for the access policy which owns these
+ *   [Service Perimeters]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter].
+ *
+ *   Format: `accessPolicies/{policy_id}`
+ * @param {number[]} request.servicePerimeters
+ *   Required. The desired [Service Perimeters]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter] that should
+ *   replace all existing [Service Perimeters]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter] in the
+ *   [Access Policy]
+ *   [google.identity.accesscontextmanager.v1.AccessPolicy].
+ * @param {string} request.etag
+ *   Optional. The etag for the version of the [Access Policy]
+ *   [google.identity.accesscontextmanager.v1.AccessPolicy] that this
+ *   replace operation is to be performed on. If, at the time of replace, the
+ *   etag for the Access Policy stored in Access Context Manager is different
+ *   from the specified etag, then the replace operation will not be performed
+ *   and the call will fail. This field is not required. If etag is not
+ *   provided, the operation will be performed as if a valid etag is provided.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.replace_service_perimeters.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ReplaceServicePerimeters_async
+ */
   replaceServicePerimeters(
-    request?: protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   replaceServicePerimeters(
-    request: protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   replaceServicePerimeters(
-    request: protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersRequest,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   replaceServicePerimeters(
-    request?: protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('replaceServicePerimeters response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('replaceServicePerimeters request %j', request);
-    return this.innerApiCalls
-      .replaceServicePerimeters(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('replaceServicePerimeters response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.replaceServicePerimeters(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('replaceServicePerimeters response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `replaceServicePerimeters()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.replace_service_perimeters.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ReplaceServicePerimeters_async
-   */
-  async checkReplaceServicePerimetersProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersResponse,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `replaceServicePerimeters()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.replace_service_perimeters.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ReplaceServicePerimeters_async
+ */
+  async checkReplaceServicePerimetersProgress(name: string): Promise<LROperation<protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>>{
     this._log.info('replaceServicePerimeters long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.replaceServicePerimeters,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersResponse,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.replaceServicePerimeters, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>;
   }
-  /**
-   * Commits the dry-run specification for all the [service perimeters]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] in an
-   * {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|access policy}.
-   * A commit operation on a service perimeter involves copying its `spec` field
-   * to the `status` field of the service perimeter. Only [service perimeters]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] with
-   * `use_explicit_dry_run_spec` field set to true are affected by a commit
-   * operation. The long-running operation from this RPC has a successful
-   * status after the dry-run specifications for all the [service perimeters]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] have been
-   * committed. If a commit fails, it causes the long-running operation to
-   * return an error response and the entire commit operation is cancelled.
-   * When successful, the Operation.response field contains
-   * CommitServicePerimetersResponse. The `dry_run` and the `spec` fields are
-   * cleared after a successful commit operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name for the parent [Access Policy]
-   *   [google.identity.accesscontextmanager.v1.AccessPolicy] which owns all
-   *   [Service Perimeters]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter] in scope for
-   *   the commit operation.
-   *
-   *   Format: `accessPolicies/{policy_id}`
-   * @param {string} request.etag
-   *   Optional. The etag for the version of the [Access Policy]
-   *   [google.identity.accesscontextmanager.v1.AccessPolicy] that this
-   *   commit operation is to be performed on. If, at the time of commit, the
-   *   etag for the Access Policy stored in Access Context Manager is different
-   *   from the specified etag, then the commit operation will not be performed
-   *   and the call will fail. This field is not required. If etag is not
-   *   provided, the operation will be performed as if a valid etag is provided.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.commit_service_perimeters.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CommitServicePerimeters_async
-   */
+/**
+ * Commits the dry-run specification for all the [service perimeters]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter] in an
+ * {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|access policy}.
+ * A commit operation on a service perimeter involves copying its `spec` field
+ * to the `status` field of the service perimeter. Only [service perimeters]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter] with
+ * `use_explicit_dry_run_spec` field set to true are affected by a commit
+ * operation. The long-running operation from this RPC has a successful
+ * status after the dry-run specifications for all the [service perimeters]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter] have been
+ * committed. If a commit fails, it causes the long-running operation to
+ * return an error response and the entire commit operation is cancelled.
+ * When successful, the Operation.response field contains
+ * CommitServicePerimetersResponse. The `dry_run` and the `spec` fields are
+ * cleared after a successful commit operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name for the parent [Access Policy]
+ *   [google.identity.accesscontextmanager.v1.AccessPolicy] which owns all
+ *   [Service Perimeters]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter] in scope for
+ *   the commit operation.
+ *
+ *   Format: `accessPolicies/{policy_id}`
+ * @param {string} request.etag
+ *   Optional. The etag for the version of the [Access Policy]
+ *   [google.identity.accesscontextmanager.v1.AccessPolicy] that this
+ *   commit operation is to be performed on. If, at the time of commit, the
+ *   etag for the Access Policy stored in Access Context Manager is different
+ *   from the specified etag, then the commit operation will not be performed
+ *   and the call will fail. This field is not required. If etag is not
+ *   provided, the operation will be performed as if a valid etag is provided.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.commit_service_perimeters.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CommitServicePerimeters_async
+ */
   commitServicePerimeters(
-    request?: protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   commitServicePerimeters(
-    request: protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   commitServicePerimeters(
-    request: protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersRequest,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   commitServicePerimeters(
-    request?: protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse,
-        protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('commitServicePerimeters response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('commitServicePerimeters request %j', request);
-    return this.innerApiCalls
-      .commitServicePerimeters(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse,
-            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('commitServicePerimeters response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.commitServicePerimeters(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('commitServicePerimeters response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `commitServicePerimeters()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.commit_service_perimeters.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CommitServicePerimeters_async
-   */
-  async checkCommitServicePerimetersProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersResponse,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `commitServicePerimeters()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.commit_service_perimeters.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CommitServicePerimeters_async
+ */
+  async checkCommitServicePerimetersProgress(name: string): Promise<LROperation<protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>>{
     this._log.info('commitServicePerimeters long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.commitServicePerimeters,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersResponse,
-      protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.commitServicePerimeters, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersResponse, protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata>;
   }
-  /**
-   * Creates a [GcpUserAccessBinding]
-   * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding]. If the
-   * client specifies a [name]
-   * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding.name],
-   * the server ignores it. Fails if a resource already exists with the same
-   * [group_key]
-   * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding.group_key].
-   * Completion of this long-running operation does not necessarily signify that
-   * the new binding is deployed onto all affected users, which may take more
-   * time.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Example: "organizations/256"
-   * @param {google.identity.accesscontextmanager.v1.GcpUserAccessBinding} request.gcpUserAccessBinding
-   *   Required. [GcpUserAccessBinding]
-   *   [google.identity.accesscontextmanager.v1.GcpUserAccessBinding]
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.create_gcp_user_access_binding.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateGcpUserAccessBinding_async
-   */
+/**
+ * Creates a [GcpUserAccessBinding]
+ * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding]. If the
+ * client specifies a [name]
+ * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding.name],
+ * the server ignores it. Fails if a resource already exists with the same
+ * [group_key]
+ * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding.group_key].
+ * Completion of this long-running operation does not necessarily signify that
+ * the new binding is deployed onto all affected users, which may take more
+ * time.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Example: "organizations/256"
+ * @param {google.identity.accesscontextmanager.v1.GcpUserAccessBinding} request.gcpUserAccessBinding
+ *   Required. [GcpUserAccessBinding]
+ *   [google.identity.accesscontextmanager.v1.GcpUserAccessBinding]
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.create_gcp_user_access_binding.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateGcpUserAccessBinding_async
+ */
   createGcpUserAccessBinding(
-    request?: protos.google.identity.accesscontextmanager.v1.ICreateGcpUserAccessBindingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.ICreateGcpUserAccessBindingRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createGcpUserAccessBinding(
-    request: protos.google.identity.accesscontextmanager.v1.ICreateGcpUserAccessBindingRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.ICreateGcpUserAccessBindingRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createGcpUserAccessBinding(
-    request: protos.google.identity.accesscontextmanager.v1.ICreateGcpUserAccessBindingRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.ICreateGcpUserAccessBindingRequest,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createGcpUserAccessBinding(
-    request?: protos.google.identity.accesscontextmanager.v1.ICreateGcpUserAccessBindingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.identity.accesscontextmanager.v1.ICreateGcpUserAccessBindingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createGcpUserAccessBinding response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createGcpUserAccessBinding request %j', request);
-    return this.innerApiCalls
-      .createGcpUserAccessBinding(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createGcpUserAccessBinding response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createGcpUserAccessBinding(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createGcpUserAccessBinding response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createGcpUserAccessBinding()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.create_gcp_user_access_binding.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateGcpUserAccessBinding_async
-   */
-  async checkCreateGcpUserAccessBindingProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding,
-      protos.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createGcpUserAccessBinding()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.create_gcp_user_access_binding.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateGcpUserAccessBinding_async
+ */
+  async checkCreateGcpUserAccessBindingProgress(name: string): Promise<LROperation<protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata>>{
     this._log.info('createGcpUserAccessBinding long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createGcpUserAccessBinding,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding,
-      protos.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createGcpUserAccessBinding, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata>;
   }
-  /**
-   * Updates a [GcpUserAccessBinding]
-   * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding].
-   * Completion of this long-running operation does not necessarily signify that
-   * the changed binding is deployed onto all affected users, which may take
-   * more time.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.identity.accesscontextmanager.v1.GcpUserAccessBinding} request.gcpUserAccessBinding
-   *   Required. [GcpUserAccessBinding]
-   *   [google.identity.accesscontextmanager.v1.GcpUserAccessBinding]
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Only the fields specified in this mask are updated. Because name and
-   *   group_key cannot be changed, update_mask is required and must always be:
-   *
-   *   update_mask {
-   *   paths: "access_levels"
-   *   }
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.update_gcp_user_access_binding.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateGcpUserAccessBinding_async
-   */
+/**
+ * Updates a [GcpUserAccessBinding]
+ * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding].
+ * Completion of this long-running operation does not necessarily signify that
+ * the changed binding is deployed onto all affected users, which may take
+ * more time.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.identity.accesscontextmanager.v1.GcpUserAccessBinding} request.gcpUserAccessBinding
+ *   Required. [GcpUserAccessBinding]
+ *   [google.identity.accesscontextmanager.v1.GcpUserAccessBinding]
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Only the fields specified in this mask are updated. Because name and
+ *   group_key cannot be changed, update_mask is required and must always be:
+ *
+ *   update_mask {
+ *   paths: "access_levels"
+ *   }
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.update_gcp_user_access_binding.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateGcpUserAccessBinding_async
+ */
   updateGcpUserAccessBinding(
-    request?: protos.google.identity.accesscontextmanager.v1.IUpdateGcpUserAccessBindingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IUpdateGcpUserAccessBindingRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateGcpUserAccessBinding(
-    request: protos.google.identity.accesscontextmanager.v1.IUpdateGcpUserAccessBindingRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IUpdateGcpUserAccessBindingRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateGcpUserAccessBinding(
-    request: protos.google.identity.accesscontextmanager.v1.IUpdateGcpUserAccessBindingRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IUpdateGcpUserAccessBindingRequest,
+      callback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateGcpUserAccessBinding(
-    request?: protos.google.identity.accesscontextmanager.v1.IUpdateGcpUserAccessBindingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.identity.accesscontextmanager.v1.IUpdateGcpUserAccessBindingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'gcp_user_access_binding.name':
-          request.gcpUserAccessBinding!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'gcp_user_access_binding.name': request.gcpUserAccessBinding!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateGcpUserAccessBinding response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateGcpUserAccessBinding request %j', request);
-    return this.innerApiCalls
-      .updateGcpUserAccessBinding(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
-            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateGcpUserAccessBinding response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateGcpUserAccessBinding(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateGcpUserAccessBinding response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateGcpUserAccessBinding()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.update_gcp_user_access_binding.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateGcpUserAccessBinding_async
-   */
-  async checkUpdateGcpUserAccessBindingProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding,
-      protos.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateGcpUserAccessBinding()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.update_gcp_user_access_binding.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateGcpUserAccessBinding_async
+ */
+  async checkUpdateGcpUserAccessBindingProgress(name: string): Promise<LROperation<protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata>>{
     this._log.info('updateGcpUserAccessBinding long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateGcpUserAccessBinding,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding,
-      protos.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateGcpUserAccessBinding, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding, protos.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata>;
   }
-  /**
-   * Deletes a [GcpUserAccessBinding]
-   * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding].
-   * Completion of this long-running operation does not necessarily signify that
-   * the binding deletion is deployed onto all affected users, which may take
-   * more time.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Example: "organizations/256/gcpUserAccessBindings/b3-BhcX_Ud5N"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.delete_gcp_user_access_binding.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteGcpUserAccessBinding_async
-   */
+/**
+ * Deletes a [GcpUserAccessBinding]
+ * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding].
+ * Completion of this long-running operation does not necessarily signify that
+ * the binding deletion is deployed onto all affected users, which may take
+ * more time.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Example: "organizations/256/gcpUserAccessBindings/b3-BhcX_Ud5N"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.delete_gcp_user_access_binding.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteGcpUserAccessBinding_async
+ */
   deleteGcpUserAccessBinding(
-    request?: protos.google.identity.accesscontextmanager.v1.IDeleteGcpUserAccessBindingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IDeleteGcpUserAccessBindingRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteGcpUserAccessBinding(
-    request: protos.google.identity.accesscontextmanager.v1.IDeleteGcpUserAccessBindingRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IDeleteGcpUserAccessBindingRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteGcpUserAccessBinding(
-    request: protos.google.identity.accesscontextmanager.v1.IDeleteGcpUserAccessBindingRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.identity.accesscontextmanager.v1.IDeleteGcpUserAccessBindingRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteGcpUserAccessBinding(
-    request?: protos.google.identity.accesscontextmanager.v1.IDeleteGcpUserAccessBindingRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.identity.accesscontextmanager.v1.IDeleteGcpUserAccessBindingRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteGcpUserAccessBinding response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteGcpUserAccessBinding request %j', request);
-    return this.innerApiCalls
-      .deleteGcpUserAccessBinding(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteGcpUserAccessBinding response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteGcpUserAccessBinding(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteGcpUserAccessBinding response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteGcpUserAccessBinding()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.delete_gcp_user_access_binding.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteGcpUserAccessBinding_async
-   */
-  async checkDeleteGcpUserAccessBindingProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteGcpUserAccessBinding()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.delete_gcp_user_access_binding.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteGcpUserAccessBinding_async
+ */
+  async checkDeleteGcpUserAccessBindingProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata>>{
     this._log.info('deleteGcpUserAccessBinding long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteGcpUserAccessBinding,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteGcpUserAccessBinding, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata>;
   }
-  /**
-   * Lists all [access policies]
-   * [google.identity.accesscontextmanager.v1.AccessPolicy] in an
-   * organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name for the container to list AccessPolicy instances
-   *   from.
-   *
-   *   Format:
-   *   `organizations/{org_id}`
-   * @param {number} request.pageSize
-   *   Number of AccessPolicy instances to include in the list. Default 100.
-   * @param {string} request.pageToken
-   *   Next page token for the next batch of AccessPolicy instances. Defaults to
-   *   the first page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAccessPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all [access policies]
+ * [google.identity.accesscontextmanager.v1.AccessPolicy] in an
+ * organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name for the container to list AccessPolicy instances
+ *   from.
+ *
+ *   Format:
+ *   `organizations/{org_id}`
+ * @param {number} request.pageSize
+ *   Number of AccessPolicy instances to include in the list. Default 100.
+ * @param {string} request.pageToken
+ *   Next page token for the next batch of AccessPolicy instances. Defaults to
+ *   the first page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAccessPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAccessPolicies(
-    request?: protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IAccessPolicy[],
-      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IAccessPolicy[],
+        protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest|null,
+        protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse
+      ]>;
   listAccessPolicies(
-    request: protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
-      | protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse
-      | null
-      | undefined,
-      protos.google.identity.accesscontextmanager.v1.IAccessPolicy
-    >
-  ): void;
-  listAccessPolicies(
-    request: protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
-    callback: PaginationCallback<
-      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
-      | protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse
-      | null
-      | undefined,
-      protos.google.identity.accesscontextmanager.v1.IAccessPolicy
-    >
-  ): void;
-  listAccessPolicies(
-    request?: protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
-          | protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse
-          | null
-          | undefined,
-          protos.google.identity.accesscontextmanager.v1.IAccessPolicy
-        >,
-    callback?: PaginationCallback<
-      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
-      | protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse
-      | null
-      | undefined,
-      protos.google.identity.accesscontextmanager.v1.IAccessPolicy
-    >
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IAccessPolicy[],
-      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse,
-    ]
-  > | void {
+          protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IAccessPolicy>): void;
+  listAccessPolicies(
+      request: protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
+      callback: PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
+          protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IAccessPolicy>): void;
+  listAccessPolicies(
+      request?: protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
+          protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IAccessPolicy>,
+      callback?: PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
+          protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IAccessPolicy>):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IAccessPolicy[],
+        protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest|null,
+        protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
-          | protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse
-          | null
-          | undefined,
-          protos.google.identity.accesscontextmanager.v1.IAccessPolicy
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
+      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse|null|undefined,
+      protos.google.identity.accesscontextmanager.v1.IAccessPolicy>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAccessPolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4456,57 +3154,53 @@ export class AccessContextManagerClient {
     this._log.info('listAccessPolicies request %j', request);
     return this.innerApiCalls
       .listAccessPolicies(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.identity.accesscontextmanager.v1.IAccessPolicy[],
-          protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest | null,
-          protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse,
-        ]) => {
-          this._log.info('listAccessPolicies values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.identity.accesscontextmanager.v1.IAccessPolicy[],
+        protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest|null,
+        protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse
+      ]) => {
+        this._log.info('listAccessPolicies values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAccessPolicies`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name for the container to list AccessPolicy instances
-   *   from.
-   *
-   *   Format:
-   *   `organizations/{org_id}`
-   * @param {number} request.pageSize
-   *   Number of AccessPolicy instances to include in the list. Default 100.
-   * @param {string} request.pageToken
-   *   Next page token for the next batch of AccessPolicy instances. Defaults to
-   *   the first page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAccessPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAccessPolicies`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name for the container to list AccessPolicy instances
+ *   from.
+ *
+ *   Format:
+ *   `organizations/{org_id}`
+ * @param {number} request.pageSize
+ *   Number of AccessPolicy instances to include in the list. Default 100.
+ * @param {string} request.pageToken
+ *   Next page token for the next batch of AccessPolicy instances. Defaults to
+ *   the first page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAccessPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAccessPoliciesStream(
-    request?: protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccessPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAccessPolicies stream %j', request);
     return this.descriptors.page.listAccessPolicies.createStream(
       this.innerApiCalls.listAccessPolicies as GaxCall,
@@ -4515,48 +3209,46 @@ export class AccessContextManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listAccessPolicies`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name for the container to list AccessPolicy instances
-   *   from.
-   *
-   *   Format:
-   *   `organizations/{org_id}`
-   * @param {number} request.pageSize
-   *   Number of AccessPolicy instances to include in the list. Default 100.
-   * @param {string} request.pageToken
-   *   Next page token for the next batch of AccessPolicy instances. Defaults to
-   *   the first page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.list_access_policies.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ListAccessPolicies_async
-   */
+/**
+ * Equivalent to `listAccessPolicies`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name for the container to list AccessPolicy instances
+ *   from.
+ *
+ *   Format:
+ *   `organizations/{org_id}`
+ * @param {number} request.pageSize
+ *   Number of AccessPolicy instances to include in the list. Default 100.
+ * @param {string} request.pageToken
+ *   Next page token for the next batch of AccessPolicy instances. Defaults to
+ *   the first page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.list_access_policies.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ListAccessPolicies_async
+ */
   listAccessPoliciesAsync(
-    request?: protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.identity.accesscontextmanager.v1.IAccessPolicy> {
+      request?: protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.identity.accesscontextmanager.v1.IAccessPolicy>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccessPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAccessPolicies iterate %j', request);
     return this.descriptors.page.listAccessPolicies.asyncIterate(
       this.innerApiCalls['listAccessPolicies'] as GaxCall,
@@ -4564,126 +3256,101 @@ export class AccessContextManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.identity.accesscontextmanager.v1.IAccessPolicy>;
   }
-  /**
-   * Lists all [access levels]
-   * [google.identity.accesscontextmanager.v1.AccessLevel] for an access
-   * policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name for the access policy to list [Access Levels]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel] from.
-   *
-   *   Format:
-   *   `accessPolicies/{policy_id}`
-   * @param {number} request.pageSize
-   *   Number of [Access Levels]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel] to include in
-   *   the list. Default 100.
-   * @param {string} request.pageToken
-   *   Next page token for the next batch of [Access Level]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel] instances.
-   *   Defaults to the first page of results.
-   * @param {google.identity.accesscontextmanager.v1.LevelFormat} request.accessLevelFormat
-   *   Whether to return `BasicLevels` in the Cloud Common Expression language, as
-   *   `CustomLevels`, rather than as `BasicLevels`. Defaults to returning
-   *   `AccessLevels` in the format they were defined.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAccessLevelsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all [access levels]
+ * [google.identity.accesscontextmanager.v1.AccessLevel] for an access
+ * policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name for the access policy to list [Access Levels]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel] from.
+ *
+ *   Format:
+ *   `accessPolicies/{policy_id}`
+ * @param {number} request.pageSize
+ *   Number of [Access Levels]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel] to include in
+ *   the list. Default 100.
+ * @param {string} request.pageToken
+ *   Next page token for the next batch of [Access Level]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel] instances.
+ *   Defaults to the first page of results.
+ * @param {google.identity.accesscontextmanager.v1.LevelFormat} request.accessLevelFormat
+ *   Whether to return `BasicLevels` in the Cloud Common Expression language, as
+ *   `CustomLevels`, rather than as `BasicLevels`. Defaults to returning
+ *   `AccessLevels` in the format they were defined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAccessLevelsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAccessLevels(
-    request?: protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IAccessLevel[],
-      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IAccessLevel[],
+        protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest|null,
+        protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse
+      ]>;
   listAccessLevels(
-    request: protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
-      | protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse
-      | null
-      | undefined,
-      protos.google.identity.accesscontextmanager.v1.IAccessLevel
-    >
-  ): void;
-  listAccessLevels(
-    request: protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
-    callback: PaginationCallback<
-      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
-      | protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse
-      | null
-      | undefined,
-      protos.google.identity.accesscontextmanager.v1.IAccessLevel
-    >
-  ): void;
-  listAccessLevels(
-    request?: protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
-          | protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse
-          | null
-          | undefined,
-          protos.google.identity.accesscontextmanager.v1.IAccessLevel
-        >,
-    callback?: PaginationCallback<
-      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
-      | protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse
-      | null
-      | undefined,
-      protos.google.identity.accesscontextmanager.v1.IAccessLevel
-    >
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IAccessLevel[],
-      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse,
-    ]
-  > | void {
+          protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IAccessLevel>): void;
+  listAccessLevels(
+      request: protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
+      callback: PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
+          protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IAccessLevel>): void;
+  listAccessLevels(
+      request?: protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
+          protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IAccessLevel>,
+      callback?: PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
+          protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IAccessLevel>):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IAccessLevel[],
+        protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest|null,
+        protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
-          | protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse
-          | null
-          | undefined,
-          protos.google.identity.accesscontextmanager.v1.IAccessLevel
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
+      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse|null|undefined,
+      protos.google.identity.accesscontextmanager.v1.IAccessLevel>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAccessLevels values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4692,68 +3359,65 @@ export class AccessContextManagerClient {
     this._log.info('listAccessLevels request %j', request);
     return this.innerApiCalls
       .listAccessLevels(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.identity.accesscontextmanager.v1.IAccessLevel[],
-          protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest | null,
-          protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse,
-        ]) => {
-          this._log.info('listAccessLevels values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.identity.accesscontextmanager.v1.IAccessLevel[],
+        protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest|null,
+        protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse
+      ]) => {
+        this._log.info('listAccessLevels values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAccessLevels`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name for the access policy to list [Access Levels]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel] from.
-   *
-   *   Format:
-   *   `accessPolicies/{policy_id}`
-   * @param {number} request.pageSize
-   *   Number of [Access Levels]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel] to include in
-   *   the list. Default 100.
-   * @param {string} request.pageToken
-   *   Next page token for the next batch of [Access Level]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel] instances.
-   *   Defaults to the first page of results.
-   * @param {google.identity.accesscontextmanager.v1.LevelFormat} request.accessLevelFormat
-   *   Whether to return `BasicLevels` in the Cloud Common Expression language, as
-   *   `CustomLevels`, rather than as `BasicLevels`. Defaults to returning
-   *   `AccessLevels` in the format they were defined.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAccessLevelsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAccessLevels`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name for the access policy to list [Access Levels]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel] from.
+ *
+ *   Format:
+ *   `accessPolicies/{policy_id}`
+ * @param {number} request.pageSize
+ *   Number of [Access Levels]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel] to include in
+ *   the list. Default 100.
+ * @param {string} request.pageToken
+ *   Next page token for the next batch of [Access Level]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel] instances.
+ *   Defaults to the first page of results.
+ * @param {google.identity.accesscontextmanager.v1.LevelFormat} request.accessLevelFormat
+ *   Whether to return `BasicLevels` in the Cloud Common Expression language, as
+ *   `CustomLevels`, rather than as `BasicLevels`. Defaults to returning
+ *   `AccessLevels` in the format they were defined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAccessLevelsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAccessLevelsStream(
-    request?: protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAccessLevels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAccessLevels stream %j', request);
     return this.descriptors.page.listAccessLevels.createStream(
       this.innerApiCalls.listAccessLevels as GaxCall,
@@ -4762,59 +3426,58 @@ export class AccessContextManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listAccessLevels`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name for the access policy to list [Access Levels]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel] from.
-   *
-   *   Format:
-   *   `accessPolicies/{policy_id}`
-   * @param {number} request.pageSize
-   *   Number of [Access Levels]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel] to include in
-   *   the list. Default 100.
-   * @param {string} request.pageToken
-   *   Next page token for the next batch of [Access Level]
-   *   [google.identity.accesscontextmanager.v1.AccessLevel] instances.
-   *   Defaults to the first page of results.
-   * @param {google.identity.accesscontextmanager.v1.LevelFormat} request.accessLevelFormat
-   *   Whether to return `BasicLevels` in the Cloud Common Expression language, as
-   *   `CustomLevels`, rather than as `BasicLevels`. Defaults to returning
-   *   `AccessLevels` in the format they were defined.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.list_access_levels.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ListAccessLevels_async
-   */
+/**
+ * Equivalent to `listAccessLevels`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name for the access policy to list [Access Levels]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel] from.
+ *
+ *   Format:
+ *   `accessPolicies/{policy_id}`
+ * @param {number} request.pageSize
+ *   Number of [Access Levels]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel] to include in
+ *   the list. Default 100.
+ * @param {string} request.pageToken
+ *   Next page token for the next batch of [Access Level]
+ *   [google.identity.accesscontextmanager.v1.AccessLevel] instances.
+ *   Defaults to the first page of results.
+ * @param {google.identity.accesscontextmanager.v1.LevelFormat} request.accessLevelFormat
+ *   Whether to return `BasicLevels` in the Cloud Common Expression language, as
+ *   `CustomLevels`, rather than as `BasicLevels`. Defaults to returning
+ *   `AccessLevels` in the format they were defined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.list_access_levels.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ListAccessLevels_async
+ */
   listAccessLevelsAsync(
-    request?: protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.identity.accesscontextmanager.v1.IAccessLevel> {
+      request?: protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.identity.accesscontextmanager.v1.IAccessLevel>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAccessLevels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAccessLevels iterate %j', request);
     return this.descriptors.page.listAccessLevels.asyncIterate(
       this.innerApiCalls['listAccessLevels'] as GaxCall,
@@ -4822,122 +3485,97 @@ export class AccessContextManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.identity.accesscontextmanager.v1.IAccessLevel>;
   }
-  /**
-   * Lists all [service perimeters]
-   * [google.identity.accesscontextmanager.v1.ServicePerimeter] for an
-   * access policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name for the access policy to list [Service Perimeters]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter] from.
-   *
-   *   Format:
-   *   `accessPolicies/{policy_id}`
-   * @param {number} request.pageSize
-   *   Number of [Service Perimeters]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter] to include
-   *   in the list. Default 100.
-   * @param {string} request.pageToken
-   *   Next page token for the next batch of [Service Perimeter]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter] instances.
-   *   Defaults to the first page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.identity.accesscontextmanager.v1.ServicePerimeter|ServicePerimeter}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listServicePerimetersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all [service perimeters]
+ * [google.identity.accesscontextmanager.v1.ServicePerimeter] for an
+ * access policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name for the access policy to list [Service Perimeters]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter] from.
+ *
+ *   Format:
+ *   `accessPolicies/{policy_id}`
+ * @param {number} request.pageSize
+ *   Number of [Service Perimeters]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter] to include
+ *   in the list. Default 100.
+ * @param {string} request.pageToken
+ *   Next page token for the next batch of [Service Perimeter]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter] instances.
+ *   Defaults to the first page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.identity.accesscontextmanager.v1.ServicePerimeter|ServicePerimeter}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listServicePerimetersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServicePerimeters(
-    request?: protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IServicePerimeter[],
-      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IServicePerimeter[],
+        protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest|null,
+        protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse
+      ]>;
   listServicePerimeters(
-    request: protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
-      | protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse
-      | null
-      | undefined,
-      protos.google.identity.accesscontextmanager.v1.IServicePerimeter
-    >
-  ): void;
-  listServicePerimeters(
-    request: protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
-    callback: PaginationCallback<
-      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
-      | protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse
-      | null
-      | undefined,
-      protos.google.identity.accesscontextmanager.v1.IServicePerimeter
-    >
-  ): void;
-  listServicePerimeters(
-    request?: protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
-          | protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse
-          | null
-          | undefined,
-          protos.google.identity.accesscontextmanager.v1.IServicePerimeter
-        >,
-    callback?: PaginationCallback<
-      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
-      | protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse
-      | null
-      | undefined,
-      protos.google.identity.accesscontextmanager.v1.IServicePerimeter
-    >
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IServicePerimeter[],
-      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse,
-    ]
-  > | void {
+          protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IServicePerimeter>): void;
+  listServicePerimeters(
+      request: protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
+      callback: PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
+          protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IServicePerimeter>): void;
+  listServicePerimeters(
+      request?: protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
+          protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IServicePerimeter>,
+      callback?: PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
+          protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IServicePerimeter>):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IServicePerimeter[],
+        protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest|null,
+        protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
-          | protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse
-          | null
-          | undefined,
-          protos.google.identity.accesscontextmanager.v1.IServicePerimeter
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
+      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse|null|undefined,
+      protos.google.identity.accesscontextmanager.v1.IServicePerimeter>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listServicePerimeters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4946,64 +3584,61 @@ export class AccessContextManagerClient {
     this._log.info('listServicePerimeters request %j', request);
     return this.innerApiCalls
       .listServicePerimeters(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.identity.accesscontextmanager.v1.IServicePerimeter[],
-          protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest | null,
-          protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse,
-        ]) => {
-          this._log.info('listServicePerimeters values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.identity.accesscontextmanager.v1.IServicePerimeter[],
+        protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest|null,
+        protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse
+      ]) => {
+        this._log.info('listServicePerimeters values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listServicePerimeters`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name for the access policy to list [Service Perimeters]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter] from.
-   *
-   *   Format:
-   *   `accessPolicies/{policy_id}`
-   * @param {number} request.pageSize
-   *   Number of [Service Perimeters]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter] to include
-   *   in the list. Default 100.
-   * @param {string} request.pageToken
-   *   Next page token for the next batch of [Service Perimeter]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter] instances.
-   *   Defaults to the first page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.identity.accesscontextmanager.v1.ServicePerimeter|ServicePerimeter} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listServicePerimetersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listServicePerimeters`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name for the access policy to list [Service Perimeters]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter] from.
+ *
+ *   Format:
+ *   `accessPolicies/{policy_id}`
+ * @param {number} request.pageSize
+ *   Number of [Service Perimeters]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter] to include
+ *   in the list. Default 100.
+ * @param {string} request.pageToken
+ *   Next page token for the next batch of [Service Perimeter]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter] instances.
+ *   Defaults to the first page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.identity.accesscontextmanager.v1.ServicePerimeter|ServicePerimeter} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listServicePerimetersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServicePerimetersStream(
-    request?: protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listServicePerimeters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServicePerimeters stream %j', request);
     return this.descriptors.page.listServicePerimeters.createStream(
       this.innerApiCalls.listServicePerimeters as GaxCall,
@@ -5012,55 +3647,54 @@ export class AccessContextManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listServicePerimeters`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name for the access policy to list [Service Perimeters]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter] from.
-   *
-   *   Format:
-   *   `accessPolicies/{policy_id}`
-   * @param {number} request.pageSize
-   *   Number of [Service Perimeters]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter] to include
-   *   in the list. Default 100.
-   * @param {string} request.pageToken
-   *   Next page token for the next batch of [Service Perimeter]
-   *   [google.identity.accesscontextmanager.v1.ServicePerimeter] instances.
-   *   Defaults to the first page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.identity.accesscontextmanager.v1.ServicePerimeter|ServicePerimeter}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.list_service_perimeters.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ListServicePerimeters_async
-   */
+/**
+ * Equivalent to `listServicePerimeters`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name for the access policy to list [Service Perimeters]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter] from.
+ *
+ *   Format:
+ *   `accessPolicies/{policy_id}`
+ * @param {number} request.pageSize
+ *   Number of [Service Perimeters]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter] to include
+ *   in the list. Default 100.
+ * @param {string} request.pageToken
+ *   Next page token for the next batch of [Service Perimeter]
+ *   [google.identity.accesscontextmanager.v1.ServicePerimeter] instances.
+ *   Defaults to the first page of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.identity.accesscontextmanager.v1.ServicePerimeter|ServicePerimeter}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.list_service_perimeters.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ListServicePerimeters_async
+ */
   listServicePerimetersAsync(
-    request?: protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.identity.accesscontextmanager.v1.IServicePerimeter> {
+      request?: protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.identity.accesscontextmanager.v1.IServicePerimeter>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listServicePerimeters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServicePerimeters iterate %j', request);
     return this.descriptors.page.listServicePerimeters.asyncIterate(
       this.innerApiCalls['listServicePerimeters'] as GaxCall,
@@ -5068,118 +3702,93 @@ export class AccessContextManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.identity.accesscontextmanager.v1.IServicePerimeter>;
   }
-  /**
-   * Lists all [GcpUserAccessBindings]
-   * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding] for a
-   * Google Cloud organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Example: "organizations/256"
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of items to return. The server may return fewer items.
-   *   If left blank, the server may return any number of items.
-   * @param {string} [request.pageToken]
-   *   Optional. If left blank, returns the first page. To enumerate all items, use the
-   *   [next_page_token]
-   *   [google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsResponse.next_page_token]
-   *   from your previous list operation.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding|GcpUserAccessBinding}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listGcpUserAccessBindingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all [GcpUserAccessBindings]
+ * [google.identity.accesscontextmanager.v1.GcpUserAccessBinding] for a
+ * Google Cloud organization.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Example: "organizations/256"
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of items to return. The server may return fewer items.
+ *   If left blank, the server may return any number of items.
+ * @param {string} [request.pageToken]
+ *   Optional. If left blank, returns the first page. To enumerate all items, use the
+ *   [next_page_token]
+ *   [google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsResponse.next_page_token]
+ *   from your previous list operation.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding|GcpUserAccessBinding}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listGcpUserAccessBindingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGcpUserAccessBindings(
-    request?: protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[],
-      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse,
-    ]
-  >;
+      request?: protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[],
+        protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest|null,
+        protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse
+      ]>;
   listGcpUserAccessBindings(
-    request: protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
-      | protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse
-      | null
-      | undefined,
-      protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding
-    >
-  ): void;
-  listGcpUserAccessBindings(
-    request: protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
-    callback: PaginationCallback<
-      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
-      | protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse
-      | null
-      | undefined,
-      protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding
-    >
-  ): void;
-  listGcpUserAccessBindings(
-    request?: protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
-          | protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse
-          | null
-          | undefined,
-          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding
-        >,
-    callback?: PaginationCallback<
-      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
-      | protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse
-      | null
-      | undefined,
-      protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding
-    >
-  ): Promise<
-    [
-      protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[],
-      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse,
-    ]
-  > | void {
+          protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding>): void;
+  listGcpUserAccessBindings(
+      request: protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
+      callback: PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
+          protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding>): void;
+  listGcpUserAccessBindings(
+      request?: protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
+          protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding>,
+      callback?: PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
+          protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse|null|undefined,
+          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding>):
+      Promise<[
+        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[],
+        protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest|null,
+        protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
-          | protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse
-          | null
-          | undefined,
-          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
+      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse|null|undefined,
+      protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listGcpUserAccessBindings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5188,60 +3797,57 @@ export class AccessContextManagerClient {
     this._log.info('listGcpUserAccessBindings request %j', request);
     return this.innerApiCalls
       .listGcpUserAccessBindings(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[],
-          protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest | null,
-          protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse,
-        ]) => {
-          this._log.info('listGcpUserAccessBindings values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[],
+        protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest|null,
+        protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse
+      ]) => {
+        this._log.info('listGcpUserAccessBindings values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listGcpUserAccessBindings`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Example: "organizations/256"
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of items to return. The server may return fewer items.
-   *   If left blank, the server may return any number of items.
-   * @param {string} [request.pageToken]
-   *   Optional. If left blank, returns the first page. To enumerate all items, use the
-   *   [next_page_token]
-   *   [google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsResponse.next_page_token]
-   *   from your previous list operation.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding|GcpUserAccessBinding} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listGcpUserAccessBindingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listGcpUserAccessBindings`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Example: "organizations/256"
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of items to return. The server may return fewer items.
+ *   If left blank, the server may return any number of items.
+ * @param {string} [request.pageToken]
+ *   Optional. If left blank, returns the first page. To enumerate all items, use the
+ *   [next_page_token]
+ *   [google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsResponse.next_page_token]
+ *   from your previous list operation.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding|GcpUserAccessBinding} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listGcpUserAccessBindingsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGcpUserAccessBindingsStream(
-    request?: protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listGcpUserAccessBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listGcpUserAccessBindings stream %j', request);
     return this.descriptors.page.listGcpUserAccessBindings.createStream(
       this.innerApiCalls.listGcpUserAccessBindings as GaxCall,
@@ -5250,51 +3856,50 @@ export class AccessContextManagerClient {
     );
   }
 
-  /**
-   * Equivalent to `listGcpUserAccessBindings`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Example: "organizations/256"
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of items to return. The server may return fewer items.
-   *   If left blank, the server may return any number of items.
-   * @param {string} [request.pageToken]
-   *   Optional. If left blank, returns the first page. To enumerate all items, use the
-   *   [next_page_token]
-   *   [google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsResponse.next_page_token]
-   *   from your previous list operation.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding|GcpUserAccessBinding}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/access_context_manager.list_gcp_user_access_bindings.js</caption>
-   * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ListGcpUserAccessBindings_async
-   */
+/**
+ * Equivalent to `listGcpUserAccessBindings`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Example: "organizations/256"
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of items to return. The server may return fewer items.
+ *   If left blank, the server may return any number of items.
+ * @param {string} [request.pageToken]
+ *   Optional. If left blank, returns the first page. To enumerate all items, use the
+ *   [next_page_token]
+ *   [google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsResponse.next_page_token]
+ *   from your previous list operation.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding|GcpUserAccessBinding}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/access_context_manager.list_gcp_user_access_bindings.js</caption>
+ * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ListGcpUserAccessBindings_async
+ */
   listGcpUserAccessBindingsAsync(
-    request?: protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding> {
+      request?: protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listGcpUserAccessBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listGcpUserAccessBindings iterate %j', request);
     return this.descriptors.page.listGcpUserAccessBindings.asyncIterate(
       this.innerApiCalls['listGcpUserAccessBindings'] as GaxCall,
@@ -5302,7 +3907,7 @@ export class AccessContextManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding>;
   }
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -5347,20 +3952,20 @@ export class AccessContextManagerClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5397,13 +4002,13 @@ export class AccessContextManagerClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5437,7 +4042,7 @@ export class AccessContextManagerClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -5452,20 +4057,20 @@ export class AccessContextManagerClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -5509,20 +4114,20 @@ export class AccessContextManagerClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -5537,7 +4142,7 @@ export class AccessContextManagerClient {
    * @param {string} access_level
    * @returns {string} Resource name string.
    */
-  accessLevelPath(accessPolicy: string, accessLevel: string) {
+  accessLevelPath(accessPolicy:string,accessLevel:string) {
     return this.pathTemplates.accessLevelPathTemplate.render({
       access_policy: accessPolicy,
       access_level: accessLevel,
@@ -5552,8 +4157,7 @@ export class AccessContextManagerClient {
    * @returns {string} A string representing the access_policy.
    */
   matchAccessPolicyFromAccessLevelName(accessLevelName: string) {
-    return this.pathTemplates.accessLevelPathTemplate.match(accessLevelName)
-      .access_policy;
+    return this.pathTemplates.accessLevelPathTemplate.match(accessLevelName).access_policy;
   }
 
   /**
@@ -5564,8 +4168,7 @@ export class AccessContextManagerClient {
    * @returns {string} A string representing the access_level.
    */
   matchAccessLevelFromAccessLevelName(accessLevelName: string) {
-    return this.pathTemplates.accessLevelPathTemplate.match(accessLevelName)
-      .access_level;
+    return this.pathTemplates.accessLevelPathTemplate.match(accessLevelName).access_level;
   }
 
   /**
@@ -5574,7 +4177,7 @@ export class AccessContextManagerClient {
    * @param {string} access_policy
    * @returns {string} Resource name string.
    */
-  accessPolicyPath(accessPolicy: string) {
+  accessPolicyPath(accessPolicy:string) {
     return this.pathTemplates.accessPolicyPathTemplate.render({
       access_policy: accessPolicy,
     });
@@ -5588,8 +4191,7 @@ export class AccessContextManagerClient {
    * @returns {string} A string representing the access_policy.
    */
   matchAccessPolicyFromAccessPolicyName(accessPolicyName: string) {
-    return this.pathTemplates.accessPolicyPathTemplate.match(accessPolicyName)
-      .access_policy;
+    return this.pathTemplates.accessPolicyPathTemplate.match(accessPolicyName).access_policy;
   }
 
   /**
@@ -5599,7 +4201,7 @@ export class AccessContextManagerClient {
    * @param {string} gcp_user_access_binding
    * @returns {string} Resource name string.
    */
-  gcpUserAccessBindingPath(organization: string, gcpUserAccessBinding: string) {
+  gcpUserAccessBindingPath(organization:string,gcpUserAccessBinding:string) {
     return this.pathTemplates.gcpUserAccessBindingPathTemplate.render({
       organization: organization,
       gcp_user_access_binding: gcpUserAccessBinding,
@@ -5613,12 +4215,8 @@ export class AccessContextManagerClient {
    *   A fully-qualified path representing GcpUserAccessBinding resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromGcpUserAccessBindingName(
-    gcpUserAccessBindingName: string
-  ) {
-    return this.pathTemplates.gcpUserAccessBindingPathTemplate.match(
-      gcpUserAccessBindingName
-    ).organization;
+  matchOrganizationFromGcpUserAccessBindingName(gcpUserAccessBindingName: string) {
+    return this.pathTemplates.gcpUserAccessBindingPathTemplate.match(gcpUserAccessBindingName).organization;
   }
 
   /**
@@ -5628,12 +4226,8 @@ export class AccessContextManagerClient {
    *   A fully-qualified path representing GcpUserAccessBinding resource.
    * @returns {string} A string representing the gcp_user_access_binding.
    */
-  matchGcpUserAccessBindingFromGcpUserAccessBindingName(
-    gcpUserAccessBindingName: string
-  ) {
-    return this.pathTemplates.gcpUserAccessBindingPathTemplate.match(
-      gcpUserAccessBindingName
-    ).gcp_user_access_binding;
+  matchGcpUserAccessBindingFromGcpUserAccessBindingName(gcpUserAccessBindingName: string) {
+    return this.pathTemplates.gcpUserAccessBindingPathTemplate.match(gcpUserAccessBindingName).gcp_user_access_binding;
   }
 
   /**
@@ -5642,7 +4236,7 @@ export class AccessContextManagerClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization: string) {
+  organizationPath(organization:string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -5656,8 +4250,7 @@ export class AccessContextManagerClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName)
-      .organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
   }
 
   /**
@@ -5667,7 +4260,7 @@ export class AccessContextManagerClient {
    * @param {string} service_perimeter
    * @returns {string} Resource name string.
    */
-  servicePerimeterPath(accessPolicy: string, servicePerimeter: string) {
+  servicePerimeterPath(accessPolicy:string,servicePerimeter:string) {
     return this.pathTemplates.servicePerimeterPathTemplate.render({
       access_policy: accessPolicy,
       service_perimeter: servicePerimeter,
@@ -5682,9 +4275,7 @@ export class AccessContextManagerClient {
    * @returns {string} A string representing the access_policy.
    */
   matchAccessPolicyFromServicePerimeterName(servicePerimeterName: string) {
-    return this.pathTemplates.servicePerimeterPathTemplate.match(
-      servicePerimeterName
-    ).access_policy;
+    return this.pathTemplates.servicePerimeterPathTemplate.match(servicePerimeterName).access_policy;
   }
 
   /**
@@ -5695,9 +4286,7 @@ export class AccessContextManagerClient {
    * @returns {string} A string representing the service_perimeter.
    */
   matchServicePerimeterFromServicePerimeterName(servicePerimeterName: string) {
-    return this.pathTemplates.servicePerimeterPathTemplate.match(
-      servicePerimeterName
-    ).service_perimeter;
+    return this.pathTemplates.servicePerimeterPathTemplate.match(servicePerimeterName).service_perimeter;
   }
 
   /**
