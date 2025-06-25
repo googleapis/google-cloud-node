@@ -16,14 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const cloudcontrolspartner = require('@google-cloud/cloudcontrolspartner');
 
 function main() {
-  const cloudControlsPartnerCoreClient =
-    new cloudcontrolspartner.CloudControlsPartnerCoreClient();
-  const cloudControlsPartnerMonitoringClient =
-    new cloudcontrolspartner.CloudControlsPartnerMonitoringClient();
+  const cloudControlsPartnerCoreClient = new cloudcontrolspartner.CloudControlsPartnerCoreClient();
+  const cloudControlsPartnerMonitoringClient = new cloudcontrolspartner.CloudControlsPartnerMonitoringClient();
 }
 
 main();

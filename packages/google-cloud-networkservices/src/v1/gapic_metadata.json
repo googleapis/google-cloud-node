@@ -20,6 +20,11 @@
                 "getLbRouteExtension"
               ]
             },
+            "GetAuthzExtension": {
+              "methods": [
+                "getAuthzExtension"
+              ]
+            },
             "CreateLbTrafficExtension": {
               "methods": [
                 "createLbTrafficExtension"
@@ -50,6 +55,21 @@
                 "deleteLbRouteExtension"
               ]
             },
+            "CreateAuthzExtension": {
+              "methods": [
+                "createAuthzExtension"
+              ]
+            },
+            "UpdateAuthzExtension": {
+              "methods": [
+                "updateAuthzExtension"
+              ]
+            },
+            "DeleteAuthzExtension": {
+              "methods": [
+                "deleteAuthzExtension"
+              ]
+            },
             "ListLbTrafficExtensions": {
               "methods": [
                 "listLbTrafficExtensions",
@@ -62,6 +82,13 @@
                 "listLbRouteExtensions",
                 "listLbRouteExtensionsStream",
                 "listLbRouteExtensionsAsync"
+              ]
+            },
+            "ListAuthzExtensions": {
+              "methods": [
+                "listAuthzExtensions",
+                "listAuthzExtensionsStream",
+                "listAuthzExtensionsAsync"
               ]
             }
           }
@@ -79,6 +106,11 @@
                 "getLbRouteExtension"
               ]
             },
+            "GetAuthzExtension": {
+              "methods": [
+                "getAuthzExtension"
+              ]
+            },
             "CreateLbTrafficExtension": {
               "methods": [
                 "createLbTrafficExtension"
@@ -109,6 +141,21 @@
                 "deleteLbRouteExtension"
               ]
             },
+            "CreateAuthzExtension": {
+              "methods": [
+                "createAuthzExtension"
+              ]
+            },
+            "UpdateAuthzExtension": {
+              "methods": [
+                "updateAuthzExtension"
+              ]
+            },
+            "DeleteAuthzExtension": {
+              "methods": [
+                "deleteAuthzExtension"
+              ]
+            },
             "ListLbTrafficExtensions": {
               "methods": [
                 "listLbTrafficExtensions",
@@ -121,6 +168,13 @@
                 "listLbRouteExtensions",
                 "listLbRouteExtensionsStream",
                 "listLbRouteExtensionsAsync"
+              ]
+            },
+            "ListAuthzExtensions": {
+              "methods": [
+                "listAuthzExtensions",
+                "listAuthzExtensionsStream",
+                "listAuthzExtensionsAsync"
               ]
             }
           }
@@ -135,6 +189,16 @@
             "GetEndpointPolicy": {
               "methods": [
                 "getEndpointPolicy"
+              ]
+            },
+            "GetWasmPluginVersion": {
+              "methods": [
+                "getWasmPluginVersion"
+              ]
+            },
+            "GetWasmPlugin": {
+              "methods": [
+                "getWasmPlugin"
               ]
             },
             "GetGateway": {
@@ -200,6 +264,31 @@
             "DeleteEndpointPolicy": {
               "methods": [
                 "deleteEndpointPolicy"
+              ]
+            },
+            "CreateWasmPluginVersion": {
+              "methods": [
+                "createWasmPluginVersion"
+              ]
+            },
+            "DeleteWasmPluginVersion": {
+              "methods": [
+                "deleteWasmPluginVersion"
+              ]
+            },
+            "CreateWasmPlugin": {
+              "methods": [
+                "createWasmPlugin"
+              ]
+            },
+            "UpdateWasmPlugin": {
+              "methods": [
+                "updateWasmPlugin"
+              ]
+            },
+            "DeleteWasmPlugin": {
+              "methods": [
+                "deleteWasmPlugin"
               ]
             },
             "CreateGateway": {
@@ -327,6 +416,20 @@
                 "listEndpointPolicies",
                 "listEndpointPoliciesStream",
                 "listEndpointPoliciesAsync"
+              ]
+            },
+            "ListWasmPluginVersions": {
+              "methods": [
+                "listWasmPluginVersions",
+                "listWasmPluginVersionsStream",
+                "listWasmPluginVersionsAsync"
+              ]
+            },
+            "ListWasmPlugins": {
+              "methods": [
+                "listWasmPlugins",
+                "listWasmPluginsStream",
+                "listWasmPluginsAsync"
               ]
             },
             "ListGateways": {
@@ -409,6 +512,16 @@
                 "getEndpointPolicy"
               ]
             },
+            "GetWasmPluginVersion": {
+              "methods": [
+                "getWasmPluginVersion"
+              ]
+            },
+            "GetWasmPlugin": {
+              "methods": [
+                "getWasmPlugin"
+              ]
+            },
             "GetGateway": {
               "methods": [
                 "getGateway"
@@ -472,6 +585,31 @@
             "DeleteEndpointPolicy": {
               "methods": [
                 "deleteEndpointPolicy"
+              ]
+            },
+            "CreateWasmPluginVersion": {
+              "methods": [
+                "createWasmPluginVersion"
+              ]
+            },
+            "DeleteWasmPluginVersion": {
+              "methods": [
+                "deleteWasmPluginVersion"
+              ]
+            },
+            "CreateWasmPlugin": {
+              "methods": [
+                "createWasmPlugin"
+              ]
+            },
+            "UpdateWasmPlugin": {
+              "methods": [
+                "updateWasmPlugin"
+              ]
+            },
+            "DeleteWasmPlugin": {
+              "methods": [
+                "deleteWasmPlugin"
               ]
             },
             "CreateGateway": {
@@ -599,6 +737,20 @@
                 "listEndpointPolicies",
                 "listEndpointPoliciesStream",
                 "listEndpointPoliciesAsync"
+              ]
+            },
+            "ListWasmPluginVersions": {
+              "methods": [
+                "listWasmPluginVersions",
+                "listWasmPluginVersionsStream",
+                "listWasmPluginVersionsAsync"
+              ]
+            },
+            "ListWasmPlugins": {
+              "methods": [
+                "listWasmPlugins",
+                "listWasmPluginsStream",
+                "listWasmPluginsAsync"
               ]
             },
             "ListGateways": {

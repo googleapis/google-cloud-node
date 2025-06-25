@@ -27,411 +27,338 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
 describe('v1.AddressValidationClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new addressvalidationModule.v1.AddressValidationClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'addressvalidation.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new addressvalidationModule.v1.AddressValidationClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          addressvalidationModule.v1.AddressValidationClient.servicePath;
-        assert.strictEqual(servicePath, 'addressvalidation.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          addressvalidationModule.v1.AddressValidationClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'addressvalidation.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'addressvalidation.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'addressvalidation.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new addressvalidationModule.v1.AddressValidationClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'addressvalidation.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new addressvalidationModule.v1.AddressValidationClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'addressvalidation.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new addressvalidationModule.v1.AddressValidationClient(
-            {universeDomain: 'configured.example.com'}
-          );
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(
-            servicePath,
-            'addressvalidation.configured.example.com'
-          );
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new addressvalidationModule.v1.AddressValidationClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new addressvalidationModule.v1.AddressValidationClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = addressvalidationModule.v1.AddressValidationClient.servicePath;
+                assert.strictEqual(servicePath, 'addressvalidation.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = addressvalidationModule.v1.AddressValidationClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'addressvalidation.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+        }
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new addressvalidationModule.v1.AddressValidationClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'addressvalidation.example.com');
         });
-      });
-    });
 
-    it('has port', () => {
-      const port = addressvalidationModule.v1.AddressValidationClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new addressvalidationModule.v1.AddressValidationClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'addressvalidation.example.com');
+        });
 
-    it('should create a client with no option', () => {
-      const client = new addressvalidationModule.v1.AddressValidationClient();
-      assert(client);
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new addressvalidationModule.v1.AddressValidationClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'addressvalidation.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('should create a client with gRPC fallback', () => {
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        fallback: true,
-      });
-      assert(client);
-    });
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new addressvalidationModule.v1.AddressValidationClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'addressvalidation.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new addressvalidationModule.v1.AddressValidationClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.addressValidationStub, undefined);
-      await client.initialize();
-      assert(client.addressValidationStub);
-    });
+        it('has port', () => {
+            const port = addressvalidationModule.v1.AddressValidationClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-    it('has close method for the initialized client', done => {
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.addressValidationStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+        it('should create a client with no option', () => {
+            const client = new addressvalidationModule.v1.AddressValidationClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new addressvalidationModule.v1.AddressValidationClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new addressvalidationModule.v1.AddressValidationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.addressValidationStub, undefined);
+            await client.initialize();
+            assert(client.addressValidationStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new addressvalidationModule.v1.AddressValidationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.addressValidationStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new addressvalidationModule.v1.AddressValidationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.addressValidationStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new addressvalidationModule.v1.AddressValidationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new addressvalidationModule.v1.AddressValidationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
         });
     });
 
-    it('has close method for the non-initialized client', done => {
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.addressValidationStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
+    describe('validateAddress', () => {
+        it('invokes validateAddress without error', async () => {
+            const client = new addressvalidationModule.v1.AddressValidationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.addressvalidation.v1.ValidateAddressRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.maps.addressvalidation.v1.ValidateAddressResponse()
+            );
+            client.innerApiCalls.validateAddress = stubSimpleCall(expectedResponse);
+            const [response] = await client.validateAddress(request);
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes validateAddress without error using callback', async () => {
+            const client = new addressvalidationModule.v1.AddressValidationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.addressvalidation.v1.ValidateAddressRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.maps.addressvalidation.v1.ValidateAddressResponse()
+            );
+            client.innerApiCalls.validateAddress = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.validateAddress(
+                    request,
+                    (err?: Error|null, result?: protos.google.maps.addressvalidation.v1.IValidateAddressResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes validateAddress with error', async () => {
+            const client = new addressvalidationModule.v1.AddressValidationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.addressvalidation.v1.ValidateAddressRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.validateAddress = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.validateAddress(request), expectedError);
+        });
+
+        it('invokes validateAddress with closed client', async () => {
+            const client = new addressvalidationModule.v1.AddressValidationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.addressvalidation.v1.ValidateAddressRequest()
+            );
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.validateAddress(request), expectedError);
         });
     });
 
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
+    describe('provideValidationFeedback', () => {
+        it('invokes provideValidationFeedback without error', async () => {
+            const client = new addressvalidationModule.v1.AddressValidationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackResponse()
+            );
+            client.innerApiCalls.provideValidationFeedback = stubSimpleCall(expectedResponse);
+            const [response] = await client.provideValidationFeedback(request);
+            assert.deepStrictEqual(response, expectedResponse);
         });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
 
-  describe('validateAddress', () => {
-    it('invokes validateAddress without error', async () => {
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.addressvalidation.v1.ValidateAddressRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.maps.addressvalidation.v1.ValidateAddressResponse()
-      );
-      client.innerApiCalls.validateAddress = stubSimpleCall(expectedResponse);
-      const [response] = await client.validateAddress(request);
-      assert.deepStrictEqual(response, expectedResponse);
-    });
+        it('invokes provideValidationFeedback without error using callback', async () => {
+            const client = new addressvalidationModule.v1.AddressValidationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+              new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackResponse()
+            );
+            client.innerApiCalls.provideValidationFeedback = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.provideValidationFeedback(
+                    request,
+                    (err?: Error|null, result?: protos.google.maps.addressvalidation.v1.IProvideValidationFeedbackResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+        });
 
-    it('invokes validateAddress without error using callback', async () => {
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.addressvalidation.v1.ValidateAddressRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.maps.addressvalidation.v1.ValidateAddressResponse()
-      );
-      client.innerApiCalls.validateAddress =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.validateAddress(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.maps.addressvalidation.v1.IValidateAddressResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
+        it('invokes provideValidationFeedback with error', async () => {
+            const client = new addressvalidationModule.v1.AddressValidationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.provideValidationFeedback = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.provideValidationFeedback(request), expectedError);
+        });
 
-    it('invokes validateAddress with error', async () => {
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.addressvalidation.v1.ValidateAddressRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.validateAddress = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.validateAddress(request), expectedError);
+        it('invokes provideValidationFeedback with closed client', async () => {
+            const client = new addressvalidationModule.v1.AddressValidationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackRequest()
+            );
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.provideValidationFeedback(request), expectedError);
+        });
     });
-
-    it('invokes validateAddress with closed client', async () => {
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.addressvalidation.v1.ValidateAddressRequest()
-      );
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.validateAddress(request), expectedError);
-    });
-  });
-
-  describe('provideValidationFeedback', () => {
-    it('invokes provideValidationFeedback without error', async () => {
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackResponse()
-      );
-      client.innerApiCalls.provideValidationFeedback =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.provideValidationFeedback(request);
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes provideValidationFeedback without error using callback', async () => {
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackResponse()
-      );
-      client.innerApiCalls.provideValidationFeedback =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.provideValidationFeedback(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.maps.addressvalidation.v1.IProvideValidationFeedbackResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-    });
-
-    it('invokes provideValidationFeedback with error', async () => {
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.provideValidationFeedback = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.provideValidationFeedback(request),
-        expectedError
-      );
-    });
-
-    it('invokes provideValidationFeedback with closed client', async () => {
-      const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackRequest()
-      );
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.provideValidationFeedback(request),
-        expectedError
-      );
-    });
-  });
 });

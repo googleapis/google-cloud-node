@@ -1366,9 +1366,6 @@ export namespace google {
                     /** Repository internalMetadata. */
                     public internalMetadata?: (string|null);
 
-                    /** Repository _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
-
                     /**
                      * Creates a new Repository instance using the specified properties.
                      * @param [properties] Properties to set
@@ -2665,7 +2662,7 @@ export namespace google {
                         interface IWriteFile {
 
                             /** WriteFile contents */
-                            contents?: (Uint8Array|string|null);
+                            contents?: (Uint8Array|Buffer|string|null);
                         }
 
                         /** Represents a WriteFile. */
@@ -2678,7 +2675,7 @@ export namespace google {
                             constructor(properties?: google.cloud.dataform.v1.CommitRepositoryChangesRequest.FileOperation.IWriteFile);
 
                             /** WriteFile contents. */
-                            public contents: (Uint8Array|string);
+                            public contents: (Uint8Array|Buffer|string);
 
                             /**
                              * Creates a new WriteFile instance using the specified properties.
@@ -3061,7 +3058,7 @@ export namespace google {
                 interface IReadRepositoryFileResponse {
 
                     /** ReadRepositoryFileResponse contents */
-                    contents?: (Uint8Array|string|null);
+                    contents?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a ReadRepositoryFileResponse. */
@@ -3074,7 +3071,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dataform.v1.IReadRepositoryFileResponse);
 
                     /** ReadRepositoryFileResponse contents. */
-                    public contents: (Uint8Array|string);
+                    public contents: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new ReadRepositoryFileResponse instance using the specified properties.
@@ -4243,9 +4240,6 @@ export namespace google {
 
                     /** Workspace internalMetadata. */
                     public internalMetadata?: (string|null);
-
-                    /** Workspace _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
 
                     /**
                      * Creates a new Workspace instance using the specified properties.
@@ -8022,7 +8016,7 @@ export namespace google {
                 interface IReadFileResponse {
 
                     /** ReadFileResponse fileContents */
-                    fileContents?: (Uint8Array|string|null);
+                    fileContents?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a ReadFileResponse. */
@@ -8035,7 +8029,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dataform.v1.IReadFileResponse);
 
                     /** ReadFileResponse fileContents. */
-                    public fileContents: (Uint8Array|string);
+                    public fileContents: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new ReadFileResponse instance using the specified properties.
@@ -8519,7 +8513,7 @@ export namespace google {
                     path?: (string|null);
 
                     /** WriteFileRequest contents */
-                    contents?: (Uint8Array|string|null);
+                    contents?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a WriteFileRequest. */
@@ -8538,7 +8532,7 @@ export namespace google {
                     public path: string;
 
                     /** WriteFileRequest contents. */
-                    public contents: (Uint8Array|string);
+                    public contents: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new WriteFileRequest instance using the specified properties.
@@ -8963,9 +8957,6 @@ export namespace google {
 
                     /** ReleaseConfig internalMetadata. */
                     public internalMetadata?: (string|null);
-
-                    /** ReleaseConfig _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
 
                     /**
                      * Creates a new ReleaseConfig instance using the specified properties.
@@ -9865,9 +9856,6 @@ export namespace google {
 
                     /** CompilationResult source. */
                     public source?: ("gitCommitish"|"workspace"|"releaseConfig");
-
-                    /** CompilationResult _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
 
                     /**
                      * Creates a new CompilationResult instance using the specified properties.
@@ -11157,9 +11145,6 @@ export namespace google {
 
                     /** CompilationResultAction compiledObject. */
                     public compiledObject?: ("relation"|"operations"|"assertion"|"declaration"|"notebook"|"dataPreparation");
-
-                    /** CompilationResultAction _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
 
                     /**
                      * Creates a new CompilationResultAction instance using the specified properties.
@@ -12958,9 +12943,6 @@ export namespace google {
                     /** WorkflowConfig internalMetadata. */
                     public internalMetadata?: (string|null);
 
-                    /** WorkflowConfig _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
-
                     /**
                      * Creates a new WorkflowConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -13975,9 +13957,6 @@ export namespace google {
                     /** WorkflowInvocation compilationSource. */
                     public compilationSource?: ("compilationResult"|"workflowConfig");
 
-                    /** WorkflowInvocation _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
-
                     /**
                      * Creates a new WorkflowInvocation instance using the specified properties.
                      * @param [properties] Properties to set
@@ -14853,9 +14832,6 @@ export namespace google {
 
                     /** WorkflowInvocationAction action. */
                     public action?: ("bigqueryAction"|"notebookAction"|"dataPreparationAction");
-
-                    /** WorkflowInvocationAction _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
 
                     /**
                      * Creates a new WorkflowInvocationAction instance using the specified properties.
@@ -17653,9 +17629,6 @@ export namespace google {
                     /** Repository internalMetadata. */
                     public internalMetadata?: (string|null);
 
-                    /** Repository _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
-
                     /**
                      * Creates a new Repository instance using the specified properties.
                      * @param [properties] Properties to set
@@ -18952,7 +18925,7 @@ export namespace google {
                         interface IWriteFile {
 
                             /** WriteFile contents */
-                            contents?: (Uint8Array|string|null);
+                            contents?: (Uint8Array|Buffer|string|null);
                         }
 
                         /** Represents a WriteFile. */
@@ -18965,7 +18938,7 @@ export namespace google {
                             constructor(properties?: google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest.FileOperation.IWriteFile);
 
                             /** WriteFile contents. */
-                            public contents: (Uint8Array|string);
+                            public contents: (Uint8Array|Buffer|string);
 
                             /**
                              * Creates a new WriteFile instance using the specified properties.
@@ -19348,7 +19321,7 @@ export namespace google {
                 interface IReadRepositoryFileResponse {
 
                     /** ReadRepositoryFileResponse contents */
-                    contents?: (Uint8Array|string|null);
+                    contents?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a ReadRepositoryFileResponse. */
@@ -19361,7 +19334,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dataform.v1beta1.IReadRepositoryFileResponse);
 
                     /** ReadRepositoryFileResponse contents. */
-                    public contents: (Uint8Array|string);
+                    public contents: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new ReadRepositoryFileResponse instance using the specified properties.
@@ -20530,9 +20503,6 @@ export namespace google {
 
                     /** Workspace internalMetadata. */
                     public internalMetadata?: (string|null);
-
-                    /** Workspace _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
 
                     /**
                      * Creates a new Workspace instance using the specified properties.
@@ -24309,7 +24279,7 @@ export namespace google {
                 interface IReadFileResponse {
 
                     /** ReadFileResponse fileContents */
-                    fileContents?: (Uint8Array|string|null);
+                    fileContents?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a ReadFileResponse. */
@@ -24322,7 +24292,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dataform.v1beta1.IReadFileResponse);
 
                     /** ReadFileResponse fileContents. */
-                    public fileContents: (Uint8Array|string);
+                    public fileContents: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new ReadFileResponse instance using the specified properties.
@@ -24806,7 +24776,7 @@ export namespace google {
                     path?: (string|null);
 
                     /** WriteFileRequest contents */
-                    contents?: (Uint8Array|string|null);
+                    contents?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a WriteFileRequest. */
@@ -24825,7 +24795,7 @@ export namespace google {
                     public path: string;
 
                     /** WriteFileRequest contents. */
-                    public contents: (Uint8Array|string);
+                    public contents: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new WriteFileRequest instance using the specified properties.
@@ -25250,9 +25220,6 @@ export namespace google {
 
                     /** ReleaseConfig internalMetadata. */
                     public internalMetadata?: (string|null);
-
-                    /** ReleaseConfig _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
 
                     /**
                      * Creates a new ReleaseConfig instance using the specified properties.
@@ -26152,9 +26119,6 @@ export namespace google {
 
                     /** CompilationResult source. */
                     public source?: ("gitCommitish"|"workspace"|"releaseConfig");
-
-                    /** CompilationResult _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
 
                     /**
                      * Creates a new CompilationResult instance using the specified properties.
@@ -27444,9 +27408,6 @@ export namespace google {
 
                     /** CompilationResultAction compiledObject. */
                     public compiledObject?: ("relation"|"operations"|"assertion"|"declaration"|"notebook"|"dataPreparation");
-
-                    /** CompilationResultAction _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
 
                     /**
                      * Creates a new CompilationResultAction instance using the specified properties.
@@ -29245,9 +29206,6 @@ export namespace google {
                     /** WorkflowConfig internalMetadata. */
                     public internalMetadata?: (string|null);
 
-                    /** WorkflowConfig _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
-
                     /**
                      * Creates a new WorkflowConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -30262,9 +30220,6 @@ export namespace google {
                     /** WorkflowInvocation compilationSource. */
                     public compilationSource?: ("compilationResult"|"workflowConfig");
 
-                    /** WorkflowInvocation _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
-
                     /**
                      * Creates a new WorkflowInvocation instance using the specified properties.
                      * @param [properties] Properties to set
@@ -31140,9 +31095,6 @@ export namespace google {
 
                     /** WorkflowInvocationAction action. */
                     public action?: ("bigqueryAction"|"notebookAction"|"dataPreparationAction");
-
-                    /** WorkflowInvocationAction _internalMetadata. */
-                    public _internalMetadata?: "internalMetadata";
 
                     /**
                      * Creates a new WorkflowInvocationAction instance using the specified properties.
@@ -33254,6 +33206,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -33294,6 +33249,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -37512,6 +37470,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -37760,7 +37721,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -37791,7 +37752,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -39221,7 +39182,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -39237,7 +39198,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

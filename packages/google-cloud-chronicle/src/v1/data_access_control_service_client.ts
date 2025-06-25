@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -108,42 +101,20 @@ export class DataAccessControlServiceClient {
    *     const client = new DataAccessControlServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof DataAccessControlServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof DataAccessControlServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'chronicle.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -169,7 +140,7 @@ export class DataAccessControlServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -183,7 +154,10 @@ export class DataAccessControlServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -240,25 +214,16 @@ export class DataAccessControlServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDataAccessLabels: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'dataAccessLabels'
-      ),
-      listDataAccessScopes: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'dataAccessScopes'
-      ),
+      listDataAccessLabels:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataAccessLabels'),
+      listDataAccessScopes:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataAccessScopes')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.chronicle.v1.DataAccessControlService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.chronicle.v1.DataAccessControlService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -289,47 +254,32 @@ export class DataAccessControlServiceClient {
     // Put together the "service stub" for
     // google.cloud.chronicle.v1.DataAccessControlService.
     this.dataAccessControlServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.chronicle.v1.DataAccessControlService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.chronicle.v1
-            .DataAccessControlService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.chronicle.v1.DataAccessControlService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.chronicle.v1.DataAccessControlService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dataAccessControlServiceStubMethods = [
-      'createDataAccessLabel',
-      'getDataAccessLabel',
-      'listDataAccessLabels',
-      'updateDataAccessLabel',
-      'deleteDataAccessLabel',
-      'createDataAccessScope',
-      'getDataAccessScope',
-      'listDataAccessScopes',
-      'updateDataAccessScope',
-      'deleteDataAccessScope',
-    ];
+    const dataAccessControlServiceStubMethods =
+        ['createDataAccessLabel', 'getDataAccessLabel', 'listDataAccessLabels', 'updateDataAccessLabel', 'deleteDataAccessLabel', 'createDataAccessScope', 'getDataAccessScope', 'listDataAccessScopes', 'updateDataAccessScope', 'deleteDataAccessScope'];
     for (const methodName of dataAccessControlServiceStubMethods) {
       const callPromise = this.dataAccessControlServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -349,14 +299,8 @@ export class DataAccessControlServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'chronicle.googleapis.com';
   }
@@ -367,14 +311,8 @@ export class DataAccessControlServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'chronicle.googleapis.com';
   }
@@ -405,7 +343,9 @@ export class DataAccessControlServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -414,9 +354,8 @@ export class DataAccessControlServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -427,1182 +366,905 @@ export class DataAccessControlServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a data access label.
-   * Data access labels are applied to incoming event data and selected in data
-   * access scopes (another resource), and only users with scopes containing the
-   * label can see data with that label. Currently, the data access label
-   * resource only includes custom labels, which are labels that correspond
-   * to UDM queries over event data.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this Data Access Label will be created.
-   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
-   * @param {google.cloud.chronicle.v1.DataAccessLabel} request.dataAccessLabel
-   *   Required. Data access label to create.
-   * @param {string} request.dataAccessLabelId
-   *   Required. The ID to use for the data access label, which will become the
-   *   label's display name and the final component of the label's resource name.
-   *   The maximum number of characters should be 63. Regex pattern is as per AIP:
-   *   https://google.aip.dev/122#resource-id-segments
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DataAccessLabel|DataAccessLabel}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/data_access_control_service.create_data_access_label.js</caption>
-   * region_tag:chronicle_v1_generated_DataAccessControlService_CreateDataAccessLabel_async
-   */
+/**
+ * Creates a data access label.
+ * Data access labels are applied to incoming event data and selected in data
+ * access scopes (another resource), and only users with scopes containing the
+ * label can see data with that label. Currently, the data access label
+ * resource only includes custom labels, which are labels that correspond
+ * to UDM queries over event data.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this Data Access Label will be created.
+ *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+ * @param {google.cloud.chronicle.v1.DataAccessLabel} request.dataAccessLabel
+ *   Required. Data access label to create.
+ * @param {string} request.dataAccessLabelId
+ *   Required. The ID to use for the data access label, which will become the
+ *   label's display name and the final component of the label's resource name.
+ *   The maximum number of characters should be 63. Regex pattern is as per AIP:
+ *   https://google.aip.dev/122#resource-id-segments
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DataAccessLabel|DataAccessLabel}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/data_access_control_service.create_data_access_label.js</caption>
+ * region_tag:chronicle_v1_generated_DataAccessControlService_CreateDataAccessLabel_async
+ */
   createDataAccessLabel(
-    request?: protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessLabel,
-      (
-        | protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessLabel,
+        protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest|undefined, {}|undefined
+      ]>;
   createDataAccessLabel(
-    request: protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessLabel,
-      | protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDataAccessLabel(
-    request: protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessLabel,
-      | protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDataAccessLabel(
-    request?: protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.chronicle.v1.IDataAccessLabel,
-          | protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessLabel,
-      | protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessLabel,
-      (
-        | protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDataAccessLabel(
+      request: protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest,
+      callback: Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessLabel,
+          protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDataAccessLabel(
+      request?: protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessLabel,
+          protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessLabel,
+          protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessLabel,
+        protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createDataAccessLabel request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.chronicle.v1.IDataAccessLabel,
-          | protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.chronicle.v1.IDataAccessLabel,
+        protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDataAccessLabel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createDataAccessLabel(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.chronicle.v1.IDataAccessLabel,
-          (
-            | protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createDataAccessLabel response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createDataAccessLabel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.chronicle.v1.IDataAccessLabel,
+        protos.google.cloud.chronicle.v1.ICreateDataAccessLabelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDataAccessLabel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a data access label.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The ID of the data access label to retrieve.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/dataAccessLabels/{data_access_label}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DataAccessLabel|DataAccessLabel}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/data_access_control_service.get_data_access_label.js</caption>
-   * region_tag:chronicle_v1_generated_DataAccessControlService_GetDataAccessLabel_async
-   */
+/**
+ * Gets a data access label.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The ID of the data access label to retrieve.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/dataAccessLabels/{data_access_label}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DataAccessLabel|DataAccessLabel}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/data_access_control_service.get_data_access_label.js</caption>
+ * region_tag:chronicle_v1_generated_DataAccessControlService_GetDataAccessLabel_async
+ */
   getDataAccessLabel(
-    request?: protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessLabel,
-      protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessLabel,
+        protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest|undefined, {}|undefined
+      ]>;
   getDataAccessLabel(
-    request: protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessLabel,
-      | protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataAccessLabel(
-    request: protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessLabel,
-      | protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataAccessLabel(
-    request?: protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.chronicle.v1.IDataAccessLabel,
-          | protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessLabel,
-      | protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessLabel,
-      protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataAccessLabel(
+      request: protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest,
+      callback: Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessLabel,
+          protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataAccessLabel(
+      request?: protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessLabel,
+          protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessLabel,
+          protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessLabel,
+        protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDataAccessLabel request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.chronicle.v1.IDataAccessLabel,
-          | protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.chronicle.v1.IDataAccessLabel,
+        protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDataAccessLabel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDataAccessLabel(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.chronicle.v1.IDataAccessLabel,
-          (
-            | protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDataAccessLabel response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDataAccessLabel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.chronicle.v1.IDataAccessLabel,
+        protos.google.cloud.chronicle.v1.IGetDataAccessLabelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDataAccessLabel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a data access label.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.chronicle.v1.DataAccessLabel} request.dataAccessLabel
-   *   Required. The data access label to update.
-   *
-   *   The label's `name` field is used to identify the label to update.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/dataAccessLabels/{data_access_label}`
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to update. If not included, all fields with a non-empty
-   *   value will be overwritten. Currently, only the description and definition
-   *   fields are supported for update; an update call that attempts to update any
-   *   other fields will return INVALID_ARGUMENT.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DataAccessLabel|DataAccessLabel}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/data_access_control_service.update_data_access_label.js</caption>
-   * region_tag:chronicle_v1_generated_DataAccessControlService_UpdateDataAccessLabel_async
-   */
+/**
+ * Updates a data access label.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.chronicle.v1.DataAccessLabel} request.dataAccessLabel
+ *   Required. The data access label to update.
+ *
+ *   The label's `name` field is used to identify the label to update.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/dataAccessLabels/{data_access_label}`
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The list of fields to update. If not included, all fields with a non-empty
+ *   value will be overwritten. Currently, only the description and definition
+ *   fields are supported for update; an update call that attempts to update any
+ *   other fields will return INVALID_ARGUMENT.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DataAccessLabel|DataAccessLabel}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/data_access_control_service.update_data_access_label.js</caption>
+ * region_tag:chronicle_v1_generated_DataAccessControlService_UpdateDataAccessLabel_async
+ */
   updateDataAccessLabel(
-    request?: protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessLabel,
-      (
-        | protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessLabel,
+        protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest|undefined, {}|undefined
+      ]>;
   updateDataAccessLabel(
-    request: protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessLabel,
-      | protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDataAccessLabel(
-    request: protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessLabel,
-      | protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDataAccessLabel(
-    request?: protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.chronicle.v1.IDataAccessLabel,
-          | protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessLabel,
-      | protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessLabel,
-      (
-        | protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDataAccessLabel(
+      request: protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest,
+      callback: Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessLabel,
+          protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDataAccessLabel(
+      request?: protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessLabel,
+          protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessLabel,
+          protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessLabel,
+        protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'data_access_label.name': request.dataAccessLabel!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'data_access_label.name': request.dataAccessLabel!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateDataAccessLabel request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.chronicle.v1.IDataAccessLabel,
-          | protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.chronicle.v1.IDataAccessLabel,
+        protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDataAccessLabel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateDataAccessLabel(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.chronicle.v1.IDataAccessLabel,
-          (
-            | protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDataAccessLabel response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateDataAccessLabel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.chronicle.v1.IDataAccessLabel,
+        protos.google.cloud.chronicle.v1.IUpdateDataAccessLabelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDataAccessLabel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a data access label. When a label is deleted, new
-   * data that enters in the system will not receive the label, but the label
-   * will not be removed from old data that still refers to it.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The ID of the data access label to delete.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/dataAccessLabels/{data_access_label}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/data_access_control_service.delete_data_access_label.js</caption>
-   * region_tag:chronicle_v1_generated_DataAccessControlService_DeleteDataAccessLabel_async
-   */
+/**
+ * Deletes a data access label. When a label is deleted, new
+ * data that enters in the system will not receive the label, but the label
+ * will not be removed from old data that still refers to it.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The ID of the data access label to delete.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/dataAccessLabels/{data_access_label}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/data_access_control_service.delete_data_access_label.js</caption>
+ * region_tag:chronicle_v1_generated_DataAccessControlService_DeleteDataAccessLabel_async
+ */
   deleteDataAccessLabel(
-    request?: protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest|undefined, {}|undefined
+      ]>;
   deleteDataAccessLabel(
-    request: protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDataAccessLabel(
-    request: protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDataAccessLabel(
-    request?: protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDataAccessLabel(
+      request: protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDataAccessLabel(
+      request?: protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteDataAccessLabel request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDataAccessLabel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteDataAccessLabel(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDataAccessLabel response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteDataAccessLabel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.chronicle.v1.IDeleteDataAccessLabelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteDataAccessLabel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a data access scope.
-   * Data access scope is a combination of allowed and denied labels attached
-   * to a permission group. If a scope has allowed labels A and B and denied
-   * labels C and D, then the group of people attached to the scope
-   * will have permissions to see all events labeled with A or B (or both) and
-   * not labeled with either C or D.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this Data Access Scope will be created.
-   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
-   * @param {google.cloud.chronicle.v1.DataAccessScope} request.dataAccessScope
-   *   Required. Data access scope to create.
-   * @param {string} request.dataAccessScopeId
-   *   Required. The user provided scope id which will become the last part of the
-   *   name of the scope resource. Needs to be compliant with
-   *   https://google.aip.dev/122
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DataAccessScope|DataAccessScope}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/data_access_control_service.create_data_access_scope.js</caption>
-   * region_tag:chronicle_v1_generated_DataAccessControlService_CreateDataAccessScope_async
-   */
+/**
+ * Creates a data access scope.
+ * Data access scope is a combination of allowed and denied labels attached
+ * to a permission group. If a scope has allowed labels A and B and denied
+ * labels C and D, then the group of people attached to the scope
+ * will have permissions to see all events labeled with A or B (or both) and
+ * not labeled with either C or D.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this Data Access Scope will be created.
+ *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+ * @param {google.cloud.chronicle.v1.DataAccessScope} request.dataAccessScope
+ *   Required. Data access scope to create.
+ * @param {string} request.dataAccessScopeId
+ *   Required. The user provided scope id which will become the last part of the
+ *   name of the scope resource. Needs to be compliant with
+ *   https://google.aip.dev/122
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DataAccessScope|DataAccessScope}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/data_access_control_service.create_data_access_scope.js</caption>
+ * region_tag:chronicle_v1_generated_DataAccessControlService_CreateDataAccessScope_async
+ */
   createDataAccessScope(
-    request?: protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessScope,
-      (
-        | protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessScope,
+        protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest|undefined, {}|undefined
+      ]>;
   createDataAccessScope(
-    request: protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessScope,
-      | protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDataAccessScope(
-    request: protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessScope,
-      | protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDataAccessScope(
-    request?: protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.chronicle.v1.IDataAccessScope,
-          | protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessScope,
-      | protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessScope,
-      (
-        | protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDataAccessScope(
+      request: protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest,
+      callback: Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessScope,
+          protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDataAccessScope(
+      request?: protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessScope,
+          protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessScope,
+          protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessScope,
+        protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createDataAccessScope request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.chronicle.v1.IDataAccessScope,
-          | protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.chronicle.v1.IDataAccessScope,
+        protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDataAccessScope response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createDataAccessScope(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.chronicle.v1.IDataAccessScope,
-          (
-            | protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createDataAccessScope response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createDataAccessScope(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.chronicle.v1.IDataAccessScope,
+        protos.google.cloud.chronicle.v1.ICreateDataAccessScopeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDataAccessScope response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Retrieves an existing data access scope.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The ID of the data access scope to retrieve.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/dataAccessScopes/{data_access_scope}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DataAccessScope|DataAccessScope}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/data_access_control_service.get_data_access_scope.js</caption>
-   * region_tag:chronicle_v1_generated_DataAccessControlService_GetDataAccessScope_async
-   */
+/**
+ * Retrieves an existing data access scope.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The ID of the data access scope to retrieve.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/dataAccessScopes/{data_access_scope}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DataAccessScope|DataAccessScope}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/data_access_control_service.get_data_access_scope.js</caption>
+ * region_tag:chronicle_v1_generated_DataAccessControlService_GetDataAccessScope_async
+ */
   getDataAccessScope(
-    request?: protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessScope,
-      protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessScope,
+        protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest|undefined, {}|undefined
+      ]>;
   getDataAccessScope(
-    request: protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessScope,
-      | protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataAccessScope(
-    request: protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessScope,
-      | protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDataAccessScope(
-    request?: protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.chronicle.v1.IDataAccessScope,
-          | protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessScope,
-      | protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessScope,
-      protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataAccessScope(
+      request: protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest,
+      callback: Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessScope,
+          protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDataAccessScope(
+      request?: protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessScope,
+          protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessScope,
+          protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessScope,
+        protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDataAccessScope request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.chronicle.v1.IDataAccessScope,
-          | protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.chronicle.v1.IDataAccessScope,
+        protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDataAccessScope response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDataAccessScope(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.chronicle.v1.IDataAccessScope,
-          (
-            | protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDataAccessScope response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDataAccessScope(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.chronicle.v1.IDataAccessScope,
+        protos.google.cloud.chronicle.v1.IGetDataAccessScopeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDataAccessScope response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a data access scope.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.chronicle.v1.DataAccessScope} request.dataAccessScope
-   *   Required. The data access scope to update.
-   *
-   *   The scope's `name` field is used to identify the scope to update.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/dataAccessScopes/{data_access_scope}`
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to update. If not included, all fields with a non-empty
-   *   value will be overwritten. Currently, only the description, the allowed
-   *   and denied labels list fields are supported for update;
-   *   an update call that attempts to update any
-   *   other fields will return INVALID_ARGUMENT.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DataAccessScope|DataAccessScope}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/data_access_control_service.update_data_access_scope.js</caption>
-   * region_tag:chronicle_v1_generated_DataAccessControlService_UpdateDataAccessScope_async
-   */
+/**
+ * Updates a data access scope.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.chronicle.v1.DataAccessScope} request.dataAccessScope
+ *   Required. The data access scope to update.
+ *
+ *   The scope's `name` field is used to identify the scope to update.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/dataAccessScopes/{data_access_scope}`
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The list of fields to update. If not included, all fields with a non-empty
+ *   value will be overwritten. Currently, only the description, the allowed
+ *   and denied labels list fields are supported for update;
+ *   an update call that attempts to update any
+ *   other fields will return INVALID_ARGUMENT.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DataAccessScope|DataAccessScope}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/data_access_control_service.update_data_access_scope.js</caption>
+ * region_tag:chronicle_v1_generated_DataAccessControlService_UpdateDataAccessScope_async
+ */
   updateDataAccessScope(
-    request?: protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessScope,
-      (
-        | protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessScope,
+        protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest|undefined, {}|undefined
+      ]>;
   updateDataAccessScope(
-    request: protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessScope,
-      | protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDataAccessScope(
-    request: protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest,
-    callback: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessScope,
-      | protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDataAccessScope(
-    request?: protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.chronicle.v1.IDataAccessScope,
-          | protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.chronicle.v1.IDataAccessScope,
-      | protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessScope,
-      (
-        | protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDataAccessScope(
+      request: protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest,
+      callback: Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessScope,
+          protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDataAccessScope(
+      request?: protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessScope,
+          protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.chronicle.v1.IDataAccessScope,
+          protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessScope,
+        protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'data_access_scope.name': request.dataAccessScope!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'data_access_scope.name': request.dataAccessScope!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateDataAccessScope request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.chronicle.v1.IDataAccessScope,
-          | protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.chronicle.v1.IDataAccessScope,
+        protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDataAccessScope response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateDataAccessScope(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.chronicle.v1.IDataAccessScope,
-          (
-            | protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDataAccessScope response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateDataAccessScope(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.chronicle.v1.IDataAccessScope,
+        protos.google.cloud.chronicle.v1.IUpdateDataAccessScopeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDataAccessScope response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a data access scope.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The ID of the data access scope to delete.
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/dataAccessScopes/{data_access_scope}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/data_access_control_service.delete_data_access_scope.js</caption>
-   * region_tag:chronicle_v1_generated_DataAccessControlService_DeleteDataAccessScope_async
-   */
+/**
+ * Deletes a data access scope.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The ID of the data access scope to delete.
+ *   Format:
+ *   `projects/{project}/locations/{location}/instances/{instance}/dataAccessScopes/{data_access_scope}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/data_access_control_service.delete_data_access_scope.js</caption>
+ * region_tag:chronicle_v1_generated_DataAccessControlService_DeleteDataAccessScope_async
+ */
   deleteDataAccessScope(
-    request?: protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest|undefined, {}|undefined
+      ]>;
   deleteDataAccessScope(
-    request: protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDataAccessScope(
-    request: protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDataAccessScope(
-    request?: protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDataAccessScope(
+      request: protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDataAccessScope(
+      request?: protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteDataAccessScope request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDataAccessScope response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteDataAccessScope(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDataAccessScope response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteDataAccessScope(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.chronicle.v1.IDeleteDataAccessScopeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteDataAccessScope response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists all data access labels for the customer.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this data access label will be created.
-   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
-   * @param {number} request.pageSize
-   *   The maximum number of data access labels to return. The service may return
-   *   fewer than this value. If unspecified, at most 100 data access labels will
-   *   be returned. The maximum value is 1000; values above 1000 will be coerced
-   *   to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListDataAccessLabelsRequest` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. A filter which should follow the guidelines of AIP-160.
-   *   Supports filtering on all fieds of DataAccessLabel and all operations as
-   *   mentioned in https://google.aip.dev/160.
-   *   example filter: "create_time greater than \"2023-04-21T11:30:00-04:00\" OR
-   *   display_name:\"-21-1\"".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.DataAccessLabel|DataAccessLabel}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDataAccessLabelsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all data access labels for the customer.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this data access label will be created.
+ *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+ * @param {number} request.pageSize
+ *   The maximum number of data access labels to return. The service may return
+ *   fewer than this value. If unspecified, at most 100 data access labels will
+ *   be returned. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListDataAccessLabelsRequest` call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. A filter which should follow the guidelines of AIP-160.
+ *   Supports filtering on all fieds of DataAccessLabel and all operations as
+ *   mentioned in https://google.aip.dev/160.
+ *   example filter: "create_time greater than \"2023-04-21T11:30:00-04:00\" OR
+ *   display_name:\"-21-1\"".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.DataAccessLabel|DataAccessLabel}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDataAccessLabelsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDataAccessLabels(
-    request?: protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessLabel[],
-      protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest | null,
-      protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessLabel[],
+        protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest|null,
+        protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse
+      ]>;
   listDataAccessLabels(
-    request: protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
-      | protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse
-      | null
-      | undefined,
-      protos.google.cloud.chronicle.v1.IDataAccessLabel
-    >
-  ): void;
-  listDataAccessLabels(
-    request: protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
-      | protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse
-      | null
-      | undefined,
-      protos.google.cloud.chronicle.v1.IDataAccessLabel
-    >
-  ): void;
-  listDataAccessLabels(
-    request?: protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
-          | protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse
-          | null
-          | undefined,
-          protos.google.cloud.chronicle.v1.IDataAccessLabel
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
-      | protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse
-      | null
-      | undefined,
-      protos.google.cloud.chronicle.v1.IDataAccessLabel
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessLabel[],
-      protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest | null,
-      protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IDataAccessLabel>): void;
+  listDataAccessLabels(
+      request: protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
+          protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IDataAccessLabel>): void;
+  listDataAccessLabels(
+      request?: protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
+          protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IDataAccessLabel>,
+      callback?: PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
+          protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IDataAccessLabel>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessLabel[],
+        protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest|null,
+        protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
-          | protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse
-          | null
-          | undefined,
-          protos.google.cloud.chronicle.v1.IDataAccessLabel
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
+      protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse|null|undefined,
+      protos.google.cloud.chronicle.v1.IDataAccessLabel>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDataAccessLabels values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1611,67 +1273,64 @@ export class DataAccessControlServiceClient {
     this._log.info('listDataAccessLabels request %j', request);
     return this.innerApiCalls
       .listDataAccessLabels(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.chronicle.v1.IDataAccessLabel[],
-          protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest | null,
-          protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse,
-        ]) => {
-          this._log.info('listDataAccessLabels values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.chronicle.v1.IDataAccessLabel[],
+        protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest|null,
+        protos.google.cloud.chronicle.v1.IListDataAccessLabelsResponse
+      ]) => {
+        this._log.info('listDataAccessLabels values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDataAccessLabels`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this data access label will be created.
-   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
-   * @param {number} request.pageSize
-   *   The maximum number of data access labels to return. The service may return
-   *   fewer than this value. If unspecified, at most 100 data access labels will
-   *   be returned. The maximum value is 1000; values above 1000 will be coerced
-   *   to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListDataAccessLabelsRequest` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. A filter which should follow the guidelines of AIP-160.
-   *   Supports filtering on all fieds of DataAccessLabel and all operations as
-   *   mentioned in https://google.aip.dev/160.
-   *   example filter: "create_time greater than \"2023-04-21T11:30:00-04:00\" OR
-   *   display_name:\"-21-1\"".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.DataAccessLabel|DataAccessLabel} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDataAccessLabelsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDataAccessLabels`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this data access label will be created.
+ *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+ * @param {number} request.pageSize
+ *   The maximum number of data access labels to return. The service may return
+ *   fewer than this value. If unspecified, at most 100 data access labels will
+ *   be returned. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListDataAccessLabelsRequest` call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. A filter which should follow the guidelines of AIP-160.
+ *   Supports filtering on all fieds of DataAccessLabel and all operations as
+ *   mentioned in https://google.aip.dev/160.
+ *   example filter: "create_time greater than \"2023-04-21T11:30:00-04:00\" OR
+ *   display_name:\"-21-1\"".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.DataAccessLabel|DataAccessLabel} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDataAccessLabelsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDataAccessLabelsStream(
-    request?: protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDataAccessLabels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDataAccessLabels stream %j', request);
     return this.descriptors.page.listDataAccessLabels.createStream(
       this.innerApiCalls.listDataAccessLabels as GaxCall,
@@ -1680,58 +1339,57 @@ export class DataAccessControlServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listDataAccessLabels`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this data access label will be created.
-   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
-   * @param {number} request.pageSize
-   *   The maximum number of data access labels to return. The service may return
-   *   fewer than this value. If unspecified, at most 100 data access labels will
-   *   be returned. The maximum value is 1000; values above 1000 will be coerced
-   *   to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListDataAccessLabelsRequest` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. A filter which should follow the guidelines of AIP-160.
-   *   Supports filtering on all fieds of DataAccessLabel and all operations as
-   *   mentioned in https://google.aip.dev/160.
-   *   example filter: "create_time greater than \"2023-04-21T11:30:00-04:00\" OR
-   *   display_name:\"-21-1\"".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.chronicle.v1.DataAccessLabel|DataAccessLabel}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/data_access_control_service.list_data_access_labels.js</caption>
-   * region_tag:chronicle_v1_generated_DataAccessControlService_ListDataAccessLabels_async
-   */
+/**
+ * Equivalent to `listDataAccessLabels`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this data access label will be created.
+ *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+ * @param {number} request.pageSize
+ *   The maximum number of data access labels to return. The service may return
+ *   fewer than this value. If unspecified, at most 100 data access labels will
+ *   be returned. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListDataAccessLabelsRequest` call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. A filter which should follow the guidelines of AIP-160.
+ *   Supports filtering on all fieds of DataAccessLabel and all operations as
+ *   mentioned in https://google.aip.dev/160.
+ *   example filter: "create_time greater than \"2023-04-21T11:30:00-04:00\" OR
+ *   display_name:\"-21-1\"".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.chronicle.v1.DataAccessLabel|DataAccessLabel}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/data_access_control_service.list_data_access_labels.js</caption>
+ * region_tag:chronicle_v1_generated_DataAccessControlService_ListDataAccessLabels_async
+ */
   listDataAccessLabelsAsync(
-    request?: protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.chronicle.v1.IDataAccessLabel> {
+      request?: protos.google.cloud.chronicle.v1.IListDataAccessLabelsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.chronicle.v1.IDataAccessLabel>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDataAccessLabels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDataAccessLabels iterate %j', request);
     return this.descriptors.page.listDataAccessLabels.asyncIterate(
       this.innerApiCalls['listDataAccessLabels'] as GaxCall,
@@ -1739,123 +1397,98 @@ export class DataAccessControlServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.chronicle.v1.IDataAccessLabel>;
   }
-  /**
-   * Lists all existing data access scopes for the customer.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this data access scope will be created.
-   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
-   * @param {number} request.pageSize
-   *   The maximum number of data access scopes to return. The service may return
-   *   fewer than this value. If unspecified, at most 100 data access scopes will
-   *   be returned. The maximum value is 1000; values above 1000 will be coerced
-   *   to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListDataAccessScopesRequest` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. A filter which should follow the guidelines of AIP-160.
-   *   Supports filtering on all fieds of DataAccessScope and all operations as
-   *   mentioned in https://google.aip.dev/160.
-   *   example filter: "create_time greater than \"2023-04-21T11:30:00-04:00\" OR
-   *   display_name:\"-21-1\"".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.DataAccessScope|DataAccessScope}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDataAccessScopesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all existing data access scopes for the customer.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this data access scope will be created.
+ *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+ * @param {number} request.pageSize
+ *   The maximum number of data access scopes to return. The service may return
+ *   fewer than this value. If unspecified, at most 100 data access scopes will
+ *   be returned. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListDataAccessScopesRequest` call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. A filter which should follow the guidelines of AIP-160.
+ *   Supports filtering on all fieds of DataAccessScope and all operations as
+ *   mentioned in https://google.aip.dev/160.
+ *   example filter: "create_time greater than \"2023-04-21T11:30:00-04:00\" OR
+ *   display_name:\"-21-1\"".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.DataAccessScope|DataAccessScope}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDataAccessScopesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDataAccessScopes(
-    request?: protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessScope[],
-      protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest | null,
-      protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessScope[],
+        protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest|null,
+        protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse
+      ]>;
   listDataAccessScopes(
-    request: protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
-      | protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse
-      | null
-      | undefined,
-      protos.google.cloud.chronicle.v1.IDataAccessScope
-    >
-  ): void;
-  listDataAccessScopes(
-    request: protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
-      | protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse
-      | null
-      | undefined,
-      protos.google.cloud.chronicle.v1.IDataAccessScope
-    >
-  ): void;
-  listDataAccessScopes(
-    request?: protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
-          | protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse
-          | null
-          | undefined,
-          protos.google.cloud.chronicle.v1.IDataAccessScope
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
-      | protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse
-      | null
-      | undefined,
-      protos.google.cloud.chronicle.v1.IDataAccessScope
-    >
-  ): Promise<
-    [
-      protos.google.cloud.chronicle.v1.IDataAccessScope[],
-      protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest | null,
-      protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse,
-    ]
-  > | void {
+          protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IDataAccessScope>): void;
+  listDataAccessScopes(
+      request: protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
+          protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IDataAccessScope>): void;
+  listDataAccessScopes(
+      request?: protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
+          protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IDataAccessScope>,
+      callback?: PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
+          protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse|null|undefined,
+          protos.google.cloud.chronicle.v1.IDataAccessScope>):
+      Promise<[
+        protos.google.cloud.chronicle.v1.IDataAccessScope[],
+        protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest|null,
+        protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
-          | protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse
-          | null
-          | undefined,
-          protos.google.cloud.chronicle.v1.IDataAccessScope
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
+      protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse|null|undefined,
+      protos.google.cloud.chronicle.v1.IDataAccessScope>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDataAccessScopes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1864,67 +1497,64 @@ export class DataAccessControlServiceClient {
     this._log.info('listDataAccessScopes request %j', request);
     return this.innerApiCalls
       .listDataAccessScopes(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.chronicle.v1.IDataAccessScope[],
-          protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest | null,
-          protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse,
-        ]) => {
-          this._log.info('listDataAccessScopes values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.chronicle.v1.IDataAccessScope[],
+        protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest|null,
+        protos.google.cloud.chronicle.v1.IListDataAccessScopesResponse
+      ]) => {
+        this._log.info('listDataAccessScopes values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDataAccessScopes`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this data access scope will be created.
-   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
-   * @param {number} request.pageSize
-   *   The maximum number of data access scopes to return. The service may return
-   *   fewer than this value. If unspecified, at most 100 data access scopes will
-   *   be returned. The maximum value is 1000; values above 1000 will be coerced
-   *   to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListDataAccessScopesRequest` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. A filter which should follow the guidelines of AIP-160.
-   *   Supports filtering on all fieds of DataAccessScope and all operations as
-   *   mentioned in https://google.aip.dev/160.
-   *   example filter: "create_time greater than \"2023-04-21T11:30:00-04:00\" OR
-   *   display_name:\"-21-1\"".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.DataAccessScope|DataAccessScope} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDataAccessScopesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDataAccessScopes`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this data access scope will be created.
+ *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+ * @param {number} request.pageSize
+ *   The maximum number of data access scopes to return. The service may return
+ *   fewer than this value. If unspecified, at most 100 data access scopes will
+ *   be returned. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListDataAccessScopesRequest` call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. A filter which should follow the guidelines of AIP-160.
+ *   Supports filtering on all fieds of DataAccessScope and all operations as
+ *   mentioned in https://google.aip.dev/160.
+ *   example filter: "create_time greater than \"2023-04-21T11:30:00-04:00\" OR
+ *   display_name:\"-21-1\"".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.DataAccessScope|DataAccessScope} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDataAccessScopesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDataAccessScopesStream(
-    request?: protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDataAccessScopes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDataAccessScopes stream %j', request);
     return this.descriptors.page.listDataAccessScopes.createStream(
       this.innerApiCalls.listDataAccessScopes as GaxCall,
@@ -1933,58 +1563,57 @@ export class DataAccessControlServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listDataAccessScopes`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this data access scope will be created.
-   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
-   * @param {number} request.pageSize
-   *   The maximum number of data access scopes to return. The service may return
-   *   fewer than this value. If unspecified, at most 100 data access scopes will
-   *   be returned. The maximum value is 1000; values above 1000 will be coerced
-   *   to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListDataAccessScopesRequest` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. A filter which should follow the guidelines of AIP-160.
-   *   Supports filtering on all fieds of DataAccessScope and all operations as
-   *   mentioned in https://google.aip.dev/160.
-   *   example filter: "create_time greater than \"2023-04-21T11:30:00-04:00\" OR
-   *   display_name:\"-21-1\"".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.chronicle.v1.DataAccessScope|DataAccessScope}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/data_access_control_service.list_data_access_scopes.js</caption>
-   * region_tag:chronicle_v1_generated_DataAccessControlService_ListDataAccessScopes_async
-   */
+/**
+ * Equivalent to `listDataAccessScopes`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this data access scope will be created.
+ *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+ * @param {number} request.pageSize
+ *   The maximum number of data access scopes to return. The service may return
+ *   fewer than this value. If unspecified, at most 100 data access scopes will
+ *   be returned. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListDataAccessScopesRequest` call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. A filter which should follow the guidelines of AIP-160.
+ *   Supports filtering on all fieds of DataAccessScope and all operations as
+ *   mentioned in https://google.aip.dev/160.
+ *   example filter: "create_time greater than \"2023-04-21T11:30:00-04:00\" OR
+ *   display_name:\"-21-1\"".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.chronicle.v1.DataAccessScope|DataAccessScope}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/data_access_control_service.list_data_access_scopes.js</caption>
+ * region_tag:chronicle_v1_generated_DataAccessControlService_ListDataAccessScopes_async
+ */
   listDataAccessScopesAsync(
-    request?: protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.chronicle.v1.IDataAccessScope> {
+      request?: protos.google.cloud.chronicle.v1.IListDataAccessScopesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.chronicle.v1.IDataAccessScope>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDataAccessScopes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDataAccessScopes iterate %j', request);
     return this.descriptors.page.listDataAccessScopes.asyncIterate(
       this.innerApiCalls['listDataAccessScopes'] as GaxCall,
@@ -2005,12 +1634,7 @@ export class DataAccessControlServiceClient {
    * @param {string} data_access_label
    * @returns {string} Resource name string.
    */
-  dataAccessLabelPath(
-    project: string,
-    location: string,
-    instance: string,
-    dataAccessLabel: string
-  ) {
+  dataAccessLabelPath(project:string,location:string,instance:string,dataAccessLabel:string) {
     return this.pathTemplates.dataAccessLabelPathTemplate.render({
       project: project,
       location: location,
@@ -2027,9 +1651,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(
-      dataAccessLabelName
-    ).project;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).project;
   }
 
   /**
@@ -2040,9 +1662,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(
-      dataAccessLabelName
-    ).location;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).location;
   }
 
   /**
@@ -2053,9 +1673,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(
-      dataAccessLabelName
-    ).instance;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).instance;
   }
 
   /**
@@ -2066,9 +1684,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the data_access_label.
    */
   matchDataAccessLabelFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(
-      dataAccessLabelName
-    ).data_access_label;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).data_access_label;
   }
 
   /**
@@ -2080,12 +1696,7 @@ export class DataAccessControlServiceClient {
    * @param {string} data_access_scope
    * @returns {string} Resource name string.
    */
-  dataAccessScopePath(
-    project: string,
-    location: string,
-    instance: string,
-    dataAccessScope: string
-  ) {
+  dataAccessScopePath(project:string,location:string,instance:string,dataAccessScope:string) {
     return this.pathTemplates.dataAccessScopePathTemplate.render({
       project: project,
       location: location,
@@ -2102,9 +1713,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(
-      dataAccessScopeName
-    ).project;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).project;
   }
 
   /**
@@ -2115,9 +1724,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(
-      dataAccessScopeName
-    ).location;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).location;
   }
 
   /**
@@ -2128,9 +1735,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(
-      dataAccessScopeName
-    ).instance;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).instance;
   }
 
   /**
@@ -2141,9 +1746,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the data_access_scope.
    */
   matchDataAccessScopeFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(
-      dataAccessScopeName
-    ).data_access_scope;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).data_access_scope;
   }
 
   /**
@@ -2154,7 +1757,7 @@ export class DataAccessControlServiceClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project: string, location: string, instance: string) {
+  instancePath(project:string,location:string,instance:string) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       location: location,
@@ -2202,7 +1805,7 @@ export class DataAccessControlServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2237,7 +1840,7 @@ export class DataAccessControlServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2263,12 +1866,7 @@ export class DataAccessControlServiceClient {
    * @param {string} reference_list
    * @returns {string} Resource name string.
    */
-  referenceListPath(
-    project: string,
-    location: string,
-    instance: string,
-    referenceList: string
-  ) {
+  referenceListPath(project:string,location:string,instance:string,referenceList:string) {
     return this.pathTemplates.referenceListPathTemplate.render({
       project: project,
       location: location,
@@ -2285,8 +1883,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
-      .project;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).project;
   }
 
   /**
@@ -2297,8 +1894,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
-      .location;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).location;
   }
 
   /**
@@ -2309,8 +1905,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
-      .instance;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).instance;
   }
 
   /**
@@ -2321,8 +1916,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the reference_list.
    */
   matchReferenceListFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
-      .reference_list;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).reference_list;
   }
 
   /**
@@ -2335,13 +1929,7 @@ export class DataAccessControlServiceClient {
    * @param {string} retrohunt
    * @returns {string} Resource name string.
    */
-  retrohuntPath(
-    project: string,
-    location: string,
-    instance: string,
-    rule: string,
-    retrohunt: string
-  ) {
+  retrohuntPath(project:string,location:string,instance:string,rule:string,retrohunt:string) {
     return this.pathTemplates.retrohuntPathTemplate.render({
       project: project,
       location: location,
@@ -2359,8 +1947,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
-      .project;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).project;
   }
 
   /**
@@ -2371,8 +1958,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
-      .location;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).location;
   }
 
   /**
@@ -2383,8 +1969,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
-      .instance;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).instance;
   }
 
   /**
@@ -2406,8 +1991,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the retrohunt.
    */
   matchRetrohuntFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
-      .retrohunt;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).retrohunt;
   }
 
   /**
@@ -2419,7 +2003,7 @@ export class DataAccessControlServiceClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  rulePath(project: string, location: string, instance: string, rule: string) {
+  rulePath(project:string,location:string,instance:string,rule:string) {
     return this.pathTemplates.rulePathTemplate.render({
       project: project,
       location: location,
@@ -2481,12 +2065,7 @@ export class DataAccessControlServiceClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  ruleDeploymentPath(
-    project: string,
-    location: string,
-    instance: string,
-    rule: string
-  ) {
+  ruleDeploymentPath(project:string,location:string,instance:string,rule:string) {
     return this.pathTemplates.ruleDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -2503,9 +2082,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(
-      ruleDeploymentName
-    ).project;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).project;
   }
 
   /**
@@ -2516,9 +2093,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(
-      ruleDeploymentName
-    ).location;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).location;
   }
 
   /**
@@ -2529,9 +2104,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(
-      ruleDeploymentName
-    ).instance;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).instance;
   }
 
   /**
@@ -2542,9 +2115,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the rule.
    */
   matchRuleFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(
-      ruleDeploymentName
-    ).rule;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).rule;
   }
 
   /**
@@ -2556,12 +2127,7 @@ export class DataAccessControlServiceClient {
    * @param {string} watchlist
    * @returns {string} Resource name string.
    */
-  watchlistPath(
-    project: string,
-    location: string,
-    instance: string,
-    watchlist: string
-  ) {
+  watchlistPath(project:string,location:string,instance:string,watchlist:string) {
     return this.pathTemplates.watchlistPathTemplate.render({
       project: project,
       location: location,
@@ -2578,8 +2144,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
-      .project;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).project;
   }
 
   /**
@@ -2590,8 +2155,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
-      .location;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).location;
   }
 
   /**
@@ -2602,8 +2166,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
-      .instance;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).instance;
   }
 
   /**
@@ -2614,8 +2177,7 @@ export class DataAccessControlServiceClient {
    * @returns {string} A string representing the watchlist.
    */
   matchWatchlistFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
-      .watchlist;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).watchlist;
   }
 
   /**

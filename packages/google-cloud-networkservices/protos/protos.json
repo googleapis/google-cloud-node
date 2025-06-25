@@ -389,6 +389,124 @@
                               }
                             }
                           ]
+                        },
+                        "ListAuthzExtensions": {
+                          "requestType": "ListAuthzExtensionsRequest",
+                          "responseType": "ListAuthzExtensionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/authzExtensions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/authzExtensions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetAuthzExtension": {
+                          "requestType": "GetAuthzExtensionRequest",
+                          "responseType": "AuthzExtension",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/authzExtensions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/authzExtensions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateAuthzExtension": {
+                          "requestType": "CreateAuthzExtensionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/authzExtensions",
+                            "(google.api.http).body": "authz_extension",
+                            "(google.api.method_signature)": "parent,authz_extension,authz_extension_id",
+                            "(google.longrunning.operation_info).response_type": "AuthzExtension",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/authzExtensions",
+                                "body": "authz_extension"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,authz_extension,authz_extension_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AuthzExtension",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateAuthzExtension": {
+                          "requestType": "UpdateAuthzExtensionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{authz_extension.name=projects/*/locations/*/authzExtensions/*}",
+                            "(google.api.http).body": "authz_extension",
+                            "(google.api.method_signature)": "authz_extension,update_mask",
+                            "(google.longrunning.operation_info).response_type": "AuthzExtension",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{authz_extension.name=projects/*/locations/*/authzExtensions/*}",
+                                "body": "authz_extension"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "authz_extension,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AuthzExtension",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteAuthzExtension": {
+                          "requestType": "DeleteAuthzExtensionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/authzExtensions/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/authzExtensions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -408,6 +526,12 @@
                         "LOAD_BALANCING_SCHEME_UNSPECIFIED": 0,
                         "INTERNAL_MANAGED": 1,
                         "EXTERNAL_MANAGED": 2
+                      }
+                    },
+                    "WireFormat": {
+                      "values": {
+                        "WIRE_FORMAT_UNSPECIFIED": 0,
+                        "EXT_PROC_GRPC": 1
                       }
                     },
                     "ExtensionChain": {
@@ -499,6 +623,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "metadata": {
+                              "type": "google.protobuf.Struct",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         }
@@ -553,7 +684,7 @@
                           "type": "string",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "extensionChains": {
@@ -956,6 +1087,259 @@
                         }
                       }
                     },
+                    "AuthzExtension": {
+                      "options": {
+                        "(google.api.resource).type": "networkservices.googleapis.com/AuthzExtension",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/authzExtensions/{authz_extension}",
+                        "(google.api.resource).plural": "authzExtensions",
+                        "(google.api.resource).singular": "authzExtension"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "loadBalancingScheme": {
+                          "type": "LoadBalancingScheme",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "authority": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "timeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "failOpen": {
+                          "type": "bool",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Struct",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "forwardHeaders": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "wireFormat": {
+                          "type": "WireFormat",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListAuthzExtensionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networkservices.googleapis.com/AuthzExtension"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListAuthzExtensionsResponse": {
+                      "fields": {
+                        "authzExtensions": {
+                          "rule": "repeated",
+                          "type": "AuthzExtension",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetAuthzExtensionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkservices.googleapis.com/AuthzExtension"
+                          }
+                        }
+                      }
+                    },
+                    "CreateAuthzExtensionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networkservices.googleapis.com/AuthzExtension"
+                          }
+                        },
+                        "authzExtensionId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "authzExtension": {
+                          "type": "AuthzExtension",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateAuthzExtensionRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "authzExtension": {
+                          "type": "AuthzExtension",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteAuthzExtensionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkservices.googleapis.com/AuthzExtension"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "EndpointPolicy": {
                       "options": {
                         "(google.api.resource).type": "networkservices.googleapis.com/EndpointPolicy",
@@ -1163,6 +1547,487 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "networkservices.googleapis.com/EndpointPolicy"
+                          }
+                        }
+                      }
+                    },
+                    "WasmPluginView": {
+                      "values": {
+                        "WASM_PLUGIN_VIEW_UNSPECIFIED": 0,
+                        "WASM_PLUGIN_VIEW_BASIC": 1,
+                        "WASM_PLUGIN_VIEW_FULL": 2
+                      }
+                    },
+                    "WasmPlugin": {
+                      "options": {
+                        "(google.api.resource).type": "networkservices.googleapis.com/WasmPlugin",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/wasmPlugins/{wasm_plugin}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mainVersionId": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "logConfig": {
+                          "type": "LogConfig",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "versions": {
+                          "keyType": "string",
+                          "type": "VersionDetails",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "usedBy": {
+                          "rule": "repeated",
+                          "type": "UsedBy",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "VersionDetails": {
+                          "oneofs": {
+                            "pluginConfigSource": {
+                              "oneof": [
+                                "pluginConfigData",
+                                "pluginConfigUri"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "pluginConfigData": {
+                              "type": "bytes",
+                              "id": 9
+                            },
+                            "pluginConfigUri": {
+                              "type": "string",
+                              "id": 10
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "imageUri": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "imageDigest": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "pluginConfigDigest": {
+                              "type": "string",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "LogConfig": {
+                          "fields": {
+                            "enable": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "sampleRate": {
+                              "type": "float",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "NON_EMPTY_DEFAULT"
+                              }
+                            },
+                            "minLogLevel": {
+                              "type": "LogLevel",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "NON_EMPTY_DEFAULT"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "LogLevel": {
+                              "values": {
+                                "LOG_LEVEL_UNSPECIFIED": 0,
+                                "TRACE": 1,
+                                "DEBUG": 2,
+                                "INFO": 3,
+                                "WARN": 4,
+                                "ERROR": 5,
+                                "CRITICAL": 6
+                              }
+                            }
+                          }
+                        },
+                        "UsedBy": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "WasmPluginVersion": {
+                      "options": {
+                        "(google.api.resource).type": "networkservices.googleapis.com/WasmPluginVersion",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/wasmPlugins/{wasm_plugin}/versions/{wasm_plugin_version}"
+                      },
+                      "oneofs": {
+                        "pluginConfigSource": {
+                          "oneof": [
+                            "pluginConfigData",
+                            "pluginConfigUri"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "pluginConfigData": {
+                          "type": "bytes",
+                          "id": 12
+                        },
+                        "pluginConfigUri": {
+                          "type": "string",
+                          "id": 13
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "imageUri": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "imageDigest": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pluginConfigDigest": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ListWasmPluginsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networkservices.googleapis.com/WasmPlugin"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListWasmPluginsResponse": {
+                      "fields": {
+                        "wasmPlugins": {
+                          "rule": "repeated",
+                          "type": "WasmPlugin",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetWasmPluginRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkservices.googleapis.com/WasmPlugin"
+                          }
+                        },
+                        "view": {
+                          "type": "WasmPluginView",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateWasmPluginRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networkservices.googleapis.com/WasmPlugin"
+                          }
+                        },
+                        "wasmPluginId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "wasmPlugin": {
+                          "type": "WasmPlugin",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateWasmPluginRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "wasmPlugin": {
+                          "type": "WasmPlugin",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteWasmPluginRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkservices.googleapis.com/WasmPlugin"
+                          }
+                        }
+                      }
+                    },
+                    "ListWasmPluginVersionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networkservices.googleapis.com/WasmPluginVersion"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListWasmPluginVersionsResponse": {
+                      "fields": {
+                        "wasmPluginVersions": {
+                          "rule": "repeated",
+                          "type": "WasmPluginVersion",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetWasmPluginVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkservices.googleapis.com/WasmPluginVersion"
+                          }
+                        }
+                      }
+                    },
+                    "CreateWasmPluginVersionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networkservices.googleapis.com/WasmPluginVersion"
+                          }
+                        },
+                        "wasmPluginVersionId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "wasmPluginVersion": {
+                          "type": "WasmPluginVersion",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteWasmPluginVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkservices.googleapis.com/WasmPluginVersion"
                           }
                         }
                       }
@@ -2936,6 +3801,214 @@
                             {
                               "(google.api.http)": {
                                 "delete": "/v1/{name=projects/*/locations/*/endpointPolicies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.networkservices.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListWasmPluginVersions": {
+                          "requestType": "ListWasmPluginVersionsRequest",
+                          "responseType": "ListWasmPluginVersionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/wasmPlugins/*}/versions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/wasmPlugins/*}/versions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetWasmPluginVersion": {
+                          "requestType": "GetWasmPluginVersionRequest",
+                          "responseType": "WasmPluginVersion",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/wasmPlugins/*/versions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/wasmPlugins/*/versions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateWasmPluginVersion": {
+                          "requestType": "CreateWasmPluginVersionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/wasmPlugins/*}/versions",
+                            "(google.api.http).body": "wasm_plugin_version",
+                            "(google.api.method_signature)": "parent,wasm_plugin_version,wasm_plugin_version_id",
+                            "(google.longrunning.operation_info).response_type": "WasmPluginVersion",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networkservices.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/wasmPlugins/*}/versions",
+                                "body": "wasm_plugin_version"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,wasm_plugin_version,wasm_plugin_version_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "WasmPluginVersion",
+                                "metadata_type": "google.cloud.networkservices.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteWasmPluginVersion": {
+                          "requestType": "DeleteWasmPluginVersionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/wasmPlugins/*/versions/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networkservices.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/wasmPlugins/*/versions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.networkservices.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListWasmPlugins": {
+                          "requestType": "ListWasmPluginsRequest",
+                          "responseType": "ListWasmPluginsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/wasmPlugins",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/wasmPlugins"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetWasmPlugin": {
+                          "requestType": "GetWasmPluginRequest",
+                          "responseType": "WasmPlugin",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/wasmPlugins/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/wasmPlugins/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateWasmPlugin": {
+                          "requestType": "CreateWasmPluginRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/wasmPlugins",
+                            "(google.api.http).body": "wasm_plugin",
+                            "(google.api.method_signature)": "parent,wasm_plugin,wasm_plugin_id",
+                            "(google.longrunning.operation_info).response_type": "WasmPlugin",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networkservices.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/wasmPlugins",
+                                "body": "wasm_plugin"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,wasm_plugin,wasm_plugin_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "WasmPlugin",
+                                "metadata_type": "google.cloud.networkservices.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateWasmPlugin": {
+                          "requestType": "UpdateWasmPluginRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{wasm_plugin.name=projects/*/locations/*/wasmPlugins/*}",
+                            "(google.api.http).body": "wasm_plugin",
+                            "(google.api.method_signature)": "wasm_plugin,update_mask",
+                            "(google.longrunning.operation_info).response_type": "WasmPlugin",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networkservices.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{wasm_plugin.name=projects/*/locations/*/wasmPlugins/*}",
+                                "body": "wasm_plugin"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "wasm_plugin,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "WasmPlugin",
+                                "metadata_type": "google.cloud.networkservices.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteWasmPlugin": {
+                          "requestType": "DeleteWasmPluginRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/wasmPlugins/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networkservices.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/wasmPlugins/*}"
                               }
                             },
                             {

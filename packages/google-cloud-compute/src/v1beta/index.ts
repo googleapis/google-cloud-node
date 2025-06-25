@@ -104,6 +104,7 @@ export {RegionUrlMapsClient} from './region_url_maps_client';
 export {RegionZonesClient} from './region_zones_client';
 export {ReservationBlocksClient} from './reservation_blocks_client';
 export {ReservationsClient} from './reservations_client';
+export {ReservationSubBlocksClient} from './reservation_sub_blocks_client';
 export {ResourcePoliciesClient} from './resource_policies_client';
 export {RoutersClient} from './routers_client';
 export {RoutesClient} from './routes_client';

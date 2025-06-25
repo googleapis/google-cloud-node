@@ -16,20 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  CloudControlsPartnerCoreClient,
-  CloudControlsPartnerMonitoringClient,
-} from '@google-cloud/cloudcontrolspartner';
+import {CloudControlsPartnerCoreClient, CloudControlsPartnerMonitoringClient} from '@google-cloud/cloudcontrolspartner';
 
 // check that the client class type name can be used
-function doStuffWithCloudControlsPartnerCoreClient(
-  client: CloudControlsPartnerCoreClient
-) {
+function doStuffWithCloudControlsPartnerCoreClient(client: CloudControlsPartnerCoreClient) {
   client.close();
 }
-function doStuffWithCloudControlsPartnerMonitoringClient(
-  client: CloudControlsPartnerMonitoringClient
-) {
+function doStuffWithCloudControlsPartnerMonitoringClient(client: CloudControlsPartnerMonitoringClient) {
   client.close();
 }
 
@@ -38,11 +31,8 @@ function main() {
   const cloudControlsPartnerCoreClient = new CloudControlsPartnerCoreClient();
   doStuffWithCloudControlsPartnerCoreClient(cloudControlsPartnerCoreClient);
   // check that the client instance can be created
-  const cloudControlsPartnerMonitoringClient =
-    new CloudControlsPartnerMonitoringClient();
-  doStuffWithCloudControlsPartnerMonitoringClient(
-    cloudControlsPartnerMonitoringClient
-  );
+  const cloudControlsPartnerMonitoringClient = new CloudControlsPartnerMonitoringClient();
+  doStuffWithCloudControlsPartnerMonitoringClient(cloudControlsPartnerMonitoringClient);
 }
 
 main();

@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -113,41 +102,20 @@ export class StorageInsightsClient {
    *     const client = new StorageInsightsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof StorageInsightsClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'storageinsights.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -173,7 +141,7 @@ export class StorageInsightsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -189,9 +157,13 @@ export class StorageInsightsClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -233,130 +205,75 @@ export class StorageInsightsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listReportConfigs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'reportConfigs'
-      ),
-      listReportDetails: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'reportDetails'
-      ),
-      listDatasetConfigs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'datasetConfigs'
-      ),
+      listReportConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'reportConfigs'),
+      listReportDetails:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'reportDetails'),
+      listDatasetConfigs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'datasetConfigs')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createDatasetConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.storageinsights.v1.DatasetConfig'
-    ) as gax.protobuf.Type;
+      '.google.cloud.storageinsights.v1.DatasetConfig') as gax.protobuf.Type;
     const createDatasetConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.storageinsights.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.storageinsights.v1.OperationMetadata') as gax.protobuf.Type;
     const updateDatasetConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.storageinsights.v1.DatasetConfig'
-    ) as gax.protobuf.Type;
+      '.google.cloud.storageinsights.v1.DatasetConfig') as gax.protobuf.Type;
     const updateDatasetConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.storageinsights.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.storageinsights.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteDatasetConfigResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteDatasetConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.storageinsights.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.storageinsights.v1.OperationMetadata') as gax.protobuf.Type;
     const linkDatasetResponse = protoFilesRoot.lookup(
-      '.google.cloud.storageinsights.v1.LinkDatasetResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.storageinsights.v1.LinkDatasetResponse') as gax.protobuf.Type;
     const linkDatasetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.storageinsights.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.storageinsights.v1.OperationMetadata') as gax.protobuf.Type;
     const unlinkDatasetResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const unlinkDatasetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.storageinsights.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.storageinsights.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createDatasetConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createDatasetConfigResponse.decode.bind(createDatasetConfigResponse),
-        createDatasetConfigMetadata.decode.bind(createDatasetConfigMetadata)
-      ),
+        createDatasetConfigMetadata.decode.bind(createDatasetConfigMetadata)),
       updateDatasetConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateDatasetConfigResponse.decode.bind(updateDatasetConfigResponse),
-        updateDatasetConfigMetadata.decode.bind(updateDatasetConfigMetadata)
-      ),
+        updateDatasetConfigMetadata.decode.bind(updateDatasetConfigMetadata)),
       deleteDatasetConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteDatasetConfigResponse.decode.bind(deleteDatasetConfigResponse),
-        deleteDatasetConfigMetadata.decode.bind(deleteDatasetConfigMetadata)
-      ),
+        deleteDatasetConfigMetadata.decode.bind(deleteDatasetConfigMetadata)),
       linkDataset: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         linkDatasetResponse.decode.bind(linkDatasetResponse),
-        linkDatasetMetadata.decode.bind(linkDatasetMetadata)
-      ),
+        linkDatasetMetadata.decode.bind(linkDatasetMetadata)),
       unlinkDataset: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         unlinkDatasetResponse.decode.bind(unlinkDatasetResponse),
-        unlinkDatasetMetadata.decode.bind(unlinkDatasetMetadata)
-      ),
+        unlinkDatasetMetadata.decode.bind(unlinkDatasetMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.storageinsights.v1.StorageInsights',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.storageinsights.v1.StorageInsights', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -387,48 +304,28 @@ export class StorageInsightsClient {
     // Put together the "service stub" for
     // google.cloud.storageinsights.v1.StorageInsights.
     this.storageInsightsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.storageinsights.v1.StorageInsights'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.storageinsights.v1.StorageInsights') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.storageinsights.v1.StorageInsights,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const storageInsightsStubMethods = [
-      'listReportConfigs',
-      'getReportConfig',
-      'createReportConfig',
-      'updateReportConfig',
-      'deleteReportConfig',
-      'listReportDetails',
-      'getReportDetail',
-      'listDatasetConfigs',
-      'getDatasetConfig',
-      'createDatasetConfig',
-      'updateDatasetConfig',
-      'deleteDatasetConfig',
-      'linkDataset',
-      'unlinkDataset',
-    ];
+    const storageInsightsStubMethods =
+        ['listReportConfigs', 'getReportConfig', 'createReportConfig', 'updateReportConfig', 'deleteReportConfig', 'listReportDetails', 'getReportDetail', 'listDatasetConfigs', 'getDatasetConfig', 'createDatasetConfig', 'updateDatasetConfig', 'deleteDatasetConfig', 'linkDataset', 'unlinkDataset'];
     for (const methodName of storageInsightsStubMethods) {
       const callPromise = this.storageInsightsStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -453,14 +350,8 @@ export class StorageInsightsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'storageinsights.googleapis.com';
   }
@@ -471,14 +362,8 @@ export class StorageInsightsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'storageinsights.googleapis.com';
   }
@@ -509,7 +394,9 @@ export class StorageInsightsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -518,9 +405,8 @@ export class StorageInsightsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -531,1827 +417,1294 @@ export class StorageInsightsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of a single ReportConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.get_report_config.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_GetReportConfig_async
-   */
+/**
+ * Gets details of a single ReportConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.get_report_config.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_GetReportConfig_async
+ */
   getReportConfig(
-    request?: protos.google.cloud.storageinsights.v1.IGetReportConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IReportConfig,
-      (
-        | protos.google.cloud.storageinsights.v1.IGetReportConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.storageinsights.v1.IGetReportConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IReportConfig,
+        protos.google.cloud.storageinsights.v1.IGetReportConfigRequest|undefined, {}|undefined
+      ]>;
   getReportConfig(
-    request: protos.google.cloud.storageinsights.v1.IGetReportConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.storageinsights.v1.IReportConfig,
-      | protos.google.cloud.storageinsights.v1.IGetReportConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReportConfig(
-    request: protos.google.cloud.storageinsights.v1.IGetReportConfigRequest,
-    callback: Callback<
-      protos.google.cloud.storageinsights.v1.IReportConfig,
-      | protos.google.cloud.storageinsights.v1.IGetReportConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReportConfig(
-    request?: protos.google.cloud.storageinsights.v1.IGetReportConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.storageinsights.v1.IGetReportConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.storageinsights.v1.IReportConfig,
-          | protos.google.cloud.storageinsights.v1.IGetReportConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.storageinsights.v1.IReportConfig,
-      | protos.google.cloud.storageinsights.v1.IGetReportConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IReportConfig,
-      (
-        | protos.google.cloud.storageinsights.v1.IGetReportConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.storageinsights.v1.IGetReportConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReportConfig(
+      request: protos.google.cloud.storageinsights.v1.IGetReportConfigRequest,
+      callback: Callback<
+          protos.google.cloud.storageinsights.v1.IReportConfig,
+          protos.google.cloud.storageinsights.v1.IGetReportConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReportConfig(
+      request?: protos.google.cloud.storageinsights.v1.IGetReportConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.storageinsights.v1.IReportConfig,
+          protos.google.cloud.storageinsights.v1.IGetReportConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.storageinsights.v1.IReportConfig,
+          protos.google.cloud.storageinsights.v1.IGetReportConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IReportConfig,
+        protos.google.cloud.storageinsights.v1.IGetReportConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getReportConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.storageinsights.v1.IReportConfig,
-          | protos.google.cloud.storageinsights.v1.IGetReportConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.storageinsights.v1.IReportConfig,
+        protos.google.cloud.storageinsights.v1.IGetReportConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getReportConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getReportConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.storageinsights.v1.IReportConfig,
-          (
-            | protos.google.cloud.storageinsights.v1.IGetReportConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getReportConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getReportConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.storageinsights.v1.IReportConfig,
+        protos.google.cloud.storageinsights.v1.IGetReportConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getReportConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new ReportConfig in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {google.cloud.storageinsights.v1.ReportConfig} request.reportConfig
-   *   Required. The resource being created
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.create_report_config.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_CreateReportConfig_async
-   */
+/**
+ * Creates a new ReportConfig in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {google.cloud.storageinsights.v1.ReportConfig} request.reportConfig
+ *   Required. The resource being created
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.create_report_config.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_CreateReportConfig_async
+ */
   createReportConfig(
-    request?: protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IReportConfig,
-      (
-        | protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IReportConfig,
+        protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest|undefined, {}|undefined
+      ]>;
   createReportConfig(
-    request: protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.storageinsights.v1.IReportConfig,
-      | protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createReportConfig(
-    request: protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest,
-    callback: Callback<
-      protos.google.cloud.storageinsights.v1.IReportConfig,
-      | protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createReportConfig(
-    request?: protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.storageinsights.v1.IReportConfig,
-          | protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.storageinsights.v1.IReportConfig,
-      | protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IReportConfig,
-      (
-        | protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  createReportConfig(
+      request: protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest,
+      callback: Callback<
+          protos.google.cloud.storageinsights.v1.IReportConfig,
+          protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  createReportConfig(
+      request?: protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.storageinsights.v1.IReportConfig,
+          protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.storageinsights.v1.IReportConfig,
+          protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IReportConfig,
+        protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createReportConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.storageinsights.v1.IReportConfig,
-          | protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.storageinsights.v1.IReportConfig,
+        protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createReportConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createReportConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.storageinsights.v1.IReportConfig,
-          (
-            | protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createReportConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createReportConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.storageinsights.v1.IReportConfig,
+        protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createReportConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the parameters of a single ReportConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   ReportConfig resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.storageinsights.v1.ReportConfig} request.reportConfig
-   *   Required. The resource being updated
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.update_report_config.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_UpdateReportConfig_async
-   */
+/**
+ * Updates the parameters of a single ReportConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   ReportConfig resource by the update.
+ *   The fields specified in the update_mask are relative to the resource, not
+ *   the full request. A field will be overwritten if it is in the mask. If the
+ *   user does not provide a mask then all fields will be overwritten.
+ * @param {google.cloud.storageinsights.v1.ReportConfig} request.reportConfig
+ *   Required. The resource being updated
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.update_report_config.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_UpdateReportConfig_async
+ */
   updateReportConfig(
-    request?: protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IReportConfig,
-      (
-        | protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IReportConfig,
+        protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest|undefined, {}|undefined
+      ]>;
   updateReportConfig(
-    request: protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.storageinsights.v1.IReportConfig,
-      | protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateReportConfig(
-    request: protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest,
-    callback: Callback<
-      protos.google.cloud.storageinsights.v1.IReportConfig,
-      | protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateReportConfig(
-    request?: protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.storageinsights.v1.IReportConfig,
-          | protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.storageinsights.v1.IReportConfig,
-      | protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IReportConfig,
-      (
-        | protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateReportConfig(
+      request: protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest,
+      callback: Callback<
+          protos.google.cloud.storageinsights.v1.IReportConfig,
+          protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateReportConfig(
+      request?: protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.storageinsights.v1.IReportConfig,
+          protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.storageinsights.v1.IReportConfig,
+          protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IReportConfig,
+        protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'report_config.name': request.reportConfig!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'report_config.name': request.reportConfig!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateReportConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.storageinsights.v1.IReportConfig,
-          | protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.storageinsights.v1.IReportConfig,
+        protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateReportConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateReportConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.storageinsights.v1.IReportConfig,
-          (
-            | protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateReportConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateReportConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.storageinsights.v1.IReportConfig,
+        protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateReportConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a single ReportConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {boolean} [request.force]
-   *   Optional. If set, all ReportDetails for this ReportConfig will be deleted.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.delete_report_config.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_DeleteReportConfig_async
-   */
+/**
+ * Deletes a single ReportConfig.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {boolean} [request.force]
+ *   Optional. If set, all ReportDetails for this ReportConfig will be deleted.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.delete_report_config.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_DeleteReportConfig_async
+ */
   deleteReportConfig(
-    request?: protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest|undefined, {}|undefined
+      ]>;
   deleteReportConfig(
-    request: protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteReportConfig(
-    request: protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteReportConfig(
-    request?: protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteReportConfig(
+      request: protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteReportConfig(
+      request?: protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteReportConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteReportConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteReportConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteReportConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteReportConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteReportConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single ReportDetail.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.storageinsights.v1.ReportDetail|ReportDetail}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.get_report_detail.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_GetReportDetail_async
-   */
+/**
+ * Gets details of a single ReportDetail.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.storageinsights.v1.ReportDetail|ReportDetail}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.get_report_detail.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_GetReportDetail_async
+ */
   getReportDetail(
-    request?: protos.google.cloud.storageinsights.v1.IGetReportDetailRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IReportDetail,
-      (
-        | protos.google.cloud.storageinsights.v1.IGetReportDetailRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.storageinsights.v1.IGetReportDetailRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IReportDetail,
+        protos.google.cloud.storageinsights.v1.IGetReportDetailRequest|undefined, {}|undefined
+      ]>;
   getReportDetail(
-    request: protos.google.cloud.storageinsights.v1.IGetReportDetailRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.storageinsights.v1.IReportDetail,
-      | protos.google.cloud.storageinsights.v1.IGetReportDetailRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReportDetail(
-    request: protos.google.cloud.storageinsights.v1.IGetReportDetailRequest,
-    callback: Callback<
-      protos.google.cloud.storageinsights.v1.IReportDetail,
-      | protos.google.cloud.storageinsights.v1.IGetReportDetailRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReportDetail(
-    request?: protos.google.cloud.storageinsights.v1.IGetReportDetailRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.storageinsights.v1.IGetReportDetailRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.storageinsights.v1.IReportDetail,
-          | protos.google.cloud.storageinsights.v1.IGetReportDetailRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.storageinsights.v1.IReportDetail,
-      | protos.google.cloud.storageinsights.v1.IGetReportDetailRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IReportDetail,
-      (
-        | protos.google.cloud.storageinsights.v1.IGetReportDetailRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.storageinsights.v1.IGetReportDetailRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReportDetail(
+      request: protos.google.cloud.storageinsights.v1.IGetReportDetailRequest,
+      callback: Callback<
+          protos.google.cloud.storageinsights.v1.IReportDetail,
+          protos.google.cloud.storageinsights.v1.IGetReportDetailRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReportDetail(
+      request?: protos.google.cloud.storageinsights.v1.IGetReportDetailRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.storageinsights.v1.IReportDetail,
+          protos.google.cloud.storageinsights.v1.IGetReportDetailRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.storageinsights.v1.IReportDetail,
+          protos.google.cloud.storageinsights.v1.IGetReportDetailRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IReportDetail,
+        protos.google.cloud.storageinsights.v1.IGetReportDetailRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getReportDetail request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.storageinsights.v1.IReportDetail,
-          | protos.google.cloud.storageinsights.v1.IGetReportDetailRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.storageinsights.v1.IReportDetail,
+        protos.google.cloud.storageinsights.v1.IGetReportDetailRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getReportDetail response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getReportDetail(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.storageinsights.v1.IReportDetail,
-          (
-            | protos.google.cloud.storageinsights.v1.IGetReportDetailRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getReportDetail response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getReportDetail(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.storageinsights.v1.IReportDetail,
+        protos.google.cloud.storageinsights.v1.IGetReportDetailRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getReportDetail response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the dataset configuration in a given project for a given location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.storageinsights.v1.DatasetConfig|DatasetConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.get_dataset_config.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_GetDatasetConfig_async
-   */
+/**
+ * Gets the dataset configuration in a given project for a given location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.storageinsights.v1.DatasetConfig|DatasetConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.get_dataset_config.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_GetDatasetConfig_async
+ */
   getDatasetConfig(
-    request?: protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IDatasetConfig,
-      (
-        | protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IDatasetConfig,
+        protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest|undefined, {}|undefined
+      ]>;
   getDatasetConfig(
-    request: protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.storageinsights.v1.IDatasetConfig,
-      | protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDatasetConfig(
-    request: protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest,
-    callback: Callback<
-      protos.google.cloud.storageinsights.v1.IDatasetConfig,
-      | protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDatasetConfig(
-    request?: protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.storageinsights.v1.IDatasetConfig,
-          | protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.storageinsights.v1.IDatasetConfig,
-      | protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IDatasetConfig,
-      (
-        | protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDatasetConfig(
+      request: protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest,
+      callback: Callback<
+          protos.google.cloud.storageinsights.v1.IDatasetConfig,
+          protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDatasetConfig(
+      request?: protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.storageinsights.v1.IDatasetConfig,
+          protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.storageinsights.v1.IDatasetConfig,
+          protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IDatasetConfig,
+        protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDatasetConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.storageinsights.v1.IDatasetConfig,
-          | protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.storageinsights.v1.IDatasetConfig,
+        protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDatasetConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDatasetConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.storageinsights.v1.IDatasetConfig,
-          (
-            | protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDatasetConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDatasetConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.storageinsights.v1.IDatasetConfig,
+        protos.google.cloud.storageinsights.v1.IGetDatasetConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDatasetConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a dataset configuration in a given project for a given location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {string} request.datasetConfigId
-   *   Required. ID of the requesting object.
-   *   If auto-generating ID is enabled on the server-side, remove this field and
-   *   `dataset_config_id` from the method_signature of Create RPC
-   *   Note: The value should not contain any hyphens.
-   * @param {google.cloud.storageinsights.v1.DatasetConfig} request.datasetConfig
-   *   Required. The resource being created
-   * @param {string} [request.requestId]
-   *   Optional. A unique identifier for your request.
-   *   Specify the request ID if you need to retry the request.
-   *   If you retry the request with the same ID within 60 minutes, the server
-   *   ignores the request if it has already completed the original request.
-   *
-   *   For example, if your initial request times out and you retry the request
-   *   using the same request ID, the server recognizes the original request and
-   *   does not process the new request.
-   *
-   *   The request ID must be a valid UUID and cannot be a zero UUID
-   *   (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.create_dataset_config.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_CreateDatasetConfig_async
-   */
+/**
+ * Creates a dataset configuration in a given project for a given location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.datasetConfigId
+ *   Required. ID of the requesting object.
+ *   If auto-generating ID is enabled on the server-side, remove this field and
+ *   `dataset_config_id` from the method_signature of Create RPC
+ *   Note: The value should not contain any hyphens.
+ * @param {google.cloud.storageinsights.v1.DatasetConfig} request.datasetConfig
+ *   Required. The resource being created
+ * @param {string} [request.requestId]
+ *   Optional. A unique identifier for your request.
+ *   Specify the request ID if you need to retry the request.
+ *   If you retry the request with the same ID within 60 minutes, the server
+ *   ignores the request if it has already completed the original request.
+ *
+ *   For example, if your initial request times out and you retry the request
+ *   using the same request ID, the server recognizes the original request and
+ *   does not process the new request.
+ *
+ *   The request ID must be a valid UUID and cannot be a zero UUID
+ *   (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.create_dataset_config.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_CreateDatasetConfig_async
+ */
   createDatasetConfig(
-    request?: protos.google.cloud.storageinsights.v1.ICreateDatasetConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.storageinsights.v1.IDatasetConfig,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.storageinsights.v1.ICreateDatasetConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createDatasetConfig(
-    request: protos.google.cloud.storageinsights.v1.ICreateDatasetConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.storageinsights.v1.IDatasetConfig,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.storageinsights.v1.ICreateDatasetConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createDatasetConfig(
-    request: protos.google.cloud.storageinsights.v1.ICreateDatasetConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.storageinsights.v1.IDatasetConfig,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.storageinsights.v1.ICreateDatasetConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createDatasetConfig(
-    request?: protos.google.cloud.storageinsights.v1.ICreateDatasetConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.storageinsights.v1.IDatasetConfig,
-            protos.google.cloud.storageinsights.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.storageinsights.v1.IDatasetConfig,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.storageinsights.v1.IDatasetConfig,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.storageinsights.v1.ICreateDatasetConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.storageinsights.v1.IDatasetConfig,
-            protos.google.cloud.storageinsights.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createDatasetConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createDatasetConfig request %j', request);
-    return this.innerApiCalls
-      .createDatasetConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.storageinsights.v1.IDatasetConfig,
-            protos.google.cloud.storageinsights.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createDatasetConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createDatasetConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createDatasetConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createDatasetConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.create_dataset_config.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_CreateDatasetConfig_async
-   */
-  async checkCreateDatasetConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.storageinsights.v1.DatasetConfig,
-      protos.google.cloud.storageinsights.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createDatasetConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.create_dataset_config.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_CreateDatasetConfig_async
+ */
+  async checkCreateDatasetConfigProgress(name: string): Promise<LROperation<protos.google.cloud.storageinsights.v1.DatasetConfig, protos.google.cloud.storageinsights.v1.OperationMetadata>>{
     this._log.info('createDatasetConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createDatasetConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.storageinsights.v1.DatasetConfig,
-      protos.google.cloud.storageinsights.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createDatasetConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.storageinsights.v1.DatasetConfig, protos.google.cloud.storageinsights.v1.OperationMetadata>;
   }
-  /**
-   * Updates a dataset configuration in a given project for a given location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   `DatasetConfig` resource by the update.
-   *   The fields specified in the `update_mask` are relative to the resource, not
-   *   the full request. A field is overwritten if it is in the mask. If the
-   *   user does not provide a mask then it returns an "Invalid Argument" error.
-   * @param {google.cloud.storageinsights.v1.DatasetConfig} request.datasetConfig
-   *   Required. The resource being updated
-   * @param {string} [request.requestId]
-   *   Optional. A unique identifier for your request.
-   *   Specify the request ID if you need to retry the request.
-   *   If you retry the request with the same ID within 60 minutes, the server
-   *   ignores the request if it has already completed the original request.
-   *
-   *   For example, if your initial request times out and you retry the request
-   *   using the same request ID, the server recognizes the original request and
-   *   does not process the new request.
-   *
-   *   The request ID must be a valid UUID and cannot be a zero UUID
-   *   (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.update_dataset_config.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_UpdateDatasetConfig_async
-   */
+/**
+ * Updates a dataset configuration in a given project for a given location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Field mask is used to specify the fields to be overwritten in the
+ *   `DatasetConfig` resource by the update.
+ *   The fields specified in the `update_mask` are relative to the resource, not
+ *   the full request. A field is overwritten if it is in the mask. If the
+ *   user does not provide a mask then it returns an "Invalid Argument" error.
+ * @param {google.cloud.storageinsights.v1.DatasetConfig} request.datasetConfig
+ *   Required. The resource being updated
+ * @param {string} [request.requestId]
+ *   Optional. A unique identifier for your request.
+ *   Specify the request ID if you need to retry the request.
+ *   If you retry the request with the same ID within 60 minutes, the server
+ *   ignores the request if it has already completed the original request.
+ *
+ *   For example, if your initial request times out and you retry the request
+ *   using the same request ID, the server recognizes the original request and
+ *   does not process the new request.
+ *
+ *   The request ID must be a valid UUID and cannot be a zero UUID
+ *   (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.update_dataset_config.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_UpdateDatasetConfig_async
+ */
   updateDatasetConfig(
-    request?: protos.google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.storageinsights.v1.IDatasetConfig,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateDatasetConfig(
-    request: protos.google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.storageinsights.v1.IDatasetConfig,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateDatasetConfig(
-    request: protos.google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.storageinsights.v1.IDatasetConfig,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateDatasetConfig(
-    request?: protos.google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.storageinsights.v1.IDatasetConfig,
-            protos.google.cloud.storageinsights.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.storageinsights.v1.IDatasetConfig,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.storageinsights.v1.IDatasetConfig,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.storageinsights.v1.IUpdateDatasetConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'dataset_config.name': request.datasetConfig!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'dataset_config.name': request.datasetConfig!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.storageinsights.v1.IDatasetConfig,
-            protos.google.cloud.storageinsights.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateDatasetConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateDatasetConfig request %j', request);
-    return this.innerApiCalls
-      .updateDatasetConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.storageinsights.v1.IDatasetConfig,
-            protos.google.cloud.storageinsights.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDatasetConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateDatasetConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.storageinsights.v1.IDatasetConfig, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateDatasetConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateDatasetConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.update_dataset_config.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_UpdateDatasetConfig_async
-   */
-  async checkUpdateDatasetConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.storageinsights.v1.DatasetConfig,
-      protos.google.cloud.storageinsights.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateDatasetConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.update_dataset_config.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_UpdateDatasetConfig_async
+ */
+  async checkUpdateDatasetConfigProgress(name: string): Promise<LROperation<protos.google.cloud.storageinsights.v1.DatasetConfig, protos.google.cloud.storageinsights.v1.OperationMetadata>>{
     this._log.info('updateDatasetConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateDatasetConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.storageinsights.v1.DatasetConfig,
-      protos.google.cloud.storageinsights.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateDatasetConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.storageinsights.v1.DatasetConfig, protos.google.cloud.storageinsights.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a dataset configuration in a given project for a given location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {string} [request.requestId]
-   *   Optional. A unique identifier for your request.
-   *   Specify the request ID if you need to retry the request.
-   *   If you retry the request with the same ID within 60 minutes, the server
-   *   ignores the request if it has already completed the original request.
-   *
-   *   For example, if your initial request times out and you retry the request
-   *   using the same request ID, the server recognizes the original request and
-   *   does not process the new request.
-   *
-   *   The request ID must be a valid UUID and cannot be a zero UUID
-   *   (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.delete_dataset_config.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_DeleteDatasetConfig_async
-   */
+/**
+ * Deletes a dataset configuration in a given project for a given location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {string} [request.requestId]
+ *   Optional. A unique identifier for your request.
+ *   Specify the request ID if you need to retry the request.
+ *   If you retry the request with the same ID within 60 minutes, the server
+ *   ignores the request if it has already completed the original request.
+ *
+ *   For example, if your initial request times out and you retry the request
+ *   using the same request ID, the server recognizes the original request and
+ *   does not process the new request.
+ *
+ *   The request ID must be a valid UUID and cannot be a zero UUID
+ *   (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.delete_dataset_config.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_DeleteDatasetConfig_async
+ */
   deleteDatasetConfig(
-    request?: protos.google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteDatasetConfig(
-    request: protos.google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteDatasetConfig(
-    request: protos.google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteDatasetConfig(
-    request?: protos.google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.storageinsights.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.storageinsights.v1.IDeleteDatasetConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.storageinsights.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteDatasetConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteDatasetConfig request %j', request);
-    return this.innerApiCalls
-      .deleteDatasetConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.storageinsights.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDatasetConfig response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteDatasetConfig(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteDatasetConfig response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteDatasetConfig()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.delete_dataset_config.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_DeleteDatasetConfig_async
-   */
-  async checkDeleteDatasetConfigProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.storageinsights.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteDatasetConfig()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.delete_dataset_config.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_DeleteDatasetConfig_async
+ */
+  async checkDeleteDatasetConfigProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.storageinsights.v1.OperationMetadata>>{
     this._log.info('deleteDatasetConfig long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteDatasetConfig,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.storageinsights.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteDatasetConfig, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.storageinsights.v1.OperationMetadata>;
   }
-  /**
-   * Links a dataset to BigQuery in a given project for a given location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.link_dataset.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_LinkDataset_async
-   */
+/**
+ * Links a dataset to BigQuery in a given project for a given location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.link_dataset.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_LinkDataset_async
+ */
   linkDataset(
-    request?: protos.google.cloud.storageinsights.v1.ILinkDatasetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.storageinsights.v1.ILinkDatasetResponse,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.storageinsights.v1.ILinkDatasetRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.storageinsights.v1.ILinkDatasetResponse, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   linkDataset(
-    request: protos.google.cloud.storageinsights.v1.ILinkDatasetRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.storageinsights.v1.ILinkDatasetResponse,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.storageinsights.v1.ILinkDatasetRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.storageinsights.v1.ILinkDatasetResponse, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   linkDataset(
-    request: protos.google.cloud.storageinsights.v1.ILinkDatasetRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.storageinsights.v1.ILinkDatasetResponse,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.storageinsights.v1.ILinkDatasetRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.storageinsights.v1.ILinkDatasetResponse, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   linkDataset(
-    request?: protos.google.cloud.storageinsights.v1.ILinkDatasetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.storageinsights.v1.ILinkDatasetResponse,
-            protos.google.cloud.storageinsights.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.storageinsights.v1.ILinkDatasetResponse,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.storageinsights.v1.ILinkDatasetResponse,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.storageinsights.v1.ILinkDatasetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.storageinsights.v1.ILinkDatasetResponse, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.storageinsights.v1.ILinkDatasetResponse, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.storageinsights.v1.ILinkDatasetResponse, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.storageinsights.v1.ILinkDatasetResponse,
-            protos.google.cloud.storageinsights.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.storageinsights.v1.ILinkDatasetResponse, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('linkDataset response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('linkDataset request %j', request);
-    return this.innerApiCalls
-      .linkDataset(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.storageinsights.v1.ILinkDatasetResponse,
-            protos.google.cloud.storageinsights.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('linkDataset response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.linkDataset(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.storageinsights.v1.ILinkDatasetResponse, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('linkDataset response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `linkDataset()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.link_dataset.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_LinkDataset_async
-   */
-  async checkLinkDatasetProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.storageinsights.v1.LinkDatasetResponse,
-      protos.google.cloud.storageinsights.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `linkDataset()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.link_dataset.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_LinkDataset_async
+ */
+  async checkLinkDatasetProgress(name: string): Promise<LROperation<protos.google.cloud.storageinsights.v1.LinkDatasetResponse, protos.google.cloud.storageinsights.v1.OperationMetadata>>{
     this._log.info('linkDataset long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.linkDataset,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.storageinsights.v1.LinkDatasetResponse,
-      protos.google.cloud.storageinsights.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.linkDataset, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.storageinsights.v1.LinkDatasetResponse, protos.google.cloud.storageinsights.v1.OperationMetadata>;
   }
-  /**
-   * Unlinks a dataset from BigQuery in a given project
-   * for a given location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.unlink_dataset.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_UnlinkDataset_async
-   */
+/**
+ * Unlinks a dataset from BigQuery in a given project
+ * for a given location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.unlink_dataset.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_UnlinkDataset_async
+ */
   unlinkDataset(
-    request?: protos.google.cloud.storageinsights.v1.IUnlinkDatasetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.storageinsights.v1.IUnlinkDatasetRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   unlinkDataset(
-    request: protos.google.cloud.storageinsights.v1.IUnlinkDatasetRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.storageinsights.v1.IUnlinkDatasetRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   unlinkDataset(
-    request: protos.google.cloud.storageinsights.v1.IUnlinkDatasetRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.storageinsights.v1.IUnlinkDatasetRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   unlinkDataset(
-    request?: protos.google.cloud.storageinsights.v1.IUnlinkDatasetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.storageinsights.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.storageinsights.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.storageinsights.v1.IUnlinkDatasetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.storageinsights.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('unlinkDataset response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('unlinkDataset request %j', request);
-    return this.innerApiCalls
-      .unlinkDataset(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.storageinsights.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('unlinkDataset response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.unlinkDataset(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.storageinsights.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('unlinkDataset response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `unlinkDataset()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.unlink_dataset.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_UnlinkDataset_async
-   */
-  async checkUnlinkDatasetProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.storageinsights.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `unlinkDataset()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.unlink_dataset.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_UnlinkDataset_async
+ */
+  async checkUnlinkDatasetProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.storageinsights.v1.OperationMetadata>>{
     this._log.info('unlinkDataset long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.unlinkDataset,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.storageinsights.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.unlinkDataset, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.storageinsights.v1.OperationMetadata>;
   }
-  /**
-   * Lists ReportConfigs in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListReportConfigsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listReportConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists ReportConfigs in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListReportConfigsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listReportConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReportConfigs(
-    request?: protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IReportConfig[],
-      protos.google.cloud.storageinsights.v1.IListReportConfigsRequest | null,
-      protos.google.cloud.storageinsights.v1.IListReportConfigsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IReportConfig[],
+        protos.google.cloud.storageinsights.v1.IListReportConfigsRequest|null,
+        protos.google.cloud.storageinsights.v1.IListReportConfigsResponse
+      ]>;
   listReportConfigs(
-    request: protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
-      | protos.google.cloud.storageinsights.v1.IListReportConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.storageinsights.v1.IReportConfig
-    >
-  ): void;
-  listReportConfigs(
-    request: protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
-      | protos.google.cloud.storageinsights.v1.IListReportConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.storageinsights.v1.IReportConfig
-    >
-  ): void;
-  listReportConfigs(
-    request?: protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
-          | protos.google.cloud.storageinsights.v1.IListReportConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.storageinsights.v1.IReportConfig
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
-      | protos.google.cloud.storageinsights.v1.IListReportConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.storageinsights.v1.IReportConfig
-    >
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IReportConfig[],
-      protos.google.cloud.storageinsights.v1.IListReportConfigsRequest | null,
-      protos.google.cloud.storageinsights.v1.IListReportConfigsResponse,
-    ]
-  > | void {
+          protos.google.cloud.storageinsights.v1.IListReportConfigsResponse|null|undefined,
+          protos.google.cloud.storageinsights.v1.IReportConfig>): void;
+  listReportConfigs(
+      request: protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
+          protos.google.cloud.storageinsights.v1.IListReportConfigsResponse|null|undefined,
+          protos.google.cloud.storageinsights.v1.IReportConfig>): void;
+  listReportConfigs(
+      request?: protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
+          protos.google.cloud.storageinsights.v1.IListReportConfigsResponse|null|undefined,
+          protos.google.cloud.storageinsights.v1.IReportConfig>,
+      callback?: PaginationCallback<
+          protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
+          protos.google.cloud.storageinsights.v1.IListReportConfigsResponse|null|undefined,
+          protos.google.cloud.storageinsights.v1.IReportConfig>):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IReportConfig[],
+        protos.google.cloud.storageinsights.v1.IListReportConfigsRequest|null,
+        protos.google.cloud.storageinsights.v1.IListReportConfigsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
-          | protos.google.cloud.storageinsights.v1.IListReportConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.storageinsights.v1.IReportConfig
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
+      protos.google.cloud.storageinsights.v1.IListReportConfigsResponse|null|undefined,
+      protos.google.cloud.storageinsights.v1.IReportConfig>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listReportConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2360,61 +1713,58 @@ export class StorageInsightsClient {
     this._log.info('listReportConfigs request %j', request);
     return this.innerApiCalls
       .listReportConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.storageinsights.v1.IReportConfig[],
-          protos.google.cloud.storageinsights.v1.IListReportConfigsRequest | null,
-          protos.google.cloud.storageinsights.v1.IListReportConfigsResponse,
-        ]) => {
-          this._log.info('listReportConfigs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.storageinsights.v1.IReportConfig[],
+        protos.google.cloud.storageinsights.v1.IListReportConfigsRequest|null,
+        protos.google.cloud.storageinsights.v1.IListReportConfigsResponse
+      ]) => {
+        this._log.info('listReportConfigs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listReportConfigs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListReportConfigsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listReportConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listReportConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListReportConfigsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listReportConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReportConfigsStream(
-    request?: protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReportConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReportConfigs stream %j', request);
     return this.descriptors.page.listReportConfigs.createStream(
       this.innerApiCalls.listReportConfigs as GaxCall,
@@ -2423,52 +1773,51 @@ export class StorageInsightsClient {
     );
   }
 
-  /**
-   * Equivalent to `listReportConfigs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListReportConfigsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.list_report_configs.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_ListReportConfigs_async
-   */
+/**
+ * Equivalent to `listReportConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListReportConfigsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.list_report_configs.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_ListReportConfigs_async
+ */
   listReportConfigsAsync(
-    request?: protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.storageinsights.v1.IReportConfig> {
+      request?: protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.storageinsights.v1.IReportConfig>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReportConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReportConfigs iterate %j', request);
     return this.descriptors.page.listReportConfigs.asyncIterate(
       this.innerApiCalls['listReportConfigs'] as GaxCall,
@@ -2476,117 +1825,92 @@ export class StorageInsightsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.storageinsights.v1.IReportConfig>;
   }
-  /**
-   * Lists ReportDetails in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListReportDetailsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.storageinsights.v1.ReportDetail|ReportDetail}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listReportDetailsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists ReportDetails in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListReportDetailsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.storageinsights.v1.ReportDetail|ReportDetail}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listReportDetailsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReportDetails(
-    request?: protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IReportDetail[],
-      protos.google.cloud.storageinsights.v1.IListReportDetailsRequest | null,
-      protos.google.cloud.storageinsights.v1.IListReportDetailsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IReportDetail[],
+        protos.google.cloud.storageinsights.v1.IListReportDetailsRequest|null,
+        protos.google.cloud.storageinsights.v1.IListReportDetailsResponse
+      ]>;
   listReportDetails(
-    request: protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
-      | protos.google.cloud.storageinsights.v1.IListReportDetailsResponse
-      | null
-      | undefined,
-      protos.google.cloud.storageinsights.v1.IReportDetail
-    >
-  ): void;
-  listReportDetails(
-    request: protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
-      | protos.google.cloud.storageinsights.v1.IListReportDetailsResponse
-      | null
-      | undefined,
-      protos.google.cloud.storageinsights.v1.IReportDetail
-    >
-  ): void;
-  listReportDetails(
-    request?: protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
-          | protos.google.cloud.storageinsights.v1.IListReportDetailsResponse
-          | null
-          | undefined,
-          protos.google.cloud.storageinsights.v1.IReportDetail
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
-      | protos.google.cloud.storageinsights.v1.IListReportDetailsResponse
-      | null
-      | undefined,
-      protos.google.cloud.storageinsights.v1.IReportDetail
-    >
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IReportDetail[],
-      protos.google.cloud.storageinsights.v1.IListReportDetailsRequest | null,
-      protos.google.cloud.storageinsights.v1.IListReportDetailsResponse,
-    ]
-  > | void {
+          protos.google.cloud.storageinsights.v1.IListReportDetailsResponse|null|undefined,
+          protos.google.cloud.storageinsights.v1.IReportDetail>): void;
+  listReportDetails(
+      request: protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
+          protos.google.cloud.storageinsights.v1.IListReportDetailsResponse|null|undefined,
+          protos.google.cloud.storageinsights.v1.IReportDetail>): void;
+  listReportDetails(
+      request?: protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
+          protos.google.cloud.storageinsights.v1.IListReportDetailsResponse|null|undefined,
+          protos.google.cloud.storageinsights.v1.IReportDetail>,
+      callback?: PaginationCallback<
+          protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
+          protos.google.cloud.storageinsights.v1.IListReportDetailsResponse|null|undefined,
+          protos.google.cloud.storageinsights.v1.IReportDetail>):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IReportDetail[],
+        protos.google.cloud.storageinsights.v1.IListReportDetailsRequest|null,
+        protos.google.cloud.storageinsights.v1.IListReportDetailsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
-          | protos.google.cloud.storageinsights.v1.IListReportDetailsResponse
-          | null
-          | undefined,
-          protos.google.cloud.storageinsights.v1.IReportDetail
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
+      protos.google.cloud.storageinsights.v1.IListReportDetailsResponse|null|undefined,
+      protos.google.cloud.storageinsights.v1.IReportDetail>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listReportDetails values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2595,61 +1919,58 @@ export class StorageInsightsClient {
     this._log.info('listReportDetails request %j', request);
     return this.innerApiCalls
       .listReportDetails(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.storageinsights.v1.IReportDetail[],
-          protos.google.cloud.storageinsights.v1.IListReportDetailsRequest | null,
-          protos.google.cloud.storageinsights.v1.IListReportDetailsResponse,
-        ]) => {
-          this._log.info('listReportDetails values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.storageinsights.v1.IReportDetail[],
+        protos.google.cloud.storageinsights.v1.IListReportDetailsRequest|null,
+        protos.google.cloud.storageinsights.v1.IListReportDetailsResponse
+      ]) => {
+        this._log.info('listReportDetails values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listReportDetails`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListReportDetailsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.storageinsights.v1.ReportDetail|ReportDetail} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listReportDetailsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listReportDetails`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListReportDetailsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.storageinsights.v1.ReportDetail|ReportDetail} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listReportDetailsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReportDetailsStream(
-    request?: protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReportDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReportDetails stream %j', request);
     return this.descriptors.page.listReportDetails.createStream(
       this.innerApiCalls.listReportDetails as GaxCall,
@@ -2658,52 +1979,51 @@ export class StorageInsightsClient {
     );
   }
 
-  /**
-   * Equivalent to `listReportDetails`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListReportDetailsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.storageinsights.v1.ReportDetail|ReportDetail}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.list_report_details.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_ListReportDetails_async
-   */
+/**
+ * Equivalent to `listReportDetails`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListReportDetailsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.storageinsights.v1.ReportDetail|ReportDetail}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.list_report_details.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_ListReportDetails_async
+ */
   listReportDetailsAsync(
-    request?: protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.storageinsights.v1.IReportDetail> {
+      request?: protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.storageinsights.v1.IReportDetail>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReportDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReportDetails iterate %j', request);
     return this.descriptors.page.listReportDetails.asyncIterate(
       this.innerApiCalls['listReportDetails'] as GaxCall,
@@ -2711,117 +2031,92 @@ export class StorageInsightsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.storageinsights.v1.IReportDetail>;
   }
-  /**
-   * Lists the dataset configurations in a given project for a given location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListDatasetConfigsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server might return fewer items than requested.
-   *   If unspecified, server picks an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.storageinsights.v1.DatasetConfig|DatasetConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDatasetConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the dataset configurations in a given project for a given location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListDatasetConfigsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server might return fewer items than requested.
+ *   If unspecified, server picks an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.storageinsights.v1.DatasetConfig|DatasetConfig}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDatasetConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDatasetConfigs(
-    request?: protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IDatasetConfig[],
-      protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest | null,
-      protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IDatasetConfig[],
+        protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest|null,
+        protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse
+      ]>;
   listDatasetConfigs(
-    request: protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
-      | protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.storageinsights.v1.IDatasetConfig
-    >
-  ): void;
-  listDatasetConfigs(
-    request: protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
-      | protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.storageinsights.v1.IDatasetConfig
-    >
-  ): void;
-  listDatasetConfigs(
-    request?: protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
-          | protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.storageinsights.v1.IDatasetConfig
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
-      | protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.storageinsights.v1.IDatasetConfig
-    >
-  ): Promise<
-    [
-      protos.google.cloud.storageinsights.v1.IDatasetConfig[],
-      protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest | null,
-      protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse,
-    ]
-  > | void {
+          protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse|null|undefined,
+          protos.google.cloud.storageinsights.v1.IDatasetConfig>): void;
+  listDatasetConfigs(
+      request: protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
+          protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse|null|undefined,
+          protos.google.cloud.storageinsights.v1.IDatasetConfig>): void;
+  listDatasetConfigs(
+      request?: protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
+          protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse|null|undefined,
+          protos.google.cloud.storageinsights.v1.IDatasetConfig>,
+      callback?: PaginationCallback<
+          protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
+          protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse|null|undefined,
+          protos.google.cloud.storageinsights.v1.IDatasetConfig>):
+      Promise<[
+        protos.google.cloud.storageinsights.v1.IDatasetConfig[],
+        protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest|null,
+        protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
-          | protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse
-          | null
-          | undefined,
-          protos.google.cloud.storageinsights.v1.IDatasetConfig
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
+      protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse|null|undefined,
+      protos.google.cloud.storageinsights.v1.IDatasetConfig>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDatasetConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2830,61 +2125,58 @@ export class StorageInsightsClient {
     this._log.info('listDatasetConfigs request %j', request);
     return this.innerApiCalls
       .listDatasetConfigs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.storageinsights.v1.IDatasetConfig[],
-          protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest | null,
-          protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse,
-        ]) => {
-          this._log.info('listDatasetConfigs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.storageinsights.v1.IDatasetConfig[],
+        protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest|null,
+        protos.google.cloud.storageinsights.v1.IListDatasetConfigsResponse
+      ]) => {
+        this._log.info('listDatasetConfigs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDatasetConfigs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListDatasetConfigsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server might return fewer items than requested.
-   *   If unspecified, server picks an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.storageinsights.v1.DatasetConfig|DatasetConfig} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDatasetConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDatasetConfigs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListDatasetConfigsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server might return fewer items than requested.
+ *   If unspecified, server picks an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.storageinsights.v1.DatasetConfig|DatasetConfig} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDatasetConfigsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDatasetConfigsStream(
-    request?: protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDatasetConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDatasetConfigs stream %j', request);
     return this.descriptors.page.listDatasetConfigs.createStream(
       this.innerApiCalls.listDatasetConfigs as GaxCall,
@@ -2893,52 +2185,51 @@ export class StorageInsightsClient {
     );
   }
 
-  /**
-   * Equivalent to `listDatasetConfigs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListDatasetConfigsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server might return fewer items than requested.
-   *   If unspecified, server picks an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.storageinsights.v1.DatasetConfig|DatasetConfig}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/storage_insights.list_dataset_configs.js</caption>
-   * region_tag:storageinsights_v1_generated_StorageInsights_ListDatasetConfigs_async
-   */
+/**
+ * Equivalent to `listDatasetConfigs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListDatasetConfigsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server might return fewer items than requested.
+ *   If unspecified, server picks an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.storageinsights.v1.DatasetConfig|DatasetConfig}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_insights.list_dataset_configs.js</caption>
+ * region_tag:storageinsights_v1_generated_StorageInsights_ListDatasetConfigs_async
+ */
   listDatasetConfigsAsync(
-    request?: protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.storageinsights.v1.IDatasetConfig> {
+      request?: protos.google.cloud.storageinsights.v1.IListDatasetConfigsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.storageinsights.v1.IDatasetConfig>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDatasetConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDatasetConfigs iterate %j', request);
     return this.descriptors.page.listDatasetConfigs.asyncIterate(
       this.innerApiCalls['listDatasetConfigs'] as GaxCall,
@@ -2946,7 +2237,7 @@ export class StorageInsightsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.storageinsights.v1.IDatasetConfig>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -2986,7 +2277,7 @@ export class StorageInsightsClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -3024,7 +2315,7 @@ export class StorageInsightsClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -3069,20 +2360,20 @@ export class StorageInsightsClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -3119,13 +2410,13 @@ export class StorageInsightsClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3159,7 +2450,7 @@ export class StorageInsightsClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -3174,20 +2465,20 @@ export class StorageInsightsClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -3231,20 +2522,20 @@ export class StorageInsightsClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3260,7 +2551,7 @@ export class StorageInsightsClient {
    * @param {string} dataset_config
    * @returns {string} Resource name string.
    */
-  datasetConfigPath(project: string, location: string, datasetConfig: string) {
+  datasetConfigPath(project:string,location:string,datasetConfig:string) {
     return this.pathTemplates.datasetConfigPathTemplate.render({
       project: project,
       location: location,
@@ -3276,8 +2567,7 @@ export class StorageInsightsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDatasetConfigName(datasetConfigName: string) {
-    return this.pathTemplates.datasetConfigPathTemplate.match(datasetConfigName)
-      .project;
+    return this.pathTemplates.datasetConfigPathTemplate.match(datasetConfigName).project;
   }
 
   /**
@@ -3288,8 +2578,7 @@ export class StorageInsightsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDatasetConfigName(datasetConfigName: string) {
-    return this.pathTemplates.datasetConfigPathTemplate.match(datasetConfigName)
-      .location;
+    return this.pathTemplates.datasetConfigPathTemplate.match(datasetConfigName).location;
   }
 
   /**
@@ -3300,8 +2589,7 @@ export class StorageInsightsClient {
    * @returns {string} A string representing the dataset_config.
    */
   matchDatasetConfigFromDatasetConfigName(datasetConfigName: string) {
-    return this.pathTemplates.datasetConfigPathTemplate.match(datasetConfigName)
-      .dataset_config;
+    return this.pathTemplates.datasetConfigPathTemplate.match(datasetConfigName).dataset_config;
   }
 
   /**
@@ -3311,7 +2599,7 @@ export class StorageInsightsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3346,7 +2634,7 @@ export class StorageInsightsClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -3371,7 +2659,7 @@ export class StorageInsightsClient {
    * @param {string} report_config
    * @returns {string} Resource name string.
    */
-  reportConfigPath(project: string, location: string, reportConfig: string) {
+  reportConfigPath(project:string,location:string,reportConfig:string) {
     return this.pathTemplates.reportConfigPathTemplate.render({
       project: project,
       location: location,
@@ -3387,8 +2675,7 @@ export class StorageInsightsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReportConfigName(reportConfigName: string) {
-    return this.pathTemplates.reportConfigPathTemplate.match(reportConfigName)
-      .project;
+    return this.pathTemplates.reportConfigPathTemplate.match(reportConfigName).project;
   }
 
   /**
@@ -3399,8 +2686,7 @@ export class StorageInsightsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReportConfigName(reportConfigName: string) {
-    return this.pathTemplates.reportConfigPathTemplate.match(reportConfigName)
-      .location;
+    return this.pathTemplates.reportConfigPathTemplate.match(reportConfigName).location;
   }
 
   /**
@@ -3411,8 +2697,7 @@ export class StorageInsightsClient {
    * @returns {string} A string representing the report_config.
    */
   matchReportConfigFromReportConfigName(reportConfigName: string) {
-    return this.pathTemplates.reportConfigPathTemplate.match(reportConfigName)
-      .report_config;
+    return this.pathTemplates.reportConfigPathTemplate.match(reportConfigName).report_config;
   }
 
   /**
@@ -3424,12 +2709,7 @@ export class StorageInsightsClient {
    * @param {string} report_detail
    * @returns {string} Resource name string.
    */
-  reportDetailPath(
-    project: string,
-    location: string,
-    reportConfig: string,
-    reportDetail: string
-  ) {
+  reportDetailPath(project:string,location:string,reportConfig:string,reportDetail:string) {
     return this.pathTemplates.reportDetailPathTemplate.render({
       project: project,
       location: location,
@@ -3446,8 +2726,7 @@ export class StorageInsightsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReportDetailName(reportDetailName: string) {
-    return this.pathTemplates.reportDetailPathTemplate.match(reportDetailName)
-      .project;
+    return this.pathTemplates.reportDetailPathTemplate.match(reportDetailName).project;
   }
 
   /**
@@ -3458,8 +2737,7 @@ export class StorageInsightsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReportDetailName(reportDetailName: string) {
-    return this.pathTemplates.reportDetailPathTemplate.match(reportDetailName)
-      .location;
+    return this.pathTemplates.reportDetailPathTemplate.match(reportDetailName).location;
   }
 
   /**
@@ -3470,8 +2748,7 @@ export class StorageInsightsClient {
    * @returns {string} A string representing the report_config.
    */
   matchReportConfigFromReportDetailName(reportDetailName: string) {
-    return this.pathTemplates.reportDetailPathTemplate.match(reportDetailName)
-      .report_config;
+    return this.pathTemplates.reportDetailPathTemplate.match(reportDetailName).report_config;
   }
 
   /**
@@ -3482,8 +2759,7 @@ export class StorageInsightsClient {
    * @returns {string} A string representing the report_detail.
    */
   matchReportDetailFromReportDetailName(reportDetailName: string) {
-    return this.pathTemplates.reportDetailPathTemplate.match(reportDetailName)
-      .report_detail;
+    return this.pathTemplates.reportDetailPathTemplate.match(reportDetailName).report_detail;
   }
 
   /**
@@ -3498,9 +2774,7 @@ export class StorageInsightsClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

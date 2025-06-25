@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -124,41 +115,20 @@ export class RegistrationServiceClient {
    *     const client = new RegistrationServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof RegistrationServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'servicedirectory.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -184,7 +154,7 @@ export class RegistrationServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -200,9 +170,13 @@ export class RegistrationServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -241,30 +215,18 @@ export class RegistrationServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listNamespaces: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'namespaces'
-      ),
-      listServices: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'services'
-      ),
-      listEndpoints: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'endpoints'
-      ),
+      listNamespaces:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'namespaces'),
+      listServices:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'services'),
+      listEndpoints:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'endpoints')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.servicedirectory.v1.RegistrationService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.servicedirectory.v1.RegistrationService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -295,55 +257,32 @@ export class RegistrationServiceClient {
     // Put together the "service stub" for
     // google.cloud.servicedirectory.v1.RegistrationService.
     this.registrationServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.servicedirectory.v1.RegistrationService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.servicedirectory.v1
-            .RegistrationService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.servicedirectory.v1.RegistrationService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.servicedirectory.v1.RegistrationService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const registrationServiceStubMethods = [
-      'createNamespace',
-      'listNamespaces',
-      'getNamespace',
-      'updateNamespace',
-      'deleteNamespace',
-      'createService',
-      'listServices',
-      'getService',
-      'updateService',
-      'deleteService',
-      'createEndpoint',
-      'listEndpoints',
-      'getEndpoint',
-      'updateEndpoint',
-      'deleteEndpoint',
-      'getIamPolicy',
-      'setIamPolicy',
-      'testIamPermissions',
-    ];
+    const registrationServiceStubMethods =
+        ['createNamespace', 'listNamespaces', 'getNamespace', 'updateNamespace', 'deleteNamespace', 'createService', 'listServices', 'getService', 'updateService', 'deleteService', 'createEndpoint', 'listEndpoints', 'getEndpoint', 'updateEndpoint', 'deleteEndpoint', 'getIamPolicy', 'setIamPolicy', 'testIamPermissions'];
     for (const methodName of registrationServiceStubMethods) {
       const callPromise = this.registrationServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -363,14 +302,8 @@ export class RegistrationServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'servicedirectory.googleapis.com';
   }
@@ -381,14 +314,8 @@ export class RegistrationServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'servicedirectory.googleapis.com';
   }
@@ -419,7 +346,9 @@ export class RegistrationServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -428,9 +357,8 @@ export class RegistrationServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -441,2028 +369,1601 @@ export class RegistrationServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a namespace, and returns the new namespace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the project and location the namespace
-   *   will be created in.
-   * @param {string} request.namespaceId
-   *   Required. The Resource ID must be 1-63 characters long, and comply with
-   *   <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
-   *   Specifically, the name must be 1-63 characters long and match the regular
-   *   expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?` which means the first
-   *   character must be a lowercase letter, and all following characters must
-   *   be a dash, lowercase letter, or digit, except the last character, which
-   *   cannot be a dash.
-   * @param {google.cloud.servicedirectory.v1.Namespace} request.namespace
-   *   Required. A namespace with initial fields set.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Namespace|Namespace}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.create_namespace.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_CreateNamespace_async
-   */
+/**
+ * Creates a namespace, and returns the new namespace.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the project and location the namespace
+ *   will be created in.
+ * @param {string} request.namespaceId
+ *   Required. The Resource ID must be 1-63 characters long, and comply with
+ *   <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
+ *   Specifically, the name must be 1-63 characters long and match the regular
+ *   expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?` which means the first
+ *   character must be a lowercase letter, and all following characters must
+ *   be a dash, lowercase letter, or digit, except the last character, which
+ *   cannot be a dash.
+ * @param {google.cloud.servicedirectory.v1.Namespace} request.namespace
+ *   Required. A namespace with initial fields set.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Namespace|Namespace}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.create_namespace.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_CreateNamespace_async
+ */
   createNamespace(
-    request?: protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.INamespace,
-      (
-        | protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.INamespace,
+        protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest|undefined, {}|undefined
+      ]>;
   createNamespace(
-    request: protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.INamespace,
-      | protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createNamespace(
-    request: protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.INamespace,
-      | protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createNamespace(
-    request?: protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.servicedirectory.v1.INamespace,
-          | protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.servicedirectory.v1.INamespace,
-      | protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.INamespace,
-      (
-        | protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createNamespace(
+      request: protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest,
+      callback: Callback<
+          protos.google.cloud.servicedirectory.v1.INamespace,
+          protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createNamespace(
+      request?: protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.servicedirectory.v1.INamespace,
+          protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.servicedirectory.v1.INamespace,
+          protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.INamespace,
+        protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createNamespace request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.servicedirectory.v1.INamespace,
-          | protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.servicedirectory.v1.INamespace,
+        protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createNamespace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createNamespace(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.servicedirectory.v1.INamespace,
-          (
-            | protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createNamespace response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createNamespace(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.servicedirectory.v1.INamespace,
+        protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createNamespace response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a namespace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the namespace to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Namespace|Namespace}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.get_namespace.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_GetNamespace_async
-   */
+/**
+ * Gets a namespace.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the namespace to retrieve.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Namespace|Namespace}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.get_namespace.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_GetNamespace_async
+ */
   getNamespace(
-    request?: protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.INamespace,
-      protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.INamespace,
+        protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest|undefined, {}|undefined
+      ]>;
   getNamespace(
-    request: protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.INamespace,
-      | protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNamespace(
-    request: protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.INamespace,
-      | protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNamespace(
-    request?: protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.servicedirectory.v1.INamespace,
-          | protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.servicedirectory.v1.INamespace,
-      | protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.INamespace,
-      protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNamespace(
+      request: protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest,
+      callback: Callback<
+          protos.google.cloud.servicedirectory.v1.INamespace,
+          protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNamespace(
+      request?: protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.servicedirectory.v1.INamespace,
+          protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.servicedirectory.v1.INamespace,
+          protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.INamespace,
+        protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getNamespace request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.servicedirectory.v1.INamespace,
-          | protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.servicedirectory.v1.INamespace,
+        protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNamespace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getNamespace(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.servicedirectory.v1.INamespace,
-          (
-            | protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getNamespace response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getNamespace(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.servicedirectory.v1.INamespace,
+        protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getNamespace response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a namespace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.servicedirectory.v1.Namespace} request.namespace
-   *   Required. The updated namespace.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. List of fields to be updated in this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Namespace|Namespace}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.update_namespace.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_UpdateNamespace_async
-   */
+/**
+ * Updates a namespace.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.servicedirectory.v1.Namespace} request.namespace
+ *   Required. The updated namespace.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. List of fields to be updated in this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Namespace|Namespace}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.update_namespace.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_UpdateNamespace_async
+ */
   updateNamespace(
-    request?: protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.INamespace,
-      (
-        | protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.INamespace,
+        protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest|undefined, {}|undefined
+      ]>;
   updateNamespace(
-    request: protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.INamespace,
-      | protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateNamespace(
-    request: protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.INamespace,
-      | protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateNamespace(
-    request?: protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.servicedirectory.v1.INamespace,
-          | protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.servicedirectory.v1.INamespace,
-      | protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.INamespace,
-      (
-        | protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateNamespace(
+      request: protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest,
+      callback: Callback<
+          protos.google.cloud.servicedirectory.v1.INamespace,
+          protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateNamespace(
+      request?: protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.servicedirectory.v1.INamespace,
+          protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.servicedirectory.v1.INamespace,
+          protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.INamespace,
+        protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'namespace.name': request.namespace!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'namespace.name': request.namespace!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateNamespace request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.servicedirectory.v1.INamespace,
-          | protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.servicedirectory.v1.INamespace,
+        protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateNamespace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateNamespace(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.servicedirectory.v1.INamespace,
-          (
-            | protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateNamespace response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateNamespace(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.servicedirectory.v1.INamespace,
+        protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateNamespace response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a namespace. This also deletes all services and endpoints in
-   * the namespace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the namespace to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.delete_namespace.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_DeleteNamespace_async
-   */
+/**
+ * Deletes a namespace. This also deletes all services and endpoints in
+ * the namespace.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the namespace to delete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.delete_namespace.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_DeleteNamespace_async
+ */
   deleteNamespace(
-    request?: protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest|undefined, {}|undefined
+      ]>;
   deleteNamespace(
-    request: protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteNamespace(
-    request: protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteNamespace(
-    request?: protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteNamespace(
+      request: protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteNamespace(
+      request?: protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteNamespace request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteNamespace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteNamespace(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteNamespace response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteNamespace(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteNamespace response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a service, and returns the new service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the namespace this service will belong to.
-   * @param {string} request.serviceId
-   *   Required. The Resource ID must be 1-63 characters long, and comply with
-   *   <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
-   *   Specifically, the name must be 1-63 characters long and match the regular
-   *   expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?` which means the first
-   *   character must be a lowercase letter, and all following characters must
-   *   be a dash, lowercase letter, or digit, except the last character, which
-   *   cannot be a dash.
-   * @param {google.cloud.servicedirectory.v1.Service} request.service
-   *   Required. A service  with initial fields set.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Service|Service}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.create_service.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_CreateService_async
-   */
+/**
+ * Creates a service, and returns the new service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the namespace this service will belong to.
+ * @param {string} request.serviceId
+ *   Required. The Resource ID must be 1-63 characters long, and comply with
+ *   <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
+ *   Specifically, the name must be 1-63 characters long and match the regular
+ *   expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?` which means the first
+ *   character must be a lowercase letter, and all following characters must
+ *   be a dash, lowercase letter, or digit, except the last character, which
+ *   cannot be a dash.
+ * @param {google.cloud.servicedirectory.v1.Service} request.service
+ *   Required. A service  with initial fields set.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Service|Service}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.create_service.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_CreateService_async
+ */
   createService(
-    request?: protos.google.cloud.servicedirectory.v1.ICreateServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IService,
-      protos.google.cloud.servicedirectory.v1.ICreateServiceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.ICreateServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IService,
+        protos.google.cloud.servicedirectory.v1.ICreateServiceRequest|undefined, {}|undefined
+      ]>;
   createService(
-    request: protos.google.cloud.servicedirectory.v1.ICreateServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.IService,
-      | protos.google.cloud.servicedirectory.v1.ICreateServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createService(
-    request: protos.google.cloud.servicedirectory.v1.ICreateServiceRequest,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.IService,
-      | protos.google.cloud.servicedirectory.v1.ICreateServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createService(
-    request?: protos.google.cloud.servicedirectory.v1.ICreateServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicedirectory.v1.ICreateServiceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.servicedirectory.v1.IService,
-          | protos.google.cloud.servicedirectory.v1.ICreateServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.servicedirectory.v1.IService,
-      | protos.google.cloud.servicedirectory.v1.ICreateServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IService,
-      protos.google.cloud.servicedirectory.v1.ICreateServiceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.ICreateServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createService(
+      request: protos.google.cloud.servicedirectory.v1.ICreateServiceRequest,
+      callback: Callback<
+          protos.google.cloud.servicedirectory.v1.IService,
+          protos.google.cloud.servicedirectory.v1.ICreateServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  createService(
+      request?: protos.google.cloud.servicedirectory.v1.ICreateServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.servicedirectory.v1.IService,
+          protos.google.cloud.servicedirectory.v1.ICreateServiceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.servicedirectory.v1.IService,
+          protos.google.cloud.servicedirectory.v1.ICreateServiceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IService,
+        protos.google.cloud.servicedirectory.v1.ICreateServiceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createService request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.servicedirectory.v1.IService,
-          | protos.google.cloud.servicedirectory.v1.ICreateServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.servicedirectory.v1.IService,
+        protos.google.cloud.servicedirectory.v1.ICreateServiceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createService(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.servicedirectory.v1.IService,
-          (
-            | protos.google.cloud.servicedirectory.v1.ICreateServiceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createService response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createService(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.servicedirectory.v1.IService,
+        protos.google.cloud.servicedirectory.v1.ICreateServiceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createService response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the service to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Service|Service}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.get_service.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_GetService_async
-   */
+/**
+ * Gets a service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the service to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Service|Service}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.get_service.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_GetService_async
+ */
   getService(
-    request?: protos.google.cloud.servicedirectory.v1.IGetServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IService,
-      protos.google.cloud.servicedirectory.v1.IGetServiceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.IGetServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IService,
+        protos.google.cloud.servicedirectory.v1.IGetServiceRequest|undefined, {}|undefined
+      ]>;
   getService(
-    request: protos.google.cloud.servicedirectory.v1.IGetServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.IService,
-      | protos.google.cloud.servicedirectory.v1.IGetServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getService(
-    request: protos.google.cloud.servicedirectory.v1.IGetServiceRequest,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.IService,
-      | protos.google.cloud.servicedirectory.v1.IGetServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getService(
-    request?: protos.google.cloud.servicedirectory.v1.IGetServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicedirectory.v1.IGetServiceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.servicedirectory.v1.IService,
-          | protos.google.cloud.servicedirectory.v1.IGetServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.servicedirectory.v1.IService,
-      | protos.google.cloud.servicedirectory.v1.IGetServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IService,
-      protos.google.cloud.servicedirectory.v1.IGetServiceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getService(
+      request: protos.google.cloud.servicedirectory.v1.IGetServiceRequest,
+      callback: Callback<
+          protos.google.cloud.servicedirectory.v1.IService,
+          protos.google.cloud.servicedirectory.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getService(
+      request?: protos.google.cloud.servicedirectory.v1.IGetServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.servicedirectory.v1.IService,
+          protos.google.cloud.servicedirectory.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.servicedirectory.v1.IService,
+          protos.google.cloud.servicedirectory.v1.IGetServiceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IService,
+        protos.google.cloud.servicedirectory.v1.IGetServiceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getService request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.servicedirectory.v1.IService,
-          | protos.google.cloud.servicedirectory.v1.IGetServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.servicedirectory.v1.IService,
+        protos.google.cloud.servicedirectory.v1.IGetServiceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getService(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.servicedirectory.v1.IService,
-          (
-            | protos.google.cloud.servicedirectory.v1.IGetServiceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getService response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getService(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.servicedirectory.v1.IService,
+        protos.google.cloud.servicedirectory.v1.IGetServiceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getService response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.servicedirectory.v1.Service} request.service
-   *   Required. The updated service.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. List of fields to be updated in this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Service|Service}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.update_service.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_UpdateService_async
-   */
+/**
+ * Updates a service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.servicedirectory.v1.Service} request.service
+ *   Required. The updated service.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. List of fields to be updated in this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Service|Service}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.update_service.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_UpdateService_async
+ */
   updateService(
-    request?: protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IService,
-      protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IService,
+        protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest|undefined, {}|undefined
+      ]>;
   updateService(
-    request: protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.IService,
-      | protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateService(
-    request: protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.IService,
-      | protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateService(
-    request?: protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.servicedirectory.v1.IService,
-          | protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.servicedirectory.v1.IService,
-      | protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IService,
-      protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateService(
+      request: protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest,
+      callback: Callback<
+          protos.google.cloud.servicedirectory.v1.IService,
+          protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateService(
+      request?: protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.servicedirectory.v1.IService,
+          protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.servicedirectory.v1.IService,
+          protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IService,
+        protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'service.name': request.service!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'service.name': request.service!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateService request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.servicedirectory.v1.IService,
-          | protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.servicedirectory.v1.IService,
+        protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateService(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.servicedirectory.v1.IService,
-          (
-            | protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateService response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateService(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.servicedirectory.v1.IService,
+        protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateService response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a service. This also deletes all endpoints associated with
-   * the service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the service to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.delete_service.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_DeleteService_async
-   */
+/**
+ * Deletes a service. This also deletes all endpoints associated with
+ * the service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the service to delete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.delete_service.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_DeleteService_async
+ */
   deleteService(
-    request?: protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest|undefined, {}|undefined
+      ]>;
   deleteService(
-    request: protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteService(
-    request: protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteService(
-    request?: protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteService(
+      request: protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteService(
+      request?: protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteService request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteService(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteService response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteService(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteService response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates an endpoint, and returns the new endpoint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the service that this endpoint provides.
-   * @param {string} request.endpointId
-   *   Required. The Resource ID must be 1-63 characters long, and comply with
-   *   <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
-   *   Specifically, the name must be 1-63 characters long and match the regular
-   *   expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?` which means the first
-   *   character must be a lowercase letter, and all following characters must
-   *   be a dash, lowercase letter, or digit, except the last character, which
-   *   cannot be a dash.
-   * @param {google.cloud.servicedirectory.v1.Endpoint} request.endpoint
-   *   Required. A endpoint with initial fields set.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Endpoint|Endpoint}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.create_endpoint.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_CreateEndpoint_async
-   */
+/**
+ * Creates an endpoint, and returns the new endpoint.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the service that this endpoint provides.
+ * @param {string} request.endpointId
+ *   Required. The Resource ID must be 1-63 characters long, and comply with
+ *   <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
+ *   Specifically, the name must be 1-63 characters long and match the regular
+ *   expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?` which means the first
+ *   character must be a lowercase letter, and all following characters must
+ *   be a dash, lowercase letter, or digit, except the last character, which
+ *   cannot be a dash.
+ * @param {google.cloud.servicedirectory.v1.Endpoint} request.endpoint
+ *   Required. A endpoint with initial fields set.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Endpoint|Endpoint}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.create_endpoint.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_CreateEndpoint_async
+ */
   createEndpoint(
-    request?: protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IEndpoint,
-      (
-        | protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IEndpoint,
+        protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest|undefined, {}|undefined
+      ]>;
   createEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.IEndpoint,
-      | protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.IEndpoint,
-      | protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createEndpoint(
-    request?: protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.servicedirectory.v1.IEndpoint,
-          | protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.servicedirectory.v1.IEndpoint,
-      | protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IEndpoint,
-      (
-        | protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest|null|undefined,
+          {}|null|undefined>): void;
+  createEndpoint(
+      request: protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest,
+      callback: Callback<
+          protos.google.cloud.servicedirectory.v1.IEndpoint,
+          protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest|null|undefined,
+          {}|null|undefined>): void;
+  createEndpoint(
+      request?: protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.servicedirectory.v1.IEndpoint,
+          protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.servicedirectory.v1.IEndpoint,
+          protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IEndpoint,
+        protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createEndpoint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.servicedirectory.v1.IEndpoint,
-          | protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.servicedirectory.v1.IEndpoint,
+        protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createEndpoint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createEndpoint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.servicedirectory.v1.IEndpoint,
-          (
-            | protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createEndpoint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createEndpoint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.servicedirectory.v1.IEndpoint,
+        protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createEndpoint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an endpoint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the endpoint to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Endpoint|Endpoint}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.get_endpoint.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_GetEndpoint_async
-   */
+/**
+ * Gets an endpoint.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the endpoint to get.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Endpoint|Endpoint}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.get_endpoint.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_GetEndpoint_async
+ */
   getEndpoint(
-    request?: protos.google.cloud.servicedirectory.v1.IGetEndpointRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IEndpoint,
-      protos.google.cloud.servicedirectory.v1.IGetEndpointRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.IGetEndpointRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IEndpoint,
+        protos.google.cloud.servicedirectory.v1.IGetEndpointRequest|undefined, {}|undefined
+      ]>;
   getEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.IGetEndpointRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.IEndpoint,
-      | protos.google.cloud.servicedirectory.v1.IGetEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.IGetEndpointRequest,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.IEndpoint,
-      | protos.google.cloud.servicedirectory.v1.IGetEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEndpoint(
-    request?: protos.google.cloud.servicedirectory.v1.IGetEndpointRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicedirectory.v1.IGetEndpointRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.servicedirectory.v1.IEndpoint,
-          | protos.google.cloud.servicedirectory.v1.IGetEndpointRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.servicedirectory.v1.IEndpoint,
-      | protos.google.cloud.servicedirectory.v1.IGetEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IEndpoint,
-      protos.google.cloud.servicedirectory.v1.IGetEndpointRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.IGetEndpointRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEndpoint(
+      request: protos.google.cloud.servicedirectory.v1.IGetEndpointRequest,
+      callback: Callback<
+          protos.google.cloud.servicedirectory.v1.IEndpoint,
+          protos.google.cloud.servicedirectory.v1.IGetEndpointRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEndpoint(
+      request?: protos.google.cloud.servicedirectory.v1.IGetEndpointRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.servicedirectory.v1.IEndpoint,
+          protos.google.cloud.servicedirectory.v1.IGetEndpointRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.servicedirectory.v1.IEndpoint,
+          protos.google.cloud.servicedirectory.v1.IGetEndpointRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IEndpoint,
+        protos.google.cloud.servicedirectory.v1.IGetEndpointRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEndpoint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.servicedirectory.v1.IEndpoint,
-          | protos.google.cloud.servicedirectory.v1.IGetEndpointRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.servicedirectory.v1.IEndpoint,
+        protos.google.cloud.servicedirectory.v1.IGetEndpointRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEndpoint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEndpoint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.servicedirectory.v1.IEndpoint,
-          (
-            | protos.google.cloud.servicedirectory.v1.IGetEndpointRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getEndpoint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getEndpoint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.servicedirectory.v1.IEndpoint,
+        protos.google.cloud.servicedirectory.v1.IGetEndpointRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEndpoint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates an endpoint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.servicedirectory.v1.Endpoint} request.endpoint
-   *   Required. The updated endpoint.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. List of fields to be updated in this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Endpoint|Endpoint}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.update_endpoint.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_UpdateEndpoint_async
-   */
+/**
+ * Updates an endpoint.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.servicedirectory.v1.Endpoint} request.endpoint
+ *   Required. The updated endpoint.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. List of fields to be updated in this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.servicedirectory.v1.Endpoint|Endpoint}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.update_endpoint.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_UpdateEndpoint_async
+ */
   updateEndpoint(
-    request?: protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IEndpoint,
-      (
-        | protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IEndpoint,
+        protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest|undefined, {}|undefined
+      ]>;
   updateEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.IEndpoint,
-      | protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1.IEndpoint,
-      | protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEndpoint(
-    request?: protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.servicedirectory.v1.IEndpoint,
-          | protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.servicedirectory.v1.IEndpoint,
-      | protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IEndpoint,
-      (
-        | protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateEndpoint(
+      request: protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest,
+      callback: Callback<
+          protos.google.cloud.servicedirectory.v1.IEndpoint,
+          protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateEndpoint(
+      request?: protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.servicedirectory.v1.IEndpoint,
+          protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.servicedirectory.v1.IEndpoint,
+          protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IEndpoint,
+        protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'endpoint.name': request.endpoint!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'endpoint.name': request.endpoint!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateEndpoint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.servicedirectory.v1.IEndpoint,
-          | protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.servicedirectory.v1.IEndpoint,
+        protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateEndpoint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateEndpoint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.servicedirectory.v1.IEndpoint,
-          (
-            | protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateEndpoint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateEndpoint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.servicedirectory.v1.IEndpoint,
+        protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateEndpoint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes an endpoint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the endpoint to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.delete_endpoint.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_DeleteEndpoint_async
-   */
+/**
+ * Deletes an endpoint.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the endpoint to delete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.delete_endpoint.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_DeleteEndpoint_async
+ */
   deleteEndpoint(
-    request?: protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest|undefined, {}|undefined
+      ]>;
   deleteEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteEndpoint(
-    request?: protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteEndpoint(
+      request: protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteEndpoint(
+      request?: protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteEndpoint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteEndpoint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteEndpoint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteEndpoint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteEndpoint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteEndpoint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the IAM Policy for a resource (namespace or service only).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.get_iam_policy.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_GetIamPolicy_async
-   */
+/**
+ * Gets the IAM Policy for a resource (namespace or service only).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.GetPolicyOptions} request.options
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.get_iam_policy.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_GetIamPolicy_async
+ */
   getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the IAM Policy for a resource (namespace or service only).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-   *   the fields in the mask will be modified. If no mask is provided, the
-   *   following default mask is used:
-   *
-   *   `paths: "bindings, etag"`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.set_iam_policy.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_SetIamPolicy_async
-   */
+/**
+ * Sets the IAM Policy for a resource (namespace or service only).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being specified.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.Policy} request.policy
+ *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is a
+ *   valid policy but certain Cloud Platform services (such as Projects)
+ *   might reject them.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+ *   the fields in the mask will be modified. If no mask is provided, the
+ *   following default mask is used:
+ *
+ *   `paths: "bindings, etag"`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.set_iam_policy.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_SetIamPolicy_async
+ */
   setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Tests IAM permissions for a resource (namespace or service only).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.test_iam_permissions.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_TestIamPermissions_async
-   */
+/**
+ * Tests IAM permissions for a resource (namespace or service only).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.test_iam_permissions.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_TestIamPermissions_async
+ */
   testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      callback: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .testIamPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('testIamPermissions response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists all namespaces.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the project and location whose namespaces
-   *   you'd like to list.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
-   * @param {string} [request.filter]
-   *   Optional. The filter to list results by.
-   *
-   *   General `filter` string syntax:
-   *   `<field> <operator> <value> (<logical connector>)`
-   *
-   *   *   `<field>` can be `name` or `labels.<key>` for map field
-   *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
-   *       means `HAS`, and is roughly the same as `=`
-   *   *   `<value>` must be the same data type as field
-   *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
-   *
-   *   Examples of valid filters:
-   *
-   *   *   `labels.owner` returns namespaces that have a label with the key
-   *       `owner`, this is the same as `labels:owner`
-   *   *   `labels.owner=sd` returns namespaces that have key/value
-   *       `owner=sd`
-   *   *   `name>projects/my-project/locations/us-east1/namespaces/namespace-c`
-   *       returns namespaces that have name that is alphabetically later than the
-   *       string, so "namespace-e" is returned but "namespace-a" is not
-   *   *   `labels.owner!=sd AND labels.foo=bar` returns namespaces that have
-   *       `owner` in label key but value is not `sd` AND have key/value `foo=bar`
-   *   *   `doesnotexist.foo=bar` returns an empty list. Note that namespace
-   *       doesn't have a field called "doesnotexist". Since the filter does not
-   *       match any namespaces, it returns no results
-   *
-   *   For more information about filtering, see
-   *   [API Filtering](https://aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. The order to list results by.
-   *
-   *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
-   *
-   *   *   `<field>` allows value: `name`
-   *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
-   *       left blank, `asc` is used
-   *
-   *   Note that an empty `order_by` string results in default order, which is
-   *   order by `name` in ascending order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.servicedirectory.v1.Namespace|Namespace}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listNamespacesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all namespaces.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the project and location whose namespaces
+ *   you'd like to list.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous List request,
+ *   if any.
+ * @param {string} [request.filter]
+ *   Optional. The filter to list results by.
+ *
+ *   General `filter` string syntax:
+ *   `<field> <operator> <value> (<logical connector>)`
+ *
+ *   *   `<field>` can be `name` or `labels.<key>` for map field
+ *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
+ *       means `HAS`, and is roughly the same as `=`
+ *   *   `<value>` must be the same data type as field
+ *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
+ *
+ *   Examples of valid filters:
+ *
+ *   *   `labels.owner` returns namespaces that have a label with the key
+ *       `owner`, this is the same as `labels:owner`
+ *   *   `labels.owner=sd` returns namespaces that have key/value
+ *       `owner=sd`
+ *   *   `name>projects/my-project/locations/us-east1/namespaces/namespace-c`
+ *       returns namespaces that have name that is alphabetically later than the
+ *       string, so "namespace-e" is returned but "namespace-a" is not
+ *   *   `labels.owner!=sd AND labels.foo=bar` returns namespaces that have
+ *       `owner` in label key but value is not `sd` AND have key/value `foo=bar`
+ *   *   `doesnotexist.foo=bar` returns an empty list. Note that namespace
+ *       doesn't have a field called "doesnotexist". Since the filter does not
+ *       match any namespaces, it returns no results
+ *
+ *   For more information about filtering, see
+ *   [API Filtering](https://aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. The order to list results by.
+ *
+ *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
+ *
+ *   *   `<field>` allows value: `name`
+ *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
+ *       left blank, `asc` is used
+ *
+ *   Note that an empty `order_by` string results in default order, which is
+ *   order by `name` in ascending order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.servicedirectory.v1.Namespace|Namespace}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listNamespacesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNamespaces(
-    request?: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.INamespace[],
-      protos.google.cloud.servicedirectory.v1.IListNamespacesRequest | null,
-      protos.google.cloud.servicedirectory.v1.IListNamespacesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.INamespace[],
+        protos.google.cloud.servicedirectory.v1.IListNamespacesRequest|null,
+        protos.google.cloud.servicedirectory.v1.IListNamespacesResponse
+      ]>;
   listNamespaces(
-    request: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
-      | protos.google.cloud.servicedirectory.v1.IListNamespacesResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicedirectory.v1.INamespace
-    >
-  ): void;
-  listNamespaces(
-    request: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
-      | protos.google.cloud.servicedirectory.v1.IListNamespacesResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicedirectory.v1.INamespace
-    >
-  ): void;
-  listNamespaces(
-    request?: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
-          | protos.google.cloud.servicedirectory.v1.IListNamespacesResponse
-          | null
-          | undefined,
-          protos.google.cloud.servicedirectory.v1.INamespace
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
-      | protos.google.cloud.servicedirectory.v1.IListNamespacesResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicedirectory.v1.INamespace
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.INamespace[],
-      protos.google.cloud.servicedirectory.v1.IListNamespacesRequest | null,
-      protos.google.cloud.servicedirectory.v1.IListNamespacesResponse,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.IListNamespacesResponse|null|undefined,
+          protos.google.cloud.servicedirectory.v1.INamespace>): void;
+  listNamespaces(
+      request: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
+          protos.google.cloud.servicedirectory.v1.IListNamespacesResponse|null|undefined,
+          protos.google.cloud.servicedirectory.v1.INamespace>): void;
+  listNamespaces(
+      request?: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
+          protos.google.cloud.servicedirectory.v1.IListNamespacesResponse|null|undefined,
+          protos.google.cloud.servicedirectory.v1.INamespace>,
+      callback?: PaginationCallback<
+          protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
+          protos.google.cloud.servicedirectory.v1.IListNamespacesResponse|null|undefined,
+          protos.google.cloud.servicedirectory.v1.INamespace>):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.INamespace[],
+        protos.google.cloud.servicedirectory.v1.IListNamespacesRequest|null,
+        protos.google.cloud.servicedirectory.v1.IListNamespacesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
-          | protos.google.cloud.servicedirectory.v1.IListNamespacesResponse
-          | null
-          | undefined,
-          protos.google.cloud.servicedirectory.v1.INamespace
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
+      protos.google.cloud.servicedirectory.v1.IListNamespacesResponse|null|undefined,
+      protos.google.cloud.servicedirectory.v1.INamespace>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listNamespaces values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2471,98 +1972,95 @@ export class RegistrationServiceClient {
     this._log.info('listNamespaces request %j', request);
     return this.innerApiCalls
       .listNamespaces(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.servicedirectory.v1.INamespace[],
-          protos.google.cloud.servicedirectory.v1.IListNamespacesRequest | null,
-          protos.google.cloud.servicedirectory.v1.IListNamespacesResponse,
-        ]) => {
-          this._log.info('listNamespaces values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.servicedirectory.v1.INamespace[],
+        protos.google.cloud.servicedirectory.v1.IListNamespacesRequest|null,
+        protos.google.cloud.servicedirectory.v1.IListNamespacesResponse
+      ]) => {
+        this._log.info('listNamespaces values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listNamespaces`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the project and location whose namespaces
-   *   you'd like to list.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
-   * @param {string} [request.filter]
-   *   Optional. The filter to list results by.
-   *
-   *   General `filter` string syntax:
-   *   `<field> <operator> <value> (<logical connector>)`
-   *
-   *   *   `<field>` can be `name` or `labels.<key>` for map field
-   *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
-   *       means `HAS`, and is roughly the same as `=`
-   *   *   `<value>` must be the same data type as field
-   *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
-   *
-   *   Examples of valid filters:
-   *
-   *   *   `labels.owner` returns namespaces that have a label with the key
-   *       `owner`, this is the same as `labels:owner`
-   *   *   `labels.owner=sd` returns namespaces that have key/value
-   *       `owner=sd`
-   *   *   `name>projects/my-project/locations/us-east1/namespaces/namespace-c`
-   *       returns namespaces that have name that is alphabetically later than the
-   *       string, so "namespace-e" is returned but "namespace-a" is not
-   *   *   `labels.owner!=sd AND labels.foo=bar` returns namespaces that have
-   *       `owner` in label key but value is not `sd` AND have key/value `foo=bar`
-   *   *   `doesnotexist.foo=bar` returns an empty list. Note that namespace
-   *       doesn't have a field called "doesnotexist". Since the filter does not
-   *       match any namespaces, it returns no results
-   *
-   *   For more information about filtering, see
-   *   [API Filtering](https://aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. The order to list results by.
-   *
-   *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
-   *
-   *   *   `<field>` allows value: `name`
-   *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
-   *       left blank, `asc` is used
-   *
-   *   Note that an empty `order_by` string results in default order, which is
-   *   order by `name` in ascending order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.servicedirectory.v1.Namespace|Namespace} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listNamespacesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listNamespaces`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the project and location whose namespaces
+ *   you'd like to list.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous List request,
+ *   if any.
+ * @param {string} [request.filter]
+ *   Optional. The filter to list results by.
+ *
+ *   General `filter` string syntax:
+ *   `<field> <operator> <value> (<logical connector>)`
+ *
+ *   *   `<field>` can be `name` or `labels.<key>` for map field
+ *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
+ *       means `HAS`, and is roughly the same as `=`
+ *   *   `<value>` must be the same data type as field
+ *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
+ *
+ *   Examples of valid filters:
+ *
+ *   *   `labels.owner` returns namespaces that have a label with the key
+ *       `owner`, this is the same as `labels:owner`
+ *   *   `labels.owner=sd` returns namespaces that have key/value
+ *       `owner=sd`
+ *   *   `name>projects/my-project/locations/us-east1/namespaces/namespace-c`
+ *       returns namespaces that have name that is alphabetically later than the
+ *       string, so "namespace-e" is returned but "namespace-a" is not
+ *   *   `labels.owner!=sd AND labels.foo=bar` returns namespaces that have
+ *       `owner` in label key but value is not `sd` AND have key/value `foo=bar`
+ *   *   `doesnotexist.foo=bar` returns an empty list. Note that namespace
+ *       doesn't have a field called "doesnotexist". Since the filter does not
+ *       match any namespaces, it returns no results
+ *
+ *   For more information about filtering, see
+ *   [API Filtering](https://aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. The order to list results by.
+ *
+ *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
+ *
+ *   *   `<field>` allows value: `name`
+ *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
+ *       left blank, `asc` is used
+ *
+ *   Note that an empty `order_by` string results in default order, which is
+ *   order by `name` in ascending order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.servicedirectory.v1.Namespace|Namespace} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listNamespacesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNamespacesStream(
-    request?: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listNamespaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listNamespaces stream %j', request);
     return this.descriptors.page.listNamespaces.createStream(
       this.innerApiCalls.listNamespaces as GaxCall,
@@ -2571,89 +2069,88 @@ export class RegistrationServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listNamespaces`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the project and location whose namespaces
-   *   you'd like to list.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
-   * @param {string} [request.filter]
-   *   Optional. The filter to list results by.
-   *
-   *   General `filter` string syntax:
-   *   `<field> <operator> <value> (<logical connector>)`
-   *
-   *   *   `<field>` can be `name` or `labels.<key>` for map field
-   *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
-   *       means `HAS`, and is roughly the same as `=`
-   *   *   `<value>` must be the same data type as field
-   *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
-   *
-   *   Examples of valid filters:
-   *
-   *   *   `labels.owner` returns namespaces that have a label with the key
-   *       `owner`, this is the same as `labels:owner`
-   *   *   `labels.owner=sd` returns namespaces that have key/value
-   *       `owner=sd`
-   *   *   `name>projects/my-project/locations/us-east1/namespaces/namespace-c`
-   *       returns namespaces that have name that is alphabetically later than the
-   *       string, so "namespace-e" is returned but "namespace-a" is not
-   *   *   `labels.owner!=sd AND labels.foo=bar` returns namespaces that have
-   *       `owner` in label key but value is not `sd` AND have key/value `foo=bar`
-   *   *   `doesnotexist.foo=bar` returns an empty list. Note that namespace
-   *       doesn't have a field called "doesnotexist". Since the filter does not
-   *       match any namespaces, it returns no results
-   *
-   *   For more information about filtering, see
-   *   [API Filtering](https://aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. The order to list results by.
-   *
-   *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
-   *
-   *   *   `<field>` allows value: `name`
-   *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
-   *       left blank, `asc` is used
-   *
-   *   Note that an empty `order_by` string results in default order, which is
-   *   order by `name` in ascending order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.servicedirectory.v1.Namespace|Namespace}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.list_namespaces.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_ListNamespaces_async
-   */
+/**
+ * Equivalent to `listNamespaces`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the project and location whose namespaces
+ *   you'd like to list.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous List request,
+ *   if any.
+ * @param {string} [request.filter]
+ *   Optional. The filter to list results by.
+ *
+ *   General `filter` string syntax:
+ *   `<field> <operator> <value> (<logical connector>)`
+ *
+ *   *   `<field>` can be `name` or `labels.<key>` for map field
+ *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
+ *       means `HAS`, and is roughly the same as `=`
+ *   *   `<value>` must be the same data type as field
+ *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
+ *
+ *   Examples of valid filters:
+ *
+ *   *   `labels.owner` returns namespaces that have a label with the key
+ *       `owner`, this is the same as `labels:owner`
+ *   *   `labels.owner=sd` returns namespaces that have key/value
+ *       `owner=sd`
+ *   *   `name>projects/my-project/locations/us-east1/namespaces/namespace-c`
+ *       returns namespaces that have name that is alphabetically later than the
+ *       string, so "namespace-e" is returned but "namespace-a" is not
+ *   *   `labels.owner!=sd AND labels.foo=bar` returns namespaces that have
+ *       `owner` in label key but value is not `sd` AND have key/value `foo=bar`
+ *   *   `doesnotexist.foo=bar` returns an empty list. Note that namespace
+ *       doesn't have a field called "doesnotexist". Since the filter does not
+ *       match any namespaces, it returns no results
+ *
+ *   For more information about filtering, see
+ *   [API Filtering](https://aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. The order to list results by.
+ *
+ *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
+ *
+ *   *   `<field>` allows value: `name`
+ *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
+ *       left blank, `asc` is used
+ *
+ *   Note that an empty `order_by` string results in default order, which is
+ *   order by `name` in ascending order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.servicedirectory.v1.Namespace|Namespace}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.list_namespaces.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_ListNamespaces_async
+ */
   listNamespacesAsync(
-    request?: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.servicedirectory.v1.INamespace> {
+      request?: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.servicedirectory.v1.INamespace>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listNamespaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listNamespaces iterate %j', request);
     return this.descriptors.page.listNamespaces.asyncIterate(
       this.innerApiCalls['listNamespaces'] as GaxCall,
@@ -2661,156 +2158,131 @@ export class RegistrationServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.servicedirectory.v1.INamespace>;
   }
-  /**
-   * Lists all services belonging to a namespace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the namespace whose services you'd
-   *   like to list.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
-   * @param {string} [request.filter]
-   *   Optional. The filter to list results by.
-   *
-   *   General `filter` string syntax:
-   *   `<field> <operator> <value> (<logical connector>)`
-   *
-   *   *   `<field>` can be `name` or `annotations.<key>` for map field
-   *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
-   *       means `HAS`, and is roughly the same as `=`
-   *   *   `<value>` must be the same data type as field
-   *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
-   *
-   *   Examples of valid filters:
-   *
-   *   *   `annotations.owner` returns services that have a annotation with the
-   *       key `owner`, this is the same as `annotations:owner`
-   *   *   `annotations.protocol=gRPC` returns services that have key/value
-   *       `protocol=gRPC`
-   *   *
-   *   `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/service-c`
-   *       returns services that have name that is alphabetically later than the
-   *       string, so "service-e" is returned but "service-a" is not
-   *   *   `annotations.owner!=sd AND annotations.foo=bar` returns services that
-   *       have `owner` in annotation key but value is not `sd` AND have
-   *       key/value `foo=bar`
-   *   *   `doesnotexist.foo=bar` returns an empty list. Note that service
-   *       doesn't have a field called "doesnotexist". Since the filter does not
-   *       match any services, it returns no results
-   *
-   *   For more information about filtering, see
-   *   [API Filtering](https://aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. The order to list results by.
-   *
-   *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
-   *
-   *   *   `<field>` allows value: `name`
-   *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
-   *       left blank, `asc` is used
-   *
-   *   Note that an empty `order_by` string results in default order, which is
-   *   order by `name` in ascending order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.servicedirectory.v1.Service|Service}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listServicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all services belonging to a namespace.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the namespace whose services you'd
+ *   like to list.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous List request,
+ *   if any.
+ * @param {string} [request.filter]
+ *   Optional. The filter to list results by.
+ *
+ *   General `filter` string syntax:
+ *   `<field> <operator> <value> (<logical connector>)`
+ *
+ *   *   `<field>` can be `name` or `annotations.<key>` for map field
+ *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
+ *       means `HAS`, and is roughly the same as `=`
+ *   *   `<value>` must be the same data type as field
+ *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
+ *
+ *   Examples of valid filters:
+ *
+ *   *   `annotations.owner` returns services that have a annotation with the
+ *       key `owner`, this is the same as `annotations:owner`
+ *   *   `annotations.protocol=gRPC` returns services that have key/value
+ *       `protocol=gRPC`
+ *   *
+ *   `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/service-c`
+ *       returns services that have name that is alphabetically later than the
+ *       string, so "service-e" is returned but "service-a" is not
+ *   *   `annotations.owner!=sd AND annotations.foo=bar` returns services that
+ *       have `owner` in annotation key but value is not `sd` AND have
+ *       key/value `foo=bar`
+ *   *   `doesnotexist.foo=bar` returns an empty list. Note that service
+ *       doesn't have a field called "doesnotexist". Since the filter does not
+ *       match any services, it returns no results
+ *
+ *   For more information about filtering, see
+ *   [API Filtering](https://aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. The order to list results by.
+ *
+ *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
+ *
+ *   *   `<field>` allows value: `name`
+ *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
+ *       left blank, `asc` is used
+ *
+ *   Note that an empty `order_by` string results in default order, which is
+ *   order by `name` in ascending order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.servicedirectory.v1.Service|Service}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listServicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServices(
-    request?: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IService[],
-      protos.google.cloud.servicedirectory.v1.IListServicesRequest | null,
-      protos.google.cloud.servicedirectory.v1.IListServicesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IService[],
+        protos.google.cloud.servicedirectory.v1.IListServicesRequest|null,
+        protos.google.cloud.servicedirectory.v1.IListServicesResponse
+      ]>;
   listServices(
-    request: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.servicedirectory.v1.IListServicesRequest,
-      | protos.google.cloud.servicedirectory.v1.IListServicesResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicedirectory.v1.IService
-    >
-  ): void;
-  listServices(
-    request: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.servicedirectory.v1.IListServicesRequest,
-      | protos.google.cloud.servicedirectory.v1.IListServicesResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicedirectory.v1.IService
-    >
-  ): void;
-  listServices(
-    request?: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.servicedirectory.v1.IListServicesRequest,
-          | protos.google.cloud.servicedirectory.v1.IListServicesResponse
-          | null
-          | undefined,
-          protos.google.cloud.servicedirectory.v1.IService
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.servicedirectory.v1.IListServicesRequest,
-      | protos.google.cloud.servicedirectory.v1.IListServicesResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicedirectory.v1.IService
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IService[],
-      protos.google.cloud.servicedirectory.v1.IListServicesRequest | null,
-      protos.google.cloud.servicedirectory.v1.IListServicesResponse,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.IListServicesResponse|null|undefined,
+          protos.google.cloud.servicedirectory.v1.IService>): void;
+  listServices(
+      request: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.servicedirectory.v1.IListServicesRequest,
+          protos.google.cloud.servicedirectory.v1.IListServicesResponse|null|undefined,
+          protos.google.cloud.servicedirectory.v1.IService>): void;
+  listServices(
+      request?: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.servicedirectory.v1.IListServicesRequest,
+          protos.google.cloud.servicedirectory.v1.IListServicesResponse|null|undefined,
+          protos.google.cloud.servicedirectory.v1.IService>,
+      callback?: PaginationCallback<
+          protos.google.cloud.servicedirectory.v1.IListServicesRequest,
+          protos.google.cloud.servicedirectory.v1.IListServicesResponse|null|undefined,
+          protos.google.cloud.servicedirectory.v1.IService>):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IService[],
+        protos.google.cloud.servicedirectory.v1.IListServicesRequest|null,
+        protos.google.cloud.servicedirectory.v1.IListServicesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.servicedirectory.v1.IListServicesRequest,
-          | protos.google.cloud.servicedirectory.v1.IListServicesResponse
-          | null
-          | undefined,
-          protos.google.cloud.servicedirectory.v1.IService
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.servicedirectory.v1.IListServicesRequest,
+      protos.google.cloud.servicedirectory.v1.IListServicesResponse|null|undefined,
+      protos.google.cloud.servicedirectory.v1.IService>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listServices values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2819,100 +2291,97 @@ export class RegistrationServiceClient {
     this._log.info('listServices request %j', request);
     return this.innerApiCalls
       .listServices(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.servicedirectory.v1.IService[],
-          protos.google.cloud.servicedirectory.v1.IListServicesRequest | null,
-          protos.google.cloud.servicedirectory.v1.IListServicesResponse,
-        ]) => {
-          this._log.info('listServices values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.servicedirectory.v1.IService[],
+        protos.google.cloud.servicedirectory.v1.IListServicesRequest|null,
+        protos.google.cloud.servicedirectory.v1.IListServicesResponse
+      ]) => {
+        this._log.info('listServices values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listServices`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the namespace whose services you'd
-   *   like to list.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
-   * @param {string} [request.filter]
-   *   Optional. The filter to list results by.
-   *
-   *   General `filter` string syntax:
-   *   `<field> <operator> <value> (<logical connector>)`
-   *
-   *   *   `<field>` can be `name` or `annotations.<key>` for map field
-   *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
-   *       means `HAS`, and is roughly the same as `=`
-   *   *   `<value>` must be the same data type as field
-   *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
-   *
-   *   Examples of valid filters:
-   *
-   *   *   `annotations.owner` returns services that have a annotation with the
-   *       key `owner`, this is the same as `annotations:owner`
-   *   *   `annotations.protocol=gRPC` returns services that have key/value
-   *       `protocol=gRPC`
-   *   *
-   *   `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/service-c`
-   *       returns services that have name that is alphabetically later than the
-   *       string, so "service-e" is returned but "service-a" is not
-   *   *   `annotations.owner!=sd AND annotations.foo=bar` returns services that
-   *       have `owner` in annotation key but value is not `sd` AND have
-   *       key/value `foo=bar`
-   *   *   `doesnotexist.foo=bar` returns an empty list. Note that service
-   *       doesn't have a field called "doesnotexist". Since the filter does not
-   *       match any services, it returns no results
-   *
-   *   For more information about filtering, see
-   *   [API Filtering](https://aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. The order to list results by.
-   *
-   *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
-   *
-   *   *   `<field>` allows value: `name`
-   *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
-   *       left blank, `asc` is used
-   *
-   *   Note that an empty `order_by` string results in default order, which is
-   *   order by `name` in ascending order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.servicedirectory.v1.Service|Service} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listServicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listServices`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the namespace whose services you'd
+ *   like to list.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous List request,
+ *   if any.
+ * @param {string} [request.filter]
+ *   Optional. The filter to list results by.
+ *
+ *   General `filter` string syntax:
+ *   `<field> <operator> <value> (<logical connector>)`
+ *
+ *   *   `<field>` can be `name` or `annotations.<key>` for map field
+ *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
+ *       means `HAS`, and is roughly the same as `=`
+ *   *   `<value>` must be the same data type as field
+ *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
+ *
+ *   Examples of valid filters:
+ *
+ *   *   `annotations.owner` returns services that have a annotation with the
+ *       key `owner`, this is the same as `annotations:owner`
+ *   *   `annotations.protocol=gRPC` returns services that have key/value
+ *       `protocol=gRPC`
+ *   *
+ *   `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/service-c`
+ *       returns services that have name that is alphabetically later than the
+ *       string, so "service-e" is returned but "service-a" is not
+ *   *   `annotations.owner!=sd AND annotations.foo=bar` returns services that
+ *       have `owner` in annotation key but value is not `sd` AND have
+ *       key/value `foo=bar`
+ *   *   `doesnotexist.foo=bar` returns an empty list. Note that service
+ *       doesn't have a field called "doesnotexist". Since the filter does not
+ *       match any services, it returns no results
+ *
+ *   For more information about filtering, see
+ *   [API Filtering](https://aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. The order to list results by.
+ *
+ *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
+ *
+ *   *   `<field>` allows value: `name`
+ *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
+ *       left blank, `asc` is used
+ *
+ *   Note that an empty `order_by` string results in default order, which is
+ *   order by `name` in ascending order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.servicedirectory.v1.Service|Service} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listServicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listServicesStream(
-    request?: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
@@ -2921,91 +2390,90 @@ export class RegistrationServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listServices`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the namespace whose services you'd
-   *   like to list.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
-   * @param {string} [request.filter]
-   *   Optional. The filter to list results by.
-   *
-   *   General `filter` string syntax:
-   *   `<field> <operator> <value> (<logical connector>)`
-   *
-   *   *   `<field>` can be `name` or `annotations.<key>` for map field
-   *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
-   *       means `HAS`, and is roughly the same as `=`
-   *   *   `<value>` must be the same data type as field
-   *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
-   *
-   *   Examples of valid filters:
-   *
-   *   *   `annotations.owner` returns services that have a annotation with the
-   *       key `owner`, this is the same as `annotations:owner`
-   *   *   `annotations.protocol=gRPC` returns services that have key/value
-   *       `protocol=gRPC`
-   *   *
-   *   `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/service-c`
-   *       returns services that have name that is alphabetically later than the
-   *       string, so "service-e" is returned but "service-a" is not
-   *   *   `annotations.owner!=sd AND annotations.foo=bar` returns services that
-   *       have `owner` in annotation key but value is not `sd` AND have
-   *       key/value `foo=bar`
-   *   *   `doesnotexist.foo=bar` returns an empty list. Note that service
-   *       doesn't have a field called "doesnotexist". Since the filter does not
-   *       match any services, it returns no results
-   *
-   *   For more information about filtering, see
-   *   [API Filtering](https://aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. The order to list results by.
-   *
-   *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
-   *
-   *   *   `<field>` allows value: `name`
-   *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
-   *       left blank, `asc` is used
-   *
-   *   Note that an empty `order_by` string results in default order, which is
-   *   order by `name` in ascending order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.servicedirectory.v1.Service|Service}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.list_services.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_ListServices_async
-   */
+/**
+ * Equivalent to `listServices`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the namespace whose services you'd
+ *   like to list.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous List request,
+ *   if any.
+ * @param {string} [request.filter]
+ *   Optional. The filter to list results by.
+ *
+ *   General `filter` string syntax:
+ *   `<field> <operator> <value> (<logical connector>)`
+ *
+ *   *   `<field>` can be `name` or `annotations.<key>` for map field
+ *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
+ *       means `HAS`, and is roughly the same as `=`
+ *   *   `<value>` must be the same data type as field
+ *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
+ *
+ *   Examples of valid filters:
+ *
+ *   *   `annotations.owner` returns services that have a annotation with the
+ *       key `owner`, this is the same as `annotations:owner`
+ *   *   `annotations.protocol=gRPC` returns services that have key/value
+ *       `protocol=gRPC`
+ *   *
+ *   `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/service-c`
+ *       returns services that have name that is alphabetically later than the
+ *       string, so "service-e" is returned but "service-a" is not
+ *   *   `annotations.owner!=sd AND annotations.foo=bar` returns services that
+ *       have `owner` in annotation key but value is not `sd` AND have
+ *       key/value `foo=bar`
+ *   *   `doesnotexist.foo=bar` returns an empty list. Note that service
+ *       doesn't have a field called "doesnotexist". Since the filter does not
+ *       match any services, it returns no results
+ *
+ *   For more information about filtering, see
+ *   [API Filtering](https://aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. The order to list results by.
+ *
+ *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
+ *
+ *   *   `<field>` allows value: `name`
+ *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
+ *       left blank, `asc` is used
+ *
+ *   Note that an empty `order_by` string results in default order, which is
+ *   order by `name` in ascending order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.servicedirectory.v1.Service|Service}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.list_services.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_ListServices_async
+ */
   listServicesAsync(
-    request?: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.servicedirectory.v1.IService> {
+      request?: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.servicedirectory.v1.IService>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
@@ -3013,159 +2481,134 @@ export class RegistrationServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.servicedirectory.v1.IService>;
   }
-  /**
-   * Lists all endpoints.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the service whose endpoints you'd like to
-   *   list.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
-   * @param {string} [request.filter]
-   *   Optional. The filter to list results by.
-   *
-   *   General `filter` string syntax:
-   *   `<field> <operator> <value> (<logical connector>)`
-   *
-   *   *   `<field>` can be `name`, `address`, `port`, or `annotations.<key>` for
-   *        map field
-   *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
-   *       means `HAS`, and is roughly the same as `=`
-   *   *   `<value>` must be the same data type as field
-   *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
-   *
-   *   Examples of valid filters:
-   *
-   *   *   `annotations.owner` returns endpoints that have a annotation with the
-   *       key `owner`, this is the same as `annotations:owner`
-   *   *   `annotations.protocol=gRPC` returns endpoints that have key/value
-   *       `protocol=gRPC`
-   *   *   `address=192.108.1.105` returns endpoints that have this address
-   *   *   `port>8080` returns endpoints that have port number larger than 8080
-   *   *
-   *   `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/my-service/endpoints/endpoint-c`
-   *       returns endpoints that have name that is alphabetically later than the
-   *       string, so "endpoint-e" is returned but "endpoint-a" is not
-   *   *   `annotations.owner!=sd AND annotations.foo=bar` returns endpoints that
-   *       have `owner` in annotation key but value is not `sd` AND have
-   *       key/value `foo=bar`
-   *   *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
-   *       doesn't have a field called "doesnotexist". Since the filter does not
-   *       match any endpoints, it returns no results
-   *
-   *   For more information about filtering, see
-   *   [API Filtering](https://aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. The order to list results by.
-   *
-   *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
-   *
-   *   *   `<field>` allows values: `name`, `address`, `port`
-   *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
-   *       left blank, `asc` is used
-   *
-   *   Note that an empty `order_by` string results in default order, which is
-   *   order by `name` in ascending order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.servicedirectory.v1.Endpoint|Endpoint}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEndpointsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all endpoints.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the service whose endpoints you'd like to
+ *   list.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous List request,
+ *   if any.
+ * @param {string} [request.filter]
+ *   Optional. The filter to list results by.
+ *
+ *   General `filter` string syntax:
+ *   `<field> <operator> <value> (<logical connector>)`
+ *
+ *   *   `<field>` can be `name`, `address`, `port`, or `annotations.<key>` for
+ *        map field
+ *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
+ *       means `HAS`, and is roughly the same as `=`
+ *   *   `<value>` must be the same data type as field
+ *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
+ *
+ *   Examples of valid filters:
+ *
+ *   *   `annotations.owner` returns endpoints that have a annotation with the
+ *       key `owner`, this is the same as `annotations:owner`
+ *   *   `annotations.protocol=gRPC` returns endpoints that have key/value
+ *       `protocol=gRPC`
+ *   *   `address=192.108.1.105` returns endpoints that have this address
+ *   *   `port>8080` returns endpoints that have port number larger than 8080
+ *   *
+ *   `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/my-service/endpoints/endpoint-c`
+ *       returns endpoints that have name that is alphabetically later than the
+ *       string, so "endpoint-e" is returned but "endpoint-a" is not
+ *   *   `annotations.owner!=sd AND annotations.foo=bar` returns endpoints that
+ *       have `owner` in annotation key but value is not `sd` AND have
+ *       key/value `foo=bar`
+ *   *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
+ *       doesn't have a field called "doesnotexist". Since the filter does not
+ *       match any endpoints, it returns no results
+ *
+ *   For more information about filtering, see
+ *   [API Filtering](https://aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. The order to list results by.
+ *
+ *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
+ *
+ *   *   `<field>` allows values: `name`, `address`, `port`
+ *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
+ *       left blank, `asc` is used
+ *
+ *   Note that an empty `order_by` string results in default order, which is
+ *   order by `name` in ascending order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.servicedirectory.v1.Endpoint|Endpoint}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listEndpointsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEndpoints(
-    request?: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IEndpoint[],
-      protos.google.cloud.servicedirectory.v1.IListEndpointsRequest | null,
-      protos.google.cloud.servicedirectory.v1.IListEndpointsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IEndpoint[],
+        protos.google.cloud.servicedirectory.v1.IListEndpointsRequest|null,
+        protos.google.cloud.servicedirectory.v1.IListEndpointsResponse
+      ]>;
   listEndpoints(
-    request: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
-      | protos.google.cloud.servicedirectory.v1.IListEndpointsResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicedirectory.v1.IEndpoint
-    >
-  ): void;
-  listEndpoints(
-    request: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
-      | protos.google.cloud.servicedirectory.v1.IListEndpointsResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicedirectory.v1.IEndpoint
-    >
-  ): void;
-  listEndpoints(
-    request?: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
-          | protos.google.cloud.servicedirectory.v1.IListEndpointsResponse
-          | null
-          | undefined,
-          protos.google.cloud.servicedirectory.v1.IEndpoint
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
-      | protos.google.cloud.servicedirectory.v1.IListEndpointsResponse
-      | null
-      | undefined,
-      protos.google.cloud.servicedirectory.v1.IEndpoint
-    >
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1.IEndpoint[],
-      protos.google.cloud.servicedirectory.v1.IListEndpointsRequest | null,
-      protos.google.cloud.servicedirectory.v1.IListEndpointsResponse,
-    ]
-  > | void {
+          protos.google.cloud.servicedirectory.v1.IListEndpointsResponse|null|undefined,
+          protos.google.cloud.servicedirectory.v1.IEndpoint>): void;
+  listEndpoints(
+      request: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
+          protos.google.cloud.servicedirectory.v1.IListEndpointsResponse|null|undefined,
+          protos.google.cloud.servicedirectory.v1.IEndpoint>): void;
+  listEndpoints(
+      request?: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
+          protos.google.cloud.servicedirectory.v1.IListEndpointsResponse|null|undefined,
+          protos.google.cloud.servicedirectory.v1.IEndpoint>,
+      callback?: PaginationCallback<
+          protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
+          protos.google.cloud.servicedirectory.v1.IListEndpointsResponse|null|undefined,
+          protos.google.cloud.servicedirectory.v1.IEndpoint>):
+      Promise<[
+        protos.google.cloud.servicedirectory.v1.IEndpoint[],
+        protos.google.cloud.servicedirectory.v1.IListEndpointsRequest|null,
+        protos.google.cloud.servicedirectory.v1.IListEndpointsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
-          | protos.google.cloud.servicedirectory.v1.IListEndpointsResponse
-          | null
-          | undefined,
-          protos.google.cloud.servicedirectory.v1.IEndpoint
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
+      protos.google.cloud.servicedirectory.v1.IListEndpointsResponse|null|undefined,
+      protos.google.cloud.servicedirectory.v1.IEndpoint>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEndpoints values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3174,103 +2617,100 @@ export class RegistrationServiceClient {
     this._log.info('listEndpoints request %j', request);
     return this.innerApiCalls
       .listEndpoints(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.servicedirectory.v1.IEndpoint[],
-          protos.google.cloud.servicedirectory.v1.IListEndpointsRequest | null,
-          protos.google.cloud.servicedirectory.v1.IListEndpointsResponse,
-        ]) => {
-          this._log.info('listEndpoints values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.servicedirectory.v1.IEndpoint[],
+        protos.google.cloud.servicedirectory.v1.IListEndpointsRequest|null,
+        protos.google.cloud.servicedirectory.v1.IListEndpointsResponse
+      ]) => {
+        this._log.info('listEndpoints values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listEndpoints`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the service whose endpoints you'd like to
-   *   list.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
-   * @param {string} [request.filter]
-   *   Optional. The filter to list results by.
-   *
-   *   General `filter` string syntax:
-   *   `<field> <operator> <value> (<logical connector>)`
-   *
-   *   *   `<field>` can be `name`, `address`, `port`, or `annotations.<key>` for
-   *        map field
-   *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
-   *       means `HAS`, and is roughly the same as `=`
-   *   *   `<value>` must be the same data type as field
-   *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
-   *
-   *   Examples of valid filters:
-   *
-   *   *   `annotations.owner` returns endpoints that have a annotation with the
-   *       key `owner`, this is the same as `annotations:owner`
-   *   *   `annotations.protocol=gRPC` returns endpoints that have key/value
-   *       `protocol=gRPC`
-   *   *   `address=192.108.1.105` returns endpoints that have this address
-   *   *   `port>8080` returns endpoints that have port number larger than 8080
-   *   *
-   *   `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/my-service/endpoints/endpoint-c`
-   *       returns endpoints that have name that is alphabetically later than the
-   *       string, so "endpoint-e" is returned but "endpoint-a" is not
-   *   *   `annotations.owner!=sd AND annotations.foo=bar` returns endpoints that
-   *       have `owner` in annotation key but value is not `sd` AND have
-   *       key/value `foo=bar`
-   *   *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
-   *       doesn't have a field called "doesnotexist". Since the filter does not
-   *       match any endpoints, it returns no results
-   *
-   *   For more information about filtering, see
-   *   [API Filtering](https://aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. The order to list results by.
-   *
-   *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
-   *
-   *   *   `<field>` allows values: `name`, `address`, `port`
-   *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
-   *       left blank, `asc` is used
-   *
-   *   Note that an empty `order_by` string results in default order, which is
-   *   order by `name` in ascending order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.servicedirectory.v1.Endpoint|Endpoint} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEndpointsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listEndpoints`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the service whose endpoints you'd like to
+ *   list.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous List request,
+ *   if any.
+ * @param {string} [request.filter]
+ *   Optional. The filter to list results by.
+ *
+ *   General `filter` string syntax:
+ *   `<field> <operator> <value> (<logical connector>)`
+ *
+ *   *   `<field>` can be `name`, `address`, `port`, or `annotations.<key>` for
+ *        map field
+ *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
+ *       means `HAS`, and is roughly the same as `=`
+ *   *   `<value>` must be the same data type as field
+ *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
+ *
+ *   Examples of valid filters:
+ *
+ *   *   `annotations.owner` returns endpoints that have a annotation with the
+ *       key `owner`, this is the same as `annotations:owner`
+ *   *   `annotations.protocol=gRPC` returns endpoints that have key/value
+ *       `protocol=gRPC`
+ *   *   `address=192.108.1.105` returns endpoints that have this address
+ *   *   `port>8080` returns endpoints that have port number larger than 8080
+ *   *
+ *   `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/my-service/endpoints/endpoint-c`
+ *       returns endpoints that have name that is alphabetically later than the
+ *       string, so "endpoint-e" is returned but "endpoint-a" is not
+ *   *   `annotations.owner!=sd AND annotations.foo=bar` returns endpoints that
+ *       have `owner` in annotation key but value is not `sd` AND have
+ *       key/value `foo=bar`
+ *   *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
+ *       doesn't have a field called "doesnotexist". Since the filter does not
+ *       match any endpoints, it returns no results
+ *
+ *   For more information about filtering, see
+ *   [API Filtering](https://aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. The order to list results by.
+ *
+ *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
+ *
+ *   *   `<field>` allows values: `name`, `address`, `port`
+ *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
+ *       left blank, `asc` is used
+ *
+ *   Note that an empty `order_by` string results in default order, which is
+ *   order by `name` in ascending order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.servicedirectory.v1.Endpoint|Endpoint} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listEndpointsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEndpointsStream(
-    request?: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEndpoints stream %j', request);
     return this.descriptors.page.listEndpoints.createStream(
       this.innerApiCalls.listEndpoints as GaxCall,
@@ -3279,94 +2719,93 @@ export class RegistrationServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listEndpoints`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the service whose endpoints you'd like to
-   *   list.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous List request,
-   *   if any.
-   * @param {string} [request.filter]
-   *   Optional. The filter to list results by.
-   *
-   *   General `filter` string syntax:
-   *   `<field> <operator> <value> (<logical connector>)`
-   *
-   *   *   `<field>` can be `name`, `address`, `port`, or `annotations.<key>` for
-   *        map field
-   *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
-   *       means `HAS`, and is roughly the same as `=`
-   *   *   `<value>` must be the same data type as field
-   *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
-   *
-   *   Examples of valid filters:
-   *
-   *   *   `annotations.owner` returns endpoints that have a annotation with the
-   *       key `owner`, this is the same as `annotations:owner`
-   *   *   `annotations.protocol=gRPC` returns endpoints that have key/value
-   *       `protocol=gRPC`
-   *   *   `address=192.108.1.105` returns endpoints that have this address
-   *   *   `port>8080` returns endpoints that have port number larger than 8080
-   *   *
-   *   `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/my-service/endpoints/endpoint-c`
-   *       returns endpoints that have name that is alphabetically later than the
-   *       string, so "endpoint-e" is returned but "endpoint-a" is not
-   *   *   `annotations.owner!=sd AND annotations.foo=bar` returns endpoints that
-   *       have `owner` in annotation key but value is not `sd` AND have
-   *       key/value `foo=bar`
-   *   *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
-   *       doesn't have a field called "doesnotexist". Since the filter does not
-   *       match any endpoints, it returns no results
-   *
-   *   For more information about filtering, see
-   *   [API Filtering](https://aip.dev/160).
-   * @param {string} [request.orderBy]
-   *   Optional. The order to list results by.
-   *
-   *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
-   *
-   *   *   `<field>` allows values: `name`, `address`, `port`
-   *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
-   *       left blank, `asc` is used
-   *
-   *   Note that an empty `order_by` string results in default order, which is
-   *   order by `name` in ascending order.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.servicedirectory.v1.Endpoint|Endpoint}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/registration_service.list_endpoints.js</caption>
-   * region_tag:servicedirectory_v1_generated_RegistrationService_ListEndpoints_async
-   */
+/**
+ * Equivalent to `listEndpoints`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the service whose endpoints you'd like to
+ *   list.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of items to return.
+ * @param {string} [request.pageToken]
+ *   Optional. The next_page_token value returned from a previous List request,
+ *   if any.
+ * @param {string} [request.filter]
+ *   Optional. The filter to list results by.
+ *
+ *   General `filter` string syntax:
+ *   `<field> <operator> <value> (<logical connector>)`
+ *
+ *   *   `<field>` can be `name`, `address`, `port`, or `annotations.<key>` for
+ *        map field
+ *   *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
+ *       means `HAS`, and is roughly the same as `=`
+ *   *   `<value>` must be the same data type as field
+ *   *   `<logical connector>` can be `AND`, `OR`, `NOT`
+ *
+ *   Examples of valid filters:
+ *
+ *   *   `annotations.owner` returns endpoints that have a annotation with the
+ *       key `owner`, this is the same as `annotations:owner`
+ *   *   `annotations.protocol=gRPC` returns endpoints that have key/value
+ *       `protocol=gRPC`
+ *   *   `address=192.108.1.105` returns endpoints that have this address
+ *   *   `port>8080` returns endpoints that have port number larger than 8080
+ *   *
+ *   `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/my-service/endpoints/endpoint-c`
+ *       returns endpoints that have name that is alphabetically later than the
+ *       string, so "endpoint-e" is returned but "endpoint-a" is not
+ *   *   `annotations.owner!=sd AND annotations.foo=bar` returns endpoints that
+ *       have `owner` in annotation key but value is not `sd` AND have
+ *       key/value `foo=bar`
+ *   *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
+ *       doesn't have a field called "doesnotexist". Since the filter does not
+ *       match any endpoints, it returns no results
+ *
+ *   For more information about filtering, see
+ *   [API Filtering](https://aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. The order to list results by.
+ *
+ *   General `order_by` string syntax: `<field> (<asc|desc>) (,)`
+ *
+ *   *   `<field>` allows values: `name`, `address`, `port`
+ *   *   `<asc|desc>` ascending or descending order by `<field>`. If this is
+ *       left blank, `asc` is used
+ *
+ *   Note that an empty `order_by` string results in default order, which is
+ *   order by `name` in ascending order.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.servicedirectory.v1.Endpoint|Endpoint}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/registration_service.list_endpoints.js</caption>
+ * region_tag:servicedirectory_v1_generated_RegistrationService_ListEndpoints_async
+ */
   listEndpointsAsync(
-    request?: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.servicedirectory.v1.IEndpoint> {
+      request?: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.servicedirectory.v1.IEndpoint>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEndpoints iterate %j', request);
     return this.descriptors.page.listEndpoints.asyncIterate(
       this.innerApiCalls['listEndpoints'] as GaxCall,
@@ -3374,7 +2813,7 @@ export class RegistrationServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.servicedirectory.v1.IEndpoint>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -3414,7 +2853,7 @@ export class RegistrationServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -3466,13 +2905,7 @@ export class RegistrationServiceClient {
    * @param {string} endpoint
    * @returns {string} Resource name string.
    */
-  endpointPath(
-    project: string,
-    location: string,
-    namespace: string,
-    service: string,
-    endpoint: string
-  ) {
+  endpointPath(project:string,location:string,namespace:string,service:string,endpoint:string) {
     return this.pathTemplates.endpointPathTemplate.render({
       project: project,
       location: location,
@@ -3512,8 +2945,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the namespace.
    */
   matchNamespaceFromEndpointName(endpointName: string) {
-    return this.pathTemplates.endpointPathTemplate.match(endpointName)
-      .namespace;
+    return this.pathTemplates.endpointPathTemplate.match(endpointName).namespace;
   }
 
   /**
@@ -3545,7 +2977,7 @@ export class RegistrationServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3582,7 +3014,7 @@ export class RegistrationServiceClient {
    * @param {string} namespace
    * @returns {string} Resource name string.
    */
-  namespacePath(project: string, location: string, namespace: string) {
+  namespacePath(project:string,location:string,namespace:string) {
     return this.pathTemplates.namespacePathTemplate.render({
       project: project,
       location: location,
@@ -3598,8 +3030,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNamespaceName(namespaceName: string) {
-    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
-      .project;
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName).project;
   }
 
   /**
@@ -3610,8 +3041,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNamespaceName(namespaceName: string) {
-    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
-      .location;
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName).location;
   }
 
   /**
@@ -3622,8 +3052,7 @@ export class RegistrationServiceClient {
    * @returns {string} A string representing the namespace.
    */
   matchNamespaceFromNamespaceName(namespaceName: string) {
-    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
-      .namespace;
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName).namespace;
   }
 
   /**
@@ -3635,12 +3064,7 @@ export class RegistrationServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  servicePath(
-    project: string,
-    location: string,
-    namespace: string,
-    service: string
-  ) {
+  servicePath(project:string,location:string,namespace:string,service:string) {
     return this.pathTemplates.servicePathTemplate.render({
       project: project,
       location: location,
@@ -3705,9 +3129,7 @@ export class RegistrationServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();

@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,41 +100,20 @@ export class RuleSetServiceClient {
    *     const client = new RuleSetServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof RuleSetServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'contentwarehouse.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class RuleSetServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +153,10 @@ export class RuleSetServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -211,10 +186,9 @@ export class RuleSetServiceClient {
       projectLocationDocumentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/documents/{document}'
       ),
-      projectLocationDocumentsReferenceIdPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/documents/referenceId/{reference_id}'
-        ),
+      projectLocationDocumentsReferenceIdPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/documents/referenceId/{reference_id}'
+      ),
       ruleSetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ruleSets/{rule_set}'
       ),
@@ -227,20 +201,14 @@ export class RuleSetServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listRuleSets: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'ruleSets'
-      ),
+      listRuleSets:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'ruleSets')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.contentwarehouse.v1.RuleSetService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.contentwarehouse.v1.RuleSetService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -271,41 +239,32 @@ export class RuleSetServiceClient {
     // Put together the "service stub" for
     // google.cloud.contentwarehouse.v1.RuleSetService.
     this.ruleSetServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.contentwarehouse.v1.RuleSetService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.contentwarehouse.v1.RuleSetService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.contentwarehouse.v1.RuleSetService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const ruleSetServiceStubMethods = [
-      'createRuleSet',
-      'getRuleSet',
-      'updateRuleSet',
-      'deleteRuleSet',
-      'listRuleSets',
-    ];
+    const ruleSetServiceStubMethods =
+        ['createRuleSet', 'getRuleSet', 'updateRuleSet', 'deleteRuleSet', 'listRuleSets'];
     for (const methodName of ruleSetServiceStubMethods) {
       const callPromise = this.ruleSetServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -325,14 +284,8 @@ export class RuleSetServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'contentwarehouse.googleapis.com';
   }
@@ -343,14 +296,8 @@ export class RuleSetServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'contentwarehouse.googleapis.com';
   }
@@ -381,7 +328,9 @@ export class RuleSetServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -390,9 +339,8 @@ export class RuleSetServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -403,617 +351,484 @@ export class RuleSetServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a ruleset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent name.
-   *   Format: projects/{project_number}/locations/{location}.
-   * @param {google.cloud.contentwarehouse.v1.RuleSet} request.ruleSet
-   *   Required. The rule set to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.RuleSet|RuleSet}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_set_service.create_rule_set.js</caption>
-   * region_tag:contentwarehouse_v1_generated_RuleSetService_CreateRuleSet_async
-   */
+/**
+ * Creates a ruleset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent name.
+ *   Format: projects/{project_number}/locations/{location}.
+ * @param {google.cloud.contentwarehouse.v1.RuleSet} request.ruleSet
+ *   Required. The rule set to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.RuleSet|RuleSet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_set_service.create_rule_set.js</caption>
+ * region_tag:contentwarehouse_v1_generated_RuleSetService_CreateRuleSet_async
+ */
   createRuleSet(
-    request?: protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IRuleSet,
-      protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IRuleSet,
+        protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest|undefined, {}|undefined
+      ]>;
   createRuleSet(
-    request: protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.IRuleSet,
-      | protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createRuleSet(
-    request: protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.IRuleSet,
-      | protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createRuleSet(
-    request?: protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.contentwarehouse.v1.IRuleSet,
-          | protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.contentwarehouse.v1.IRuleSet,
-      | protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IRuleSet,
-      protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  createRuleSet(
+      request: protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest,
+      callback: Callback<
+          protos.google.cloud.contentwarehouse.v1.IRuleSet,
+          protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  createRuleSet(
+      request?: protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.contentwarehouse.v1.IRuleSet,
+          protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.contentwarehouse.v1.IRuleSet,
+          protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IRuleSet,
+        protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createRuleSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.contentwarehouse.v1.IRuleSet,
-          | protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.contentwarehouse.v1.IRuleSet,
+        protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createRuleSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createRuleSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.contentwarehouse.v1.IRuleSet,
-          (
-            | protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createRuleSet response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createRuleSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.contentwarehouse.v1.IRuleSet,
+        protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createRuleSet response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a ruleset. Returns NOT_FOUND if the ruleset does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the rule set to retrieve.
-   *   Format:
-   *   projects/{project_number}/locations/{location}/ruleSets/{rule_set_id}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.RuleSet|RuleSet}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_set_service.get_rule_set.js</caption>
-   * region_tag:contentwarehouse_v1_generated_RuleSetService_GetRuleSet_async
-   */
+/**
+ * Gets a ruleset. Returns NOT_FOUND if the ruleset does not exist.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the rule set to retrieve.
+ *   Format:
+ *   projects/{project_number}/locations/{location}/ruleSets/{rule_set_id}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.RuleSet|RuleSet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_set_service.get_rule_set.js</caption>
+ * region_tag:contentwarehouse_v1_generated_RuleSetService_GetRuleSet_async
+ */
   getRuleSet(
-    request?: protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IRuleSet,
-      protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IRuleSet,
+        protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest|undefined, {}|undefined
+      ]>;
   getRuleSet(
-    request: protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.IRuleSet,
-      | protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRuleSet(
-    request: protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.IRuleSet,
-      | protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRuleSet(
-    request?: protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.contentwarehouse.v1.IRuleSet,
-          | protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.contentwarehouse.v1.IRuleSet,
-      | protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IRuleSet,
-      protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRuleSet(
+      request: protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest,
+      callback: Callback<
+          protos.google.cloud.contentwarehouse.v1.IRuleSet,
+          protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  getRuleSet(
+      request?: protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.contentwarehouse.v1.IRuleSet,
+          protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.contentwarehouse.v1.IRuleSet,
+          protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IRuleSet,
+        protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getRuleSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.contentwarehouse.v1.IRuleSet,
-          | protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.contentwarehouse.v1.IRuleSet,
+        protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRuleSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getRuleSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.contentwarehouse.v1.IRuleSet,
-          (
-            | protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getRuleSet response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getRuleSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.contentwarehouse.v1.IRuleSet,
+        protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getRuleSet response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a ruleset. Returns INVALID_ARGUMENT if the name of the ruleset
-   * is non-empty and does not equal the existing name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the rule set to update.
-   *   Format:
-   *   projects/{project_number}/locations/{location}/ruleSets/{rule_set_id}.
-   * @param {google.cloud.contentwarehouse.v1.RuleSet} request.ruleSet
-   *   Required. The rule set to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.RuleSet|RuleSet}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_set_service.update_rule_set.js</caption>
-   * region_tag:contentwarehouse_v1_generated_RuleSetService_UpdateRuleSet_async
-   */
+/**
+ * Updates a ruleset. Returns INVALID_ARGUMENT if the name of the ruleset
+ * is non-empty and does not equal the existing name.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the rule set to update.
+ *   Format:
+ *   projects/{project_number}/locations/{location}/ruleSets/{rule_set_id}.
+ * @param {google.cloud.contentwarehouse.v1.RuleSet} request.ruleSet
+ *   Required. The rule set to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.RuleSet|RuleSet}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_set_service.update_rule_set.js</caption>
+ * region_tag:contentwarehouse_v1_generated_RuleSetService_UpdateRuleSet_async
+ */
   updateRuleSet(
-    request?: protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IRuleSet,
-      protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IRuleSet,
+        protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest|undefined, {}|undefined
+      ]>;
   updateRuleSet(
-    request: protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.IRuleSet,
-      | protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateRuleSet(
-    request: protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.IRuleSet,
-      | protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateRuleSet(
-    request?: protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.contentwarehouse.v1.IRuleSet,
-          | protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.contentwarehouse.v1.IRuleSet,
-      | protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IRuleSet,
-      protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRuleSet(
+      request: protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest,
+      callback: Callback<
+          protos.google.cloud.contentwarehouse.v1.IRuleSet,
+          protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateRuleSet(
+      request?: protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.contentwarehouse.v1.IRuleSet,
+          protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.contentwarehouse.v1.IRuleSet,
+          protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IRuleSet,
+        protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateRuleSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.contentwarehouse.v1.IRuleSet,
-          | protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.contentwarehouse.v1.IRuleSet,
+        protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateRuleSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateRuleSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.contentwarehouse.v1.IRuleSet,
-          (
-            | protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateRuleSet response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateRuleSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.contentwarehouse.v1.IRuleSet,
+        protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateRuleSet response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a ruleset. Returns NOT_FOUND if the document does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the rule set to delete.
-   *   Format:
-   *   projects/{project_number}/locations/{location}/ruleSets/{rule_set_id}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_set_service.delete_rule_set.js</caption>
-   * region_tag:contentwarehouse_v1_generated_RuleSetService_DeleteRuleSet_async
-   */
+/**
+ * Deletes a ruleset. Returns NOT_FOUND if the document does not exist.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the rule set to delete.
+ *   Format:
+ *   projects/{project_number}/locations/{location}/ruleSets/{rule_set_id}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_set_service.delete_rule_set.js</caption>
+ * region_tag:contentwarehouse_v1_generated_RuleSetService_DeleteRuleSet_async
+ */
   deleteRuleSet(
-    request?: protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest|undefined, {}|undefined
+      ]>;
   deleteRuleSet(
-    request: protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteRuleSet(
-    request: protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteRuleSet(
-    request?: protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteRuleSet(
+      request: protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteRuleSet(
+      request?: protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteRuleSet request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteRuleSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteRuleSet(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteRuleSet response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteRuleSet(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteRuleSet response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists rulesets.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of document.
-   *   Format: projects/{project_number}/locations/{location}.
-   * @param {number} request.pageSize
-   *   The maximum number of rule sets to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 50 rule sets will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListRuleSets` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRuleSets`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.contentwarehouse.v1.RuleSet|RuleSet}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRuleSetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists rulesets.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of document.
+ *   Format: projects/{project_number}/locations/{location}.
+ * @param {number} request.pageSize
+ *   The maximum number of rule sets to return. The service may return
+ *   fewer than this value.
+ *   If unspecified, at most 50 rule sets will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListRuleSets` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRuleSets`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.contentwarehouse.v1.RuleSet|RuleSet}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listRuleSetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRuleSets(
-    request?: protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IRuleSet[],
-      protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IRuleSet[],
+        protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest|null,
+        protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse
+      ]>;
   listRuleSets(
-    request: protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
-      | protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.contentwarehouse.v1.IRuleSet
-    >
-  ): void;
-  listRuleSets(
-    request: protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
-      | protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.contentwarehouse.v1.IRuleSet
-    >
-  ): void;
-  listRuleSets(
-    request?: protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
-          | protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.contentwarehouse.v1.IRuleSet
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
-      | protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.contentwarehouse.v1.IRuleSet
-    >
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IRuleSet[],
-      protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse,
-    ]
-  > | void {
+          protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse|null|undefined,
+          protos.google.cloud.contentwarehouse.v1.IRuleSet>): void;
+  listRuleSets(
+      request: protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
+          protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse|null|undefined,
+          protos.google.cloud.contentwarehouse.v1.IRuleSet>): void;
+  listRuleSets(
+      request?: protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
+          protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse|null|undefined,
+          protos.google.cloud.contentwarehouse.v1.IRuleSet>,
+      callback?: PaginationCallback<
+          protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
+          protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse|null|undefined,
+          protos.google.cloud.contentwarehouse.v1.IRuleSet>):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IRuleSet[],
+        protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest|null,
+        protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
-          | protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse
-          | null
-          | undefined,
-          protos.google.cloud.contentwarehouse.v1.IRuleSet
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
+      protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse|null|undefined,
+      protos.google.cloud.contentwarehouse.v1.IRuleSet>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRuleSets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1022,64 +837,61 @@ export class RuleSetServiceClient {
     this._log.info('listRuleSets request %j', request);
     return this.innerApiCalls
       .listRuleSets(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.contentwarehouse.v1.IRuleSet[],
-          protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest | null,
-          protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse,
-        ]) => {
-          this._log.info('listRuleSets values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.contentwarehouse.v1.IRuleSet[],
+        protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest|null,
+        protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse
+      ]) => {
+        this._log.info('listRuleSets values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listRuleSets`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of document.
-   *   Format: projects/{project_number}/locations/{location}.
-   * @param {number} request.pageSize
-   *   The maximum number of rule sets to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 50 rule sets will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListRuleSets` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRuleSets`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.contentwarehouse.v1.RuleSet|RuleSet} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listRuleSetsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listRuleSets`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of document.
+ *   Format: projects/{project_number}/locations/{location}.
+ * @param {number} request.pageSize
+ *   The maximum number of rule sets to return. The service may return
+ *   fewer than this value.
+ *   If unspecified, at most 50 rule sets will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListRuleSets` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRuleSets`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.contentwarehouse.v1.RuleSet|RuleSet} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listRuleSetsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listRuleSetsStream(
-    request?: protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRuleSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRuleSets stream %j', request);
     return this.descriptors.page.listRuleSets.createStream(
       this.innerApiCalls.listRuleSets as GaxCall,
@@ -1088,55 +900,54 @@ export class RuleSetServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listRuleSets`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of document.
-   *   Format: projects/{project_number}/locations/{location}.
-   * @param {number} request.pageSize
-   *   The maximum number of rule sets to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 50 rule sets will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListRuleSets` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListRuleSets`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.contentwarehouse.v1.RuleSet|RuleSet}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/rule_set_service.list_rule_sets.js</caption>
-   * region_tag:contentwarehouse_v1_generated_RuleSetService_ListRuleSets_async
-   */
+/**
+ * Equivalent to `listRuleSets`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of document.
+ *   Format: projects/{project_number}/locations/{location}.
+ * @param {number} request.pageSize
+ *   The maximum number of rule sets to return. The service may return
+ *   fewer than this value.
+ *   If unspecified, at most 50 rule sets will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListRuleSets` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListRuleSets`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.contentwarehouse.v1.RuleSet|RuleSet}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/rule_set_service.list_rule_sets.js</caption>
+ * region_tag:contentwarehouse_v1_generated_RuleSetService_ListRuleSets_async
+ */
   listRuleSetsAsync(
-    request?: protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.contentwarehouse.v1.IRuleSet> {
+      request?: protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.contentwarehouse.v1.IRuleSet>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listRuleSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listRuleSets iterate %j', request);
     return this.descriptors.page.listRuleSets.asyncIterate(
       this.innerApiCalls['listRuleSets'] as GaxCall,
@@ -1157,12 +968,7 @@ export class RuleSetServiceClient {
    * @param {string} document_link
    * @returns {string} Resource name string.
    */
-  documentLinkPath(
-    project: string,
-    location: string,
-    document: string,
-    documentLink: string
-  ) {
+  documentLinkPath(project:string,location:string,document:string,documentLink:string) {
     return this.pathTemplates.documentLinkPathTemplate.render({
       project: project,
       location: location,
@@ -1179,8 +985,7 @@ export class RuleSetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDocumentLinkName(documentLinkName: string) {
-    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName)
-      .project;
+    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName).project;
   }
 
   /**
@@ -1191,8 +996,7 @@ export class RuleSetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDocumentLinkName(documentLinkName: string) {
-    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName)
-      .location;
+    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName).location;
   }
 
   /**
@@ -1203,8 +1007,7 @@ export class RuleSetServiceClient {
    * @returns {string} A string representing the document.
    */
   matchDocumentFromDocumentLinkName(documentLinkName: string) {
-    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName)
-      .document;
+    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName).document;
   }
 
   /**
@@ -1215,8 +1018,7 @@ export class RuleSetServiceClient {
    * @returns {string} A string representing the document_link.
    */
   matchDocumentLinkFromDocumentLinkName(documentLinkName: string) {
-    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName)
-      .document_link;
+    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName).document_link;
   }
 
   /**
@@ -1227,11 +1029,7 @@ export class RuleSetServiceClient {
    * @param {string} document_schema
    * @returns {string} Resource name string.
    */
-  documentSchemaPath(
-    project: string,
-    location: string,
-    documentSchema: string
-  ) {
+  documentSchemaPath(project:string,location:string,documentSchema:string) {
     return this.pathTemplates.documentSchemaPathTemplate.render({
       project: project,
       location: location,
@@ -1247,9 +1045,7 @@ export class RuleSetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDocumentSchemaName(documentSchemaName: string) {
-    return this.pathTemplates.documentSchemaPathTemplate.match(
-      documentSchemaName
-    ).project;
+    return this.pathTemplates.documentSchemaPathTemplate.match(documentSchemaName).project;
   }
 
   /**
@@ -1260,9 +1056,7 @@ export class RuleSetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDocumentSchemaName(documentSchemaName: string) {
-    return this.pathTemplates.documentSchemaPathTemplate.match(
-      documentSchemaName
-    ).location;
+    return this.pathTemplates.documentSchemaPathTemplate.match(documentSchemaName).location;
   }
 
   /**
@@ -1273,9 +1067,7 @@ export class RuleSetServiceClient {
    * @returns {string} A string representing the document_schema.
    */
   matchDocumentSchemaFromDocumentSchemaName(documentSchemaName: string) {
-    return this.pathTemplates.documentSchemaPathTemplate.match(
-      documentSchemaName
-    ).document_schema;
+    return this.pathTemplates.documentSchemaPathTemplate.match(documentSchemaName).document_schema;
   }
 
   /**
@@ -1286,11 +1078,7 @@ export class RuleSetServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  projectLocationDocumentPath(
-    project: string,
-    location: string,
-    document: string
-  ) {
+  projectLocationDocumentPath(project:string,location:string,document:string) {
     return this.pathTemplates.projectLocationDocumentPathTemplate.render({
       project: project,
       location: location,
@@ -1305,12 +1093,8 @@ export class RuleSetServiceClient {
    *   A fully-qualified path representing project_location_document resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDocumentName(
-    projectLocationDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentPathTemplate.match(
-      projectLocationDocumentName
-    ).project;
+  matchProjectFromProjectLocationDocumentName(projectLocationDocumentName: string) {
+    return this.pathTemplates.projectLocationDocumentPathTemplate.match(projectLocationDocumentName).project;
   }
 
   /**
@@ -1320,12 +1104,8 @@ export class RuleSetServiceClient {
    *   A fully-qualified path representing project_location_document resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDocumentName(
-    projectLocationDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentPathTemplate.match(
-      projectLocationDocumentName
-    ).location;
+  matchLocationFromProjectLocationDocumentName(projectLocationDocumentName: string) {
+    return this.pathTemplates.projectLocationDocumentPathTemplate.match(projectLocationDocumentName).location;
   }
 
   /**
@@ -1335,12 +1115,8 @@ export class RuleSetServiceClient {
    *   A fully-qualified path representing project_location_document resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectLocationDocumentName(
-    projectLocationDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentPathTemplate.match(
-      projectLocationDocumentName
-    ).document;
+  matchDocumentFromProjectLocationDocumentName(projectLocationDocumentName: string) {
+    return this.pathTemplates.projectLocationDocumentPathTemplate.match(projectLocationDocumentName).document;
   }
 
   /**
@@ -1351,18 +1127,12 @@ export class RuleSetServiceClient {
    * @param {string} reference_id
    * @returns {string} Resource name string.
    */
-  projectLocationDocumentsReferenceIdPath(
-    project: string,
-    location: string,
-    referenceId: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        reference_id: referenceId,
-      }
-    );
+  projectLocationDocumentsReferenceIdPath(project:string,location:string,referenceId:string) {
+    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render({
+      project: project,
+      location: location,
+      reference_id: referenceId,
+    });
   }
 
   /**
@@ -1372,12 +1142,8 @@ export class RuleSetServiceClient {
    *   A fully-qualified path representing project_location_documents_reference_id resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDocumentsReferenceIdName(
-    projectLocationDocumentsReferenceIdName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(
-      projectLocationDocumentsReferenceIdName
-    ).project;
+  matchProjectFromProjectLocationDocumentsReferenceIdName(projectLocationDocumentsReferenceIdName: string) {
+    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(projectLocationDocumentsReferenceIdName).project;
   }
 
   /**
@@ -1387,12 +1153,8 @@ export class RuleSetServiceClient {
    *   A fully-qualified path representing project_location_documents_reference_id resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDocumentsReferenceIdName(
-    projectLocationDocumentsReferenceIdName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(
-      projectLocationDocumentsReferenceIdName
-    ).location;
+  matchLocationFromProjectLocationDocumentsReferenceIdName(projectLocationDocumentsReferenceIdName: string) {
+    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(projectLocationDocumentsReferenceIdName).location;
   }
 
   /**
@@ -1402,12 +1164,8 @@ export class RuleSetServiceClient {
    *   A fully-qualified path representing project_location_documents_reference_id resource.
    * @returns {string} A string representing the reference_id.
    */
-  matchReferenceIdFromProjectLocationDocumentsReferenceIdName(
-    projectLocationDocumentsReferenceIdName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(
-      projectLocationDocumentsReferenceIdName
-    ).reference_id;
+  matchReferenceIdFromProjectLocationDocumentsReferenceIdName(projectLocationDocumentsReferenceIdName: string) {
+    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(projectLocationDocumentsReferenceIdName).reference_id;
   }
 
   /**
@@ -1418,7 +1176,7 @@ export class RuleSetServiceClient {
    * @param {string} rule_set
    * @returns {string} Resource name string.
    */
-  ruleSetPath(project: string, location: string, ruleSet: string) {
+  ruleSetPath(project:string,location:string,ruleSet:string) {
     return this.pathTemplates.ruleSetPathTemplate.render({
       project: project,
       location: location,
@@ -1467,7 +1225,7 @@ export class RuleSetServiceClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  synonymSetPath(project: string, location: string, context: string) {
+  synonymSetPath(project:string,location:string,context:string) {
     return this.pathTemplates.synonymSetPathTemplate.render({
       project: project,
       location: location,
@@ -1483,8 +1241,7 @@ export class RuleSetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSynonymSetName(synonymSetName: string) {
-    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName)
-      .project;
+    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName).project;
   }
 
   /**
@@ -1495,8 +1252,7 @@ export class RuleSetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSynonymSetName(synonymSetName: string) {
-    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName)
-      .location;
+    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName).location;
   }
 
   /**
@@ -1507,8 +1263,7 @@ export class RuleSetServiceClient {
    * @returns {string} A string representing the context.
    */
   matchContextFromSynonymSetName(synonymSetName: string) {
-    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName)
-      .context;
+    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName).context;
   }
 
   /**

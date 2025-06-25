@@ -12,14 +12,19 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Dep_service.create_authz_extension](#dep_service.create_authz_extension)
   * [Dep_service.create_lb_route_extension](#dep_service.create_lb_route_extension)
   * [Dep_service.create_lb_traffic_extension](#dep_service.create_lb_traffic_extension)
+  * [Dep_service.delete_authz_extension](#dep_service.delete_authz_extension)
   * [Dep_service.delete_lb_route_extension](#dep_service.delete_lb_route_extension)
   * [Dep_service.delete_lb_traffic_extension](#dep_service.delete_lb_traffic_extension)
+  * [Dep_service.get_authz_extension](#dep_service.get_authz_extension)
   * [Dep_service.get_lb_route_extension](#dep_service.get_lb_route_extension)
   * [Dep_service.get_lb_traffic_extension](#dep_service.get_lb_traffic_extension)
+  * [Dep_service.list_authz_extensions](#dep_service.list_authz_extensions)
   * [Dep_service.list_lb_route_extensions](#dep_service.list_lb_route_extensions)
   * [Dep_service.list_lb_traffic_extensions](#dep_service.list_lb_traffic_extensions)
+  * [Dep_service.update_authz_extension](#dep_service.update_authz_extension)
   * [Dep_service.update_lb_route_extension](#dep_service.update_lb_route_extension)
   * [Dep_service.update_lb_traffic_extension](#dep_service.update_lb_traffic_extension)
   * [Network_services.create_endpoint_policy](#network_services.create_endpoint_policy)
@@ -31,6 +36,8 @@
   * [Network_services.create_service_lb_policy](#network_services.create_service_lb_policy)
   * [Network_services.create_tcp_route](#network_services.create_tcp_route)
   * [Network_services.create_tls_route](#network_services.create_tls_route)
+  * [Network_services.create_wasm_plugin](#network_services.create_wasm_plugin)
+  * [Network_services.create_wasm_plugin_version](#network_services.create_wasm_plugin_version)
   * [Network_services.delete_endpoint_policy](#network_services.delete_endpoint_policy)
   * [Network_services.delete_gateway](#network_services.delete_gateway)
   * [Network_services.delete_grpc_route](#network_services.delete_grpc_route)
@@ -40,6 +47,8 @@
   * [Network_services.delete_service_lb_policy](#network_services.delete_service_lb_policy)
   * [Network_services.delete_tcp_route](#network_services.delete_tcp_route)
   * [Network_services.delete_tls_route](#network_services.delete_tls_route)
+  * [Network_services.delete_wasm_plugin](#network_services.delete_wasm_plugin)
+  * [Network_services.delete_wasm_plugin_version](#network_services.delete_wasm_plugin_version)
   * [Network_services.get_endpoint_policy](#network_services.get_endpoint_policy)
   * [Network_services.get_gateway](#network_services.get_gateway)
   * [Network_services.get_gateway_route_view](#network_services.get_gateway_route_view)
@@ -51,6 +60,8 @@
   * [Network_services.get_service_lb_policy](#network_services.get_service_lb_policy)
   * [Network_services.get_tcp_route](#network_services.get_tcp_route)
   * [Network_services.get_tls_route](#network_services.get_tls_route)
+  * [Network_services.get_wasm_plugin](#network_services.get_wasm_plugin)
+  * [Network_services.get_wasm_plugin_version](#network_services.get_wasm_plugin_version)
   * [Network_services.list_endpoint_policies](#network_services.list_endpoint_policies)
   * [Network_services.list_gateway_route_views](#network_services.list_gateway_route_views)
   * [Network_services.list_gateways](#network_services.list_gateways)
@@ -62,6 +73,8 @@
   * [Network_services.list_service_lb_policies](#network_services.list_service_lb_policies)
   * [Network_services.list_tcp_routes](#network_services.list_tcp_routes)
   * [Network_services.list_tls_routes](#network_services.list_tls_routes)
+  * [Network_services.list_wasm_plugin_versions](#network_services.list_wasm_plugin_versions)
+  * [Network_services.list_wasm_plugins](#network_services.list_wasm_plugins)
   * [Network_services.update_endpoint_policy](#network_services.update_endpoint_policy)
   * [Network_services.update_gateway](#network_services.update_gateway)
   * [Network_services.update_grpc_route](#network_services.update_grpc_route)
@@ -71,6 +84,7 @@
   * [Network_services.update_service_lb_policy](#network_services.update_service_lb_policy)
   * [Network_services.update_tcp_route](#network_services.update_tcp_route)
   * [Network_services.update_tls_route](#network_services.update_tls_route)
+  * [Network_services.update_wasm_plugin](#network_services.update_wasm_plugin)
   * [Dep_service.create_lb_route_extension](#dep_service.create_lb_route_extension)
   * [Dep_service.create_lb_traffic_extension](#dep_service.create_lb_traffic_extension)
   * [Dep_service.delete_lb_route_extension](#dep_service.delete_lb_route_extension)
@@ -103,6 +117,23 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
+### Dep_service.create_authz_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_authz_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_authz_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_authz_extension.js`
+
+
+-----
+
+
+
+
 ### Dep_service.create_lb_route_extension
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_lb_route_extension.js).
@@ -130,6 +161,23 @@ __Usage:__
 
 
 `node packages/google-cloud-networkservices/samples/generated/v1/dep_service.create_lb_traffic_extension.js`
+
+
+-----
+
+
+
+
+### Dep_service.delete_authz_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.delete_authz_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.delete_authz_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/dep_service.delete_authz_extension.js`
 
 
 -----
@@ -171,6 +219,23 @@ __Usage:__
 
 
 
+### Dep_service.get_authz_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_authz_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_authz_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_authz_extension.js`
+
+
+-----
+
+
+
+
 ### Dep_service.get_lb_route_extension
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.get_lb_route_extension.js).
@@ -205,6 +270,23 @@ __Usage:__
 
 
 
+### Dep_service.list_authz_extensions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_authz_extensions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_authz_extensions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_authz_extensions.js`
+
+
+-----
+
+
+
+
 ### Dep_service.list_lb_route_extensions
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_lb_route_extensions.js).
@@ -232,6 +314,23 @@ __Usage:__
 
 
 `node packages/google-cloud-networkservices/samples/generated/v1/dep_service.list_lb_traffic_extensions.js`
+
+
+-----
+
+
+
+
+### Dep_service.update_authz_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_authz_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_authz_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/dep_service.update_authz_extension.js`
 
 
 -----
@@ -426,6 +525,40 @@ __Usage:__
 
 
 
+### Network_services.create_wasm_plugin
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_wasm_plugin.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.create_wasm_plugin.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.create_wasm_plugin.js`
+
+
+-----
+
+
+
+
+### Network_services.create_wasm_plugin_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.create_wasm_plugin_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.create_wasm_plugin_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.create_wasm_plugin_version.js`
+
+
+-----
+
+
+
+
 ### Network_services.delete_endpoint_policy
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_endpoint_policy.js).
@@ -572,6 +705,40 @@ __Usage:__
 
 
 `node packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_tls_route.js`
+
+
+-----
+
+
+
+
+### Network_services.delete_wasm_plugin
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_wasm_plugin.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_wasm_plugin.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_wasm_plugin.js`
+
+
+-----
+
+
+
+
+### Network_services.delete_wasm_plugin_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_wasm_plugin_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_wasm_plugin_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.delete_wasm_plugin_version.js`
 
 
 -----
@@ -766,6 +933,40 @@ __Usage:__
 
 
 
+### Network_services.get_wasm_plugin
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_wasm_plugin.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.get_wasm_plugin.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.get_wasm_plugin.js`
+
+
+-----
+
+
+
+
+### Network_services.get_wasm_plugin_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.get_wasm_plugin_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.get_wasm_plugin_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.get_wasm_plugin_version.js`
+
+
+-----
+
+
+
+
 ### Network_services.list_endpoint_policies
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_endpoint_policies.js).
@@ -953,6 +1154,40 @@ __Usage:__
 
 
 
+### Network_services.list_wasm_plugin_versions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_wasm_plugin_versions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.list_wasm_plugin_versions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.list_wasm_plugin_versions.js`
+
+
+-----
+
+
+
+
+### Network_services.list_wasm_plugins
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.list_wasm_plugins.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.list_wasm_plugins.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.list_wasm_plugins.js`
+
+
+-----
+
+
+
+
 ### Network_services.update_endpoint_policy
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_endpoint_policy.js).
@@ -1099,6 +1334,23 @@ __Usage:__
 
 
 `node packages/google-cloud-networkservices/samples/generated/v1/network_services.update_tls_route.js`
+
+
+-----
+
+
+
+
+### Network_services.update_wasm_plugin
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkservices/samples/generated/v1/network_services.update_wasm_plugin.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkservices/samples/generated/v1/network_services.update_wasm_plugin.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkservices/samples/generated/v1/network_services.update_wasm_plugin.js`
 
 
 -----

@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,42 +100,20 @@ export class CloudControlsPartnerCoreClient {
    *     const client = new CloudControlsPartnerCoreClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof CloudControlsPartnerCoreClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof CloudControlsPartnerCoreClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'cloudcontrolspartner.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +139,7 @@ export class CloudControlsPartnerCoreClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +153,10 @@ export class CloudControlsPartnerCoreClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -230,30 +204,18 @@ export class CloudControlsPartnerCoreClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listWorkloads: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'workloads'
-      ),
-      listCustomers: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'customers'
-      ),
-      listAccessApprovalRequests: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'accessApprovalRequests'
-      ),
+      listWorkloads:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'workloads'),
+      listCustomers:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'customers'),
+      listAccessApprovalRequests:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'accessApprovalRequests')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -284,48 +246,32 @@ export class CloudControlsPartnerCoreClient {
     // Put together the "service stub" for
     // google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore.
     this.cloudControlsPartnerCoreStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.cloudcontrolspartner.v1beta
-            .CloudControlsPartnerCore,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.cloudcontrolspartner.v1beta.CloudControlsPartnerCore,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const cloudControlsPartnerCoreStubMethods = [
-      'getWorkload',
-      'listWorkloads',
-      'getCustomer',
-      'listCustomers',
-      'getEkmConnections',
-      'getPartnerPermissions',
-      'listAccessApprovalRequests',
-      'getPartner',
-      'createCustomer',
-      'updateCustomer',
-      'deleteCustomer',
-    ];
+    const cloudControlsPartnerCoreStubMethods =
+        ['getWorkload', 'listWorkloads', 'getCustomer', 'listCustomers', 'getEkmConnections', 'getPartnerPermissions', 'listAccessApprovalRequests', 'getPartner', 'createCustomer', 'updateCustomer', 'deleteCustomer'];
     for (const methodName of cloudControlsPartnerCoreStubMethods) {
       const callPromise = this.cloudControlsPartnerCoreStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -345,14 +291,8 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudcontrolspartner.googleapis.com';
   }
@@ -363,14 +303,8 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudcontrolspartner.googleapis.com';
   }
@@ -401,7 +335,9 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -410,9 +346,8 @@ export class CloudControlsPartnerCoreClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -423,1154 +358,865 @@ export class CloudControlsPartnerCoreClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of a single workload
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Format:
-   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.Workload|Workload}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.get_workload.js</caption>
-   * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_GetWorkload_async
-   */
+/**
+ * Gets details of a single workload
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Format:
+ *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.Workload|Workload}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.get_workload.js</caption>
+ * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_GetWorkload_async
+ */
   getWorkload(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest|undefined, {}|undefined
+      ]>;
   getWorkload(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getWorkload(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest,
-    callback: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getWorkload(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWorkload(
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest,
+      callback: Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest|null|undefined,
+          {}|null|undefined>): void;
+  getWorkload(
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getWorkload request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getWorkload response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getWorkload(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
-          (
-            | protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getWorkload response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getWorkload(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetWorkloadRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getWorkload response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single customer
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Format:
-   *   `organizations/{organization}/locations/{location}/customers/{customer}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.Customer|Customer}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.get_customer.js</caption>
-   * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_GetCustomer_async
-   */
+/**
+ * Gets details of a single customer
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Format:
+ *   `organizations/{organization}/locations/{location}/customers/{customer}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.Customer|Customer}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.get_customer.js</caption>
+ * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_GetCustomer_async
+ */
   getCustomer(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest|undefined, {}|undefined
+      ]>;
   getCustomer(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCustomer(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest,
-    callback: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCustomer(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCustomer(
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest,
+      callback: Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest|null|undefined,
+          {}|null|undefined>): void;
+  getCustomer(
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getCustomer request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCustomer response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getCustomer(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-          (
-            | protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getCustomer response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getCustomer(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetCustomerRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getCustomer response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the EKM connections associated with a workload
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Format:
-   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/ekmConnections`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.EkmConnections|EkmConnections}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.get_ekm_connections.js</caption>
-   * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_GetEkmConnections_async
-   */
+/**
+ * Gets the EKM connections associated with a workload
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Format:
+ *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/ekmConnections`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.EkmConnections|EkmConnections}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.get_ekm_connections.js</caption>
+ * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_GetEkmConnections_async
+ */
   getEkmConnections(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest|undefined, {}|undefined
+      ]>;
   getEkmConnections(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEkmConnections(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest,
-    callback: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEkmConnections(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEkmConnections(
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest,
+      callback: Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEkmConnections(
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEkmConnections request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEkmConnections response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEkmConnections(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
-          (
-            | protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getEkmConnections response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getEkmConnections(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.cloudcontrolspartner.v1beta.IEkmConnections,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetEkmConnectionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEkmConnections response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the partner permissions granted for a workload
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource to get in the format:
-   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/partnerPermissions`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.PartnerPermissions|PartnerPermissions}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.get_partner_permissions.js</caption>
-   * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_GetPartnerPermissions_async
-   */
+/**
+ * Gets the partner permissions granted for a workload
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource to get in the format:
+ *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/partnerPermissions`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.PartnerPermissions|PartnerPermissions}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.get_partner_permissions.js</caption>
+ * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_GetPartnerPermissions_async
+ */
   getPartnerPermissions(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest|undefined, {}|undefined
+      ]>;
   getPartnerPermissions(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPartnerPermissions(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest,
-    callback: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPartnerPermissions(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPartnerPermissions(
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest,
+      callback: Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPartnerPermissions(
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPartnerPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPartnerPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPartnerPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
-          (
-            | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getPartnerPermissions response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getPartnerPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.cloudcontrolspartner.v1beta.IPartnerPermissions,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerPermissionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPartnerPermissions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Get details of a Partner.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Format:
-   *   `organizations/{organization}/locations/{location}/partner`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.Partner|Partner}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.get_partner.js</caption>
-   * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_GetPartner_async
-   */
+/**
+ * Get details of a Partner.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Format:
+ *   `organizations/{organization}/locations/{location}/partner`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.Partner|Partner}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.get_partner.js</caption>
+ * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_GetPartner_async
+ */
   getPartner(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest|undefined, {}|undefined
+      ]>;
   getPartner(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPartner(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest,
-    callback: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPartner(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPartner(
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest,
+      callback: Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPartner(
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPartner request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPartner response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPartner(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
-          (
-            | protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getPartner response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getPartner(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.cloudcontrolspartner.v1beta.IPartner,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IGetPartnerRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPartner response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a new customer.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource
-   *   Format: `organizations/{organization}/locations/{location}`
-   * @param {google.cloud.cloudcontrolspartner.v1beta.Customer} request.customer
-   *   Required. The customer to create.
-   * @param {string} request.customerId
-   *   Required. The customer id to use for the customer, which will become the
-   *   final component of the customer's resource name. The specified value must
-   *   be a valid Google cloud organization id.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.Customer|Customer}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.create_customer.js</caption>
-   * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_CreateCustomer_async
-   */
+/**
+ * Creates a new customer.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource
+ *   Format: `organizations/{organization}/locations/{location}`
+ * @param {google.cloud.cloudcontrolspartner.v1beta.Customer} request.customer
+ *   Required. The customer to create.
+ * @param {string} request.customerId
+ *   Required. The customer id to use for the customer, which will become the
+ *   final component of the customer's resource name. The specified value must
+ *   be a valid Google cloud organization id.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.Customer|Customer}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.create_customer.js</caption>
+ * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_CreateCustomer_async
+ */
   createCustomer(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest|undefined, {}|undefined
+      ]>;
   createCustomer(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCustomer(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest,
-    callback: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCustomer(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCustomer(
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest,
+      callback: Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest|null|undefined,
+          {}|null|undefined>): void;
+  createCustomer(
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createCustomer request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createCustomer response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createCustomer(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-          (
-            | protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createCustomer response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createCustomer(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICreateCustomerRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createCustomer response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Update details of a single customer
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.cloudcontrolspartner.v1beta.Customer} request.customer
-   *   Required. The customer to update
-   *   Format:
-   *   `organizations/{organization}/locations/{location}/customers/{customer}`
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The list of fields to update
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.Customer|Customer}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.update_customer.js</caption>
-   * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_UpdateCustomer_async
-   */
+/**
+ * Update details of a single customer
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.cloudcontrolspartner.v1beta.Customer} request.customer
+ *   Required. The customer to update
+ *   Format:
+ *   `organizations/{organization}/locations/{location}/customers/{customer}`
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The list of fields to update
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.Customer|Customer}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.update_customer.js</caption>
+ * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_UpdateCustomer_async
+ */
   updateCustomer(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest|undefined, {}|undefined
+      ]>;
   updateCustomer(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCustomer(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest,
-    callback: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCustomer(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCustomer(
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest,
+      callback: Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateCustomer(
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'customer.name': request.customer!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'customer.name': request.customer!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateCustomer request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateCustomer response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateCustomer(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
-          (
-            | protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateCustomer response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateCustomer(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IUpdateCustomerRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateCustomer response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Delete details of a single customer
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. name of the resource to be deleted
-   *   format: name=organizations/* /locations/* /customers/*
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.delete_customer.js</caption>
-   * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_DeleteCustomer_async
-   */
+/**
+ * Delete details of a single customer
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. name of the resource to be deleted
+ *   format: name=organizations/* /locations/* /customers/*
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.delete_customer.js</caption>
+ * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_DeleteCustomer_async
+ */
   deleteCustomer(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest|undefined, {}|undefined
+      ]>;
   deleteCustomer(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteCustomer(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteCustomer(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteCustomer(
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteCustomer(
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteCustomer request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteCustomer response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteCustomer(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteCustomer response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteCustomer(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IDeleteCustomerRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteCustomer response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists customer workloads for a given customer org id
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource
-   *   Format:
-   *   `organizations/{organization}/locations/{location}/customers/{customer}`
-   * @param {number} request.pageSize
-   *   The maximum number of workloads to return. The service may return fewer
-   *   than this value. If unspecified, at most 500 workloads will be returned.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListWorkloads` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.cloudcontrolspartner.v1beta.Workload|Workload}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listWorkloadsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists customer workloads for a given customer org id
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource
+ *   Format:
+ *   `organizations/{organization}/locations/{location}/customers/{customer}`
+ * @param {number} request.pageSize
+ *   The maximum number of workloads to return. The service may return fewer
+ *   than this value. If unspecified, at most 500 workloads will be returned.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListWorkloads` call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.cloudcontrolspartner.v1beta.Workload|Workload}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listWorkloadsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkloads(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload[],
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest | null,
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload[],
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest|null,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse
+      ]>;
   listWorkloads(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse
-      | null
-      | undefined,
-      protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload
-    >
-  ): void;
-  listWorkloads(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse
-      | null
-      | undefined,
-      protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload
-    >
-  ): void;
-  listWorkloads(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse
-          | null
-          | undefined,
-          protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse
-      | null
-      | undefined,
-      protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload
-    >
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload[],
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest | null,
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse,
-    ]
-  > | void {
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse|null|undefined,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload>): void;
+  listWorkloads(
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse|null|undefined,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload>): void;
+  listWorkloads(
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse|null|undefined,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload>,
+      callback?: PaginationCallback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse|null|undefined,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload>):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload[],
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest|null,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse
-          | null
-          | undefined,
-          protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
+      protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse|null|undefined,
+      protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listWorkloads values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1579,64 +1225,61 @@ export class CloudControlsPartnerCoreClient {
     this._log.info('listWorkloads request %j', request);
     return this.innerApiCalls
       .listWorkloads(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload[],
-          protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest | null,
-          protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse,
-        ]) => {
-          this._log.info('listWorkloads values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload[],
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest|null,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsResponse
+      ]) => {
+        this._log.info('listWorkloads values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listWorkloads`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource
-   *   Format:
-   *   `organizations/{organization}/locations/{location}/customers/{customer}`
-   * @param {number} request.pageSize
-   *   The maximum number of workloads to return. The service may return fewer
-   *   than this value. If unspecified, at most 500 workloads will be returned.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListWorkloads` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.Workload|Workload} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listWorkloadsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listWorkloads`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource
+ *   Format:
+ *   `organizations/{organization}/locations/{location}/customers/{customer}`
+ * @param {number} request.pageSize
+ *   The maximum number of workloads to return. The service may return fewer
+ *   than this value. If unspecified, at most 500 workloads will be returned.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListWorkloads` call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.Workload|Workload} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listWorkloadsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listWorkloadsStream(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkloads stream %j', request);
     return this.descriptors.page.listWorkloads.createStream(
       this.innerApiCalls.listWorkloads as GaxCall,
@@ -1645,55 +1288,54 @@ export class CloudControlsPartnerCoreClient {
     );
   }
 
-  /**
-   * Equivalent to `listWorkloads`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource
-   *   Format:
-   *   `organizations/{organization}/locations/{location}/customers/{customer}`
-   * @param {number} request.pageSize
-   *   The maximum number of workloads to return. The service may return fewer
-   *   than this value. If unspecified, at most 500 workloads will be returned.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListWorkloads` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.cloudcontrolspartner.v1beta.Workload|Workload}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.list_workloads.js</caption>
-   * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_ListWorkloads_async
-   */
+/**
+ * Equivalent to `listWorkloads`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource
+ *   Format:
+ *   `organizations/{organization}/locations/{location}/customers/{customer}`
+ * @param {number} request.pageSize
+ *   The maximum number of workloads to return. The service may return fewer
+ *   than this value. If unspecified, at most 500 workloads will be returned.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListWorkloads` call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.cloudcontrolspartner.v1beta.Workload|Workload}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.list_workloads.js</caption>
+ * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_ListWorkloads_async
+ */
   listWorkloadsAsync(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload> {
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListWorkloadsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listWorkloads iterate %j', request);
     return this.descriptors.page.listWorkloads.asyncIterate(
       this.innerApiCalls['listWorkloads'] as GaxCall,
@@ -1701,119 +1343,94 @@ export class CloudControlsPartnerCoreClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.cloudcontrolspartner.v1beta.IWorkload>;
   }
-  /**
-   * Lists customers of a partner identified by its Google Cloud organization ID
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource
-   *   Format: `organizations/{organization}/locations/{location}`
-   * @param {number} request.pageSize
-   *   The maximum number of Customers to return. The service may return fewer
-   *   than this value. If unspecified, at most 500 Customers will be returned.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListCustomers` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.cloudcontrolspartner.v1beta.Customer|Customer}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCustomersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists customers of a partner identified by its Google Cloud organization ID
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource
+ *   Format: `organizations/{organization}/locations/{location}`
+ * @param {number} request.pageSize
+ *   The maximum number of Customers to return. The service may return fewer
+ *   than this value. If unspecified, at most 500 Customers will be returned.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListCustomers` call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.cloudcontrolspartner.v1beta.Customer|Customer}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listCustomersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCustomers(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer[],
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest | null,
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse,
-    ]
-  >;
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer[],
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest|null,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse
+      ]>;
   listCustomers(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse
-      | null
-      | undefined,
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer
-    >
-  ): void;
-  listCustomers(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse
-      | null
-      | undefined,
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer
-    >
-  ): void;
-  listCustomers(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse
-          | null
-          | undefined,
-          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse
-      | null
-      | undefined,
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer
-    >
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer[],
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest | null,
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse,
-    ]
-  > | void {
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse|null|undefined,
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer>): void;
+  listCustomers(
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse|null|undefined,
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer>): void;
+  listCustomers(
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse|null|undefined,
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer>,
+      callback?: PaginationCallback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse|null|undefined,
+          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer>):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer[],
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest|null,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse
-          | null
-          | undefined,
-          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
+      protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse|null|undefined,
+      protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCustomers values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1822,63 +1439,60 @@ export class CloudControlsPartnerCoreClient {
     this._log.info('listCustomers request %j', request);
     return this.innerApiCalls
       .listCustomers(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer[],
-          protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest | null,
-          protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse,
-        ]) => {
-          this._log.info('listCustomers values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer[],
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest|null,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersResponse
+      ]) => {
+        this._log.info('listCustomers values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listCustomers`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource
-   *   Format: `organizations/{organization}/locations/{location}`
-   * @param {number} request.pageSize
-   *   The maximum number of Customers to return. The service may return fewer
-   *   than this value. If unspecified, at most 500 Customers will be returned.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListCustomers` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.Customer|Customer} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listCustomersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listCustomers`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource
+ *   Format: `organizations/{organization}/locations/{location}`
+ * @param {number} request.pageSize
+ *   The maximum number of Customers to return. The service may return fewer
+ *   than this value. If unspecified, at most 500 Customers will be returned.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListCustomers` call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.Customer|Customer} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listCustomersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listCustomersStream(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCustomers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCustomers stream %j', request);
     return this.descriptors.page.listCustomers.createStream(
       this.innerApiCalls.listCustomers as GaxCall,
@@ -1887,54 +1501,53 @@ export class CloudControlsPartnerCoreClient {
     );
   }
 
-  /**
-   * Equivalent to `listCustomers`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource
-   *   Format: `organizations/{organization}/locations/{location}`
-   * @param {number} request.pageSize
-   *   The maximum number of Customers to return. The service may return fewer
-   *   than this value. If unspecified, at most 500 Customers will be returned.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListCustomers` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.cloudcontrolspartner.v1beta.Customer|Customer}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.list_customers.js</caption>
-   * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_ListCustomers_async
-   */
+/**
+ * Equivalent to `listCustomers`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource
+ *   Format: `organizations/{organization}/locations/{location}`
+ * @param {number} request.pageSize
+ *   The maximum number of Customers to return. The service may return fewer
+ *   than this value. If unspecified, at most 500 Customers will be returned.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListCustomers` call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.cloudcontrolspartner.v1beta.Customer|Customer}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.list_customers.js</caption>
+ * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_ListCustomers_async
+ */
   listCustomersAsync(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer> {
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListCustomersRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listCustomers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listCustomers iterate %j', request);
     return this.descriptors.page.listCustomers.asyncIterate(
       this.innerApiCalls['listCustomers'] as GaxCall,
@@ -1942,129 +1555,100 @@ export class CloudControlsPartnerCoreClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.cloudcontrolspartner.v1beta.ICustomer>;
   }
-  /**
-   * Deprecated: Only returns access approval requests directly associated with
-   * an assured workload folder.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource
-   *   Format:
-   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of access requests to return. The service may
-   *   return fewer than this value. If unspecified, at most 500 access requests
-   *   will be returned.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `ListAccessApprovalRequests` call. Provide this to retrieve the subsequent
-   *   page.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest|AccessApprovalRequest}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAccessApprovalRequestsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @deprecated ListAccessApprovalRequests is deprecated and may be removed in a future version.
-   */
+ /**
+ * Deprecated: Only returns access approval requests directly associated with
+ * an assured workload folder.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource
+ *   Format:
+ *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of access requests to return. The service may
+ *   return fewer than this value. If unspecified, at most 500 access requests
+ *   will be returned.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `ListAccessApprovalRequests` call. Provide this to retrieve the subsequent
+ *   page.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest|AccessApprovalRequest}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAccessApprovalRequestsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @deprecated ListAccessApprovalRequests is deprecated and may be removed in a future version.
+ */
   listAccessApprovalRequests(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest[],
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest | null,
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest[],
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest|null,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse
+      ]>;
   listAccessApprovalRequests(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse
-      | null
-      | undefined,
-      protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest
-    >
-  ): void;
-  listAccessApprovalRequests(
-    request: protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse
-      | null
-      | undefined,
-      protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest
-    >
-  ): void;
-  listAccessApprovalRequests(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse
-          | null
-          | undefined,
-          protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
-      | protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse
-      | null
-      | undefined,
-      protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest
-    >
-  ): Promise<
-    [
-      protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest[],
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest | null,
-      protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse,
-    ]
-  > | void {
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse|null|undefined,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest>): void;
+  listAccessApprovalRequests(
+      request: protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse|null|undefined,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest>): void;
+  listAccessApprovalRequests(
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse|null|undefined,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest>,
+      callback?: PaginationCallback<
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse|null|undefined,
+          protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest>):
+      Promise<[
+        protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest[],
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest|null,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    this.warn(
-      'DEP$CloudControlsPartnerCore-$ListAccessApprovalRequests',
-      'ListAccessApprovalRequests is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
-          | protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse
-          | null
-          | undefined,
-          protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    this.warn('DEP$CloudControlsPartnerCore-$ListAccessApprovalRequests','ListAccessApprovalRequests is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
+      protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse|null|undefined,
+      protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAccessApprovalRequests values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2073,72 +1657,65 @@ export class CloudControlsPartnerCoreClient {
     this._log.info('listAccessApprovalRequests request %j', request);
     return this.innerApiCalls
       .listAccessApprovalRequests(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest[],
-          protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest | null,
-          protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse,
-        ]) => {
-          this._log.info('listAccessApprovalRequests values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest[],
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest|null,
+        protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsResponse
+      ]) => {
+        this._log.info('listAccessApprovalRequests values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAccessApprovalRequests`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource
-   *   Format:
-   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of access requests to return. The service may
-   *   return fewer than this value. If unspecified, at most 500 access requests
-   *   will be returned.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `ListAccessApprovalRequests` call. Provide this to retrieve the subsequent
-   *   page.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest|AccessApprovalRequest} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAccessApprovalRequestsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @deprecated ListAccessApprovalRequests is deprecated and may be removed in a future version.
-   */
+/**
+ * Equivalent to `listAccessApprovalRequests`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource
+ *   Format:
+ *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of access requests to return. The service may
+ *   return fewer than this value. If unspecified, at most 500 access requests
+ *   will be returned.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `ListAccessApprovalRequests` call. Provide this to retrieve the subsequent
+ *   page.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest|AccessApprovalRequest} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAccessApprovalRequestsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @deprecated ListAccessApprovalRequests is deprecated and may be removed in a future version.
+ */
   listAccessApprovalRequestsStream(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAccessApprovalRequests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this.warn(
-      'DEP$CloudControlsPartnerCore-$ListAccessApprovalRequests',
-      'ListAccessApprovalRequests is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
+    this.initialize().catch(err => {throw err});
+    this.warn('DEP$CloudControlsPartnerCore-$ListAccessApprovalRequests','ListAccessApprovalRequests is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('listAccessApprovalRequests stream %j', request);
     return this.descriptors.page.listAccessApprovalRequests.createStream(
       this.innerApiCalls.listAccessApprovalRequests as GaxCall,
@@ -2147,63 +1724,58 @@ export class CloudControlsPartnerCoreClient {
     );
   }
 
-  /**
-   * Equivalent to `listAccessApprovalRequests`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource
-   *   Format:
-   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of access requests to return. The service may
-   *   return fewer than this value. If unspecified, at most 500 access requests
-   *   will be returned.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   `ListAccessApprovalRequests` call. Provide this to retrieve the subsequent
-   *   page.
-   * @param {string} [request.filter]
-   *   Optional. Filtering results.
-   * @param {string} [request.orderBy]
-   *   Optional. Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest|AccessApprovalRequest}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.list_access_approval_requests.js</caption>
-   * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_ListAccessApprovalRequests_async
-   * @deprecated ListAccessApprovalRequests is deprecated and may be removed in a future version.
-   */
+/**
+ * Equivalent to `listAccessApprovalRequests`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent resource
+ *   Format:
+ *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of access requests to return. The service may
+ *   return fewer than this value. If unspecified, at most 500 access requests
+ *   will be returned.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous
+ *   `ListAccessApprovalRequests` call. Provide this to retrieve the subsequent
+ *   page.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.cloudcontrolspartner.v1beta.AccessApprovalRequest|AccessApprovalRequest}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/cloud_controls_partner_core.list_access_approval_requests.js</caption>
+ * region_tag:cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_ListAccessApprovalRequests_async
+ * @deprecated ListAccessApprovalRequests is deprecated and may be removed in a future version.
+ */
   listAccessApprovalRequestsAsync(
-    request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest> {
+      request?: protos.google.cloud.cloudcontrolspartner.v1beta.IListAccessApprovalRequestsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.cloudcontrolspartner.v1beta.IAccessApprovalRequest>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAccessApprovalRequests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this.warn(
-      'DEP$CloudControlsPartnerCore-$ListAccessApprovalRequests',
-      'ListAccessApprovalRequests is deprecated and may be removed in a future version.',
-      'DeprecationWarning'
-    );
+    this.initialize().catch(err => {throw err});
+    this.warn('DEP$CloudControlsPartnerCore-$ListAccessApprovalRequests','ListAccessApprovalRequests is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('listAccessApprovalRequests iterate %j', request);
     return this.descriptors.page.listAccessApprovalRequests.asyncIterate(
       this.innerApiCalls['listAccessApprovalRequests'] as GaxCall,
@@ -2225,13 +1797,7 @@ export class CloudControlsPartnerCoreClient {
    * @param {string} access_approval_request
    * @returns {string} Resource name string.
    */
-  accessApprovalRequestPath(
-    organization: string,
-    location: string,
-    customer: string,
-    workload: string,
-    accessApprovalRequest: string
-  ) {
+  accessApprovalRequestPath(organization:string,location:string,customer:string,workload:string,accessApprovalRequest:string) {
     return this.pathTemplates.accessApprovalRequestPathTemplate.render({
       organization: organization,
       location: location,
@@ -2248,12 +1814,8 @@ export class CloudControlsPartnerCoreClient {
    *   A fully-qualified path representing AccessApprovalRequest resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromAccessApprovalRequestName(
-    accessApprovalRequestName: string
-  ) {
-    return this.pathTemplates.accessApprovalRequestPathTemplate.match(
-      accessApprovalRequestName
-    ).organization;
+  matchOrganizationFromAccessApprovalRequestName(accessApprovalRequestName: string) {
+    return this.pathTemplates.accessApprovalRequestPathTemplate.match(accessApprovalRequestName).organization;
   }
 
   /**
@@ -2263,12 +1825,8 @@ export class CloudControlsPartnerCoreClient {
    *   A fully-qualified path representing AccessApprovalRequest resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromAccessApprovalRequestName(
-    accessApprovalRequestName: string
-  ) {
-    return this.pathTemplates.accessApprovalRequestPathTemplate.match(
-      accessApprovalRequestName
-    ).location;
+  matchLocationFromAccessApprovalRequestName(accessApprovalRequestName: string) {
+    return this.pathTemplates.accessApprovalRequestPathTemplate.match(accessApprovalRequestName).location;
   }
 
   /**
@@ -2278,12 +1836,8 @@ export class CloudControlsPartnerCoreClient {
    *   A fully-qualified path representing AccessApprovalRequest resource.
    * @returns {string} A string representing the customer.
    */
-  matchCustomerFromAccessApprovalRequestName(
-    accessApprovalRequestName: string
-  ) {
-    return this.pathTemplates.accessApprovalRequestPathTemplate.match(
-      accessApprovalRequestName
-    ).customer;
+  matchCustomerFromAccessApprovalRequestName(accessApprovalRequestName: string) {
+    return this.pathTemplates.accessApprovalRequestPathTemplate.match(accessApprovalRequestName).customer;
   }
 
   /**
@@ -2293,12 +1847,8 @@ export class CloudControlsPartnerCoreClient {
    *   A fully-qualified path representing AccessApprovalRequest resource.
    * @returns {string} A string representing the workload.
    */
-  matchWorkloadFromAccessApprovalRequestName(
-    accessApprovalRequestName: string
-  ) {
-    return this.pathTemplates.accessApprovalRequestPathTemplate.match(
-      accessApprovalRequestName
-    ).workload;
+  matchWorkloadFromAccessApprovalRequestName(accessApprovalRequestName: string) {
+    return this.pathTemplates.accessApprovalRequestPathTemplate.match(accessApprovalRequestName).workload;
   }
 
   /**
@@ -2308,12 +1858,8 @@ export class CloudControlsPartnerCoreClient {
    *   A fully-qualified path representing AccessApprovalRequest resource.
    * @returns {string} A string representing the access_approval_request.
    */
-  matchAccessApprovalRequestFromAccessApprovalRequestName(
-    accessApprovalRequestName: string
-  ) {
-    return this.pathTemplates.accessApprovalRequestPathTemplate.match(
-      accessApprovalRequestName
-    ).access_approval_request;
+  matchAccessApprovalRequestFromAccessApprovalRequestName(accessApprovalRequestName: string) {
+    return this.pathTemplates.accessApprovalRequestPathTemplate.match(accessApprovalRequestName).access_approval_request;
   }
 
   /**
@@ -2324,7 +1870,7 @@ export class CloudControlsPartnerCoreClient {
    * @param {string} customer
    * @returns {string} Resource name string.
    */
-  customerPath(organization: string, location: string, customer: string) {
+  customerPath(organization:string,location:string,customer:string) {
     return this.pathTemplates.customerPathTemplate.render({
       organization: organization,
       location: location,
@@ -2340,8 +1886,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromCustomerName(customerName: string) {
-    return this.pathTemplates.customerPathTemplate.match(customerName)
-      .organization;
+    return this.pathTemplates.customerPathTemplate.match(customerName).organization;
   }
 
   /**
@@ -2375,12 +1920,7 @@ export class CloudControlsPartnerCoreClient {
    * @param {string} workload
    * @returns {string} Resource name string.
    */
-  ekmConnectionsPath(
-    organization: string,
-    location: string,
-    customer: string,
-    workload: string
-  ) {
+  ekmConnectionsPath(organization:string,location:string,customer:string,workload:string) {
     return this.pathTemplates.ekmConnectionsPathTemplate.render({
       organization: organization,
       location: location,
@@ -2397,9 +1937,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromEkmConnectionsName(ekmConnectionsName: string) {
-    return this.pathTemplates.ekmConnectionsPathTemplate.match(
-      ekmConnectionsName
-    ).organization;
+    return this.pathTemplates.ekmConnectionsPathTemplate.match(ekmConnectionsName).organization;
   }
 
   /**
@@ -2410,9 +1948,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEkmConnectionsName(ekmConnectionsName: string) {
-    return this.pathTemplates.ekmConnectionsPathTemplate.match(
-      ekmConnectionsName
-    ).location;
+    return this.pathTemplates.ekmConnectionsPathTemplate.match(ekmConnectionsName).location;
   }
 
   /**
@@ -2423,9 +1959,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the customer.
    */
   matchCustomerFromEkmConnectionsName(ekmConnectionsName: string) {
-    return this.pathTemplates.ekmConnectionsPathTemplate.match(
-      ekmConnectionsName
-    ).customer;
+    return this.pathTemplates.ekmConnectionsPathTemplate.match(ekmConnectionsName).customer;
   }
 
   /**
@@ -2436,9 +1970,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the workload.
    */
   matchWorkloadFromEkmConnectionsName(ekmConnectionsName: string) {
-    return this.pathTemplates.ekmConnectionsPathTemplate.match(
-      ekmConnectionsName
-    ).workload;
+    return this.pathTemplates.ekmConnectionsPathTemplate.match(ekmConnectionsName).workload;
   }
 
   /**
@@ -2448,7 +1980,7 @@ export class CloudControlsPartnerCoreClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  partnerPath(organization: string, location: string) {
+  partnerPath(organization:string,location:string) {
     return this.pathTemplates.partnerPathTemplate.render({
       organization: organization,
       location: location,
@@ -2463,8 +1995,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromPartnerName(partnerName: string) {
-    return this.pathTemplates.partnerPathTemplate.match(partnerName)
-      .organization;
+    return this.pathTemplates.partnerPathTemplate.match(partnerName).organization;
   }
 
   /**
@@ -2487,12 +2018,7 @@ export class CloudControlsPartnerCoreClient {
    * @param {string} workload
    * @returns {string} Resource name string.
    */
-  partnerPermissionsPath(
-    organization: string,
-    location: string,
-    customer: string,
-    workload: string
-  ) {
+  partnerPermissionsPath(organization:string,location:string,customer:string,workload:string) {
     return this.pathTemplates.partnerPermissionsPathTemplate.render({
       organization: organization,
       location: location,
@@ -2509,9 +2035,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromPartnerPermissionsName(partnerPermissionsName: string) {
-    return this.pathTemplates.partnerPermissionsPathTemplate.match(
-      partnerPermissionsName
-    ).organization;
+    return this.pathTemplates.partnerPermissionsPathTemplate.match(partnerPermissionsName).organization;
   }
 
   /**
@@ -2522,9 +2046,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPartnerPermissionsName(partnerPermissionsName: string) {
-    return this.pathTemplates.partnerPermissionsPathTemplate.match(
-      partnerPermissionsName
-    ).location;
+    return this.pathTemplates.partnerPermissionsPathTemplate.match(partnerPermissionsName).location;
   }
 
   /**
@@ -2535,9 +2057,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the customer.
    */
   matchCustomerFromPartnerPermissionsName(partnerPermissionsName: string) {
-    return this.pathTemplates.partnerPermissionsPathTemplate.match(
-      partnerPermissionsName
-    ).customer;
+    return this.pathTemplates.partnerPermissionsPathTemplate.match(partnerPermissionsName).customer;
   }
 
   /**
@@ -2548,9 +2068,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the workload.
    */
   matchWorkloadFromPartnerPermissionsName(partnerPermissionsName: string) {
-    return this.pathTemplates.partnerPermissionsPathTemplate.match(
-      partnerPermissionsName
-    ).workload;
+    return this.pathTemplates.partnerPermissionsPathTemplate.match(partnerPermissionsName).workload;
   }
 
   /**
@@ -2563,13 +2081,7 @@ export class CloudControlsPartnerCoreClient {
    * @param {string} violation
    * @returns {string} Resource name string.
    */
-  violationPath(
-    organization: string,
-    location: string,
-    customer: string,
-    workload: string,
-    violation: string
-  ) {
+  violationPath(organization:string,location:string,customer:string,workload:string,violation:string) {
     return this.pathTemplates.violationPathTemplate.render({
       organization: organization,
       location: location,
@@ -2587,8 +2099,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromViolationName(violationName: string) {
-    return this.pathTemplates.violationPathTemplate.match(violationName)
-      .organization;
+    return this.pathTemplates.violationPathTemplate.match(violationName).organization;
   }
 
   /**
@@ -2599,8 +2110,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromViolationName(violationName: string) {
-    return this.pathTemplates.violationPathTemplate.match(violationName)
-      .location;
+    return this.pathTemplates.violationPathTemplate.match(violationName).location;
   }
 
   /**
@@ -2611,8 +2121,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the customer.
    */
   matchCustomerFromViolationName(violationName: string) {
-    return this.pathTemplates.violationPathTemplate.match(violationName)
-      .customer;
+    return this.pathTemplates.violationPathTemplate.match(violationName).customer;
   }
 
   /**
@@ -2623,8 +2132,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the workload.
    */
   matchWorkloadFromViolationName(violationName: string) {
-    return this.pathTemplates.violationPathTemplate.match(violationName)
-      .workload;
+    return this.pathTemplates.violationPathTemplate.match(violationName).workload;
   }
 
   /**
@@ -2635,8 +2143,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the violation.
    */
   matchViolationFromViolationName(violationName: string) {
-    return this.pathTemplates.violationPathTemplate.match(violationName)
-      .violation;
+    return this.pathTemplates.violationPathTemplate.match(violationName).violation;
   }
 
   /**
@@ -2648,12 +2155,7 @@ export class CloudControlsPartnerCoreClient {
    * @param {string} workload
    * @returns {string} Resource name string.
    */
-  workloadPath(
-    organization: string,
-    location: string,
-    customer: string,
-    workload: string
-  ) {
+  workloadPath(organization:string,location:string,customer:string,workload:string) {
     return this.pathTemplates.workloadPathTemplate.render({
       organization: organization,
       location: location,
@@ -2670,8 +2172,7 @@ export class CloudControlsPartnerCoreClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromWorkloadName(workloadName: string) {
-    return this.pathTemplates.workloadPathTemplate.match(workloadName)
-      .organization;
+    return this.pathTemplates.workloadPathTemplate.match(workloadName).organization;
   }
 
   /**
