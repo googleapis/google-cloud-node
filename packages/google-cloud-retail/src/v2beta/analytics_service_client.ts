@@ -18,16 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -112,41 +103,20 @@ export class AnalyticsServiceClient {
    *     const client = new AnalyticsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AnalyticsServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'retail.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -172,7 +142,7 @@ export class AnalyticsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -188,9 +158,13 @@ export class AnalyticsServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -243,61 +217,31 @@ export class AnalyticsServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2beta/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
-          additional_bindings: [
-            {
-              get: '/v2beta/{name=projects/*/locations/*/catalogs/*/operations/*}',
-            },
-            {get: '/v2beta/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v2beta/{name=projects/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2beta/{name=projects/*/locations/*/catalogs/*}/operations',
-          additional_bindings: [
-            {get: '/v2beta/{name=projects/*/locations/*}/operations'},
-            {get: '/v2beta/{name=projects/*}/operations'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v2beta/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',additional_bindings: [{get: '/v2beta/{name=projects/*/locations/*/catalogs/*/operations/*}',},{get: '/v2beta/{name=projects/*/locations/*/operations/*}',},{get: '/v2beta/{name=projects/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v2beta/{name=projects/*/locations/*/catalogs/*}/operations',additional_bindings: [{get: '/v2beta/{name=projects/*/locations/*}/operations',},{get: '/v2beta/{name=projects/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const exportAnalyticsMetricsResponse = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2beta.ExportAnalyticsMetricsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2beta.ExportAnalyticsMetricsResponse') as gax.protobuf.Type;
     const exportAnalyticsMetricsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2beta.ExportMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2beta.ExportMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       exportAnalyticsMetrics: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        exportAnalyticsMetricsResponse.decode.bind(
-          exportAnalyticsMetricsResponse
-        ),
-        exportAnalyticsMetricsMetadata.decode.bind(
-          exportAnalyticsMetricsMetadata
-        )
-      ),
+        exportAnalyticsMetricsResponse.decode.bind(exportAnalyticsMetricsResponse),
+        exportAnalyticsMetricsMetadata.decode.bind(exportAnalyticsMetricsMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.retail.v2beta.AnalyticsService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.retail.v2beta.AnalyticsService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -328,35 +272,32 @@ export class AnalyticsServiceClient {
     // Put together the "service stub" for
     // google.cloud.retail.v2beta.AnalyticsService.
     this.analyticsServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.retail.v2beta.AnalyticsService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.retail.v2beta.AnalyticsService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.retail.v2beta.AnalyticsService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const analyticsServiceStubMethods = ['exportAnalyticsMetrics'];
+    const analyticsServiceStubMethods =
+        ['exportAnalyticsMetrics'];
     for (const methodName of analyticsServiceStubMethods) {
       const callPromise = this.analyticsServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -376,14 +317,8 @@ export class AnalyticsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -394,14 +329,8 @@ export class AnalyticsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -432,7 +361,9 @@ export class AnalyticsServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -441,9 +372,8 @@ export class AnalyticsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -455,200 +385,138 @@ export class AnalyticsServiceClient {
   // -- Service calls --
   // -------------------
 
-  /**
-   * Exports analytics metrics.
-   *
-   * `Operation.response` is of type `ExportAnalyticsMetricsResponse`.
-   * `Operation.metadata` is of type `ExportMetadata`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.catalog
-   *   Required. Full resource name of the parent catalog.
-   *   Expected format: `projects/* /locations/* /catalogs/*`
-   * @param {google.cloud.retail.v2beta.OutputConfig} request.outputConfig
-   *   Required. The output location of the data.
-   * @param {string} request.filter
-   *   A filtering expression to specify restrictions on returned metrics.
-   *   The expression is a sequence of terms. Each term applies a restriction to
-   *   the returned metrics. Use this expression to restrict results to a
-   *   specific time range.
-   *
-   *     Currently we expect only one types of fields:
-   *
-   *      * `timestamp`: This can be specified twice, once with a
-   *        less than operator and once with a greater than operator. The
-   *        `timestamp` restriction should result in one, contiguous, valid,
-   *        `timestamp` range.
-   *
-   *     Some examples of valid filters expressions:
-   *
-   *     * Example 1: `timestamp > "2012-04-23T18:25:43.511Z"
-   *               timestamp < "2012-04-23T18:30:43.511Z"`
-   *     * Example 2: `timestamp > "2012-04-23T18:25:43.511Z"`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/analytics_service.export_analytics_metrics.js</caption>
-   * region_tag:retail_v2beta_generated_AnalyticsService_ExportAnalyticsMetrics_async
-   */
+/**
+ * Exports analytics metrics.
+ *
+ * `Operation.response` is of type `ExportAnalyticsMetricsResponse`.
+ * `Operation.metadata` is of type `ExportMetadata`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.catalog
+ *   Required. Full resource name of the parent catalog.
+ *   Expected format: `projects/* /locations/* /catalogs/*`
+ * @param {google.cloud.retail.v2beta.OutputConfig} request.outputConfig
+ *   Required. The output location of the data.
+ * @param {string} request.filter
+ *   A filtering expression to specify restrictions on returned metrics.
+ *   The expression is a sequence of terms. Each term applies a restriction to
+ *   the returned metrics. Use this expression to restrict results to a
+ *   specific time range.
+ *
+ *     Currently we expect only one types of fields:
+ *
+ *      * `timestamp`: This can be specified twice, once with a
+ *        less than operator and once with a greater than operator. The
+ *        `timestamp` restriction should result in one, contiguous, valid,
+ *        `timestamp` range.
+ *
+ *     Some examples of valid filters expressions:
+ *
+ *     * Example 1: `timestamp > "2012-04-23T18:25:43.511Z"
+ *               timestamp < "2012-04-23T18:30:43.511Z"`
+ *     * Example 2: `timestamp > "2012-04-23T18:25:43.511Z"`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/analytics_service.export_analytics_metrics.js</caption>
+ * region_tag:retail_v2beta_generated_AnalyticsService_ExportAnalyticsMetrics_async
+ */
   exportAnalyticsMetrics(
-    request?: protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse,
-        protos.google.cloud.retail.v2beta.IExportMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   exportAnalyticsMetrics(
-    request: protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse,
-        protos.google.cloud.retail.v2beta.IExportMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportAnalyticsMetrics(
-    request: protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse,
-        protos.google.cloud.retail.v2beta.IExportMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportAnalyticsMetrics(
-    request?: protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse,
-            protos.google.cloud.retail.v2beta.IExportMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse,
-        protos.google.cloud.retail.v2beta.IExportMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse,
-        protos.google.cloud.retail.v2beta.IExportMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        catalog: request.catalog ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'catalog': request.catalog ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse,
-            protos.google.cloud.retail.v2beta.IExportMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportAnalyticsMetrics response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportAnalyticsMetrics request %j', request);
-    return this.innerApiCalls
-      .exportAnalyticsMetrics(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse,
-            protos.google.cloud.retail.v2beta.IExportMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('exportAnalyticsMetrics response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.exportAnalyticsMetrics(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('exportAnalyticsMetrics response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `exportAnalyticsMetrics()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/analytics_service.export_analytics_metrics.js</caption>
-   * region_tag:retail_v2beta_generated_AnalyticsService_ExportAnalyticsMetrics_async
-   */
-  async checkExportAnalyticsMetricsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.retail.v2beta.ExportAnalyticsMetricsResponse,
-      protos.google.cloud.retail.v2beta.ExportMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `exportAnalyticsMetrics()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/analytics_service.export_analytics_metrics.js</caption>
+ * region_tag:retail_v2beta_generated_AnalyticsService_ExportAnalyticsMetrics_async
+ */
+  async checkExportAnalyticsMetricsProgress(name: string): Promise<LROperation<protos.google.cloud.retail.v2beta.ExportAnalyticsMetricsResponse, protos.google.cloud.retail.v2beta.ExportMetadata>>{
     this._log.info('exportAnalyticsMetrics long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.exportAnalyticsMetrics,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.retail.v2beta.ExportAnalyticsMetricsResponse,
-      protos.google.cloud.retail.v2beta.ExportMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportAnalyticsMetrics, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.retail.v2beta.ExportAnalyticsMetricsResponse, protos.google.cloud.retail.v2beta.ExportMetadata>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -688,7 +556,7 @@ export class AnalyticsServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -726,7 +594,7 @@ export class AnalyticsServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -771,20 +639,20 @@ export class AnalyticsServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -821,13 +689,13 @@ export class AnalyticsServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -861,7 +729,7 @@ export class AnalyticsServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -876,20 +744,20 @@ export class AnalyticsServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -933,20 +801,20 @@ export class AnalyticsServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -960,7 +828,7 @@ export class AnalyticsServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  alertConfigPath(project: string) {
+  alertConfigPath(project:string) {
     return this.pathTemplates.alertConfigPathTemplate.render({
       project: project,
     });
@@ -974,8 +842,7 @@ export class AnalyticsServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAlertConfigName(alertConfigName: string) {
-    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
-      .project;
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName).project;
   }
 
   /**
@@ -986,7 +853,7 @@ export class AnalyticsServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  attributesConfigPath(project: string, location: string, catalog: string) {
+  attributesConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.attributesConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1002,9 +869,7 @@ export class AnalyticsServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).project;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).project;
   }
 
   /**
@@ -1015,9 +880,7 @@ export class AnalyticsServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).location;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).location;
   }
 
   /**
@@ -1028,9 +891,7 @@ export class AnalyticsServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).catalog;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).catalog;
   }
 
   /**
@@ -1041,7 +902,7 @@ export class AnalyticsServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  catalogPath(project: string, location: string, catalog: string) {
+  catalogPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.catalogPathTemplate.render({
       project: project,
       location: location,
@@ -1090,7 +951,7 @@ export class AnalyticsServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  completionConfigPath(project: string, location: string, catalog: string) {
+  completionConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.completionConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1106,9 +967,7 @@ export class AnalyticsServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).project;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).project;
   }
 
   /**
@@ -1119,9 +978,7 @@ export class AnalyticsServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).location;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).location;
   }
 
   /**
@@ -1132,9 +989,7 @@ export class AnalyticsServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).catalog;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).catalog;
   }
 
   /**
@@ -1146,12 +1001,7 @@ export class AnalyticsServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  controlPath(
-    project: string,
-    location: string,
-    catalog: string,
-    control: string
-  ) {
+  controlPath(project:string,location:string,catalog:string,control:string) {
     return this.pathTemplates.controlPathTemplate.render({
       project: project,
       location: location,
@@ -1213,7 +1063,7 @@ export class AnalyticsServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, catalog: string, model: string) {
+  modelPath(project:string,location:string,catalog:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -1276,13 +1126,7 @@ export class AnalyticsServiceClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string,
-    product: string
-  ) {
+  productPath(project:string,location:string,catalog:string,branch:string,product:string) {
     return this.pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
@@ -1356,12 +1200,7 @@ export class AnalyticsServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  servingConfigPath(
-    project: string,
-    location: string,
-    catalog: string,
-    servingConfig: string
-  ) {
+  servingConfigPath(project:string,location:string,catalog:string,servingConfig:string) {
     return this.pathTemplates.servingConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1378,8 +1217,7 @@ export class AnalyticsServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .project;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).project;
   }
 
   /**
@@ -1390,8 +1228,7 @@ export class AnalyticsServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .location;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).location;
   }
 
   /**
@@ -1402,8 +1239,7 @@ export class AnalyticsServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .catalog;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).catalog;
   }
 
   /**
@@ -1414,8 +1250,7 @@ export class AnalyticsServiceClient {
    * @returns {string} A string representing the serving_config.
    */
   matchServingConfigFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .serving_config;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).serving_config;
   }
 
   /**
@@ -1430,9 +1265,7 @@ export class AnalyticsServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

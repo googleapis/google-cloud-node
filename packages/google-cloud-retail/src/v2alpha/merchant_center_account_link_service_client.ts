@@ -18,16 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -111,42 +102,20 @@ export class MerchantCenterAccountLinkServiceClient {
    *     const client = new MerchantCenterAccountLinkServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof MerchantCenterAccountLinkServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof MerchantCenterAccountLinkServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'retail.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -172,7 +141,7 @@ export class MerchantCenterAccountLinkServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -188,9 +157,13 @@ export class MerchantCenterAccountLinkServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -255,65 +228,31 @@ export class MerchantCenterAccountLinkServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
-          additional_bindings: [
-            {
-              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',
-            },
-            {
-              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',
-            },
-            {get: '/v2alpha/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v2alpha/{name=projects/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2alpha/{name=projects/*/locations/*/catalogs/*}/operations',
-          additional_bindings: [
-            {get: '/v2alpha/{name=projects/*/locations/*}/operations'},
-            {get: '/v2alpha/{name=projects/*}/operations'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',additional_bindings: [{get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',},{get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',},{get: '/v2alpha/{name=projects/*/locations/*/operations/*}',},{get: '/v2alpha/{name=projects/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v2alpha/{name=projects/*/locations/*/catalogs/*}/operations',additional_bindings: [{get: '/v2alpha/{name=projects/*/locations/*}/operations',},{get: '/v2alpha/{name=projects/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createMerchantCenterAccountLinkResponse = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2alpha.MerchantCenterAccountLink'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2alpha.MerchantCenterAccountLink') as gax.protobuf.Type;
     const createMerchantCenterAccountLinkMetadata = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      createMerchantCenterAccountLink:
-        new this._gaxModule.LongrunningDescriptor(
-          this.operationsClient,
-          createMerchantCenterAccountLinkResponse.decode.bind(
-            createMerchantCenterAccountLinkResponse
-          ),
-          createMerchantCenterAccountLinkMetadata.decode.bind(
-            createMerchantCenterAccountLinkMetadata
-          )
-        ),
+      createMerchantCenterAccountLink: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createMerchantCenterAccountLinkResponse.decode.bind(createMerchantCenterAccountLinkResponse),
+        createMerchantCenterAccountLinkMetadata.decode.bind(createMerchantCenterAccountLinkMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.retail.v2alpha.MerchantCenterAccountLinkService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.retail.v2alpha.MerchantCenterAccountLinkService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -344,40 +283,32 @@ export class MerchantCenterAccountLinkServiceClient {
     // Put together the "service stub" for
     // google.cloud.retail.v2alpha.MerchantCenterAccountLinkService.
     this.merchantCenterAccountLinkServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.retail.v2alpha.MerchantCenterAccountLinkService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.retail.v2alpha
-            .MerchantCenterAccountLinkService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.retail.v2alpha.MerchantCenterAccountLinkService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.retail.v2alpha.MerchantCenterAccountLinkService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const merchantCenterAccountLinkServiceStubMethods = [
-      'listMerchantCenterAccountLinks',
-      'createMerchantCenterAccountLink',
-      'deleteMerchantCenterAccountLink',
-    ];
+    const merchantCenterAccountLinkServiceStubMethods =
+        ['listMerchantCenterAccountLinks', 'createMerchantCenterAccountLink', 'deleteMerchantCenterAccountLink'];
     for (const methodName of merchantCenterAccountLinkServiceStubMethods) {
       const callPromise = this.merchantCenterAccountLinkServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -397,14 +328,8 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -415,14 +340,8 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -453,7 +372,9 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -462,9 +383,8 @@ export class MerchantCenterAccountLinkServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -475,502 +395,324 @@ export class MerchantCenterAccountLinkServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Lists all
-   * {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}s
-   * under the specified parent {@link protos.google.cloud.retail.v2alpha.Catalog|Catalog}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent Catalog of the resource.
-   *   It must match this format:
-   *   `projects/{PROJECT_NUMBER}/locations/global/catalogs/{CATALOG_ID}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse|ListMerchantCenterAccountLinksResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.list_merchant_center_account_links.js</caption>
-   * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_ListMerchantCenterAccountLinks_async
-   */
+/**
+ * Lists all
+ * {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}s
+ * under the specified parent {@link protos.google.cloud.retail.v2alpha.Catalog|Catalog}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent Catalog of the resource.
+ *   It must match this format:
+ *   `projects/{PROJECT_NUMBER}/locations/global/catalogs/{CATALOG_ID}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.ListMerchantCenterAccountLinksResponse|ListMerchantCenterAccountLinksResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.list_merchant_center_account_links.js</caption>
+ * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_ListMerchantCenterAccountLinks_async
+ */
   listMerchantCenterAccountLinks(
-    request?: protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
-      (
-        | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
+        protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest|undefined, {}|undefined
+      ]>;
   listMerchantCenterAccountLinks(
-    request: protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
-      | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listMerchantCenterAccountLinks(
-    request: protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
-      | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listMerchantCenterAccountLinks(
-    request?: protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
-          | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
-      | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
-      (
-        | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest|null|undefined,
+          {}|null|undefined>): void;
+  listMerchantCenterAccountLinks(
+      request: protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
+          protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest|null|undefined,
+          {}|null|undefined>): void;
+  listMerchantCenterAccountLinks(
+      request?: protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
+          protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
+          protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
+        protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('listMerchantCenterAccountLinks request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
-          | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
+        protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'listMerchantCenterAccountLinks response %j',
-            response
-          );
+          this._log.info('listMerchantCenterAccountLinks response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .listMerchantCenterAccountLinks(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
-          (
-            | protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'listMerchantCenterAccountLinks response %j',
-            response
-          );
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.listMerchantCenterAccountLinks(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksResponse,
+        protos.google.cloud.retail.v2alpha.IListMerchantCenterAccountLinksRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('listMerchantCenterAccountLinks response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Deletes a
-   * {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}.
-   * If the
-   * {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}
-   * to delete does not exist, a NOT_FOUND error is returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Full resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/merchantCenterAccountLinks/{merchant_center_account_link_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.delete_merchant_center_account_link.js</caption>
-   * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_DeleteMerchantCenterAccountLink_async
-   */
+/**
+ * Deletes a
+ * {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}.
+ * If the
+ * {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}
+ * to delete does not exist, a NOT_FOUND error is returned.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Full resource name. Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/merchantCenterAccountLinks/{merchant_center_account_link_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.delete_merchant_center_account_link.js</caption>
+ * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_DeleteMerchantCenterAccountLink_async
+ */
   deleteMerchantCenterAccountLink(
-    request?: protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest|undefined, {}|undefined
+      ]>;
   deleteMerchantCenterAccountLink(
-    request: protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteMerchantCenterAccountLink(
-    request: protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteMerchantCenterAccountLink(
-    request?: protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteMerchantCenterAccountLink(
+      request: protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteMerchantCenterAccountLink(
+      request?: protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteMerchantCenterAccountLink request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'deleteMerchantCenterAccountLink response %j',
-            response
-          );
+          this._log.info('deleteMerchantCenterAccountLink response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteMerchantCenterAccountLink(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'deleteMerchantCenterAccountLink response %j',
-            response
-          );
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.deleteMerchantCenterAccountLink(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.retail.v2alpha.IDeleteMerchantCenterAccountLinkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteMerchantCenterAccountLink response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
 
-  /**
-   * Creates a
-   * {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The branch resource where this MerchantCenterAccountLink will be
-   *   created. Format:
-   *   `projects/{PROJECT_NUMBER}/locations/global/catalogs/{CATALOG_ID}`
-   * @param {google.cloud.retail.v2alpha.MerchantCenterAccountLink} request.merchantCenterAccountLink
-   *   Required. The
-   *   {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}
-   *   to create.
-   *
-   *   If the caller does not have permission to create the
-   *   {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink},
-   *   regardless of whether or not it exists, a PERMISSION_DENIED error is
-   *   returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.create_merchant_center_account_link.js</caption>
-   * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_CreateMerchantCenterAccountLink_async
-   */
+/**
+ * Creates a
+ * {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The branch resource where this MerchantCenterAccountLink will be
+ *   created. Format:
+ *   `projects/{PROJECT_NUMBER}/locations/global/catalogs/{CATALOG_ID}`
+ * @param {google.cloud.retail.v2alpha.MerchantCenterAccountLink} request.merchantCenterAccountLink
+ *   Required. The
+ *   {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink}
+ *   to create.
+ *
+ *   If the caller does not have permission to create the
+ *   {@link protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink|MerchantCenterAccountLink},
+ *   regardless of whether or not it exists, a PERMISSION_DENIED error is
+ *   returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.create_merchant_center_account_link.js</caption>
+ * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_CreateMerchantCenterAccountLink_async
+ */
   createMerchantCenterAccountLink(
-    request?: protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
-        protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink, protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createMerchantCenterAccountLink(
-    request: protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
-        protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink, protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createMerchantCenterAccountLink(
-    request: protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
-        protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink, protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createMerchantCenterAccountLink(
-    request?: protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
-            protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
-        protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
-        protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink, protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink, protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink, protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
-            protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink, protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info(
-            'createMerchantCenterAccountLink response %j',
-            rawResponse
-          );
+          this._log.info('createMerchantCenterAccountLink response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createMerchantCenterAccountLink request %j', request);
-    return this.innerApiCalls
-      .createMerchantCenterAccountLink(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink,
-            protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'createMerchantCenterAccountLink response %j',
-            rawResponse
-          );
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createMerchantCenterAccountLink(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.retail.v2alpha.IMerchantCenterAccountLink, protos.google.cloud.retail.v2alpha.ICreateMerchantCenterAccountLinkMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createMerchantCenterAccountLink response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createMerchantCenterAccountLink()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.create_merchant_center_account_link.js</caption>
-   * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_CreateMerchantCenterAccountLink_async
-   */
-  async checkCreateMerchantCenterAccountLinkProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink,
-      protos.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createMerchantCenterAccountLink()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/merchant_center_account_link_service.create_merchant_center_account_link.js</caption>
+ * region_tag:retail_v2alpha_generated_MerchantCenterAccountLinkService_CreateMerchantCenterAccountLink_async
+ */
+  async checkCreateMerchantCenterAccountLinkProgress(name: string): Promise<LROperation<protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink, protos.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata>>{
     this._log.info('createMerchantCenterAccountLink long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createMerchantCenterAccountLink,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink,
-      protos.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMerchantCenterAccountLink, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.retail.v2alpha.MerchantCenterAccountLink, protos.google.cloud.retail.v2alpha.CreateMerchantCenterAccountLinkMetadata>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1010,7 +752,7 @@ export class MerchantCenterAccountLinkServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1048,7 +790,7 @@ export class MerchantCenterAccountLinkServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1093,20 +835,20 @@ export class MerchantCenterAccountLinkServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1143,13 +885,13 @@ export class MerchantCenterAccountLinkServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1183,7 +925,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1198,20 +940,20 @@ export class MerchantCenterAccountLinkServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1255,20 +997,20 @@ export class MerchantCenterAccountLinkServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1282,7 +1024,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  alertConfigPath(project: string) {
+  alertConfigPath(project:string) {
     return this.pathTemplates.alertConfigPathTemplate.render({
       project: project,
     });
@@ -1296,8 +1038,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAlertConfigName(alertConfigName: string) {
-    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
-      .project;
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName).project;
   }
 
   /**
@@ -1308,7 +1049,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  attributesConfigPath(project: string, location: string, catalog: string) {
+  attributesConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.attributesConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1324,9 +1065,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).project;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).project;
   }
 
   /**
@@ -1337,9 +1076,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).location;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).location;
   }
 
   /**
@@ -1350,9 +1087,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).catalog;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).catalog;
   }
 
   /**
@@ -1364,12 +1099,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @param {string} branch
    * @returns {string} Resource name string.
    */
-  branchPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string
-  ) {
+  branchPath(project:string,location:string,catalog:string,branch:string) {
     return this.pathTemplates.branchPathTemplate.render({
       project: project,
       location: location,
@@ -1430,7 +1160,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  catalogPath(project: string, location: string, catalog: string) {
+  catalogPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.catalogPathTemplate.render({
       project: project,
       location: location,
@@ -1479,7 +1209,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  completionConfigPath(project: string, location: string, catalog: string) {
+  completionConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.completionConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1495,9 +1225,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).project;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).project;
   }
 
   /**
@@ -1508,9 +1236,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).location;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).location;
   }
 
   /**
@@ -1521,9 +1247,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).catalog;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).catalog;
   }
 
   /**
@@ -1535,12 +1259,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  controlPath(
-    project: string,
-    location: string,
-    catalog: string,
-    control: string
-  ) {
+  controlPath(project:string,location:string,catalog:string,control:string) {
     return this.pathTemplates.controlPathTemplate.render({
       project: project,
       location: location,
@@ -1599,7 +1318,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  loggingConfigPath(project: string) {
+  loggingConfigPath(project:string) {
     return this.pathTemplates.loggingConfigPathTemplate.render({
       project: project,
     });
@@ -1613,8 +1332,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLoggingConfigName(loggingConfigName: string) {
-    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName)
-      .project;
+    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName).project;
   }
 
   /**
@@ -1626,12 +1344,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @param {string} merchant_center_account_link
    * @returns {string} Resource name string.
    */
-  merchantCenterAccountLinkPath(
-    project: string,
-    location: string,
-    catalog: string,
-    merchantCenterAccountLink: string
-  ) {
+  merchantCenterAccountLinkPath(project:string,location:string,catalog:string,merchantCenterAccountLink:string) {
     return this.pathTemplates.merchantCenterAccountLinkPathTemplate.render({
       project: project,
       location: location,
@@ -1647,12 +1360,8 @@ export class MerchantCenterAccountLinkServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).project;
+  matchProjectFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).project;
   }
 
   /**
@@ -1662,12 +1371,8 @@ export class MerchantCenterAccountLinkServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).location;
+  matchLocationFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).location;
   }
 
   /**
@@ -1677,12 +1382,8 @@ export class MerchantCenterAccountLinkServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the catalog.
    */
-  matchCatalogFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).catalog;
+  matchCatalogFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).catalog;
   }
 
   /**
@@ -1692,12 +1393,8 @@ export class MerchantCenterAccountLinkServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the merchant_center_account_link.
    */
-  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).merchant_center_account_link;
+  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).merchant_center_account_link;
   }
 
   /**
@@ -1709,7 +1406,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, catalog: string, model: string) {
+  modelPath(project:string,location:string,catalog:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -1772,13 +1469,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string,
-    product: string
-  ) {
+  productPath(project:string,location:string,catalog:string,branch:string,product:string) {
     return this.pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
@@ -1849,7 +1540,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  retailProjectPath(project: string) {
+  retailProjectPath(project:string) {
     return this.pathTemplates.retailProjectPathTemplate.render({
       project: project,
     });
@@ -1863,8 +1554,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRetailProjectName(retailProjectName: string) {
-    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName)
-      .project;
+    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName).project;
   }
 
   /**
@@ -1876,12 +1566,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  servingConfigPath(
-    project: string,
-    location: string,
-    catalog: string,
-    servingConfig: string
-  ) {
+  servingConfigPath(project:string,location:string,catalog:string,servingConfig:string) {
     return this.pathTemplates.servingConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1898,8 +1583,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .project;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).project;
   }
 
   /**
@@ -1910,8 +1594,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .location;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).location;
   }
 
   /**
@@ -1922,8 +1605,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .catalog;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).catalog;
   }
 
   /**
@@ -1934,8 +1616,7 @@ export class MerchantCenterAccountLinkServiceClient {
    * @returns {string} A string representing the serving_config.
    */
   matchServingConfigFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .serving_config;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).serving_config;
   }
 
   /**
@@ -1950,9 +1631,7 @@ export class MerchantCenterAccountLinkServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

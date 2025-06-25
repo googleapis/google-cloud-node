@@ -18,15 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -110,41 +102,20 @@ export class PredictionServiceClient {
    *     const client = new PredictionServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof PredictionServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'retail.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +141,7 @@ export class PredictionServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -186,9 +157,13 @@ export class PredictionServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -253,48 +228,23 @@ export class PredictionServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
-          additional_bindings: [
-            {
-              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',
-            },
-            {
-              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',
-            },
-            {get: '/v2alpha/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v2alpha/{name=projects/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2alpha/{name=projects/*/locations/*/catalogs/*}/operations',
-          additional_bindings: [
-            {get: '/v2alpha/{name=projects/*/locations/*}/operations'},
-            {get: '/v2alpha/{name=projects/*}/operations'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',additional_bindings: [{get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',},{get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',},{get: '/v2alpha/{name=projects/*/locations/*/operations/*}',},{get: '/v2alpha/{name=projects/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v2alpha/{name=projects/*/locations/*/catalogs/*}/operations',additional_bindings: [{get: '/v2alpha/{name=projects/*/locations/*}/operations',},{get: '/v2alpha/{name=projects/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
 
-    this.descriptors.longrunning = {};
+    this.descriptors.longrunning = {
+    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.retail.v2alpha.PredictionService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.retail.v2alpha.PredictionService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -325,35 +275,31 @@ export class PredictionServiceClient {
     // Put together the "service stub" for
     // google.cloud.retail.v2alpha.PredictionService.
     this.predictionServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.retail.v2alpha.PredictionService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.retail.v2alpha.PredictionService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.retail.v2alpha.PredictionService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const predictionServiceStubMethods = ['predict'];
+    const predictionServiceStubMethods =
+        ['predict'];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -373,14 +319,8 @@ export class PredictionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -391,14 +331,8 @@ export class PredictionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -429,7 +363,9 @@ export class PredictionServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -438,9 +374,8 @@ export class PredictionServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -451,258 +386,228 @@ export class PredictionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Makes a recommendation prediction.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.placement
-   *   Required. Full resource name of the format:
-   *   `{placement=projects/* /locations/global/catalogs/default_catalog/servingConfigs/*}`
-   *   or
-   *   `{placement=projects/* /locations/global/catalogs/default_catalog/placements/*}`.
-   *   We recommend using the `servingConfigs` resource. `placements` is a legacy
-   *   resource.
-   *   The ID of the Recommendations AI serving config or placement.
-   *   Before you can request predictions from your model, you must create at
-   *   least one serving config or placement for it. For more information, see
-   *   [Manage serving configs]
-   *   (https://cloud.google.com/retail/docs/manage-configs).
-   *
-   *   The full list of available serving configs can be seen at
-   *   https://console.cloud.google.com/ai/retail/catalogs/default_catalog/configs
-   * @param {google.cloud.retail.v2alpha.UserEvent} request.userEvent
-   *   Required. Context about the user, what they are looking at and what action
-   *   they took to trigger the predict request. Note that this user event detail
-   *   won't be ingested to userEvent logs. Thus, a separate userEvent write
-   *   request is required for event logging.
-   *
-   *   Don't set
-   *   {@link protos.google.cloud.retail.v2alpha.UserEvent.visitor_id|UserEvent.visitor_id} or
-   *   {@link protos.google.cloud.retail.v2alpha.UserInfo.user_id|UserInfo.user_id} to the
-   *   same fixed ID for different users. If you are trying to receive
-   *   non-personalized recommendations (not recommended; this can negatively
-   *   impact model performance), instead set
-   *   {@link protos.google.cloud.retail.v2alpha.UserEvent.visitor_id|UserEvent.visitor_id} to
-   *   a random unique ID and leave
-   *   {@link protos.google.cloud.retail.v2alpha.UserInfo.user_id|UserInfo.user_id} unset.
-   * @param {number} request.pageSize
-   *   Maximum number of results to return. Set this property to the number of
-   *   prediction results needed. If zero, the service will choose a reasonable
-   *   default. The maximum allowed value is 100. Values above 100 will be coerced
-   *   to 100.
-   * @param {string} request.pageToken
-   *   This field is not used; leave it unset.
-   * @param {string} request.filter
-   *   Filter for restricting prediction results with a length limit of 5,000
-   *   characters. Accepts values for tags and the `filterOutOfStockItems` flag.
-   *
-   *    * Tag expressions. Restricts predictions to products that match all of the
-   *      specified tags. Boolean operators `OR` and `NOT` are supported if the
-   *      expression is enclosed in parentheses, and must be separated from the
-   *      tag values by a space. `-"tagA"` is also supported and is equivalent to
-   *      `NOT "tagA"`. Tag values must be double quoted UTF-8 encoded strings
-   *      with a size limit of 1,000 characters.
-   *
-   *      Note: "Recently viewed" models don't support tag filtering at the
-   *      moment.
-   *
-   *    * filterOutOfStockItems. Restricts predictions to products that do not
-   *    have a
-   *      stockState value of OUT_OF_STOCK.
-   *
-   *   Examples:
-   *
-   *    * tag=("Red" OR "Blue") tag="New-Arrival" tag=(NOT "promotional")
-   *    * filterOutOfStockItems  tag=(-"promotional")
-   *    * filterOutOfStockItems
-   *
-   *   If your filter blocks all prediction results, the API will return *no*
-   *   results. If instead you want empty result sets to return generic
-   *   (unfiltered) popular products, set `strictFiltering` to False in
-   *   `PredictRequest.params`. Note that the API will never return items with
-   *   storageStatus of "EXPIRED" or "DELETED" regardless of filter choices.
-   *
-   *   If `filterSyntaxV2` is set to true under the `params` field, then
-   *   attribute-based expressions are expected instead of the above described
-   *   tag-based syntax. Examples:
-   *
-   *    * (colors: ANY("Red", "Blue")) AND NOT (categories: ANY("Phones"))
-   *    * (availability: ANY("IN_STOCK")) AND
-   *      (colors: ANY("Red") OR categories: ANY("Phones"))
-   *
-   *   For more information, see
-   *   [Filter recommendations](https://cloud.google.com/retail/docs/filter-recs).
-   * @param {boolean} request.validateOnly
-   *   Use validate only mode for this prediction query. If set to true, a
-   *   dummy model will be used that returns arbitrary products.
-   *   Note that the validate only mode should only be used for testing the API,
-   *   or if the model is not ready.
-   * @param {number[]} request.params
-   *   Additional domain specific parameters for the predictions.
-   *
-   *   Allowed values:
-   *
-   *   * `returnProduct`: Boolean. If set to true, the associated product
-   *      object will be returned in the `results.metadata` field in the
-   *      prediction response.
-   *   * `returnScore`: Boolean. If set to true, the prediction 'score'
-   *      corresponding to each returned product will be set in the
-   *      `results.metadata` field in the prediction response. The given
-   *      'score' indicates the probability of a product being clicked/purchased
-   *      given the user's context and history.
-   *   * `strictFiltering`: Boolean. True by default. If set to false, the service
-   *      will return generic (unfiltered) popular products instead of empty if
-   *      your filter blocks all prediction results.
-   *   * `priceRerankLevel`: String. Default empty. If set to be non-empty, then
-   *      it needs to be one of {'no-price-reranking', 'low-price-reranking',
-   *      'medium-price-reranking', 'high-price-reranking'}. This gives
-   *      request-level control and adjusts prediction results based on product
-   *      price.
-   *   * `diversityLevel`: String. Default empty. If set to be non-empty, then
-   *      it needs to be one of {'no-diversity', 'low-diversity',
-   *      'medium-diversity', 'high-diversity', 'auto-diversity'}. This gives
-   *      request-level control and adjusts prediction results based on product
-   *      category.
-   *   * `filterSyntaxV2`: Boolean. False by default. If set to true, the `filter`
-   *     field is interpreteted according to the new, attribute-based syntax.
-   * @param {number[]} request.labels
-   *   The labels applied to a resource must meet the following requirements:
-   *
-   *   * Each resource can have multiple labels, up to a maximum of 64.
-   *   * Each label must be a key-value pair.
-   *   * Keys have a minimum length of 1 character and a maximum length of 63
-   *     characters and cannot be empty. Values can be empty and have a maximum
-   *     length of 63 characters.
-   *   * Keys and values can contain only lowercase letters, numeric characters,
-   *     underscores, and dashes. All characters must use UTF-8 encoding, and
-   *     international characters are allowed.
-   *   * The key portion of a label must be unique. However, you can use the same
-   *     key with multiple resources.
-   *   * Keys must start with a lowercase letter or international character.
-   *
-   *   See [Google Cloud
-   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
-   *   for more details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.PredictResponse|PredictResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/prediction_service.predict.js</caption>
-   * region_tag:retail_v2alpha_generated_PredictionService_Predict_async
-   */
+/**
+ * Makes a recommendation prediction.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.placement
+ *   Required. Full resource name of the format:
+ *   `{placement=projects/* /locations/global/catalogs/default_catalog/servingConfigs/*}`
+ *   or
+ *   `{placement=projects/* /locations/global/catalogs/default_catalog/placements/*}`.
+ *   We recommend using the `servingConfigs` resource. `placements` is a legacy
+ *   resource.
+ *   The ID of the Recommendations AI serving config or placement.
+ *   Before you can request predictions from your model, you must create at
+ *   least one serving config or placement for it. For more information, see
+ *   [Manage serving configs]
+ *   (https://cloud.google.com/retail/docs/manage-configs).
+ *
+ *   The full list of available serving configs can be seen at
+ *   https://console.cloud.google.com/ai/retail/catalogs/default_catalog/configs
+ * @param {google.cloud.retail.v2alpha.UserEvent} request.userEvent
+ *   Required. Context about the user, what they are looking at and what action
+ *   they took to trigger the predict request. Note that this user event detail
+ *   won't be ingested to userEvent logs. Thus, a separate userEvent write
+ *   request is required for event logging.
+ *
+ *   Don't set
+ *   {@link protos.google.cloud.retail.v2alpha.UserEvent.visitor_id|UserEvent.visitor_id} or
+ *   {@link protos.google.cloud.retail.v2alpha.UserInfo.user_id|UserInfo.user_id} to the
+ *   same fixed ID for different users. If you are trying to receive
+ *   non-personalized recommendations (not recommended; this can negatively
+ *   impact model performance), instead set
+ *   {@link protos.google.cloud.retail.v2alpha.UserEvent.visitor_id|UserEvent.visitor_id} to
+ *   a random unique ID and leave
+ *   {@link protos.google.cloud.retail.v2alpha.UserInfo.user_id|UserInfo.user_id} unset.
+ * @param {number} request.pageSize
+ *   Maximum number of results to return. Set this property to the number of
+ *   prediction results needed. If zero, the service will choose a reasonable
+ *   default. The maximum allowed value is 100. Values above 100 will be coerced
+ *   to 100.
+ * @param {string} request.pageToken
+ *   This field is not used; leave it unset.
+ * @param {string} request.filter
+ *   Filter for restricting prediction results with a length limit of 5,000
+ *   characters. Accepts values for tags and the `filterOutOfStockItems` flag.
+ *
+ *    * Tag expressions. Restricts predictions to products that match all of the
+ *      specified tags. Boolean operators `OR` and `NOT` are supported if the
+ *      expression is enclosed in parentheses, and must be separated from the
+ *      tag values by a space. `-"tagA"` is also supported and is equivalent to
+ *      `NOT "tagA"`. Tag values must be double quoted UTF-8 encoded strings
+ *      with a size limit of 1,000 characters.
+ *
+ *      Note: "Recently viewed" models don't support tag filtering at the
+ *      moment.
+ *
+ *    * filterOutOfStockItems. Restricts predictions to products that do not
+ *    have a
+ *      stockState value of OUT_OF_STOCK.
+ *
+ *   Examples:
+ *
+ *    * tag=("Red" OR "Blue") tag="New-Arrival" tag=(NOT "promotional")
+ *    * filterOutOfStockItems  tag=(-"promotional")
+ *    * filterOutOfStockItems
+ *
+ *   If your filter blocks all prediction results, the API will return *no*
+ *   results. If instead you want empty result sets to return generic
+ *   (unfiltered) popular products, set `strictFiltering` to False in
+ *   `PredictRequest.params`. Note that the API will never return items with
+ *   storageStatus of "EXPIRED" or "DELETED" regardless of filter choices.
+ *
+ *   If `filterSyntaxV2` is set to true under the `params` field, then
+ *   attribute-based expressions are expected instead of the above described
+ *   tag-based syntax. Examples:
+ *
+ *    * (colors: ANY("Red", "Blue")) AND NOT (categories: ANY("Phones"))
+ *    * (availability: ANY("IN_STOCK")) AND
+ *      (colors: ANY("Red") OR categories: ANY("Phones"))
+ *
+ *   For more information, see
+ *   [Filter recommendations](https://cloud.google.com/retail/docs/filter-recs).
+ * @param {boolean} request.validateOnly
+ *   Use validate only mode for this prediction query. If set to true, a
+ *   dummy model will be used that returns arbitrary products.
+ *   Note that the validate only mode should only be used for testing the API,
+ *   or if the model is not ready.
+ * @param {number[]} request.params
+ *   Additional domain specific parameters for the predictions.
+ *
+ *   Allowed values:
+ *
+ *   * `returnProduct`: Boolean. If set to true, the associated product
+ *      object will be returned in the `results.metadata` field in the
+ *      prediction response.
+ *   * `returnScore`: Boolean. If set to true, the prediction 'score'
+ *      corresponding to each returned product will be set in the
+ *      `results.metadata` field in the prediction response. The given
+ *      'score' indicates the probability of a product being clicked/purchased
+ *      given the user's context and history.
+ *   * `strictFiltering`: Boolean. True by default. If set to false, the service
+ *      will return generic (unfiltered) popular products instead of empty if
+ *      your filter blocks all prediction results.
+ *   * `priceRerankLevel`: String. Default empty. If set to be non-empty, then
+ *      it needs to be one of {'no-price-reranking', 'low-price-reranking',
+ *      'medium-price-reranking', 'high-price-reranking'}. This gives
+ *      request-level control and adjusts prediction results based on product
+ *      price.
+ *   * `diversityLevel`: String. Default empty. If set to be non-empty, then
+ *      it needs to be one of {'no-diversity', 'low-diversity',
+ *      'medium-diversity', 'high-diversity', 'auto-diversity'}. This gives
+ *      request-level control and adjusts prediction results based on product
+ *      category.
+ *   * `filterSyntaxV2`: Boolean. False by default. If set to true, the `filter`
+ *     field is interpreteted according to the new, attribute-based syntax.
+ * @param {number[]} request.labels
+ *   The labels applied to a resource must meet the following requirements:
+ *
+ *   * Each resource can have multiple labels, up to a maximum of 64.
+ *   * Each label must be a key-value pair.
+ *   * Keys have a minimum length of 1 character and a maximum length of 63
+ *     characters and cannot be empty. Values can be empty and have a maximum
+ *     length of 63 characters.
+ *   * Keys and values can contain only lowercase letters, numeric characters,
+ *     underscores, and dashes. All characters must use UTF-8 encoding, and
+ *     international characters are allowed.
+ *   * The key portion of a label must be unique. However, you can use the same
+ *     key with multiple resources.
+ *   * Keys must start with a lowercase letter or international character.
+ *
+ *   See [Google Cloud
+ *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+ *   for more details.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.PredictResponse|PredictResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/prediction_service.predict.js</caption>
+ * region_tag:retail_v2alpha_generated_PredictionService_Predict_async
+ */
   predict(
-    request?: protos.google.cloud.retail.v2alpha.IPredictRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IPredictResponse,
-      protos.google.cloud.retail.v2alpha.IPredictRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IPredictRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IPredictResponse,
+        protos.google.cloud.retail.v2alpha.IPredictRequest|undefined, {}|undefined
+      ]>;
   predict(
-    request: protos.google.cloud.retail.v2alpha.IPredictRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IPredictResponse,
-      protos.google.cloud.retail.v2alpha.IPredictRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  predict(
-    request: protos.google.cloud.retail.v2alpha.IPredictRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IPredictResponse,
-      protos.google.cloud.retail.v2alpha.IPredictRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  predict(
-    request?: protos.google.cloud.retail.v2alpha.IPredictRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IPredictRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.IPredictResponse,
-          protos.google.cloud.retail.v2alpha.IPredictRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IPredictResponse,
-      protos.google.cloud.retail.v2alpha.IPredictRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IPredictResponse,
-      protos.google.cloud.retail.v2alpha.IPredictRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IPredictRequest|null|undefined,
+          {}|null|undefined>): void;
+  predict(
+      request: protos.google.cloud.retail.v2alpha.IPredictRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.IPredictResponse,
+          protos.google.cloud.retail.v2alpha.IPredictRequest|null|undefined,
+          {}|null|undefined>): void;
+  predict(
+      request?: protos.google.cloud.retail.v2alpha.IPredictRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.IPredictResponse,
+          protos.google.cloud.retail.v2alpha.IPredictRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.IPredictResponse,
+          protos.google.cloud.retail.v2alpha.IPredictRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IPredictResponse,
+        protos.google.cloud.retail.v2alpha.IPredictRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        placement: request.placement ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'placement': request.placement ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('predict request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IPredictResponse,
-          protos.google.cloud.retail.v2alpha.IPredictRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.IPredictResponse,
+        protos.google.cloud.retail.v2alpha.IPredictRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('predict response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .predict(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.IPredictResponse,
-          protos.google.cloud.retail.v2alpha.IPredictRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('predict response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.predict(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.IPredictResponse,
+        protos.google.cloud.retail.v2alpha.IPredictRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('predict response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -742,7 +647,7 @@ export class PredictionServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -780,7 +685,7 @@ export class PredictionServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -825,20 +730,20 @@ export class PredictionServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -875,13 +780,13 @@ export class PredictionServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -915,7 +820,7 @@ export class PredictionServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -930,20 +835,20 @@ export class PredictionServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -987,20 +892,20 @@ export class PredictionServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1014,7 +919,7 @@ export class PredictionServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  alertConfigPath(project: string) {
+  alertConfigPath(project:string) {
     return this.pathTemplates.alertConfigPathTemplate.render({
       project: project,
     });
@@ -1028,8 +933,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAlertConfigName(alertConfigName: string) {
-    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
-      .project;
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName).project;
   }
 
   /**
@@ -1040,7 +944,7 @@ export class PredictionServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  attributesConfigPath(project: string, location: string, catalog: string) {
+  attributesConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.attributesConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1056,9 +960,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).project;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).project;
   }
 
   /**
@@ -1069,9 +971,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).location;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).location;
   }
 
   /**
@@ -1082,9 +982,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).catalog;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).catalog;
   }
 
   /**
@@ -1096,12 +994,7 @@ export class PredictionServiceClient {
    * @param {string} branch
    * @returns {string} Resource name string.
    */
-  branchPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string
-  ) {
+  branchPath(project:string,location:string,catalog:string,branch:string) {
     return this.pathTemplates.branchPathTemplate.render({
       project: project,
       location: location,
@@ -1162,7 +1055,7 @@ export class PredictionServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  catalogPath(project: string, location: string, catalog: string) {
+  catalogPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.catalogPathTemplate.render({
       project: project,
       location: location,
@@ -1211,7 +1104,7 @@ export class PredictionServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  completionConfigPath(project: string, location: string, catalog: string) {
+  completionConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.completionConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1227,9 +1120,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).project;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).project;
   }
 
   /**
@@ -1240,9 +1131,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).location;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).location;
   }
 
   /**
@@ -1253,9 +1142,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).catalog;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).catalog;
   }
 
   /**
@@ -1267,12 +1154,7 @@ export class PredictionServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  controlPath(
-    project: string,
-    location: string,
-    catalog: string,
-    control: string
-  ) {
+  controlPath(project:string,location:string,catalog:string,control:string) {
     return this.pathTemplates.controlPathTemplate.render({
       project: project,
       location: location,
@@ -1331,7 +1213,7 @@ export class PredictionServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  loggingConfigPath(project: string) {
+  loggingConfigPath(project:string) {
     return this.pathTemplates.loggingConfigPathTemplate.render({
       project: project,
     });
@@ -1345,8 +1227,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLoggingConfigName(loggingConfigName: string) {
-    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName)
-      .project;
+    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName).project;
   }
 
   /**
@@ -1358,12 +1239,7 @@ export class PredictionServiceClient {
    * @param {string} merchant_center_account_link
    * @returns {string} Resource name string.
    */
-  merchantCenterAccountLinkPath(
-    project: string,
-    location: string,
-    catalog: string,
-    merchantCenterAccountLink: string
-  ) {
+  merchantCenterAccountLinkPath(project:string,location:string,catalog:string,merchantCenterAccountLink:string) {
     return this.pathTemplates.merchantCenterAccountLinkPathTemplate.render({
       project: project,
       location: location,
@@ -1379,12 +1255,8 @@ export class PredictionServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).project;
+  matchProjectFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).project;
   }
 
   /**
@@ -1394,12 +1266,8 @@ export class PredictionServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).location;
+  matchLocationFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).location;
   }
 
   /**
@@ -1409,12 +1277,8 @@ export class PredictionServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the catalog.
    */
-  matchCatalogFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).catalog;
+  matchCatalogFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).catalog;
   }
 
   /**
@@ -1424,12 +1288,8 @@ export class PredictionServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the merchant_center_account_link.
    */
-  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).merchant_center_account_link;
+  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).merchant_center_account_link;
   }
 
   /**
@@ -1441,7 +1301,7 @@ export class PredictionServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, catalog: string, model: string) {
+  modelPath(project:string,location:string,catalog:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -1504,13 +1364,7 @@ export class PredictionServiceClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string,
-    product: string
-  ) {
+  productPath(project:string,location:string,catalog:string,branch:string,product:string) {
     return this.pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
@@ -1581,7 +1435,7 @@ export class PredictionServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  retailProjectPath(project: string) {
+  retailProjectPath(project:string) {
     return this.pathTemplates.retailProjectPathTemplate.render({
       project: project,
     });
@@ -1595,8 +1449,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRetailProjectName(retailProjectName: string) {
-    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName)
-      .project;
+    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName).project;
   }
 
   /**
@@ -1608,12 +1461,7 @@ export class PredictionServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  servingConfigPath(
-    project: string,
-    location: string,
-    catalog: string,
-    servingConfig: string
-  ) {
+  servingConfigPath(project:string,location:string,catalog:string,servingConfig:string) {
     return this.pathTemplates.servingConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1630,8 +1478,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .project;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).project;
   }
 
   /**
@@ -1642,8 +1489,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .location;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).location;
   }
 
   /**
@@ -1654,8 +1500,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .catalog;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).catalog;
   }
 
   /**
@@ -1666,8 +1511,7 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the serving_config.
    */
   matchServingConfigFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .serving_config;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).serving_config;
   }
 
   /**
@@ -1682,9 +1526,7 @@ export class PredictionServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

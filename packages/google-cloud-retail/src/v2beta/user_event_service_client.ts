@@ -18,16 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -111,41 +102,20 @@ export class UserEventServiceClient {
    *     const client = new UserEventServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof UserEventServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'retail.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -171,7 +141,7 @@ export class UserEventServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -187,9 +157,13 @@ export class UserEventServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -242,90 +216,55 @@ export class UserEventServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2beta/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
-          additional_bindings: [
-            {
-              get: '/v2beta/{name=projects/*/locations/*/catalogs/*/operations/*}',
-            },
-            {get: '/v2beta/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v2beta/{name=projects/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2beta/{name=projects/*/locations/*/catalogs/*}/operations',
-          additional_bindings: [
-            {get: '/v2beta/{name=projects/*/locations/*}/operations'},
-            {get: '/v2beta/{name=projects/*}/operations'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v2beta/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',additional_bindings: [{get: '/v2beta/{name=projects/*/locations/*/catalogs/*/operations/*}',},{get: '/v2beta/{name=projects/*/locations/*/operations/*}',},{get: '/v2beta/{name=projects/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v2beta/{name=projects/*/locations/*/catalogs/*}/operations',additional_bindings: [{get: '/v2beta/{name=projects/*/locations/*}/operations',},{get: '/v2beta/{name=projects/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const purgeUserEventsResponse = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2beta.PurgeUserEventsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2beta.PurgeUserEventsResponse') as gax.protobuf.Type;
     const purgeUserEventsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2beta.PurgeMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2beta.PurgeMetadata') as gax.protobuf.Type;
     const importUserEventsResponse = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2beta.ImportUserEventsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2beta.ImportUserEventsResponse') as gax.protobuf.Type;
     const importUserEventsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2beta.ImportMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2beta.ImportMetadata') as gax.protobuf.Type;
     const exportUserEventsResponse = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2beta.ExportUserEventsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2beta.ExportUserEventsResponse') as gax.protobuf.Type;
     const exportUserEventsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2beta.ExportMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2beta.ExportMetadata') as gax.protobuf.Type;
     const rejoinUserEventsResponse = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2beta.RejoinUserEventsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2beta.RejoinUserEventsResponse') as gax.protobuf.Type;
     const rejoinUserEventsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.retail.v2beta.RejoinUserEventsMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.retail.v2beta.RejoinUserEventsMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       purgeUserEvents: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         purgeUserEventsResponse.decode.bind(purgeUserEventsResponse),
-        purgeUserEventsMetadata.decode.bind(purgeUserEventsMetadata)
-      ),
+        purgeUserEventsMetadata.decode.bind(purgeUserEventsMetadata)),
       importUserEvents: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importUserEventsResponse.decode.bind(importUserEventsResponse),
-        importUserEventsMetadata.decode.bind(importUserEventsMetadata)
-      ),
+        importUserEventsMetadata.decode.bind(importUserEventsMetadata)),
       exportUserEvents: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportUserEventsResponse.decode.bind(exportUserEventsResponse),
-        exportUserEventsMetadata.decode.bind(exportUserEventsMetadata)
-      ),
+        exportUserEventsMetadata.decode.bind(exportUserEventsMetadata)),
       rejoinUserEvents: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         rejoinUserEventsResponse.decode.bind(rejoinUserEventsResponse),
-        rejoinUserEventsMetadata.decode.bind(rejoinUserEventsMetadata)
-      ),
+        rejoinUserEventsMetadata.decode.bind(rejoinUserEventsMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.retail.v2beta.UserEventService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.retail.v2beta.UserEventService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -356,42 +295,32 @@ export class UserEventServiceClient {
     // Put together the "service stub" for
     // google.cloud.retail.v2beta.UserEventService.
     this.userEventServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.retail.v2beta.UserEventService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.retail.v2beta.UserEventService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.retail.v2beta.UserEventService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const userEventServiceStubMethods = [
-      'writeUserEvent',
-      'collectUserEvent',
-      'purgeUserEvents',
-      'importUserEvents',
-      'exportUserEvents',
-      'rejoinUserEvents',
-    ];
+    const userEventServiceStubMethods =
+        ['writeUserEvent', 'collectUserEvent', 'purgeUserEvents', 'importUserEvents', 'exportUserEvents', 'rejoinUserEvents'];
     for (const methodName of userEventServiceStubMethods) {
       const callPromise = this.userEventServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -411,14 +340,8 @@ export class UserEventServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -429,14 +352,8 @@ export class UserEventServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -467,7 +384,9 @@ export class UserEventServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -476,9 +395,8 @@ export class UserEventServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -489,1091 +407,760 @@ export class UserEventServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Writes a single user event.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent catalog resource name, such as
-   *   `projects/1234/locations/global/catalogs/default_catalog`.
-   * @param {google.cloud.retail.v2beta.UserEvent} request.userEvent
-   *   Required. User event to write.
-   * @param {boolean} request.writeAsync
-   *   If set to true, the user event will be written asynchronously after
-   *   validation, and the API will respond without waiting for the write.
-   *   Therefore, silent failures can occur even if the API returns success. In
-   *   case of silent failures, error messages can be found in Stackdriver logs.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2beta.UserEvent|UserEvent}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/user_event_service.write_user_event.js</caption>
-   * region_tag:retail_v2beta_generated_UserEventService_WriteUserEvent_async
-   */
+/**
+ * Writes a single user event.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent catalog resource name, such as
+ *   `projects/1234/locations/global/catalogs/default_catalog`.
+ * @param {google.cloud.retail.v2beta.UserEvent} request.userEvent
+ *   Required. User event to write.
+ * @param {boolean} request.writeAsync
+ *   If set to true, the user event will be written asynchronously after
+ *   validation, and the API will respond without waiting for the write.
+ *   Therefore, silent failures can occur even if the API returns success. In
+ *   case of silent failures, error messages can be found in Stackdriver logs.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2beta.UserEvent|UserEvent}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/user_event_service.write_user_event.js</caption>
+ * region_tag:retail_v2beta_generated_UserEventService_WriteUserEvent_async
+ */
   writeUserEvent(
-    request?: protos.google.cloud.retail.v2beta.IWriteUserEventRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2beta.IUserEvent,
-      protos.google.cloud.retail.v2beta.IWriteUserEventRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2beta.IWriteUserEventRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2beta.IUserEvent,
+        protos.google.cloud.retail.v2beta.IWriteUserEventRequest|undefined, {}|undefined
+      ]>;
   writeUserEvent(
-    request: protos.google.cloud.retail.v2beta.IWriteUserEventRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2beta.IUserEvent,
-      | protos.google.cloud.retail.v2beta.IWriteUserEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  writeUserEvent(
-    request: protos.google.cloud.retail.v2beta.IWriteUserEventRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2beta.IUserEvent,
-      | protos.google.cloud.retail.v2beta.IWriteUserEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  writeUserEvent(
-    request?: protos.google.cloud.retail.v2beta.IWriteUserEventRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2beta.IWriteUserEventRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2beta.IUserEvent,
-          | protos.google.cloud.retail.v2beta.IWriteUserEventRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2beta.IUserEvent,
-      | protos.google.cloud.retail.v2beta.IWriteUserEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2beta.IUserEvent,
-      protos.google.cloud.retail.v2beta.IWriteUserEventRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2beta.IWriteUserEventRequest|null|undefined,
+          {}|null|undefined>): void;
+  writeUserEvent(
+      request: protos.google.cloud.retail.v2beta.IWriteUserEventRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2beta.IUserEvent,
+          protos.google.cloud.retail.v2beta.IWriteUserEventRequest|null|undefined,
+          {}|null|undefined>): void;
+  writeUserEvent(
+      request?: protos.google.cloud.retail.v2beta.IWriteUserEventRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2beta.IUserEvent,
+          protos.google.cloud.retail.v2beta.IWriteUserEventRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2beta.IUserEvent,
+          protos.google.cloud.retail.v2beta.IWriteUserEventRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2beta.IUserEvent,
+        protos.google.cloud.retail.v2beta.IWriteUserEventRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('writeUserEvent request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2beta.IUserEvent,
-          | protos.google.cloud.retail.v2beta.IWriteUserEventRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2beta.IUserEvent,
+        protos.google.cloud.retail.v2beta.IWriteUserEventRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('writeUserEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .writeUserEvent(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2beta.IUserEvent,
-          protos.google.cloud.retail.v2beta.IWriteUserEventRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('writeUserEvent response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.writeUserEvent(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2beta.IUserEvent,
+        protos.google.cloud.retail.v2beta.IWriteUserEventRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('writeUserEvent response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Writes a single user event from the browser.
-   *
-   * For larger user event payload over 16 KB, the POST method should be used
-   * instead, otherwise a 400 Bad Request error is returned.
-   *
-   * This method is used only by the Retail API JavaScript pixel and Google Tag
-   * Manager. Users should not call this method directly.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.prebuiltRule
-   *   The prebuilt rule name that can convert a specific type of raw_json.
-   *   For example: "ga4_bq" rule for the GA4 user event schema.
-   * @param {string} request.parent
-   *   Required. The parent catalog name, such as
-   *   `projects/1234/locations/global/catalogs/default_catalog`.
-   * @param {string} request.userEvent
-   *   Required. URL encoded UserEvent proto with a length limit of 2,000,000
-   *   characters.
-   * @param {string} request.uri
-   *   The URL including cgi-parameters but excluding the hash fragment with a
-   *   length limit of 5,000 characters. This is often more useful than the
-   *   referer URL, because many browsers only send the domain for 3rd party
-   *   requests.
-   * @param {number} request.ets
-   *   The event timestamp in milliseconds. This prevents browser caching of
-   *   otherwise identical get requests. The name is abbreviated to reduce the
-   *   payload bytes.
-   * @param {string} request.rawJson
-   *   An arbitrary serialized JSON string that contains necessary information
-   *   that can comprise a user event. When this field is specified, the
-   *   user_event field will be ignored. Note: line-delimited JSON is not
-   *   supported, a single JSON only.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/user_event_service.collect_user_event.js</caption>
-   * region_tag:retail_v2beta_generated_UserEventService_CollectUserEvent_async
-   */
+/**
+ * Writes a single user event from the browser.
+ *
+ * For larger user event payload over 16 KB, the POST method should be used
+ * instead, otherwise a 400 Bad Request error is returned.
+ *
+ * This method is used only by the Retail API JavaScript pixel and Google Tag
+ * Manager. Users should not call this method directly.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.prebuiltRule
+ *   The prebuilt rule name that can convert a specific type of raw_json.
+ *   For example: "ga4_bq" rule for the GA4 user event schema.
+ * @param {string} request.parent
+ *   Required. The parent catalog name, such as
+ *   `projects/1234/locations/global/catalogs/default_catalog`.
+ * @param {string} request.userEvent
+ *   Required. URL encoded UserEvent proto with a length limit of 2,000,000
+ *   characters.
+ * @param {string} request.uri
+ *   The URL including cgi-parameters but excluding the hash fragment with a
+ *   length limit of 5,000 characters. This is often more useful than the
+ *   referer URL, because many browsers only send the domain for 3rd party
+ *   requests.
+ * @param {number} request.ets
+ *   The event timestamp in milliseconds. This prevents browser caching of
+ *   otherwise identical get requests. The name is abbreviated to reduce the
+ *   payload bytes.
+ * @param {string} request.rawJson
+ *   An arbitrary serialized JSON string that contains necessary information
+ *   that can comprise a user event. When this field is specified, the
+ *   user_event field will be ignored. Note: line-delimited JSON is not
+ *   supported, a single JSON only.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/user_event_service.collect_user_event.js</caption>
+ * region_tag:retail_v2beta_generated_UserEventService_CollectUserEvent_async
+ */
   collectUserEvent(
-    request?: protos.google.cloud.retail.v2beta.ICollectUserEventRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.IHttpBody,
-      protos.google.cloud.retail.v2beta.ICollectUserEventRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2beta.ICollectUserEventRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.api.IHttpBody,
+        protos.google.cloud.retail.v2beta.ICollectUserEventRequest|undefined, {}|undefined
+      ]>;
   collectUserEvent(
-    request: protos.google.cloud.retail.v2beta.ICollectUserEventRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      | protos.google.cloud.retail.v2beta.ICollectUserEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  collectUserEvent(
-    request: protos.google.cloud.retail.v2beta.ICollectUserEventRequest,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      | protos.google.cloud.retail.v2beta.ICollectUserEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  collectUserEvent(
-    request?: protos.google.cloud.retail.v2beta.ICollectUserEventRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2beta.ICollectUserEventRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.api.IHttpBody,
-          | protos.google.cloud.retail.v2beta.ICollectUserEventRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.api.IHttpBody,
-      | protos.google.cloud.retail.v2beta.ICollectUserEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.api.IHttpBody,
-      protos.google.cloud.retail.v2beta.ICollectUserEventRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2beta.ICollectUserEventRequest|null|undefined,
+          {}|null|undefined>): void;
+  collectUserEvent(
+      request: protos.google.cloud.retail.v2beta.ICollectUserEventRequest,
+      callback: Callback<
+          protos.google.api.IHttpBody,
+          protos.google.cloud.retail.v2beta.ICollectUserEventRequest|null|undefined,
+          {}|null|undefined>): void;
+  collectUserEvent(
+      request?: protos.google.cloud.retail.v2beta.ICollectUserEventRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.api.IHttpBody,
+          protos.google.cloud.retail.v2beta.ICollectUserEventRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.api.IHttpBody,
+          protos.google.cloud.retail.v2beta.ICollectUserEventRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.api.IHttpBody,
+        protos.google.cloud.retail.v2beta.ICollectUserEventRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('collectUserEvent request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.api.IHttpBody,
-          | protos.google.cloud.retail.v2beta.ICollectUserEventRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.api.IHttpBody,
+        protos.google.cloud.retail.v2beta.ICollectUserEventRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('collectUserEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .collectUserEvent(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.api.IHttpBody,
-          (
-            | protos.google.cloud.retail.v2beta.ICollectUserEventRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('collectUserEvent response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.collectUserEvent(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.api.IHttpBody,
+        protos.google.cloud.retail.v2beta.ICollectUserEventRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('collectUserEvent response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
 
-  /**
-   * Deletes permanently all user events specified by the filter provided.
-   * Depending on the number of events specified by the filter, this operation
-   * could take hours or days to complete. To test a filter, use the list
-   * command first.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the catalog under which the events are
-   *   created. The format is
-   *   `projects/${projectId}/locations/global/catalogs/${catalogId}`
-   * @param {string} request.filter
-   *   Required. The filter string to specify the events to be deleted with a
-   *   length limit of 5,000 characters. Empty string filter is not allowed. The
-   *   eligible fields for filtering are:
-   *
-   *   * `eventType`: Double quoted
-   *   {@link protos.google.cloud.retail.v2beta.UserEvent.event_type|UserEvent.event_type}
-   *   string.
-   *   * `eventTime`: in ISO 8601 "zulu" format.
-   *   * `visitorId`: Double quoted string. Specifying this will delete all
-   *     events associated with a visitor.
-   *   * `userId`: Double quoted string. Specifying this will delete all events
-   *     associated with a user.
-   *
-   *   Examples:
-   *
-   *   * Deleting all events in a time range:
-   *     `eventTime > "2012-04-23T18:25:43.511Z"
-   *     eventTime < "2012-04-23T18:30:43.511Z"`
-   *   * Deleting specific eventType in time range:
-   *     `eventTime > "2012-04-23T18:25:43.511Z" eventType = "detail-page-view"`
-   *   * Deleting all events for a specific visitor:
-   *     `visitorId = "visitor1024"`
-   *
-   *   The filtering fields are assumed to have an implicit AND.
-   * @param {boolean} request.force
-   *   Actually perform the purge.
-   *   If `force` is set to false, the method will return the expected purge count
-   *   without deleting any user events.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/user_event_service.purge_user_events.js</caption>
-   * region_tag:retail_v2beta_generated_UserEventService_PurgeUserEvents_async
-   */
+/**
+ * Deletes permanently all user events specified by the filter provided.
+ * Depending on the number of events specified by the filter, this operation
+ * could take hours or days to complete. To test a filter, use the list
+ * command first.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the catalog under which the events are
+ *   created. The format is
+ *   `projects/${projectId}/locations/global/catalogs/${catalogId}`
+ * @param {string} request.filter
+ *   Required. The filter string to specify the events to be deleted with a
+ *   length limit of 5,000 characters. Empty string filter is not allowed. The
+ *   eligible fields for filtering are:
+ *
+ *   * `eventType`: Double quoted
+ *   {@link protos.google.cloud.retail.v2beta.UserEvent.event_type|UserEvent.event_type}
+ *   string.
+ *   * `eventTime`: in ISO 8601 "zulu" format.
+ *   * `visitorId`: Double quoted string. Specifying this will delete all
+ *     events associated with a visitor.
+ *   * `userId`: Double quoted string. Specifying this will delete all events
+ *     associated with a user.
+ *
+ *   Examples:
+ *
+ *   * Deleting all events in a time range:
+ *     `eventTime > "2012-04-23T18:25:43.511Z"
+ *     eventTime < "2012-04-23T18:30:43.511Z"`
+ *   * Deleting specific eventType in time range:
+ *     `eventTime > "2012-04-23T18:25:43.511Z" eventType = "detail-page-view"`
+ *   * Deleting all events for a specific visitor:
+ *     `visitorId = "visitor1024"`
+ *
+ *   The filtering fields are assumed to have an implicit AND.
+ * @param {boolean} request.force
+ *   Actually perform the purge.
+ *   If `force` is set to false, the method will return the expected purge count
+ *   without deleting any user events.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/user_event_service.purge_user_events.js</caption>
+ * region_tag:retail_v2beta_generated_UserEventService_PurgeUserEvents_async
+ */
   purgeUserEvents(
-    request?: protos.google.cloud.retail.v2beta.IPurgeUserEventsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IPurgeMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2beta.IPurgeUserEventsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse, protos.google.cloud.retail.v2beta.IPurgeMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   purgeUserEvents(
-    request: protos.google.cloud.retail.v2beta.IPurgeUserEventsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IPurgeMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2beta.IPurgeUserEventsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse, protos.google.cloud.retail.v2beta.IPurgeMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   purgeUserEvents(
-    request: protos.google.cloud.retail.v2beta.IPurgeUserEventsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IPurgeMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2beta.IPurgeUserEventsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse, protos.google.cloud.retail.v2beta.IPurgeMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   purgeUserEvents(
-    request?: protos.google.cloud.retail.v2beta.IPurgeUserEventsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
-            protos.google.cloud.retail.v2beta.IPurgeMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IPurgeMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IPurgeMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.retail.v2beta.IPurgeUserEventsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse, protos.google.cloud.retail.v2beta.IPurgeMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse, protos.google.cloud.retail.v2beta.IPurgeMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse, protos.google.cloud.retail.v2beta.IPurgeMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
-            protos.google.cloud.retail.v2beta.IPurgeMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse, protos.google.cloud.retail.v2beta.IPurgeMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('purgeUserEvents response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('purgeUserEvents request %j', request);
-    return this.innerApiCalls
-      .purgeUserEvents(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
-            protos.google.cloud.retail.v2beta.IPurgeMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('purgeUserEvents response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.purgeUserEvents(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse, protos.google.cloud.retail.v2beta.IPurgeMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('purgeUserEvents response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `purgeUserEvents()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/user_event_service.purge_user_events.js</caption>
-   * region_tag:retail_v2beta_generated_UserEventService_PurgeUserEvents_async
-   */
-  async checkPurgeUserEventsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.retail.v2beta.PurgeUserEventsResponse,
-      protos.google.cloud.retail.v2beta.PurgeMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `purgeUserEvents()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/user_event_service.purge_user_events.js</caption>
+ * region_tag:retail_v2beta_generated_UserEventService_PurgeUserEvents_async
+ */
+  async checkPurgeUserEventsProgress(name: string): Promise<LROperation<protos.google.cloud.retail.v2beta.PurgeUserEventsResponse, protos.google.cloud.retail.v2beta.PurgeMetadata>>{
     this._log.info('purgeUserEvents long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.purgeUserEvents,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.retail.v2beta.PurgeUserEventsResponse,
-      protos.google.cloud.retail.v2beta.PurgeMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.purgeUserEvents, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.retail.v2beta.PurgeUserEventsResponse, protos.google.cloud.retail.v2beta.PurgeMetadata>;
   }
-  /**
-   * Bulk import of User events. Request processing might be
-   * synchronous. Events that already exist are skipped.
-   * Use this method for backfilling historical user events.
-   *
-   * `Operation.response` is of type `ImportResponse`. Note that it is
-   * possible for a subset of the items to be successfully inserted.
-   * `Operation.metadata` is of type `ImportMetadata`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. `projects/1234/locations/global/catalogs/default_catalog`
-   * @param {google.cloud.retail.v2beta.UserEventInputConfig} request.inputConfig
-   *   Required. The desired input location of the data.
-   * @param {google.cloud.retail.v2beta.ImportErrorsConfig} request.errorsConfig
-   *   The desired location of errors incurred during the Import. Cannot be set
-   *   for inline user event imports.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/user_event_service.import_user_events.js</caption>
-   * region_tag:retail_v2beta_generated_UserEventService_ImportUserEvents_async
-   */
+/**
+ * Bulk import of User events. Request processing might be
+ * synchronous. Events that already exist are skipped.
+ * Use this method for backfilling historical user events.
+ *
+ * `Operation.response` is of type `ImportResponse`. Note that it is
+ * possible for a subset of the items to be successfully inserted.
+ * `Operation.metadata` is of type `ImportMetadata`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. `projects/1234/locations/global/catalogs/default_catalog`
+ * @param {google.cloud.retail.v2beta.UserEventInputConfig} request.inputConfig
+ *   Required. The desired input location of the data.
+ * @param {google.cloud.retail.v2beta.ImportErrorsConfig} request.errorsConfig
+ *   The desired location of errors incurred during the Import. Cannot be set
+ *   for inline user event imports.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/user_event_service.import_user_events.js</caption>
+ * region_tag:retail_v2beta_generated_UserEventService_ImportUserEvents_async
+ */
   importUserEvents(
-    request?: protos.google.cloud.retail.v2beta.IImportUserEventsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2beta.IImportUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IImportMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2beta.IImportUserEventsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2beta.IImportUserEventsResponse, protos.google.cloud.retail.v2beta.IImportMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   importUserEvents(
-    request: protos.google.cloud.retail.v2beta.IImportUserEventsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IImportUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IImportMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2beta.IImportUserEventsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IImportUserEventsResponse, protos.google.cloud.retail.v2beta.IImportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   importUserEvents(
-    request: protos.google.cloud.retail.v2beta.IImportUserEventsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IImportUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IImportMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2beta.IImportUserEventsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IImportUserEventsResponse, protos.google.cloud.retail.v2beta.IImportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   importUserEvents(
-    request?: protos.google.cloud.retail.v2beta.IImportUserEventsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2beta.IImportUserEventsResponse,
-            protos.google.cloud.retail.v2beta.IImportMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IImportUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IImportMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2beta.IImportUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IImportMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.retail.v2beta.IImportUserEventsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IImportUserEventsResponse, protos.google.cloud.retail.v2beta.IImportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IImportUserEventsResponse, protos.google.cloud.retail.v2beta.IImportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2beta.IImportUserEventsResponse, protos.google.cloud.retail.v2beta.IImportMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2beta.IImportUserEventsResponse,
-            protos.google.cloud.retail.v2beta.IImportMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IImportUserEventsResponse, protos.google.cloud.retail.v2beta.IImportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('importUserEvents response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('importUserEvents request %j', request);
-    return this.innerApiCalls
-      .importUserEvents(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.retail.v2beta.IImportUserEventsResponse,
-            protos.google.cloud.retail.v2beta.IImportMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('importUserEvents response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.importUserEvents(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.retail.v2beta.IImportUserEventsResponse, protos.google.cloud.retail.v2beta.IImportMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('importUserEvents response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `importUserEvents()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/user_event_service.import_user_events.js</caption>
-   * region_tag:retail_v2beta_generated_UserEventService_ImportUserEvents_async
-   */
-  async checkImportUserEventsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.retail.v2beta.ImportUserEventsResponse,
-      protos.google.cloud.retail.v2beta.ImportMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `importUserEvents()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/user_event_service.import_user_events.js</caption>
+ * region_tag:retail_v2beta_generated_UserEventService_ImportUserEvents_async
+ */
+  async checkImportUserEventsProgress(name: string): Promise<LROperation<protos.google.cloud.retail.v2beta.ImportUserEventsResponse, protos.google.cloud.retail.v2beta.ImportMetadata>>{
     this._log.info('importUserEvents long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.importUserEvents,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.retail.v2beta.ImportUserEventsResponse,
-      protos.google.cloud.retail.v2beta.ImportMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importUserEvents, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.retail.v2beta.ImportUserEventsResponse, protos.google.cloud.retail.v2beta.ImportMetadata>;
   }
-  /**
-   * Exports user events.
-   *
-   * `Operation.response` is of type `ExportResponse`.
-   * `Operation.metadata` is of type `ExportMetadata`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of a {@link protos.google.cloud.retail.v2beta.Catalog|Catalog}.
-   *   For example `projects/1234/locations/global/catalogs/default_catalog`
-   * @param {google.cloud.retail.v2beta.OutputConfig} request.outputConfig
-   *   Required. The output location of the data.
-   * @param {string} request.filter
-   *   A filtering expression to specify restrictions on returned events.
-   *   The expression is a sequence of terms. Each term applies a restriction to
-   *   the returned user events. Use this expression to restrict results to a
-   *   specific time range or to filter events by eventType.
-   *   For example, `eventTime > "2012-04-23T18:25:43.511Z"
-   *   eventsMissingCatalogItems eventTime<"2012-04-23T18:25:43.511Z"
-   *   eventType=search`
-   *
-   *     We expect only three types of fields:
-   *
-   *      * `eventTime`: This can be specified twice, once with a
-   *        less than operator and once with a greater than operator. The
-   *        `eventTime` restriction should result in one, contiguous, valid,
-   *        `eventTime` range.
-   *
-   *      * `eventType`: Boolean operators `OR` and `NOT` are supported if the
-   *        expression is enclosed in parentheses and the operators are separated
-   *        from the tag values by a space.
-   *
-   *      * `eventsMissingCatalogItems`: This restricts results
-   *        to events for which catalog items were not found in the catalog. The
-   *        default behavior is to return only those events for which catalog
-   *        items were found.
-   *
-   *     Some examples of valid filters expressions:
-   *
-   *     * Example 1: `eventTime > "2012-04-23T18:25:43.511Z"
-   *               eventTime < "2012-04-23T18:30:43.511Z"`
-   *     * Example 2: `eventTime > "2012-04-23T18:25:43.511Z"
-   *               eventType = detail-page-view`
-   *     * Example 3: `eventsMissingCatalogItems
-   *               eventType = (NOT search) eventTime <
-   *               "2018-04-23T18:30:43.511Z"`
-   *     * Example 4: `eventTime > "2012-04-23T18:25:43.511Z"`
-   *     * Example 5: `eventType = (detail-page-view OR search)`
-   *     * Example 6: `eventsMissingCatalogItems`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/user_event_service.export_user_events.js</caption>
-   * region_tag:retail_v2beta_generated_UserEventService_ExportUserEvents_async
-   */
+/**
+ * Exports user events.
+ *
+ * `Operation.response` is of type `ExportResponse`.
+ * `Operation.metadata` is of type `ExportMetadata`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Resource name of a {@link protos.google.cloud.retail.v2beta.Catalog|Catalog}.
+ *   For example `projects/1234/locations/global/catalogs/default_catalog`
+ * @param {google.cloud.retail.v2beta.OutputConfig} request.outputConfig
+ *   Required. The output location of the data.
+ * @param {string} request.filter
+ *   A filtering expression to specify restrictions on returned events.
+ *   The expression is a sequence of terms. Each term applies a restriction to
+ *   the returned user events. Use this expression to restrict results to a
+ *   specific time range or to filter events by eventType.
+ *   For example, `eventTime > "2012-04-23T18:25:43.511Z"
+ *   eventsMissingCatalogItems eventTime<"2012-04-23T18:25:43.511Z"
+ *   eventType=search`
+ *
+ *     We expect only three types of fields:
+ *
+ *      * `eventTime`: This can be specified twice, once with a
+ *        less than operator and once with a greater than operator. The
+ *        `eventTime` restriction should result in one, contiguous, valid,
+ *        `eventTime` range.
+ *
+ *      * `eventType`: Boolean operators `OR` and `NOT` are supported if the
+ *        expression is enclosed in parentheses and the operators are separated
+ *        from the tag values by a space.
+ *
+ *      * `eventsMissingCatalogItems`: This restricts results
+ *        to events for which catalog items were not found in the catalog. The
+ *        default behavior is to return only those events for which catalog
+ *        items were found.
+ *
+ *     Some examples of valid filters expressions:
+ *
+ *     * Example 1: `eventTime > "2012-04-23T18:25:43.511Z"
+ *               eventTime < "2012-04-23T18:30:43.511Z"`
+ *     * Example 2: `eventTime > "2012-04-23T18:25:43.511Z"
+ *               eventType = detail-page-view`
+ *     * Example 3: `eventsMissingCatalogItems
+ *               eventType = (NOT search) eventTime <
+ *               "2018-04-23T18:30:43.511Z"`
+ *     * Example 4: `eventTime > "2012-04-23T18:25:43.511Z"`
+ *     * Example 5: `eventType = (detail-page-view OR search)`
+ *     * Example 6: `eventsMissingCatalogItems`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/user_event_service.export_user_events.js</caption>
+ * region_tag:retail_v2beta_generated_UserEventService_ExportUserEvents_async
+ */
   exportUserEvents(
-    request?: protos.google.cloud.retail.v2beta.IExportUserEventsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2beta.IExportUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IExportMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2beta.IExportUserEventsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2beta.IExportUserEventsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   exportUserEvents(
-    request: protos.google.cloud.retail.v2beta.IExportUserEventsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IExportUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IExportMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2beta.IExportUserEventsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IExportUserEventsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportUserEvents(
-    request: protos.google.cloud.retail.v2beta.IExportUserEventsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IExportUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IExportMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2beta.IExportUserEventsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IExportUserEventsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportUserEvents(
-    request?: protos.google.cloud.retail.v2beta.IExportUserEventsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2beta.IExportUserEventsResponse,
-            protos.google.cloud.retail.v2beta.IExportMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IExportUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IExportMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2beta.IExportUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IExportMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.retail.v2beta.IExportUserEventsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IExportUserEventsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IExportUserEventsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2beta.IExportUserEventsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2beta.IExportUserEventsResponse,
-            protos.google.cloud.retail.v2beta.IExportMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IExportUserEventsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportUserEvents response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportUserEvents request %j', request);
-    return this.innerApiCalls
-      .exportUserEvents(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.retail.v2beta.IExportUserEventsResponse,
-            protos.google.cloud.retail.v2beta.IExportMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('exportUserEvents response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.exportUserEvents(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.retail.v2beta.IExportUserEventsResponse, protos.google.cloud.retail.v2beta.IExportMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('exportUserEvents response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `exportUserEvents()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/user_event_service.export_user_events.js</caption>
-   * region_tag:retail_v2beta_generated_UserEventService_ExportUserEvents_async
-   */
-  async checkExportUserEventsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.retail.v2beta.ExportUserEventsResponse,
-      protos.google.cloud.retail.v2beta.ExportMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `exportUserEvents()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/user_event_service.export_user_events.js</caption>
+ * region_tag:retail_v2beta_generated_UserEventService_ExportUserEvents_async
+ */
+  async checkExportUserEventsProgress(name: string): Promise<LROperation<protos.google.cloud.retail.v2beta.ExportUserEventsResponse, protos.google.cloud.retail.v2beta.ExportMetadata>>{
     this._log.info('exportUserEvents long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.exportUserEvents,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.retail.v2beta.ExportUserEventsResponse,
-      protos.google.cloud.retail.v2beta.ExportMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportUserEvents, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.retail.v2beta.ExportUserEventsResponse, protos.google.cloud.retail.v2beta.ExportMetadata>;
   }
-  /**
-   * Starts a user-event rejoin operation with latest product catalog. Events
-   * are not annotated with detailed product information for products that are
-   * missing from the catalog when the user event is ingested. These
-   * events are stored as unjoined events with limited usage on training and
-   * serving. You can use this method to start a join operation on specified
-   * events with the latest version of product catalog. You can also use this
-   * method to correct events joined with the wrong product catalog. A rejoin
-   * operation can take hours or days to complete.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent catalog resource name, such as
-   *   `projects/1234/locations/global/catalogs/default_catalog`.
-   * @param {google.cloud.retail.v2beta.RejoinUserEventsRequest.UserEventRejoinScope} request.userEventRejoinScope
-   *   The type of the user event rejoin to define the scope and range of the user
-   *   events to be rejoined with the latest product catalog. Defaults to
-   *   `USER_EVENT_REJOIN_SCOPE_UNSPECIFIED` if this field is not set, or set to
-   *   an invalid integer value.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/user_event_service.rejoin_user_events.js</caption>
-   * region_tag:retail_v2beta_generated_UserEventService_RejoinUserEvents_async
-   */
+/**
+ * Starts a user-event rejoin operation with latest product catalog. Events
+ * are not annotated with detailed product information for products that are
+ * missing from the catalog when the user event is ingested. These
+ * events are stored as unjoined events with limited usage on training and
+ * serving. You can use this method to start a join operation on specified
+ * events with the latest version of product catalog. You can also use this
+ * method to correct events joined with the wrong product catalog. A rejoin
+ * operation can take hours or days to complete.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent catalog resource name, such as
+ *   `projects/1234/locations/global/catalogs/default_catalog`.
+ * @param {google.cloud.retail.v2beta.RejoinUserEventsRequest.UserEventRejoinScope} request.userEventRejoinScope
+ *   The type of the user event rejoin to define the scope and range of the user
+ *   events to be rejoined with the latest product catalog. Defaults to
+ *   `USER_EVENT_REJOIN_SCOPE_UNSPECIFIED` if this field is not set, or set to
+ *   an invalid integer value.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/user_event_service.rejoin_user_events.js</caption>
+ * region_tag:retail_v2beta_generated_UserEventService_RejoinUserEvents_async
+ */
   rejoinUserEvents(
-    request?: protos.google.cloud.retail.v2beta.IRejoinUserEventsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2beta.IRejoinUserEventsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse, protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   rejoinUserEvents(
-    request: protos.google.cloud.retail.v2beta.IRejoinUserEventsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2beta.IRejoinUserEventsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse, protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   rejoinUserEvents(
-    request: protos.google.cloud.retail.v2beta.IRejoinUserEventsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.retail.v2beta.IRejoinUserEventsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse, protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   rejoinUserEvents(
-    request?: protos.google.cloud.retail.v2beta.IRejoinUserEventsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse,
-            protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.retail.v2beta.IRejoinUserEventsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse, protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse, protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse, protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse,
-            protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse, protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('rejoinUserEvents response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('rejoinUserEvents request %j', request);
-    return this.innerApiCalls
-      .rejoinUserEvents(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse,
-            protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('rejoinUserEvents response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.rejoinUserEvents(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.retail.v2beta.IRejoinUserEventsResponse, protos.google.cloud.retail.v2beta.IRejoinUserEventsMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('rejoinUserEvents response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `rejoinUserEvents()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/user_event_service.rejoin_user_events.js</caption>
-   * region_tag:retail_v2beta_generated_UserEventService_RejoinUserEvents_async
-   */
-  async checkRejoinUserEventsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.retail.v2beta.RejoinUserEventsResponse,
-      protos.google.cloud.retail.v2beta.RejoinUserEventsMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `rejoinUserEvents()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/user_event_service.rejoin_user_events.js</caption>
+ * region_tag:retail_v2beta_generated_UserEventService_RejoinUserEvents_async
+ */
+  async checkRejoinUserEventsProgress(name: string): Promise<LROperation<protos.google.cloud.retail.v2beta.RejoinUserEventsResponse, protos.google.cloud.retail.v2beta.RejoinUserEventsMetadata>>{
     this._log.info('rejoinUserEvents long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.rejoinUserEvents,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.retail.v2beta.RejoinUserEventsResponse,
-      protos.google.cloud.retail.v2beta.RejoinUserEventsMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.rejoinUserEvents, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.retail.v2beta.RejoinUserEventsResponse, protos.google.cloud.retail.v2beta.RejoinUserEventsMetadata>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1613,7 +1200,7 @@ export class UserEventServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1651,7 +1238,7 @@ export class UserEventServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1696,20 +1283,20 @@ export class UserEventServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1746,13 +1333,13 @@ export class UserEventServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1786,7 +1373,7 @@ export class UserEventServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1801,20 +1388,20 @@ export class UserEventServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1858,20 +1445,20 @@ export class UserEventServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1885,7 +1472,7 @@ export class UserEventServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  alertConfigPath(project: string) {
+  alertConfigPath(project:string) {
     return this.pathTemplates.alertConfigPathTemplate.render({
       project: project,
     });
@@ -1899,8 +1486,7 @@ export class UserEventServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAlertConfigName(alertConfigName: string) {
-    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
-      .project;
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName).project;
   }
 
   /**
@@ -1911,7 +1497,7 @@ export class UserEventServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  attributesConfigPath(project: string, location: string, catalog: string) {
+  attributesConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.attributesConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1927,9 +1513,7 @@ export class UserEventServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).project;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).project;
   }
 
   /**
@@ -1940,9 +1524,7 @@ export class UserEventServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).location;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).location;
   }
 
   /**
@@ -1953,9 +1535,7 @@ export class UserEventServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).catalog;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).catalog;
   }
 
   /**
@@ -1966,7 +1546,7 @@ export class UserEventServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  catalogPath(project: string, location: string, catalog: string) {
+  catalogPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.catalogPathTemplate.render({
       project: project,
       location: location,
@@ -2015,7 +1595,7 @@ export class UserEventServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  completionConfigPath(project: string, location: string, catalog: string) {
+  completionConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.completionConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2031,9 +1611,7 @@ export class UserEventServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).project;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).project;
   }
 
   /**
@@ -2044,9 +1622,7 @@ export class UserEventServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).location;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).location;
   }
 
   /**
@@ -2057,9 +1633,7 @@ export class UserEventServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).catalog;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).catalog;
   }
 
   /**
@@ -2071,12 +1645,7 @@ export class UserEventServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  controlPath(
-    project: string,
-    location: string,
-    catalog: string,
-    control: string
-  ) {
+  controlPath(project:string,location:string,catalog:string,control:string) {
     return this.pathTemplates.controlPathTemplate.render({
       project: project,
       location: location,
@@ -2138,7 +1707,7 @@ export class UserEventServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, catalog: string, model: string) {
+  modelPath(project:string,location:string,catalog:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -2201,13 +1770,7 @@ export class UserEventServiceClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string,
-    product: string
-  ) {
+  productPath(project:string,location:string,catalog:string,branch:string,product:string) {
     return this.pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
@@ -2281,12 +1844,7 @@ export class UserEventServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  servingConfigPath(
-    project: string,
-    location: string,
-    catalog: string,
-    servingConfig: string
-  ) {
+  servingConfigPath(project:string,location:string,catalog:string,servingConfig:string) {
     return this.pathTemplates.servingConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2303,8 +1861,7 @@ export class UserEventServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .project;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).project;
   }
 
   /**
@@ -2315,8 +1872,7 @@ export class UserEventServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .location;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).location;
   }
 
   /**
@@ -2327,8 +1883,7 @@ export class UserEventServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .catalog;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).catalog;
   }
 
   /**
@@ -2339,8 +1894,7 @@ export class UserEventServiceClient {
    * @returns {string} A string representing the serving_config.
    */
   matchServingConfigFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .serving_config;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).serving_config;
   }
 
   /**
@@ -2355,9 +1909,7 @@ export class UserEventServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }
