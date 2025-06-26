@@ -28,6 +28,7 @@ function main() {
   const automaticImprovementsServiceClient = new accounts.AutomaticImprovementsServiceClient();
   const businessIdentityServiceClient = new accounts.BusinessIdentityServiceClient();
   const businessInfoServiceClient = new accounts.BusinessInfoServiceClient();
+  const checkoutSettingsServiceClient = new accounts.CheckoutSettingsServiceClient();
   const emailPreferencesServiceClient = new accounts.EmailPreferencesServiceClient();
   const gbpAccountsServiceClient = new accounts.GbpAccountsServiceClient();
   const homepageServiceClient = new accounts.HomepageServiceClient();

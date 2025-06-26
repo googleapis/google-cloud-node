@@ -1168,6 +1168,44 @@ describe('v1beta.UserServiceClient', () => {
             });
         });
 
+        describe('checkoutSettings', async () => {
+            const fakePath = "/rendered/path/checkoutSettings";
+            const expectedParameters = {
+                account: "accountValue",
+                program: "programValue",
+            };
+            const client = new userserviceModule.v1beta.UserServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.checkoutSettingsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.checkoutSettingsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('checkoutSettingsPath', () => {
+                const result = client.checkoutSettingsPath("accountValue", "programValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.checkoutSettingsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromCheckoutSettingsName', () => {
+                const result = client.matchAccountFromCheckoutSettingsName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.checkoutSettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchProgramFromCheckoutSettingsName', () => {
+                const result = client.matchProgramFromCheckoutSettingsName(fakePath);
+                assert.strictEqual(result, "programValue");
+                assert((client.pathTemplates.checkoutSettingsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('emailPreferences', async () => {
             const fakePath = "/rendered/path/emailPreferences";
             const expectedParameters = {

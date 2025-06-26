@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AccountIssueServiceClient, AccountsServiceClient, AccountTaxServiceClient, AutofeedSettingsServiceClient, AutomaticImprovementsServiceClient, BusinessIdentityServiceClient, BusinessInfoServiceClient, EmailPreferencesServiceClient, GbpAccountsServiceClient, HomepageServiceClient, LfpProvidersServiceClient, OmnichannelSettingsServiceClient, OnlineReturnPolicyServiceClient, ProgramsServiceClient, RegionsServiceClient, ShippingSettingsServiceClient, TermsOfServiceAgreementStateServiceClient, TermsOfServiceServiceClient, UserServiceClient} from '@google-shopping/accounts';
+import {AccountIssueServiceClient, AccountsServiceClient, AccountTaxServiceClient, AutofeedSettingsServiceClient, AutomaticImprovementsServiceClient, BusinessIdentityServiceClient, BusinessInfoServiceClient, CheckoutSettingsServiceClient, EmailPreferencesServiceClient, GbpAccountsServiceClient, HomepageServiceClient, LfpProvidersServiceClient, OmnichannelSettingsServiceClient, OnlineReturnPolicyServiceClient, ProgramsServiceClient, RegionsServiceClient, ShippingSettingsServiceClient, TermsOfServiceAgreementStateServiceClient, TermsOfServiceServiceClient, UserServiceClient} from '@google-shopping/accounts';
 
 // check that the client class type name can be used
 function doStuffWithAccountIssueServiceClient(client: AccountIssueServiceClient) {
@@ -38,6 +38,9 @@ function doStuffWithBusinessIdentityServiceClient(client: BusinessIdentityServic
   client.close();
 }
 function doStuffWithBusinessInfoServiceClient(client: BusinessInfoServiceClient) {
+  client.close();
+}
+function doStuffWithCheckoutSettingsServiceClient(client: CheckoutSettingsServiceClient) {
   client.close();
 }
 function doStuffWithEmailPreferencesServiceClient(client: EmailPreferencesServiceClient) {
@@ -99,6 +102,9 @@ function main() {
   // check that the client instance can be created
   const businessInfoServiceClient = new BusinessInfoServiceClient();
   doStuffWithBusinessInfoServiceClient(businessInfoServiceClient);
+  // check that the client instance can be created
+  const checkoutSettingsServiceClient = new CheckoutSettingsServiceClient();
+  doStuffWithCheckoutSettingsServiceClient(checkoutSettingsServiceClient);
   // check that the client instance can be created
   const emailPreferencesServiceClient = new EmailPreferencesServiceClient();
   doStuffWithEmailPreferencesServiceClient(emailPreferencesServiceClient);

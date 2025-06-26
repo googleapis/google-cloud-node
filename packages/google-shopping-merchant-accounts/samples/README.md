@@ -30,6 +30,10 @@
   * [Business_identity_service.update_business_identity](#business_identity_service.update_business_identity)
   * [Business_info_service.get_business_info](#business_info_service.get_business_info)
   * [Business_info_service.update_business_info](#business_info_service.update_business_info)
+  * [Checkout_settings_service.create_checkout_settings](#checkout_settings_service.create_checkout_settings)
+  * [Checkout_settings_service.delete_checkout_settings](#checkout_settings_service.delete_checkout_settings)
+  * [Checkout_settings_service.get_checkout_settings](#checkout_settings_service.get_checkout_settings)
+  * [Checkout_settings_service.update_checkout_settings](#checkout_settings_service.update_checkout_settings)
   * [Email_preferences_service.get_email_preferences](#email_preferences_service.get_email_preferences)
   * [Email_preferences_service.update_email_preferences](#email_preferences_service.update_email_preferences)
   * [Gbp_accounts_service.link_gbp_account](#gbp_accounts_service.link_gbp_account)
@@ -387,6 +391,74 @@ __Usage:__
 
 
 `node packages/google-shopping-merchant-accounts/samples/generated/v1beta/business_info_service.update_business_info.js`
+
+
+-----
+
+
+
+
+### Checkout_settings_service.create_checkout_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/checkout_settings_service.create_checkout_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/checkout_settings_service.create_checkout_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/checkout_settings_service.create_checkout_settings.js`
+
+
+-----
+
+
+
+
+### Checkout_settings_service.delete_checkout_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/checkout_settings_service.delete_checkout_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/checkout_settings_service.delete_checkout_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/checkout_settings_service.delete_checkout_settings.js`
+
+
+-----
+
+
+
+
+### Checkout_settings_service.get_checkout_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/checkout_settings_service.get_checkout_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/checkout_settings_service.get_checkout_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/checkout_settings_service.get_checkout_settings.js`
+
+
+-----
+
+
+
+
+### Checkout_settings_service.update_checkout_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/checkout_settings_service.update_checkout_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/checkout_settings_service.update_checkout_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/checkout_settings_service.update_checkout_settings.js`
 
 
 -----

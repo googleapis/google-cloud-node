@@ -14398,6 +14398,1961 @@
                             return values;
                         })();
     
+                        v1beta.CheckoutSettingsService = (function() {
+    
+                            /**
+                             * Constructs a new CheckoutSettingsService service.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a CheckoutSettingsService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function CheckoutSettingsService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (CheckoutSettingsService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = CheckoutSettingsService;
+    
+                            /**
+                             * Creates new CheckoutSettingsService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettingsService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {CheckoutSettingsService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            CheckoutSettingsService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.CheckoutSettingsService|getCheckoutSettings}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettingsService
+                             * @typedef GetCheckoutSettingsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.CheckoutSettings} [response] CheckoutSettings
+                             */
+    
+                            /**
+                             * Calls GetCheckoutSettings.
+                             * @function getCheckoutSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetCheckoutSettingsRequest} request GetCheckoutSettingsRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.GetCheckoutSettingsCallback} callback Node-style callback called with the error, if any, and CheckoutSettings
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(CheckoutSettingsService.prototype.getCheckoutSettings = function getCheckoutSettings(request, callback) {
+                                return this.rpcCall(getCheckoutSettings, $root.google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest, $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings, request, callback);
+                            }, "name", { value: "GetCheckoutSettings" });
+    
+                            /**
+                             * Calls GetCheckoutSettings.
+                             * @function getCheckoutSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetCheckoutSettingsRequest} request GetCheckoutSettingsRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.CheckoutSettings>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.CheckoutSettingsService|createCheckoutSettings}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettingsService
+                             * @typedef CreateCheckoutSettingsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.CheckoutSettings} [response] CheckoutSettings
+                             */
+    
+                            /**
+                             * Calls CreateCheckoutSettings.
+                             * @function createCheckoutSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateCheckoutSettingsRequest} request CreateCheckoutSettingsRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.CreateCheckoutSettingsCallback} callback Node-style callback called with the error, if any, and CheckoutSettings
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(CheckoutSettingsService.prototype.createCheckoutSettings = function createCheckoutSettings(request, callback) {
+                                return this.rpcCall(createCheckoutSettings, $root.google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest, $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings, request, callback);
+                            }, "name", { value: "CreateCheckoutSettings" });
+    
+                            /**
+                             * Calls CreateCheckoutSettings.
+                             * @function createCheckoutSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateCheckoutSettingsRequest} request CreateCheckoutSettingsRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.CheckoutSettings>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.CheckoutSettingsService|updateCheckoutSettings}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettingsService
+                             * @typedef UpdateCheckoutSettingsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.CheckoutSettings} [response] CheckoutSettings
+                             */
+    
+                            /**
+                             * Calls UpdateCheckoutSettings.
+                             * @function updateCheckoutSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateCheckoutSettingsRequest} request UpdateCheckoutSettingsRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.UpdateCheckoutSettingsCallback} callback Node-style callback called with the error, if any, and CheckoutSettings
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(CheckoutSettingsService.prototype.updateCheckoutSettings = function updateCheckoutSettings(request, callback) {
+                                return this.rpcCall(updateCheckoutSettings, $root.google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest, $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings, request, callback);
+                            }, "name", { value: "UpdateCheckoutSettings" });
+    
+                            /**
+                             * Calls UpdateCheckoutSettings.
+                             * @function updateCheckoutSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateCheckoutSettingsRequest} request UpdateCheckoutSettingsRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.CheckoutSettings>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.CheckoutSettingsService|deleteCheckoutSettings}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettingsService
+                             * @typedef DeleteCheckoutSettingsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls DeleteCheckoutSettings.
+                             * @function deleteCheckoutSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IDeleteCheckoutSettingsRequest} request DeleteCheckoutSettingsRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.DeleteCheckoutSettingsCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(CheckoutSettingsService.prototype.deleteCheckoutSettings = function deleteCheckoutSettings(request, callback) {
+                                return this.rpcCall(deleteCheckoutSettings, $root.google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "DeleteCheckoutSettings" });
+    
+                            /**
+                             * Calls DeleteCheckoutSettings.
+                             * @function deleteCheckoutSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettingsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IDeleteCheckoutSettingsRequest} request DeleteCheckoutSettingsRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            return CheckoutSettingsService;
+                        })();
+    
+                        v1beta.GetCheckoutSettingsRequest = (function() {
+    
+                            /**
+                             * Properties of a GetCheckoutSettingsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IGetCheckoutSettingsRequest
+                             * @property {string|null} [name] GetCheckoutSettingsRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetCheckoutSettingsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a GetCheckoutSettingsRequest.
+                             * @implements IGetCheckoutSettingsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetCheckoutSettingsRequest=} [properties] Properties to set
+                             */
+                            function GetCheckoutSettingsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetCheckoutSettingsRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest
+                             * @instance
+                             */
+                            GetCheckoutSettingsRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetCheckoutSettingsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetCheckoutSettingsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest} GetCheckoutSettingsRequest instance
+                             */
+                            GetCheckoutSettingsRequest.create = function create(properties) {
+                                return new GetCheckoutSettingsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetCheckoutSettingsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetCheckoutSettingsRequest} message GetCheckoutSettingsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetCheckoutSettingsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetCheckoutSettingsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetCheckoutSettingsRequest} message GetCheckoutSettingsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetCheckoutSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetCheckoutSettingsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest} GetCheckoutSettingsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetCheckoutSettingsRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetCheckoutSettingsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest} GetCheckoutSettingsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetCheckoutSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetCheckoutSettingsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetCheckoutSettingsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetCheckoutSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest} GetCheckoutSettingsRequest
+                             */
+                            GetCheckoutSettingsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetCheckoutSettingsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest} message GetCheckoutSettingsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetCheckoutSettingsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetCheckoutSettingsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetCheckoutSettingsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetCheckoutSettingsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetCheckoutSettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.GetCheckoutSettingsRequest";
+                            };
+    
+                            return GetCheckoutSettingsRequest;
+                        })();
+    
+                        v1beta.CreateCheckoutSettingsRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateCheckoutSettingsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface ICreateCheckoutSettingsRequest
+                             * @property {string|null} [parent] CreateCheckoutSettingsRequest parent
+                             * @property {google.shopping.merchant.accounts.v1beta.ICheckoutSettings|null} [checkoutSettings] CreateCheckoutSettingsRequest checkoutSettings
+                             */
+    
+                            /**
+                             * Constructs a new CreateCheckoutSettingsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a CreateCheckoutSettingsRequest.
+                             * @implements ICreateCheckoutSettingsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateCheckoutSettingsRequest=} [properties] Properties to set
+                             */
+                            function CreateCheckoutSettingsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateCheckoutSettingsRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest
+                             * @instance
+                             */
+                            CreateCheckoutSettingsRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateCheckoutSettingsRequest checkoutSettings.
+                             * @member {google.shopping.merchant.accounts.v1beta.ICheckoutSettings|null|undefined} checkoutSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest
+                             * @instance
+                             */
+                            CreateCheckoutSettingsRequest.prototype.checkoutSettings = null;
+    
+                            /**
+                             * Creates a new CreateCheckoutSettingsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateCheckoutSettingsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest} CreateCheckoutSettingsRequest instance
+                             */
+                            CreateCheckoutSettingsRequest.create = function create(properties) {
+                                return new CreateCheckoutSettingsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateCheckoutSettingsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateCheckoutSettingsRequest} message CreateCheckoutSettingsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateCheckoutSettingsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.checkoutSettings != null && Object.hasOwnProperty.call(message, "checkoutSettings"))
+                                    $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.encode(message.checkoutSettings, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateCheckoutSettingsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ICreateCheckoutSettingsRequest} message CreateCheckoutSettingsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateCheckoutSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateCheckoutSettingsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest} CreateCheckoutSettingsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateCheckoutSettingsRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.checkoutSettings = $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateCheckoutSettingsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest} CreateCheckoutSettingsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateCheckoutSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateCheckoutSettingsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateCheckoutSettingsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.checkoutSettings != null && message.hasOwnProperty("checkoutSettings")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.verify(message.checkoutSettings);
+                                    if (error)
+                                        return "checkoutSettings." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateCheckoutSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest} CreateCheckoutSettingsRequest
+                             */
+                            CreateCheckoutSettingsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.checkoutSettings != null) {
+                                    if (typeof object.checkoutSettings !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest.checkoutSettings: object expected");
+                                    message.checkoutSettings = $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.fromObject(object.checkoutSettings);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateCheckoutSettingsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest} message CreateCheckoutSettingsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateCheckoutSettingsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.checkoutSettings = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.checkoutSettings != null && message.hasOwnProperty("checkoutSettings"))
+                                    object.checkoutSettings = $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.toObject(message.checkoutSettings, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateCheckoutSettingsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateCheckoutSettingsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateCheckoutSettingsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateCheckoutSettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.CreateCheckoutSettingsRequest";
+                            };
+    
+                            return CreateCheckoutSettingsRequest;
+                        })();
+    
+                        v1beta.UpdateCheckoutSettingsRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateCheckoutSettingsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IUpdateCheckoutSettingsRequest
+                             * @property {google.shopping.merchant.accounts.v1beta.ICheckoutSettings|null} [checkoutSettings] UpdateCheckoutSettingsRequest checkoutSettings
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateCheckoutSettingsRequest updateMask
+                             */
+    
+                            /**
+                             * Constructs a new UpdateCheckoutSettingsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an UpdateCheckoutSettingsRequest.
+                             * @implements IUpdateCheckoutSettingsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateCheckoutSettingsRequest=} [properties] Properties to set
+                             */
+                            function UpdateCheckoutSettingsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateCheckoutSettingsRequest checkoutSettings.
+                             * @member {google.shopping.merchant.accounts.v1beta.ICheckoutSettings|null|undefined} checkoutSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest
+                             * @instance
+                             */
+                            UpdateCheckoutSettingsRequest.prototype.checkoutSettings = null;
+    
+                            /**
+                             * UpdateCheckoutSettingsRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest
+                             * @instance
+                             */
+                            UpdateCheckoutSettingsRequest.prototype.updateMask = null;
+    
+                            /**
+                             * Creates a new UpdateCheckoutSettingsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateCheckoutSettingsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest} UpdateCheckoutSettingsRequest instance
+                             */
+                            UpdateCheckoutSettingsRequest.create = function create(properties) {
+                                return new UpdateCheckoutSettingsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateCheckoutSettingsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateCheckoutSettingsRequest} message UpdateCheckoutSettingsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateCheckoutSettingsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.checkoutSettings != null && Object.hasOwnProperty.call(message, "checkoutSettings"))
+                                    $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.encode(message.checkoutSettings, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateCheckoutSettingsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateCheckoutSettingsRequest} message UpdateCheckoutSettingsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateCheckoutSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateCheckoutSettingsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest} UpdateCheckoutSettingsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateCheckoutSettingsRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.checkoutSettings = $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateCheckoutSettingsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest} UpdateCheckoutSettingsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateCheckoutSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateCheckoutSettingsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateCheckoutSettingsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.checkoutSettings != null && message.hasOwnProperty("checkoutSettings")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.verify(message.checkoutSettings);
+                                    if (error)
+                                        return "checkoutSettings." + error;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateCheckoutSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest} UpdateCheckoutSettingsRequest
+                             */
+                            UpdateCheckoutSettingsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest();
+                                if (object.checkoutSettings != null) {
+                                    if (typeof object.checkoutSettings !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest.checkoutSettings: object expected");
+                                    message.checkoutSettings = $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.fromObject(object.checkoutSettings);
+                                }
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateCheckoutSettingsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest} message UpdateCheckoutSettingsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateCheckoutSettingsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.checkoutSettings = null;
+                                    object.updateMask = null;
+                                }
+                                if (message.checkoutSettings != null && message.hasOwnProperty("checkoutSettings"))
+                                    object.checkoutSettings = $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.toObject(message.checkoutSettings, options);
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateCheckoutSettingsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateCheckoutSettingsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateCheckoutSettingsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateCheckoutSettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.UpdateCheckoutSettingsRequest";
+                            };
+    
+                            return UpdateCheckoutSettingsRequest;
+                        })();
+    
+                        v1beta.DeleteCheckoutSettingsRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteCheckoutSettingsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IDeleteCheckoutSettingsRequest
+                             * @property {string|null} [name] DeleteCheckoutSettingsRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteCheckoutSettingsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a DeleteCheckoutSettingsRequest.
+                             * @implements IDeleteCheckoutSettingsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IDeleteCheckoutSettingsRequest=} [properties] Properties to set
+                             */
+                            function DeleteCheckoutSettingsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteCheckoutSettingsRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest
+                             * @instance
+                             */
+                            DeleteCheckoutSettingsRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteCheckoutSettingsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IDeleteCheckoutSettingsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest} DeleteCheckoutSettingsRequest instance
+                             */
+                            DeleteCheckoutSettingsRequest.create = function create(properties) {
+                                return new DeleteCheckoutSettingsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteCheckoutSettingsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IDeleteCheckoutSettingsRequest} message DeleteCheckoutSettingsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteCheckoutSettingsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteCheckoutSettingsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IDeleteCheckoutSettingsRequest} message DeleteCheckoutSettingsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteCheckoutSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteCheckoutSettingsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest} DeleteCheckoutSettingsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteCheckoutSettingsRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteCheckoutSettingsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest} DeleteCheckoutSettingsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteCheckoutSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteCheckoutSettingsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteCheckoutSettingsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteCheckoutSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest} DeleteCheckoutSettingsRequest
+                             */
+                            DeleteCheckoutSettingsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteCheckoutSettingsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest} message DeleteCheckoutSettingsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteCheckoutSettingsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteCheckoutSettingsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteCheckoutSettingsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteCheckoutSettingsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteCheckoutSettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.DeleteCheckoutSettingsRequest";
+                            };
+    
+                            return DeleteCheckoutSettingsRequest;
+                        })();
+    
+                        v1beta.CheckoutSettings = (function() {
+    
+                            /**
+                             * Properties of a CheckoutSettings.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface ICheckoutSettings
+                             * @property {string|null} [name] CheckoutSettings name
+                             * @property {google.shopping.merchant.accounts.v1beta.IUriSettings|null} [uriSettings] CheckoutSettings uriSettings
+                             * @property {Array.<google.shopping.type.Destination.DestinationEnum>|null} [eligibleDestinations] CheckoutSettings eligibleDestinations
+                             * @property {google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState|null} [enrollmentState] CheckoutSettings enrollmentState
+                             * @property {google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState|null} [reviewState] CheckoutSettings reviewState
+                             * @property {google.shopping.merchant.accounts.v1beta.IUriSettings|null} [effectiveUriSettings] CheckoutSettings effectiveUriSettings
+                             * @property {google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState|null} [effectiveEnrollmentState] CheckoutSettings effectiveEnrollmentState
+                             * @property {google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState|null} [effectiveReviewState] CheckoutSettings effectiveReviewState
+                             */
+    
+                            /**
+                             * Constructs a new CheckoutSettings.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a CheckoutSettings.
+                             * @implements ICheckoutSettings
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.ICheckoutSettings=} [properties] Properties to set
+                             */
+                            function CheckoutSettings(properties) {
+                                this.eligibleDestinations = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CheckoutSettings name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @instance
+                             */
+                            CheckoutSettings.prototype.name = "";
+    
+                            /**
+                             * CheckoutSettings uriSettings.
+                             * @member {google.shopping.merchant.accounts.v1beta.IUriSettings|null|undefined} uriSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @instance
+                             */
+                            CheckoutSettings.prototype.uriSettings = null;
+    
+                            /**
+                             * CheckoutSettings eligibleDestinations.
+                             * @member {Array.<google.shopping.type.Destination.DestinationEnum>} eligibleDestinations
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @instance
+                             */
+                            CheckoutSettings.prototype.eligibleDestinations = $util.emptyArray;
+    
+                            /**
+                             * CheckoutSettings enrollmentState.
+                             * @member {google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState|null|undefined} enrollmentState
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @instance
+                             */
+                            CheckoutSettings.prototype.enrollmentState = null;
+    
+                            /**
+                             * CheckoutSettings reviewState.
+                             * @member {google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState|null|undefined} reviewState
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @instance
+                             */
+                            CheckoutSettings.prototype.reviewState = null;
+    
+                            /**
+                             * CheckoutSettings effectiveUriSettings.
+                             * @member {google.shopping.merchant.accounts.v1beta.IUriSettings|null|undefined} effectiveUriSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @instance
+                             */
+                            CheckoutSettings.prototype.effectiveUriSettings = null;
+    
+                            /**
+                             * CheckoutSettings effectiveEnrollmentState.
+                             * @member {google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState|null|undefined} effectiveEnrollmentState
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @instance
+                             */
+                            CheckoutSettings.prototype.effectiveEnrollmentState = null;
+    
+                            /**
+                             * CheckoutSettings effectiveReviewState.
+                             * @member {google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState|null|undefined} effectiveReviewState
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @instance
+                             */
+                            CheckoutSettings.prototype.effectiveReviewState = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CheckoutSettings.prototype, "_uriSettings", {
+                                get: $util.oneOfGetter($oneOfFields = ["uriSettings"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CheckoutSettings.prototype, "_enrollmentState", {
+                                get: $util.oneOfGetter($oneOfFields = ["enrollmentState"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CheckoutSettings.prototype, "_reviewState", {
+                                get: $util.oneOfGetter($oneOfFields = ["reviewState"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CheckoutSettings.prototype, "_effectiveEnrollmentState", {
+                                get: $util.oneOfGetter($oneOfFields = ["effectiveEnrollmentState"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CheckoutSettings.prototype, "_effectiveReviewState", {
+                                get: $util.oneOfGetter($oneOfFields = ["effectiveReviewState"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new CheckoutSettings instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ICheckoutSettings=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.CheckoutSettings} CheckoutSettings instance
+                             */
+                            CheckoutSettings.create = function create(properties) {
+                                return new CheckoutSettings(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CheckoutSettings message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CheckoutSettings.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ICheckoutSettings} message CheckoutSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CheckoutSettings.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.uriSettings != null && Object.hasOwnProperty.call(message, "uriSettings"))
+                                    $root.google.shopping.merchant.accounts.v1beta.UriSettings.encode(message.uriSettings, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.enrollmentState != null && Object.hasOwnProperty.call(message, "enrollmentState"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.enrollmentState);
+                                if (message.reviewState != null && Object.hasOwnProperty.call(message, "reviewState"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.reviewState);
+                                if (message.effectiveUriSettings != null && Object.hasOwnProperty.call(message, "effectiveUriSettings"))
+                                    $root.google.shopping.merchant.accounts.v1beta.UriSettings.encode(message.effectiveUriSettings, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.effectiveEnrollmentState != null && Object.hasOwnProperty.call(message, "effectiveEnrollmentState"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.effectiveEnrollmentState);
+                                if (message.effectiveReviewState != null && Object.hasOwnProperty.call(message, "effectiveReviewState"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int32(message.effectiveReviewState);
+                                if (message.eligibleDestinations != null && message.eligibleDestinations.length) {
+                                    writer.uint32(/* id 8, wireType 2 =*/66).fork();
+                                    for (var i = 0; i < message.eligibleDestinations.length; ++i)
+                                        writer.int32(message.eligibleDestinations[i]);
+                                    writer.ldelim();
+                                }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CheckoutSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.CheckoutSettings.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.ICheckoutSettings} message CheckoutSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CheckoutSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CheckoutSettings message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.CheckoutSettings} CheckoutSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CheckoutSettings.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.uriSettings = $root.google.shopping.merchant.accounts.v1beta.UriSettings.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            if (!(message.eligibleDestinations && message.eligibleDestinations.length))
+                                                message.eligibleDestinations = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.eligibleDestinations.push(reader.int32());
+                                            } else
+                                                message.eligibleDestinations.push(reader.int32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.enrollmentState = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.reviewState = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.effectiveUriSettings = $root.google.shopping.merchant.accounts.v1beta.UriSettings.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.effectiveEnrollmentState = reader.int32();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.effectiveReviewState = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CheckoutSettings message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.CheckoutSettings} CheckoutSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CheckoutSettings.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CheckoutSettings message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CheckoutSettings.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.uriSettings != null && message.hasOwnProperty("uriSettings")) {
+                                    properties._uriSettings = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.accounts.v1beta.UriSettings.verify(message.uriSettings);
+                                        if (error)
+                                            return "uriSettings." + error;
+                                    }
+                                }
+                                if (message.eligibleDestinations != null && message.hasOwnProperty("eligibleDestinations")) {
+                                    if (!Array.isArray(message.eligibleDestinations))
+                                        return "eligibleDestinations: array expected";
+                                    for (var i = 0; i < message.eligibleDestinations.length; ++i)
+                                        switch (message.eligibleDestinations[i]) {
+                                        default:
+                                            return "eligibleDestinations: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                            break;
+                                        }
+                                }
+                                if (message.enrollmentState != null && message.hasOwnProperty("enrollmentState")) {
+                                    properties._enrollmentState = 1;
+                                    switch (message.enrollmentState) {
+                                    default:
+                                        return "enrollmentState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                if (message.reviewState != null && message.hasOwnProperty("reviewState")) {
+                                    properties._reviewState = 1;
+                                    switch (message.reviewState) {
+                                    default:
+                                        return "reviewState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                if (message.effectiveUriSettings != null && message.hasOwnProperty("effectiveUriSettings")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.UriSettings.verify(message.effectiveUriSettings);
+                                    if (error)
+                                        return "effectiveUriSettings." + error;
+                                }
+                                if (message.effectiveEnrollmentState != null && message.hasOwnProperty("effectiveEnrollmentState")) {
+                                    properties._effectiveEnrollmentState = 1;
+                                    switch (message.effectiveEnrollmentState) {
+                                    default:
+                                        return "effectiveEnrollmentState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                if (message.effectiveReviewState != null && message.hasOwnProperty("effectiveReviewState")) {
+                                    properties._effectiveReviewState = 1;
+                                    switch (message.effectiveReviewState) {
+                                    default:
+                                        return "effectiveReviewState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CheckoutSettings message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.CheckoutSettings} CheckoutSettings
+                             */
+                            CheckoutSettings.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.uriSettings != null) {
+                                    if (typeof object.uriSettings !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.CheckoutSettings.uriSettings: object expected");
+                                    message.uriSettings = $root.google.shopping.merchant.accounts.v1beta.UriSettings.fromObject(object.uriSettings);
+                                }
+                                if (object.eligibleDestinations) {
+                                    if (!Array.isArray(object.eligibleDestinations))
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.CheckoutSettings.eligibleDestinations: array expected");
+                                    message.eligibleDestinations = [];
+                                    for (var i = 0; i < object.eligibleDestinations.length; ++i)
+                                        switch (object.eligibleDestinations[i]) {
+                                        default:
+                                            if (typeof object.eligibleDestinations[i] === "number") {
+                                                message.eligibleDestinations[i] = object.eligibleDestinations[i];
+                                                break;
+                                            }
+                                        case "DESTINATION_ENUM_UNSPECIFIED":
+                                        case 0:
+                                            message.eligibleDestinations[i] = 0;
+                                            break;
+                                        case "SHOPPING_ADS":
+                                        case 1:
+                                            message.eligibleDestinations[i] = 1;
+                                            break;
+                                        case "DISPLAY_ADS":
+                                        case 2:
+                                            message.eligibleDestinations[i] = 2;
+                                            break;
+                                        case "LOCAL_INVENTORY_ADS":
+                                        case 3:
+                                            message.eligibleDestinations[i] = 3;
+                                            break;
+                                        case "FREE_LISTINGS":
+                                        case 4:
+                                            message.eligibleDestinations[i] = 4;
+                                            break;
+                                        case "FREE_LOCAL_LISTINGS":
+                                        case 5:
+                                            message.eligibleDestinations[i] = 5;
+                                            break;
+                                        case "YOUTUBE_SHOPPING":
+                                        case 6:
+                                            message.eligibleDestinations[i] = 6;
+                                            break;
+                                        }
+                                }
+                                switch (object.enrollmentState) {
+                                default:
+                                    if (typeof object.enrollmentState === "number") {
+                                        message.enrollmentState = object.enrollmentState;
+                                        break;
+                                    }
+                                    break;
+                                case "CHECKOUT_ENROLLMENT_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.enrollmentState = 0;
+                                    break;
+                                case "INACTIVE":
+                                case 1:
+                                    message.enrollmentState = 1;
+                                    break;
+                                case "ENROLLED":
+                                case 2:
+                                    message.enrollmentState = 2;
+                                    break;
+                                case "OPTED_OUT":
+                                case 3:
+                                    message.enrollmentState = 3;
+                                    break;
+                                }
+                                switch (object.reviewState) {
+                                default:
+                                    if (typeof object.reviewState === "number") {
+                                        message.reviewState = object.reviewState;
+                                        break;
+                                    }
+                                    break;
+                                case "CHECKOUT_REVIEW_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.reviewState = 0;
+                                    break;
+                                case "IN_REVIEW":
+                                case 1:
+                                    message.reviewState = 1;
+                                    break;
+                                case "APPROVED":
+                                case 2:
+                                    message.reviewState = 2;
+                                    break;
+                                case "DISAPPROVED":
+                                case 3:
+                                    message.reviewState = 3;
+                                    break;
+                                }
+                                if (object.effectiveUriSettings != null) {
+                                    if (typeof object.effectiveUriSettings !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.CheckoutSettings.effectiveUriSettings: object expected");
+                                    message.effectiveUriSettings = $root.google.shopping.merchant.accounts.v1beta.UriSettings.fromObject(object.effectiveUriSettings);
+                                }
+                                switch (object.effectiveEnrollmentState) {
+                                default:
+                                    if (typeof object.effectiveEnrollmentState === "number") {
+                                        message.effectiveEnrollmentState = object.effectiveEnrollmentState;
+                                        break;
+                                    }
+                                    break;
+                                case "CHECKOUT_ENROLLMENT_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.effectiveEnrollmentState = 0;
+                                    break;
+                                case "INACTIVE":
+                                case 1:
+                                    message.effectiveEnrollmentState = 1;
+                                    break;
+                                case "ENROLLED":
+                                case 2:
+                                    message.effectiveEnrollmentState = 2;
+                                    break;
+                                case "OPTED_OUT":
+                                case 3:
+                                    message.effectiveEnrollmentState = 3;
+                                    break;
+                                }
+                                switch (object.effectiveReviewState) {
+                                default:
+                                    if (typeof object.effectiveReviewState === "number") {
+                                        message.effectiveReviewState = object.effectiveReviewState;
+                                        break;
+                                    }
+                                    break;
+                                case "CHECKOUT_REVIEW_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.effectiveReviewState = 0;
+                                    break;
+                                case "IN_REVIEW":
+                                case 1:
+                                    message.effectiveReviewState = 1;
+                                    break;
+                                case "APPROVED":
+                                case 2:
+                                    message.effectiveReviewState = 2;
+                                    break;
+                                case "DISAPPROVED":
+                                case 3:
+                                    message.effectiveReviewState = 3;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CheckoutSettings message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.CheckoutSettings} message CheckoutSettings
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CheckoutSettings.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.eligibleDestinations = [];
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.effectiveUriSettings = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.uriSettings != null && message.hasOwnProperty("uriSettings")) {
+                                    object.uriSettings = $root.google.shopping.merchant.accounts.v1beta.UriSettings.toObject(message.uriSettings, options);
+                                    if (options.oneofs)
+                                        object._uriSettings = "uriSettings";
+                                }
+                                if (message.enrollmentState != null && message.hasOwnProperty("enrollmentState")) {
+                                    object.enrollmentState = options.enums === String ? $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState[message.enrollmentState] === undefined ? message.enrollmentState : $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState[message.enrollmentState] : message.enrollmentState;
+                                    if (options.oneofs)
+                                        object._enrollmentState = "enrollmentState";
+                                }
+                                if (message.reviewState != null && message.hasOwnProperty("reviewState")) {
+                                    object.reviewState = options.enums === String ? $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState[message.reviewState] === undefined ? message.reviewState : $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState[message.reviewState] : message.reviewState;
+                                    if (options.oneofs)
+                                        object._reviewState = "reviewState";
+                                }
+                                if (message.effectiveUriSettings != null && message.hasOwnProperty("effectiveUriSettings"))
+                                    object.effectiveUriSettings = $root.google.shopping.merchant.accounts.v1beta.UriSettings.toObject(message.effectiveUriSettings, options);
+                                if (message.effectiveEnrollmentState != null && message.hasOwnProperty("effectiveEnrollmentState")) {
+                                    object.effectiveEnrollmentState = options.enums === String ? $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState[message.effectiveEnrollmentState] === undefined ? message.effectiveEnrollmentState : $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState[message.effectiveEnrollmentState] : message.effectiveEnrollmentState;
+                                    if (options.oneofs)
+                                        object._effectiveEnrollmentState = "effectiveEnrollmentState";
+                                }
+                                if (message.effectiveReviewState != null && message.hasOwnProperty("effectiveReviewState")) {
+                                    object.effectiveReviewState = options.enums === String ? $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState[message.effectiveReviewState] === undefined ? message.effectiveReviewState : $root.google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState[message.effectiveReviewState] : message.effectiveReviewState;
+                                    if (options.oneofs)
+                                        object._effectiveReviewState = "effectiveReviewState";
+                                }
+                                if (message.eligibleDestinations && message.eligibleDestinations.length) {
+                                    object.eligibleDestinations = [];
+                                    for (var j = 0; j < message.eligibleDestinations.length; ++j)
+                                        object.eligibleDestinations[j] = options.enums === String ? $root.google.shopping.type.Destination.DestinationEnum[message.eligibleDestinations[j]] === undefined ? message.eligibleDestinations[j] : $root.google.shopping.type.Destination.DestinationEnum[message.eligibleDestinations[j]] : message.eligibleDestinations[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CheckoutSettings to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CheckoutSettings.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CheckoutSettings
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.CheckoutSettings
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CheckoutSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.CheckoutSettings";
+                            };
+    
+                            /**
+                             * CheckoutEnrollmentState enum.
+                             * @name google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutEnrollmentState
+                             * @enum {number}
+                             * @property {number} CHECKOUT_ENROLLMENT_STATE_UNSPECIFIED=0 CHECKOUT_ENROLLMENT_STATE_UNSPECIFIED value
+                             * @property {number} INACTIVE=1 INACTIVE value
+                             * @property {number} ENROLLED=2 ENROLLED value
+                             * @property {number} OPTED_OUT=3 OPTED_OUT value
+                             */
+                            CheckoutSettings.CheckoutEnrollmentState = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CHECKOUT_ENROLLMENT_STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "INACTIVE"] = 1;
+                                values[valuesById[2] = "ENROLLED"] = 2;
+                                values[valuesById[3] = "OPTED_OUT"] = 3;
+                                return values;
+                            })();
+    
+                            /**
+                             * CheckoutReviewState enum.
+                             * @name google.shopping.merchant.accounts.v1beta.CheckoutSettings.CheckoutReviewState
+                             * @enum {number}
+                             * @property {number} CHECKOUT_REVIEW_STATE_UNSPECIFIED=0 CHECKOUT_REVIEW_STATE_UNSPECIFIED value
+                             * @property {number} IN_REVIEW=1 IN_REVIEW value
+                             * @property {number} APPROVED=2 APPROVED value
+                             * @property {number} DISAPPROVED=3 DISAPPROVED value
+                             */
+                            CheckoutSettings.CheckoutReviewState = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CHECKOUT_REVIEW_STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "IN_REVIEW"] = 1;
+                                values[valuesById[2] = "APPROVED"] = 2;
+                                values[valuesById[3] = "DISAPPROVED"] = 3;
+                                return values;
+                            })();
+    
+                            return CheckoutSettings;
+                        })();
+    
+                        v1beta.UriSettings = (function() {
+    
+                            /**
+                             * Properties of an UriSettings.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IUriSettings
+                             * @property {string|null} [checkoutUriTemplate] UriSettings checkoutUriTemplate
+                             * @property {string|null} [cartUriTemplate] UriSettings cartUriTemplate
+                             */
+    
+                            /**
+                             * Constructs a new UriSettings.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an UriSettings.
+                             * @implements IUriSettings
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IUriSettings=} [properties] Properties to set
+                             */
+                            function UriSettings(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UriSettings checkoutUriTemplate.
+                             * @member {string|null|undefined} checkoutUriTemplate
+                             * @memberof google.shopping.merchant.accounts.v1beta.UriSettings
+                             * @instance
+                             */
+                            UriSettings.prototype.checkoutUriTemplate = null;
+    
+                            /**
+                             * UriSettings cartUriTemplate.
+                             * @member {string|null|undefined} cartUriTemplate
+                             * @memberof google.shopping.merchant.accounts.v1beta.UriSettings
+                             * @instance
+                             */
+                            UriSettings.prototype.cartUriTemplate = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * UriSettings uriTemplate.
+                             * @member {"checkoutUriTemplate"|"cartUriTemplate"|undefined} uriTemplate
+                             * @memberof google.shopping.merchant.accounts.v1beta.UriSettings
+                             * @instance
+                             */
+                            Object.defineProperty(UriSettings.prototype, "uriTemplate", {
+                                get: $util.oneOfGetter($oneOfFields = ["checkoutUriTemplate", "cartUriTemplate"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new UriSettings instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.UriSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUriSettings=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.UriSettings} UriSettings instance
+                             */
+                            UriSettings.create = function create(properties) {
+                                return new UriSettings(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UriSettings message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UriSettings.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.UriSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUriSettings} message UriSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UriSettings.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.checkoutUriTemplate != null && Object.hasOwnProperty.call(message, "checkoutUriTemplate"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.checkoutUriTemplate);
+                                if (message.cartUriTemplate != null && Object.hasOwnProperty.call(message, "cartUriTemplate"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.cartUriTemplate);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UriSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UriSettings.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.UriSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUriSettings} message UriSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UriSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UriSettings message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.UriSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.UriSettings} UriSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UriSettings.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.UriSettings();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.checkoutUriTemplate = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.cartUriTemplate = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UriSettings message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.UriSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.UriSettings} UriSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UriSettings.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UriSettings message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.UriSettings
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UriSettings.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.checkoutUriTemplate != null && message.hasOwnProperty("checkoutUriTemplate")) {
+                                    properties.uriTemplate = 1;
+                                    if (!$util.isString(message.checkoutUriTemplate))
+                                        return "checkoutUriTemplate: string expected";
+                                }
+                                if (message.cartUriTemplate != null && message.hasOwnProperty("cartUriTemplate")) {
+                                    if (properties.uriTemplate === 1)
+                                        return "uriTemplate: multiple values";
+                                    properties.uriTemplate = 1;
+                                    if (!$util.isString(message.cartUriTemplate))
+                                        return "cartUriTemplate: string expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UriSettings message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.UriSettings
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.UriSettings} UriSettings
+                             */
+                            UriSettings.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.UriSettings)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.UriSettings();
+                                if (object.checkoutUriTemplate != null)
+                                    message.checkoutUriTemplate = String(object.checkoutUriTemplate);
+                                if (object.cartUriTemplate != null)
+                                    message.cartUriTemplate = String(object.cartUriTemplate);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UriSettings message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.UriSettings
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.UriSettings} message UriSettings
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UriSettings.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.checkoutUriTemplate != null && message.hasOwnProperty("checkoutUriTemplate")) {
+                                    object.checkoutUriTemplate = message.checkoutUriTemplate;
+                                    if (options.oneofs)
+                                        object.uriTemplate = "checkoutUriTemplate";
+                                }
+                                if (message.cartUriTemplate != null && message.hasOwnProperty("cartUriTemplate")) {
+                                    object.cartUriTemplate = message.cartUriTemplate;
+                                    if (options.oneofs)
+                                        object.uriTemplate = "cartUriTemplate";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UriSettings to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.UriSettings
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UriSettings.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UriSettings
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.UriSettings
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UriSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.UriSettings";
+                            };
+    
+                            return UriSettings;
+                        })();
+    
                         v1beta.EmailPreferencesService = (function() {
     
                             /**

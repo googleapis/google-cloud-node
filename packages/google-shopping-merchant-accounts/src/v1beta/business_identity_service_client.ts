@@ -199,6 +199,9 @@ export class BusinessIdentityServiceClient {
       businessInfoPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/businessInfo'
       ),
+      checkoutSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/programs/{program}/checkoutSettings'
+      ),
       emailPreferencesPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/users/{email}/emailPreferences'
       ),
@@ -764,6 +767,42 @@ export class BusinessIdentityServiceClient {
    */
   matchAccountFromBusinessInfoName(businessInfoName: string) {
     return this.pathTemplates.businessInfoPathTemplate.match(businessInfoName).account;
+  }
+
+  /**
+   * Return a fully-qualified checkoutSettings resource name string.
+   *
+   * @param {string} account
+   * @param {string} program
+   * @returns {string} Resource name string.
+   */
+  checkoutSettingsPath(account:string,program:string) {
+    return this.pathTemplates.checkoutSettingsPathTemplate.render({
+      account: account,
+      program: program,
+    });
+  }
+
+  /**
+   * Parse the account from CheckoutSettings resource.
+   *
+   * @param {string} checkoutSettingsName
+   *   A fully-qualified path representing CheckoutSettings resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromCheckoutSettingsName(checkoutSettingsName: string) {
+    return this.pathTemplates.checkoutSettingsPathTemplate.match(checkoutSettingsName).account;
+  }
+
+  /**
+   * Parse the program from CheckoutSettings resource.
+   *
+   * @param {string} checkoutSettingsName
+   *   A fully-qualified path representing CheckoutSettings resource.
+   * @returns {string} A string representing the program.
+   */
+  matchProgramFromCheckoutSettingsName(checkoutSettingsName: string) {
+    return this.pathTemplates.checkoutSettingsPathTemplate.match(checkoutSettingsName).program;
   }
 
   /**

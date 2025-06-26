@@ -812,6 +812,174 @@
             }
         },
         {
+            "regionTag": "merchantapi_v1beta_generated_CheckoutSettingsService_GetCheckoutSettings_async",
+            "title": "AccountIssueService getCheckoutSettings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets `CheckoutSettings` for the given merchant. This includes information about review state, enrollment state and URL settings.",
+            "canonical": true,
+            "file": "checkout_settings_service.get_checkout_settings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetCheckoutSettings",
+                "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.GetCheckoutSettings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.accounts.v1beta.CheckoutSettings",
+                "client": {
+                    "shortName": "CheckoutSettingsServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsServiceClient"
+                },
+                "method": {
+                    "shortName": "GetCheckoutSettings",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.GetCheckoutSettings",
+                    "service": {
+                        "shortName": "CheckoutSettingsService",
+                        "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "merchantapi_v1beta_generated_CheckoutSettingsService_CreateCheckoutSettings_async",
+            "title": "AccountIssueService createCheckoutSettings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates `CheckoutSettings` for the given merchant.",
+            "canonical": true,
+            "file": "checkout_settings_service.create_checkout_settings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateCheckoutSettings",
+                "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.CreateCheckoutSettings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "checkout_settings",
+                        "type": ".google.shopping.merchant.accounts.v1beta.CheckoutSettings"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.accounts.v1beta.CheckoutSettings",
+                "client": {
+                    "shortName": "CheckoutSettingsServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateCheckoutSettings",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.CreateCheckoutSettings",
+                    "service": {
+                        "shortName": "CheckoutSettingsService",
+                        "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "merchantapi_v1beta_generated_CheckoutSettingsService_UpdateCheckoutSettings_async",
+            "title": "AccountIssueService updateCheckoutSettings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates `CheckoutSettings` for the given merchant.",
+            "canonical": true,
+            "file": "checkout_settings_service.update_checkout_settings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateCheckoutSettings",
+                "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.UpdateCheckoutSettings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "checkout_settings",
+                        "type": ".google.shopping.merchant.accounts.v1beta.CheckoutSettings"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.accounts.v1beta.CheckoutSettings",
+                "client": {
+                    "shortName": "CheckoutSettingsServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateCheckoutSettings",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.UpdateCheckoutSettings",
+                    "service": {
+                        "shortName": "CheckoutSettingsService",
+                        "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "merchantapi_v1beta_generated_CheckoutSettingsService_DeleteCheckoutSettings_async",
+            "title": "AccountIssueService deleteCheckoutSettings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes `CheckoutSettings` and unenrolls merchant from `Checkout` program.",
+            "canonical": true,
+            "file": "checkout_settings_service.delete_checkout_settings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteCheckoutSettings",
+                "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.DeleteCheckoutSettings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "CheckoutSettingsServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteCheckoutSettings",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.DeleteCheckoutSettings",
+                    "service": {
+                        "shortName": "CheckoutSettingsService",
+                        "fullName": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "merchantapi_v1beta_generated_EmailPreferencesService_GetEmailPreferences_async",
             "title": "AccountIssueService getEmailPreferences Sample",
             "origin": "API_DEFINITION",
