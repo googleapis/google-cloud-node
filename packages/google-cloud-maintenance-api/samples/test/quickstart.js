@@ -18,7 +18,7 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const { MaintenanceClient } = require('@google-cloud/api').v1beta;
+const { MaintenanceClient } = require('@google-cloud/maintenance-api').v1beta;
 const maintenanceClient = new MaintenanceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});

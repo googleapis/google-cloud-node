@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2025 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/api',
+    systemName: '@google-cloud/maintenance-api',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

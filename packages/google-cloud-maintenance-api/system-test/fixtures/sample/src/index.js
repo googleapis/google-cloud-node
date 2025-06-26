@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const api = require('@google-cloud/api');
+const api = require('@google-cloud/maintenance-api');
 
 function main() {
   const maintenanceClient = new api.MaintenanceClient();

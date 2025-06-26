@@ -69,7 +69,7 @@ function main(parent) {
   // const orderBy = 'abc123'
 
   // Imports the Api library
-  const {MaintenanceClient} = require('@google-cloud/api').v1beta;
+  const {MaintenanceClient} = require('@google-cloud/maintenance-api').v1beta;
 
   // Instantiates a client
   const apiClient = new MaintenanceClient();
