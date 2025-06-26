@@ -16,8 +16,8 @@
 'use strict';
 
 // Service has limited quota, adding max results and page size to keep in the limit.
-const PAGE_SIZE = 5;
-const MAX_RESULTS = 10;
+const PAGE_SIZE = 1;
+const MAX_RESULTS = 1;
 
 async function main(projectId, location) {
   // [START nodejs_contact_center_insights_quickstart]
