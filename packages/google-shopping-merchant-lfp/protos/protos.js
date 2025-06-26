@@ -295,56 +295,31 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * LfpInventory _gtin.
-                             * @member {"gtin"|undefined} _gtin
-                             * @memberof google.shopping.merchant.lfp.v1beta.LfpInventory
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LfpInventory.prototype, "_gtin", {
                                 get: $util.oneOfGetter($oneOfFields = ["gtin"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * LfpInventory _quantity.
-                             * @member {"quantity"|undefined} _quantity
-                             * @memberof google.shopping.merchant.lfp.v1beta.LfpInventory
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LfpInventory.prototype, "_quantity", {
                                 get: $util.oneOfGetter($oneOfFields = ["quantity"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * LfpInventory _pickupMethod.
-                             * @member {"pickupMethod"|undefined} _pickupMethod
-                             * @memberof google.shopping.merchant.lfp.v1beta.LfpInventory
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LfpInventory.prototype, "_pickupMethod", {
                                 get: $util.oneOfGetter($oneOfFields = ["pickupMethod"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * LfpInventory _pickupSla.
-                             * @member {"pickupSla"|undefined} _pickupSla
-                             * @memberof google.shopping.merchant.lfp.v1beta.LfpInventory
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LfpInventory.prototype, "_pickupSla", {
                                 get: $util.oneOfGetter($oneOfFields = ["pickupSla"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * LfpInventory _feedLabel.
-                             * @member {"feedLabel"|undefined} _feedLabel
-                             * @memberof google.shopping.merchant.lfp.v1beta.LfpInventory
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LfpInventory.prototype, "_feedLabel", {
                                 get: $util.oneOfGetter($oneOfFields = ["feedLabel"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -2950,23 +2925,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * LfpSale _uid.
-                             * @member {"uid"|undefined} _uid
-                             * @memberof google.shopping.merchant.lfp.v1beta.LfpSale
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LfpSale.prototype, "_uid", {
                                 get: $util.oneOfGetter($oneOfFields = ["uid"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * LfpSale _feedLabel.
-                             * @member {"feedLabel"|undefined} _feedLabel
-                             * @memberof google.shopping.merchant.lfp.v1beta.LfpSale
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LfpSale.prototype, "_feedLabel", {
                                 get: $util.oneOfGetter($oneOfFields = ["feedLabel"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -3874,56 +3839,31 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * LfpStore _storeName.
-                             * @member {"storeName"|undefined} _storeName
-                             * @memberof google.shopping.merchant.lfp.v1beta.LfpStore
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LfpStore.prototype, "_storeName", {
                                 get: $util.oneOfGetter($oneOfFields = ["storeName"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * LfpStore _phoneNumber.
-                             * @member {"phoneNumber"|undefined} _phoneNumber
-                             * @memberof google.shopping.merchant.lfp.v1beta.LfpStore
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LfpStore.prototype, "_phoneNumber", {
                                 get: $util.oneOfGetter($oneOfFields = ["phoneNumber"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * LfpStore _websiteUri.
-                             * @member {"websiteUri"|undefined} _websiteUri
-                             * @memberof google.shopping.merchant.lfp.v1beta.LfpStore
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LfpStore.prototype, "_websiteUri", {
                                 get: $util.oneOfGetter($oneOfFields = ["websiteUri"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * LfpStore _placeId.
-                             * @member {"placeId"|undefined} _placeId
-                             * @memberof google.shopping.merchant.lfp.v1beta.LfpStore
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LfpStore.prototype, "_placeId", {
                                 get: $util.oneOfGetter($oneOfFields = ["placeId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * LfpStore _matchingStateHint.
-                             * @member {"matchingStateHint"|undefined} _matchingStateHint
-                             * @memberof google.shopping.merchant.lfp.v1beta.LfpStore
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(LfpStore.prototype, "_matchingStateHint", {
                                 get: $util.oneOfGetter($oneOfFields = ["matchingStateHint"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -5579,12 +5519,7 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * Weight _amountMicros.
-                     * @member {"amountMicros"|undefined} _amountMicros
-                     * @memberof google.shopping.type.Weight
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Weight.prototype, "_amountMicros", {
                         get: $util.oneOfGetter($oneOfFields = ["amountMicros"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -5876,23 +5811,13 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * Price _amountMicros.
-                     * @member {"amountMicros"|undefined} _amountMicros
-                     * @memberof google.shopping.type.Price
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Price.prototype, "_amountMicros", {
                         get: $util.oneOfGetter($oneOfFields = ["amountMicros"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
-                    /**
-                     * Price _currencyCode.
-                     * @member {"currencyCode"|undefined} _currencyCode
-                     * @memberof google.shopping.type.Price
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Price.prototype, "_currencyCode", {
                         get: $util.oneOfGetter($oneOfFields = ["currencyCode"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -6157,23 +6082,13 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * CustomAttribute _name.
-                     * @member {"name"|undefined} _name
-                     * @memberof google.shopping.type.CustomAttribute
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(CustomAttribute.prototype, "_name", {
                         get: $util.oneOfGetter($oneOfFields = ["name"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
-                    /**
-                     * CustomAttribute _value.
-                     * @member {"value"|undefined} _value
-                     * @memberof google.shopping.type.CustomAttribute
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(CustomAttribute.prototype, "_value", {
                         get: $util.oneOfGetter($oneOfFields = ["value"]),
                         set: $util.oneOfSetter($oneOfFields)

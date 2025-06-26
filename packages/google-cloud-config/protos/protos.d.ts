@@ -694,21 +694,6 @@ export namespace google {
                     /** Deployment blueprint. */
                     public blueprint?: "terraformBlueprint";
 
-                    /** Deployment _artifactsGcsBucket. */
-                    public _artifactsGcsBucket?: "artifactsGcsBucket";
-
-                    /** Deployment _serviceAccount. */
-                    public _serviceAccount?: "serviceAccount";
-
-                    /** Deployment _importExistingResources. */
-                    public _importExistingResources?: "importExistingResources";
-
-                    /** Deployment _workerPool. */
-                    public _workerPool?: "workerPool";
-
-                    /** Deployment _tfVersionConstraint. */
-                    public _tfVersionConstraint?: "tfVersionConstraint";
-
                     /**
                      * Creates a new Deployment instance using the specified properties.
                      * @param [properties] Properties to set
@@ -2784,15 +2769,6 @@ export namespace google {
                     /** GitSource ref. */
                     public ref?: (string|null);
 
-                    /** GitSource _repo. */
-                    public _repo?: "repo";
-
-                    /** GitSource _directory. */
-                    public _directory?: "directory";
-
-                    /** GitSource _ref. */
-                    public _ref?: "ref";
-
                     /**
                      * Creates a new GitSource instance using the specified properties.
                      * @param [properties] Properties to set
@@ -4751,15 +4727,6 @@ export namespace google {
                     /** Preview blueprint. */
                     public blueprint?: "terraformBlueprint";
 
-                    /** Preview _artifactsGcsBucket. */
-                    public _artifactsGcsBucket?: "artifactsGcsBucket";
-
-                    /** Preview _workerPool. */
-                    public _workerPool?: "workerPool";
-
-                    /** Preview _tfVersionConstraint. */
-                    public _tfVersionConstraint?: "tfVersionConstraint";
-
                     /**
                      * Creates a new Preview instance using the specified properties.
                      * @param [properties] Properties to set
@@ -6319,12 +6286,6 @@ export namespace google {
                     /** TerraformVersion obsoleteTime. */
                     public obsoleteTime?: (google.protobuf.ITimestamp|null);
 
-                    /** TerraformVersion _deprecateTime. */
-                    public _deprecateTime?: "deprecateTime";
-
-                    /** TerraformVersion _obsoleteTime. */
-                    public _obsoleteTime?: "obsoleteTime";
-
                     /**
                      * Creates a new TerraformVersion instance using the specified properties.
                      * @param [properties] Properties to set
@@ -7072,6 +7033,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -7112,6 +7076,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -11442,6 +11409,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -11693,7 +11663,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -11724,7 +11694,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -12863,7 +12833,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -12879,7 +12849,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

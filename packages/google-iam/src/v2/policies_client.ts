@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -109,41 +100,20 @@ export class PoliciesClient {
    *     const client = new PoliciesClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof PoliciesClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'iam.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -169,7 +139,7 @@ export class PoliciesClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -183,7 +153,10 @@ export class PoliciesClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -204,77 +177,55 @@ export class PoliciesClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listPolicies: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'policies'
-      ),
+      listPolicies:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'policies')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2/{name=policies/*/*/*/operations/*}',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v2/{name=policies/*/*/*/operations/*}',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createPolicyResponse = protoFilesRoot.lookup(
-      '.google.iam.v2.Policy'
-    ) as gax.protobuf.Type;
+      '.google.iam.v2.Policy') as gax.protobuf.Type;
     const createPolicyMetadata = protoFilesRoot.lookup(
-      '.google.iam.v2.PolicyOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.iam.v2.PolicyOperationMetadata') as gax.protobuf.Type;
     const updatePolicyResponse = protoFilesRoot.lookup(
-      '.google.iam.v2.Policy'
-    ) as gax.protobuf.Type;
+      '.google.iam.v2.Policy') as gax.protobuf.Type;
     const updatePolicyMetadata = protoFilesRoot.lookup(
-      '.google.iam.v2.PolicyOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.iam.v2.PolicyOperationMetadata') as gax.protobuf.Type;
     const deletePolicyResponse = protoFilesRoot.lookup(
-      '.google.iam.v2.Policy'
-    ) as gax.protobuf.Type;
+      '.google.iam.v2.Policy') as gax.protobuf.Type;
     const deletePolicyMetadata = protoFilesRoot.lookup(
-      '.google.iam.v2.PolicyOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.iam.v2.PolicyOperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createPolicy: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createPolicyResponse.decode.bind(createPolicyResponse),
-        createPolicyMetadata.decode.bind(createPolicyMetadata)
-      ),
+        createPolicyMetadata.decode.bind(createPolicyMetadata)),
       updatePolicy: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updatePolicyResponse.decode.bind(updatePolicyResponse),
-        updatePolicyMetadata.decode.bind(updatePolicyMetadata)
-      ),
+        updatePolicyMetadata.decode.bind(updatePolicyMetadata)),
       deletePolicy: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deletePolicyResponse.decode.bind(deletePolicyResponse),
-        deletePolicyMetadata.decode.bind(deletePolicyMetadata)
-      ),
+        deletePolicyMetadata.decode.bind(deletePolicyMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.iam.v2.Policies',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.iam.v2.Policies', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -305,39 +256,28 @@ export class PoliciesClient {
     // Put together the "service stub" for
     // google.iam.v2.Policies.
     this.policiesStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.iam.v2.Policies'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.iam.v2.Policies') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.iam.v2.Policies,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const policiesStubMethods = [
-      'listPolicies',
-      'getPolicy',
-      'createPolicy',
-      'updatePolicy',
-      'deletePolicy',
-    ];
+    const policiesStubMethods =
+        ['listPolicies', 'getPolicy', 'createPolicy', 'updatePolicy', 'deletePolicy'];
     for (const methodName of policiesStubMethods) {
       const callPromise = this.policiesStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -362,14 +302,8 @@ export class PoliciesClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'iam.googleapis.com';
   }
@@ -380,14 +314,8 @@ export class PoliciesClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'iam.googleapis.com';
   }
@@ -418,7 +346,9 @@ export class PoliciesClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -427,9 +357,8 @@ export class PoliciesClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -440,791 +369,576 @@ export class PoliciesClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets a policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the policy to retrieve. Format:
-   *   `policies/{attachment_point}/denypolicies/{policy_id}`
-   *
-   *
-   *   Use the URL-encoded full resource name, which means that the forward-slash
-   *   character, `/`, must be written as `%2F`. For example,
-   *   `policies/cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project/denypolicies/my-policy`.
-   *
-   *   For organizations and folders, use the numeric ID in the full resource
-   *   name. For projects, you can use the alphanumeric or the numeric ID.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v2.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/policies.get_policy.js</caption>
-   * region_tag:iam_v2_generated_Policies_GetPolicy_async
-   */
+/**
+ * Gets a policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the policy to retrieve. Format:
+ *   `policies/{attachment_point}/denypolicies/{policy_id}`
+ *
+ *
+ *   Use the URL-encoded full resource name, which means that the forward-slash
+ *   character, `/`, must be written as `%2F`. For example,
+ *   `policies/cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project/denypolicies/my-policy`.
+ *
+ *   For organizations and folders, use the numeric ID in the full resource
+ *   name. For projects, you can use the alphanumeric or the numeric ID.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v2.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/policies.get_policy.js</caption>
+ * region_tag:iam_v2_generated_Policies_GetPolicy_async
+ */
   getPolicy(
-    request?: protos.google.iam.v2.IGetPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v2.IPolicy,
-      protos.google.iam.v2.IGetPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v2.IGetPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v2.IPolicy,
+        protos.google.iam.v2.IGetPolicyRequest|undefined, {}|undefined
+      ]>;
   getPolicy(
-    request: protos.google.iam.v2.IGetPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v2.IPolicy,
-      protos.google.iam.v2.IGetPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPolicy(
-    request: protos.google.iam.v2.IGetPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v2.IPolicy,
-      protos.google.iam.v2.IGetPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPolicy(
-    request?: protos.google.iam.v2.IGetPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v2.IGetPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v2.IPolicy,
-          protos.google.iam.v2.IGetPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v2.IPolicy,
-      protos.google.iam.v2.IGetPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v2.IPolicy,
-      protos.google.iam.v2.IGetPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v2.IGetPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPolicy(
+      request: protos.google.iam.v2.IGetPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v2.IPolicy,
+          protos.google.iam.v2.IGetPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPolicy(
+      request?: protos.google.iam.v2.IGetPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v2.IPolicy,
+          protos.google.iam.v2.IGetPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v2.IPolicy,
+          protos.google.iam.v2.IGetPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v2.IPolicy,
+        protos.google.iam.v2.IGetPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v2.IPolicy,
-          protos.google.iam.v2.IGetPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v2.IPolicy,
+        protos.google.iam.v2.IGetPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v2.IPolicy,
-          protos.google.iam.v2.IGetPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v2.IPolicy,
+        protos.google.iam.v2.IGetPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource that the policy is attached to, along with the kind of policy
-   *   to create. Format: `policies/{attachment_point}/denypolicies`
-   *
-   *
-   *   The attachment point is identified by its URL-encoded full resource name,
-   *   which means that the forward-slash character, `/`, must be written as
-   *   `%2F`. For example,
-   *   `policies/cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project/denypolicies`.
-   *
-   *   For organizations and folders, use the numeric ID in the full resource
-   *   name. For projects, you can use the alphanumeric or the numeric ID.
-   * @param {google.iam.v2.Policy} request.policy
-   *   Required. The policy to create.
-   * @param {string} request.policyId
-   *   The ID to use for this policy, which will become the final component of
-   *   the policy's resource name. The ID must contain 3 to 63 characters. It can
-   *   contain lowercase letters and numbers, as well as dashes (`-`) and periods
-   *   (`.`). The first character must be a lowercase letter.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/policies.create_policy.js</caption>
-   * region_tag:iam_v2_generated_Policies_CreatePolicy_async
-   */
+/**
+ * Creates a policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource that the policy is attached to, along with the kind of policy
+ *   to create. Format: `policies/{attachment_point}/denypolicies`
+ *
+ *
+ *   The attachment point is identified by its URL-encoded full resource name,
+ *   which means that the forward-slash character, `/`, must be written as
+ *   `%2F`. For example,
+ *   `policies/cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project/denypolicies`.
+ *
+ *   For organizations and folders, use the numeric ID in the full resource
+ *   name. For projects, you can use the alphanumeric or the numeric ID.
+ * @param {google.iam.v2.Policy} request.policy
+ *   Required. The policy to create.
+ * @param {string} request.policyId
+ *   The ID to use for this policy, which will become the final component of
+ *   the policy's resource name. The ID must contain 3 to 63 characters. It can
+ *   contain lowercase letters and numbers, as well as dashes (`-`) and periods
+ *   (`.`). The first character must be a lowercase letter.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/policies.create_policy.js</caption>
+ * region_tag:iam_v2_generated_Policies_CreatePolicy_async
+ */
   createPolicy(
-    request?: protos.google.iam.v2.ICreatePolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.iam.v2.IPolicy,
-        protos.google.iam.v2.IPolicyOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v2.ICreatePolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createPolicy(
-    request: protos.google.iam.v2.ICreatePolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.iam.v2.IPolicy,
-        protos.google.iam.v2.IPolicyOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.iam.v2.ICreatePolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createPolicy(
-    request: protos.google.iam.v2.ICreatePolicyRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.iam.v2.IPolicy,
-        protos.google.iam.v2.IPolicyOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.iam.v2.ICreatePolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createPolicy(
-    request?: protos.google.iam.v2.ICreatePolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.iam.v2.IPolicy,
-            protos.google.iam.v2.IPolicyOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.iam.v2.IPolicy,
-        protos.google.iam.v2.IPolicyOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.iam.v2.IPolicy,
-        protos.google.iam.v2.IPolicyOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.iam.v2.ICreatePolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.iam.v2.IPolicy,
-            protos.google.iam.v2.IPolicyOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createPolicy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createPolicy request %j', request);
-    return this.innerApiCalls
-      .createPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.iam.v2.IPolicy,
-            protos.google.iam.v2.IPolicyOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createPolicy response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createPolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createPolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createPolicy()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/policies.create_policy.js</caption>
-   * region_tag:iam_v2_generated_Policies_CreatePolicy_async
-   */
-  async checkCreatePolicyProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.iam.v2.Policy,
-      protos.google.iam.v2.PolicyOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createPolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/policies.create_policy.js</caption>
+ * region_tag:iam_v2_generated_Policies_CreatePolicy_async
+ */
+  async checkCreatePolicyProgress(name: string): Promise<LROperation<protos.google.iam.v2.Policy, protos.google.iam.v2.PolicyOperationMetadata>>{
     this._log.info('createPolicy long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createPolicy,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.iam.v2.Policy,
-      protos.google.iam.v2.PolicyOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createPolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.iam.v2.Policy, protos.google.iam.v2.PolicyOperationMetadata>;
   }
-  /**
-   * Updates the specified policy.
-   *
-   * You can update only the rules and the display name for the policy.
-   *
-   * To update a policy, you should use a read-modify-write loop:
-   *
-   * 1. Use {@link protos.google.iam.v2.Policies.GetPolicy|GetPolicy} to read the current version of the policy.
-   * 2. Modify the policy as needed.
-   * 3. Use `UpdatePolicy` to write the updated policy.
-   *
-   * This pattern helps prevent conflicts between concurrent updates.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.iam.v2.Policy} request.policy
-   *   Required. The policy to update.
-   *
-   *   To prevent conflicting updates, the `etag` value must match the value that
-   *   is stored in IAM. If the `etag` values do not match, the request fails with
-   *   a `409` error code and `ABORTED` status.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/policies.update_policy.js</caption>
-   * region_tag:iam_v2_generated_Policies_UpdatePolicy_async
-   */
+/**
+ * Updates the specified policy.
+ *
+ * You can update only the rules and the display name for the policy.
+ *
+ * To update a policy, you should use a read-modify-write loop:
+ *
+ * 1. Use {@link protos.google.iam.v2.Policies.GetPolicy|GetPolicy} to read the current version of the policy.
+ * 2. Modify the policy as needed.
+ * 3. Use `UpdatePolicy` to write the updated policy.
+ *
+ * This pattern helps prevent conflicts between concurrent updates.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.iam.v2.Policy} request.policy
+ *   Required. The policy to update.
+ *
+ *   To prevent conflicting updates, the `etag` value must match the value that
+ *   is stored in IAM. If the `etag` values do not match, the request fails with
+ *   a `409` error code and `ABORTED` status.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/policies.update_policy.js</caption>
+ * region_tag:iam_v2_generated_Policies_UpdatePolicy_async
+ */
   updatePolicy(
-    request?: protos.google.iam.v2.IUpdatePolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.iam.v2.IPolicy,
-        protos.google.iam.v2.IPolicyOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v2.IUpdatePolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updatePolicy(
-    request: protos.google.iam.v2.IUpdatePolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.iam.v2.IPolicy,
-        protos.google.iam.v2.IPolicyOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.iam.v2.IUpdatePolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updatePolicy(
-    request: protos.google.iam.v2.IUpdatePolicyRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.iam.v2.IPolicy,
-        protos.google.iam.v2.IPolicyOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.iam.v2.IUpdatePolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updatePolicy(
-    request?: protos.google.iam.v2.IUpdatePolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.iam.v2.IPolicy,
-            protos.google.iam.v2.IPolicyOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.iam.v2.IPolicy,
-        protos.google.iam.v2.IPolicyOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.iam.v2.IPolicy,
-        protos.google.iam.v2.IPolicyOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.iam.v2.IUpdatePolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'policy.name': request.policy!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'policy.name': request.policy!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.iam.v2.IPolicy,
-            protos.google.iam.v2.IPolicyOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updatePolicy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updatePolicy request %j', request);
-    return this.innerApiCalls
-      .updatePolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.iam.v2.IPolicy,
-            protos.google.iam.v2.IPolicyOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updatePolicy response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updatePolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updatePolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updatePolicy()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/policies.update_policy.js</caption>
-   * region_tag:iam_v2_generated_Policies_UpdatePolicy_async
-   */
-  async checkUpdatePolicyProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.iam.v2.Policy,
-      protos.google.iam.v2.PolicyOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updatePolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/policies.update_policy.js</caption>
+ * region_tag:iam_v2_generated_Policies_UpdatePolicy_async
+ */
+  async checkUpdatePolicyProgress(name: string): Promise<LROperation<protos.google.iam.v2.Policy, protos.google.iam.v2.PolicyOperationMetadata>>{
     this._log.info('updatePolicy long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updatePolicy,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.iam.v2.Policy,
-      protos.google.iam.v2.PolicyOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updatePolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.iam.v2.Policy, protos.google.iam.v2.PolicyOperationMetadata>;
   }
-  /**
-   * Deletes a policy. This action is permanent.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the policy to delete. Format:
-   *   `policies/{attachment_point}/denypolicies/{policy_id}`
-   *
-   *
-   *   Use the URL-encoded full resource name, which means that the forward-slash
-   *   character, `/`, must be written as `%2F`. For example,
-   *   `policies/cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project/denypolicies/my-policy`.
-   *
-   *   For organizations and folders, use the numeric ID in the full resource
-   *   name. For projects, you can use the alphanumeric or the numeric ID.
-   * @param {string} [request.etag]
-   *   Optional. The expected `etag` of the policy to delete. If the value does not match
-   *   the value that is stored in IAM, the request fails with a `409` error code
-   *   and `ABORTED` status.
-   *
-   *   If you omit this field, the policy is deleted regardless of its current
-   *   `etag`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/policies.delete_policy.js</caption>
-   * region_tag:iam_v2_generated_Policies_DeletePolicy_async
-   */
+/**
+ * Deletes a policy. This action is permanent.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the policy to delete. Format:
+ *   `policies/{attachment_point}/denypolicies/{policy_id}`
+ *
+ *
+ *   Use the URL-encoded full resource name, which means that the forward-slash
+ *   character, `/`, must be written as `%2F`. For example,
+ *   `policies/cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project/denypolicies/my-policy`.
+ *
+ *   For organizations and folders, use the numeric ID in the full resource
+ *   name. For projects, you can use the alphanumeric or the numeric ID.
+ * @param {string} [request.etag]
+ *   Optional. The expected `etag` of the policy to delete. If the value does not match
+ *   the value that is stored in IAM, the request fails with a `409` error code
+ *   and `ABORTED` status.
+ *
+ *   If you omit this field, the policy is deleted regardless of its current
+ *   `etag`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/policies.delete_policy.js</caption>
+ * region_tag:iam_v2_generated_Policies_DeletePolicy_async
+ */
   deletePolicy(
-    request?: protos.google.iam.v2.IDeletePolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.iam.v2.IPolicy,
-        protos.google.iam.v2.IPolicyOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v2.IDeletePolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deletePolicy(
-    request: protos.google.iam.v2.IDeletePolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.iam.v2.IPolicy,
-        protos.google.iam.v2.IPolicyOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.iam.v2.IDeletePolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deletePolicy(
-    request: protos.google.iam.v2.IDeletePolicyRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.iam.v2.IPolicy,
-        protos.google.iam.v2.IPolicyOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.iam.v2.IDeletePolicyRequest,
+      callback: Callback<
+          LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deletePolicy(
-    request?: protos.google.iam.v2.IDeletePolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.iam.v2.IPolicy,
-            protos.google.iam.v2.IPolicyOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.iam.v2.IPolicy,
-        protos.google.iam.v2.IPolicyOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.iam.v2.IPolicy,
-        protos.google.iam.v2.IPolicyOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.iam.v2.IDeletePolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.iam.v2.IPolicy,
-            protos.google.iam.v2.IPolicyOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deletePolicy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deletePolicy request %j', request);
-    return this.innerApiCalls
-      .deletePolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.iam.v2.IPolicy,
-            protos.google.iam.v2.IPolicyOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deletePolicy response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deletePolicy(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.iam.v2.IPolicy, protos.google.iam.v2.IPolicyOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deletePolicy response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deletePolicy()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/policies.delete_policy.js</caption>
-   * region_tag:iam_v2_generated_Policies_DeletePolicy_async
-   */
-  async checkDeletePolicyProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.iam.v2.Policy,
-      protos.google.iam.v2.PolicyOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deletePolicy()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/policies.delete_policy.js</caption>
+ * region_tag:iam_v2_generated_Policies_DeletePolicy_async
+ */
+  async checkDeletePolicyProgress(name: string): Promise<LROperation<protos.google.iam.v2.Policy, protos.google.iam.v2.PolicyOperationMetadata>>{
     this._log.info('deletePolicy long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deletePolicy,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.iam.v2.Policy,
-      protos.google.iam.v2.PolicyOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deletePolicy, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.iam.v2.Policy, protos.google.iam.v2.PolicyOperationMetadata>;
   }
-  /**
-   * Retrieves the policies of the specified kind that are attached to a
-   * resource.
-   *
-   * The response lists only policy metadata. In particular, policy rules are
-   * omitted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource that the policy is attached to, along with the kind of policy
-   *   to list. Format:
-   *   `policies/{attachment_point}/denypolicies`
-   *
-   *
-   *   The attachment point is identified by its URL-encoded full resource name,
-   *   which means that the forward-slash character, `/`, must be written as
-   *   `%2F`. For example,
-   *   `policies/cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project/denypolicies`.
-   *
-   *   For organizations and folders, use the numeric ID in the full resource
-   *   name. For projects, you can use the alphanumeric or the numeric ID.
-   * @param {number} request.pageSize
-   *   The maximum number of policies to return. IAM ignores this value and uses
-   *   the value 1000.
-   * @param {string} request.pageToken
-   *   A page token received in a {@link protos.google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this token to
-   *   retrieve the next page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.iam.v2.Policy|Policy}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Retrieves the policies of the specified kind that are attached to a
+ * resource.
+ *
+ * The response lists only policy metadata. In particular, policy rules are
+ * omitted.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource that the policy is attached to, along with the kind of policy
+ *   to list. Format:
+ *   `policies/{attachment_point}/denypolicies`
+ *
+ *
+ *   The attachment point is identified by its URL-encoded full resource name,
+ *   which means that the forward-slash character, `/`, must be written as
+ *   `%2F`. For example,
+ *   `policies/cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project/denypolicies`.
+ *
+ *   For organizations and folders, use the numeric ID in the full resource
+ *   name. For projects, you can use the alphanumeric or the numeric ID.
+ * @param {number} request.pageSize
+ *   The maximum number of policies to return. IAM ignores this value and uses
+ *   the value 1000.
+ * @param {string} request.pageToken
+ *   A page token received in a {@link protos.google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this token to
+ *   retrieve the next page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.iam.v2.Policy|Policy}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPolicies(
-    request?: protos.google.iam.v2.IListPoliciesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v2.IPolicy[],
-      protos.google.iam.v2.IListPoliciesRequest | null,
-      protos.google.iam.v2.IListPoliciesResponse,
-    ]
-  >;
+      request?: protos.google.iam.v2.IListPoliciesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v2.IPolicy[],
+        protos.google.iam.v2.IListPoliciesRequest|null,
+        protos.google.iam.v2.IListPoliciesResponse
+      ]>;
   listPolicies(
-    request: protos.google.iam.v2.IListPoliciesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.iam.v2.IListPoliciesRequest,
-      protos.google.iam.v2.IListPoliciesResponse | null | undefined,
-      protos.google.iam.v2.IPolicy
-    >
-  ): void;
-  listPolicies(
-    request: protos.google.iam.v2.IListPoliciesRequest,
-    callback: PaginationCallback<
-      protos.google.iam.v2.IListPoliciesRequest,
-      protos.google.iam.v2.IListPoliciesResponse | null | undefined,
-      protos.google.iam.v2.IPolicy
-    >
-  ): void;
-  listPolicies(
-    request?: protos.google.iam.v2.IListPoliciesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.iam.v2.IListPoliciesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.iam.v2.IListPoliciesRequest,
-          protos.google.iam.v2.IListPoliciesResponse | null | undefined,
-          protos.google.iam.v2.IPolicy
-        >,
-    callback?: PaginationCallback<
-      protos.google.iam.v2.IListPoliciesRequest,
-      protos.google.iam.v2.IListPoliciesResponse | null | undefined,
-      protos.google.iam.v2.IPolicy
-    >
-  ): Promise<
-    [
-      protos.google.iam.v2.IPolicy[],
-      protos.google.iam.v2.IListPoliciesRequest | null,
-      protos.google.iam.v2.IListPoliciesResponse,
-    ]
-  > | void {
+          protos.google.iam.v2.IListPoliciesResponse|null|undefined,
+          protos.google.iam.v2.IPolicy>): void;
+  listPolicies(
+      request: protos.google.iam.v2.IListPoliciesRequest,
+      callback: PaginationCallback<
+          protos.google.iam.v2.IListPoliciesRequest,
+          protos.google.iam.v2.IListPoliciesResponse|null|undefined,
+          protos.google.iam.v2.IPolicy>): void;
+  listPolicies(
+      request?: protos.google.iam.v2.IListPoliciesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.iam.v2.IListPoliciesRequest,
+          protos.google.iam.v2.IListPoliciesResponse|null|undefined,
+          protos.google.iam.v2.IPolicy>,
+      callback?: PaginationCallback<
+          protos.google.iam.v2.IListPoliciesRequest,
+          protos.google.iam.v2.IListPoliciesResponse|null|undefined,
+          protos.google.iam.v2.IPolicy>):
+      Promise<[
+        protos.google.iam.v2.IPolicy[],
+        protos.google.iam.v2.IListPoliciesRequest|null,
+        protos.google.iam.v2.IListPoliciesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.iam.v2.IListPoliciesRequest,
-          protos.google.iam.v2.IListPoliciesResponse | null | undefined,
-          protos.google.iam.v2.IPolicy
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.iam.v2.IListPoliciesRequest,
+      protos.google.iam.v2.IListPoliciesResponse|null|undefined,
+      protos.google.iam.v2.IPolicy>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1233,69 +947,66 @@ export class PoliciesClient {
     this._log.info('listPolicies request %j', request);
     return this.innerApiCalls
       .listPolicies(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.iam.v2.IPolicy[],
-          protos.google.iam.v2.IListPoliciesRequest | null,
-          protos.google.iam.v2.IListPoliciesResponse,
-        ]) => {
-          this._log.info('listPolicies values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.iam.v2.IPolicy[],
+        protos.google.iam.v2.IListPoliciesRequest|null,
+        protos.google.iam.v2.IListPoliciesResponse
+      ]) => {
+        this._log.info('listPolicies values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listPolicies`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource that the policy is attached to, along with the kind of policy
-   *   to list. Format:
-   *   `policies/{attachment_point}/denypolicies`
-   *
-   *
-   *   The attachment point is identified by its URL-encoded full resource name,
-   *   which means that the forward-slash character, `/`, must be written as
-   *   `%2F`. For example,
-   *   `policies/cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project/denypolicies`.
-   *
-   *   For organizations and folders, use the numeric ID in the full resource
-   *   name. For projects, you can use the alphanumeric or the numeric ID.
-   * @param {number} request.pageSize
-   *   The maximum number of policies to return. IAM ignores this value and uses
-   *   the value 1000.
-   * @param {string} request.pageToken
-   *   A page token received in a {@link protos.google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this token to
-   *   retrieve the next page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.iam.v2.Policy|Policy} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listPolicies`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource that the policy is attached to, along with the kind of policy
+ *   to list. Format:
+ *   `policies/{attachment_point}/denypolicies`
+ *
+ *
+ *   The attachment point is identified by its URL-encoded full resource name,
+ *   which means that the forward-slash character, `/`, must be written as
+ *   `%2F`. For example,
+ *   `policies/cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project/denypolicies`.
+ *
+ *   For organizations and folders, use the numeric ID in the full resource
+ *   name. For projects, you can use the alphanumeric or the numeric ID.
+ * @param {number} request.pageSize
+ *   The maximum number of policies to return. IAM ignores this value and uses
+ *   the value 1000.
+ * @param {string} request.pageToken
+ *   A page token received in a {@link protos.google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this token to
+ *   retrieve the next page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.iam.v2.Policy|Policy} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPoliciesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPoliciesStream(
-    request?: protos.google.iam.v2.IListPoliciesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.iam.v2.IListPoliciesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPolicies stream %j', request);
     return this.descriptors.page.listPolicies.createStream(
       this.innerApiCalls.listPolicies as GaxCall,
@@ -1304,60 +1015,59 @@ export class PoliciesClient {
     );
   }
 
-  /**
-   * Equivalent to `listPolicies`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource that the policy is attached to, along with the kind of policy
-   *   to list. Format:
-   *   `policies/{attachment_point}/denypolicies`
-   *
-   *
-   *   The attachment point is identified by its URL-encoded full resource name,
-   *   which means that the forward-slash character, `/`, must be written as
-   *   `%2F`. For example,
-   *   `policies/cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project/denypolicies`.
-   *
-   *   For organizations and folders, use the numeric ID in the full resource
-   *   name. For projects, you can use the alphanumeric or the numeric ID.
-   * @param {number} request.pageSize
-   *   The maximum number of policies to return. IAM ignores this value and uses
-   *   the value 1000.
-   * @param {string} request.pageToken
-   *   A page token received in a {@link protos.google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this token to
-   *   retrieve the next page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.iam.v2.Policy|Policy}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/policies.list_policies.js</caption>
-   * region_tag:iam_v2_generated_Policies_ListPolicies_async
-   */
+/**
+ * Equivalent to `listPolicies`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource that the policy is attached to, along with the kind of policy
+ *   to list. Format:
+ *   `policies/{attachment_point}/denypolicies`
+ *
+ *
+ *   The attachment point is identified by its URL-encoded full resource name,
+ *   which means that the forward-slash character, `/`, must be written as
+ *   `%2F`. For example,
+ *   `policies/cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project/denypolicies`.
+ *
+ *   For organizations and folders, use the numeric ID in the full resource
+ *   name. For projects, you can use the alphanumeric or the numeric ID.
+ * @param {number} request.pageSize
+ *   The maximum number of policies to return. IAM ignores this value and uses
+ *   the value 1000.
+ * @param {string} request.pageToken
+ *   A page token received in a {@link protos.google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this token to
+ *   retrieve the next page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.iam.v2.Policy|Policy}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/policies.list_policies.js</caption>
+ * region_tag:iam_v2_generated_Policies_ListPolicies_async
+ */
   listPoliciesAsync(
-    request?: protos.google.iam.v2.IListPoliciesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.iam.v2.IPolicy> {
+      request?: protos.google.iam.v2.IListPoliciesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.iam.v2.IPolicy>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPolicies iterate %j', request);
     return this.descriptors.page.listPolicies.asyncIterate(
       this.innerApiCalls['listPolicies'] as GaxCall,
@@ -1365,7 +1075,7 @@ export class PoliciesClient {
       callSettings
     ) as AsyncIterable<protos.google.iam.v2.IPolicy>;
   }
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1410,20 +1120,20 @@ export class PoliciesClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1460,13 +1170,13 @@ export class PoliciesClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1500,7 +1210,7 @@ export class PoliciesClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1515,20 +1225,20 @@ export class PoliciesClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1572,22 +1282,23 @@ export class PoliciesClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
+
 
   /**
    * Terminate the gRPC channel and close the client.

@@ -18,17 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -112,41 +102,20 @@ export class ControlServiceClient {
    *     const client = new ControlServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ControlServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'retail.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -172,7 +141,7 @@ export class ControlServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -188,9 +157,13 @@ export class ControlServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -253,11 +226,8 @@ export class ControlServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listControls: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'controls'
-      ),
+      listControls:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'controls')
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -266,48 +236,23 @@ export class ControlServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
-          additional_bindings: [
-            {
-              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',
-            },
-            {
-              get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',
-            },
-            {get: '/v2alpha/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v2alpha/{name=projects/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2alpha/{name=projects/*/locations/*/catalogs/*}/operations',
-          additional_bindings: [
-            {get: '/v2alpha/{name=projects/*/locations/*}/operations'},
-            {get: '/v2alpha/{name=projects/*}/operations'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',additional_bindings: [{get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/branches/*/places/*/operations/*}',},{get: '/v2alpha/{name=projects/*/locations/*/catalogs/*/operations/*}',},{get: '/v2alpha/{name=projects/*/locations/*/operations/*}',},{get: '/v2alpha/{name=projects/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v2alpha/{name=projects/*/locations/*/catalogs/*}/operations',additional_bindings: [{get: '/v2alpha/{name=projects/*/locations/*}/operations',},{get: '/v2alpha/{name=projects/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
 
-    this.descriptors.longrunning = {};
+    this.descriptors.longrunning = {
+    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.retail.v2alpha.ControlService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.retail.v2alpha.ControlService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -338,41 +283,32 @@ export class ControlServiceClient {
     // Put together the "service stub" for
     // google.cloud.retail.v2alpha.ControlService.
     this.controlServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.retail.v2alpha.ControlService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.retail.v2alpha.ControlService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.retail.v2alpha.ControlService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const controlServiceStubMethods = [
-      'createControl',
-      'deleteControl',
-      'updateControl',
-      'getControl',
-      'listControls',
-    ];
+    const controlServiceStubMethods =
+        ['createControl', 'deleteControl', 'updateControl', 'getControl', 'listControls'];
     for (const methodName of controlServiceStubMethods) {
       const callPromise = this.controlServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -392,14 +328,8 @@ export class ControlServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -410,14 +340,8 @@ export class ControlServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -448,7 +372,9 @@ export class ControlServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -457,9 +383,8 @@ export class ControlServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -470,684 +395,505 @@ export class ControlServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a Control.
-   *
-   * If the {@link protos.google.cloud.retail.v2alpha.Control|Control} to create already
-   * exists, an ALREADY_EXISTS error is returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Full resource name of parent catalog. Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
-   * @param {google.cloud.retail.v2alpha.Control} request.control
-   *   Required. The Control to create.
-   * @param {string} request.controlId
-   *   Required. The ID to use for the Control, which will become the final
-   *   component of the Control's resource name.
-   *
-   *   This value should be 4-63 characters, and valid characters
-   *   are /{@link protos.0-9|a-z}-_/.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.Control|Control}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/control_service.create_control.js</caption>
-   * region_tag:retail_v2alpha_generated_ControlService_CreateControl_async
-   */
+/**
+ * Creates a Control.
+ *
+ * If the {@link protos.google.cloud.retail.v2alpha.Control|Control} to create already
+ * exists, an ALREADY_EXISTS error is returned.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Full resource name of parent catalog. Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+ * @param {google.cloud.retail.v2alpha.Control} request.control
+ *   Required. The Control to create.
+ * @param {string} request.controlId
+ *   Required. The ID to use for the Control, which will become the final
+ *   component of the Control's resource name.
+ *
+ *   This value should be 4-63 characters, and valid characters
+ *   are /{@link protos.0-9|a-z}-_/.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.Control|Control}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/control_service.create_control.js</caption>
+ * region_tag:retail_v2alpha_generated_ControlService_CreateControl_async
+ */
   createControl(
-    request?: protos.google.cloud.retail.v2alpha.ICreateControlRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IControl,
-      protos.google.cloud.retail.v2alpha.ICreateControlRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.ICreateControlRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IControl,
+        protos.google.cloud.retail.v2alpha.ICreateControlRequest|undefined, {}|undefined
+      ]>;
   createControl(
-    request: protos.google.cloud.retail.v2alpha.ICreateControlRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IControl,
-      | protos.google.cloud.retail.v2alpha.ICreateControlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createControl(
-    request: protos.google.cloud.retail.v2alpha.ICreateControlRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IControl,
-      | protos.google.cloud.retail.v2alpha.ICreateControlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createControl(
-    request?: protos.google.cloud.retail.v2alpha.ICreateControlRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.ICreateControlRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.IControl,
-          | protos.google.cloud.retail.v2alpha.ICreateControlRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IControl,
-      | protos.google.cloud.retail.v2alpha.ICreateControlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IControl,
-      protos.google.cloud.retail.v2alpha.ICreateControlRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.ICreateControlRequest|null|undefined,
+          {}|null|undefined>): void;
+  createControl(
+      request: protos.google.cloud.retail.v2alpha.ICreateControlRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.IControl,
+          protos.google.cloud.retail.v2alpha.ICreateControlRequest|null|undefined,
+          {}|null|undefined>): void;
+  createControl(
+      request?: protos.google.cloud.retail.v2alpha.ICreateControlRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.IControl,
+          protos.google.cloud.retail.v2alpha.ICreateControlRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.IControl,
+          protos.google.cloud.retail.v2alpha.ICreateControlRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IControl,
+        protos.google.cloud.retail.v2alpha.ICreateControlRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createControl request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IControl,
-          | protos.google.cloud.retail.v2alpha.ICreateControlRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.IControl,
+        protos.google.cloud.retail.v2alpha.ICreateControlRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createControl(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.IControl,
-          protos.google.cloud.retail.v2alpha.ICreateControlRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createControl response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.createControl(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.IControl,
+        protos.google.cloud.retail.v2alpha.ICreateControlRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createControl response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Deletes a Control.
-   *
-   * If the {@link protos.google.cloud.retail.v2alpha.Control|Control} to delete does not
-   * exist, a NOT_FOUND error is returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Control to delete. Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/controls/{control_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/control_service.delete_control.js</caption>
-   * region_tag:retail_v2alpha_generated_ControlService_DeleteControl_async
-   */
+/**
+ * Deletes a Control.
+ *
+ * If the {@link protos.google.cloud.retail.v2alpha.Control|Control} to delete does not
+ * exist, a NOT_FOUND error is returned.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Control to delete. Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/controls/{control_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/control_service.delete_control.js</caption>
+ * region_tag:retail_v2alpha_generated_ControlService_DeleteControl_async
+ */
   deleteControl(
-    request?: protos.google.cloud.retail.v2alpha.IDeleteControlRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.retail.v2alpha.IDeleteControlRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IDeleteControlRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.retail.v2alpha.IDeleteControlRequest|undefined, {}|undefined
+      ]>;
   deleteControl(
-    request: protos.google.cloud.retail.v2alpha.IDeleteControlRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.retail.v2alpha.IDeleteControlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteControl(
-    request: protos.google.cloud.retail.v2alpha.IDeleteControlRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.retail.v2alpha.IDeleteControlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteControl(
-    request?: protos.google.cloud.retail.v2alpha.IDeleteControlRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IDeleteControlRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.retail.v2alpha.IDeleteControlRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.retail.v2alpha.IDeleteControlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.retail.v2alpha.IDeleteControlRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IDeleteControlRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteControl(
+      request: protos.google.cloud.retail.v2alpha.IDeleteControlRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.retail.v2alpha.IDeleteControlRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteControl(
+      request?: protos.google.cloud.retail.v2alpha.IDeleteControlRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.retail.v2alpha.IDeleteControlRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.retail.v2alpha.IDeleteControlRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.retail.v2alpha.IDeleteControlRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteControl request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.retail.v2alpha.IDeleteControlRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.retail.v2alpha.IDeleteControlRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteControl(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.retail.v2alpha.IDeleteControlRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteControl response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.deleteControl(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.retail.v2alpha.IDeleteControlRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteControl response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Updates a Control.
-   *
-   * {@link protos.google.cloud.retail.v2alpha.Control|Control} cannot be set to a different
-   * oneof field, if so an INVALID_ARGUMENT is returned. If the
-   * {@link protos.google.cloud.retail.v2alpha.Control|Control} to update does not exist, a
-   * NOT_FOUND error is returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.retail.v2alpha.Control} request.control
-   *   Required. The Control to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Indicates which fields in the provided
-   *   {@link protos.google.cloud.retail.v2alpha.Control|Control} to update. The following are
-   *   NOT supported:
-   *
-   *   * {@link protos.google.cloud.retail.v2alpha.Control.name|Control.name}
-   *
-   *   If not set or empty, all supported fields are updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.Control|Control}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/control_service.update_control.js</caption>
-   * region_tag:retail_v2alpha_generated_ControlService_UpdateControl_async
-   */
+/**
+ * Updates a Control.
+ *
+ * {@link protos.google.cloud.retail.v2alpha.Control|Control} cannot be set to a different
+ * oneof field, if so an INVALID_ARGUMENT is returned. If the
+ * {@link protos.google.cloud.retail.v2alpha.Control|Control} to update does not exist, a
+ * NOT_FOUND error is returned.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.retail.v2alpha.Control} request.control
+ *   Required. The Control to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Indicates which fields in the provided
+ *   {@link protos.google.cloud.retail.v2alpha.Control|Control} to update. The following are
+ *   NOT supported:
+ *
+ *   * {@link protos.google.cloud.retail.v2alpha.Control.name|Control.name}
+ *
+ *   If not set or empty, all supported fields are updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.Control|Control}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/control_service.update_control.js</caption>
+ * region_tag:retail_v2alpha_generated_ControlService_UpdateControl_async
+ */
   updateControl(
-    request?: protos.google.cloud.retail.v2alpha.IUpdateControlRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IControl,
-      protos.google.cloud.retail.v2alpha.IUpdateControlRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IUpdateControlRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IControl,
+        protos.google.cloud.retail.v2alpha.IUpdateControlRequest|undefined, {}|undefined
+      ]>;
   updateControl(
-    request: protos.google.cloud.retail.v2alpha.IUpdateControlRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IControl,
-      | protos.google.cloud.retail.v2alpha.IUpdateControlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateControl(
-    request: protos.google.cloud.retail.v2alpha.IUpdateControlRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IControl,
-      | protos.google.cloud.retail.v2alpha.IUpdateControlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateControl(
-    request?: protos.google.cloud.retail.v2alpha.IUpdateControlRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IUpdateControlRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.IControl,
-          | protos.google.cloud.retail.v2alpha.IUpdateControlRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IControl,
-      | protos.google.cloud.retail.v2alpha.IUpdateControlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IControl,
-      protos.google.cloud.retail.v2alpha.IUpdateControlRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IUpdateControlRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateControl(
+      request: protos.google.cloud.retail.v2alpha.IUpdateControlRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.IControl,
+          protos.google.cloud.retail.v2alpha.IUpdateControlRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateControl(
+      request?: protos.google.cloud.retail.v2alpha.IUpdateControlRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.IControl,
+          protos.google.cloud.retail.v2alpha.IUpdateControlRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.IControl,
+          protos.google.cloud.retail.v2alpha.IUpdateControlRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IControl,
+        protos.google.cloud.retail.v2alpha.IUpdateControlRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'control.name': request.control!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'control.name': request.control!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateControl request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IControl,
-          | protos.google.cloud.retail.v2alpha.IUpdateControlRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.IControl,
+        protos.google.cloud.retail.v2alpha.IUpdateControlRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateControl(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.IControl,
-          protos.google.cloud.retail.v2alpha.IUpdateControlRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateControl response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.updateControl(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.IControl,
+        protos.google.cloud.retail.v2alpha.IUpdateControlRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateControl response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Gets a Control.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Control to get. Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/controls/{control_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.Control|Control}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/control_service.get_control.js</caption>
-   * region_tag:retail_v2alpha_generated_ControlService_GetControl_async
-   */
+/**
+ * Gets a Control.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Control to get. Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/controls/{control_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2alpha.Control|Control}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/control_service.get_control.js</caption>
+ * region_tag:retail_v2alpha_generated_ControlService_GetControl_async
+ */
   getControl(
-    request?: protos.google.cloud.retail.v2alpha.IGetControlRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IControl,
-      protos.google.cloud.retail.v2alpha.IGetControlRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IGetControlRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IControl,
+        protos.google.cloud.retail.v2alpha.IGetControlRequest|undefined, {}|undefined
+      ]>;
   getControl(
-    request: protos.google.cloud.retail.v2alpha.IGetControlRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IControl,
-      protos.google.cloud.retail.v2alpha.IGetControlRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getControl(
-    request: protos.google.cloud.retail.v2alpha.IGetControlRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2alpha.IControl,
-      protos.google.cloud.retail.v2alpha.IGetControlRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getControl(
-    request?: protos.google.cloud.retail.v2alpha.IGetControlRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2alpha.IGetControlRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2alpha.IControl,
-          | protos.google.cloud.retail.v2alpha.IGetControlRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2alpha.IControl,
-      protos.google.cloud.retail.v2alpha.IGetControlRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IControl,
-      protos.google.cloud.retail.v2alpha.IGetControlRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IGetControlRequest|null|undefined,
+          {}|null|undefined>): void;
+  getControl(
+      request: protos.google.cloud.retail.v2alpha.IGetControlRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2alpha.IControl,
+          protos.google.cloud.retail.v2alpha.IGetControlRequest|null|undefined,
+          {}|null|undefined>): void;
+  getControl(
+      request?: protos.google.cloud.retail.v2alpha.IGetControlRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2alpha.IControl,
+          protos.google.cloud.retail.v2alpha.IGetControlRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2alpha.IControl,
+          protos.google.cloud.retail.v2alpha.IGetControlRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IControl,
+        protos.google.cloud.retail.v2alpha.IGetControlRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getControl request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2alpha.IControl,
-          | protos.google.cloud.retail.v2alpha.IGetControlRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2alpha.IControl,
+        protos.google.cloud.retail.v2alpha.IGetControlRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getControl(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2alpha.IControl,
-          protos.google.cloud.retail.v2alpha.IGetControlRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getControl response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.getControl(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2alpha.IControl,
+        protos.google.cloud.retail.v2alpha.IGetControlRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getControl response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
 
-  /**
-   * Lists all Controls by their parent
-   * {@link protos.google.cloud.retail.v2alpha.Catalog|Catalog}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The catalog resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of results to return. If unspecified, defaults
-   *   to 50. Max allowed value is 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListControls` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. A filter to apply on the list results. Supported features:
-   *
-   *   * List all the products under the parent branch if
-   *   {@link protos.google.cloud.retail.v2alpha.ListControlsRequest.filter|filter} is unset.
-   *   * List controls that are used in a single ServingConfig:
-   *       'serving_config = "boosted_home_page_cvr"'
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.retail.v2alpha.Control|Control}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listControlsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all Controls by their parent
+ * {@link protos.google.cloud.retail.v2alpha.Catalog|Catalog}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The catalog resource name. Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of results to return. If unspecified, defaults
+ *   to 50. Max allowed value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListControls` call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. A filter to apply on the list results. Supported features:
+ *
+ *   * List all the products under the parent branch if
+ *   {@link protos.google.cloud.retail.v2alpha.ListControlsRequest.filter|filter} is unset.
+ *   * List controls that are used in a single ServingConfig:
+ *       'serving_config = "boosted_home_page_cvr"'
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.retail.v2alpha.Control|Control}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listControlsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listControls(
-    request?: protos.google.cloud.retail.v2alpha.IListControlsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IControl[],
-      protos.google.cloud.retail.v2alpha.IListControlsRequest | null,
-      protos.google.cloud.retail.v2alpha.IListControlsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2alpha.IListControlsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IControl[],
+        protos.google.cloud.retail.v2alpha.IListControlsRequest|null,
+        protos.google.cloud.retail.v2alpha.IListControlsResponse
+      ]>;
   listControls(
-    request: protos.google.cloud.retail.v2alpha.IListControlsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.retail.v2alpha.IListControlsRequest,
-      | protos.google.cloud.retail.v2alpha.IListControlsResponse
-      | null
-      | undefined,
-      protos.google.cloud.retail.v2alpha.IControl
-    >
-  ): void;
-  listControls(
-    request: protos.google.cloud.retail.v2alpha.IListControlsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.retail.v2alpha.IListControlsRequest,
-      | protos.google.cloud.retail.v2alpha.IListControlsResponse
-      | null
-      | undefined,
-      protos.google.cloud.retail.v2alpha.IControl
-    >
-  ): void;
-  listControls(
-    request?: protos.google.cloud.retail.v2alpha.IListControlsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.retail.v2alpha.IListControlsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.retail.v2alpha.IListControlsRequest,
-          | protos.google.cloud.retail.v2alpha.IListControlsResponse
-          | null
-          | undefined,
-          protos.google.cloud.retail.v2alpha.IControl
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.retail.v2alpha.IListControlsRequest,
-      | protos.google.cloud.retail.v2alpha.IListControlsResponse
-      | null
-      | undefined,
-      protos.google.cloud.retail.v2alpha.IControl
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.IControl[],
-      protos.google.cloud.retail.v2alpha.IListControlsRequest | null,
-      protos.google.cloud.retail.v2alpha.IListControlsResponse,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2alpha.IListControlsResponse|null|undefined,
+          protos.google.cloud.retail.v2alpha.IControl>): void;
+  listControls(
+      request: protos.google.cloud.retail.v2alpha.IListControlsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.retail.v2alpha.IListControlsRequest,
+          protos.google.cloud.retail.v2alpha.IListControlsResponse|null|undefined,
+          protos.google.cloud.retail.v2alpha.IControl>): void;
+  listControls(
+      request?: protos.google.cloud.retail.v2alpha.IListControlsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.retail.v2alpha.IListControlsRequest,
+          protos.google.cloud.retail.v2alpha.IListControlsResponse|null|undefined,
+          protos.google.cloud.retail.v2alpha.IControl>,
+      callback?: PaginationCallback<
+          protos.google.cloud.retail.v2alpha.IListControlsRequest,
+          protos.google.cloud.retail.v2alpha.IListControlsResponse|null|undefined,
+          protos.google.cloud.retail.v2alpha.IControl>):
+      Promise<[
+        protos.google.cloud.retail.v2alpha.IControl[],
+        protos.google.cloud.retail.v2alpha.IListControlsRequest|null,
+        protos.google.cloud.retail.v2alpha.IListControlsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.retail.v2alpha.IListControlsRequest,
-          | protos.google.cloud.retail.v2alpha.IListControlsResponse
-          | null
-          | undefined,
-          protos.google.cloud.retail.v2alpha.IControl
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.retail.v2alpha.IListControlsRequest,
+      protos.google.cloud.retail.v2alpha.IListControlsResponse|null|undefined,
+      protos.google.cloud.retail.v2alpha.IControl>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listControls values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1156,66 +902,63 @@ export class ControlServiceClient {
     this._log.info('listControls request %j', request);
     return this.innerApiCalls
       .listControls(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.retail.v2alpha.IControl[],
-          protos.google.cloud.retail.v2alpha.IListControlsRequest | null,
-          protos.google.cloud.retail.v2alpha.IListControlsResponse,
-        ]) => {
-          this._log.info('listControls values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.retail.v2alpha.IControl[],
+        protos.google.cloud.retail.v2alpha.IListControlsRequest|null,
+        protos.google.cloud.retail.v2alpha.IListControlsResponse
+      ]) => {
+        this._log.info('listControls values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listControls`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The catalog resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of results to return. If unspecified, defaults
-   *   to 50. Max allowed value is 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListControls` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. A filter to apply on the list results. Supported features:
-   *
-   *   * List all the products under the parent branch if
-   *   {@link protos.google.cloud.retail.v2alpha.ListControlsRequest.filter|filter} is unset.
-   *   * List controls that are used in a single ServingConfig:
-   *       'serving_config = "boosted_home_page_cvr"'
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.retail.v2alpha.Control|Control} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listControlsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listControls`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The catalog resource name. Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of results to return. If unspecified, defaults
+ *   to 50. Max allowed value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListControls` call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. A filter to apply on the list results. Supported features:
+ *
+ *   * List all the products under the parent branch if
+ *   {@link protos.google.cloud.retail.v2alpha.ListControlsRequest.filter|filter} is unset.
+ *   * List controls that are used in a single ServingConfig:
+ *       'serving_config = "boosted_home_page_cvr"'
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.retail.v2alpha.Control|Control} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listControlsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listControlsStream(
-    request?: protos.google.cloud.retail.v2alpha.IListControlsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.retail.v2alpha.IListControlsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listControls'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listControls stream %j', request);
     return this.descriptors.page.listControls.createStream(
       this.innerApiCalls.listControls as GaxCall,
@@ -1224,57 +967,56 @@ export class ControlServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listControls`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The catalog resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of results to return. If unspecified, defaults
-   *   to 50. Max allowed value is 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListControls` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. A filter to apply on the list results. Supported features:
-   *
-   *   * List all the products under the parent branch if
-   *   {@link protos.google.cloud.retail.v2alpha.ListControlsRequest.filter|filter} is unset.
-   *   * List controls that are used in a single ServingConfig:
-   *       'serving_config = "boosted_home_page_cvr"'
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.retail.v2alpha.Control|Control}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2alpha/control_service.list_controls.js</caption>
-   * region_tag:retail_v2alpha_generated_ControlService_ListControls_async
-   */
+/**
+ * Equivalent to `listControls`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The catalog resource name. Format:
+ *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of results to return. If unspecified, defaults
+ *   to 50. Max allowed value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListControls` call.
+ *   Provide this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. A filter to apply on the list results. Supported features:
+ *
+ *   * List all the products under the parent branch if
+ *   {@link protos.google.cloud.retail.v2alpha.ListControlsRequest.filter|filter} is unset.
+ *   * List controls that are used in a single ServingConfig:
+ *       'serving_config = "boosted_home_page_cvr"'
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.retail.v2alpha.Control|Control}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2alpha/control_service.list_controls.js</caption>
+ * region_tag:retail_v2alpha_generated_ControlService_ListControls_async
+ */
   listControlsAsync(
-    request?: protos.google.cloud.retail.v2alpha.IListControlsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.retail.v2alpha.IControl> {
+      request?: protos.google.cloud.retail.v2alpha.IListControlsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.retail.v2alpha.IControl>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listControls'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listControls iterate %j', request);
     return this.descriptors.page.listControls.asyncIterate(
       this.innerApiCalls['listControls'] as GaxCall,
@@ -1282,7 +1024,7 @@ export class ControlServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.retail.v2alpha.IControl>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1322,7 +1064,7 @@ export class ControlServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1360,7 +1102,7 @@ export class ControlServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1405,20 +1147,20 @@ export class ControlServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1455,13 +1197,13 @@ export class ControlServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1495,7 +1237,7 @@ export class ControlServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1510,20 +1252,20 @@ export class ControlServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1567,20 +1309,20 @@ export class ControlServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1594,7 +1336,7 @@ export class ControlServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  alertConfigPath(project: string) {
+  alertConfigPath(project:string) {
     return this.pathTemplates.alertConfigPathTemplate.render({
       project: project,
     });
@@ -1608,8 +1350,7 @@ export class ControlServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAlertConfigName(alertConfigName: string) {
-    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
-      .project;
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName).project;
   }
 
   /**
@@ -1620,7 +1361,7 @@ export class ControlServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  attributesConfigPath(project: string, location: string, catalog: string) {
+  attributesConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.attributesConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1636,9 +1377,7 @@ export class ControlServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).project;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).project;
   }
 
   /**
@@ -1649,9 +1388,7 @@ export class ControlServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).location;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).location;
   }
 
   /**
@@ -1662,9 +1399,7 @@ export class ControlServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).catalog;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).catalog;
   }
 
   /**
@@ -1676,12 +1411,7 @@ export class ControlServiceClient {
    * @param {string} branch
    * @returns {string} Resource name string.
    */
-  branchPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string
-  ) {
+  branchPath(project:string,location:string,catalog:string,branch:string) {
     return this.pathTemplates.branchPathTemplate.render({
       project: project,
       location: location,
@@ -1742,7 +1472,7 @@ export class ControlServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  catalogPath(project: string, location: string, catalog: string) {
+  catalogPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.catalogPathTemplate.render({
       project: project,
       location: location,
@@ -1791,7 +1521,7 @@ export class ControlServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  completionConfigPath(project: string, location: string, catalog: string) {
+  completionConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.completionConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1807,9 +1537,7 @@ export class ControlServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).project;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).project;
   }
 
   /**
@@ -1820,9 +1548,7 @@ export class ControlServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).location;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).location;
   }
 
   /**
@@ -1833,9 +1559,7 @@ export class ControlServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).catalog;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).catalog;
   }
 
   /**
@@ -1847,12 +1571,7 @@ export class ControlServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  controlPath(
-    project: string,
-    location: string,
-    catalog: string,
-    control: string
-  ) {
+  controlPath(project:string,location:string,catalog:string,control:string) {
     return this.pathTemplates.controlPathTemplate.render({
       project: project,
       location: location,
@@ -1911,7 +1630,7 @@ export class ControlServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  loggingConfigPath(project: string) {
+  loggingConfigPath(project:string) {
     return this.pathTemplates.loggingConfigPathTemplate.render({
       project: project,
     });
@@ -1925,8 +1644,7 @@ export class ControlServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLoggingConfigName(loggingConfigName: string) {
-    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName)
-      .project;
+    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName).project;
   }
 
   /**
@@ -1938,12 +1656,7 @@ export class ControlServiceClient {
    * @param {string} merchant_center_account_link
    * @returns {string} Resource name string.
    */
-  merchantCenterAccountLinkPath(
-    project: string,
-    location: string,
-    catalog: string,
-    merchantCenterAccountLink: string
-  ) {
+  merchantCenterAccountLinkPath(project:string,location:string,catalog:string,merchantCenterAccountLink:string) {
     return this.pathTemplates.merchantCenterAccountLinkPathTemplate.render({
       project: project,
       location: location,
@@ -1959,12 +1672,8 @@ export class ControlServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).project;
+  matchProjectFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).project;
   }
 
   /**
@@ -1974,12 +1683,8 @@ export class ControlServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).location;
+  matchLocationFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).location;
   }
 
   /**
@@ -1989,12 +1694,8 @@ export class ControlServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the catalog.
    */
-  matchCatalogFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).catalog;
+  matchCatalogFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).catalog;
   }
 
   /**
@@ -2004,12 +1705,8 @@ export class ControlServiceClient {
    *   A fully-qualified path representing MerchantCenterAccountLink resource.
    * @returns {string} A string representing the merchant_center_account_link.
    */
-  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(
-    merchantCenterAccountLinkName: string
-  ) {
-    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(
-      merchantCenterAccountLinkName
-    ).merchant_center_account_link;
+  matchMerchantCenterAccountLinkFromMerchantCenterAccountLinkName(merchantCenterAccountLinkName: string) {
+    return this.pathTemplates.merchantCenterAccountLinkPathTemplate.match(merchantCenterAccountLinkName).merchant_center_account_link;
   }
 
   /**
@@ -2021,7 +1718,7 @@ export class ControlServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, catalog: string, model: string) {
+  modelPath(project:string,location:string,catalog:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -2084,13 +1781,7 @@ export class ControlServiceClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string,
-    product: string
-  ) {
+  productPath(project:string,location:string,catalog:string,branch:string,product:string) {
     return this.pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
@@ -2161,7 +1852,7 @@ export class ControlServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  retailProjectPath(project: string) {
+  retailProjectPath(project:string) {
     return this.pathTemplates.retailProjectPathTemplate.render({
       project: project,
     });
@@ -2175,8 +1866,7 @@ export class ControlServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRetailProjectName(retailProjectName: string) {
-    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName)
-      .project;
+    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName).project;
   }
 
   /**
@@ -2188,12 +1878,7 @@ export class ControlServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  servingConfigPath(
-    project: string,
-    location: string,
-    catalog: string,
-    servingConfig: string
-  ) {
+  servingConfigPath(project:string,location:string,catalog:string,servingConfig:string) {
     return this.pathTemplates.servingConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2210,8 +1895,7 @@ export class ControlServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .project;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).project;
   }
 
   /**
@@ -2222,8 +1906,7 @@ export class ControlServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .location;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).location;
   }
 
   /**
@@ -2234,8 +1917,7 @@ export class ControlServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .catalog;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).catalog;
   }
 
   /**
@@ -2246,8 +1928,7 @@ export class ControlServiceClient {
    * @returns {string} A string representing the serving_config.
    */
   matchServingConfigFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .serving_config;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).serving_config;
   }
 
   /**
@@ -2262,9 +1943,7 @@ export class ControlServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

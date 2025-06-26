@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +101,20 @@ export class TagKeysClient {
    *     const client = new TagKeysClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof TagKeysClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'cloudresourcemanager.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +140,7 @@ export class TagKeysClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +154,10 @@ export class TagKeysClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -205,7 +178,9 @@ export class TagKeysClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      folderPathTemplate: new this._gaxModule.PathTemplate('folders/{folder}'),
+      folderPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}'
+      ),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
@@ -218,7 +193,9 @@ export class TagKeysClient {
       tagHoldPathTemplate: new this._gaxModule.PathTemplate(
         'tagValues/{tag_value}/tagHolds/{tag_hold}'
       ),
-      tagKeyPathTemplate: new this._gaxModule.PathTemplate('tagKeys/{tag_key}'),
+      tagKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'tagKeys/{tag_key}'
+      ),
       tagValuePathTemplate: new this._gaxModule.PathTemplate(
         'tagValues/{tag_value}'
       ),
@@ -228,77 +205,55 @@ export class TagKeysClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listTagKeys: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'tagKeys'
-      ),
+      listTagKeys:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tagKeys')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v3/{name=operations/**}',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v3/{name=operations/**}',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createTagKeyResponse = protoFilesRoot.lookup(
-      '.google.cloud.resourcemanager.v3.TagKey'
-    ) as gax.protobuf.Type;
+      '.google.cloud.resourcemanager.v3.TagKey') as gax.protobuf.Type;
     const createTagKeyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.resourcemanager.v3.CreateTagKeyMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.resourcemanager.v3.CreateTagKeyMetadata') as gax.protobuf.Type;
     const updateTagKeyResponse = protoFilesRoot.lookup(
-      '.google.cloud.resourcemanager.v3.TagKey'
-    ) as gax.protobuf.Type;
+      '.google.cloud.resourcemanager.v3.TagKey') as gax.protobuf.Type;
     const updateTagKeyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.resourcemanager.v3.UpdateTagKeyMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.resourcemanager.v3.UpdateTagKeyMetadata') as gax.protobuf.Type;
     const deleteTagKeyResponse = protoFilesRoot.lookup(
-      '.google.cloud.resourcemanager.v3.TagKey'
-    ) as gax.protobuf.Type;
+      '.google.cloud.resourcemanager.v3.TagKey') as gax.protobuf.Type;
     const deleteTagKeyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.resourcemanager.v3.DeleteTagKeyMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.resourcemanager.v3.DeleteTagKeyMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createTagKey: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createTagKeyResponse.decode.bind(createTagKeyResponse),
-        createTagKeyMetadata.decode.bind(createTagKeyMetadata)
-      ),
+        createTagKeyMetadata.decode.bind(createTagKeyMetadata)),
       updateTagKey: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateTagKeyResponse.decode.bind(updateTagKeyResponse),
-        updateTagKeyMetadata.decode.bind(updateTagKeyMetadata)
-      ),
+        updateTagKeyMetadata.decode.bind(updateTagKeyMetadata)),
       deleteTagKey: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteTagKeyResponse.decode.bind(deleteTagKeyResponse),
-        deleteTagKeyMetadata.decode.bind(deleteTagKeyMetadata)
-      ),
+        deleteTagKeyMetadata.decode.bind(deleteTagKeyMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.resourcemanager.v3.TagKeys',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.resourcemanager.v3.TagKeys', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -329,43 +284,28 @@ export class TagKeysClient {
     // Put together the "service stub" for
     // google.cloud.resourcemanager.v3.TagKeys.
     this.tagKeysStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.resourcemanager.v3.TagKeys'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.resourcemanager.v3.TagKeys') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.resourcemanager.v3.TagKeys,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const tagKeysStubMethods = [
-      'listTagKeys',
-      'getTagKey',
-      'getNamespacedTagKey',
-      'createTagKey',
-      'updateTagKey',
-      'deleteTagKey',
-      'getIamPolicy',
-      'setIamPolicy',
-      'testIamPermissions',
-    ];
+    const tagKeysStubMethods =
+        ['listTagKeys', 'getTagKey', 'getNamespacedTagKey', 'createTagKey', 'updateTagKey', 'deleteTagKey', 'getIamPolicy', 'setIamPolicy', 'testIamPermissions'];
     for (const methodName of tagKeysStubMethods) {
       const callPromise = this.tagKeysStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -390,14 +330,8 @@ export class TagKeysClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudresourcemanager.googleapis.com';
   }
@@ -408,14 +342,8 @@ export class TagKeysClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'cloudresourcemanager.googleapis.com';
   }
@@ -448,7 +376,7 @@ export class TagKeysClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/cloud-platform.read-only',
+      'https://www.googleapis.com/auth/cloud-platform.read-only'
     ];
   }
 
@@ -458,9 +386,8 @@ export class TagKeysClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -471,1250 +398,937 @@ export class TagKeysClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Retrieves a TagKey. This method will return `PERMISSION_DENIED` if the
-   * key does not exist or the user does not have permission to view it.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A resource name in the format `tagKeys/{id}`, such as
-   *   `tagKeys/123`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.resourcemanager.v3.TagKey|TagKey}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_keys.get_tag_key.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagKeys_GetTagKey_async
-   */
+/**
+ * Retrieves a TagKey. This method will return `PERMISSION_DENIED` if the
+ * key does not exist or the user does not have permission to view it.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A resource name in the format `tagKeys/{id}`, such as
+ *   `tagKeys/123`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.resourcemanager.v3.TagKey|TagKey}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_keys.get_tag_key.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagKeys_GetTagKey_async
+ */
   getTagKey(
-    request?: protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.resourcemanager.v3.ITagKey,
-      protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.resourcemanager.v3.ITagKey,
+        protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest|undefined, {}|undefined
+      ]>;
   getTagKey(
-    request: protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.resourcemanager.v3.ITagKey,
-      | protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTagKey(
-    request: protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest,
-    callback: Callback<
-      protos.google.cloud.resourcemanager.v3.ITagKey,
-      | protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTagKey(
-    request?: protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.resourcemanager.v3.ITagKey,
-          | protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.resourcemanager.v3.ITagKey,
-      | protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.resourcemanager.v3.ITagKey,
-      protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTagKey(
+      request: protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest,
+      callback: Callback<
+          protos.google.cloud.resourcemanager.v3.ITagKey,
+          protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getTagKey(
+      request?: protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.resourcemanager.v3.ITagKey,
+          protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.resourcemanager.v3.ITagKey,
+          protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.resourcemanager.v3.ITagKey,
+        protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getTagKey request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.resourcemanager.v3.ITagKey,
-          | protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.resourcemanager.v3.ITagKey,
+        protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTagKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getTagKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.resourcemanager.v3.ITagKey,
-          protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getTagKey response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getTagKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.resourcemanager.v3.ITagKey,
+        protos.google.cloud.resourcemanager.v3.IGetTagKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getTagKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Retrieves a TagKey by its namespaced name.
-   * This method will return `PERMISSION_DENIED` if the key does not exist
-   * or the user does not have permission to view it.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A namespaced tag key name in the format
-   *   `{parentId}/{tagKeyShort}`, such as `42/foo` for a key with short name
-   *   "foo" under the organization with ID 42 or `r2-d2/bar` for a key with short
-   *   name "bar" under the project `r2-d2`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.resourcemanager.v3.TagKey|TagKey}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_keys.get_namespaced_tag_key.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagKeys_GetNamespacedTagKey_async
-   */
+/**
+ * Retrieves a TagKey by its namespaced name.
+ * This method will return `PERMISSION_DENIED` if the key does not exist
+ * or the user does not have permission to view it.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A namespaced tag key name in the format
+ *   `{parentId}/{tagKeyShort}`, such as `42/foo` for a key with short name
+ *   "foo" under the organization with ID 42 or `r2-d2/bar` for a key with short
+ *   name "bar" under the project `r2-d2`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.resourcemanager.v3.TagKey|TagKey}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_keys.get_namespaced_tag_key.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagKeys_GetNamespacedTagKey_async
+ */
   getNamespacedTagKey(
-    request?: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.resourcemanager.v3.ITagKey,
-      (
-        | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.resourcemanager.v3.ITagKey,
+        protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest|undefined, {}|undefined
+      ]>;
   getNamespacedTagKey(
-    request: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.resourcemanager.v3.ITagKey,
-      | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNamespacedTagKey(
-    request: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest,
-    callback: Callback<
-      protos.google.cloud.resourcemanager.v3.ITagKey,
-      | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNamespacedTagKey(
-    request?: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.resourcemanager.v3.ITagKey,
-          | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.resourcemanager.v3.ITagKey,
-      | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.resourcemanager.v3.ITagKey,
-      (
-        | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNamespacedTagKey(
+      request: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest,
+      callback: Callback<
+          protos.google.cloud.resourcemanager.v3.ITagKey,
+          protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNamespacedTagKey(
+      request?: protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.resourcemanager.v3.ITagKey,
+          protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.resourcemanager.v3.ITagKey,
+          protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.resourcemanager.v3.ITagKey,
+        protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('getNamespacedTagKey request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.resourcemanager.v3.ITagKey,
-          | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.resourcemanager.v3.ITagKey,
+        protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNamespacedTagKey response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getNamespacedTagKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.resourcemanager.v3.ITagKey,
-          (
-            | protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getNamespacedTagKey response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getNamespacedTagKey(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.resourcemanager.v3.ITagKey,
+        protos.google.cloud.resourcemanager.v3.IGetNamespacedTagKeyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getNamespacedTagKey response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the access control policy for a TagKey. The returned policy may be
-   * empty if no such policy or resource exists. The `resource` field should
-   * be the TagKey's resource name. For example, "tagKeys/1234".
-   * The caller must have
-   * `cloudresourcemanager.googleapis.com/tagKeys.getIamPolicy` permission on
-   * the specified TagKey.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_keys.get_iam_policy.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagKeys_GetIamPolicy_async
-   */
+/**
+ * Gets the access control policy for a TagKey. The returned policy may be
+ * empty if no such policy or resource exists. The `resource` field should
+ * be the TagKey's resource name. For example, "tagKeys/1234".
+ * The caller must have
+ * `cloudresourcemanager.googleapis.com/tagKeys.getIamPolicy` permission on
+ * the specified TagKey.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.GetPolicyOptions} request.options
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_keys.get_iam_policy.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagKeys_GetIamPolicy_async
+ */
   getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Sets the access control policy on a TagKey, replacing any existing
-   * policy. The `resource` field should be the TagKey's resource name.
-   * For example, "tagKeys/1234".
-   * The caller must have `resourcemanager.tagKeys.setIamPolicy` permission
-   * on the identified tagValue.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-   *   the fields in the mask will be modified. If no mask is provided, the
-   *   following default mask is used:
-   *
-   *   `paths: "bindings, etag"`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_keys.set_iam_policy.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagKeys_SetIamPolicy_async
-   */
+/**
+ * Sets the access control policy on a TagKey, replacing any existing
+ * policy. The `resource` field should be the TagKey's resource name.
+ * For example, "tagKeys/1234".
+ * The caller must have `resourcemanager.tagKeys.setIamPolicy` permission
+ * on the identified tagValue.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being specified.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.Policy} request.policy
+ *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is a
+ *   valid policy but certain Cloud Platform services (such as Projects)
+ *   might reject them.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+ *   the fields in the mask will be modified. If no mask is provided, the
+ *   following default mask is used:
+ *
+ *   `paths: "bindings, etag"`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_keys.set_iam_policy.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagKeys_SetIamPolicy_async
+ */
   setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>;
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .setIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setIamPolicy response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns permissions that a caller has on the specified TagKey.
-   * The `resource` field should be the TagKey's resource name.
-   * For example, "tagKeys/1234".
-   *
-   * There are no permissions required for making this API call.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_keys.test_iam_permissions.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagKeys_TestIamPermissions_async
-   */
+/**
+ * Returns permissions that a caller has on the specified TagKey.
+ * The `resource` field should be the TagKey's resource name.
+ * For example, "tagKeys/1234".
+ *
+ * There are no permissions required for making this API call.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_keys.test_iam_permissions.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagKeys_TestIamPermissions_async
+ */
   testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      callback: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .testIamPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('testIamPermissions response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a new TagKey. If another request with the same parameters is
-   * sent while the original request is in process, the second request
-   * will receive an error. A maximum of 1000 TagKeys can exist under a parent
-   * at any given time.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.resourcemanager.v3.TagKey} request.tagKey
-   *   Required. The TagKey to be created. Only fields `short_name`,
-   *   `description`, and `parent` are considered during the creation request.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. Set to true to perform validations necessary for creating the
-   *   resource, but not actually perform the action.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_keys.create_tag_key.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagKeys_CreateTagKey_async
-   */
+/**
+ * Creates a new TagKey. If another request with the same parameters is
+ * sent while the original request is in process, the second request
+ * will receive an error. A maximum of 1000 TagKeys can exist under a parent
+ * at any given time.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.resourcemanager.v3.TagKey} request.tagKey
+ *   Required. The TagKey to be created. Only fields `short_name`,
+ *   `description`, and `parent` are considered during the creation request.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. Set to true to perform validations necessary for creating the
+ *   resource, but not actually perform the action.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_keys.create_tag_key.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagKeys_CreateTagKey_async
+ */
   createTagKey(
-    request?: protos.google.cloud.resourcemanager.v3.ICreateTagKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.resourcemanager.v3.ICreateTagKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createTagKey(
-    request: protos.google.cloud.resourcemanager.v3.ICreateTagKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.resourcemanager.v3.ICreateTagKeyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createTagKey(
-    request: protos.google.cloud.resourcemanager.v3.ICreateTagKeyRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.resourcemanager.v3.ICreateTagKeyRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createTagKey(
-    request?: protos.google.cloud.resourcemanager.v3.ICreateTagKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagKey,
-            protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.resourcemanager.v3.ICreateTagKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagKey,
-            protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createTagKey response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createTagKey request %j', request);
-    return this.innerApiCalls
-      .createTagKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagKey,
-            protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createTagKey response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createTagKey(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.ICreateTagKeyMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createTagKey response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createTagKey()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_keys.create_tag_key.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagKeys_CreateTagKey_async
-   */
-  async checkCreateTagKeyProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.resourcemanager.v3.TagKey,
-      protos.google.cloud.resourcemanager.v3.CreateTagKeyMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createTagKey()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_keys.create_tag_key.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagKeys_CreateTagKey_async
+ */
+  async checkCreateTagKeyProgress(name: string): Promise<LROperation<protos.google.cloud.resourcemanager.v3.TagKey, protos.google.cloud.resourcemanager.v3.CreateTagKeyMetadata>>{
     this._log.info('createTagKey long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createTagKey,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.resourcemanager.v3.TagKey,
-      protos.google.cloud.resourcemanager.v3.CreateTagKeyMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createTagKey, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.resourcemanager.v3.TagKey, protos.google.cloud.resourcemanager.v3.CreateTagKeyMetadata>;
   }
-  /**
-   * Updates the attributes of the TagKey resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.resourcemanager.v3.TagKey} request.tagKey
-   *   Required. The new definition of the TagKey. Only the `description` and
-   *   `etag` fields can be updated by this request. If the `etag` field is not
-   *   empty, it must match the `etag` field of the existing tag key. Otherwise,
-   *   `ABORTED` will be returned.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Fields to be updated. The mask may only contain `description` or
-   *   `etag`. If omitted entirely, both `description` and `etag` are assumed to
-   *   be significant.
-   * @param {boolean} request.validateOnly
-   *   Set as true to perform validations necessary for updating the resource, but
-   *   not actually perform the action.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_keys.update_tag_key.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagKeys_UpdateTagKey_async
-   */
+/**
+ * Updates the attributes of the TagKey resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.resourcemanager.v3.TagKey} request.tagKey
+ *   Required. The new definition of the TagKey. Only the `description` and
+ *   `etag` fields can be updated by this request. If the `etag` field is not
+ *   empty, it must match the `etag` field of the existing tag key. Otherwise,
+ *   `ABORTED` will be returned.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Fields to be updated. The mask may only contain `description` or
+ *   `etag`. If omitted entirely, both `description` and `etag` are assumed to
+ *   be significant.
+ * @param {boolean} request.validateOnly
+ *   Set as true to perform validations necessary for updating the resource, but
+ *   not actually perform the action.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_keys.update_tag_key.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagKeys_UpdateTagKey_async
+ */
   updateTagKey(
-    request?: protos.google.cloud.resourcemanager.v3.IUpdateTagKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.resourcemanager.v3.IUpdateTagKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateTagKey(
-    request: protos.google.cloud.resourcemanager.v3.IUpdateTagKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.resourcemanager.v3.IUpdateTagKeyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateTagKey(
-    request: protos.google.cloud.resourcemanager.v3.IUpdateTagKeyRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.resourcemanager.v3.IUpdateTagKeyRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateTagKey(
-    request?: protos.google.cloud.resourcemanager.v3.IUpdateTagKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagKey,
-            protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.resourcemanager.v3.IUpdateTagKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'tag_key.name': request.tagKey!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'tag_key.name': request.tagKey!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagKey,
-            protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateTagKey response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateTagKey request %j', request);
-    return this.innerApiCalls
-      .updateTagKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagKey,
-            protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateTagKey response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateTagKey(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IUpdateTagKeyMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateTagKey response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateTagKey()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_keys.update_tag_key.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagKeys_UpdateTagKey_async
-   */
-  async checkUpdateTagKeyProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.resourcemanager.v3.TagKey,
-      protos.google.cloud.resourcemanager.v3.UpdateTagKeyMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateTagKey()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_keys.update_tag_key.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagKeys_UpdateTagKey_async
+ */
+  async checkUpdateTagKeyProgress(name: string): Promise<LROperation<protos.google.cloud.resourcemanager.v3.TagKey, protos.google.cloud.resourcemanager.v3.UpdateTagKeyMetadata>>{
     this._log.info('updateTagKey long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateTagKey,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.resourcemanager.v3.TagKey,
-      protos.google.cloud.resourcemanager.v3.UpdateTagKeyMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateTagKey, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.resourcemanager.v3.TagKey, protos.google.cloud.resourcemanager.v3.UpdateTagKeyMetadata>;
   }
-  /**
-   * Deletes a TagKey. The TagKey cannot be deleted if it has any child
-   * TagValues.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of a TagKey to be deleted in the format
-   *   `tagKeys/123`. The TagKey cannot be a parent of any existing TagValues or
-   *   it will not be deleted successfully.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. Set as true to perform validations necessary for deletion, but
-   *   not actually perform the action.
-   * @param {string} [request.etag]
-   *   Optional. The etag known to the client for the expected state of the
-   *   TagKey. This is to be used for optimistic concurrency.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_keys.delete_tag_key.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagKeys_DeleteTagKey_async
-   */
+/**
+ * Deletes a TagKey. The TagKey cannot be deleted if it has any child
+ * TagValues.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of a TagKey to be deleted in the format
+ *   `tagKeys/123`. The TagKey cannot be a parent of any existing TagValues or
+ *   it will not be deleted successfully.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. Set as true to perform validations necessary for deletion, but
+ *   not actually perform the action.
+ * @param {string} [request.etag]
+ *   Optional. The etag known to the client for the expected state of the
+ *   TagKey. This is to be used for optimistic concurrency.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_keys.delete_tag_key.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagKeys_DeleteTagKey_async
+ */
   deleteTagKey(
-    request?: protos.google.cloud.resourcemanager.v3.IDeleteTagKeyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.resourcemanager.v3.IDeleteTagKeyRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteTagKey(
-    request: protos.google.cloud.resourcemanager.v3.IDeleteTagKeyRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.resourcemanager.v3.IDeleteTagKeyRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteTagKey(
-    request: protos.google.cloud.resourcemanager.v3.IDeleteTagKeyRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.resourcemanager.v3.IDeleteTagKeyRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteTagKey(
-    request?: protos.google.cloud.resourcemanager.v3.IDeleteTagKeyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagKey,
-            protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.ITagKey,
-        protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.resourcemanager.v3.IDeleteTagKeyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagKey,
-            protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteTagKey response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteTagKey request %j', request);
-    return this.innerApiCalls
-      .deleteTagKey(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.resourcemanager.v3.ITagKey,
-            protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteTagKey response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteTagKey(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.resourcemanager.v3.ITagKey, protos.google.cloud.resourcemanager.v3.IDeleteTagKeyMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteTagKey response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteTagKey()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_keys.delete_tag_key.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagKeys_DeleteTagKey_async
-   */
-  async checkDeleteTagKeyProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.resourcemanager.v3.TagKey,
-      protos.google.cloud.resourcemanager.v3.DeleteTagKeyMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteTagKey()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_keys.delete_tag_key.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagKeys_DeleteTagKey_async
+ */
+  async checkDeleteTagKeyProgress(name: string): Promise<LROperation<protos.google.cloud.resourcemanager.v3.TagKey, protos.google.cloud.resourcemanager.v3.DeleteTagKeyMetadata>>{
     this._log.info('deleteTagKey long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteTagKey,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.resourcemanager.v3.TagKey,
-      protos.google.cloud.resourcemanager.v3.DeleteTagKeyMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteTagKey, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.resourcemanager.v3.TagKey, protos.google.cloud.resourcemanager.v3.DeleteTagKeyMetadata>;
   }
-  /**
-   * Lists all TagKeys for a parent resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the TagKey's parent.
-   *   Must be of the form `organizations/{org_id}` or `projects/{project_id}` or
-   *   `projects/{project_number}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of TagKeys to return in the response. The
-   *   server allows a maximum of 300 TagKeys to return. If unspecified, the
-   *   server will use 100 as the default.
-   * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to `ListTagKey`
-   *   that indicates where this listing should continue from.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.resourcemanager.v3.TagKey|TagKey}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listTagKeysAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all TagKeys for a parent resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the TagKey's parent.
+ *   Must be of the form `organizations/{org_id}` or `projects/{project_id}` or
+ *   `projects/{project_number}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of TagKeys to return in the response. The
+ *   server allows a maximum of 300 TagKeys to return. If unspecified, the
+ *   server will use 100 as the default.
+ * @param {string} [request.pageToken]
+ *   Optional. A pagination token returned from a previous call to `ListTagKey`
+ *   that indicates where this listing should continue from.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.resourcemanager.v3.TagKey|TagKey}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listTagKeysAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTagKeys(
-    request?: protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.resourcemanager.v3.ITagKey[],
-      protos.google.cloud.resourcemanager.v3.IListTagKeysRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListTagKeysResponse,
-    ]
-  >;
+      request?: protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.resourcemanager.v3.ITagKey[],
+        protos.google.cloud.resourcemanager.v3.IListTagKeysRequest|null,
+        protos.google.cloud.resourcemanager.v3.IListTagKeysResponse
+      ]>;
   listTagKeys(
-    request: protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
-      | protos.google.cloud.resourcemanager.v3.IListTagKeysResponse
-      | null
-      | undefined,
-      protos.google.cloud.resourcemanager.v3.ITagKey
-    >
-  ): void;
-  listTagKeys(
-    request: protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
-      | protos.google.cloud.resourcemanager.v3.IListTagKeysResponse
-      | null
-      | undefined,
-      protos.google.cloud.resourcemanager.v3.ITagKey
-    >
-  ): void;
-  listTagKeys(
-    request?: protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
-          | protos.google.cloud.resourcemanager.v3.IListTagKeysResponse
-          | null
-          | undefined,
-          protos.google.cloud.resourcemanager.v3.ITagKey
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
-      | protos.google.cloud.resourcemanager.v3.IListTagKeysResponse
-      | null
-      | undefined,
-      protos.google.cloud.resourcemanager.v3.ITagKey
-    >
-  ): Promise<
-    [
-      protos.google.cloud.resourcemanager.v3.ITagKey[],
-      protos.google.cloud.resourcemanager.v3.IListTagKeysRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListTagKeysResponse,
-    ]
-  > | void {
+          protos.google.cloud.resourcemanager.v3.IListTagKeysResponse|null|undefined,
+          protos.google.cloud.resourcemanager.v3.ITagKey>): void;
+  listTagKeys(
+      request: protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
+          protos.google.cloud.resourcemanager.v3.IListTagKeysResponse|null|undefined,
+          protos.google.cloud.resourcemanager.v3.ITagKey>): void;
+  listTagKeys(
+      request?: protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
+          protos.google.cloud.resourcemanager.v3.IListTagKeysResponse|null|undefined,
+          protos.google.cloud.resourcemanager.v3.ITagKey>,
+      callback?: PaginationCallback<
+          protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
+          protos.google.cloud.resourcemanager.v3.IListTagKeysResponse|null|undefined,
+          protos.google.cloud.resourcemanager.v3.ITagKey>):
+      Promise<[
+        protos.google.cloud.resourcemanager.v3.ITagKey[],
+        protos.google.cloud.resourcemanager.v3.IListTagKeysRequest|null,
+        protos.google.cloud.resourcemanager.v3.IListTagKeysResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
-          | protos.google.cloud.resourcemanager.v3.IListTagKeysResponse
-          | null
-          | undefined,
-          protos.google.cloud.resourcemanager.v3.ITagKey
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
+      protos.google.cloud.resourcemanager.v3.IListTagKeysResponse|null|undefined,
+      protos.google.cloud.resourcemanager.v3.ITagKey>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTagKeys values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1723,57 +1337,53 @@ export class TagKeysClient {
     this._log.info('listTagKeys request %j', request);
     return this.innerApiCalls
       .listTagKeys(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.resourcemanager.v3.ITagKey[],
-          protos.google.cloud.resourcemanager.v3.IListTagKeysRequest | null,
-          protos.google.cloud.resourcemanager.v3.IListTagKeysResponse,
-        ]) => {
-          this._log.info('listTagKeys values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.resourcemanager.v3.ITagKey[],
+        protos.google.cloud.resourcemanager.v3.IListTagKeysRequest|null,
+        protos.google.cloud.resourcemanager.v3.IListTagKeysResponse
+      ]) => {
+        this._log.info('listTagKeys values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listTagKeys`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the TagKey's parent.
-   *   Must be of the form `organizations/{org_id}` or `projects/{project_id}` or
-   *   `projects/{project_number}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of TagKeys to return in the response. The
-   *   server allows a maximum of 300 TagKeys to return. If unspecified, the
-   *   server will use 100 as the default.
-   * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to `ListTagKey`
-   *   that indicates where this listing should continue from.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.resourcemanager.v3.TagKey|TagKey} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listTagKeysAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listTagKeys`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the TagKey's parent.
+ *   Must be of the form `organizations/{org_id}` or `projects/{project_id}` or
+ *   `projects/{project_number}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of TagKeys to return in the response. The
+ *   server allows a maximum of 300 TagKeys to return. If unspecified, the
+ *   server will use 100 as the default.
+ * @param {string} [request.pageToken]
+ *   Optional. A pagination token returned from a previous call to `ListTagKey`
+ *   that indicates where this listing should continue from.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.resourcemanager.v3.TagKey|TagKey} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listTagKeysAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listTagKeysStream(
-    request?: protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTagKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTagKeys stream %j', request);
     return this.descriptors.page.listTagKeys.createStream(
       this.innerApiCalls.listTagKeys as GaxCall,
@@ -1782,48 +1392,46 @@ export class TagKeysClient {
     );
   }
 
-  /**
-   * Equivalent to `listTagKeys`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the TagKey's parent.
-   *   Must be of the form `organizations/{org_id}` or `projects/{project_id}` or
-   *   `projects/{project_number}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of TagKeys to return in the response. The
-   *   server allows a maximum of 300 TagKeys to return. If unspecified, the
-   *   server will use 100 as the default.
-   * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to `ListTagKey`
-   *   that indicates where this listing should continue from.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.resourcemanager.v3.TagKey|TagKey}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v3/tag_keys.list_tag_keys.js</caption>
-   * region_tag:cloudresourcemanager_v3_generated_TagKeys_ListTagKeys_async
-   */
+/**
+ * Equivalent to `listTagKeys`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the TagKey's parent.
+ *   Must be of the form `organizations/{org_id}` or `projects/{project_id}` or
+ *   `projects/{project_number}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of TagKeys to return in the response. The
+ *   server allows a maximum of 300 TagKeys to return. If unspecified, the
+ *   server will use 100 as the default.
+ * @param {string} [request.pageToken]
+ *   Optional. A pagination token returned from a previous call to `ListTagKey`
+ *   that indicates where this listing should continue from.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.resourcemanager.v3.TagKey|TagKey}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/tag_keys.list_tag_keys.js</caption>
+ * region_tag:cloudresourcemanager_v3_generated_TagKeys_ListTagKeys_async
+ */
   listTagKeysAsync(
-    request?: protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.resourcemanager.v3.ITagKey> {
+      request?: protos.google.cloud.resourcemanager.v3.IListTagKeysRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.resourcemanager.v3.ITagKey>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTagKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listTagKeys iterate %j', request);
     return this.descriptors.page.listTagKeys.asyncIterate(
       this.innerApiCalls['listTagKeys'] as GaxCall,
@@ -1831,7 +1439,7 @@ export class TagKeysClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.resourcemanager.v3.ITagKey>;
   }
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1876,20 +1484,20 @@ export class TagKeysClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1926,13 +1534,13 @@ export class TagKeysClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1966,7 +1574,7 @@ export class TagKeysClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1981,20 +1589,20 @@ export class TagKeysClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2038,20 +1646,20 @@ export class TagKeysClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2065,7 +1673,7 @@ export class TagKeysClient {
    * @param {string} folder
    * @returns {string} Resource name string.
    */
-  folderPath(folder: string) {
+  folderPath(folder:string) {
     return this.pathTemplates.folderPathTemplate.render({
       folder: folder,
     });
@@ -2088,7 +1696,7 @@ export class TagKeysClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization: string) {
+  organizationPath(organization:string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -2102,8 +1710,7 @@ export class TagKeysClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName)
-      .organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
   }
 
   /**
@@ -2112,7 +1719,7 @@ export class TagKeysClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2135,7 +1742,7 @@ export class TagKeysClient {
    * @param {string} tag_binding
    * @returns {string} Resource name string.
    */
-  tagBindingPath(tagBinding: string) {
+  tagBindingPath(tagBinding:string) {
     return this.pathTemplates.tagBindingPathTemplate.render({
       tag_binding: tagBinding,
     });
@@ -2149,8 +1756,7 @@ export class TagKeysClient {
    * @returns {string} A string representing the tag_binding.
    */
   matchTagBindingFromTagBindingName(tagBindingName: string) {
-    return this.pathTemplates.tagBindingPathTemplate.match(tagBindingName)
-      .tag_binding;
+    return this.pathTemplates.tagBindingPathTemplate.match(tagBindingName).tag_binding;
   }
 
   /**
@@ -2160,7 +1766,7 @@ export class TagKeysClient {
    * @param {string} tag_hold
    * @returns {string} Resource name string.
    */
-  tagHoldPath(tagValue: string, tagHold: string) {
+  tagHoldPath(tagValue:string,tagHold:string) {
     return this.pathTemplates.tagHoldPathTemplate.render({
       tag_value: tagValue,
       tag_hold: tagHold,
@@ -2195,7 +1801,7 @@ export class TagKeysClient {
    * @param {string} tag_key
    * @returns {string} Resource name string.
    */
-  tagKeyPath(tagKey: string) {
+  tagKeyPath(tagKey:string) {
     return this.pathTemplates.tagKeyPathTemplate.render({
       tag_key: tagKey,
     });
@@ -2218,7 +1824,7 @@ export class TagKeysClient {
    * @param {string} tag_value
    * @returns {string} Resource name string.
    */
-  tagValuePath(tagValue: string) {
+  tagValuePath(tagValue:string) {
     return this.pathTemplates.tagValuePathTemplate.render({
       tag_value: tagValue,
     });
@@ -2232,8 +1838,7 @@ export class TagKeysClient {
    * @returns {string} A string representing the tag_value.
    */
   matchTagValueFromTagValueName(tagValueName: string) {
-    return this.pathTemplates.tagValuePathTemplate.match(tagValueName)
-      .tag_value;
+    return this.pathTemplates.tagValuePathTemplate.match(tagValueName).tag_value;
   }
 
   /**

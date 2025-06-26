@@ -16,12 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const issueresolution = require('@google-shopping/issueresolution');
 
 function main() {
-  const issueResolutionServiceClient =
-    new issueresolution.IssueResolutionServiceClient();
+  const aggregateProductStatusesServiceClient = new issueresolution.AggregateProductStatusesServiceClient();
+  const issueResolutionServiceClient = new issueresolution.IssueResolutionServiceClient();
 }
 
 main();

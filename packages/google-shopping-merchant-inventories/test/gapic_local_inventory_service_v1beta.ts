@@ -29,1118 +29,827 @@ import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta.LocalInventoryServiceClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          localinventoryserviceModule.v1beta.LocalInventoryServiceClient
-            .servicePath;
-        assert.strictEqual(servicePath, 'merchantapi.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          localinventoryserviceModule.v1beta.LocalInventoryServiceClient
-            .apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          universeDomain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'merchantapi.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          universe_domain: 'example.com',
-        });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'merchantapi.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new localinventoryserviceModule.v1beta.LocalInventoryServiceClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'merchantapi.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client =
-            new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-              universeDomain: 'configured.example.com',
+        it('has universeDomain', () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
+        });
+
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = localinventoryserviceModule.v1beta.LocalInventoryServiceClient.servicePath;
+                assert.strictEqual(servicePath, 'merchantapi.googleapis.com');
+                assert(stub.called);
+                stub.restore();
             });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'merchantapi.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
-        });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port =
-        localinventoryserviceModule.v1beta.LocalInventoryServiceClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          fallback: true,
-        });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.localInventoryServiceStub, undefined);
-      await client.initialize();
-      assert(client.localInventoryServiceStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.localInventoryServiceStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      assert.strictEqual(client.localInventoryServiceStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('insertLocalInventory', () => {
-    it('invokes insertLocalInventory without error', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
-      );
-      client.innerApiCalls.insertLocalInventory =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.insertLocalInventory(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.insertLocalInventory as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.insertLocalInventory as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes insertLocalInventory without error using callback', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
-      );
-      client.innerApiCalls.insertLocalInventory =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.insertLocalInventory(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.shopping.merchant.inventories.v1beta.ILocalInventory | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.insertLocalInventory as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.insertLocalInventory as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes insertLocalInventory with error', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.insertLocalInventory = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.insertLocalInventory(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.insertLocalInventory as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.insertLocalInventory as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes insertLocalInventory with closed client', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.insertLocalInventory(request), expectedError);
-    });
-  });
-
-  describe('deleteLocalInventory', () => {
-    it('invokes deleteLocalInventory without error', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteLocalInventory =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteLocalInventory(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteLocalInventory as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLocalInventory as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLocalInventory without error using callback', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteLocalInventory =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteLocalInventory(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteLocalInventory as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLocalInventory as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLocalInventory with error', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteLocalInventory = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteLocalInventory(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteLocalInventory as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteLocalInventory as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteLocalInventory with closed client', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.deleteLocalInventory(request), expectedError);
-    });
-  });
-
-  describe('listLocalInventories', () => {
-    it('invokes listLocalInventories without error', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
-        ),
-      ];
-      client.innerApiCalls.listLocalInventories =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listLocalInventories(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLocalInventories as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLocalInventories as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLocalInventories without error using callback', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
-        ),
-      ];
-      client.innerApiCalls.listLocalInventories =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listLocalInventories(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.shopping.merchant.inventories.v1beta.ILocalInventory[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listLocalInventories as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLocalInventories as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLocalInventories with error', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listLocalInventories = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listLocalInventories(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listLocalInventories as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listLocalInventories as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listLocalInventoriesStream without error', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
-        ),
-      ];
-      client.descriptors.page.listLocalInventories.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listLocalInventoriesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.shopping.merchant.inventories.v1beta.LocalInventory[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.shopping.merchant.inventories.v1beta.LocalInventory
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listLocalInventories.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLocalInventories, request)
-      );
-      assert(
-        (client.descriptors.page.listLocalInventories.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listLocalInventoriesStream with error', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLocalInventories.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listLocalInventoriesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.shopping.merchant.inventories.v1beta.LocalInventory[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.shopping.merchant.inventories.v1beta.LocalInventory
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listLocalInventories.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listLocalInventories, request)
-      );
-      assert(
-        (client.descriptors.page.listLocalInventories.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listLocalInventories without error', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
-        ),
-      ];
-      client.descriptors.page.listLocalInventories.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.shopping.merchant.inventories.v1beta.ILocalInventory[] =
-        [];
-      const iterable = client.listLocalInventoriesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listLocalInventories.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listLocalInventories.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listLocalInventories with error', async () => {
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listLocalInventories.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocalInventoriesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.shopping.merchant.inventories.v1beta.ILocalInventory[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = localinventoryserviceModule.v1beta.LocalInventoryServiceClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listLocalInventories.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listLocalInventories.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('localInventory', async () => {
-      const fakePath = '/rendered/path/localInventory';
-      const expectedParameters = {
-        account: 'accountValue',
-        product: 'productValue',
-        store_code: 'storeCodeValue',
-      };
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'merchantapi.example.com');
         });
-      await client.initialize();
-      client.pathTemplates.localInventoryPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.localInventoryPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('localInventoryPath', () => {
-        const result = client.localInventoryPath(
-          'accountValue',
-          'productValue',
-          'storeCodeValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.localInventoryPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchAccountFromLocalInventoryName', () => {
-        const result = client.matchAccountFromLocalInventoryName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.localInventoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchProductFromLocalInventoryName', () => {
-        const result = client.matchProductFromLocalInventoryName(fakePath);
-        assert.strictEqual(result, 'productValue');
-        assert(
-          (client.pathTemplates.localInventoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchStoreCodeFromLocalInventoryName', () => {
-        const result = client.matchStoreCodeFromLocalInventoryName(fakePath);
-        assert.strictEqual(result, 'storeCodeValue');
-        assert(
-          (client.pathTemplates.localInventoryPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('product', async () => {
-      const fakePath = '/rendered/path/product';
-      const expectedParameters = {
-        account: 'accountValue',
-        product: 'productValue',
-      };
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'merchantapi.example.com');
         });
-      await client.initialize();
-      client.pathTemplates.productPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.productPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('productPath', () => {
-        const result = client.productPath('accountValue', 'productValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.productPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'merchantapi.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-      it('matchAccountFromProductName', () => {
-        const result = client.matchAccountFromProductName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (client.pathTemplates.productPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchProductFromProductName', () => {
-        const result = client.matchProductFromProductName(fakePath);
-        assert.strictEqual(result, 'productValue');
-        assert(
-          (client.pathTemplates.productPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('regionalInventory', async () => {
-      const fakePath = '/rendered/path/regionalInventory';
-      const expectedParameters = {
-        account: 'accountValue',
-        product: 'productValue',
-        region: 'regionValue',
-      };
-      const client =
-        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'merchantapi.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
+        }
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
         });
-      await client.initialize();
-      client.pathTemplates.regionalInventoryPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.regionalInventoryPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
 
-      it('regionalInventoryPath', () => {
-        const result = client.regionalInventoryPath(
-          'accountValue',
-          'productValue',
-          'regionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.regionalInventoryPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        it('has port', () => {
+            const port = localinventoryserviceModule.v1beta.LocalInventoryServiceClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
 
-      it('matchAccountFromRegionalInventoryName', () => {
-        const result = client.matchAccountFromRegionalInventoryName(fakePath);
-        assert.strictEqual(result, 'accountValue');
-        assert(
-          (
-            client.pathTemplates.regionalInventoryPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('should create a client with no option', () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient();
+            assert(client);
+        });
 
-      it('matchProductFromRegionalInventoryName', () => {
-        const result = client.matchProductFromRegionalInventoryName(fakePath);
-        assert.strictEqual(result, 'productValue');
-        assert(
-          (
-            client.pathTemplates.regionalInventoryPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('should create a client with gRPC fallback', () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+                fallback: true,
+            });
+            assert(client);
+        });
 
-      it('matchRegionFromRegionalInventoryName', () => {
-        const result = client.matchRegionFromRegionalInventoryName(fakePath);
-        assert.strictEqual(result, 'regionValue');
-        assert(
-          (
-            client.pathTemplates.regionalInventoryPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.localInventoryServiceStub, undefined);
+            await client.initialize();
+            assert(client.localInventoryServiceStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.localInventoryServiceStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.localInventoryServiceStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
-  });
+
+    describe('insertLocalInventory', () => {
+        it('invokes insertLocalInventory without error', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
+            );
+            client.innerApiCalls.insertLocalInventory = stubSimpleCall(expectedResponse);
+            const [response] = await client.insertLocalInventory(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.insertLocalInventory as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.insertLocalInventory as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes insertLocalInventory without error using callback', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()
+            );
+            client.innerApiCalls.insertLocalInventory = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.insertLocalInventory(
+                    request,
+                    (err?: Error|null, result?: protos.google.shopping.merchant.inventories.v1beta.ILocalInventory|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.insertLocalInventory as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.insertLocalInventory as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes insertLocalInventory with error', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.insertLocalInventory = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.insertLocalInventory(request), expectedError);
+            const actualRequest = (client.innerApiCalls.insertLocalInventory as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.insertLocalInventory as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes insertLocalInventory with closed client', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.insertLocalInventory(request), expectedError);
+        });
+    });
+
+    describe('deleteLocalInventory', () => {
+        it('invokes deleteLocalInventory without error', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteLocalInventory = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteLocalInventory(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteLocalInventory as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLocalInventory as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLocalInventory without error using callback', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteLocalInventory = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteLocalInventory(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteLocalInventory as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLocalInventory as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLocalInventory with error', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteLocalInventory = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteLocalInventory(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteLocalInventory as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteLocalInventory as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteLocalInventory with closed client', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteLocalInventory(request), expectedError);
+        });
+    });
+
+    describe('listLocalInventories', () => {
+        it('invokes listLocalInventories without error', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()),
+              generateSampleMessage(new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()),
+              generateSampleMessage(new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()),
+            ];
+            client.innerApiCalls.listLocalInventories = stubSimpleCall(expectedResponse);
+            const [response] = await client.listLocalInventories(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLocalInventories as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLocalInventories as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listLocalInventories without error using callback', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()),
+              generateSampleMessage(new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()),
+              generateSampleMessage(new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()),
+            ];
+            client.innerApiCalls.listLocalInventories = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listLocalInventories(
+                    request,
+                    (err?: Error|null, result?: protos.google.shopping.merchant.inventories.v1beta.ILocalInventory[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listLocalInventories as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLocalInventories as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listLocalInventories with error', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listLocalInventories = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listLocalInventories(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listLocalInventories as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listLocalInventories as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listLocalInventoriesStream without error', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()),
+              generateSampleMessage(new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()),
+              generateSampleMessage(new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()),
+            ];
+            client.descriptors.page.listLocalInventories.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listLocalInventoriesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.shopping.merchant.inventories.v1beta.LocalInventory[] = [];
+                stream.on('data', (response: protos.google.shopping.merchant.inventories.v1beta.LocalInventory) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listLocalInventories.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLocalInventories, request));
+            assert(
+                (client.descriptors.page.listLocalInventories.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listLocalInventoriesStream with error', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLocalInventories.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listLocalInventoriesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.shopping.merchant.inventories.v1beta.LocalInventory[] = [];
+                stream.on('data', (response: protos.google.shopping.merchant.inventories.v1beta.LocalInventory) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listLocalInventories.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listLocalInventories, request));
+            assert(
+                (client.descriptors.page.listLocalInventories.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listLocalInventories without error', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()),
+              generateSampleMessage(new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()),
+              generateSampleMessage(new protos.google.shopping.merchant.inventories.v1beta.LocalInventory()),
+            ];
+            client.descriptors.page.listLocalInventories.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.shopping.merchant.inventories.v1beta.ILocalInventory[] = [];
+            const iterable = client.listLocalInventoriesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLocalInventories.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLocalInventories.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listLocalInventories with error', async () => {
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listLocalInventories.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocalInventoriesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.shopping.merchant.inventories.v1beta.ILocalInventory[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listLocalInventories.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listLocalInventories.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('localInventory', async () => {
+            const fakePath = "/rendered/path/localInventory";
+            const expectedParameters = {
+                account: "accountValue",
+                product: "productValue",
+                store_code: "storeCodeValue",
+            };
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.localInventoryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.localInventoryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('localInventoryPath', () => {
+                const result = client.localInventoryPath("accountValue", "productValue", "storeCodeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.localInventoryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromLocalInventoryName', () => {
+                const result = client.matchAccountFromLocalInventoryName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.localInventoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchProductFromLocalInventoryName', () => {
+                const result = client.matchProductFromLocalInventoryName(fakePath);
+                assert.strictEqual(result, "productValue");
+                assert((client.pathTemplates.localInventoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchStoreCodeFromLocalInventoryName', () => {
+                const result = client.matchStoreCodeFromLocalInventoryName(fakePath);
+                assert.strictEqual(result, "storeCodeValue");
+                assert((client.pathTemplates.localInventoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('product', async () => {
+            const fakePath = "/rendered/path/product";
+            const expectedParameters = {
+                account: "accountValue",
+                product: "productValue",
+            };
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.productPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.productPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('productPath', () => {
+                const result = client.productPath("accountValue", "productValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.productPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromProductName', () => {
+                const result = client.matchAccountFromProductName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.productPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchProductFromProductName', () => {
+                const result = client.matchProductFromProductName(fakePath);
+                assert.strictEqual(result, "productValue");
+                assert((client.pathTemplates.productPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('regionalInventory', async () => {
+            const fakePath = "/rendered/path/regionalInventory";
+            const expectedParameters = {
+                account: "accountValue",
+                product: "productValue",
+                region: "regionValue",
+            };
+            const client = new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.regionalInventoryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.regionalInventoryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('regionalInventoryPath', () => {
+                const result = client.regionalInventoryPath("accountValue", "productValue", "regionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.regionalInventoryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromRegionalInventoryName', () => {
+                const result = client.matchAccountFromRegionalInventoryName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.regionalInventoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchProductFromRegionalInventoryName', () => {
+                const result = client.matchProductFromRegionalInventoryName(fakePath);
+                assert.strictEqual(result, "productValue");
+                assert((client.pathTemplates.regionalInventoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRegionFromRegionalInventoryName', () => {
+                const result = client.matchRegionFromRegionalInventoryName(fakePath);
+                assert.strictEqual(result, "regionValue");
+                assert((client.pathTemplates.regionalInventoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+    });
 });

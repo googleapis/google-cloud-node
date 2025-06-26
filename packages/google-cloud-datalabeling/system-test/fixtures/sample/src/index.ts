@@ -19,9 +19,7 @@
 import {DataLabelingServiceClient} from '@google-cloud/datalabeling';
 
 // check that the client class type name can be used
-function doStuffWithDataLabelingServiceClient(
-  client: DataLabelingServiceClient
-) {
+function doStuffWithDataLabelingServiceClient(client: DataLabelingServiceClient) {
   client.close();
 }
 

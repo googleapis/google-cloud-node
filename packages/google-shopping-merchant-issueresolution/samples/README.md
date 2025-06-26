@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Aggregate_product_statuses_service.list_aggregate_product_statuses](#aggregate_product_statuses_service.list_aggregate_product_statuses)
   * [Issue_resolution_service.render_account_issues](#issue_resolution_service.render_account_issues)
   * [Issue_resolution_service.render_product_issues](#issue_resolution_service.render_product_issues)
   * [Issue_resolution_service.trigger_action](#issue_resolution_service.trigger_action)
@@ -29,6 +30,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Aggregate_product_statuses_service.list_aggregate_product_statuses
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/aggregate_product_statuses_service.list_aggregate_product_statuses.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/aggregate_product_statuses_service.list_aggregate_product_statuses.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/aggregate_product_statuses_service.list_aggregate_product_statuses.js`
+
+
+-----
+
 
 
 

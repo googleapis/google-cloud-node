@@ -25,10244 +25,7949 @@ import * as backupforgkeModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  IamProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
-).resolveAll();
+const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-  let type = root.lookupType(typeName) as protobuf.Type;
-  for (const field of fields.slice(0, -1)) {
-    type = type.fields[field]?.resolvedType as protobuf.Type;
-  }
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+    let type = root.lookupType(typeName) as protobuf.Type;
+    for (const field of fields.slice(0, -1)) {
+        type = type.fields[field]?.resolvedType as protobuf.Type;
+    }
+    return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
-  return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
-  ) as T;
+    const filledObject = (instance.constructor as typeof protobuf.Message)
+        .toObject(instance as protobuf.Message<T>, {defaults: true});
+    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-  return error
-    ? sinon.stub().rejects(error)
-    : sinon.stub().resolves([response]);
+    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  return error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
+    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
+    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
+    const mockOperation = {
+        promise: innerStub,
+    };
+    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    const pagingStub = sinon.stub();
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+        }
     }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // trigger as many responses as needed
+    if (responses) {
+        for (let i = 0; i < responses.length; ++i) {
+            setImmediate(() => { mockStream.write({}); });
+        }
+        setImmediate(() => { mockStream.end(); });
+    } else {
+        setImmediate(() => { mockStream.write({}); });
+        setImmediate(() => { mockStream.end(); });
     }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
+    return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
+    let counter = 0;
+    const asyncIterable = {
+        [Symbol.asyncIterator]() {
+            return {
+                async next() {
+                    if (error) {
+                        return Promise.reject(error);
+                    }
+                    if (counter >= responses!.length) {
+                        return Promise.resolve({done: true, value: undefined});
+                    }
+                    return Promise.resolve({done: false, value: responses![counter++]});
+                }
+            };
+        }
+    };
+    return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.BackupForGKEClient', () => {
-  describe('Common methods', () => {
-    it('has apiEndpoint', () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient();
-      const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'gkebackup.googleapis.com');
-    });
-
-    it('has universeDomain', () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient();
-      const universeDomain = client.universeDomain;
-      assert.strictEqual(universeDomain, 'googleapis.com');
-    });
-
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      it('throws DeprecationWarning if static servicePath is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          backupforgkeModule.v1.BackupForGKEClient.servicePath;
-        assert.strictEqual(servicePath, 'gkebackup.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-
-      it('throws DeprecationWarning if static apiEndpoint is used', () => {
-        const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          backupforgkeModule.v1.BackupForGKEClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'gkebackup.googleapis.com');
-        assert(stub.called);
-        stub.restore();
-      });
-    }
-    it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        universeDomain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'gkebackup.example.com');
-    });
-
-    it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        universe_domain: 'example.com',
-      });
-      const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'gkebackup.example.com');
-    });
-
-    if (typeof process === 'object' && 'env' in process) {
-      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-        it('sets apiEndpoint from environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new backupforgkeModule.v1.BackupForGKEClient();
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'gkebackup.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+    describe('Common methods', () => {
+        it('has apiEndpoint', () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient();
+            const apiEndpoint = client.apiEndpoint;
+            assert.strictEqual(apiEndpoint, 'gkebackup.googleapis.com');
         });
 
-        it('value configured in code has priority over environment variable', () => {
-          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new backupforgkeModule.v1.BackupForGKEClient({
-            universeDomain: 'configured.example.com',
-          });
-          const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'gkebackup.configured.example.com');
-          if (saved) {
-            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-          } else {
-            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-          }
+        it('has universeDomain', () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient();
+            const universeDomain = client.universeDomain;
+            assert.strictEqual(universeDomain, "googleapis.com");
         });
-      });
-    }
-    it('does not allow setting both universeDomain and universe_domain', () => {
-      assert.throws(() => {
-        new backupforgkeModule.v1.BackupForGKEClient({
-          universe_domain: 'example.com',
-          universeDomain: 'example.net',
-        });
-      });
-    });
 
-    it('has port', () => {
-      const port = backupforgkeModule.v1.BackupForGKEClient.port;
-      assert(port);
-      assert(typeof port === 'number');
-    });
-
-    it('should create a client with no option', () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient();
-      assert(client);
-    });
-
-    it('should create a client with gRPC fallback', () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        fallback: true,
-      });
-      assert(client);
-    });
-
-    it('has initialize method and supports deferred initialization', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.backupForGKEStub, undefined);
-      await client.initialize();
-      assert(client.backupForGKEStub);
-    });
-
-    it('has close method for the initialized client', done => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize().catch(err => {
-        throw err;
-      });
-      assert(client.backupForGKEStub);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has close method for the non-initialized client', done => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.backupForGKEStub, undefined);
-      client
-        .close()
-        .then(() => {
-          done();
-        })
-        .catch(err => {
-          throw err;
-        });
-    });
-
-    it('has getProjectId method', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-      const result = await client.getProjectId();
-      assert.strictEqual(result, fakeProjectId);
-      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-      const fakeProjectId = 'fake-project-id';
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.auth.getProjectId = sinon
-        .stub()
-        .callsArgWith(0, null, fakeProjectId);
-      const promise = new Promise((resolve, reject) => {
-        client.getProjectId((err?: Error | null, projectId?: string | null) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId);
-          }
-        });
-      });
-      const result = await promise;
-      assert.strictEqual(result, fakeProjectId);
-    });
-  });
-
-  describe('getBackupPlan', () => {
-    it('invokes getBackupPlan without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupPlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupPlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.BackupPlan()
-      );
-      client.innerApiCalls.getBackupPlan = stubSimpleCall(expectedResponse);
-      const [response] = await client.getBackupPlan(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackupPlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackupPlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackupPlan without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupPlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupPlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.BackupPlan()
-      );
-      client.innerApiCalls.getBackupPlan =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getBackupPlan(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IBackupPlan | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackupPlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackupPlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackupPlan with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupPlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupPlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getBackupPlan = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getBackupPlan(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getBackupPlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackupPlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackupPlan with closed client', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupPlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupPlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getBackupPlan(request), expectedError);
-    });
-  });
-
-  describe('getBackupChannel', () => {
-    it('invokes getBackupChannel without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.BackupChannel()
-      );
-      client.innerApiCalls.getBackupChannel = stubSimpleCall(expectedResponse);
-      const [response] = await client.getBackupChannel(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackupChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackupChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackupChannel without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.BackupChannel()
-      );
-      client.innerApiCalls.getBackupChannel =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getBackupChannel(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IBackupChannel | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackupChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackupChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackupChannel with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getBackupChannel = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getBackupChannel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getBackupChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackupChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackupChannel with closed client', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getBackupChannel(request), expectedError);
-    });
-  });
-
-  describe('getBackupPlanBinding', () => {
-    it('invokes getBackupPlanBinding without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
-      );
-      client.innerApiCalls.getBackupPlanBinding =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getBackupPlanBinding(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackupPlanBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackupPlanBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackupPlanBinding without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
-      );
-      client.innerApiCalls.getBackupPlanBinding =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getBackupPlanBinding(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IBackupPlanBinding | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackupPlanBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackupPlanBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackupPlanBinding with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getBackupPlanBinding = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getBackupPlanBinding(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getBackupPlanBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackupPlanBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackupPlanBinding with closed client', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getBackupPlanBinding(request), expectedError);
-    });
-  });
-
-  describe('getBackup', () => {
-    it('invokes getBackup without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.Backup()
-      );
-      client.innerApiCalls.getBackup = stubSimpleCall(expectedResponse);
-      const [response] = await client.getBackup(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackup without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.Backup()
-      );
-      client.innerApiCalls.getBackup =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getBackup(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IBackup | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackup with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getBackup = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getBackup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackup with closed client', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getBackup(request), expectedError);
-    });
-  });
-
-  describe('getVolumeBackup', () => {
-    it('invokes getVolumeBackup without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetVolumeBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetVolumeBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.VolumeBackup()
-      );
-      client.innerApiCalls.getVolumeBackup = stubSimpleCall(expectedResponse);
-      const [response] = await client.getVolumeBackup(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVolumeBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVolumeBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVolumeBackup without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetVolumeBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetVolumeBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.VolumeBackup()
-      );
-      client.innerApiCalls.getVolumeBackup =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getVolumeBackup(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IVolumeBackup | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVolumeBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVolumeBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVolumeBackup with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetVolumeBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetVolumeBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getVolumeBackup = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getVolumeBackup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getVolumeBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVolumeBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVolumeBackup with closed client', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetVolumeBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetVolumeBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getVolumeBackup(request), expectedError);
-    });
-  });
-
-  describe('getRestorePlan', () => {
-    it('invokes getRestorePlan without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestorePlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestorePlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.RestorePlan()
-      );
-      client.innerApiCalls.getRestorePlan = stubSimpleCall(expectedResponse);
-      const [response] = await client.getRestorePlan(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRestorePlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRestorePlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRestorePlan without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestorePlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestorePlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.RestorePlan()
-      );
-      client.innerApiCalls.getRestorePlan =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getRestorePlan(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IRestorePlan | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRestorePlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRestorePlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRestorePlan with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestorePlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestorePlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getRestorePlan = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getRestorePlan(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getRestorePlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRestorePlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRestorePlan with closed client', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestorePlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestorePlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getRestorePlan(request), expectedError);
-    });
-  });
-
-  describe('getRestoreChannel', () => {
-    it('invokes getRestoreChannel without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestoreChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestoreChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.RestoreChannel()
-      );
-      client.innerApiCalls.getRestoreChannel = stubSimpleCall(expectedResponse);
-      const [response] = await client.getRestoreChannel(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRestoreChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRestoreChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRestoreChannel without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestoreChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestoreChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.RestoreChannel()
-      );
-      client.innerApiCalls.getRestoreChannel =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getRestoreChannel(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IRestoreChannel | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRestoreChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRestoreChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRestoreChannel with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestoreChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestoreChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getRestoreChannel = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getRestoreChannel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getRestoreChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRestoreChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRestoreChannel with closed client', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestoreChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestoreChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getRestoreChannel(request), expectedError);
-    });
-  });
-
-  describe('getRestorePlanBinding', () => {
-    it('invokes getRestorePlanBinding without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
-      );
-      client.innerApiCalls.getRestorePlanBinding =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getRestorePlanBinding(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRestorePlanBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRestorePlanBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRestorePlanBinding without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
-      );
-      client.innerApiCalls.getRestorePlanBinding =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getRestorePlanBinding(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IRestorePlanBinding | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRestorePlanBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRestorePlanBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRestorePlanBinding with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getRestorePlanBinding = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getRestorePlanBinding(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getRestorePlanBinding as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRestorePlanBinding as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRestorePlanBinding with closed client', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getRestorePlanBinding(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('getRestore', () => {
-    it('invokes getRestore without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.Restore()
-      );
-      client.innerApiCalls.getRestore = stubSimpleCall(expectedResponse);
-      const [response] = await client.getRestore(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRestore without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.Restore()
-      );
-      client.innerApiCalls.getRestore =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getRestore(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IRestore | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRestore with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getRestore = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getRestore(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getRestore with closed client', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetRestoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getRestore(request), expectedError);
-    });
-  });
-
-  describe('getVolumeRestore', () => {
-    it('invokes getVolumeRestore without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetVolumeRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetVolumeRestoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.VolumeRestore()
-      );
-      client.innerApiCalls.getVolumeRestore = stubSimpleCall(expectedResponse);
-      const [response] = await client.getVolumeRestore(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVolumeRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVolumeRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVolumeRestore without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetVolumeRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetVolumeRestoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.VolumeRestore()
-      );
-      client.innerApiCalls.getVolumeRestore =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getVolumeRestore(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IVolumeRestore | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getVolumeRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVolumeRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVolumeRestore with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetVolumeRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetVolumeRestoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getVolumeRestore = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getVolumeRestore(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getVolumeRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getVolumeRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getVolumeRestore with closed client', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetVolumeRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetVolumeRestoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(client.getVolumeRestore(request), expectedError);
-    });
-  });
-
-  describe('getBackupIndexDownloadUrl', () => {
-    it('invokes getBackupIndexDownloadUrl without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest',
-        ['backup']
-      );
-      request.backup = defaultValue1;
-      const expectedHeaderRequestParams = `backup=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlResponse()
-      );
-      client.innerApiCalls.getBackupIndexDownloadUrl =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getBackupIndexDownloadUrl(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackupIndexDownloadUrl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackupIndexDownloadUrl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackupIndexDownloadUrl without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest',
-        ['backup']
-      );
-      request.backup = defaultValue1;
-      const expectedHeaderRequestParams = `backup=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlResponse()
-      );
-      client.innerApiCalls.getBackupIndexDownloadUrl =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getBackupIndexDownloadUrl(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getBackupIndexDownloadUrl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackupIndexDownloadUrl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackupIndexDownloadUrl with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest',
-        ['backup']
-      );
-      request.backup = defaultValue1;
-      const expectedHeaderRequestParams = `backup=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getBackupIndexDownloadUrl = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getBackupIndexDownloadUrl(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.getBackupIndexDownloadUrl as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getBackupIndexDownloadUrl as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getBackupIndexDownloadUrl with closed client', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest',
-        ['backup']
-      );
-      request.backup = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
-        throw err;
-      });
-      await assert.rejects(
-        client.getBackupIndexDownloadUrl(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('createBackupPlan', () => {
-    it('invokes createBackupPlan without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateBackupPlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateBackupPlanRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createBackupPlan =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createBackupPlan(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBackupPlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackupPlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBackupPlan without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateBackupPlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateBackupPlanRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createBackupPlan =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createBackupPlan(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkebackup.v1.IBackupPlan,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkebackup.v1.IBackupPlan,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBackupPlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackupPlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBackupPlan with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateBackupPlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateBackupPlanRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBackupPlan = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createBackupPlan(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBackupPlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackupPlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBackupPlan with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateBackupPlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateBackupPlanRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBackupPlan = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createBackupPlan(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBackupPlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackupPlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateBackupPlanProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateBackupPlanProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateBackupPlanProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateBackupPlanProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateBackupPlan', () => {
-    it('invokes updateBackupPlan without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateBackupPlanRequest()
-      );
-      request.backupPlan ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateBackupPlanRequest',
-        ['backupPlan', 'name']
-      );
-      request.backupPlan.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_plan.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateBackupPlan =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateBackupPlan(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBackupPlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBackupPlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBackupPlan without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateBackupPlanRequest()
-      );
-      request.backupPlan ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateBackupPlanRequest',
-        ['backupPlan', 'name']
-      );
-      request.backupPlan.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_plan.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateBackupPlan =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateBackupPlan(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkebackup.v1.IBackupPlan,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkebackup.v1.IBackupPlan,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBackupPlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBackupPlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBackupPlan with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateBackupPlanRequest()
-      );
-      request.backupPlan ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateBackupPlanRequest',
-        ['backupPlan', 'name']
-      );
-      request.backupPlan.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_plan.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateBackupPlan = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateBackupPlan(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateBackupPlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBackupPlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBackupPlan with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateBackupPlanRequest()
-      );
-      request.backupPlan ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateBackupPlanRequest',
-        ['backupPlan', 'name']
-      );
-      request.backupPlan.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_plan.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateBackupPlan = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateBackupPlan(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateBackupPlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBackupPlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateBackupPlanProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateBackupPlanProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateBackupPlanProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateBackupPlanProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteBackupPlan', () => {
-    it('invokes deleteBackupPlan without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteBackupPlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteBackupPlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteBackupPlan =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteBackupPlan(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackupPlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackupPlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBackupPlan without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteBackupPlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteBackupPlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteBackupPlan =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteBackupPlan(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackupPlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackupPlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBackupPlan with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteBackupPlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteBackupPlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteBackupPlan = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteBackupPlan(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackupPlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackupPlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBackupPlan with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteBackupPlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteBackupPlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteBackupPlan = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteBackupPlan(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackupPlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackupPlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteBackupPlanProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteBackupPlanProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteBackupPlanProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteBackupPlanProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createBackupChannel', () => {
-    it('invokes createBackupChannel without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateBackupChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateBackupChannelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createBackupChannel =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createBackupChannel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBackupChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackupChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBackupChannel without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateBackupChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateBackupChannelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createBackupChannel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createBackupChannel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkebackup.v1.IBackupChannel,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkebackup.v1.IBackupChannel,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBackupChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackupChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBackupChannel with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateBackupChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateBackupChannelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBackupChannel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createBackupChannel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBackupChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackupChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBackupChannel with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateBackupChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateBackupChannelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBackupChannel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createBackupChannel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBackupChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackupChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateBackupChannelProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateBackupChannelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateBackupChannelProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateBackupChannelProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateBackupChannel', () => {
-    it('invokes updateBackupChannel without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateBackupChannelRequest()
-      );
-      request.backupChannel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateBackupChannelRequest',
-        ['backupChannel', 'name']
-      );
-      request.backupChannel.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_channel.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateBackupChannel =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateBackupChannel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBackupChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBackupChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBackupChannel without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateBackupChannelRequest()
-      );
-      request.backupChannel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateBackupChannelRequest',
-        ['backupChannel', 'name']
-      );
-      request.backupChannel.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_channel.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateBackupChannel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateBackupChannel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkebackup.v1.IBackupChannel,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkebackup.v1.IBackupChannel,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBackupChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBackupChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBackupChannel with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateBackupChannelRequest()
-      );
-      request.backupChannel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateBackupChannelRequest',
-        ['backupChannel', 'name']
-      );
-      request.backupChannel.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_channel.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateBackupChannel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateBackupChannel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateBackupChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBackupChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBackupChannel with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateBackupChannelRequest()
-      );
-      request.backupChannel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateBackupChannelRequest',
-        ['backupChannel', 'name']
-      );
-      request.backupChannel.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup_channel.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateBackupChannel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateBackupChannel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateBackupChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBackupChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateBackupChannelProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateBackupChannelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateBackupChannelProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateBackupChannelProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteBackupChannel', () => {
-    it('invokes deleteBackupChannel without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteBackupChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteBackupChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteBackupChannel =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteBackupChannel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackupChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackupChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBackupChannel without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteBackupChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteBackupChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteBackupChannel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteBackupChannel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackupChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackupChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBackupChannel with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteBackupChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteBackupChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteBackupChannel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteBackupChannel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackupChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackupChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBackupChannel with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteBackupChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteBackupChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteBackupChannel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteBackupChannel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackupChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackupChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteBackupChannelProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteBackupChannelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteBackupChannelProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteBackupChannelProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createBackup', () => {
-    it('invokes createBackup without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateBackupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createBackup = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createBackup(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBackup without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateBackupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createBackup =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createBackup(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkebackup.v1.IBackup,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkebackup.v1.IBackup,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBackup with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateBackupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBackup = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createBackup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createBackup with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateBackupRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createBackup = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createBackup(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateBackupProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateBackupProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateBackupProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkCreateBackupProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateBackup', () => {
-    it('invokes updateBackup without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateBackupRequest()
-      );
-      request.backup ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateBackupRequest',
-        ['backup', 'name']
-      );
-      request.backup.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateBackup = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateBackup(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBackup without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateBackupRequest()
-      );
-      request.backup ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateBackupRequest',
-        ['backup', 'name']
-      );
-      request.backup.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateBackup =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateBackup(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkebackup.v1.IBackup,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkebackup.v1.IBackup,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBackup with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateBackupRequest()
-      );
-      request.backup ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateBackupRequest',
-        ['backup', 'name']
-      );
-      request.backup.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateBackup = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateBackup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateBackup with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateBackupRequest()
-      );
-      request.backup ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateBackupRequest',
-        ['backup', 'name']
-      );
-      request.backup.name = defaultValue1;
-      const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateBackup = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateBackup(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateBackupProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateBackupProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateBackupProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkUpdateBackupProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteBackup', () => {
-    it('invokes deleteBackup without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteBackup = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteBackup(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBackup without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteBackup =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteBackup(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBackup with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteBackup = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteBackup(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteBackup with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteBackupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteBackupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteBackup = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteBackup(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteBackup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteBackupProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteBackupProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteBackupProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.checkDeleteBackupProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createRestorePlan', () => {
-    it('invokes createRestorePlan without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateRestorePlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateRestorePlanRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createRestorePlan =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createRestorePlan(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createRestorePlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRestorePlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRestorePlan without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateRestorePlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateRestorePlanRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createRestorePlan =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createRestorePlan(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkebackup.v1.IRestorePlan,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkebackup.v1.IRestorePlan,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createRestorePlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRestorePlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRestorePlan with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateRestorePlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateRestorePlanRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createRestorePlan = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createRestorePlan(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createRestorePlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRestorePlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRestorePlan with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateRestorePlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateRestorePlanRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createRestorePlan = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createRestorePlan(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createRestorePlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRestorePlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateRestorePlanProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateRestorePlanProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateRestorePlanProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateRestorePlanProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateRestorePlan', () => {
-    it('invokes updateRestorePlan without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateRestorePlanRequest()
-      );
-      request.restorePlan ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateRestorePlanRequest',
-        ['restorePlan', 'name']
-      );
-      request.restorePlan.name = defaultValue1;
-      const expectedHeaderRequestParams = `restore_plan.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateRestorePlan =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateRestorePlan(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateRestorePlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRestorePlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRestorePlan without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateRestorePlanRequest()
-      );
-      request.restorePlan ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateRestorePlanRequest',
-        ['restorePlan', 'name']
-      );
-      request.restorePlan.name = defaultValue1;
-      const expectedHeaderRequestParams = `restore_plan.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateRestorePlan =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateRestorePlan(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkebackup.v1.IRestorePlan,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkebackup.v1.IRestorePlan,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateRestorePlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRestorePlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRestorePlan with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateRestorePlanRequest()
-      );
-      request.restorePlan ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateRestorePlanRequest',
-        ['restorePlan', 'name']
-      );
-      request.restorePlan.name = defaultValue1;
-      const expectedHeaderRequestParams = `restore_plan.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateRestorePlan = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateRestorePlan(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateRestorePlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRestorePlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRestorePlan with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateRestorePlanRequest()
-      );
-      request.restorePlan ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateRestorePlanRequest',
-        ['restorePlan', 'name']
-      );
-      request.restorePlan.name = defaultValue1;
-      const expectedHeaderRequestParams = `restore_plan.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateRestorePlan = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateRestorePlan(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateRestorePlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRestorePlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateRestorePlanProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateRestorePlanProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateRestorePlanProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateRestorePlanProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteRestorePlan', () => {
-    it('invokes deleteRestorePlan without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteRestorePlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteRestorePlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteRestorePlan =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteRestorePlan(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteRestorePlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRestorePlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRestorePlan without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteRestorePlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteRestorePlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteRestorePlan =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteRestorePlan(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteRestorePlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRestorePlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRestorePlan with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteRestorePlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteRestorePlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteRestorePlan = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteRestorePlan(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteRestorePlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRestorePlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRestorePlan with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteRestorePlanRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteRestorePlanRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteRestorePlan = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteRestorePlan(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteRestorePlan as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRestorePlan as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteRestorePlanProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteRestorePlanProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteRestorePlanProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteRestorePlanProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createRestoreChannel', () => {
-    it('invokes createRestoreChannel without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateRestoreChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateRestoreChannelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createRestoreChannel =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createRestoreChannel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createRestoreChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRestoreChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRestoreChannel without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateRestoreChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateRestoreChannelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createRestoreChannel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createRestoreChannel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkebackup.v1.IRestoreChannel,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkebackup.v1.IRestoreChannel,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createRestoreChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRestoreChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRestoreChannel with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateRestoreChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateRestoreChannelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createRestoreChannel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createRestoreChannel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createRestoreChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRestoreChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRestoreChannel with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateRestoreChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateRestoreChannelRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createRestoreChannel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createRestoreChannel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createRestoreChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRestoreChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateRestoreChannelProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateRestoreChannelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateRestoreChannelProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateRestoreChannelProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateRestoreChannel', () => {
-    it('invokes updateRestoreChannel without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest()
-      );
-      request.restoreChannel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest',
-        ['restoreChannel', 'name']
-      );
-      request.restoreChannel.name = defaultValue1;
-      const expectedHeaderRequestParams = `restore_channel.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateRestoreChannel =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateRestoreChannel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateRestoreChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRestoreChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRestoreChannel without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest()
-      );
-      request.restoreChannel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest',
-        ['restoreChannel', 'name']
-      );
-      request.restoreChannel.name = defaultValue1;
-      const expectedHeaderRequestParams = `restore_channel.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateRestoreChannel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateRestoreChannel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkebackup.v1.IRestoreChannel,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkebackup.v1.IRestoreChannel,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateRestoreChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRestoreChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRestoreChannel with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest()
-      );
-      request.restoreChannel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest',
-        ['restoreChannel', 'name']
-      );
-      request.restoreChannel.name = defaultValue1;
-      const expectedHeaderRequestParams = `restore_channel.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateRestoreChannel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateRestoreChannel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateRestoreChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRestoreChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRestoreChannel with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest()
-      );
-      request.restoreChannel ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest',
-        ['restoreChannel', 'name']
-      );
-      request.restoreChannel.name = defaultValue1;
-      const expectedHeaderRequestParams = `restore_channel.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateRestoreChannel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateRestoreChannel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateRestoreChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRestoreChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateRestoreChannelProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateRestoreChannelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateRestoreChannelProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateRestoreChannelProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteRestoreChannel', () => {
-    it('invokes deleteRestoreChannel without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteRestoreChannel =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteRestoreChannel(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteRestoreChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRestoreChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRestoreChannel without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteRestoreChannel =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteRestoreChannel(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteRestoreChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRestoreChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRestoreChannel with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteRestoreChannel = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteRestoreChannel(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteRestoreChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRestoreChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRestoreChannel with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteRestoreChannel = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteRestoreChannel(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteRestoreChannel as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRestoreChannel as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteRestoreChannelProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteRestoreChannelProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteRestoreChannelProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteRestoreChannelProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('createRestore', () => {
-    it('invokes createRestore without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateRestoreRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createRestore =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createRestore(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRestore without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateRestoreRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createRestore =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createRestore(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkebackup.v1.IRestore,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkebackup.v1.IRestore,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRestore with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateRestoreRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createRestore = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createRestore(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createRestore with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.CreateRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.CreateRestoreRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createRestore = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createRestore(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateRestoreProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateRestoreProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateRestoreProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateRestoreProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('updateRestore', () => {
-    it('invokes updateRestore without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateRestoreRequest()
-      );
-      request.restore ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateRestoreRequest',
-        ['restore', 'name']
-      );
-      request.restore.name = defaultValue1;
-      const expectedHeaderRequestParams = `restore.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateRestore =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateRestore(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRestore without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateRestoreRequest()
-      );
-      request.restore ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateRestoreRequest',
-        ['restore', 'name']
-      );
-      request.restore.name = defaultValue1;
-      const expectedHeaderRequestParams = `restore.name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.updateRestore =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateRestore(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.gkebackup.v1.IRestore,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.gkebackup.v1.IRestore,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRestore with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateRestoreRequest()
-      );
-      request.restore ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateRestoreRequest',
-        ['restore', 'name']
-      );
-      request.restore.name = defaultValue1;
-      const expectedHeaderRequestParams = `restore.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateRestore = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateRestore(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateRestore with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.UpdateRestoreRequest()
-      );
-      request.restore ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.UpdateRestoreRequest',
-        ['restore', 'name']
-      );
-      request.restore.name = defaultValue1;
-      const expectedHeaderRequestParams = `restore.name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateRestore = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.updateRestore(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkUpdateRestoreProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateRestoreProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkUpdateRestoreProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkUpdateRestoreProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteRestore', () => {
-    it('invokes deleteRestore without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteRestoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteRestore =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteRestore(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRestore without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteRestoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteRestore =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteRestore(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.gkebackup.v1.IOperationMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.gkebackup.v1.IOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRestore with call error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteRestoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteRestore = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteRestore(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteRestore with LRO error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.DeleteRestoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.DeleteRestoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteRestore = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteRestore(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteRestore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteRestore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteRestoreProgress without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteRestoreProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteRestoreProgress with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteRestoreProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listBackupPlans', () => {
-    it('invokes listBackupPlans without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupPlansRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlan()
-        ),
-      ];
-      client.innerApiCalls.listBackupPlans = stubSimpleCall(expectedResponse);
-      const [response] = await client.listBackupPlans(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBackupPlans as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackupPlans as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBackupPlans without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupPlansRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlan()
-        ),
-      ];
-      client.innerApiCalls.listBackupPlans =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listBackupPlans(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IBackupPlan[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBackupPlans as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackupPlans as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBackupPlans with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupPlansRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listBackupPlans = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listBackupPlans(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listBackupPlans as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackupPlans as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBackupPlansStream without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupPlansRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlan()
-        ),
-      ];
-      client.descriptors.page.listBackupPlans.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listBackupPlansStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.BackupPlan[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.BackupPlan) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listBackupPlans.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBackupPlans, request)
-      );
-      assert(
-        (client.descriptors.page.listBackupPlans.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listBackupPlansStream with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupPlansRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBackupPlans.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listBackupPlansStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.BackupPlan[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.BackupPlan) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listBackupPlans.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBackupPlans, request)
-      );
-      assert(
-        (client.descriptors.page.listBackupPlans.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listBackupPlans without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupPlansRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlan()
-        ),
-      ];
-      client.descriptors.page.listBackupPlans.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gkebackup.v1.IBackupPlan[] = [];
-      const iterable = client.listBackupPlansAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBackupPlans.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBackupPlans.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listBackupPlans with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupPlansRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBackupPlans.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listBackupPlansAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gkebackup.v1.IBackupPlan[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+            it('throws DeprecationWarning if static servicePath is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const servicePath = backupforgkeModule.v1.BackupForGKEClient.servicePath;
+                assert.strictEqual(servicePath, 'gkebackup.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
+
+            it('throws DeprecationWarning if static apiEndpoint is used', () => {
+                const stub = sinon.stub(process, 'emitWarning');
+                const apiEndpoint = backupforgkeModule.v1.BackupForGKEClient.apiEndpoint;
+                assert.strictEqual(apiEndpoint, 'gkebackup.googleapis.com');
+                assert(stub.called);
+                stub.restore();
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBackupPlans.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBackupPlans.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listBackupChannels', () => {
-    it('invokes listBackupChannels without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupChannelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupChannelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupChannel()
-        ),
-      ];
-      client.innerApiCalls.listBackupChannels =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listBackupChannels(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBackupChannels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackupChannels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBackupChannels without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupChannelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupChannelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupChannel()
-        ),
-      ];
-      client.innerApiCalls.listBackupChannels =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listBackupChannels(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IBackupChannel[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBackupChannels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackupChannels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBackupChannels with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupChannelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupChannelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listBackupChannels = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listBackupChannels(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listBackupChannels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackupChannels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBackupChannelsStream without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupChannelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupChannelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupChannel()
-        ),
-      ];
-      client.descriptors.page.listBackupChannels.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listBackupChannelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.BackupChannel[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.BackupChannel) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain camelCase', () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({universeDomain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'gkebackup.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listBackupChannels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBackupChannels, request)
-      );
-      assert(
-        (client.descriptors.page.listBackupChannels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listBackupChannelsStream with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupChannelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupChannelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBackupChannels.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listBackupChannelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.BackupChannel[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.BackupChannel) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({universe_domain: 'example.com'});
+            const servicePath = client.apiEndpoint;
+            assert.strictEqual(servicePath, 'gkebackup.example.com');
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listBackupChannels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBackupChannels, request)
-      );
-      assert(
-        (client.descriptors.page.listBackupChannels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listBackupChannels without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupChannelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupChannelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupChannel()
-        ),
-      ];
-      client.descriptors.page.listBackupChannels.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gkebackup.v1.IBackupChannel[] = [];
-      const iterable = client.listBackupChannelsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBackupChannels.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBackupChannels.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        if (typeof process === 'object' && 'env' in process) {
+            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+                it('sets apiEndpoint from environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new backupforgkeModule.v1.BackupForGKEClient();
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'gkebackup.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
 
-    it('uses async iteration with listBackupChannels with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupChannelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupChannelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBackupChannels.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listBackupChannelsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gkebackup.v1.IBackupChannel[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+                it('value configured in code has priority over environment variable', () => {
+                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+                    const client = new backupforgkeModule.v1.BackupForGKEClient({universeDomain: 'configured.example.com'});
+                    const servicePath = client.apiEndpoint;
+                    assert.strictEqual(servicePath, 'gkebackup.configured.example.com');
+                    if (saved) {
+                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+                    } else {
+                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+                    }
+                });
+            });
         }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBackupChannels.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBackupChannels.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('does not allow setting both universeDomain and universe_domain', () => {
+            assert.throws(() => { new backupforgkeModule.v1.BackupForGKEClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+        });
 
-  describe('listBackupPlanBindings', () => {
-    it('invokes listBackupPlanBindings without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
-        ),
-      ];
-      client.innerApiCalls.listBackupPlanBindings =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listBackupPlanBindings(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBackupPlanBindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackupPlanBindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        it('has port', () => {
+            const port = backupforgkeModule.v1.BackupForGKEClient.port;
+            assert(port);
+            assert(typeof port === 'number');
+        });
+
+        it('should create a client with no option', () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient();
+            assert(client);
+        });
+
+        it('should create a client with gRPC fallback', () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                fallback: true,
+            });
+            assert(client);
+        });
+
+        it('has initialize method and supports deferred initialization', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.backupForGKEStub, undefined);
+            await client.initialize();
+            assert(client.backupForGKEStub);
+        });
+
+        it('has close method for the initialized client', done => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize().catch(err => {throw err});
+            assert(client.backupForGKEStub);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has close method for the non-initialized client', done => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            assert.strictEqual(client.backupForGKEStub, undefined);
+            client.close().then(() => {
+                done();
+            }).catch(err => {throw err});
+        });
+
+        it('has getProjectId method', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+            const result = await client.getProjectId();
+            assert.strictEqual(result, fakeProjectId);
+            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+        });
+
+        it('has getProjectId method with callback', async () => {
+            const fakeProjectId = 'fake-project-id';
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
+            const promise = new Promise((resolve, reject) => {
+                client.getProjectId((err?: Error|null, projectId?: string|null) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(projectId);
+                    }
+                });
+            });
+            const result = await promise;
+            assert.strictEqual(result, fakeProjectId);
+        });
     });
 
-    it('invokes listBackupPlanBindings without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
-        ),
-      ];
-      client.innerApiCalls.listBackupPlanBindings =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listBackupPlanBindings(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.gkebackup.v1.IBackupPlanBinding[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('getBackupPlan', () => {
+        it('invokes getBackupPlan without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupPlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupPlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.BackupPlan()
+            );
+            client.innerApiCalls.getBackupPlan = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBackupPlan(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackupPlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackupPlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackupPlan without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupPlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupPlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.BackupPlan()
+            );
+            client.innerApiCalls.getBackupPlan = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBackupPlan(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IBackupPlan|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackupPlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackupPlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackupPlan with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupPlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupPlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBackupPlan = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBackupPlan(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBackupPlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackupPlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackupPlan with closed client', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupPlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupPlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBackupPlan(request), expectedError);
+        });
+    });
+
+    describe('getBackupChannel', () => {
+        it('invokes getBackupChannel without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.BackupChannel()
+            );
+            client.innerApiCalls.getBackupChannel = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBackupChannel(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackupChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackupChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackupChannel without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.BackupChannel()
+            );
+            client.innerApiCalls.getBackupChannel = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBackupChannel(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IBackupChannel|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackupChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackupChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackupChannel with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBackupChannel = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBackupChannel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBackupChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackupChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackupChannel with closed client', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBackupChannel(request), expectedError);
+        });
+    });
+
+    describe('getBackupPlanBinding', () => {
+        it('invokes getBackupPlanBinding without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
+            );
+            client.innerApiCalls.getBackupPlanBinding = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBackupPlanBinding(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackupPlanBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackupPlanBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackupPlanBinding without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
+            );
+            client.innerApiCalls.getBackupPlanBinding = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBackupPlanBinding(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IBackupPlanBinding|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackupPlanBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackupPlanBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackupPlanBinding with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBackupPlanBinding = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBackupPlanBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBackupPlanBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackupPlanBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackupPlanBinding with closed client', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupPlanBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBackupPlanBinding(request), expectedError);
+        });
+    });
+
+    describe('getBackup', () => {
+        it('invokes getBackup without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.Backup()
+            );
+            client.innerApiCalls.getBackup = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBackup(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackup without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.Backup()
+            );
+            client.innerApiCalls.getBackup = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBackup(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IBackup|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackup with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBackup = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBackup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackup with closed client', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBackup(request), expectedError);
+        });
+    });
+
+    describe('getVolumeBackup', () => {
+        it('invokes getVolumeBackup without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetVolumeBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetVolumeBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.VolumeBackup()
+            );
+            client.innerApiCalls.getVolumeBackup = stubSimpleCall(expectedResponse);
+            const [response] = await client.getVolumeBackup(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVolumeBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVolumeBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVolumeBackup without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetVolumeBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetVolumeBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.VolumeBackup()
+            );
+            client.innerApiCalls.getVolumeBackup = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getVolumeBackup(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IVolumeBackup|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVolumeBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVolumeBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVolumeBackup with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetVolumeBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetVolumeBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getVolumeBackup = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getVolumeBackup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getVolumeBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVolumeBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVolumeBackup with closed client', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetVolumeBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetVolumeBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getVolumeBackup(request), expectedError);
+        });
+    });
+
+    describe('getRestorePlan', () => {
+        it('invokes getRestorePlan without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestorePlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestorePlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.RestorePlan()
+            );
+            client.innerApiCalls.getRestorePlan = stubSimpleCall(expectedResponse);
+            const [response] = await client.getRestorePlan(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRestorePlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRestorePlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRestorePlan without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestorePlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestorePlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.RestorePlan()
+            );
+            client.innerApiCalls.getRestorePlan = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getRestorePlan(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IRestorePlan|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRestorePlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRestorePlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRestorePlan with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestorePlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestorePlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getRestorePlan = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getRestorePlan(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getRestorePlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRestorePlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRestorePlan with closed client', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestorePlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestorePlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getRestorePlan(request), expectedError);
+        });
+    });
+
+    describe('getRestoreChannel', () => {
+        it('invokes getRestoreChannel without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestoreChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestoreChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.RestoreChannel()
+            );
+            client.innerApiCalls.getRestoreChannel = stubSimpleCall(expectedResponse);
+            const [response] = await client.getRestoreChannel(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRestoreChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRestoreChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRestoreChannel without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestoreChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestoreChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.RestoreChannel()
+            );
+            client.innerApiCalls.getRestoreChannel = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getRestoreChannel(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IRestoreChannel|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRestoreChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRestoreChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRestoreChannel with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestoreChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestoreChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getRestoreChannel = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getRestoreChannel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getRestoreChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRestoreChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRestoreChannel with closed client', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestoreChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestoreChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getRestoreChannel(request), expectedError);
+        });
+    });
+
+    describe('getRestorePlanBinding', () => {
+        it('invokes getRestorePlanBinding without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
+            );
+            client.innerApiCalls.getRestorePlanBinding = stubSimpleCall(expectedResponse);
+            const [response] = await client.getRestorePlanBinding(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRestorePlanBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRestorePlanBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRestorePlanBinding without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
+            );
+            client.innerApiCalls.getRestorePlanBinding = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getRestorePlanBinding(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IRestorePlanBinding|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRestorePlanBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRestorePlanBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRestorePlanBinding with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getRestorePlanBinding = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getRestorePlanBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getRestorePlanBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRestorePlanBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRestorePlanBinding with closed client', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestorePlanBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getRestorePlanBinding(request), expectedError);
+        });
+    });
+
+    describe('getRestore', () => {
+        it('invokes getRestore without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.Restore()
+            );
+            client.innerApiCalls.getRestore = stubSimpleCall(expectedResponse);
+            const [response] = await client.getRestore(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRestore without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.Restore()
+            );
+            client.innerApiCalls.getRestore = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getRestore(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IRestore|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRestore with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getRestore = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getRestore(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getRestore with closed client', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetRestoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getRestore(request), expectedError);
+        });
+    });
+
+    describe('getVolumeRestore', () => {
+        it('invokes getVolumeRestore without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetVolumeRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetVolumeRestoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.VolumeRestore()
+            );
+            client.innerApiCalls.getVolumeRestore = stubSimpleCall(expectedResponse);
+            const [response] = await client.getVolumeRestore(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVolumeRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVolumeRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVolumeRestore without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetVolumeRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetVolumeRestoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.VolumeRestore()
+            );
+            client.innerApiCalls.getVolumeRestore = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getVolumeRestore(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IVolumeRestore|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getVolumeRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVolumeRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVolumeRestore with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetVolumeRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetVolumeRestoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getVolumeRestore = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getVolumeRestore(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getVolumeRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getVolumeRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getVolumeRestore with closed client', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetVolumeRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetVolumeRestoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getVolumeRestore(request), expectedError);
+        });
+    });
+
+    describe('getBackupIndexDownloadUrl', () => {
+        it('invokes getBackupIndexDownloadUrl without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest', ['backup']);
+            request.backup = defaultValue1;
+            const expectedHeaderRequestParams = `backup=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlResponse()
+            );
+            client.innerApiCalls.getBackupIndexDownloadUrl = stubSimpleCall(expectedResponse);
+            const [response] = await client.getBackupIndexDownloadUrl(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackupIndexDownloadUrl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackupIndexDownloadUrl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackupIndexDownloadUrl without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest', ['backup']);
+            request.backup = defaultValue1;
+            const expectedHeaderRequestParams = `backup=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlResponse()
+            );
+            client.innerApiCalls.getBackupIndexDownloadUrl = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getBackupIndexDownloadUrl(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getBackupIndexDownloadUrl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackupIndexDownloadUrl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackupIndexDownloadUrl with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest', ['backup']);
+            request.backup = defaultValue1;
+            const expectedHeaderRequestParams = `backup=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getBackupIndexDownloadUrl = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getBackupIndexDownloadUrl(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getBackupIndexDownloadUrl as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getBackupIndexDownloadUrl as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getBackupIndexDownloadUrl with closed client', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlRequest', ['backup']);
+            request.backup = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getBackupIndexDownloadUrl(request), expectedError);
+        });
+    });
+
+    describe('createBackupPlan', () => {
+        it('invokes createBackupPlan without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateBackupPlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateBackupPlanRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createBackupPlan = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createBackupPlan(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBackupPlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackupPlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBackupPlan without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateBackupPlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateBackupPlanRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createBackupPlan = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createBackupPlan(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkebackup.v1.IBackupPlan, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkebackup.v1.IBackupPlan, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBackupPlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackupPlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBackupPlan with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateBackupPlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateBackupPlanRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBackupPlan = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createBackupPlan(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createBackupPlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackupPlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBackupPlan with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateBackupPlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateBackupPlanRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBackupPlan = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createBackupPlan(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createBackupPlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackupPlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateBackupPlanProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateBackupPlanProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateBackupPlanProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateBackupPlanProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateBackupPlan', () => {
+        it('invokes updateBackupPlan without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateBackupPlanRequest()
+            );
+            request.backupPlan ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateBackupPlanRequest', ['backupPlan', 'name']);
+            request.backupPlan.name = defaultValue1;
+            const expectedHeaderRequestParams = `backup_plan.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateBackupPlan = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateBackupPlan(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBackupPlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackupPlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBackupPlan without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateBackupPlanRequest()
+            );
+            request.backupPlan ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateBackupPlanRequest', ['backupPlan', 'name']);
+            request.backupPlan.name = defaultValue1;
+            const expectedHeaderRequestParams = `backup_plan.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateBackupPlan = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateBackupPlan(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkebackup.v1.IBackupPlan, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkebackup.v1.IBackupPlan, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBackupPlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackupPlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBackupPlan with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateBackupPlanRequest()
+            );
+            request.backupPlan ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateBackupPlanRequest', ['backupPlan', 'name']);
+            request.backupPlan.name = defaultValue1;
+            const expectedHeaderRequestParams = `backup_plan.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateBackupPlan = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateBackupPlan(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateBackupPlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackupPlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBackupPlan with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateBackupPlanRequest()
+            );
+            request.backupPlan ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateBackupPlanRequest', ['backupPlan', 'name']);
+            request.backupPlan.name = defaultValue1;
+            const expectedHeaderRequestParams = `backup_plan.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateBackupPlan = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateBackupPlan(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateBackupPlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackupPlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateBackupPlanProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateBackupPlanProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateBackupPlanProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateBackupPlanProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteBackupPlan', () => {
+        it('invokes deleteBackupPlan without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteBackupPlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteBackupPlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteBackupPlan = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteBackupPlan(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBackupPlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackupPlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackupPlan without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteBackupPlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteBackupPlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteBackupPlan = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteBackupPlan(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBackupPlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackupPlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackupPlan with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteBackupPlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteBackupPlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBackupPlan = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteBackupPlan(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBackupPlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackupPlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackupPlan with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteBackupPlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteBackupPlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBackupPlan = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteBackupPlan(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBackupPlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackupPlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteBackupPlanProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteBackupPlanProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteBackupPlanProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteBackupPlanProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createBackupChannel', () => {
+        it('invokes createBackupChannel without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateBackupChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateBackupChannelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createBackupChannel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createBackupChannel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBackupChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackupChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBackupChannel without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateBackupChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateBackupChannelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createBackupChannel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createBackupChannel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkebackup.v1.IBackupChannel, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkebackup.v1.IBackupChannel, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBackupChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackupChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBackupChannel with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateBackupChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateBackupChannelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBackupChannel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createBackupChannel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createBackupChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackupChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBackupChannel with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateBackupChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateBackupChannelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBackupChannel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createBackupChannel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createBackupChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackupChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateBackupChannelProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateBackupChannelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateBackupChannelProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateBackupChannelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateBackupChannel', () => {
+        it('invokes updateBackupChannel without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateBackupChannelRequest()
+            );
+            request.backupChannel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateBackupChannelRequest', ['backupChannel', 'name']);
+            request.backupChannel.name = defaultValue1;
+            const expectedHeaderRequestParams = `backup_channel.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateBackupChannel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateBackupChannel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBackupChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackupChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBackupChannel without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateBackupChannelRequest()
+            );
+            request.backupChannel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateBackupChannelRequest', ['backupChannel', 'name']);
+            request.backupChannel.name = defaultValue1;
+            const expectedHeaderRequestParams = `backup_channel.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateBackupChannel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateBackupChannel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkebackup.v1.IBackupChannel, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkebackup.v1.IBackupChannel, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBackupChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackupChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBackupChannel with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateBackupChannelRequest()
+            );
+            request.backupChannel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateBackupChannelRequest', ['backupChannel', 'name']);
+            request.backupChannel.name = defaultValue1;
+            const expectedHeaderRequestParams = `backup_channel.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateBackupChannel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateBackupChannel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateBackupChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackupChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBackupChannel with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateBackupChannelRequest()
+            );
+            request.backupChannel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateBackupChannelRequest', ['backupChannel', 'name']);
+            request.backupChannel.name = defaultValue1;
+            const expectedHeaderRequestParams = `backup_channel.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateBackupChannel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateBackupChannel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateBackupChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackupChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateBackupChannelProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateBackupChannelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateBackupChannelProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateBackupChannelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteBackupChannel', () => {
+        it('invokes deleteBackupChannel without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteBackupChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteBackupChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteBackupChannel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteBackupChannel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBackupChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackupChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackupChannel without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteBackupChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteBackupChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteBackupChannel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteBackupChannel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBackupChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackupChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackupChannel with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteBackupChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteBackupChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBackupChannel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteBackupChannel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBackupChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackupChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackupChannel with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteBackupChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteBackupChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBackupChannel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteBackupChannel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBackupChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackupChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteBackupChannelProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteBackupChannelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteBackupChannelProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteBackupChannelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createBackup', () => {
+        it('invokes createBackup without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateBackupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createBackup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createBackup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBackup without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateBackupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createBackup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createBackup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkebackup.v1.IBackup, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkebackup.v1.IBackup, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBackup with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateBackupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBackup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createBackup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createBackup with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateBackupRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createBackup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createBackup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateBackupProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateBackupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateBackupProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateBackupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateBackup', () => {
+        it('invokes updateBackup without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateBackupRequest()
+            );
+            request.backup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateBackupRequest', ['backup', 'name']);
+            request.backup.name = defaultValue1;
+            const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateBackup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateBackup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBackup without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateBackupRequest()
+            );
+            request.backup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateBackupRequest', ['backup', 'name']);
+            request.backup.name = defaultValue1;
+            const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateBackup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateBackup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkebackup.v1.IBackup, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkebackup.v1.IBackup, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBackup with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateBackupRequest()
+            );
+            request.backup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateBackupRequest', ['backup', 'name']);
+            request.backup.name = defaultValue1;
+            const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateBackup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateBackup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateBackup with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateBackupRequest()
+            );
+            request.backup ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateBackupRequest', ['backup', 'name']);
+            request.backup.name = defaultValue1;
+            const expectedHeaderRequestParams = `backup.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateBackup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateBackup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateBackupProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateBackupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateBackupProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateBackupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteBackup', () => {
+        it('invokes deleteBackup without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteBackup = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteBackup(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackup without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteBackup = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteBackup(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackup with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBackup = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteBackup(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteBackup with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteBackupRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteBackupRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteBackup = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteBackup(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteBackup as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteBackupProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteBackupProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteBackupProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteBackupProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createRestorePlan', () => {
+        it('invokes createRestorePlan without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateRestorePlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateRestorePlanRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createRestorePlan = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createRestorePlan(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createRestorePlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRestorePlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createRestorePlan without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateRestorePlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateRestorePlanRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createRestorePlan = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createRestorePlan(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkebackup.v1.IRestorePlan, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkebackup.v1.IRestorePlan, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createRestorePlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRestorePlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createRestorePlan with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateRestorePlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateRestorePlanRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createRestorePlan = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createRestorePlan(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createRestorePlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRestorePlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createRestorePlan with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateRestorePlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateRestorePlanRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createRestorePlan = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createRestorePlan(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createRestorePlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRestorePlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateRestorePlanProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateRestorePlanProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateRestorePlanProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateRestorePlanProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateRestorePlan', () => {
+        it('invokes updateRestorePlan without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateRestorePlanRequest()
+            );
+            request.restorePlan ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateRestorePlanRequest', ['restorePlan', 'name']);
+            request.restorePlan.name = defaultValue1;
+            const expectedHeaderRequestParams = `restore_plan.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateRestorePlan = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateRestorePlan(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRestorePlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRestorePlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRestorePlan without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateRestorePlanRequest()
+            );
+            request.restorePlan ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateRestorePlanRequest', ['restorePlan', 'name']);
+            request.restorePlan.name = defaultValue1;
+            const expectedHeaderRequestParams = `restore_plan.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateRestorePlan = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateRestorePlan(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkebackup.v1.IRestorePlan, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkebackup.v1.IRestorePlan, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRestorePlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRestorePlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRestorePlan with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateRestorePlanRequest()
+            );
+            request.restorePlan ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateRestorePlanRequest', ['restorePlan', 'name']);
+            request.restorePlan.name = defaultValue1;
+            const expectedHeaderRequestParams = `restore_plan.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateRestorePlan = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateRestorePlan(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateRestorePlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRestorePlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRestorePlan with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateRestorePlanRequest()
+            );
+            request.restorePlan ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateRestorePlanRequest', ['restorePlan', 'name']);
+            request.restorePlan.name = defaultValue1;
+            const expectedHeaderRequestParams = `restore_plan.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateRestorePlan = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateRestorePlan(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateRestorePlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRestorePlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateRestorePlanProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateRestorePlanProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateRestorePlanProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateRestorePlanProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteRestorePlan', () => {
+        it('invokes deleteRestorePlan without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteRestorePlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteRestorePlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteRestorePlan = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteRestorePlan(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteRestorePlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRestorePlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteRestorePlan without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteRestorePlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteRestorePlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteRestorePlan = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteRestorePlan(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteRestorePlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRestorePlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteRestorePlan with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteRestorePlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteRestorePlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteRestorePlan = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteRestorePlan(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteRestorePlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRestorePlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteRestorePlan with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteRestorePlanRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteRestorePlanRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteRestorePlan = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteRestorePlan(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteRestorePlan as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRestorePlan as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteRestorePlanProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteRestorePlanProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteRestorePlanProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteRestorePlanProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createRestoreChannel', () => {
+        it('invokes createRestoreChannel without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateRestoreChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateRestoreChannelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createRestoreChannel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createRestoreChannel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createRestoreChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRestoreChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createRestoreChannel without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateRestoreChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateRestoreChannelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createRestoreChannel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createRestoreChannel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkebackup.v1.IRestoreChannel, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkebackup.v1.IRestoreChannel, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createRestoreChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRestoreChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createRestoreChannel with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateRestoreChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateRestoreChannelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createRestoreChannel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createRestoreChannel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createRestoreChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRestoreChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createRestoreChannel with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateRestoreChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateRestoreChannelRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createRestoreChannel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createRestoreChannel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createRestoreChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRestoreChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateRestoreChannelProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateRestoreChannelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateRestoreChannelProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateRestoreChannelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateRestoreChannel', () => {
+        it('invokes updateRestoreChannel without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest()
+            );
+            request.restoreChannel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest', ['restoreChannel', 'name']);
+            request.restoreChannel.name = defaultValue1;
+            const expectedHeaderRequestParams = `restore_channel.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateRestoreChannel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateRestoreChannel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRestoreChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRestoreChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRestoreChannel without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest()
+            );
+            request.restoreChannel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest', ['restoreChannel', 'name']);
+            request.restoreChannel.name = defaultValue1;
+            const expectedHeaderRequestParams = `restore_channel.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateRestoreChannel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateRestoreChannel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkebackup.v1.IRestoreChannel, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkebackup.v1.IRestoreChannel, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRestoreChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRestoreChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRestoreChannel with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest()
+            );
+            request.restoreChannel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest', ['restoreChannel', 'name']);
+            request.restoreChannel.name = defaultValue1;
+            const expectedHeaderRequestParams = `restore_channel.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateRestoreChannel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateRestoreChannel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateRestoreChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRestoreChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRestoreChannel with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest()
+            );
+            request.restoreChannel ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateRestoreChannelRequest', ['restoreChannel', 'name']);
+            request.restoreChannel.name = defaultValue1;
+            const expectedHeaderRequestParams = `restore_channel.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateRestoreChannel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateRestoreChannel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateRestoreChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRestoreChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateRestoreChannelProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateRestoreChannelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateRestoreChannelProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateRestoreChannelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteRestoreChannel', () => {
+        it('invokes deleteRestoreChannel without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteRestoreChannel = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteRestoreChannel(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteRestoreChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRestoreChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteRestoreChannel without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteRestoreChannel = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteRestoreChannel(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteRestoreChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRestoreChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteRestoreChannel with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteRestoreChannel = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteRestoreChannel(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteRestoreChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRestoreChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteRestoreChannel with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteRestoreChannelRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteRestoreChannel = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteRestoreChannel(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteRestoreChannel as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRestoreChannel as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteRestoreChannelProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteRestoreChannelProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteRestoreChannelProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteRestoreChannelProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createRestore', () => {
+        it('invokes createRestore without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateRestoreRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createRestore = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createRestore(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createRestore without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateRestoreRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createRestore = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createRestore(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkebackup.v1.IRestore, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkebackup.v1.IRestore, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createRestore with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateRestoreRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createRestore = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createRestore(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createRestore with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.CreateRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.CreateRestoreRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createRestore = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createRestore(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateRestoreProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateRestoreProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateRestoreProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateRestoreProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateRestore', () => {
+        it('invokes updateRestore without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateRestoreRequest()
+            );
+            request.restore ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateRestoreRequest', ['restore', 'name']);
+            request.restore.name = defaultValue1;
+            const expectedHeaderRequestParams = `restore.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateRestore = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateRestore(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRestore without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateRestoreRequest()
+            );
+            request.restore ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateRestoreRequest', ['restore', 'name']);
+            request.restore.name = defaultValue1;
+            const expectedHeaderRequestParams = `restore.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateRestore = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateRestore(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkebackup.v1.IRestore, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkebackup.v1.IRestore, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRestore with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateRestoreRequest()
+            );
+            request.restore ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateRestoreRequest', ['restore', 'name']);
+            request.restore.name = defaultValue1;
+            const expectedHeaderRequestParams = `restore.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateRestore = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateRestore(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRestore with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.UpdateRestoreRequest()
+            );
+            request.restore ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.UpdateRestoreRequest', ['restore', 'name']);
+            request.restore.name = defaultValue1;
+            const expectedHeaderRequestParams = `restore.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateRestore = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateRestore(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateRestoreProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateRestoreProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateRestoreProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateRestoreProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteRestore', () => {
+        it('invokes deleteRestore without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteRestoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteRestore = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteRestore(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteRestore without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteRestoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteRestore = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteRestore(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkebackup.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkebackup.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteRestore with call error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteRestoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteRestore = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteRestore(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteRestore with LRO error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.DeleteRestoreRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.DeleteRestoreRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteRestore = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteRestore(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteRestore as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteRestore as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteRestoreProgress without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteRestoreProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteRestoreProgress with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteRestoreProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('listBackupPlans', () => {
+        it('invokes listBackupPlans without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupPlansRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlan()),
+            ];
+            client.innerApiCalls.listBackupPlans = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBackupPlans(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackupPlans as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackupPlans as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBackupPlans without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupPlansRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlan()),
+            ];
+            client.innerApiCalls.listBackupPlans = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBackupPlans(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IBackupPlan[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackupPlans as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackupPlans as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBackupPlans with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupPlansRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBackupPlans = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBackupPlans(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBackupPlans as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackupPlans as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBackupPlansStream without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupPlansRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlan()),
+            ];
+            client.descriptors.page.listBackupPlans.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBackupPlansStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.BackupPlan[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.BackupPlan) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBackupPlans.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackupPlans, request));
+            assert(
+                (client.descriptors.page.listBackupPlans.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listBackupPlansStream with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupPlansRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackupPlans.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBackupPlansStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.BackupPlan[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.BackupPlan) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBackupPlans.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackupPlans, request));
+            assert(
+                (client.descriptors.page.listBackupPlans.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listBackupPlans without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupPlansRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlan()),
+            ];
+            client.descriptors.page.listBackupPlans.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkebackup.v1.IBackupPlan[] = [];
+            const iterable = client.listBackupPlansAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBackupPlanBindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackupPlanBindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBackupPlanBindings with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listBackupPlanBindings = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listBackupPlanBindings(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listBackupPlanBindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackupPlanBindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBackupPlanBindingsStream without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
-        ),
-      ];
-      client.descriptors.page.listBackupPlanBindings.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listBackupPlanBindingsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.BackupPlanBinding[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.BackupPlanBinding) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackupPlans.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackupPlans.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listBackupPlans with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupPlansRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackupPlans.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBackupPlansAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkebackup.v1.IBackupPlan[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackupPlans.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackupPlans.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listBackupPlanBindings
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBackupPlanBindings, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listBackupPlanBindings
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes listBackupPlanBindingsStream with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBackupPlanBindings.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listBackupPlanBindingsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.BackupPlanBinding[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.BackupPlanBinding) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listBackupChannels', () => {
+        it('invokes listBackupChannels without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupChannelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupChannelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupChannel()),
+            ];
+            client.innerApiCalls.listBackupChannels = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBackupChannels(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackupChannels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackupChannels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listBackupChannels without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupChannelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupChannelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupChannel()),
+            ];
+            client.innerApiCalls.listBackupChannels = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBackupChannels(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IBackupChannel[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackupChannels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackupChannels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listBackupPlanBindings
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBackupPlanBindings, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listBackupPlanBindings
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listBackupPlanBindings without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.BackupPlanBinding()
-        ),
-      ];
-      client.descriptors.page.listBackupPlanBindings.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gkebackup.v1.IBackupPlanBinding[] =
-        [];
-      const iterable = client.listBackupPlanBindingsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBackupPlanBindings
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listBackupPlanBindings
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        it('invokes listBackupChannels with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupChannelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupChannelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBackupChannels = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBackupChannels(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBackupChannels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackupChannels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listBackupPlanBindings with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBackupPlanBindings.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listBackupPlanBindingsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gkebackup.v1.IBackupPlanBinding[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listBackupPlanBindings
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listBackupPlanBindings
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('invokes listBackupChannelsStream without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupChannelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupChannelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupChannel()),
+            ];
+            client.descriptors.page.listBackupChannels.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBackupChannelsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.BackupChannel[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.BackupChannel) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBackupChannels.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackupChannels, request));
+            assert(
+                (client.descriptors.page.listBackupChannels.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listBackups', () => {
-    it('invokes listBackups without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
-      ];
-      client.innerApiCalls.listBackups = stubSimpleCall(expectedResponse);
-      const [response] = await client.listBackups(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listBackupChannelsStream with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupChannelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupChannelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackupChannels.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBackupChannelsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.BackupChannel[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.BackupChannel) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBackupChannels.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackupChannels, request));
+            assert(
+                (client.descriptors.page.listBackupChannels.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listBackups without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
-      ];
-      client.innerApiCalls.listBackups =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listBackups(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IBackup[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listBackupChannels without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupChannelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupChannelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupChannel()),
+            ];
+            client.descriptors.page.listBackupChannels.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkebackup.v1.IBackupChannel[] = [];
+            const iterable = client.listBackupChannelsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBackups with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listBackups = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listBackups(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listBackups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listBackupsStream without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
-      ];
-      client.descriptors.page.listBackups.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listBackupsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.Backup[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.Backup) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackupChannels.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackupChannels.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listBackupChannels with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupChannelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupChannelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackupChannels.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBackupChannelsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkebackup.v1.IBackupChannel[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackupChannels.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackupChannels.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listBackups.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBackups, request)
-      );
-      assert(
-        (client.descriptors.page.listBackups.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listBackupsStream with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBackups.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listBackupsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.Backup[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.Backup) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listBackupPlanBindings', () => {
+        it('invokes listBackupPlanBindings without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlanBinding()),
+            ];
+            client.innerApiCalls.listBackupPlanBindings = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBackupPlanBindings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackupPlanBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackupPlanBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listBackupPlanBindings without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlanBinding()),
+            ];
+            client.innerApiCalls.listBackupPlanBindings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBackupPlanBindings(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IBackupPlanBinding[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackupPlanBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackupPlanBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listBackups.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listBackups, request)
-      );
-      assert(
-        (client.descriptors.page.listBackups.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listBackups without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
-      ];
-      client.descriptors.page.listBackups.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gkebackup.v1.IBackup[] = [];
-      const iterable = client.listBackupsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.listBackups.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBackups.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listBackupPlanBindings with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBackupPlanBindings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBackupPlanBindings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBackupPlanBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackupPlanBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listBackups with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listBackups.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listBackupsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gkebackup.v1.IBackup[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.listBackups.asyncIterate as SinonStub).getCall(
-          0
-        ).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listBackups.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listBackupPlanBindingsStream without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlanBinding()),
+            ];
+            client.descriptors.page.listBackupPlanBindings.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBackupPlanBindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.BackupPlanBinding[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.BackupPlanBinding) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBackupPlanBindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackupPlanBindings, request));
+            assert(
+                (client.descriptors.page.listBackupPlanBindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listVolumeBackups', () => {
-    it('invokes listVolumeBackups without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListVolumeBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeBackup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeBackup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeBackup()
-        ),
-      ];
-      client.innerApiCalls.listVolumeBackups = stubSimpleCall(expectedResponse);
-      const [response] = await client.listVolumeBackups(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVolumeBackups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVolumeBackups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listBackupPlanBindingsStream with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackupPlanBindings.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBackupPlanBindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.BackupPlanBinding[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.BackupPlanBinding) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBackupPlanBindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackupPlanBindings, request));
+            assert(
+                (client.descriptors.page.listBackupPlanBindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listVolumeBackups without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListVolumeBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeBackup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeBackup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeBackup()
-        ),
-      ];
-      client.innerApiCalls.listVolumeBackups =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listVolumeBackups(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IVolumeBackup[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listBackupPlanBindings without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.BackupPlanBinding()),
+            ];
+            client.descriptors.page.listBackupPlanBindings.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkebackup.v1.IBackupPlanBinding[] = [];
+            const iterable = client.listBackupPlanBindingsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVolumeBackups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVolumeBackups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listVolumeBackups with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListVolumeBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listVolumeBackups = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listVolumeBackups(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listVolumeBackups as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVolumeBackups as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listVolumeBackupsStream without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListVolumeBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeBackup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeBackup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeBackup()
-        ),
-      ];
-      client.descriptors.page.listVolumeBackups.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listVolumeBackupsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.VolumeBackup[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.VolumeBackup) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackupPlanBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackupPlanBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listBackupPlanBindings with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupPlanBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackupPlanBindings.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBackupPlanBindingsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkebackup.v1.IBackupPlanBinding[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackupPlanBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackupPlanBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listVolumeBackups.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVolumeBackups, request)
-      );
-      assert(
-        (client.descriptors.page.listVolumeBackups.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listVolumeBackupsStream with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListVolumeBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVolumeBackups.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listVolumeBackupsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.VolumeBackup[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.VolumeBackup) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listBackups', () => {
+        it('invokes listBackups without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
+            ];
+            client.innerApiCalls.listBackups = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBackups(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listBackups without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
+            ];
+            client.innerApiCalls.listBackups = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBackups(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IBackup[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listVolumeBackups.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVolumeBackups, request)
-      );
-      assert(
-        (client.descriptors.page.listVolumeBackups.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listVolumeBackups without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListVolumeBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeBackup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeBackup()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeBackup()
-        ),
-      ];
-      client.descriptors.page.listVolumeBackups.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gkebackup.v1.IVolumeBackup[] = [];
-      const iterable = client.listVolumeBackupsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listVolumeBackups.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVolumeBackups.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listBackups with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBackups = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBackups(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBackups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listVolumeBackups with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListVolumeBackupsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVolumeBackups.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listVolumeBackupsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gkebackup.v1.IVolumeBackup[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listVolumeBackups.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVolumeBackups.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listBackupsStream without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
+            ];
+            client.descriptors.page.listBackups.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBackupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.Backup[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.Backup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBackups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackups, request));
+            assert(
+                (client.descriptors.page.listBackups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listRestorePlans', () => {
-    it('invokes listRestorePlans without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestorePlansRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlan()
-        ),
-      ];
-      client.innerApiCalls.listRestorePlans = stubSimpleCall(expectedResponse);
-      const [response] = await client.listRestorePlans(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRestorePlans as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRestorePlans as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listBackupsStream with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackups.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBackupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.Backup[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.Backup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBackups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBackups, request));
+            assert(
+                (client.descriptors.page.listBackups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listRestorePlans without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestorePlansRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlan()
-        ),
-      ];
-      client.innerApiCalls.listRestorePlans =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listRestorePlans(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IRestorePlan[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listBackups without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Backup()),
+            ];
+            client.descriptors.page.listBackups.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkebackup.v1.IBackup[] = [];
+            const iterable = client.listBackupsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRestorePlans as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRestorePlans as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRestorePlans with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestorePlansRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listRestorePlans = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listRestorePlans(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listRestorePlans as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRestorePlans as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRestorePlansStream without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestorePlansRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlan()
-        ),
-      ];
-      client.descriptors.page.listRestorePlans.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listRestorePlansStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.RestorePlan[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.RestorePlan) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listBackups with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBackups.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBackupsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkebackup.v1.IBackup[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listRestorePlans.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRestorePlans, request)
-      );
-      assert(
-        (client.descriptors.page.listRestorePlans.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listRestorePlansStream with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestorePlansRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRestorePlans.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listRestorePlansStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.RestorePlan[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.RestorePlan) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listVolumeBackups', () => {
+        it('invokes listVolumeBackups without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListVolumeBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeBackup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeBackup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeBackup()),
+            ];
+            client.innerApiCalls.listVolumeBackups = stubSimpleCall(expectedResponse);
+            const [response] = await client.listVolumeBackups(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVolumeBackups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVolumeBackups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listVolumeBackups without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListVolumeBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeBackup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeBackup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeBackup()),
+            ];
+            client.innerApiCalls.listVolumeBackups = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listVolumeBackups(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IVolumeBackup[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVolumeBackups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVolumeBackups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listRestorePlans.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRestorePlans, request)
-      );
-      assert(
-        (client.descriptors.page.listRestorePlans.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listRestorePlans without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestorePlansRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlan()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlan()
-        ),
-      ];
-      client.descriptors.page.listRestorePlans.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gkebackup.v1.IRestorePlan[] = [];
-      const iterable = client.listRestorePlansAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRestorePlans.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listRestorePlans.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listVolumeBackups with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListVolumeBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listVolumeBackups = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listVolumeBackups(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listVolumeBackups as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVolumeBackups as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listRestorePlans with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestorePlansRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRestorePlans.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listRestorePlansAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gkebackup.v1.IRestorePlan[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRestorePlans.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listRestorePlans.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listVolumeBackupsStream without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListVolumeBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeBackup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeBackup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeBackup()),
+            ];
+            client.descriptors.page.listVolumeBackups.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listVolumeBackupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.VolumeBackup[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.VolumeBackup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listVolumeBackups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVolumeBackups, request));
+            assert(
+                (client.descriptors.page.listVolumeBackups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listRestoreChannels', () => {
-    it('invokes listRestoreChannels without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestoreChannelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestoreChannelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestoreChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestoreChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestoreChannel()
-        ),
-      ];
-      client.innerApiCalls.listRestoreChannels =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listRestoreChannels(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRestoreChannels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRestoreChannels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listVolumeBackupsStream with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListVolumeBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVolumeBackups.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listVolumeBackupsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.VolumeBackup[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.VolumeBackup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listVolumeBackups.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVolumeBackups, request));
+            assert(
+                (client.descriptors.page.listVolumeBackups.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listRestoreChannels without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestoreChannelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestoreChannelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestoreChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestoreChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestoreChannel()
-        ),
-      ];
-      client.innerApiCalls.listRestoreChannels =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listRestoreChannels(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IRestoreChannel[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listVolumeBackups without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListVolumeBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeBackup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeBackup()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeBackup()),
+            ];
+            client.descriptors.page.listVolumeBackups.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkebackup.v1.IVolumeBackup[] = [];
+            const iterable = client.listVolumeBackupsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRestoreChannels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRestoreChannels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRestoreChannels with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestoreChannelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestoreChannelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listRestoreChannels = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listRestoreChannels(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listRestoreChannels as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRestoreChannels as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRestoreChannelsStream without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestoreChannelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestoreChannelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestoreChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestoreChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestoreChannel()
-        ),
-      ];
-      client.descriptors.page.listRestoreChannels.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listRestoreChannelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.RestoreChannel[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.RestoreChannel) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVolumeBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVolumeBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listVolumeBackups with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListVolumeBackupsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVolumeBackups.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listVolumeBackupsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkebackup.v1.IVolumeBackup[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVolumeBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVolumeBackups.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listRestoreChannels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRestoreChannels, request)
-      );
-      assert(
-        (client.descriptors.page.listRestoreChannels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listRestoreChannelsStream with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestoreChannelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestoreChannelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRestoreChannels.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listRestoreChannelsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.RestoreChannel[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.RestoreChannel) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listRestorePlans', () => {
+        it('invokes listRestorePlans without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestorePlansRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlan()),
+            ];
+            client.innerApiCalls.listRestorePlans = stubSimpleCall(expectedResponse);
+            const [response] = await client.listRestorePlans(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRestorePlans as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRestorePlans as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listRestorePlans without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestorePlansRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlan()),
+            ];
+            client.innerApiCalls.listRestorePlans = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listRestorePlans(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IRestorePlan[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRestorePlans as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRestorePlans as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listRestoreChannels.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRestoreChannels, request)
-      );
-      assert(
-        (client.descriptors.page.listRestoreChannels.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listRestoreChannels without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestoreChannelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestoreChannelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestoreChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestoreChannel()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestoreChannel()
-        ),
-      ];
-      client.descriptors.page.listRestoreChannels.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gkebackup.v1.IRestoreChannel[] = [];
-      const iterable = client.listRestoreChannelsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRestoreChannels.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listRestoreChannels.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+        it('invokes listRestorePlans with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestorePlansRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listRestorePlans = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listRestorePlans(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listRestorePlans as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRestorePlans as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listRestoreChannels with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestoreChannelsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestoreChannelsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRestoreChannels.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listRestoreChannelsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gkebackup.v1.IRestoreChannel[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRestoreChannels.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listRestoreChannels.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
+        it('invokes listRestorePlansStream without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestorePlansRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlan()),
+            ];
+            client.descriptors.page.listRestorePlans.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listRestorePlansStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.RestorePlan[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.RestorePlan) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listRestorePlans.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRestorePlans, request));
+            assert(
+                (client.descriptors.page.listRestorePlans.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listRestorePlanBindings', () => {
-    it('invokes listRestorePlanBindings without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
-        ),
-      ];
-      client.innerApiCalls.listRestorePlanBindings =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listRestorePlanBindings(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRestorePlanBindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRestorePlanBindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listRestorePlansStream with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestorePlansRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRestorePlans.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listRestorePlansStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.RestorePlan[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.RestorePlan) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listRestorePlans.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRestorePlans, request));
+            assert(
+                (client.descriptors.page.listRestorePlans.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listRestorePlanBindings without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
-        ),
-      ];
-      client.innerApiCalls.listRestorePlanBindings =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listRestorePlanBindings(
-          request,
-          (
-            err?: Error | null,
-            result?:
-              | protos.google.cloud.gkebackup.v1.IRestorePlanBinding[]
-              | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listRestorePlans without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestorePlansRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlan()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlan()),
+            ];
+            client.descriptors.page.listRestorePlans.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkebackup.v1.IRestorePlan[] = [];
+            const iterable = client.listRestorePlansAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRestorePlanBindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRestorePlanBindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRestorePlanBindings with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listRestorePlanBindings = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listRestorePlanBindings(request),
-        expectedError
-      );
-      const actualRequest = (
-        client.innerApiCalls.listRestorePlanBindings as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRestorePlanBindings as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRestorePlanBindingsStream without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
-        ),
-      ];
-      client.descriptors.page.listRestorePlanBindings.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listRestorePlanBindingsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.RestorePlanBinding[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.RestorePlanBinding) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRestorePlans.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRestorePlans.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listRestorePlans with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestorePlansRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRestorePlans.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listRestorePlansAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkebackup.v1.IRestorePlan[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRestorePlans.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRestorePlans.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listRestorePlanBindings
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRestorePlanBindings, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listRestorePlanBindings
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
     });
 
-    it('invokes listRestorePlanBindingsStream with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRestorePlanBindings.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listRestorePlanBindingsStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.RestorePlanBinding[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.RestorePlanBinding) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listRestoreChannels', () => {
+        it('invokes listRestoreChannels without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestoreChannelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestoreChannelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestoreChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestoreChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestoreChannel()),
+            ];
+            client.innerApiCalls.listRestoreChannels = stubSimpleCall(expectedResponse);
+            const [response] = await client.listRestoreChannels(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRestoreChannels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRestoreChannels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listRestoreChannels without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestoreChannelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestoreChannelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestoreChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestoreChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestoreChannel()),
+            ];
+            client.innerApiCalls.listRestoreChannels = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listRestoreChannels(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IRestoreChannel[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRestoreChannels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRestoreChannels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listRestorePlanBindings
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRestorePlanBindings, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listRestorePlanBindings
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
 
-    it('uses async iteration with listRestorePlanBindings without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.RestorePlanBinding()
-        ),
-      ];
-      client.descriptors.page.listRestorePlanBindings.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gkebackup.v1.IRestorePlanBinding[] =
-        [];
-      const iterable = client.listRestorePlanBindingsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRestorePlanBindings
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listRestorePlanBindings
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
+        it('invokes listRestoreChannels with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestoreChannelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestoreChannelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listRestoreChannels = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listRestoreChannels(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listRestoreChannels as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRestoreChannels as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listRestorePlanBindings with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRestorePlanBindings.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listRestorePlanBindingsAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gkebackup.v1.IRestorePlanBinding[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRestorePlanBindings
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listRestorePlanBindings
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
+        it('invokes listRestoreChannelsStream without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestoreChannelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestoreChannelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestoreChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestoreChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestoreChannel()),
+            ];
+            client.descriptors.page.listRestoreChannels.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listRestoreChannelsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.RestoreChannel[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.RestoreChannel) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listRestoreChannels.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRestoreChannels, request));
+            assert(
+                (client.descriptors.page.listRestoreChannels.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
 
-  describe('listRestores', () => {
-    it('invokes listRestores without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
-      ];
-      client.innerApiCalls.listRestores = stubSimpleCall(expectedResponse);
-      const [response] = await client.listRestores(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRestores as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRestores as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
+        it('invokes listRestoreChannelsStream with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestoreChannelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestoreChannelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRestoreChannels.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listRestoreChannelsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.RestoreChannel[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.RestoreChannel) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listRestoreChannels.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRestoreChannels, request));
+            assert(
+                (client.descriptors.page.listRestoreChannels.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
 
-    it('invokes listRestores without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
-      ];
-      client.innerApiCalls.listRestores =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listRestores(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IRestore[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+        it('uses async iteration with listRestoreChannels without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestoreChannelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestoreChannelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestoreChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestoreChannel()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestoreChannel()),
+            ];
+            client.descriptors.page.listRestoreChannels.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkebackup.v1.IRestoreChannel[] = [];
+            const iterable = client.listRestoreChannelsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listRestores as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRestores as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRestores with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listRestores = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listRestores(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listRestores as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listRestores as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listRestoresStream without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
-      ];
-      client.descriptors.page.listRestores.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listRestoresStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.Restore[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.Restore) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRestoreChannels.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRestoreChannels.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listRestoreChannels with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestoreChannelsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestoreChannelsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRestoreChannels.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listRestoreChannelsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkebackup.v1.IRestoreChannel[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRestoreChannels.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRestoreChannels.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listRestores.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRestores, request)
-      );
-      assert(
-        (client.descriptors.page.listRestores.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
     });
 
-    it('invokes listRestoresStream with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRestores.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listRestoresStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.Restore[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.Restore) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+    describe('listRestorePlanBindings', () => {
+        it('invokes listRestorePlanBindings without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlanBinding()),
+            ];
+            client.innerApiCalls.listRestorePlanBindings = stubSimpleCall(expectedResponse);
+            const [response] = await client.listRestorePlanBindings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRestorePlanBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRestorePlanBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listRestorePlanBindings without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlanBinding()),
+            ];
+            client.innerApiCalls.listRestorePlanBindings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listRestorePlanBindings(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IRestorePlanBinding[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRestorePlanBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRestorePlanBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listRestores.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listRestores, request)
-      );
-      assert(
-        (client.descriptors.page.listRestores.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('uses async iteration with listRestores without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
-        generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
-      ];
-      client.descriptors.page.listRestores.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gkebackup.v1.IRestore[] = [];
-      const iterable = client.listRestoresAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRestores.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listRestores.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listRestores with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListRestoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listRestores.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listRestoresAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gkebackup.v1.IRestore[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listRestores.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listRestores.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-
-  describe('listVolumeRestores', () => {
-    it('invokes listVolumeRestores without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListVolumeRestoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeRestore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeRestore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeRestore()
-        ),
-      ];
-      client.innerApiCalls.listVolumeRestores =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listVolumeRestores(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVolumeRestores as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVolumeRestores as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listVolumeRestores without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListVolumeRestoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeRestore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeRestore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeRestore()
-        ),
-      ];
-      client.innerApiCalls.listVolumeRestores =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listVolumeRestores(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.gkebackup.v1.IVolumeRestore[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listVolumeRestores as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVolumeRestores as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listVolumeRestores with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListVolumeRestoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listVolumeRestores = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listVolumeRestores(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listVolumeRestores as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listVolumeRestores as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listVolumeRestoresStream without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListVolumeRestoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeRestore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeRestore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeRestore()
-        ),
-      ];
-      client.descriptors.page.listVolumeRestores.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listVolumeRestoresStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.VolumeRestore[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.VolumeRestore) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('invokes listRestorePlanBindings with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listRestorePlanBindings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listRestorePlanBindings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listRestorePlanBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRestorePlanBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('invokes listRestorePlanBindingsStream without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlanBinding()),
+            ];
+            client.descriptors.page.listRestorePlanBindings.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listRestorePlanBindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.RestorePlanBinding[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.RestorePlanBinding) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listRestorePlanBindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRestorePlanBindings, request));
+            assert(
+                (client.descriptors.page.listRestorePlanBindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listVolumeRestores.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVolumeRestores, request)
-      );
-      assert(
-        (client.descriptors.page.listVolumeRestores.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
 
-    it('invokes listVolumeRestoresStream with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListVolumeRestoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVolumeRestores.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listVolumeRestoresStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gkebackup.v1.VolumeRestore[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.gkebackup.v1.VolumeRestore) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
+        it('invokes listRestorePlanBindingsStream with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRestorePlanBindings.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listRestorePlanBindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.RestorePlanBinding[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.RestorePlanBinding) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listRestorePlanBindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRestorePlanBindings, request));
+            assert(
+                (client.descriptors.page.listRestorePlanBindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
         });
-        stream.on('error', (err: Error) => {
-          reject(err);
+
+        it('uses async iteration with listRestorePlanBindings without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlanBinding()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.RestorePlanBinding()),
+            ];
+            client.descriptors.page.listRestorePlanBindings.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkebackup.v1.IRestorePlanBinding[] = [];
+            const iterable = client.listRestorePlanBindingsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRestorePlanBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRestorePlanBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
         });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listVolumeRestores.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listVolumeRestores, request)
-      );
-      assert(
-        (client.descriptors.page.listVolumeRestores.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
+
+        it('uses async iteration with listRestorePlanBindings with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestorePlanBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRestorePlanBindings.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listRestorePlanBindingsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkebackup.v1.IRestorePlanBinding[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRestorePlanBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRestorePlanBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
 
-    it('uses async iteration with listVolumeRestores without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListVolumeRestoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeRestore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeRestore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.gkebackup.v1.VolumeRestore()
-        ),
-      ];
-      client.descriptors.page.listVolumeRestores.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.gkebackup.v1.IVolumeRestore[] = [];
-      const iterable = client.listVolumeRestoresAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listVolumeRestores.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVolumeRestores.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
+    describe('listRestores', () => {
+        it('invokes listRestores without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
+            ];
+            client.innerApiCalls.listRestores = stubSimpleCall(expectedResponse);
+            const [response] = await client.listRestores(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRestores as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRestores as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
 
-    it('uses async iteration with listVolumeRestores with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.gkebackup.v1.ListVolumeRestoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listVolumeRestores.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listVolumeRestoresAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.gkebackup.v1.IVolumeRestore[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listVolumeRestores.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listVolumeRestores.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-  });
-  describe('getIamPolicy', () => {
-    it('invokes getIamPolicy without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
-      const response = await client.getIamPolicy(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes getIamPolicy without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.getIamPolicy = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client
-          .getIamPolicy(
-            request,
-            expectedOptions,
-            (
-              err?: Error | null,
-              result?: IamProtos.google.iam.v1.Policy | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+        it('invokes listRestores without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
+            ];
+            client.innerApiCalls.listRestores = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listRestores(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IRestore[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listRestores as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRestores as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listRestores with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listRestores = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listRestores(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listRestores as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listRestores as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listRestoresStream without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
+            ];
+            client.descriptors.page.listRestores.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listRestoresStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.Restore[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.Restore) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listRestores.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRestores, request));
+            assert(
+                (client.descriptors.page.listRestores.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listRestoresStream with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRestores.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listRestoresStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.Restore[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.Restore) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listRestores.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listRestores, request));
+            assert(
+                (client.descriptors.page.listRestores.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listRestores without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.Restore()),
+            ];
+            client.descriptors.page.listRestores.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkebackup.v1.IRestore[] = [];
+            const iterable = client.listRestoresAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRestores.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRestores.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listRestores with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListRestoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listRestores.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listRestoresAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkebackup.v1.IRestore[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listRestores.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listRestores.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes getIamPolicy with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.GetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(
-        client.getIamPolicy(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('setIamPolicy', () => {
-    it('invokes setIamPolicy without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
-      const response = await client.setIamPolicy(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-    it('invokes setIamPolicy without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.Policy()
-      );
-      client.iamClient.setIamPolicy = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client
-          .setIamPolicy(
-            request,
-            expectedOptions,
-            (
-              err?: Error | null,
-              result?: IamProtos.google.iam.v1.Policy | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+
+    describe('listVolumeRestores', () => {
+        it('invokes listVolumeRestores without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListVolumeRestoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeRestore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeRestore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeRestore()),
+            ];
+            client.innerApiCalls.listVolumeRestores = stubSimpleCall(expectedResponse);
+            const [response] = await client.listVolumeRestores(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVolumeRestores as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVolumeRestores as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listVolumeRestores without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListVolumeRestoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeRestore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeRestore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeRestore()),
+            ];
+            client.innerApiCalls.listVolumeRestores = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listVolumeRestores(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkebackup.v1.IVolumeRestore[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listVolumeRestores as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVolumeRestores as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listVolumeRestores with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListVolumeRestoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listVolumeRestores = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listVolumeRestores(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listVolumeRestores as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listVolumeRestores as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listVolumeRestoresStream without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListVolumeRestoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeRestore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeRestore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeRestore()),
+            ];
+            client.descriptors.page.listVolumeRestores.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listVolumeRestoresStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.VolumeRestore[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.VolumeRestore) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listVolumeRestores.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVolumeRestores, request));
+            assert(
+                (client.descriptors.page.listVolumeRestores.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listVolumeRestoresStream with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListVolumeRestoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVolumeRestores.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listVolumeRestoresStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkebackup.v1.VolumeRestore[] = [];
+                stream.on('data', (response: protos.google.cloud.gkebackup.v1.VolumeRestore) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listVolumeRestores.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listVolumeRestores, request));
+            assert(
+                (client.descriptors.page.listVolumeRestores.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listVolumeRestores without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListVolumeRestoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeRestore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeRestore()),
+              generateSampleMessage(new protos.google.cloud.gkebackup.v1.VolumeRestore()),
+            ];
+            client.descriptors.page.listVolumeRestores.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkebackup.v1.IVolumeRestore[] = [];
+            const iterable = client.listVolumeRestoresAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVolumeRestores.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVolumeRestores.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listVolumeRestores with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkebackup.v1.ListVolumeRestoresRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listVolumeRestores.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listVolumeRestoresAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkebackup.v1.IVolumeRestore[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listVolumeRestores.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listVolumeRestores.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes setIamPolicy with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.SetIamPolicyRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(
-        client.setIamPolicy(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('getIamPolicy', () => {
+        it('invokes getIamPolicy without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
+            const response = await client.getIamPolicy(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getIamPolicy without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.getIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIamPolicy(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getIamPolicy with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.GetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIamPolicy(request, expectedOptions), expectedError);
+            assert((client.iamClient.getIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-  });
-  describe('testIamPermissions', () => {
-    it('invokes testIamPermissions without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
-      const response = await client.testIamPermissions(
-        request,
-        expectedOptions
-      );
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.iamClient.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('setIamPolicy', () => {
+        it('invokes setIamPolicy without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
+            const response = await client.setIamPolicy(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes setIamPolicy without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.Policy()
+            );
+            client.iamClient.setIamPolicy = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.setIamPolicy(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.Policy|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0));
+        });
+        it('invokes setIamPolicy with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.SetIamPolicyRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.setIamPolicy(request, expectedOptions), expectedError);
+            assert((client.iamClient.setIamPolicy as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
     });
-    it('invokes testIamPermissions without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
-      );
-      client.iamClient.testIamPermissions = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client
-          .testIamPermissions(
-            request,
-            expectedOptions,
-            (
-              err?: Error | null,
-              result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
+    describe('testIamPermissions', () => {
+        it('invokes testIamPermissions without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
+            const response = await client.testIamPermissions(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes testIamPermissions without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+            );
+            client.iamClient.testIamPermissions = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.testIamPermissions(
+                    request,
+                    expectedOptions,
+                    (err?: Error|null, result?: IamProtos.google.iam.v1.TestIamPermissionsResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0));
+        });
+        it('invokes testIamPermissions with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+            );
+            request.resource = '';
+            const expectedHeaderRequestParams = 'resource=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.iamClient.testIamPermissions = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.testIamPermissions(request, expectedOptions), expectedError);
+            assert((client.iamClient.testIamPermissions as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('getLocation', () => {
+        it('invokes getLocation without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+            const response = await client.getLocation(request, expectedOptions);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+        it('invokes getLocation without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedResponse = generateSampleMessage(
+              new LocationProtos.google.cloud.location.Location()
+            );
+            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getLocation(
+                    request,
+                    expectedOptions,
+                    (
+                        err?: Error | null,
+                        result?: LocationProtos.google.cloud.location.ILocation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getLocation with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.GetLocationRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedOptions = {
+                otherArgs: {
+                    headers: {
+                        'x-goog-request-params': expectedHeaderRequestParams,
+                    },
+                },
+            };
+            const expectedError = new Error('expected');
+            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
+            assert((client.locationsClient.getLocation as SinonStub)
+                .getCall(0).calledWith(request, expectedOptions, undefined));
+        });
+    });
+    describe('listLocationsAsync', () => {
+        it('uses async iteration with listLocations without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+                new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedResponse = [
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+                generateSampleMessage(
+                    new LocationProtos.google.cloud.location.Location()
+                ),
+            ];
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+            const iterable = client.listLocationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+        it('uses async iteration with listLocations with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new LocationProtos.google.cloud.location.ListLocationsRequest()
+            );
+            request.name = '';
+            const expectedHeaderRequestParams = 'name=';
+            const expectedError = new Error('expected');
+            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listLocationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
     });
-    it('invokes testIamPermissions with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
-      );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.iamClient.testIamPermissions = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.testIamPermissions(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.iamClient.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('getOperation', () => {
+        it('invokes getOperation without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const response = await client.getOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes getOperation without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new operationsProtos.google.longrunning.Operation()
+            );
+            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.getOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: operationsProtos.google.longrunning.Operation | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes getOperation with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.GetOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-  });
-  describe('getLocation', () => {
-    it('invokes getLocation without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-      const response = await client.getLocation(request, expectedOptions);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+    describe('cancelOperation', () => {
+        it('invokes cancelOperation without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
+            const response = await client.cancelOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes cancelOperation without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.cancelOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes cancelOperation with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.CancelOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
+            assert((client.operationsClient.cancelOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
     });
-    it('invokes getLocation without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new LocationProtos.google.cloud.location.Location()
-      );
-      client.locationsClient.getLocation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getLocation(
-          request,
-          expectedOptions,
-          (
-            err?: Error | null,
-            result?: LocationProtos.google.cloud.location.ILocation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
+    describe('deleteOperation', () => {
+        it('invokes deleteOperation without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
+            const response = await client.deleteOperation(request);
+            assert.deepStrictEqual(response, [expectedResponse]);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request)
+            );
+        });
+        it('invokes deleteOperation without error using callback', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedResponse = generateSampleMessage(
+                new protos.google.protobuf.Empty()
+            );
+            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.operationsClient.deleteOperation(
+                    request,
+                    undefined,
+                    (
+                        err?: Error | null,
+                        result?: protos.google.protobuf.Empty | null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    }).catch(err => {throw err});
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0));
+        });
+        it('invokes deleteOperation with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.DeleteOperationRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
+            assert((client.operationsClient.deleteOperation as SinonStub)
+                .getCall(0).calledWith(request));
+        });
+    });
+    describe('listOperationsAsync', () => {
+        it('uses async iteration with listOperations without error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedResponse = [
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+                generateSampleMessage(
+                    new operationsProtos.google.longrunning.ListOperationsResponse()
+                ),
+            ];
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: operationsProtos.google.longrunning.IOperation[] = [];
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
             }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
-    });
-    it('invokes getLocation with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.GetLocationRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.locationsClient.getLocation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.getLocation(request, expectedOptions),
-        expectedError
-      );
-      assert(
-        (client.locationsClient.getLocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-  describe('listLocationsAsync', () => {
-    it('uses async iteration with listLocations without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-        generateSampleMessage(
-          new LocationProtos.google.cloud.location.Location()
-        ),
-      ];
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-      const iterable = client.listLocationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-    it('uses async iteration with listLocations with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new LocationProtos.google.cloud.location.ListLocationsRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedError = new Error('expected');
-      client.locationsClient.descriptors.page.listLocations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listLocationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.locationsClient.descriptors.page.listLocations
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-  });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .getOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .cancelOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient
-          .deleteOperation(
-            request,
-            undefined,
-            (
-              err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
-            ) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            }
-          )
-          .catch(err => {
-            throw err;
-          });
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.IOperation[] = [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
-
-  describe('Path templates', () => {
-    describe('backup', async () => {
-      const fakePath = '/rendered/path/backup';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        backup_plan: 'backupPlanValue',
-        backup: 'backupValue',
-      };
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.backupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.backupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('backupPath', () => {
-        const result = client.backupPath(
-          'projectValue',
-          'locationValue',
-          'backupPlanValue',
-          'backupValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.backupPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromBackupName', () => {
-        const result = client.matchProjectFromBackupName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.backupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromBackupName', () => {
-        const result = client.matchLocationFromBackupName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.backupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBackupPlanFromBackupName', () => {
-        const result = client.matchBackupPlanFromBackupName(fakePath);
-        assert.strictEqual(result, 'backupPlanValue');
-        assert(
-          (client.pathTemplates.backupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBackupFromBackupName', () => {
-        const result = client.matchBackupFromBackupName(fakePath);
-        assert.strictEqual(result, 'backupValue');
-        assert(
-          (client.pathTemplates.backupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+        it('uses async iteration with listOperations with error', async () => {
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new operationsProtos.google.longrunning.ListOperationsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.operationsClient.listOperationsAsync(request);
+            await assert.rejects(async () => {
+                const responses: operationsProtos.google.longrunning.IOperation[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
     });
 
-    describe('backupChannel', async () => {
-      const fakePath = '/rendered/path/backupChannel';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        backup_channel: 'backupChannelValue',
-      };
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.backupChannelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.backupChannelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+    describe('Path templates', () => {
 
-      it('backupChannelPath', () => {
-        const result = client.backupChannelPath(
-          'projectValue',
-          'locationValue',
-          'backupChannelValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.backupChannelPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
+        describe('backup', async () => {
+            const fakePath = "/rendered/path/backup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                backup_plan: "backupPlanValue",
+                backup: "backupValue",
+            };
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.backupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.backupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
 
-      it('matchProjectFromBackupChannelName', () => {
-        const result = client.matchProjectFromBackupChannelName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.backupChannelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('backupPath', () => {
+                const result = client.backupPath("projectValue", "locationValue", "backupPlanValue", "backupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.backupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
 
-      it('matchLocationFromBackupChannelName', () => {
-        const result = client.matchLocationFromBackupChannelName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.backupChannelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchProjectFromBackupName', () => {
+                const result = client.matchProjectFromBackupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
 
-      it('matchBackupChannelFromBackupChannelName', () => {
-        const result = client.matchBackupChannelFromBackupChannelName(fakePath);
-        assert.strictEqual(result, 'backupChannelValue');
-        assert(
-          (client.pathTemplates.backupChannelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
+            it('matchLocationFromBackupName', () => {
+                const result = client.matchLocationFromBackupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackupPlanFromBackupName', () => {
+                const result = client.matchBackupPlanFromBackupName(fakePath);
+                assert.strictEqual(result, "backupPlanValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackupFromBackupName', () => {
+                const result = client.matchBackupFromBackupName(fakePath);
+                assert.strictEqual(result, "backupValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('backupChannel', async () => {
+            const fakePath = "/rendered/path/backupChannel";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                backup_channel: "backupChannelValue",
+            };
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.backupChannelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.backupChannelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('backupChannelPath', () => {
+                const result = client.backupChannelPath("projectValue", "locationValue", "backupChannelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.backupChannelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromBackupChannelName', () => {
+                const result = client.matchProjectFromBackupChannelName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.backupChannelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBackupChannelName', () => {
+                const result = client.matchLocationFromBackupChannelName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.backupChannelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackupChannelFromBackupChannelName', () => {
+                const result = client.matchBackupChannelFromBackupChannelName(fakePath);
+                assert.strictEqual(result, "backupChannelValue");
+                assert((client.pathTemplates.backupChannelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('backupPlan', async () => {
+            const fakePath = "/rendered/path/backupPlan";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                backup_plan: "backupPlanValue",
+            };
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.backupPlanPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.backupPlanPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('backupPlanPath', () => {
+                const result = client.backupPlanPath("projectValue", "locationValue", "backupPlanValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.backupPlanPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromBackupPlanName', () => {
+                const result = client.matchProjectFromBackupPlanName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.backupPlanPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBackupPlanName', () => {
+                const result = client.matchLocationFromBackupPlanName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.backupPlanPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackupPlanFromBackupPlanName', () => {
+                const result = client.matchBackupPlanFromBackupPlanName(fakePath);
+                assert.strictEqual(result, "backupPlanValue");
+                assert((client.pathTemplates.backupPlanPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('backupPlanBinding', async () => {
+            const fakePath = "/rendered/path/backupPlanBinding";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                backup_channel: "backupChannelValue",
+                backup_plan_binding: "backupPlanBindingValue",
+            };
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.backupPlanBindingPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.backupPlanBindingPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('backupPlanBindingPath', () => {
+                const result = client.backupPlanBindingPath("projectValue", "locationValue", "backupChannelValue", "backupPlanBindingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.backupPlanBindingPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromBackupPlanBindingName', () => {
+                const result = client.matchProjectFromBackupPlanBindingName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.backupPlanBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromBackupPlanBindingName', () => {
+                const result = client.matchLocationFromBackupPlanBindingName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.backupPlanBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackupChannelFromBackupPlanBindingName', () => {
+                const result = client.matchBackupChannelFromBackupPlanBindingName(fakePath);
+                assert.strictEqual(result, "backupChannelValue");
+                assert((client.pathTemplates.backupPlanBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackupPlanBindingFromBackupPlanBindingName', () => {
+                const result = client.matchBackupPlanBindingFromBackupPlanBindingName(fakePath);
+                assert.strictEqual(result, "backupPlanBindingValue");
+                assert((client.pathTemplates.backupPlanBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('location', async () => {
+            const fakePath = "/rendered/path/location";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.locationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.locationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('locationPath', () => {
+                const result = client.locationPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLocationName', () => {
+                const result = client.matchProjectFromLocationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLocationName', () => {
+                const result = client.matchLocationFromLocationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('restore', async () => {
+            const fakePath = "/rendered/path/restore";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                restore_plan: "restorePlanValue",
+                restore: "restoreValue",
+            };
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.restorePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.restorePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('restorePath', () => {
+                const result = client.restorePath("projectValue", "locationValue", "restorePlanValue", "restoreValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.restorePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRestoreName', () => {
+                const result = client.matchProjectFromRestoreName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.restorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRestoreName', () => {
+                const result = client.matchLocationFromRestoreName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.restorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRestorePlanFromRestoreName', () => {
+                const result = client.matchRestorePlanFromRestoreName(fakePath);
+                assert.strictEqual(result, "restorePlanValue");
+                assert((client.pathTemplates.restorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRestoreFromRestoreName', () => {
+                const result = client.matchRestoreFromRestoreName(fakePath);
+                assert.strictEqual(result, "restoreValue");
+                assert((client.pathTemplates.restorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('restoreChannel', async () => {
+            const fakePath = "/rendered/path/restoreChannel";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                restore_channel: "restoreChannelValue",
+            };
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.restoreChannelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.restoreChannelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('restoreChannelPath', () => {
+                const result = client.restoreChannelPath("projectValue", "locationValue", "restoreChannelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.restoreChannelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRestoreChannelName', () => {
+                const result = client.matchProjectFromRestoreChannelName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.restoreChannelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRestoreChannelName', () => {
+                const result = client.matchLocationFromRestoreChannelName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.restoreChannelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRestoreChannelFromRestoreChannelName', () => {
+                const result = client.matchRestoreChannelFromRestoreChannelName(fakePath);
+                assert.strictEqual(result, "restoreChannelValue");
+                assert((client.pathTemplates.restoreChannelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('restorePlan', async () => {
+            const fakePath = "/rendered/path/restorePlan";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                restore_plan: "restorePlanValue",
+            };
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.restorePlanPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.restorePlanPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('restorePlanPath', () => {
+                const result = client.restorePlanPath("projectValue", "locationValue", "restorePlanValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.restorePlanPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRestorePlanName', () => {
+                const result = client.matchProjectFromRestorePlanName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.restorePlanPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRestorePlanName', () => {
+                const result = client.matchLocationFromRestorePlanName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.restorePlanPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRestorePlanFromRestorePlanName', () => {
+                const result = client.matchRestorePlanFromRestorePlanName(fakePath);
+                assert.strictEqual(result, "restorePlanValue");
+                assert((client.pathTemplates.restorePlanPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('restorePlanBinding', async () => {
+            const fakePath = "/rendered/path/restorePlanBinding";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                restore_channel: "restoreChannelValue",
+                restore_plan_binding: "restorePlanBindingValue",
+            };
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.restorePlanBindingPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.restorePlanBindingPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('restorePlanBindingPath', () => {
+                const result = client.restorePlanBindingPath("projectValue", "locationValue", "restoreChannelValue", "restorePlanBindingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.restorePlanBindingPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRestorePlanBindingName', () => {
+                const result = client.matchProjectFromRestorePlanBindingName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.restorePlanBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRestorePlanBindingName', () => {
+                const result = client.matchLocationFromRestorePlanBindingName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.restorePlanBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRestoreChannelFromRestorePlanBindingName', () => {
+                const result = client.matchRestoreChannelFromRestorePlanBindingName(fakePath);
+                assert.strictEqual(result, "restoreChannelValue");
+                assert((client.pathTemplates.restorePlanBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRestorePlanBindingFromRestorePlanBindingName', () => {
+                const result = client.matchRestorePlanBindingFromRestorePlanBindingName(fakePath);
+                assert.strictEqual(result, "restorePlanBindingValue");
+                assert((client.pathTemplates.restorePlanBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('volumeBackup', async () => {
+            const fakePath = "/rendered/path/volumeBackup";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                backup_plan: "backupPlanValue",
+                backup: "backupValue",
+                volume_backup: "volumeBackupValue",
+            };
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.volumeBackupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.volumeBackupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('volumeBackupPath', () => {
+                const result = client.volumeBackupPath("projectValue", "locationValue", "backupPlanValue", "backupValue", "volumeBackupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.volumeBackupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromVolumeBackupName', () => {
+                const result = client.matchProjectFromVolumeBackupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.volumeBackupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromVolumeBackupName', () => {
+                const result = client.matchLocationFromVolumeBackupName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.volumeBackupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackupPlanFromVolumeBackupName', () => {
+                const result = client.matchBackupPlanFromVolumeBackupName(fakePath);
+                assert.strictEqual(result, "backupPlanValue");
+                assert((client.pathTemplates.volumeBackupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackupFromVolumeBackupName', () => {
+                const result = client.matchBackupFromVolumeBackupName(fakePath);
+                assert.strictEqual(result, "backupValue");
+                assert((client.pathTemplates.volumeBackupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVolumeBackupFromVolumeBackupName', () => {
+                const result = client.matchVolumeBackupFromVolumeBackupName(fakePath);
+                assert.strictEqual(result, "volumeBackupValue");
+                assert((client.pathTemplates.volumeBackupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('volumeRestore', async () => {
+            const fakePath = "/rendered/path/volumeRestore";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                restore_plan: "restorePlanValue",
+                restore: "restoreValue",
+                volume_restore: "volumeRestoreValue",
+            };
+            const client = new backupforgkeModule.v1.BackupForGKEClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.volumeRestorePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.volumeRestorePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('volumeRestorePath', () => {
+                const result = client.volumeRestorePath("projectValue", "locationValue", "restorePlanValue", "restoreValue", "volumeRestoreValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.volumeRestorePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromVolumeRestoreName', () => {
+                const result = client.matchProjectFromVolumeRestoreName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.volumeRestorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromVolumeRestoreName', () => {
+                const result = client.matchLocationFromVolumeRestoreName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.volumeRestorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRestorePlanFromVolumeRestoreName', () => {
+                const result = client.matchRestorePlanFromVolumeRestoreName(fakePath);
+                assert.strictEqual(result, "restorePlanValue");
+                assert((client.pathTemplates.volumeRestorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRestoreFromVolumeRestoreName', () => {
+                const result = client.matchRestoreFromVolumeRestoreName(fakePath);
+                assert.strictEqual(result, "restoreValue");
+                assert((client.pathTemplates.volumeRestorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVolumeRestoreFromVolumeRestoreName', () => {
+                const result = client.matchVolumeRestoreFromVolumeRestoreName(fakePath);
+                assert.strictEqual(result, "volumeRestoreValue");
+                assert((client.pathTemplates.volumeRestorePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
-
-    describe('backupPlan', async () => {
-      const fakePath = '/rendered/path/backupPlan';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        backup_plan: 'backupPlanValue',
-      };
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.backupPlanPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.backupPlanPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('backupPlanPath', () => {
-        const result = client.backupPlanPath(
-          'projectValue',
-          'locationValue',
-          'backupPlanValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.backupPlanPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromBackupPlanName', () => {
-        const result = client.matchProjectFromBackupPlanName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.backupPlanPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromBackupPlanName', () => {
-        const result = client.matchLocationFromBackupPlanName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.backupPlanPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBackupPlanFromBackupPlanName', () => {
-        const result = client.matchBackupPlanFromBackupPlanName(fakePath);
-        assert.strictEqual(result, 'backupPlanValue');
-        assert(
-          (client.pathTemplates.backupPlanPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('backupPlanBinding', async () => {
-      const fakePath = '/rendered/path/backupPlanBinding';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        backup_channel: 'backupChannelValue',
-        backup_plan_binding: 'backupPlanBindingValue',
-      };
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.backupPlanBindingPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.backupPlanBindingPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('backupPlanBindingPath', () => {
-        const result = client.backupPlanBindingPath(
-          'projectValue',
-          'locationValue',
-          'backupChannelValue',
-          'backupPlanBindingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.backupPlanBindingPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromBackupPlanBindingName', () => {
-        const result = client.matchProjectFromBackupPlanBindingName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.backupPlanBindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromBackupPlanBindingName', () => {
-        const result = client.matchLocationFromBackupPlanBindingName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.backupPlanBindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBackupChannelFromBackupPlanBindingName', () => {
-        const result =
-          client.matchBackupChannelFromBackupPlanBindingName(fakePath);
-        assert.strictEqual(result, 'backupChannelValue');
-        assert(
-          (
-            client.pathTemplates.backupPlanBindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBackupPlanBindingFromBackupPlanBindingName', () => {
-        const result =
-          client.matchBackupPlanBindingFromBackupPlanBindingName(fakePath);
-        assert.strictEqual(result, 'backupPlanBindingValue');
-        assert(
-          (
-            client.pathTemplates.backupPlanBindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('location', async () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('restore', async () => {
-      const fakePath = '/rendered/path/restore';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        restore_plan: 'restorePlanValue',
-        restore: 'restoreValue',
-      };
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.restorePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.restorePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('restorePath', () => {
-        const result = client.restorePath(
-          'projectValue',
-          'locationValue',
-          'restorePlanValue',
-          'restoreValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.restorePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromRestoreName', () => {
-        const result = client.matchProjectFromRestoreName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.restorePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromRestoreName', () => {
-        const result = client.matchLocationFromRestoreName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.restorePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRestorePlanFromRestoreName', () => {
-        const result = client.matchRestorePlanFromRestoreName(fakePath);
-        assert.strictEqual(result, 'restorePlanValue');
-        assert(
-          (client.pathTemplates.restorePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRestoreFromRestoreName', () => {
-        const result = client.matchRestoreFromRestoreName(fakePath);
-        assert.strictEqual(result, 'restoreValue');
-        assert(
-          (client.pathTemplates.restorePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('restoreChannel', async () => {
-      const fakePath = '/rendered/path/restoreChannel';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        restore_channel: 'restoreChannelValue',
-      };
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.restoreChannelPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.restoreChannelPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('restoreChannelPath', () => {
-        const result = client.restoreChannelPath(
-          'projectValue',
-          'locationValue',
-          'restoreChannelValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.restoreChannelPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromRestoreChannelName', () => {
-        const result = client.matchProjectFromRestoreChannelName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.restoreChannelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromRestoreChannelName', () => {
-        const result = client.matchLocationFromRestoreChannelName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.restoreChannelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRestoreChannelFromRestoreChannelName', () => {
-        const result =
-          client.matchRestoreChannelFromRestoreChannelName(fakePath);
-        assert.strictEqual(result, 'restoreChannelValue');
-        assert(
-          (client.pathTemplates.restoreChannelPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('restorePlan', async () => {
-      const fakePath = '/rendered/path/restorePlan';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        restore_plan: 'restorePlanValue',
-      };
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.restorePlanPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.restorePlanPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('restorePlanPath', () => {
-        const result = client.restorePlanPath(
-          'projectValue',
-          'locationValue',
-          'restorePlanValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.restorePlanPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromRestorePlanName', () => {
-        const result = client.matchProjectFromRestorePlanName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.restorePlanPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromRestorePlanName', () => {
-        const result = client.matchLocationFromRestorePlanName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.restorePlanPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRestorePlanFromRestorePlanName', () => {
-        const result = client.matchRestorePlanFromRestorePlanName(fakePath);
-        assert.strictEqual(result, 'restorePlanValue');
-        assert(
-          (client.pathTemplates.restorePlanPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('restorePlanBinding', async () => {
-      const fakePath = '/rendered/path/restorePlanBinding';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        restore_channel: 'restoreChannelValue',
-        restore_plan_binding: 'restorePlanBindingValue',
-      };
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.restorePlanBindingPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.restorePlanBindingPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('restorePlanBindingPath', () => {
-        const result = client.restorePlanBindingPath(
-          'projectValue',
-          'locationValue',
-          'restoreChannelValue',
-          'restorePlanBindingValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.restorePlanBindingPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromRestorePlanBindingName', () => {
-        const result = client.matchProjectFromRestorePlanBindingName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.restorePlanBindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromRestorePlanBindingName', () => {
-        const result = client.matchLocationFromRestorePlanBindingName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.restorePlanBindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRestoreChannelFromRestorePlanBindingName', () => {
-        const result =
-          client.matchRestoreChannelFromRestorePlanBindingName(fakePath);
-        assert.strictEqual(result, 'restoreChannelValue');
-        assert(
-          (
-            client.pathTemplates.restorePlanBindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRestorePlanBindingFromRestorePlanBindingName', () => {
-        const result =
-          client.matchRestorePlanBindingFromRestorePlanBindingName(fakePath);
-        assert.strictEqual(result, 'restorePlanBindingValue');
-        assert(
-          (
-            client.pathTemplates.restorePlanBindingPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('volumeBackup', async () => {
-      const fakePath = '/rendered/path/volumeBackup';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        backup_plan: 'backupPlanValue',
-        backup: 'backupValue',
-        volume_backup: 'volumeBackupValue',
-      };
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.volumeBackupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.volumeBackupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('volumeBackupPath', () => {
-        const result = client.volumeBackupPath(
-          'projectValue',
-          'locationValue',
-          'backupPlanValue',
-          'backupValue',
-          'volumeBackupValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.volumeBackupPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromVolumeBackupName', () => {
-        const result = client.matchProjectFromVolumeBackupName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.volumeBackupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromVolumeBackupName', () => {
-        const result = client.matchLocationFromVolumeBackupName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.volumeBackupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBackupPlanFromVolumeBackupName', () => {
-        const result = client.matchBackupPlanFromVolumeBackupName(fakePath);
-        assert.strictEqual(result, 'backupPlanValue');
-        assert(
-          (client.pathTemplates.volumeBackupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBackupFromVolumeBackupName', () => {
-        const result = client.matchBackupFromVolumeBackupName(fakePath);
-        assert.strictEqual(result, 'backupValue');
-        assert(
-          (client.pathTemplates.volumeBackupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchVolumeBackupFromVolumeBackupName', () => {
-        const result = client.matchVolumeBackupFromVolumeBackupName(fakePath);
-        assert.strictEqual(result, 'volumeBackupValue');
-        assert(
-          (client.pathTemplates.volumeBackupPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('volumeRestore', async () => {
-      const fakePath = '/rendered/path/volumeRestore';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        restore_plan: 'restorePlanValue',
-        restore: 'restoreValue',
-        volume_restore: 'volumeRestoreValue',
-      };
-      const client = new backupforgkeModule.v1.BackupForGKEClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      client.pathTemplates.volumeRestorePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.volumeRestorePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('volumeRestorePath', () => {
-        const result = client.volumeRestorePath(
-          'projectValue',
-          'locationValue',
-          'restorePlanValue',
-          'restoreValue',
-          'volumeRestoreValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.volumeRestorePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromVolumeRestoreName', () => {
-        const result = client.matchProjectFromVolumeRestoreName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.volumeRestorePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromVolumeRestoreName', () => {
-        const result = client.matchLocationFromVolumeRestoreName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.volumeRestorePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRestorePlanFromVolumeRestoreName', () => {
-        const result = client.matchRestorePlanFromVolumeRestoreName(fakePath);
-        assert.strictEqual(result, 'restorePlanValue');
-        assert(
-          (client.pathTemplates.volumeRestorePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchRestoreFromVolumeRestoreName', () => {
-        const result = client.matchRestoreFromVolumeRestoreName(fakePath);
-        assert.strictEqual(result, 'restoreValue');
-        assert(
-          (client.pathTemplates.volumeRestorePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchVolumeRestoreFromVolumeRestoreName', () => {
-        const result = client.matchVolumeRestoreFromVolumeRestoreName(fakePath);
-        assert.strictEqual(result, 'volumeRestoreValue');
-        assert(
-          (client.pathTemplates.volumeRestorePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-  });
 });

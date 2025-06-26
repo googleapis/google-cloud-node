@@ -261,12 +261,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SearchRequest.decode = function decode(reader, length) {
+                            SearchRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.SearchRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -514,12 +516,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SearchResponse.decode = function decode(reader, length) {
+                            SearchResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.SearchResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.results && message.results.length))
@@ -848,12 +852,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ReportRow.decode = function decode(reader, length) {
+                            ReportRow.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.ReportRow();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.productPerformanceView = $root.google.shopping.merchant.reports.v1beta.ProductPerformanceView.decode(reader, reader.uint32());
@@ -1403,276 +1409,151 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * ProductPerformanceView _marketingMethod.
-                             * @member {"marketingMethod"|undefined} _marketingMethod
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_marketingMethod", {
                                 get: $util.oneOfGetter($oneOfFields = ["marketingMethod"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _customerCountryCode.
-                             * @member {"customerCountryCode"|undefined} _customerCountryCode
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_customerCountryCode", {
                                 get: $util.oneOfGetter($oneOfFields = ["customerCountryCode"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _offerId.
-                             * @member {"offerId"|undefined} _offerId
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_offerId", {
                                 get: $util.oneOfGetter($oneOfFields = ["offerId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _title.
-                             * @member {"title"|undefined} _title
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_title", {
                                 get: $util.oneOfGetter($oneOfFields = ["title"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _brand.
-                             * @member {"brand"|undefined} _brand
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_brand", {
                                 get: $util.oneOfGetter($oneOfFields = ["brand"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _categoryL1.
-                             * @member {"categoryL1"|undefined} _categoryL1
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_categoryL1", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL1"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _categoryL2.
-                             * @member {"categoryL2"|undefined} _categoryL2
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_categoryL2", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL2"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _categoryL3.
-                             * @member {"categoryL3"|undefined} _categoryL3
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_categoryL3", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL3"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _categoryL4.
-                             * @member {"categoryL4"|undefined} _categoryL4
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_categoryL4", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL4"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _categoryL5.
-                             * @member {"categoryL5"|undefined} _categoryL5
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_categoryL5", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL5"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _productTypeL1.
-                             * @member {"productTypeL1"|undefined} _productTypeL1
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_productTypeL1", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL1"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _productTypeL2.
-                             * @member {"productTypeL2"|undefined} _productTypeL2
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_productTypeL2", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL2"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _productTypeL3.
-                             * @member {"productTypeL3"|undefined} _productTypeL3
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_productTypeL3", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL3"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _productTypeL4.
-                             * @member {"productTypeL4"|undefined} _productTypeL4
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_productTypeL4", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL4"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _productTypeL5.
-                             * @member {"productTypeL5"|undefined} _productTypeL5
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_productTypeL5", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL5"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _customLabel0.
-                             * @member {"customLabel0"|undefined} _customLabel0
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_customLabel0", {
                                 get: $util.oneOfGetter($oneOfFields = ["customLabel0"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _customLabel1.
-                             * @member {"customLabel1"|undefined} _customLabel1
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_customLabel1", {
                                 get: $util.oneOfGetter($oneOfFields = ["customLabel1"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _customLabel2.
-                             * @member {"customLabel2"|undefined} _customLabel2
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_customLabel2", {
                                 get: $util.oneOfGetter($oneOfFields = ["customLabel2"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _customLabel3.
-                             * @member {"customLabel3"|undefined} _customLabel3
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_customLabel3", {
                                 get: $util.oneOfGetter($oneOfFields = ["customLabel3"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _customLabel4.
-                             * @member {"customLabel4"|undefined} _customLabel4
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_customLabel4", {
                                 get: $util.oneOfGetter($oneOfFields = ["customLabel4"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _clicks.
-                             * @member {"clicks"|undefined} _clicks
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_clicks", {
                                 get: $util.oneOfGetter($oneOfFields = ["clicks"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _impressions.
-                             * @member {"impressions"|undefined} _impressions
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_impressions", {
                                 get: $util.oneOfGetter($oneOfFields = ["impressions"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _clickThroughRate.
-                             * @member {"clickThroughRate"|undefined} _clickThroughRate
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_clickThroughRate", {
                                 get: $util.oneOfGetter($oneOfFields = ["clickThroughRate"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _conversions.
-                             * @member {"conversions"|undefined} _conversions
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_conversions", {
                                 get: $util.oneOfGetter($oneOfFields = ["conversions"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductPerformanceView _conversionRate.
-                             * @member {"conversionRate"|undefined} _conversionRate
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductPerformanceView.prototype, "_conversionRate", {
                                 get: $util.oneOfGetter($oneOfFields = ["conversionRate"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -1785,12 +1666,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ProductPerformanceView.decode = function decode(reader, length) {
+                            ProductPerformanceView.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.ProductPerformanceView();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.marketingMethod = reader.int32();
@@ -2686,265 +2569,145 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * ProductView _id.
-                             * @member {"id"|undefined} _id
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_id", {
                                 get: $util.oneOfGetter($oneOfFields = ["id"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _channel.
-                             * @member {"channel"|undefined} _channel
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_channel", {
                                 get: $util.oneOfGetter($oneOfFields = ["channel"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _languageCode.
-                             * @member {"languageCode"|undefined} _languageCode
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_languageCode", {
                                 get: $util.oneOfGetter($oneOfFields = ["languageCode"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _feedLabel.
-                             * @member {"feedLabel"|undefined} _feedLabel
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_feedLabel", {
                                 get: $util.oneOfGetter($oneOfFields = ["feedLabel"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _offerId.
-                             * @member {"offerId"|undefined} _offerId
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_offerId", {
                                 get: $util.oneOfGetter($oneOfFields = ["offerId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _title.
-                             * @member {"title"|undefined} _title
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_title", {
                                 get: $util.oneOfGetter($oneOfFields = ["title"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _brand.
-                             * @member {"brand"|undefined} _brand
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_brand", {
                                 get: $util.oneOfGetter($oneOfFields = ["brand"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _categoryL1.
-                             * @member {"categoryL1"|undefined} _categoryL1
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_categoryL1", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL1"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _categoryL2.
-                             * @member {"categoryL2"|undefined} _categoryL2
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_categoryL2", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL2"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _categoryL3.
-                             * @member {"categoryL3"|undefined} _categoryL3
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_categoryL3", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL3"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _categoryL4.
-                             * @member {"categoryL4"|undefined} _categoryL4
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_categoryL4", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL4"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _categoryL5.
-                             * @member {"categoryL5"|undefined} _categoryL5
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_categoryL5", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL5"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _productTypeL1.
-                             * @member {"productTypeL1"|undefined} _productTypeL1
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_productTypeL1", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL1"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _productTypeL2.
-                             * @member {"productTypeL2"|undefined} _productTypeL2
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_productTypeL2", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL2"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _productTypeL3.
-                             * @member {"productTypeL3"|undefined} _productTypeL3
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_productTypeL3", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL3"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _productTypeL4.
-                             * @member {"productTypeL4"|undefined} _productTypeL4
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_productTypeL4", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL4"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _productTypeL5.
-                             * @member {"productTypeL5"|undefined} _productTypeL5
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_productTypeL5", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL5"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _condition.
-                             * @member {"condition"|undefined} _condition
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_condition", {
                                 get: $util.oneOfGetter($oneOfFields = ["condition"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _availability.
-                             * @member {"availability"|undefined} _availability
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_availability", {
                                 get: $util.oneOfGetter($oneOfFields = ["availability"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _shippingLabel.
-                             * @member {"shippingLabel"|undefined} _shippingLabel
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_shippingLabel", {
                                 get: $util.oneOfGetter($oneOfFields = ["shippingLabel"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _itemGroupId.
-                             * @member {"itemGroupId"|undefined} _itemGroupId
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_itemGroupId", {
                                 get: $util.oneOfGetter($oneOfFields = ["itemGroupId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _thumbnailLink.
-                             * @member {"thumbnailLink"|undefined} _thumbnailLink
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_thumbnailLink", {
                                 get: $util.oneOfGetter($oneOfFields = ["thumbnailLink"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _aggregatedReportingContextStatus.
-                             * @member {"aggregatedReportingContextStatus"|undefined} _aggregatedReportingContextStatus
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_aggregatedReportingContextStatus", {
                                 get: $util.oneOfGetter($oneOfFields = ["aggregatedReportingContextStatus"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductView _clickPotentialRank.
-                             * @member {"clickPotentialRank"|undefined} _clickPotentialRank
-                             * @memberof google.shopping.merchant.reports.v1beta.ProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductView.prototype, "_clickPotentialRank", {
                                 get: $util.oneOfGetter($oneOfFields = ["clickPotentialRank"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -3063,12 +2826,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ProductView.decode = function decode(reader, length) {
+                            ProductView.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.ProductView();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.id = reader.string();
@@ -3824,12 +3589,7 @@
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
-                                /**
-                                 * ItemIssue _resolution.
-                                 * @member {"resolution"|undefined} _resolution
-                                 * @memberof google.shopping.merchant.reports.v1beta.ProductView.ItemIssue
-                                 * @instance
-                                 */
+                                // Virtual OneOf for proto3 optional field
                                 Object.defineProperty(ItemIssue.prototype, "_resolution", {
                                     get: $util.oneOfGetter($oneOfFields = ["resolution"]),
                                     set: $util.oneOfSetter($oneOfFields)
@@ -3892,12 +3652,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ItemIssue.decode = function decode(reader, length) {
+                                ItemIssue.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.ProductView.ItemIssue();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.type = $root.google.shopping.merchant.reports.v1beta.ProductView.ItemIssue.ItemIssueType.decode(reader, reader.uint32());
@@ -4115,23 +3877,13 @@
                                     // OneOf field names bound to virtual getters and setters
                                     var $oneOfFields;
     
-                                    /**
-                                     * ItemIssueType _code.
-                                     * @member {"code"|undefined} _code
-                                     * @memberof google.shopping.merchant.reports.v1beta.ProductView.ItemIssue.ItemIssueType
-                                     * @instance
-                                     */
+                                    // Virtual OneOf for proto3 optional field
                                     Object.defineProperty(ItemIssueType.prototype, "_code", {
                                         get: $util.oneOfGetter($oneOfFields = ["code"]),
                                         set: $util.oneOfSetter($oneOfFields)
                                     });
     
-                                    /**
-                                     * ItemIssueType _canonicalAttribute.
-                                     * @member {"canonicalAttribute"|undefined} _canonicalAttribute
-                                     * @memberof google.shopping.merchant.reports.v1beta.ProductView.ItemIssue.ItemIssueType
-                                     * @instance
-                                     */
+                                    // Virtual OneOf for proto3 optional field
                                     Object.defineProperty(ItemIssueType.prototype, "_canonicalAttribute", {
                                         get: $util.oneOfGetter($oneOfFields = ["canonicalAttribute"]),
                                         set: $util.oneOfSetter($oneOfFields)
@@ -4192,12 +3944,14 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    ItemIssueType.decode = function decode(reader, length) {
+                                    ItemIssueType.decode = function decode(reader, length, error) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.ProductView.ItemIssue.ItemIssueType();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.code = reader.string();
@@ -4375,12 +4129,7 @@
                                     // OneOf field names bound to virtual getters and setters
                                     var $oneOfFields;
     
-                                    /**
-                                     * ItemIssueSeverity _aggregatedSeverity.
-                                     * @member {"aggregatedSeverity"|undefined} _aggregatedSeverity
-                                     * @memberof google.shopping.merchant.reports.v1beta.ProductView.ItemIssue.ItemIssueSeverity
-                                     * @instance
-                                     */
+                                    // Virtual OneOf for proto3 optional field
                                     Object.defineProperty(ItemIssueSeverity.prototype, "_aggregatedSeverity", {
                                         get: $util.oneOfGetter($oneOfFields = ["aggregatedSeverity"]),
                                         set: $util.oneOfSetter($oneOfFields)
@@ -4442,12 +4191,14 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    ItemIssueSeverity.decode = function decode(reader, length) {
+                                    ItemIssueSeverity.decode = function decode(reader, length, error) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.ProductView.ItemIssue.ItemIssueSeverity();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     if (!(message.severityPerReportingContext && message.severityPerReportingContext.length))
@@ -4677,12 +4428,7 @@
                                         // OneOf field names bound to virtual getters and setters
                                         var $oneOfFields;
     
-                                        /**
-                                         * IssueSeverityPerReportingContext _reportingContext.
-                                         * @member {"reportingContext"|undefined} _reportingContext
-                                         * @memberof google.shopping.merchant.reports.v1beta.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext
-                                         * @instance
-                                         */
+                                        // Virtual OneOf for proto3 optional field
                                         Object.defineProperty(IssueSeverityPerReportingContext.prototype, "_reportingContext", {
                                             get: $util.oneOfGetter($oneOfFields = ["reportingContext"]),
                                             set: $util.oneOfSetter($oneOfFields)
@@ -4747,12 +4493,14 @@
                                          * @throws {Error} If the payload is not a reader or valid buffer
                                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                          */
-                                        IssueSeverityPerReportingContext.decode = function decode(reader, length) {
+                                        IssueSeverityPerReportingContext.decode = function decode(reader, length, error) {
                                             if (!(reader instanceof $Reader))
                                                 reader = $Reader.create(reader);
                                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext();
                                             while (reader.pos < end) {
                                                 var tag = reader.uint32();
+                                                if (tag === error)
+                                                    break;
                                                 switch (tag >>> 3) {
                                                 case 1: {
                                                         message.reportingContext = reader.int32();
@@ -5267,166 +5015,91 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * PriceCompetitivenessProductView _reportCountryCode.
-                             * @member {"reportCountryCode"|undefined} _reportCountryCode
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceCompetitivenessProductView.prototype, "_reportCountryCode", {
                                 get: $util.oneOfGetter($oneOfFields = ["reportCountryCode"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceCompetitivenessProductView _id.
-                             * @member {"id"|undefined} _id
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceCompetitivenessProductView.prototype, "_id", {
                                 get: $util.oneOfGetter($oneOfFields = ["id"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceCompetitivenessProductView _offerId.
-                             * @member {"offerId"|undefined} _offerId
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceCompetitivenessProductView.prototype, "_offerId", {
                                 get: $util.oneOfGetter($oneOfFields = ["offerId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceCompetitivenessProductView _title.
-                             * @member {"title"|undefined} _title
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceCompetitivenessProductView.prototype, "_title", {
                                 get: $util.oneOfGetter($oneOfFields = ["title"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceCompetitivenessProductView _brand.
-                             * @member {"brand"|undefined} _brand
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceCompetitivenessProductView.prototype, "_brand", {
                                 get: $util.oneOfGetter($oneOfFields = ["brand"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceCompetitivenessProductView _categoryL1.
-                             * @member {"categoryL1"|undefined} _categoryL1
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceCompetitivenessProductView.prototype, "_categoryL1", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL1"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceCompetitivenessProductView _categoryL2.
-                             * @member {"categoryL2"|undefined} _categoryL2
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceCompetitivenessProductView.prototype, "_categoryL2", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL2"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceCompetitivenessProductView _categoryL3.
-                             * @member {"categoryL3"|undefined} _categoryL3
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceCompetitivenessProductView.prototype, "_categoryL3", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL3"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceCompetitivenessProductView _categoryL4.
-                             * @member {"categoryL4"|undefined} _categoryL4
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceCompetitivenessProductView.prototype, "_categoryL4", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL4"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceCompetitivenessProductView _categoryL5.
-                             * @member {"categoryL5"|undefined} _categoryL5
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceCompetitivenessProductView.prototype, "_categoryL5", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL5"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceCompetitivenessProductView _productTypeL1.
-                             * @member {"productTypeL1"|undefined} _productTypeL1
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceCompetitivenessProductView.prototype, "_productTypeL1", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL1"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceCompetitivenessProductView _productTypeL2.
-                             * @member {"productTypeL2"|undefined} _productTypeL2
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceCompetitivenessProductView.prototype, "_productTypeL2", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL2"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceCompetitivenessProductView _productTypeL3.
-                             * @member {"productTypeL3"|undefined} _productTypeL3
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceCompetitivenessProductView.prototype, "_productTypeL3", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL3"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceCompetitivenessProductView _productTypeL4.
-                             * @member {"productTypeL4"|undefined} _productTypeL4
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceCompetitivenessProductView.prototype, "_productTypeL4", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL4"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceCompetitivenessProductView _productTypeL5.
-                             * @member {"productTypeL5"|undefined} _productTypeL5
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceCompetitivenessProductView.prototype, "_productTypeL5", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL5"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -5517,12 +5190,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PriceCompetitivenessProductView.decode = function decode(reader, length) {
+                            PriceCompetitivenessProductView.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.PriceCompetitivenessProductView();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.reportCountryCode = reader.string();
@@ -6105,188 +5780,103 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * PriceInsightsProductView _id.
-                             * @member {"id"|undefined} _id
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_id", {
                                 get: $util.oneOfGetter($oneOfFields = ["id"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _offerId.
-                             * @member {"offerId"|undefined} _offerId
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_offerId", {
                                 get: $util.oneOfGetter($oneOfFields = ["offerId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _title.
-                             * @member {"title"|undefined} _title
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_title", {
                                 get: $util.oneOfGetter($oneOfFields = ["title"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _brand.
-                             * @member {"brand"|undefined} _brand
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_brand", {
                                 get: $util.oneOfGetter($oneOfFields = ["brand"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _categoryL1.
-                             * @member {"categoryL1"|undefined} _categoryL1
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_categoryL1", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL1"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _categoryL2.
-                             * @member {"categoryL2"|undefined} _categoryL2
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_categoryL2", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL2"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _categoryL3.
-                             * @member {"categoryL3"|undefined} _categoryL3
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_categoryL3", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL3"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _categoryL4.
-                             * @member {"categoryL4"|undefined} _categoryL4
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_categoryL4", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL4"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _categoryL5.
-                             * @member {"categoryL5"|undefined} _categoryL5
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_categoryL5", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL5"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _productTypeL1.
-                             * @member {"productTypeL1"|undefined} _productTypeL1
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_productTypeL1", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL1"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _productTypeL2.
-                             * @member {"productTypeL2"|undefined} _productTypeL2
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_productTypeL2", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL2"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _productTypeL3.
-                             * @member {"productTypeL3"|undefined} _productTypeL3
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_productTypeL3", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL3"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _productTypeL4.
-                             * @member {"productTypeL4"|undefined} _productTypeL4
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_productTypeL4", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL4"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _productTypeL5.
-                             * @member {"productTypeL5"|undefined} _productTypeL5
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_productTypeL5", {
                                 get: $util.oneOfGetter($oneOfFields = ["productTypeL5"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _predictedImpressionsChangeFraction.
-                             * @member {"predictedImpressionsChangeFraction"|undefined} _predictedImpressionsChangeFraction
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_predictedImpressionsChangeFraction", {
                                 get: $util.oneOfGetter($oneOfFields = ["predictedImpressionsChangeFraction"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _predictedClicksChangeFraction.
-                             * @member {"predictedClicksChangeFraction"|undefined} _predictedClicksChangeFraction
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_predictedClicksChangeFraction", {
                                 get: $util.oneOfGetter($oneOfFields = ["predictedClicksChangeFraction"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PriceInsightsProductView _predictedConversionsChangeFraction.
-                             * @member {"predictedConversionsChangeFraction"|undefined} _predictedConversionsChangeFraction
-                             * @memberof google.shopping.merchant.reports.v1beta.PriceInsightsProductView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PriceInsightsProductView.prototype, "_predictedConversionsChangeFraction", {
                                 get: $util.oneOfGetter($oneOfFields = ["predictedConversionsChangeFraction"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -6383,12 +5973,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PriceInsightsProductView.decode = function decode(reader, length) {
+                            PriceInsightsProductView.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.PriceInsightsProductView();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.id = reader.string();
@@ -7054,188 +6646,103 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * BestSellersProductClusterView _reportGranularity.
-                             * @member {"reportGranularity"|undefined} _reportGranularity
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_reportGranularity", {
                                 get: $util.oneOfGetter($oneOfFields = ["reportGranularity"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _reportCountryCode.
-                             * @member {"reportCountryCode"|undefined} _reportCountryCode
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_reportCountryCode", {
                                 get: $util.oneOfGetter($oneOfFields = ["reportCountryCode"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _reportCategoryId.
-                             * @member {"reportCategoryId"|undefined} _reportCategoryId
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_reportCategoryId", {
                                 get: $util.oneOfGetter($oneOfFields = ["reportCategoryId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _title.
-                             * @member {"title"|undefined} _title
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_title", {
                                 get: $util.oneOfGetter($oneOfFields = ["title"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _brand.
-                             * @member {"brand"|undefined} _brand
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_brand", {
                                 get: $util.oneOfGetter($oneOfFields = ["brand"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _categoryL1.
-                             * @member {"categoryL1"|undefined} _categoryL1
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_categoryL1", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL1"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _categoryL2.
-                             * @member {"categoryL2"|undefined} _categoryL2
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_categoryL2", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL2"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _categoryL3.
-                             * @member {"categoryL3"|undefined} _categoryL3
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_categoryL3", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL3"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _categoryL4.
-                             * @member {"categoryL4"|undefined} _categoryL4
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_categoryL4", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL4"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _categoryL5.
-                             * @member {"categoryL5"|undefined} _categoryL5
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_categoryL5", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryL5"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _inventoryStatus.
-                             * @member {"inventoryStatus"|undefined} _inventoryStatus
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_inventoryStatus", {
                                 get: $util.oneOfGetter($oneOfFields = ["inventoryStatus"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _brandInventoryStatus.
-                             * @member {"brandInventoryStatus"|undefined} _brandInventoryStatus
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_brandInventoryStatus", {
                                 get: $util.oneOfGetter($oneOfFields = ["brandInventoryStatus"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _rank.
-                             * @member {"rank"|undefined} _rank
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_rank", {
                                 get: $util.oneOfGetter($oneOfFields = ["rank"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _previousRank.
-                             * @member {"previousRank"|undefined} _previousRank
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_previousRank", {
                                 get: $util.oneOfGetter($oneOfFields = ["previousRank"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _relativeDemand.
-                             * @member {"relativeDemand"|undefined} _relativeDemand
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_relativeDemand", {
                                 get: $util.oneOfGetter($oneOfFields = ["relativeDemand"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _previousRelativeDemand.
-                             * @member {"previousRelativeDemand"|undefined} _previousRelativeDemand
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_previousRelativeDemand", {
                                 get: $util.oneOfGetter($oneOfFields = ["previousRelativeDemand"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersProductClusterView _relativeDemandChange.
-                             * @member {"relativeDemandChange"|undefined} _relativeDemandChange
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersProductClusterView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersProductClusterView.prototype, "_relativeDemandChange", {
                                 get: $util.oneOfGetter($oneOfFields = ["relativeDemandChange"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -7331,12 +6838,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            BestSellersProductClusterView.decode = function decode(reader, length) {
+                            BestSellersProductClusterView.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.BestSellersProductClusterView();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.reportDate = $root.google.type.Date.decode(reader, reader.uint32());
@@ -8107,100 +7616,55 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * BestSellersBrandView _reportGranularity.
-                             * @member {"reportGranularity"|undefined} _reportGranularity
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersBrandView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersBrandView.prototype, "_reportGranularity", {
                                 get: $util.oneOfGetter($oneOfFields = ["reportGranularity"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersBrandView _reportCountryCode.
-                             * @member {"reportCountryCode"|undefined} _reportCountryCode
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersBrandView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersBrandView.prototype, "_reportCountryCode", {
                                 get: $util.oneOfGetter($oneOfFields = ["reportCountryCode"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersBrandView _reportCategoryId.
-                             * @member {"reportCategoryId"|undefined} _reportCategoryId
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersBrandView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersBrandView.prototype, "_reportCategoryId", {
                                 get: $util.oneOfGetter($oneOfFields = ["reportCategoryId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersBrandView _brand.
-                             * @member {"brand"|undefined} _brand
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersBrandView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersBrandView.prototype, "_brand", {
                                 get: $util.oneOfGetter($oneOfFields = ["brand"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersBrandView _rank.
-                             * @member {"rank"|undefined} _rank
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersBrandView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersBrandView.prototype, "_rank", {
                                 get: $util.oneOfGetter($oneOfFields = ["rank"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersBrandView _previousRank.
-                             * @member {"previousRank"|undefined} _previousRank
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersBrandView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersBrandView.prototype, "_previousRank", {
                                 get: $util.oneOfGetter($oneOfFields = ["previousRank"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersBrandView _relativeDemand.
-                             * @member {"relativeDemand"|undefined} _relativeDemand
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersBrandView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersBrandView.prototype, "_relativeDemand", {
                                 get: $util.oneOfGetter($oneOfFields = ["relativeDemand"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersBrandView _previousRelativeDemand.
-                             * @member {"previousRelativeDemand"|undefined} _previousRelativeDemand
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersBrandView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersBrandView.prototype, "_previousRelativeDemand", {
                                 get: $util.oneOfGetter($oneOfFields = ["previousRelativeDemand"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * BestSellersBrandView _relativeDemandChange.
-                             * @member {"relativeDemandChange"|undefined} _relativeDemandChange
-                             * @memberof google.shopping.merchant.reports.v1beta.BestSellersBrandView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(BestSellersBrandView.prototype, "_relativeDemandChange", {
                                 get: $util.oneOfGetter($oneOfFields = ["relativeDemandChange"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -8277,12 +7741,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            BestSellersBrandView.decode = function decode(reader, length) {
+                            BestSellersBrandView.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.BestSellersBrandView();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.reportDate = $root.google.type.Date.decode(reader, reader.uint32());
@@ -8777,34 +8243,19 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * NonProductPerformanceView _clicks.
-                             * @member {"clicks"|undefined} _clicks
-                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(NonProductPerformanceView.prototype, "_clicks", {
                                 get: $util.oneOfGetter($oneOfFields = ["clicks"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * NonProductPerformanceView _impressions.
-                             * @member {"impressions"|undefined} _impressions
-                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(NonProductPerformanceView.prototype, "_impressions", {
                                 get: $util.oneOfGetter($oneOfFields = ["impressions"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * NonProductPerformanceView _clickThroughRate.
-                             * @member {"clickThroughRate"|undefined} _clickThroughRate
-                             * @memberof google.shopping.merchant.reports.v1beta.NonProductPerformanceView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(NonProductPerformanceView.prototype, "_clickThroughRate", {
                                 get: $util.oneOfGetter($oneOfFields = ["clickThroughRate"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -8871,12 +8322,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            NonProductPerformanceView.decode = function decode(reader, length) {
+                            NonProductPerformanceView.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.NonProductPerformanceView();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.date = $root.google.type.Date.decode(reader, reader.uint32());
@@ -9206,111 +8659,61 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * CompetitiveVisibilityCompetitorView _domain.
-                             * @member {"domain"|undefined} _domain
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityCompetitorView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_domain", {
                                 get: $util.oneOfGetter($oneOfFields = ["domain"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityCompetitorView _isYourDomain.
-                             * @member {"isYourDomain"|undefined} _isYourDomain
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityCompetitorView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_isYourDomain", {
                                 get: $util.oneOfGetter($oneOfFields = ["isYourDomain"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityCompetitorView _reportCountryCode.
-                             * @member {"reportCountryCode"|undefined} _reportCountryCode
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityCompetitorView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_reportCountryCode", {
                                 get: $util.oneOfGetter($oneOfFields = ["reportCountryCode"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityCompetitorView _reportCategoryId.
-                             * @member {"reportCategoryId"|undefined} _reportCategoryId
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityCompetitorView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_reportCategoryId", {
                                 get: $util.oneOfGetter($oneOfFields = ["reportCategoryId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityCompetitorView _trafficSource.
-                             * @member {"trafficSource"|undefined} _trafficSource
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityCompetitorView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_trafficSource", {
                                 get: $util.oneOfGetter($oneOfFields = ["trafficSource"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityCompetitorView _rank.
-                             * @member {"rank"|undefined} _rank
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityCompetitorView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_rank", {
                                 get: $util.oneOfGetter($oneOfFields = ["rank"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityCompetitorView _adsOrganicRatio.
-                             * @member {"adsOrganicRatio"|undefined} _adsOrganicRatio
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityCompetitorView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_adsOrganicRatio", {
                                 get: $util.oneOfGetter($oneOfFields = ["adsOrganicRatio"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityCompetitorView _pageOverlapRate.
-                             * @member {"pageOverlapRate"|undefined} _pageOverlapRate
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityCompetitorView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_pageOverlapRate", {
                                 get: $util.oneOfGetter($oneOfFields = ["pageOverlapRate"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityCompetitorView _higherPositionRate.
-                             * @member {"higherPositionRate"|undefined} _higherPositionRate
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityCompetitorView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_higherPositionRate", {
                                 get: $util.oneOfGetter($oneOfFields = ["higherPositionRate"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityCompetitorView _relativeVisibility.
-                             * @member {"relativeVisibility"|undefined} _relativeVisibility
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityCompetitorView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_relativeVisibility", {
                                 get: $util.oneOfGetter($oneOfFields = ["relativeVisibility"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -9389,12 +8792,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CompetitiveVisibilityCompetitorView.decode = function decode(reader, length) {
+                            CompetitiveVisibilityCompetitorView.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.CompetitiveVisibilityCompetitorView();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.date = $root.google.type.Date.decode(reader, reader.uint32());
@@ -9838,100 +9243,55 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * CompetitiveVisibilityTopMerchantView _domain.
-                             * @member {"domain"|undefined} _domain
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityTopMerchantView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_domain", {
                                 get: $util.oneOfGetter($oneOfFields = ["domain"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityTopMerchantView _isYourDomain.
-                             * @member {"isYourDomain"|undefined} _isYourDomain
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityTopMerchantView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_isYourDomain", {
                                 get: $util.oneOfGetter($oneOfFields = ["isYourDomain"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityTopMerchantView _reportCountryCode.
-                             * @member {"reportCountryCode"|undefined} _reportCountryCode
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityTopMerchantView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_reportCountryCode", {
                                 get: $util.oneOfGetter($oneOfFields = ["reportCountryCode"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityTopMerchantView _reportCategoryId.
-                             * @member {"reportCategoryId"|undefined} _reportCategoryId
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityTopMerchantView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_reportCategoryId", {
                                 get: $util.oneOfGetter($oneOfFields = ["reportCategoryId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityTopMerchantView _trafficSource.
-                             * @member {"trafficSource"|undefined} _trafficSource
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityTopMerchantView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_trafficSource", {
                                 get: $util.oneOfGetter($oneOfFields = ["trafficSource"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityTopMerchantView _rank.
-                             * @member {"rank"|undefined} _rank
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityTopMerchantView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_rank", {
                                 get: $util.oneOfGetter($oneOfFields = ["rank"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityTopMerchantView _adsOrganicRatio.
-                             * @member {"adsOrganicRatio"|undefined} _adsOrganicRatio
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityTopMerchantView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_adsOrganicRatio", {
                                 get: $util.oneOfGetter($oneOfFields = ["adsOrganicRatio"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityTopMerchantView _pageOverlapRate.
-                             * @member {"pageOverlapRate"|undefined} _pageOverlapRate
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityTopMerchantView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_pageOverlapRate", {
                                 get: $util.oneOfGetter($oneOfFields = ["pageOverlapRate"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityTopMerchantView _higherPositionRate.
-                             * @member {"higherPositionRate"|undefined} _higherPositionRate
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityTopMerchantView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_higherPositionRate", {
                                 get: $util.oneOfGetter($oneOfFields = ["higherPositionRate"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -10008,12 +9368,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CompetitiveVisibilityTopMerchantView.decode = function decode(reader, length) {
+                            CompetitiveVisibilityTopMerchantView.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.CompetitiveVisibilityTopMerchantView();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.date = $root.google.type.Date.decode(reader, reader.uint32());
@@ -10405,56 +9767,31 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * CompetitiveVisibilityBenchmarkView _reportCountryCode.
-                             * @member {"reportCountryCode"|undefined} _reportCountryCode
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityBenchmarkView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityBenchmarkView.prototype, "_reportCountryCode", {
                                 get: $util.oneOfGetter($oneOfFields = ["reportCountryCode"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityBenchmarkView _reportCategoryId.
-                             * @member {"reportCategoryId"|undefined} _reportCategoryId
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityBenchmarkView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityBenchmarkView.prototype, "_reportCategoryId", {
                                 get: $util.oneOfGetter($oneOfFields = ["reportCategoryId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityBenchmarkView _trafficSource.
-                             * @member {"trafficSource"|undefined} _trafficSource
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityBenchmarkView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityBenchmarkView.prototype, "_trafficSource", {
                                 get: $util.oneOfGetter($oneOfFields = ["trafficSource"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityBenchmarkView _yourDomainVisibilityTrend.
-                             * @member {"yourDomainVisibilityTrend"|undefined} _yourDomainVisibilityTrend
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityBenchmarkView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityBenchmarkView.prototype, "_yourDomainVisibilityTrend", {
                                 get: $util.oneOfGetter($oneOfFields = ["yourDomainVisibilityTrend"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CompetitiveVisibilityBenchmarkView _categoryBenchmarkVisibilityTrend.
-                             * @member {"categoryBenchmarkVisibilityTrend"|undefined} _categoryBenchmarkVisibilityTrend
-                             * @memberof google.shopping.merchant.reports.v1beta.CompetitiveVisibilityBenchmarkView
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CompetitiveVisibilityBenchmarkView.prototype, "_categoryBenchmarkVisibilityTrend", {
                                 get: $util.oneOfGetter($oneOfFields = ["categoryBenchmarkVisibilityTrend"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -10523,12 +9860,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CompetitiveVisibilityBenchmarkView.decode = function decode(reader, length) {
+                            CompetitiveVisibilityBenchmarkView.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.CompetitiveVisibilityBenchmarkView();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.date = $root.google.type.Date.decode(reader, reader.uint32());
@@ -10840,12 +10179,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MarketingMethod.decode = function decode(reader, length) {
+                            MarketingMethod.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.MarketingMethod();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -11031,12 +10372,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ReportGranularity.decode = function decode(reader, length) {
+                            ReportGranularity.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.ReportGranularity();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -11222,12 +10565,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RelativeDemand.decode = function decode(reader, length) {
+                            RelativeDemand.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.RelativeDemand();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -11419,12 +10764,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RelativeDemandChangeType.decode = function decode(reader, length) {
+                            RelativeDemandChangeType.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.RelativeDemandChangeType();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -11612,12 +10959,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            TrafficSource.decode = function decode(reader, length) {
+                            TrafficSource.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1beta.TrafficSource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -11793,12 +11142,7 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * Weight _amountMicros.
-                     * @member {"amountMicros"|undefined} _amountMicros
-                     * @memberof google.shopping.type.Weight
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Weight.prototype, "_amountMicros", {
                         get: $util.oneOfGetter($oneOfFields = ["amountMicros"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -11859,12 +11203,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Weight.decode = function decode(reader, length) {
+                    Weight.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Weight();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.amountMicros = reader.int64();
@@ -12088,23 +11434,13 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * Price _amountMicros.
-                     * @member {"amountMicros"|undefined} _amountMicros
-                     * @memberof google.shopping.type.Price
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Price.prototype, "_amountMicros", {
                         get: $util.oneOfGetter($oneOfFields = ["amountMicros"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
-                    /**
-                     * Price _currencyCode.
-                     * @member {"currencyCode"|undefined} _currencyCode
-                     * @memberof google.shopping.type.Price
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Price.prototype, "_currencyCode", {
                         get: $util.oneOfGetter($oneOfFields = ["currencyCode"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -12165,12 +11501,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Price.decode = function decode(reader, length) {
+                    Price.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Price();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.amountMicros = reader.int64();
@@ -12367,23 +11705,13 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * CustomAttribute _name.
-                     * @member {"name"|undefined} _name
-                     * @memberof google.shopping.type.CustomAttribute
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(CustomAttribute.prototype, "_name", {
                         get: $util.oneOfGetter($oneOfFields = ["name"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
-                    /**
-                     * CustomAttribute _value.
-                     * @member {"value"|undefined} _value
-                     * @memberof google.shopping.type.CustomAttribute
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(CustomAttribute.prototype, "_value", {
                         get: $util.oneOfGetter($oneOfFields = ["value"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -12447,12 +11775,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CustomAttribute.decode = function decode(reader, length) {
+                    CustomAttribute.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.CustomAttribute();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -12691,12 +12021,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Destination.decode = function decode(reader, length) {
+                    Destination.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Destination();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             default:
                                 reader.skipType(tag & 7);
@@ -12890,12 +12222,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReportingContext.decode = function decode(reader, length) {
+                    ReportingContext.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.ReportingContext();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             default:
                                 reader.skipType(tag & 7);
@@ -13105,12 +12439,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Channel.decode = function decode(reader, length) {
+                    Channel.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Channel();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             default:
                                 reader.skipType(tag & 7);
@@ -13335,12 +12671,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -13685,12 +13023,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -14069,12 +13409,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -14301,12 +13643,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -14670,12 +14014,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -15014,6 +14360,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -15115,6 +14462,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -15161,6 +14516,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -15188,12 +14545,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -15239,6 +14598,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -15333,6 +14696,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -15427,6 +14793,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -15456,6 +14824,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -15486,6 +14855,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -15627,12 +14998,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -15894,12 +15267,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -16102,12 +15477,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -16310,12 +15687,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -16518,12 +15897,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -16791,12 +16172,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -17170,12 +16553,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -17378,12 +16763,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -17610,12 +16997,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -17888,12 +17277,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -18256,12 +17647,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -18656,12 +18049,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -19323,12 +18718,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -19808,12 +19205,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -20052,12 +19451,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -20308,12 +19709,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -20653,12 +20056,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -21032,12 +20437,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -21557,12 +20964,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -21828,12 +21237,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -22147,12 +21558,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -22388,12 +21801,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -22645,12 +22060,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -22953,12 +22370,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -23444,12 +22863,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -24021,12 +23442,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -24443,12 +23866,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     return writer;
                 };
     
@@ -24476,12 +23896,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -25190,12 +24612,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -25486,12 +24910,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -25772,12 +25198,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -26084,12 +25512,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -26275,6 +25705,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -26334,6 +25765,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -26368,6 +25807,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -26395,12 +25836,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -26422,6 +25865,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -26482,6 +25929,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -26518,6 +25968,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -26541,6 +25993,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -26555,6 +26008,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -26731,12 +26186,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -27148,12 +26605,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -27487,12 +26946,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -27763,12 +27224,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -28298,12 +27761,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -28682,12 +28147,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -28972,12 +28439,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -29247,12 +28716,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -29558,12 +29029,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -29826,12 +29299,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -30152,12 +29627,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -30393,12 +29870,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -30657,12 +30136,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Date.decode = function decode(reader, length) {
+                Date.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.year = reader.int32();

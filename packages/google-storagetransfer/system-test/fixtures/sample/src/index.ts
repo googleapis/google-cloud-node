@@ -19,9 +19,7 @@
 import {StorageTransferServiceClient} from '@google-cloud/storage-transfer';
 
 // check that the client class type name can be used
-function doStuffWithStorageTransferServiceClient(
-  client: StorageTransferServiceClient
-) {
+function doStuffWithStorageTransferServiceClient(client: StorageTransferServiceClient) {
   client.close();
 }
 

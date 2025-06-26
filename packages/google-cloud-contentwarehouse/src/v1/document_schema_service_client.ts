@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,42 +100,20 @@ export class DocumentSchemaServiceClient {
    *     const client = new DocumentSchemaServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof DocumentSchemaServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof DocumentSchemaServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'contentwarehouse.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +139,7 @@ export class DocumentSchemaServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +153,10 @@ export class DocumentSchemaServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -215,10 +189,9 @@ export class DocumentSchemaServiceClient {
       projectLocationDocumentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/documents/{document}'
       ),
-      projectLocationDocumentsReferenceIdPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/documents/referenceId/{reference_id}'
-        ),
+      projectLocationDocumentsReferenceIdPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/documents/referenceId/{reference_id}'
+      ),
       ruleSetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ruleSets/{rule_set}'
       ),
@@ -231,20 +204,14 @@ export class DocumentSchemaServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDocumentSchemas: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'documentSchemas'
-      ),
+      listDocumentSchemas:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'documentSchemas')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.contentwarehouse.v1.DocumentSchemaService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.contentwarehouse.v1.DocumentSchemaService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -275,42 +242,32 @@ export class DocumentSchemaServiceClient {
     // Put together the "service stub" for
     // google.cloud.contentwarehouse.v1.DocumentSchemaService.
     this.documentSchemaServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.contentwarehouse.v1.DocumentSchemaService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.contentwarehouse.v1
-            .DocumentSchemaService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.contentwarehouse.v1.DocumentSchemaService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.contentwarehouse.v1.DocumentSchemaService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const documentSchemaServiceStubMethods = [
-      'createDocumentSchema',
-      'updateDocumentSchema',
-      'getDocumentSchema',
-      'deleteDocumentSchema',
-      'listDocumentSchemas',
-    ];
+    const documentSchemaServiceStubMethods =
+        ['createDocumentSchema', 'updateDocumentSchema', 'getDocumentSchema', 'deleteDocumentSchema', 'listDocumentSchemas'];
     for (const methodName of documentSchemaServiceStubMethods) {
       const callPromise = this.documentSchemaServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -330,14 +287,8 @@ export class DocumentSchemaServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'contentwarehouse.googleapis.com';
   }
@@ -348,14 +299,8 @@ export class DocumentSchemaServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'contentwarehouse.googleapis.com';
   }
@@ -386,7 +331,9 @@ export class DocumentSchemaServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -395,9 +342,8 @@ export class DocumentSchemaServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -408,644 +354,487 @@ export class DocumentSchemaServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates a document schema.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent name.
-   * @param {google.cloud.contentwarehouse.v1.DocumentSchema} request.documentSchema
-   *   Required. The document schema to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/document_schema_service.create_document_schema.js</caption>
-   * region_tag:contentwarehouse_v1_generated_DocumentSchemaService_CreateDocumentSchema_async
-   */
+/**
+ * Creates a document schema.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent name.
+ * @param {google.cloud.contentwarehouse.v1.DocumentSchema} request.documentSchema
+ *   Required. The document schema to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/document_schema_service.create_document_schema.js</caption>
+ * region_tag:contentwarehouse_v1_generated_DocumentSchemaService_CreateDocumentSchema_async
+ */
   createDocumentSchema(
-    request?: protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-      (
-        | protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+        protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest|undefined, {}|undefined
+      ]>;
   createDocumentSchema(
-    request: protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-      | protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDocumentSchema(
-    request: protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-      | protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDocumentSchema(
-    request?: protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-          | protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-      | protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-      (
-        | protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDocumentSchema(
+      request: protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest,
+      callback: Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+          protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDocumentSchema(
+      request?: protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+          protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+          protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+        protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createDocumentSchema request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-          | protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+        protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDocumentSchema response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createDocumentSchema(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-          (
-            | protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createDocumentSchema response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createDocumentSchema(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+        protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDocumentSchema response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a Document Schema. Returns INVALID_ARGUMENT if the name of the
-   * Document Schema is non-empty and does not equal the existing name.
-   * Supports only appending new properties, adding new ENUM possible values,
-   * and updating the
-   * {@link protos.google.cloud.contentwarehouse.v1.EnumTypeOptions.validation_check_disabled|EnumTypeOptions.validation_check_disabled}
-   * flag for ENUM possible values. Updating existing properties will result
-   * into INVALID_ARGUMENT.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the document schema to update.
-   *   Format:
-   *   projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}.
-   * @param {google.cloud.contentwarehouse.v1.DocumentSchema} request.documentSchema
-   *   Required. The document schema to update with.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/document_schema_service.update_document_schema.js</caption>
-   * region_tag:contentwarehouse_v1_generated_DocumentSchemaService_UpdateDocumentSchema_async
-   */
+/**
+ * Updates a Document Schema. Returns INVALID_ARGUMENT if the name of the
+ * Document Schema is non-empty and does not equal the existing name.
+ * Supports only appending new properties, adding new ENUM possible values,
+ * and updating the
+ * {@link protos.google.cloud.contentwarehouse.v1.EnumTypeOptions.validation_check_disabled|EnumTypeOptions.validation_check_disabled}
+ * flag for ENUM possible values. Updating existing properties will result
+ * into INVALID_ARGUMENT.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the document schema to update.
+ *   Format:
+ *   projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}.
+ * @param {google.cloud.contentwarehouse.v1.DocumentSchema} request.documentSchema
+ *   Required. The document schema to update with.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/document_schema_service.update_document_schema.js</caption>
+ * region_tag:contentwarehouse_v1_generated_DocumentSchemaService_UpdateDocumentSchema_async
+ */
   updateDocumentSchema(
-    request?: protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-      (
-        | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+        protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest|undefined, {}|undefined
+      ]>;
   updateDocumentSchema(
-    request: protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-      | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDocumentSchema(
-    request: protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-      | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDocumentSchema(
-    request?: protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-          | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-      | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-      (
-        | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDocumentSchema(
+      request: protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest,
+      callback: Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+          protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDocumentSchema(
+      request?: protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+          protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+          protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+        protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateDocumentSchema request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-          | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+        protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDocumentSchema response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateDocumentSchema(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-          (
-            | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDocumentSchema response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateDocumentSchema(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+        protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDocumentSchema response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a document schema. Returns NOT_FOUND if the document schema does not
-   * exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the document schema to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/document_schema_service.get_document_schema.js</caption>
-   * region_tag:contentwarehouse_v1_generated_DocumentSchemaService_GetDocumentSchema_async
-   */
+/**
+ * Gets a document schema. Returns NOT_FOUND if the document schema does not
+ * exist.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the document schema to retrieve.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/document_schema_service.get_document_schema.js</caption>
+ * region_tag:contentwarehouse_v1_generated_DocumentSchemaService_GetDocumentSchema_async
+ */
   getDocumentSchema(
-    request?: protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-      (
-        | protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+        protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest|undefined, {}|undefined
+      ]>;
   getDocumentSchema(
-    request: protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-      | protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDocumentSchema(
-    request: protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest,
-    callback: Callback<
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-      | protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDocumentSchema(
-    request?: protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-          | protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-      | protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-      (
-        | protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDocumentSchema(
+      request: protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest,
+      callback: Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+          protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDocumentSchema(
+      request?: protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+          protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+          protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+        protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDocumentSchema request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-          | protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+        protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDocumentSchema response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDocumentSchema(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
-          (
-            | protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDocumentSchema response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDocumentSchema(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.contentwarehouse.v1.IDocumentSchema,
+        protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDocumentSchema response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a document schema. Returns NOT_FOUND if the document schema does
-   * not exist. Returns BAD_REQUEST if the document schema has documents
-   * depending on it.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the document schema to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/document_schema_service.delete_document_schema.js</caption>
-   * region_tag:contentwarehouse_v1_generated_DocumentSchemaService_DeleteDocumentSchema_async
-   */
+/**
+ * Deletes a document schema. Returns NOT_FOUND if the document schema does
+ * not exist. Returns BAD_REQUEST if the document schema has documents
+ * depending on it.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the document schema to delete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/document_schema_service.delete_document_schema.js</caption>
+ * region_tag:contentwarehouse_v1_generated_DocumentSchemaService_DeleteDocumentSchema_async
+ */
   deleteDocumentSchema(
-    request?: protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest|undefined, {}|undefined
+      ]>;
   deleteDocumentSchema(
-    request: protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDocumentSchema(
-    request: protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteDocumentSchema(
-    request?: protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDocumentSchema(
+      request: protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteDocumentSchema(
+      request?: protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteDocumentSchema request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDocumentSchema response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteDocumentSchema(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteDocumentSchema response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteDocumentSchema(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteDocumentSchema response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists document schemas.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of document schemas.
-   *   Format: projects/{project_number}/locations/{location}.
-   * @param {number} request.pageSize
-   *   The maximum number of document schemas to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 50 document schemas will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListDocumentSchemas` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListDocumentSchemas`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDocumentSchemasAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists document schemas.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of document schemas.
+ *   Format: projects/{project_number}/locations/{location}.
+ * @param {number} request.pageSize
+ *   The maximum number of document schemas to return. The service may return
+ *   fewer than this value.
+ *   If unspecified, at most 50 document schemas will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListDocumentSchemas` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListDocumentSchemas`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDocumentSchemasAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDocumentSchemas(
-    request?: protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema[],
-      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse,
-    ]
-  >;
+      request?: protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IDocumentSchema[],
+        protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest|null,
+        protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse
+      ]>;
   listDocumentSchemas(
-    request: protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
-      | protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse
-      | null
-      | undefined,
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema
-    >
-  ): void;
-  listDocumentSchemas(
-    request: protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
-      | protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse
-      | null
-      | undefined,
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema
-    >
-  ): void;
-  listDocumentSchemas(
-    request?: protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
-          | protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse
-          | null
-          | undefined,
-          protos.google.cloud.contentwarehouse.v1.IDocumentSchema
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
-      | protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse
-      | null
-      | undefined,
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema
-    >
-  ): Promise<
-    [
-      protos.google.cloud.contentwarehouse.v1.IDocumentSchema[],
-      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse,
-    ]
-  > | void {
+          protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse|null|undefined,
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema>): void;
+  listDocumentSchemas(
+      request: protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
+          protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse|null|undefined,
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema>): void;
+  listDocumentSchemas(
+      request?: protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
+          protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse|null|undefined,
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema>,
+      callback?: PaginationCallback<
+          protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
+          protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse|null|undefined,
+          protos.google.cloud.contentwarehouse.v1.IDocumentSchema>):
+      Promise<[
+        protos.google.cloud.contentwarehouse.v1.IDocumentSchema[],
+        protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest|null,
+        protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
-          | protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse
-          | null
-          | undefined,
-          protos.google.cloud.contentwarehouse.v1.IDocumentSchema
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
+      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse|null|undefined,
+      protos.google.cloud.contentwarehouse.v1.IDocumentSchema>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDocumentSchemas values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1054,64 +843,61 @@ export class DocumentSchemaServiceClient {
     this._log.info('listDocumentSchemas request %j', request);
     return this.innerApiCalls
       .listDocumentSchemas(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.contentwarehouse.v1.IDocumentSchema[],
-          protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest | null,
-          protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse,
-        ]) => {
-          this._log.info('listDocumentSchemas values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.contentwarehouse.v1.IDocumentSchema[],
+        protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest|null,
+        protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse
+      ]) => {
+        this._log.info('listDocumentSchemas values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDocumentSchemas`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of document schemas.
-   *   Format: projects/{project_number}/locations/{location}.
-   * @param {number} request.pageSize
-   *   The maximum number of document schemas to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 50 document schemas will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListDocumentSchemas` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListDocumentSchemas`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDocumentSchemasAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDocumentSchemas`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of document schemas.
+ *   Format: projects/{project_number}/locations/{location}.
+ * @param {number} request.pageSize
+ *   The maximum number of document schemas to return. The service may return
+ *   fewer than this value.
+ *   If unspecified, at most 50 document schemas will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListDocumentSchemas` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListDocumentSchemas`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDocumentSchemasAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDocumentSchemasStream(
-    request?: protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDocumentSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDocumentSchemas stream %j', request);
     return this.descriptors.page.listDocumentSchemas.createStream(
       this.innerApiCalls.listDocumentSchemas as GaxCall,
@@ -1120,55 +906,54 @@ export class DocumentSchemaServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listDocumentSchemas`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of document schemas.
-   *   Format: projects/{project_number}/locations/{location}.
-   * @param {number} request.pageSize
-   *   The maximum number of document schemas to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 50 document schemas will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListDocumentSchemas` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListDocumentSchemas`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/document_schema_service.list_document_schemas.js</caption>
-   * region_tag:contentwarehouse_v1_generated_DocumentSchemaService_ListDocumentSchemas_async
-   */
+/**
+ * Equivalent to `listDocumentSchemas`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of document schemas.
+ *   Format: projects/{project_number}/locations/{location}.
+ * @param {number} request.pageSize
+ *   The maximum number of document schemas to return. The service may return
+ *   fewer than this value.
+ *   If unspecified, at most 50 document schemas will be returned.
+ *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListDocumentSchemas` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListDocumentSchemas`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/document_schema_service.list_document_schemas.js</caption>
+ * region_tag:contentwarehouse_v1_generated_DocumentSchemaService_ListDocumentSchemas_async
+ */
   listDocumentSchemasAsync(
-    request?: protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.contentwarehouse.v1.IDocumentSchema> {
+      request?: protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.contentwarehouse.v1.IDocumentSchema>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDocumentSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDocumentSchemas iterate %j', request);
     return this.descriptors.page.listDocumentSchemas.asyncIterate(
       this.innerApiCalls['listDocumentSchemas'] as GaxCall,
@@ -1189,12 +974,7 @@ export class DocumentSchemaServiceClient {
    * @param {string} document_link
    * @returns {string} Resource name string.
    */
-  documentLinkPath(
-    project: string,
-    location: string,
-    document: string,
-    documentLink: string
-  ) {
+  documentLinkPath(project:string,location:string,document:string,documentLink:string) {
     return this.pathTemplates.documentLinkPathTemplate.render({
       project: project,
       location: location,
@@ -1211,8 +991,7 @@ export class DocumentSchemaServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDocumentLinkName(documentLinkName: string) {
-    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName)
-      .project;
+    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName).project;
   }
 
   /**
@@ -1223,8 +1002,7 @@ export class DocumentSchemaServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDocumentLinkName(documentLinkName: string) {
-    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName)
-      .location;
+    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName).location;
   }
 
   /**
@@ -1235,8 +1013,7 @@ export class DocumentSchemaServiceClient {
    * @returns {string} A string representing the document.
    */
   matchDocumentFromDocumentLinkName(documentLinkName: string) {
-    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName)
-      .document;
+    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName).document;
   }
 
   /**
@@ -1247,8 +1024,7 @@ export class DocumentSchemaServiceClient {
    * @returns {string} A string representing the document_link.
    */
   matchDocumentLinkFromDocumentLinkName(documentLinkName: string) {
-    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName)
-      .document_link;
+    return this.pathTemplates.documentLinkPathTemplate.match(documentLinkName).document_link;
   }
 
   /**
@@ -1259,11 +1035,7 @@ export class DocumentSchemaServiceClient {
    * @param {string} document_schema
    * @returns {string} Resource name string.
    */
-  documentSchemaPath(
-    project: string,
-    location: string,
-    documentSchema: string
-  ) {
+  documentSchemaPath(project:string,location:string,documentSchema:string) {
     return this.pathTemplates.documentSchemaPathTemplate.render({
       project: project,
       location: location,
@@ -1279,9 +1051,7 @@ export class DocumentSchemaServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDocumentSchemaName(documentSchemaName: string) {
-    return this.pathTemplates.documentSchemaPathTemplate.match(
-      documentSchemaName
-    ).project;
+    return this.pathTemplates.documentSchemaPathTemplate.match(documentSchemaName).project;
   }
 
   /**
@@ -1292,9 +1062,7 @@ export class DocumentSchemaServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDocumentSchemaName(documentSchemaName: string) {
-    return this.pathTemplates.documentSchemaPathTemplate.match(
-      documentSchemaName
-    ).location;
+    return this.pathTemplates.documentSchemaPathTemplate.match(documentSchemaName).location;
   }
 
   /**
@@ -1305,9 +1073,7 @@ export class DocumentSchemaServiceClient {
    * @returns {string} A string representing the document_schema.
    */
   matchDocumentSchemaFromDocumentSchemaName(documentSchemaName: string) {
-    return this.pathTemplates.documentSchemaPathTemplate.match(
-      documentSchemaName
-    ).document_schema;
+    return this.pathTemplates.documentSchemaPathTemplate.match(documentSchemaName).document_schema;
   }
 
   /**
@@ -1317,7 +1083,7 @@ export class DocumentSchemaServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1354,11 +1120,7 @@ export class DocumentSchemaServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  projectLocationDocumentPath(
-    project: string,
-    location: string,
-    document: string
-  ) {
+  projectLocationDocumentPath(project:string,location:string,document:string) {
     return this.pathTemplates.projectLocationDocumentPathTemplate.render({
       project: project,
       location: location,
@@ -1373,12 +1135,8 @@ export class DocumentSchemaServiceClient {
    *   A fully-qualified path representing project_location_document resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDocumentName(
-    projectLocationDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentPathTemplate.match(
-      projectLocationDocumentName
-    ).project;
+  matchProjectFromProjectLocationDocumentName(projectLocationDocumentName: string) {
+    return this.pathTemplates.projectLocationDocumentPathTemplate.match(projectLocationDocumentName).project;
   }
 
   /**
@@ -1388,12 +1146,8 @@ export class DocumentSchemaServiceClient {
    *   A fully-qualified path representing project_location_document resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDocumentName(
-    projectLocationDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentPathTemplate.match(
-      projectLocationDocumentName
-    ).location;
+  matchLocationFromProjectLocationDocumentName(projectLocationDocumentName: string) {
+    return this.pathTemplates.projectLocationDocumentPathTemplate.match(projectLocationDocumentName).location;
   }
 
   /**
@@ -1403,12 +1157,8 @@ export class DocumentSchemaServiceClient {
    *   A fully-qualified path representing project_location_document resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectLocationDocumentName(
-    projectLocationDocumentName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentPathTemplate.match(
-      projectLocationDocumentName
-    ).document;
+  matchDocumentFromProjectLocationDocumentName(projectLocationDocumentName: string) {
+    return this.pathTemplates.projectLocationDocumentPathTemplate.match(projectLocationDocumentName).document;
   }
 
   /**
@@ -1419,18 +1169,12 @@ export class DocumentSchemaServiceClient {
    * @param {string} reference_id
    * @returns {string} Resource name string.
    */
-  projectLocationDocumentsReferenceIdPath(
-    project: string,
-    location: string,
-    referenceId: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        reference_id: referenceId,
-      }
-    );
+  projectLocationDocumentsReferenceIdPath(project:string,location:string,referenceId:string) {
+    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render({
+      project: project,
+      location: location,
+      reference_id: referenceId,
+    });
   }
 
   /**
@@ -1440,12 +1184,8 @@ export class DocumentSchemaServiceClient {
    *   A fully-qualified path representing project_location_documents_reference_id resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationDocumentsReferenceIdName(
-    projectLocationDocumentsReferenceIdName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(
-      projectLocationDocumentsReferenceIdName
-    ).project;
+  matchProjectFromProjectLocationDocumentsReferenceIdName(projectLocationDocumentsReferenceIdName: string) {
+    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(projectLocationDocumentsReferenceIdName).project;
   }
 
   /**
@@ -1455,12 +1195,8 @@ export class DocumentSchemaServiceClient {
    *   A fully-qualified path representing project_location_documents_reference_id resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationDocumentsReferenceIdName(
-    projectLocationDocumentsReferenceIdName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(
-      projectLocationDocumentsReferenceIdName
-    ).location;
+  matchLocationFromProjectLocationDocumentsReferenceIdName(projectLocationDocumentsReferenceIdName: string) {
+    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(projectLocationDocumentsReferenceIdName).location;
   }
 
   /**
@@ -1470,12 +1206,8 @@ export class DocumentSchemaServiceClient {
    *   A fully-qualified path representing project_location_documents_reference_id resource.
    * @returns {string} A string representing the reference_id.
    */
-  matchReferenceIdFromProjectLocationDocumentsReferenceIdName(
-    projectLocationDocumentsReferenceIdName: string
-  ) {
-    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(
-      projectLocationDocumentsReferenceIdName
-    ).reference_id;
+  matchReferenceIdFromProjectLocationDocumentsReferenceIdName(projectLocationDocumentsReferenceIdName: string) {
+    return this.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match(projectLocationDocumentsReferenceIdName).reference_id;
   }
 
   /**
@@ -1486,7 +1218,7 @@ export class DocumentSchemaServiceClient {
    * @param {string} rule_set
    * @returns {string} Resource name string.
    */
-  ruleSetPath(project: string, location: string, ruleSet: string) {
+  ruleSetPath(project:string,location:string,ruleSet:string) {
     return this.pathTemplates.ruleSetPathTemplate.render({
       project: project,
       location: location,
@@ -1535,7 +1267,7 @@ export class DocumentSchemaServiceClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  synonymSetPath(project: string, location: string, context: string) {
+  synonymSetPath(project:string,location:string,context:string) {
     return this.pathTemplates.synonymSetPathTemplate.render({
       project: project,
       location: location,
@@ -1551,8 +1283,7 @@ export class DocumentSchemaServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSynonymSetName(synonymSetName: string) {
-    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName)
-      .project;
+    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName).project;
   }
 
   /**
@@ -1563,8 +1294,7 @@ export class DocumentSchemaServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSynonymSetName(synonymSetName: string) {
-    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName)
-      .location;
+    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName).location;
   }
 
   /**
@@ -1575,8 +1305,7 @@ export class DocumentSchemaServiceClient {
    * @returns {string} A string representing the context.
    */
   matchContextFromSynonymSetName(synonymSetName: string) {
-    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName)
-      .context;
+    return this.pathTemplates.synonymSetPathTemplate.match(synonymSetName).context;
   }
 
   /**

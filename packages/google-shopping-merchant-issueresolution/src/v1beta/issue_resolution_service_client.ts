@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -106,42 +101,20 @@ export class IssueResolutionServiceClient {
    *     const client = new IssueResolutionServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof IssueResolutionServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof IssueResolutionServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +140,7 @@ export class IssueResolutionServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +154,10 @@ export class IssueResolutionServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -205,6 +181,9 @@ export class IssueResolutionServiceClient {
       accountPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}'
       ),
+      aggregateProductStatusPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/aggregateProductStatuses/{aggregate_product_status}'
+      ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/products/{product}'
       ),
@@ -212,11 +191,8 @@ export class IssueResolutionServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.shopping.merchant.issueresolution.v1beta.IssueResolutionService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.shopping.merchant.issueresolution.v1beta.IssueResolutionService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -247,40 +223,31 @@ export class IssueResolutionServiceClient {
     // Put together the "service stub" for
     // google.shopping.merchant.issueresolution.v1beta.IssueResolutionService.
     this.issueResolutionServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.shopping.merchant.issueresolution.v1beta.IssueResolutionService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.shopping.merchant.issueresolution.v1beta
-            .IssueResolutionService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.shopping.merchant.issueresolution.v1beta.IssueResolutionService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.shopping.merchant.issueresolution.v1beta.IssueResolutionService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const issueResolutionServiceStubMethods = [
-      'renderAccountIssues',
-      'renderProductIssues',
-      'triggerAction',
-    ];
+    const issueResolutionServiceStubMethods =
+        ['renderAccountIssues', 'renderProductIssues', 'triggerAction'];
     for (const methodName of issueResolutionServiceStubMethods) {
       const callPromise = this.issueResolutionServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -300,14 +267,8 @@ export class IssueResolutionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -318,14 +279,8 @@ export class IssueResolutionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -356,7 +311,9 @@ export class IssueResolutionServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/content'];
+    return [
+      'https://www.googleapis.com/auth/content'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -365,9 +322,8 @@ export class IssueResolutionServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -378,429 +334,330 @@ export class IssueResolutionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Provide a list of business's account issues with an issue resolution
-   * content and available actions. This content and actions are meant to be
-   * rendered and shown in third-party applications.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The account to fetch issues for.
-   *   Format: `accounts/{account}`
-   * @param {string} [request.languageCode]
-   *   Optional. The [IETF BCP-47](https://tools.ietf.org/html/bcp47) language
-   *   code used to localize issue resolution content. If not set, the result will
-   *   be in default language `en-US`.
-   * @param {string} [request.timeZone]
-   *   Optional. The [IANA](https://www.iana.org/time-zones) timezone used to
-   *   localize times in an issue resolution content. For example
-   *   'America/Los_Angeles'. If not set, results will use as a default UTC.
-   * @param {google.shopping.merchant.issueresolution.v1beta.RenderIssuesRequestPayload} [request.payload]
-   *   Optional. The payload for configuring how the content should be rendered.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.issueresolution.v1beta.RenderAccountIssuesResponse|RenderAccountIssuesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/issue_resolution_service.render_account_issues.js</caption>
-   * region_tag:merchantapi_v1beta_generated_IssueResolutionService_RenderAccountIssues_async
-   */
+/**
+ * Provide a list of business's account issues with an issue resolution
+ * content and available actions. This content and actions are meant to be
+ * rendered and shown in third-party applications.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The account to fetch issues for.
+ *   Format: `accounts/{account}`
+ * @param {string} [request.languageCode]
+ *   Optional. The [IETF BCP-47](https://tools.ietf.org/html/bcp47) language
+ *   code used to localize issue resolution content. If not set, the result will
+ *   be in default language `en-US`.
+ * @param {string} [request.timeZone]
+ *   Optional. The [IANA](https://www.iana.org/time-zones) timezone used to
+ *   localize times in an issue resolution content. For example
+ *   'America/Los_Angeles'. If not set, results will use as a default UTC.
+ * @param {google.shopping.merchant.issueresolution.v1beta.RenderIssuesRequestPayload} [request.payload]
+ *   Optional. The payload for configuring how the content should be rendered.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.issueresolution.v1beta.RenderAccountIssuesResponse|RenderAccountIssuesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/issue_resolution_service.render_account_issues.js</caption>
+ * region_tag:merchantapi_v1beta_generated_IssueResolutionService_RenderAccountIssues_async
+ */
   renderAccountIssues(
-    request?: protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesResponse,
-      (
-        | protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesResponse,
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest|undefined, {}|undefined
+      ]>;
   renderAccountIssues(
-    request: protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesResponse,
-      | protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  renderAccountIssues(
-    request: protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesResponse,
-      | protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  renderAccountIssues(
-    request?: protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesResponse,
-          | protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesResponse,
-      | protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesResponse,
-      (
-        | protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest|null|undefined,
+          {}|null|undefined>): void;
+  renderAccountIssues(
+      request: protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesResponse,
+          protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest|null|undefined,
+          {}|null|undefined>): void;
+  renderAccountIssues(
+      request?: protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesResponse,
+          protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesResponse,
+          protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesResponse,
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('renderAccountIssues request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesResponse,
-          | protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesResponse,
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('renderAccountIssues response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .renderAccountIssues(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesResponse,
-          (
-            | protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('renderAccountIssues response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.renderAccountIssues(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesResponse,
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderAccountIssuesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('renderAccountIssues response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Provide a list of issues for business's product with an issue resolution
-   * content and available actions. This content and actions are meant to be
-   * rendered and shown in third-party applications.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the product to fetch issues for.
-   *   Format: `accounts/{account}/products/{product}`
-   * @param {string} [request.languageCode]
-   *   Optional. The [IETF BCP-47](https://tools.ietf.org/html/bcp47) language
-   *   code used to localize an issue resolution content. If not set, the result
-   *   will be in default language `en-US`.
-   * @param {string} [request.timeZone]
-   *   Optional. The [IANA](https://www.iana.org/time-zones) timezone used to
-   *   localize times in an issue resolution content. For example
-   *   'America/Los_Angeles'. If not set, results will use as a default UTC.
-   * @param {google.shopping.merchant.issueresolution.v1beta.RenderIssuesRequestPayload} [request.payload]
-   *   Optional. The payload for configuring how the content should be rendered.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.issueresolution.v1beta.RenderProductIssuesResponse|RenderProductIssuesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/issue_resolution_service.render_product_issues.js</caption>
-   * region_tag:merchantapi_v1beta_generated_IssueResolutionService_RenderProductIssues_async
-   */
+/**
+ * Provide a list of issues for business's product with an issue resolution
+ * content and available actions. This content and actions are meant to be
+ * rendered and shown in third-party applications.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the product to fetch issues for.
+ *   Format: `accounts/{account}/products/{product}`
+ * @param {string} [request.languageCode]
+ *   Optional. The [IETF BCP-47](https://tools.ietf.org/html/bcp47) language
+ *   code used to localize an issue resolution content. If not set, the result
+ *   will be in default language `en-US`.
+ * @param {string} [request.timeZone]
+ *   Optional. The [IANA](https://www.iana.org/time-zones) timezone used to
+ *   localize times in an issue resolution content. For example
+ *   'America/Los_Angeles'. If not set, results will use as a default UTC.
+ * @param {google.shopping.merchant.issueresolution.v1beta.RenderIssuesRequestPayload} [request.payload]
+ *   Optional. The payload for configuring how the content should be rendered.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.issueresolution.v1beta.RenderProductIssuesResponse|RenderProductIssuesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/issue_resolution_service.render_product_issues.js</caption>
+ * region_tag:merchantapi_v1beta_generated_IssueResolutionService_RenderProductIssues_async
+ */
   renderProductIssues(
-    request?: protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesResponse,
-      (
-        | protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesResponse,
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest|undefined, {}|undefined
+      ]>;
   renderProductIssues(
-    request: protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesResponse,
-      | protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  renderProductIssues(
-    request: protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesResponse,
-      | protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  renderProductIssues(
-    request?: protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesResponse,
-          | protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesResponse,
-      | protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesResponse,
-      (
-        | protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest|null|undefined,
+          {}|null|undefined>): void;
+  renderProductIssues(
+      request: protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesResponse,
+          protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest|null|undefined,
+          {}|null|undefined>): void;
+  renderProductIssues(
+      request?: protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesResponse,
+          protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesResponse,
+          protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesResponse,
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('renderProductIssues request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesResponse,
-          | protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesResponse,
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('renderProductIssues response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .renderProductIssues(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesResponse,
-          (
-            | protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('renderProductIssues response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.renderProductIssues(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesResponse,
+        protos.google.shopping.merchant.issueresolution.v1beta.IRenderProductIssuesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('renderProductIssues response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Start an action. The action can be requested by a business in
-   * third-party application. Before the business can request the action, the
-   * third-party application needs to show them action specific content and
-   * display a user input form.
-   *
-   * The action can be successfully started only once all `required` inputs are
-   * provided. If any `required` input is missing, or invalid value was
-   * provided, the service will return 400 error. Validation errors will contain
-   * {@link protos.google.shopping.merchant.issueresolution.v1beta.InputField.id|Ids} for
-   * all problematic field together with translated, human readable error
-   * messages that can be shown to the user.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The business's account that is triggering the action.
-   *   Format: `accounts/{account}`
-   * @param {google.shopping.merchant.issueresolution.v1beta.TriggerActionPayload} request.payload
-   *   Required. The payload for the triggered action.
-   * @param {string} [request.languageCode]
-   *   Optional. Language code [IETF BCP 47
-   *   syntax](https://tools.ietf.org/html/bcp47) used to localize the response.
-   *   If not set, the result will be in default language `en-US`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.issueresolution.v1beta.TriggerActionResponse|TriggerActionResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/issue_resolution_service.trigger_action.js</caption>
-   * region_tag:merchantapi_v1beta_generated_IssueResolutionService_TriggerAction_async
-   */
+/**
+ * Start an action. The action can be requested by a business in
+ * third-party application. Before the business can request the action, the
+ * third-party application needs to show them action specific content and
+ * display a user input form.
+ *
+ * The action can be successfully started only once all `required` inputs are
+ * provided. If any `required` input is missing, or invalid value was
+ * provided, the service will return 400 error. Validation errors will contain
+ * {@link protos.google.shopping.merchant.issueresolution.v1beta.InputField.id|Ids} for
+ * all problematic field together with translated, human readable error
+ * messages that can be shown to the user.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The business's account that is triggering the action.
+ *   Format: `accounts/{account}`
+ * @param {google.shopping.merchant.issueresolution.v1beta.TriggerActionPayload} request.payload
+ *   Required. The payload for the triggered action.
+ * @param {string} [request.languageCode]
+ *   Optional. Language code [IETF BCP 47
+ *   syntax](https://tools.ietf.org/html/bcp47) used to localize the response.
+ *   If not set, the result will be in default language `en-US`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.issueresolution.v1beta.TriggerActionResponse|TriggerActionResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/issue_resolution_service.trigger_action.js</caption>
+ * region_tag:merchantapi_v1beta_generated_IssueResolutionService_TriggerAction_async
+ */
   triggerAction(
-    request?: protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionResponse,
-      (
-        | protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionResponse,
+        protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest|undefined, {}|undefined
+      ]>;
   triggerAction(
-    request: protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionResponse,
-      | protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  triggerAction(
-    request: protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionResponse,
-      | protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  triggerAction(
-    request?: protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionResponse,
-          | protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionResponse,
-      | protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionResponse,
-      (
-        | protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest|null|undefined,
+          {}|null|undefined>): void;
+  triggerAction(
+      request: protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionResponse,
+          protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest|null|undefined,
+          {}|null|undefined>): void;
+  triggerAction(
+      request?: protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionResponse,
+          protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionResponse,
+          protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionResponse,
+        protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('triggerAction request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionResponse,
-          | protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionResponse,
+        protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('triggerAction response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .triggerAction(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionResponse,
-          (
-            | protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('triggerAction response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.triggerAction(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionResponse,
+        protos.google.shopping.merchant.issueresolution.v1beta.ITriggerActionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('triggerAction response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
   // --------------------
@@ -813,7 +670,7 @@ export class IssueResolutionServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  accountPath(account: string) {
+  accountPath(account:string) {
     return this.pathTemplates.accountPathTemplate.render({
       account: account,
     });
@@ -831,13 +688,49 @@ export class IssueResolutionServiceClient {
   }
 
   /**
+   * Return a fully-qualified aggregateProductStatus resource name string.
+   *
+   * @param {string} account
+   * @param {string} aggregate_product_status
+   * @returns {string} Resource name string.
+   */
+  aggregateProductStatusPath(account:string,aggregateProductStatus:string) {
+    return this.pathTemplates.aggregateProductStatusPathTemplate.render({
+      account: account,
+      aggregate_product_status: aggregateProductStatus,
+    });
+  }
+
+  /**
+   * Parse the account from AggregateProductStatus resource.
+   *
+   * @param {string} aggregateProductStatusName
+   *   A fully-qualified path representing AggregateProductStatus resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromAggregateProductStatusName(aggregateProductStatusName: string) {
+    return this.pathTemplates.aggregateProductStatusPathTemplate.match(aggregateProductStatusName).account;
+  }
+
+  /**
+   * Parse the aggregate_product_status from AggregateProductStatus resource.
+   *
+   * @param {string} aggregateProductStatusName
+   *   A fully-qualified path representing AggregateProductStatus resource.
+   * @returns {string} A string representing the aggregate_product_status.
+   */
+  matchAggregateProductStatusFromAggregateProductStatusName(aggregateProductStatusName: string) {
+    return this.pathTemplates.aggregateProductStatusPathTemplate.match(aggregateProductStatusName).aggregate_product_status;
+  }
+
+  /**
    * Return a fully-qualified product resource name string.
    *
    * @param {string} account
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(account: string, product: string) {
+  productPath(account:string,product:string) {
     return this.pathTemplates.productPathTemplate.render({
       account: account,
       product: product,

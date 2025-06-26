@@ -18,10 +18,8 @@
 
 import * as v1alpha from './v1alpha';
 
-const MarketingplatformAdminServiceClient =
-  v1alpha.MarketingplatformAdminServiceClient;
-type MarketingplatformAdminServiceClient =
-  v1alpha.MarketingplatformAdminServiceClient;
+const MarketingplatformAdminServiceClient = v1alpha.MarketingplatformAdminServiceClient;
+type MarketingplatformAdminServiceClient = v1alpha.MarketingplatformAdminServiceClient;
 
 export {v1alpha, MarketingplatformAdminServiceClient};
 export default {v1alpha, MarketingplatformAdminServiceClient};

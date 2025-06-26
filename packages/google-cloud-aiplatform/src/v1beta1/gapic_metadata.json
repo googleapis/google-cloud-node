@@ -2196,6 +2196,94 @@
         }
       }
     },
+    "MemoryBankService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MemoryBankServiceClient",
+          "rpcs": {
+            "GetMemory": {
+              "methods": [
+                "getMemory"
+              ]
+            },
+            "RetrieveMemories": {
+              "methods": [
+                "retrieveMemories"
+              ]
+            },
+            "CreateMemory": {
+              "methods": [
+                "createMemory"
+              ]
+            },
+            "UpdateMemory": {
+              "methods": [
+                "updateMemory"
+              ]
+            },
+            "DeleteMemory": {
+              "methods": [
+                "deleteMemory"
+              ]
+            },
+            "GenerateMemories": {
+              "methods": [
+                "generateMemories"
+              ]
+            },
+            "ListMemories": {
+              "methods": [
+                "listMemories",
+                "listMemoriesStream",
+                "listMemoriesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MemoryBankServiceClient",
+          "rpcs": {
+            "GetMemory": {
+              "methods": [
+                "getMemory"
+              ]
+            },
+            "RetrieveMemories": {
+              "methods": [
+                "retrieveMemories"
+              ]
+            },
+            "CreateMemory": {
+              "methods": [
+                "createMemory"
+              ]
+            },
+            "UpdateMemory": {
+              "methods": [
+                "updateMemory"
+              ]
+            },
+            "DeleteMemory": {
+              "methods": [
+                "deleteMemory"
+              ]
+            },
+            "GenerateMemories": {
+              "methods": [
+                "generateMemories"
+              ]
+            },
+            "ListMemories": {
+              "methods": [
+                "listMemories",
+                "listMemoriesStream",
+                "listMemoriesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MetadataService": {
       "clients": {
         "grpc": {

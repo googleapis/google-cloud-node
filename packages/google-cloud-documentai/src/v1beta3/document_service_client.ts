@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -113,41 +102,20 @@ export class DocumentServiceClient {
    *     const client = new DocumentServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DocumentServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'documentai.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -173,7 +141,7 @@ export class DocumentServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -189,9 +157,13 @@ export class DocumentServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -236,110 +208,60 @@ export class DocumentServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDocuments: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'documentMetadata'
-      ),
+      listDocuments:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'documentMetadata')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1beta3/{name=projects/*/locations/*}',
-          additional_bindings: [
-            {get: '/uiv1beta3/{name=projects/*/locations/*}'},
-          ],
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1beta3/{name=projects/*}/locations',
-          additional_bindings: [
-            {get: '/uiv1beta3/{name=projects/*}/locations'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1beta3/{name=projects/*/locations/*/operations/*}:cancel',
-          additional_bindings: [
-            {
-              post: '/uiv1beta3/{name=projects/*/locations/*/operations/*}:cancel',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1beta3/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {get: '/uiv1beta3/{name=projects/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1beta3/{name=projects/*/locations/*/operations}',
-          additional_bindings: [
-            {get: '/uiv1beta3/{name=projects/*/locations/*/operations}'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1beta3/{name=projects/*/locations/*}',additional_bindings: [{get: '/uiv1beta3/{name=projects/*/locations/*}',}],
+      },{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1beta3/{name=projects/*}/locations',additional_bindings: [{get: '/uiv1beta3/{name=projects/*}/locations',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1beta3/{name=projects/*/locations/*/operations/*}:cancel',additional_bindings: [{post: '/uiv1beta3/{name=projects/*/locations/*/operations/*}:cancel',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta3/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/uiv1beta3/{name=projects/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta3/{name=projects/*/locations/*/operations}',additional_bindings: [{get: '/uiv1beta3/{name=projects/*/locations/*/operations}',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const updateDatasetResponse = protoFilesRoot.lookup(
-      '.google.cloud.documentai.v1beta3.Dataset'
-    ) as gax.protobuf.Type;
+      '.google.cloud.documentai.v1beta3.Dataset') as gax.protobuf.Type;
     const updateDatasetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.documentai.v1beta3.UpdateDatasetOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.documentai.v1beta3.UpdateDatasetOperationMetadata') as gax.protobuf.Type;
     const importDocumentsResponse = protoFilesRoot.lookup(
-      '.google.cloud.documentai.v1beta3.ImportDocumentsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.documentai.v1beta3.ImportDocumentsResponse') as gax.protobuf.Type;
     const importDocumentsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.documentai.v1beta3.ImportDocumentsMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.documentai.v1beta3.ImportDocumentsMetadata') as gax.protobuf.Type;
     const batchDeleteDocumentsResponse = protoFilesRoot.lookup(
-      '.google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse') as gax.protobuf.Type;
     const batchDeleteDocumentsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       updateDataset: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateDatasetResponse.decode.bind(updateDatasetResponse),
-        updateDatasetMetadata.decode.bind(updateDatasetMetadata)
-      ),
+        updateDatasetMetadata.decode.bind(updateDatasetMetadata)),
       importDocuments: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importDocumentsResponse.decode.bind(importDocumentsResponse),
-        importDocumentsMetadata.decode.bind(importDocumentsMetadata)
-      ),
+        importDocumentsMetadata.decode.bind(importDocumentsMetadata)),
       batchDeleteDocuments: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchDeleteDocumentsResponse.decode.bind(batchDeleteDocumentsResponse),
-        batchDeleteDocumentsMetadata.decode.bind(batchDeleteDocumentsMetadata)
-      ),
+        batchDeleteDocumentsMetadata.decode.bind(batchDeleteDocumentsMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.documentai.v1beta3.DocumentService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.documentai.v1beta3.DocumentService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -370,41 +292,28 @@ export class DocumentServiceClient {
     // Put together the "service stub" for
     // google.cloud.documentai.v1beta3.DocumentService.
     this.documentServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.documentai.v1beta3.DocumentService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.documentai.v1beta3.DocumentService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.documentai.v1beta3.DocumentService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const documentServiceStubMethods = [
-      'updateDataset',
-      'importDocuments',
-      'getDocument',
-      'listDocuments',
-      'batchDeleteDocuments',
-      'getDatasetSchema',
-      'updateDatasetSchema',
-    ];
+    const documentServiceStubMethods =
+        ['updateDataset', 'importDocuments', 'getDocument', 'listDocuments', 'batchDeleteDocuments', 'getDatasetSchema', 'updateDatasetSchema'];
     for (const methodName of documentServiceStubMethods) {
       const callPromise = this.documentServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -429,14 +338,8 @@ export class DocumentServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'documentai.googleapis.com';
   }
@@ -447,14 +350,8 @@ export class DocumentServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'documentai.googleapis.com';
   }
@@ -485,7 +382,9 @@ export class DocumentServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -494,9 +393,8 @@ export class DocumentServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -507,1077 +405,773 @@ export class DocumentServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Returns relevant fields present in the requested document.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.dataset
-   *   Required. The resource name of the dataset that the document belongs to .
-   *   Format:
-   *   projects/{project}/locations/{location}/processors/{processor}/dataset
-   * @param {google.cloud.documentai.v1beta3.DocumentId} request.documentId
-   *   Required. Document identifier.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   If set, only fields listed here will be returned. Otherwise, all fields
-   *   will be returned by default.
-   * @param {google.cloud.documentai.v1beta3.DocumentPageRange} request.pageRange
-   *   List of pages for which the fields specified in the `read_mask` must
-   *   be served.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.documentai.v1beta3.GetDocumentResponse|GetDocumentResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/document_service.get_document.js</caption>
-   * region_tag:documentai_v1beta3_generated_DocumentService_GetDocument_async
-   */
+/**
+ * Returns relevant fields present in the requested document.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.dataset
+ *   Required. The resource name of the dataset that the document belongs to .
+ *   Format:
+ *   projects/{project}/locations/{location}/processors/{processor}/dataset
+ * @param {google.cloud.documentai.v1beta3.DocumentId} request.documentId
+ *   Required. Document identifier.
+ * @param {google.protobuf.FieldMask} request.readMask
+ *   If set, only fields listed here will be returned. Otherwise, all fields
+ *   will be returned by default.
+ * @param {google.cloud.documentai.v1beta3.DocumentPageRange} request.pageRange
+ *   List of pages for which the fields specified in the `read_mask` must
+ *   be served.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.documentai.v1beta3.GetDocumentResponse|GetDocumentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/document_service.get_document.js</caption>
+ * region_tag:documentai_v1beta3_generated_DocumentService_GetDocument_async
+ */
   getDocument(
-    request?: protos.google.cloud.documentai.v1beta3.IGetDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
-      protos.google.cloud.documentai.v1beta3.IGetDocumentRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.documentai.v1beta3.IGetDocumentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
+        protos.google.cloud.documentai.v1beta3.IGetDocumentRequest|undefined, {}|undefined
+      ]>;
   getDocument(
-    request: protos.google.cloud.documentai.v1beta3.IGetDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
-      | protos.google.cloud.documentai.v1beta3.IGetDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDocument(
-    request: protos.google.cloud.documentai.v1beta3.IGetDocumentRequest,
-    callback: Callback<
-      protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
-      | protos.google.cloud.documentai.v1beta3.IGetDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDocument(
-    request?: protos.google.cloud.documentai.v1beta3.IGetDocumentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.documentai.v1beta3.IGetDocumentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
-          | protos.google.cloud.documentai.v1beta3.IGetDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
-      | protos.google.cloud.documentai.v1beta3.IGetDocumentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
-      protos.google.cloud.documentai.v1beta3.IGetDocumentRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.documentai.v1beta3.IGetDocumentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDocument(
+      request: protos.google.cloud.documentai.v1beta3.IGetDocumentRequest,
+      callback: Callback<
+          protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
+          protos.google.cloud.documentai.v1beta3.IGetDocumentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDocument(
+      request?: protos.google.cloud.documentai.v1beta3.IGetDocumentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
+          protos.google.cloud.documentai.v1beta3.IGetDocumentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
+          protos.google.cloud.documentai.v1beta3.IGetDocumentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
+        protos.google.cloud.documentai.v1beta3.IGetDocumentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        dataset: request.dataset ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'dataset': request.dataset ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDocument request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
-          | protos.google.cloud.documentai.v1beta3.IGetDocumentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
+        protos.google.cloud.documentai.v1beta3.IGetDocumentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDocument response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDocument(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
-          (
-            | protos.google.cloud.documentai.v1beta3.IGetDocumentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDocument response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDocument(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
+        protos.google.cloud.documentai.v1beta3.IGetDocumentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDocument response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the `DatasetSchema` of a `Dataset`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The dataset schema resource name.
-   *   Format:
-   *   projects/{project}/locations/{location}/processors/{processor}/dataset/datasetSchema
-   * @param {boolean} request.visibleFieldsOnly
-   *   If set, only returns the visible fields of the schema.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.documentai.v1beta3.DatasetSchema|DatasetSchema}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/document_service.get_dataset_schema.js</caption>
-   * region_tag:documentai_v1beta3_generated_DocumentService_GetDatasetSchema_async
-   */
+/**
+ * Gets the `DatasetSchema` of a `Dataset`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The dataset schema resource name.
+ *   Format:
+ *   projects/{project}/locations/{location}/processors/{processor}/dataset/datasetSchema
+ * @param {boolean} request.visibleFieldsOnly
+ *   If set, only returns the visible fields of the schema.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.documentai.v1beta3.DatasetSchema|DatasetSchema}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/document_service.get_dataset_schema.js</caption>
+ * region_tag:documentai_v1beta3_generated_DocumentService_GetDatasetSchema_async
+ */
   getDatasetSchema(
-    request?: protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-      (
-        | protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+        protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest|undefined, {}|undefined
+      ]>;
   getDatasetSchema(
-    request: protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-      | protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDatasetSchema(
-    request: protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest,
-    callback: Callback<
-      protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-      | protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDatasetSchema(
-    request?: protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-          | protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-      | protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-      (
-        | protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDatasetSchema(
+      request: protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest,
+      callback: Callback<
+          protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+          protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDatasetSchema(
+      request?: protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+          protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+          protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+        protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDatasetSchema request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-          | protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+        protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDatasetSchema response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDatasetSchema(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-          (
-            | protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDatasetSchema response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDatasetSchema(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+        protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDatasetSchema response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a `DatasetSchema`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.documentai.v1beta3.DatasetSchema} request.datasetSchema
-   *   Required. The name field of the `DatasetSchema` is used to identify the
-   *   resource to be updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.documentai.v1beta3.DatasetSchema|DatasetSchema}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/document_service.update_dataset_schema.js</caption>
-   * region_tag:documentai_v1beta3_generated_DocumentService_UpdateDatasetSchema_async
-   */
+/**
+ * Updates a `DatasetSchema`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.documentai.v1beta3.DatasetSchema} request.datasetSchema
+ *   Required. The name field of the `DatasetSchema` is used to identify the
+ *   resource to be updated.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The update mask applies to the resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.documentai.v1beta3.DatasetSchema|DatasetSchema}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/document_service.update_dataset_schema.js</caption>
+ * region_tag:documentai_v1beta3_generated_DocumentService_UpdateDatasetSchema_async
+ */
   updateDatasetSchema(
-    request?: protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-      (
-        | protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+        protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest|undefined, {}|undefined
+      ]>;
   updateDatasetSchema(
-    request: protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-      | protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDatasetSchema(
-    request: protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest,
-    callback: Callback<
-      protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-      | protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDatasetSchema(
-    request?: protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-          | protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-      | protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-      (
-        | protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDatasetSchema(
+      request: protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest,
+      callback: Callback<
+          protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+          protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDatasetSchema(
+      request?: protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+          protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+          protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+        protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'dataset_schema.name': request.datasetSchema!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'dataset_schema.name': request.datasetSchema!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateDatasetSchema request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-          | protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+        protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDatasetSchema response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateDatasetSchema(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.documentai.v1beta3.IDatasetSchema,
-          (
-            | protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDatasetSchema response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateDatasetSchema(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+        protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDatasetSchema response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Updates metadata associated with a dataset.
-   * Note that this method requires the
-   * `documentai.googleapis.com/datasets.update` permission on the project,
-   * which is highly privileged. A user or service account with this permission
-   * can create new processors that can interact with any gcs bucket in your
-   * project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.documentai.v1beta3.Dataset} request.dataset
-   *   Required. The `name` field of the `Dataset` is used to identify the
-   *   resource to be updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/document_service.update_dataset.js</caption>
-   * region_tag:documentai_v1beta3_generated_DocumentService_UpdateDataset_async
-   */
+/**
+ * Updates metadata associated with a dataset.
+ * Note that this method requires the
+ * `documentai.googleapis.com/datasets.update` permission on the project,
+ * which is highly privileged. A user or service account with this permission
+ * can create new processors that can interact with any gcs bucket in your
+ * project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.documentai.v1beta3.Dataset} request.dataset
+ *   Required. The `name` field of the `Dataset` is used to identify the
+ *   resource to be updated.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   The update mask applies to the resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/document_service.update_dataset.js</caption>
+ * region_tag:documentai_v1beta3_generated_DocumentService_UpdateDataset_async
+ */
   updateDataset(
-    request?: protos.google.cloud.documentai.v1beta3.IUpdateDatasetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.documentai.v1beta3.IDataset,
-        protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.documentai.v1beta3.IUpdateDatasetRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.documentai.v1beta3.IDataset, protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateDataset(
-    request: protos.google.cloud.documentai.v1beta3.IUpdateDatasetRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.documentai.v1beta3.IDataset,
-        protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.documentai.v1beta3.IUpdateDatasetRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.documentai.v1beta3.IDataset, protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateDataset(
-    request: protos.google.cloud.documentai.v1beta3.IUpdateDatasetRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.documentai.v1beta3.IDataset,
-        protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.documentai.v1beta3.IUpdateDatasetRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.documentai.v1beta3.IDataset, protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateDataset(
-    request?: protos.google.cloud.documentai.v1beta3.IUpdateDatasetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.documentai.v1beta3.IDataset,
-            protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.documentai.v1beta3.IDataset,
-        protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.documentai.v1beta3.IDataset,
-        protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.documentai.v1beta3.IUpdateDatasetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.documentai.v1beta3.IDataset, protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.documentai.v1beta3.IDataset, protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.documentai.v1beta3.IDataset, protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'dataset.name': request.dataset!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'dataset.name': request.dataset!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.documentai.v1beta3.IDataset,
-            protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.documentai.v1beta3.IDataset, protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateDataset response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateDataset request %j', request);
-    return this.innerApiCalls
-      .updateDataset(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.documentai.v1beta3.IDataset,
-            protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDataset response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateDataset(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.documentai.v1beta3.IDataset, protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateDataset response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateDataset()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/document_service.update_dataset.js</caption>
-   * region_tag:documentai_v1beta3_generated_DocumentService_UpdateDataset_async
-   */
-  async checkUpdateDatasetProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.documentai.v1beta3.Dataset,
-      protos.google.cloud.documentai.v1beta3.UpdateDatasetOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateDataset()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/document_service.update_dataset.js</caption>
+ * region_tag:documentai_v1beta3_generated_DocumentService_UpdateDataset_async
+ */
+  async checkUpdateDatasetProgress(name: string): Promise<LROperation<protos.google.cloud.documentai.v1beta3.Dataset, protos.google.cloud.documentai.v1beta3.UpdateDatasetOperationMetadata>>{
     this._log.info('updateDataset long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateDataset,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.documentai.v1beta3.Dataset,
-      protos.google.cloud.documentai.v1beta3.UpdateDatasetOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateDataset, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.documentai.v1beta3.Dataset, protos.google.cloud.documentai.v1beta3.UpdateDatasetOperationMetadata>;
   }
-  /**
-   * Import documents into a dataset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.dataset
-   *   Required. The dataset resource name.
-   *   Format:
-   *   projects/{project}/locations/{location}/processors/{processor}/dataset
-   * @param {number[]} request.batchDocumentsImportConfigs
-   *   Required. The Cloud Storage uri containing raw documents that must be
-   *   imported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/document_service.import_documents.js</caption>
-   * region_tag:documentai_v1beta3_generated_DocumentService_ImportDocuments_async
-   */
+/**
+ * Import documents into a dataset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.dataset
+ *   Required. The dataset resource name.
+ *   Format:
+ *   projects/{project}/locations/{location}/processors/{processor}/dataset
+ * @param {number[]} request.batchDocumentsImportConfigs
+ *   Required. The Cloud Storage uri containing raw documents that must be
+ *   imported.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/document_service.import_documents.js</caption>
+ * region_tag:documentai_v1beta3_generated_DocumentService_ImportDocuments_async
+ */
   importDocuments(
-    request?: protos.google.cloud.documentai.v1beta3.IImportDocumentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
-        protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.documentai.v1beta3.IImportDocumentsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse, protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   importDocuments(
-    request: protos.google.cloud.documentai.v1beta3.IImportDocumentsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
-        protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.documentai.v1beta3.IImportDocumentsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse, protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   importDocuments(
-    request: protos.google.cloud.documentai.v1beta3.IImportDocumentsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
-        protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.documentai.v1beta3.IImportDocumentsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse, protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   importDocuments(
-    request?: protos.google.cloud.documentai.v1beta3.IImportDocumentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
-            protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
-        protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
-        protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.documentai.v1beta3.IImportDocumentsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse, protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse, protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse, protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        dataset: request.dataset ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'dataset': request.dataset ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
-            protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse, protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('importDocuments response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('importDocuments request %j', request);
-    return this.innerApiCalls
-      .importDocuments(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
-            protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('importDocuments response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.importDocuments(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse, protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('importDocuments response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `importDocuments()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/document_service.import_documents.js</caption>
-   * region_tag:documentai_v1beta3_generated_DocumentService_ImportDocuments_async
-   */
-  async checkImportDocumentsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.documentai.v1beta3.ImportDocumentsResponse,
-      protos.google.cloud.documentai.v1beta3.ImportDocumentsMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `importDocuments()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/document_service.import_documents.js</caption>
+ * region_tag:documentai_v1beta3_generated_DocumentService_ImportDocuments_async
+ */
+  async checkImportDocumentsProgress(name: string): Promise<LROperation<protos.google.cloud.documentai.v1beta3.ImportDocumentsResponse, protos.google.cloud.documentai.v1beta3.ImportDocumentsMetadata>>{
     this._log.info('importDocuments long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.importDocuments,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.documentai.v1beta3.ImportDocumentsResponse,
-      protos.google.cloud.documentai.v1beta3.ImportDocumentsMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importDocuments, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.documentai.v1beta3.ImportDocumentsResponse, protos.google.cloud.documentai.v1beta3.ImportDocumentsMetadata>;
   }
-  /**
-   * Deletes a set of documents.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.dataset
-   *   Required. The dataset resource name.
-   *   Format:
-   *   projects/{project}/locations/{location}/processors/{processor}/dataset
-   * @param {google.cloud.documentai.v1beta3.BatchDatasetDocuments} request.datasetDocuments
-   *   Required. Dataset documents input. If given `filter`, all documents
-   *   satisfying the filter will be deleted. If given documentIds, a maximum of
-   *   50 documents can be deleted in a batch. The request will be rejected if
-   *   more than 50 document_ids are provided.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/document_service.batch_delete_documents.js</caption>
-   * region_tag:documentai_v1beta3_generated_DocumentService_BatchDeleteDocuments_async
-   */
+/**
+ * Deletes a set of documents.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.dataset
+ *   Required. The dataset resource name.
+ *   Format:
+ *   projects/{project}/locations/{location}/processors/{processor}/dataset
+ * @param {google.cloud.documentai.v1beta3.BatchDatasetDocuments} request.datasetDocuments
+ *   Required. Dataset documents input. If given `filter`, all documents
+ *   satisfying the filter will be deleted. If given documentIds, a maximum of
+ *   50 documents can be deleted in a batch. The request will be rejected if
+ *   more than 50 document_ids are provided.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/document_service.batch_delete_documents.js</caption>
+ * region_tag:documentai_v1beta3_generated_DocumentService_BatchDeleteDocuments_async
+ */
   batchDeleteDocuments(
-    request?: protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
-        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse, protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   batchDeleteDocuments(
-    request: protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
-        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse, protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   batchDeleteDocuments(
-    request: protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
-        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse, protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   batchDeleteDocuments(
-    request?: protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
-            protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
-        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
-        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse, protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse, protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse, protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        dataset: request.dataset ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'dataset': request.dataset ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
-            protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse, protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('batchDeleteDocuments response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('batchDeleteDocuments request %j', request);
-    return this.innerApiCalls
-      .batchDeleteDocuments(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
-            protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('batchDeleteDocuments response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.batchDeleteDocuments(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse, protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('batchDeleteDocuments response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `batchDeleteDocuments()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/document_service.batch_delete_documents.js</caption>
-   * region_tag:documentai_v1beta3_generated_DocumentService_BatchDeleteDocuments_async
-   */
-  async checkBatchDeleteDocumentsProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse,
-      protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `batchDeleteDocuments()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/document_service.batch_delete_documents.js</caption>
+ * region_tag:documentai_v1beta3_generated_DocumentService_BatchDeleteDocuments_async
+ */
+  async checkBatchDeleteDocumentsProgress(name: string): Promise<LROperation<protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse, protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata>>{
     this._log.info('batchDeleteDocuments long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.batchDeleteDocuments,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse,
-      protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchDeleteDocuments, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse, protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata>;
   }
-  /**
-   * Returns a list of documents present in the dataset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.dataset
-   *   Required. The resource name of the dataset to be listed.
-   *   Format:
-   *   projects/{project}/locations/{location}/processors/{processor}/dataset
-   * @param {number} request.pageSize
-   *   The maximum number of documents to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 20 documents will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListDocuments` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListDocuments`
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Query to filter the documents based on
-   *   https://google.aip.dev/160.
-   *   ## Currently support query strings are:
-   *
-   *   `SplitType=DATASET_SPLIT_TEST|DATASET_SPLIT_TRAIN|DATASET_SPLIT_UNASSIGNED`
-   *   - `LabelingState=DOCUMENT_LABELED|DOCUMENT_UNLABELED|DOCUMENT_AUTO_LABELED`
-   *   - `DisplayName=\"file_name.pdf\"`
-   *   - `EntityType=abc/def`
-   *   - `TagName=\"auto-labeling-running\"|\"sampled\"`
-   *
-   *   Note:
-   *   - Only `AND`, `=` and `!=` are supported.
-   *       e.g. `DisplayName=file_name AND EntityType!=abc` IS supported.
-   *   - Wildcard `*` is supported only in `DisplayName` filter
-   *   - No duplicate filter keys are allowed,
-   *       e.g. `EntityType=a AND EntityType=b` is NOT supported.
-   *   - String match is case sensitive (for filter `DisplayName` & `EntityType`).
-   * @param {boolean} [request.returnTotalSize]
-   *   Optional. Controls if the request requires a total size of matched
-   *   documents. See
-   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.total_size|ListDocumentsResponse.total_size}.
-   *
-   *   Enabling this flag may adversely impact performance.
-   *
-   *   Defaults to false.
-   * @param {number} [request.skip]
-   *   Optional. Number of results to skip beginning from the `page_token` if
-   *   provided. https://google.aip.dev/158#skipping-results. It must be a
-   *   non-negative integer. Negative values will be rejected. Note that this is
-   *   not the number of pages to skip. If this value causes the cursor to move
-   *   past the end of results,
-   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.document_metadata|ListDocumentsResponse.document_metadata}
-   *   and
-   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.next_page_token|ListDocumentsResponse.next_page_token}
-   *   will be empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.documentai.v1beta3.DocumentMetadata|DocumentMetadata}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDocumentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Returns a list of documents present in the dataset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.dataset
+ *   Required. The resource name of the dataset to be listed.
+ *   Format:
+ *   projects/{project}/locations/{location}/processors/{processor}/dataset
+ * @param {number} request.pageSize
+ *   The maximum number of documents to return. The service may return
+ *   fewer than this value.
+ *   If unspecified, at most 20 documents will be returned.
+ *   The maximum value is 100; values above 100 will be coerced to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListDocuments` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListDocuments`
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Query to filter the documents based on
+ *   https://google.aip.dev/160.
+ *   ## Currently support query strings are:
+ *
+ *   `SplitType=DATASET_SPLIT_TEST|DATASET_SPLIT_TRAIN|DATASET_SPLIT_UNASSIGNED`
+ *   - `LabelingState=DOCUMENT_LABELED|DOCUMENT_UNLABELED|DOCUMENT_AUTO_LABELED`
+ *   - `DisplayName=\"file_name.pdf\"`
+ *   - `EntityType=abc/def`
+ *   - `TagName=\"auto-labeling-running\"|\"sampled\"`
+ *
+ *   Note:
+ *   - Only `AND`, `=` and `!=` are supported.
+ *       e.g. `DisplayName=file_name AND EntityType!=abc` IS supported.
+ *   - Wildcard `*` is supported only in `DisplayName` filter
+ *   - No duplicate filter keys are allowed,
+ *       e.g. `EntityType=a AND EntityType=b` is NOT supported.
+ *   - String match is case sensitive (for filter `DisplayName` & `EntityType`).
+ * @param {boolean} [request.returnTotalSize]
+ *   Optional. Controls if the request requires a total size of matched
+ *   documents. See
+ *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.total_size|ListDocumentsResponse.total_size}.
+ *
+ *   Enabling this flag may adversely impact performance.
+ *
+ *   Defaults to false.
+ * @param {number} [request.skip]
+ *   Optional. Number of results to skip beginning from the `page_token` if
+ *   provided. https://google.aip.dev/158#skipping-results. It must be a
+ *   non-negative integer. Negative values will be rejected. Note that this is
+ *   not the number of pages to skip. If this value causes the cursor to move
+ *   past the end of results,
+ *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.document_metadata|ListDocumentsResponse.document_metadata}
+ *   and
+ *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.next_page_token|ListDocumentsResponse.next_page_token}
+ *   will be empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.documentai.v1beta3.DocumentMetadata|DocumentMetadata}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDocumentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDocuments(
-    request?: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.documentai.v1beta3.IDocumentMetadata[],
-      protos.google.cloud.documentai.v1beta3.IListDocumentsRequest | null,
-      protos.google.cloud.documentai.v1beta3.IListDocumentsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.documentai.v1beta3.IDocumentMetadata[],
+        protos.google.cloud.documentai.v1beta3.IListDocumentsRequest|null,
+        protos.google.cloud.documentai.v1beta3.IListDocumentsResponse
+      ]>;
   listDocuments(
-    request: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
-      | protos.google.cloud.documentai.v1beta3.IListDocumentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.documentai.v1beta3.IDocumentMetadata
-    >
-  ): void;
-  listDocuments(
-    request: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
-      | protos.google.cloud.documentai.v1beta3.IListDocumentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.documentai.v1beta3.IDocumentMetadata
-    >
-  ): void;
-  listDocuments(
-    request?: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
-          | protos.google.cloud.documentai.v1beta3.IListDocumentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.documentai.v1beta3.IDocumentMetadata
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
-      | protos.google.cloud.documentai.v1beta3.IListDocumentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.documentai.v1beta3.IDocumentMetadata
-    >
-  ): Promise<
-    [
-      protos.google.cloud.documentai.v1beta3.IDocumentMetadata[],
-      protos.google.cloud.documentai.v1beta3.IListDocumentsRequest | null,
-      protos.google.cloud.documentai.v1beta3.IListDocumentsResponse,
-    ]
-  > | void {
+          protos.google.cloud.documentai.v1beta3.IListDocumentsResponse|null|undefined,
+          protos.google.cloud.documentai.v1beta3.IDocumentMetadata>): void;
+  listDocuments(
+      request: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+          protos.google.cloud.documentai.v1beta3.IListDocumentsResponse|null|undefined,
+          protos.google.cloud.documentai.v1beta3.IDocumentMetadata>): void;
+  listDocuments(
+      request?: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+          protos.google.cloud.documentai.v1beta3.IListDocumentsResponse|null|undefined,
+          protos.google.cloud.documentai.v1beta3.IDocumentMetadata>,
+      callback?: PaginationCallback<
+          protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+          protos.google.cloud.documentai.v1beta3.IListDocumentsResponse|null|undefined,
+          protos.google.cloud.documentai.v1beta3.IDocumentMetadata>):
+      Promise<[
+        protos.google.cloud.documentai.v1beta3.IDocumentMetadata[],
+        protos.google.cloud.documentai.v1beta3.IListDocumentsRequest|null,
+        protos.google.cloud.documentai.v1beta3.IListDocumentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        dataset: request.dataset ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'dataset': request.dataset ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
-          | protos.google.cloud.documentai.v1beta3.IListDocumentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.documentai.v1beta3.IDocumentMetadata
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+      protos.google.cloud.documentai.v1beta3.IListDocumentsResponse|null|undefined,
+      protos.google.cloud.documentai.v1beta3.IDocumentMetadata>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDocuments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1586,101 +1180,98 @@ export class DocumentServiceClient {
     this._log.info('listDocuments request %j', request);
     return this.innerApiCalls
       .listDocuments(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.documentai.v1beta3.IDocumentMetadata[],
-          protos.google.cloud.documentai.v1beta3.IListDocumentsRequest | null,
-          protos.google.cloud.documentai.v1beta3.IListDocumentsResponse,
-        ]) => {
-          this._log.info('listDocuments values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.documentai.v1beta3.IDocumentMetadata[],
+        protos.google.cloud.documentai.v1beta3.IListDocumentsRequest|null,
+        protos.google.cloud.documentai.v1beta3.IListDocumentsResponse
+      ]) => {
+        this._log.info('listDocuments values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDocuments`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.dataset
-   *   Required. The resource name of the dataset to be listed.
-   *   Format:
-   *   projects/{project}/locations/{location}/processors/{processor}/dataset
-   * @param {number} request.pageSize
-   *   The maximum number of documents to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 20 documents will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListDocuments` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListDocuments`
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Query to filter the documents based on
-   *   https://google.aip.dev/160.
-   *   ## Currently support query strings are:
-   *
-   *   `SplitType=DATASET_SPLIT_TEST|DATASET_SPLIT_TRAIN|DATASET_SPLIT_UNASSIGNED`
-   *   - `LabelingState=DOCUMENT_LABELED|DOCUMENT_UNLABELED|DOCUMENT_AUTO_LABELED`
-   *   - `DisplayName=\"file_name.pdf\"`
-   *   - `EntityType=abc/def`
-   *   - `TagName=\"auto-labeling-running\"|\"sampled\"`
-   *
-   *   Note:
-   *   - Only `AND`, `=` and `!=` are supported.
-   *       e.g. `DisplayName=file_name AND EntityType!=abc` IS supported.
-   *   - Wildcard `*` is supported only in `DisplayName` filter
-   *   - No duplicate filter keys are allowed,
-   *       e.g. `EntityType=a AND EntityType=b` is NOT supported.
-   *   - String match is case sensitive (for filter `DisplayName` & `EntityType`).
-   * @param {boolean} [request.returnTotalSize]
-   *   Optional. Controls if the request requires a total size of matched
-   *   documents. See
-   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.total_size|ListDocumentsResponse.total_size}.
-   *
-   *   Enabling this flag may adversely impact performance.
-   *
-   *   Defaults to false.
-   * @param {number} [request.skip]
-   *   Optional. Number of results to skip beginning from the `page_token` if
-   *   provided. https://google.aip.dev/158#skipping-results. It must be a
-   *   non-negative integer. Negative values will be rejected. Note that this is
-   *   not the number of pages to skip. If this value causes the cursor to move
-   *   past the end of results,
-   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.document_metadata|ListDocumentsResponse.document_metadata}
-   *   and
-   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.next_page_token|ListDocumentsResponse.next_page_token}
-   *   will be empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.documentai.v1beta3.DocumentMetadata|DocumentMetadata} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDocumentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDocuments`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.dataset
+ *   Required. The resource name of the dataset to be listed.
+ *   Format:
+ *   projects/{project}/locations/{location}/processors/{processor}/dataset
+ * @param {number} request.pageSize
+ *   The maximum number of documents to return. The service may return
+ *   fewer than this value.
+ *   If unspecified, at most 20 documents will be returned.
+ *   The maximum value is 100; values above 100 will be coerced to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListDocuments` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListDocuments`
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Query to filter the documents based on
+ *   https://google.aip.dev/160.
+ *   ## Currently support query strings are:
+ *
+ *   `SplitType=DATASET_SPLIT_TEST|DATASET_SPLIT_TRAIN|DATASET_SPLIT_UNASSIGNED`
+ *   - `LabelingState=DOCUMENT_LABELED|DOCUMENT_UNLABELED|DOCUMENT_AUTO_LABELED`
+ *   - `DisplayName=\"file_name.pdf\"`
+ *   - `EntityType=abc/def`
+ *   - `TagName=\"auto-labeling-running\"|\"sampled\"`
+ *
+ *   Note:
+ *   - Only `AND`, `=` and `!=` are supported.
+ *       e.g. `DisplayName=file_name AND EntityType!=abc` IS supported.
+ *   - Wildcard `*` is supported only in `DisplayName` filter
+ *   - No duplicate filter keys are allowed,
+ *       e.g. `EntityType=a AND EntityType=b` is NOT supported.
+ *   - String match is case sensitive (for filter `DisplayName` & `EntityType`).
+ * @param {boolean} [request.returnTotalSize]
+ *   Optional. Controls if the request requires a total size of matched
+ *   documents. See
+ *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.total_size|ListDocumentsResponse.total_size}.
+ *
+ *   Enabling this flag may adversely impact performance.
+ *
+ *   Defaults to false.
+ * @param {number} [request.skip]
+ *   Optional. Number of results to skip beginning from the `page_token` if
+ *   provided. https://google.aip.dev/158#skipping-results. It must be a
+ *   non-negative integer. Negative values will be rejected. Note that this is
+ *   not the number of pages to skip. If this value causes the cursor to move
+ *   past the end of results,
+ *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.document_metadata|ListDocumentsResponse.document_metadata}
+ *   and
+ *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.next_page_token|ListDocumentsResponse.next_page_token}
+ *   will be empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.documentai.v1beta3.DocumentMetadata|DocumentMetadata} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDocumentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDocumentsStream(
-    request?: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        dataset: request.dataset ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'dataset': request.dataset ?? '',
+    });
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDocuments stream %j', request);
     return this.descriptors.page.listDocuments.createStream(
       this.innerApiCalls.listDocuments as GaxCall,
@@ -1689,92 +1280,91 @@ export class DocumentServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listDocuments`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.dataset
-   *   Required. The resource name of the dataset to be listed.
-   *   Format:
-   *   projects/{project}/locations/{location}/processors/{processor}/dataset
-   * @param {number} request.pageSize
-   *   The maximum number of documents to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 20 documents will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListDocuments` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListDocuments`
-   *   must match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Query to filter the documents based on
-   *   https://google.aip.dev/160.
-   *   ## Currently support query strings are:
-   *
-   *   `SplitType=DATASET_SPLIT_TEST|DATASET_SPLIT_TRAIN|DATASET_SPLIT_UNASSIGNED`
-   *   - `LabelingState=DOCUMENT_LABELED|DOCUMENT_UNLABELED|DOCUMENT_AUTO_LABELED`
-   *   - `DisplayName=\"file_name.pdf\"`
-   *   - `EntityType=abc/def`
-   *   - `TagName=\"auto-labeling-running\"|\"sampled\"`
-   *
-   *   Note:
-   *   - Only `AND`, `=` and `!=` are supported.
-   *       e.g. `DisplayName=file_name AND EntityType!=abc` IS supported.
-   *   - Wildcard `*` is supported only in `DisplayName` filter
-   *   - No duplicate filter keys are allowed,
-   *       e.g. `EntityType=a AND EntityType=b` is NOT supported.
-   *   - String match is case sensitive (for filter `DisplayName` & `EntityType`).
-   * @param {boolean} [request.returnTotalSize]
-   *   Optional. Controls if the request requires a total size of matched
-   *   documents. See
-   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.total_size|ListDocumentsResponse.total_size}.
-   *
-   *   Enabling this flag may adversely impact performance.
-   *
-   *   Defaults to false.
-   * @param {number} [request.skip]
-   *   Optional. Number of results to skip beginning from the `page_token` if
-   *   provided. https://google.aip.dev/158#skipping-results. It must be a
-   *   non-negative integer. Negative values will be rejected. Note that this is
-   *   not the number of pages to skip. If this value causes the cursor to move
-   *   past the end of results,
-   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.document_metadata|ListDocumentsResponse.document_metadata}
-   *   and
-   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.next_page_token|ListDocumentsResponse.next_page_token}
-   *   will be empty.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.documentai.v1beta3.DocumentMetadata|DocumentMetadata}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta3/document_service.list_documents.js</caption>
-   * region_tag:documentai_v1beta3_generated_DocumentService_ListDocuments_async
-   */
+/**
+ * Equivalent to `listDocuments`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.dataset
+ *   Required. The resource name of the dataset to be listed.
+ *   Format:
+ *   projects/{project}/locations/{location}/processors/{processor}/dataset
+ * @param {number} request.pageSize
+ *   The maximum number of documents to return. The service may return
+ *   fewer than this value.
+ *   If unspecified, at most 20 documents will be returned.
+ *   The maximum value is 100; values above 100 will be coerced to 100.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous `ListDocuments` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListDocuments`
+ *   must match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Query to filter the documents based on
+ *   https://google.aip.dev/160.
+ *   ## Currently support query strings are:
+ *
+ *   `SplitType=DATASET_SPLIT_TEST|DATASET_SPLIT_TRAIN|DATASET_SPLIT_UNASSIGNED`
+ *   - `LabelingState=DOCUMENT_LABELED|DOCUMENT_UNLABELED|DOCUMENT_AUTO_LABELED`
+ *   - `DisplayName=\"file_name.pdf\"`
+ *   - `EntityType=abc/def`
+ *   - `TagName=\"auto-labeling-running\"|\"sampled\"`
+ *
+ *   Note:
+ *   - Only `AND`, `=` and `!=` are supported.
+ *       e.g. `DisplayName=file_name AND EntityType!=abc` IS supported.
+ *   - Wildcard `*` is supported only in `DisplayName` filter
+ *   - No duplicate filter keys are allowed,
+ *       e.g. `EntityType=a AND EntityType=b` is NOT supported.
+ *   - String match is case sensitive (for filter `DisplayName` & `EntityType`).
+ * @param {boolean} [request.returnTotalSize]
+ *   Optional. Controls if the request requires a total size of matched
+ *   documents. See
+ *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.total_size|ListDocumentsResponse.total_size}.
+ *
+ *   Enabling this flag may adversely impact performance.
+ *
+ *   Defaults to false.
+ * @param {number} [request.skip]
+ *   Optional. Number of results to skip beginning from the `page_token` if
+ *   provided. https://google.aip.dev/158#skipping-results. It must be a
+ *   non-negative integer. Negative values will be rejected. Note that this is
+ *   not the number of pages to skip. If this value causes the cursor to move
+ *   past the end of results,
+ *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.document_metadata|ListDocumentsResponse.document_metadata}
+ *   and
+ *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.next_page_token|ListDocumentsResponse.next_page_token}
+ *   will be empty.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.documentai.v1beta3.DocumentMetadata|DocumentMetadata}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta3/document_service.list_documents.js</caption>
+ * region_tag:documentai_v1beta3_generated_DocumentService_ListDocuments_async
+ */
   listDocumentsAsync(
-    request?: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.documentai.v1beta3.IDocumentMetadata> {
+      request?: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.documentai.v1beta3.IDocumentMetadata>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        dataset: request.dataset ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'dataset': request.dataset ?? '',
+    });
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDocuments iterate %j', request);
     return this.descriptors.page.listDocuments.asyncIterate(
       this.innerApiCalls['listDocuments'] as GaxCall,
@@ -1782,7 +1372,7 @@ export class DocumentServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.documentai.v1beta3.IDocumentMetadata>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1822,7 +1412,7 @@ export class DocumentServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1860,7 +1450,7 @@ export class DocumentServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1905,20 +1495,20 @@ export class DocumentServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1955,13 +1545,13 @@ export class DocumentServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1995,7 +1585,7 @@ export class DocumentServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2010,20 +1600,20 @@ export class DocumentServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2067,20 +1657,20 @@ export class DocumentServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2096,7 +1686,7 @@ export class DocumentServiceClient {
    * @param {string} processor
    * @returns {string} Resource name string.
    */
-  datasetPath(project: string, location: string, processor: string) {
+  datasetPath(project:string,location:string,processor:string) {
     return this.pathTemplates.datasetPathTemplate.render({
       project: project,
       location: location,
@@ -2145,7 +1735,7 @@ export class DocumentServiceClient {
    * @param {string} processor
    * @returns {string} Resource name string.
    */
-  datasetSchemaPath(project: string, location: string, processor: string) {
+  datasetSchemaPath(project:string,location:string,processor:string) {
     return this.pathTemplates.datasetSchemaPathTemplate.render({
       project: project,
       location: location,
@@ -2161,8 +1751,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDatasetSchemaName(datasetSchemaName: string) {
-    return this.pathTemplates.datasetSchemaPathTemplate.match(datasetSchemaName)
-      .project;
+    return this.pathTemplates.datasetSchemaPathTemplate.match(datasetSchemaName).project;
   }
 
   /**
@@ -2173,8 +1762,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDatasetSchemaName(datasetSchemaName: string) {
-    return this.pathTemplates.datasetSchemaPathTemplate.match(datasetSchemaName)
-      .location;
+    return this.pathTemplates.datasetSchemaPathTemplate.match(datasetSchemaName).location;
   }
 
   /**
@@ -2185,8 +1773,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the processor.
    */
   matchProcessorFromDatasetSchemaName(datasetSchemaName: string) {
-    return this.pathTemplates.datasetSchemaPathTemplate.match(datasetSchemaName)
-      .processor;
+    return this.pathTemplates.datasetSchemaPathTemplate.match(datasetSchemaName).processor;
   }
 
   /**
@@ -2199,13 +1786,7 @@ export class DocumentServiceClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  evaluationPath(
-    project: string,
-    location: string,
-    processor: string,
-    processorVersion: string,
-    evaluation: string
-  ) {
+  evaluationPath(project:string,location:string,processor:string,processorVersion:string,evaluation:string) {
     return this.pathTemplates.evaluationPathTemplate.render({
       project: project,
       location: location,
@@ -2223,8 +1804,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
-      .project;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).project;
   }
 
   /**
@@ -2235,8 +1815,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
-      .location;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).location;
   }
 
   /**
@@ -2247,8 +1826,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the processor.
    */
   matchProcessorFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
-      .processor;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).processor;
   }
 
   /**
@@ -2259,8 +1837,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the processor_version.
    */
   matchProcessorVersionFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
-      .processor_version;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).processor_version;
   }
 
   /**
@@ -2271,8 +1848,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
-      .evaluation;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).evaluation;
   }
 
   /**
@@ -2283,7 +1859,7 @@ export class DocumentServiceClient {
    * @param {string} processor
    * @returns {string} Resource name string.
    */
-  processorPath(project: string, location: string, processor: string) {
+  processorPath(project:string,location:string,processor:string) {
     return this.pathTemplates.processorPathTemplate.render({
       project: project,
       location: location,
@@ -2299,8 +1875,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProcessorName(processorName: string) {
-    return this.pathTemplates.processorPathTemplate.match(processorName)
-      .project;
+    return this.pathTemplates.processorPathTemplate.match(processorName).project;
   }
 
   /**
@@ -2311,8 +1886,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProcessorName(processorName: string) {
-    return this.pathTemplates.processorPathTemplate.match(processorName)
-      .location;
+    return this.pathTemplates.processorPathTemplate.match(processorName).location;
   }
 
   /**
@@ -2323,8 +1897,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the processor.
    */
   matchProcessorFromProcessorName(processorName: string) {
-    return this.pathTemplates.processorPathTemplate.match(processorName)
-      .processor;
+    return this.pathTemplates.processorPathTemplate.match(processorName).processor;
   }
 
   /**
@@ -2335,7 +1908,7 @@ export class DocumentServiceClient {
    * @param {string} processor_type
    * @returns {string} Resource name string.
    */
-  processorTypePath(project: string, location: string, processorType: string) {
+  processorTypePath(project:string,location:string,processorType:string) {
     return this.pathTemplates.processorTypePathTemplate.render({
       project: project,
       location: location,
@@ -2351,8 +1924,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProcessorTypeName(processorTypeName: string) {
-    return this.pathTemplates.processorTypePathTemplate.match(processorTypeName)
-      .project;
+    return this.pathTemplates.processorTypePathTemplate.match(processorTypeName).project;
   }
 
   /**
@@ -2363,8 +1935,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProcessorTypeName(processorTypeName: string) {
-    return this.pathTemplates.processorTypePathTemplate.match(processorTypeName)
-      .location;
+    return this.pathTemplates.processorTypePathTemplate.match(processorTypeName).location;
   }
 
   /**
@@ -2375,8 +1946,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the processor_type.
    */
   matchProcessorTypeFromProcessorTypeName(processorTypeName: string) {
-    return this.pathTemplates.processorTypePathTemplate.match(processorTypeName)
-      .processor_type;
+    return this.pathTemplates.processorTypePathTemplate.match(processorTypeName).processor_type;
   }
 
   /**
@@ -2388,12 +1958,7 @@ export class DocumentServiceClient {
    * @param {string} processor_version
    * @returns {string} Resource name string.
    */
-  processorVersionPath(
-    project: string,
-    location: string,
-    processor: string,
-    processorVersion: string
-  ) {
+  processorVersionPath(project:string,location:string,processor:string,processorVersion:string) {
     return this.pathTemplates.processorVersionPathTemplate.render({
       project: project,
       location: location,
@@ -2410,9 +1975,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProcessorVersionName(processorVersionName: string) {
-    return this.pathTemplates.processorVersionPathTemplate.match(
-      processorVersionName
-    ).project;
+    return this.pathTemplates.processorVersionPathTemplate.match(processorVersionName).project;
   }
 
   /**
@@ -2423,9 +1986,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProcessorVersionName(processorVersionName: string) {
-    return this.pathTemplates.processorVersionPathTemplate.match(
-      processorVersionName
-    ).location;
+    return this.pathTemplates.processorVersionPathTemplate.match(processorVersionName).location;
   }
 
   /**
@@ -2436,9 +1997,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the processor.
    */
   matchProcessorFromProcessorVersionName(processorVersionName: string) {
-    return this.pathTemplates.processorVersionPathTemplate.match(
-      processorVersionName
-    ).processor;
+    return this.pathTemplates.processorVersionPathTemplate.match(processorVersionName).processor;
   }
 
   /**
@@ -2449,9 +2008,7 @@ export class DocumentServiceClient {
    * @returns {string} A string representing the processor_version.
    */
   matchProcessorVersionFromProcessorVersionName(processorVersionName: string) {
-    return this.pathTemplates.processorVersionPathTemplate.match(
-      processorVersionName
-    ).processor_version;
+    return this.pathTemplates.processorVersionPathTemplate.match(processorVersionName).processor_version;
   }
 
   /**
@@ -2466,9 +2023,7 @@ export class DocumentServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

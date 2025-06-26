@@ -1271,44 +1271,6 @@ describe('v2.SessionsClient', () => {
             });
         });
 
-        describe('projectConversation', async () => {
-            const fakePath = "/rendered/path/projectConversation";
-            const expectedParameters = {
-                project: "projectValue",
-                conversation: "conversationValue",
-            };
-            const client = new sessionsModule.v2.SessionsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectConversationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectConversationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectConversationPath', () => {
-                const result = client.projectConversationPath("projectValue", "conversationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectConversationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectConversationName', () => {
-                const result = client.matchProjectFromProjectConversationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectConversationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchConversationFromProjectConversationName', () => {
-                const result = client.matchConversationFromProjectConversationName(fakePath);
-                assert.strictEqual(result, "conversationValue");
-                assert((client.pathTemplates.projectConversationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
         describe('projectConversationMessage', async () => {
             const fakePath = "/rendered/path/projectConversationMessage";
             const expectedParameters = {
@@ -1519,6 +1481,44 @@ describe('v2.SessionsClient', () => {
                 const result = client.matchConversationProfileFromProjectConversationProfileName(fakePath);
                 assert.strictEqual(result, "conversationProfileValue");
                 assert((client.pathTemplates.projectConversationProfilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectConversations', async () => {
+            const fakePath = "/rendered/path/projectConversations";
+            const expectedParameters = {
+                project: "projectValue",
+                conversation: "conversationValue",
+            };
+            const client = new sessionsModule.v2.SessionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectConversationsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectConversationsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectConversationsPath', () => {
+                const result = client.projectConversationsPath("projectValue", "conversationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectConversationsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectConversationsName', () => {
+                const result = client.matchProjectFromProjectConversationsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectConversationsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConversationFromProjectConversationsName', () => {
+                const result = client.matchConversationFromProjectConversationsName(fakePath);
+                assert.strictEqual(result, "conversationValue");
+                assert((client.pathTemplates.projectConversationsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -2269,52 +2269,6 @@ describe('v2.SessionsClient', () => {
             });
         });
 
-        describe('projectLocationConversation', async () => {
-            const fakePath = "/rendered/path/projectLocationConversation";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                conversation: "conversationValue",
-            };
-            const client = new sessionsModule.v2.SessionsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationConversationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationConversationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationConversationPath', () => {
-                const result = client.projectLocationConversationPath("projectValue", "locationValue", "conversationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationConversationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationConversationName', () => {
-                const result = client.matchProjectFromProjectLocationConversationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationConversationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationConversationName', () => {
-                const result = client.matchLocationFromProjectLocationConversationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationConversationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchConversationFromProjectLocationConversationName', () => {
-                const result = client.matchConversationFromProjectLocationConversationName(fakePath);
-                assert.strictEqual(result, "conversationValue");
-                assert((client.pathTemplates.projectLocationConversationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
         describe('projectLocationConversationMessage', async () => {
             const fakePath = "/rendered/path/projectLocationConversationMessage";
             const expectedParameters = {
@@ -2565,6 +2519,52 @@ describe('v2.SessionsClient', () => {
                 const result = client.matchConversationProfileFromProjectLocationConversationProfileName(fakePath);
                 assert.strictEqual(result, "conversationProfileValue");
                 assert((client.pathTemplates.projectLocationConversationProfilePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationConversations', async () => {
+            const fakePath = "/rendered/path/projectLocationConversations";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                conversation: "conversationValue",
+            };
+            const client = new sessionsModule.v2.SessionsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationConversationsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationConversationsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationConversationsPath', () => {
+                const result = client.projectLocationConversationsPath("projectValue", "locationValue", "conversationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationConversationsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationConversationsName', () => {
+                const result = client.matchProjectFromProjectLocationConversationsName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationConversationsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationConversationsName', () => {
+                const result = client.matchLocationFromProjectLocationConversationsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationConversationsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConversationFromProjectLocationConversationsName', () => {
+                const result = client.matchConversationFromProjectLocationConversationsName(fakePath);
+                assert.strictEqual(result, "conversationValue");
+                assert((client.pathTemplates.projectLocationConversationsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

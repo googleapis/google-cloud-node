@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -117,41 +106,20 @@ export class TelcoAutomationClient {
    *     const client = new TelcoAutomationClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof TelcoAutomationClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'telcoautomation.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -177,7 +145,7 @@ export class TelcoAutomationClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -193,9 +161,13 @@ export class TelcoAutomationClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -246,162 +218,81 @@ export class TelcoAutomationClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listOrchestrationClusters: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'orchestrationClusters'
-      ),
-      listEdgeSlms: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'edgeSlms'
-      ),
-      listBlueprints: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'blueprints'
-      ),
-      listBlueprintRevisions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'blueprints'
-      ),
-      searchBlueprintRevisions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'blueprints'
-      ),
-      searchDeploymentRevisions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'deployments'
-      ),
-      listPublicBlueprints: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'publicBlueprints'
-      ),
-      listDeployments: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'deployments'
-      ),
-      listDeploymentRevisions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'deployments'
-      ),
-      listHydratedDeployments: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'hydratedDeployments'
-      ),
+      listOrchestrationClusters:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'orchestrationClusters'),
+      listEdgeSlms:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'edgeSlms'),
+      listBlueprints:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'blueprints'),
+      listBlueprintRevisions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'blueprints'),
+      searchBlueprintRevisions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'blueprints'),
+      searchDeploymentRevisions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'deployments'),
+      listPublicBlueprints:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'publicBlueprints'),
+      listDeployments:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'deployments'),
+      listDeploymentRevisions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'deployments'),
+      listHydratedDeployments:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'hydratedDeployments')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*/locations}',
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*/operations}',
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*/locations}',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*/operations}',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createOrchestrationClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.telcoautomation.v1.OrchestrationCluster'
-    ) as gax.protobuf.Type;
+      '.google.cloud.telcoautomation.v1.OrchestrationCluster') as gax.protobuf.Type;
     const createOrchestrationClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.telcoautomation.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.telcoautomation.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteOrchestrationClusterResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteOrchestrationClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.telcoautomation.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.telcoautomation.v1.OperationMetadata') as gax.protobuf.Type;
     const createEdgeSlmResponse = protoFilesRoot.lookup(
-      '.google.cloud.telcoautomation.v1.EdgeSlm'
-    ) as gax.protobuf.Type;
+      '.google.cloud.telcoautomation.v1.EdgeSlm') as gax.protobuf.Type;
     const createEdgeSlmMetadata = protoFilesRoot.lookup(
-      '.google.cloud.telcoautomation.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.telcoautomation.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteEdgeSlmResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteEdgeSlmMetadata = protoFilesRoot.lookup(
-      '.google.cloud.telcoautomation.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.telcoautomation.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createOrchestrationCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createOrchestrationClusterResponse.decode.bind(
-          createOrchestrationClusterResponse
-        ),
-        createOrchestrationClusterMetadata.decode.bind(
-          createOrchestrationClusterMetadata
-        )
-      ),
+        createOrchestrationClusterResponse.decode.bind(createOrchestrationClusterResponse),
+        createOrchestrationClusterMetadata.decode.bind(createOrchestrationClusterMetadata)),
       deleteOrchestrationCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteOrchestrationClusterResponse.decode.bind(
-          deleteOrchestrationClusterResponse
-        ),
-        deleteOrchestrationClusterMetadata.decode.bind(
-          deleteOrchestrationClusterMetadata
-        )
-      ),
+        deleteOrchestrationClusterResponse.decode.bind(deleteOrchestrationClusterResponse),
+        deleteOrchestrationClusterMetadata.decode.bind(deleteOrchestrationClusterMetadata)),
       createEdgeSlm: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createEdgeSlmResponse.decode.bind(createEdgeSlmResponse),
-        createEdgeSlmMetadata.decode.bind(createEdgeSlmMetadata)
-      ),
+        createEdgeSlmMetadata.decode.bind(createEdgeSlmMetadata)),
       deleteEdgeSlm: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteEdgeSlmResponse.decode.bind(deleteEdgeSlmResponse),
-        deleteEdgeSlmMetadata.decode.bind(deleteEdgeSlmMetadata)
-      ),
+        deleteEdgeSlmMetadata.decode.bind(deleteEdgeSlmMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.telcoautomation.v1.TelcoAutomation',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.telcoautomation.v1.TelcoAutomation', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -432,70 +323,28 @@ export class TelcoAutomationClient {
     // Put together the "service stub" for
     // google.cloud.telcoautomation.v1.TelcoAutomation.
     this.telcoAutomationStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.telcoautomation.v1.TelcoAutomation'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.telcoautomation.v1.TelcoAutomation') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.telcoautomation.v1.TelcoAutomation,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const telcoAutomationStubMethods = [
-      'listOrchestrationClusters',
-      'getOrchestrationCluster',
-      'createOrchestrationCluster',
-      'deleteOrchestrationCluster',
-      'listEdgeSlms',
-      'getEdgeSlm',
-      'createEdgeSlm',
-      'deleteEdgeSlm',
-      'createBlueprint',
-      'updateBlueprint',
-      'getBlueprint',
-      'deleteBlueprint',
-      'listBlueprints',
-      'approveBlueprint',
-      'proposeBlueprint',
-      'rejectBlueprint',
-      'listBlueprintRevisions',
-      'searchBlueprintRevisions',
-      'searchDeploymentRevisions',
-      'discardBlueprintChanges',
-      'listPublicBlueprints',
-      'getPublicBlueprint',
-      'createDeployment',
-      'updateDeployment',
-      'getDeployment',
-      'removeDeployment',
-      'listDeployments',
-      'listDeploymentRevisions',
-      'discardDeploymentChanges',
-      'applyDeployment',
-      'computeDeploymentStatus',
-      'rollbackDeployment',
-      'getHydratedDeployment',
-      'listHydratedDeployments',
-      'updateHydratedDeployment',
-      'applyHydratedDeployment',
-    ];
+    const telcoAutomationStubMethods =
+        ['listOrchestrationClusters', 'getOrchestrationCluster', 'createOrchestrationCluster', 'deleteOrchestrationCluster', 'listEdgeSlms', 'getEdgeSlm', 'createEdgeSlm', 'deleteEdgeSlm', 'createBlueprint', 'updateBlueprint', 'getBlueprint', 'deleteBlueprint', 'listBlueprints', 'approveBlueprint', 'proposeBlueprint', 'rejectBlueprint', 'listBlueprintRevisions', 'searchBlueprintRevisions', 'searchDeploymentRevisions', 'discardBlueprintChanges', 'listPublicBlueprints', 'getPublicBlueprint', 'createDeployment', 'updateDeployment', 'getDeployment', 'removeDeployment', 'listDeployments', 'listDeploymentRevisions', 'discardDeploymentChanges', 'applyDeployment', 'computeDeploymentStatus', 'rollbackDeployment', 'getHydratedDeployment', 'listHydratedDeployments', 'updateHydratedDeployment', 'applyHydratedDeployment'];
     for (const methodName of telcoAutomationStubMethods) {
       const callPromise = this.telcoAutomationStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -520,14 +369,8 @@ export class TelcoAutomationClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'telcoautomation.googleapis.com';
   }
@@ -538,14 +381,8 @@ export class TelcoAutomationClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'telcoautomation.googleapis.com';
   }
@@ -576,7 +413,9 @@ export class TelcoAutomationClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -585,9 +424,8 @@ export class TelcoAutomationClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -598,3683 +436,2705 @@ export class TelcoAutomationClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets details of a single OrchestrationCluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.OrchestrationCluster|OrchestrationCluster}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.get_orchestration_cluster.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_GetOrchestrationCluster_async
-   */
+/**
+ * Gets details of a single OrchestrationCluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.OrchestrationCluster|OrchestrationCluster}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.get_orchestration_cluster.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_GetOrchestrationCluster_async
+ */
   getOrchestrationCluster(
-    request?: protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-      (
-        | protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
+        protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest|undefined, {}|undefined
+      ]>;
   getOrchestrationCluster(
-    request: protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-      | protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOrchestrationCluster(
-    request: protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-      | protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOrchestrationCluster(
-    request?: protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-          | protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-      | protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-      (
-        | protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOrchestrationCluster(
+      request: protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
+          protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest|null|undefined,
+          {}|null|undefined>): void;
+  getOrchestrationCluster(
+      request?: protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
+          protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
+          protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
+        protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getOrchestrationCluster request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-          | protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
+        protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getOrchestrationCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getOrchestrationCluster(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-          (
-            | protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getOrchestrationCluster response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getOrchestrationCluster(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
+        protos.google.cloud.telcoautomation.v1.IGetOrchestrationClusterRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getOrchestrationCluster response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets details of a single EdgeSlm.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.EdgeSlm|EdgeSlm}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.get_edge_slm.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_GetEdgeSlm_async
-   */
+/**
+ * Gets details of a single EdgeSlm.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.EdgeSlm|EdgeSlm}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.get_edge_slm.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_GetEdgeSlm_async
+ */
   getEdgeSlm(
-    request?: protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-      protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IEdgeSlm,
+        protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest|undefined, {}|undefined
+      ]>;
   getEdgeSlm(
-    request: protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-      | protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEdgeSlm(
-    request: protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-      | protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEdgeSlm(
-    request?: protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-          | protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-      | protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-      protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEdgeSlm(
+      request: protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IEdgeSlm,
+          protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEdgeSlm(
+      request?: protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IEdgeSlm,
+          protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IEdgeSlm,
+          protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IEdgeSlm,
+        protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEdgeSlm request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-          | protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IEdgeSlm,
+        protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEdgeSlm response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEdgeSlm(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-          protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getEdgeSlm response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getEdgeSlm(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IEdgeSlm,
+        protos.google.cloud.telcoautomation.v1.IGetEdgeSlmRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEdgeSlm response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a blueprint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of parent resource.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
-   * @param {string} [request.blueprintId]
-   *   Optional. The name of the blueprint.
-   * @param {google.cloud.telcoautomation.v1.Blueprint} request.blueprint
-   *   Required. The `Blueprint` to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.create_blueprint.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_CreateBlueprint_async
-   */
+/**
+ * Creates a blueprint.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of parent resource.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
+ * @param {string} [request.blueprintId]
+ *   Optional. The name of the blueprint.
+ * @param {google.cloud.telcoautomation.v1.Blueprint} request.blueprint
+ *   Required. The `Blueprint` to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.create_blueprint.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_CreateBlueprint_async
+ */
   createBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      (
-        | protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest|undefined, {}|undefined
+      ]>;
   createBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IBlueprint,
-          | protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      (
-        | protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  createBlueprint(
+      request: protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  createBlueprint(
+      request?: protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createBlueprint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IBlueprint,
-          | protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createBlueprint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createBlueprint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IBlueprint,
-          (
-            | protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createBlueprint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createBlueprint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.ICreateBlueprintRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createBlueprint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a blueprint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.telcoautomation.v1.Blueprint} request.blueprint
-   *   Required. The `blueprint` to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Update mask is used to specify the fields to be overwritten in
-   *   the `blueprint` resource by the update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.update_blueprint.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_UpdateBlueprint_async
-   */
+/**
+ * Updates a blueprint.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.telcoautomation.v1.Blueprint} request.blueprint
+ *   Required. The `blueprint` to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Update mask is used to specify the fields to be overwritten in
+ *   the `blueprint` resource by the update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.update_blueprint.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_UpdateBlueprint_async
+ */
   updateBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      (
-        | protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest|undefined, {}|undefined
+      ]>;
   updateBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IBlueprint,
-          | protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      (
-        | protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateBlueprint(
+      request: protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateBlueprint(
+      request?: protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'blueprint.name': request.blueprint!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'blueprint.name': request.blueprint!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateBlueprint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IBlueprint,
-          | protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateBlueprint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateBlueprint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IBlueprint,
-          (
-            | protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateBlueprint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateBlueprint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IUpdateBlueprintRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateBlueprint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns the requested blueprint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the blueprint.
-   *   Case 1: If the name provided in the request is
-   *   {blueprint_id}@{revision_id}, then the revision with revision_id will be
-   *   returned. Case 2: If the name provided in the request is {blueprint}, then
-   *   the current state of the blueprint is returned.
-   * @param {google.cloud.telcoautomation.v1.BlueprintView} [request.view]
-   *   Optional. Defines the type of view of the blueprint.
-   *   When field is not present BLUEPRINT_VIEW_BASIC is considered as default.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.get_blueprint.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_GetBlueprint_async
-   */
+/**
+ * Returns the requested blueprint.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the blueprint.
+ *   Case 1: If the name provided in the request is
+ *   {blueprint_id}@{revision_id}, then the revision with revision_id will be
+ *   returned. Case 2: If the name provided in the request is {blueprint}, then
+ *   the current state of the blueprint is returned.
+ * @param {google.cloud.telcoautomation.v1.BlueprintView} [request.view]
+ *   Optional. Defines the type of view of the blueprint.
+ *   When field is not present BLUEPRINT_VIEW_BASIC is considered as default.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.get_blueprint.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_GetBlueprint_async
+ */
   getBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest|undefined, {}|undefined
+      ]>;
   getBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IBlueprint,
-          | protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBlueprint(
+      request: protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBlueprint(
+      request?: protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getBlueprint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IBlueprint,
-          | protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getBlueprint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getBlueprint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IBlueprint,
-          (
-            | protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getBlueprint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getBlueprint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IGetBlueprintRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getBlueprint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a blueprint and all its revisions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of blueprint to delete.
-   *   Blueprint name should be in the format {blueprint_id}, if
-   *   {blueprint_id}@{revision_id} is passed then the API throws invalid
-   *   argument.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.delete_blueprint.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_DeleteBlueprint_async
-   */
+/**
+ * Deletes a blueprint and all its revisions.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of blueprint to delete.
+ *   Blueprint name should be in the format {blueprint_id}, if
+ *   {blueprint_id}@{revision_id} is passed then the API throws invalid
+ *   argument.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.delete_blueprint.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_DeleteBlueprint_async
+ */
   deleteBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest|undefined, {}|undefined
+      ]>;
   deleteBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteBlueprint(
+      request: protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteBlueprint(
+      request?: protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteBlueprint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteBlueprint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteBlueprint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteBlueprint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteBlueprint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.telcoautomation.v1.IDeleteBlueprintRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteBlueprint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Approves a blueprint and commits a new revision.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the blueprint to approve. The blueprint must be in
-   *   Proposed state. A new revision is committed on approval.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.approve_blueprint.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_ApproveBlueprint_async
-   */
+/**
+ * Approves a blueprint and commits a new revision.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the blueprint to approve. The blueprint must be in
+ *   Proposed state. A new revision is committed on approval.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.approve_blueprint.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_ApproveBlueprint_async
+ */
   approveBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      (
-        | protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest|undefined, {}|undefined
+      ]>;
   approveBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  approveBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  approveBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IBlueprint,
-          | protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      (
-        | protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  approveBlueprint(
+      request: protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  approveBlueprint(
+      request?: protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('approveBlueprint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IBlueprint,
-          | protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('approveBlueprint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .approveBlueprint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IBlueprint,
-          (
-            | protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('approveBlueprint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.approveBlueprint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IApproveBlueprintRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('approveBlueprint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Proposes a blueprint for approval of changes.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the blueprint being proposed.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.propose_blueprint.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_ProposeBlueprint_async
-   */
+/**
+ * Proposes a blueprint for approval of changes.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the blueprint being proposed.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.propose_blueprint.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_ProposeBlueprint_async
+ */
   proposeBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      (
-        | protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest|undefined, {}|undefined
+      ]>;
   proposeBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  proposeBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  proposeBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IBlueprint,
-          | protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      (
-        | protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  proposeBlueprint(
+      request: protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  proposeBlueprint(
+      request?: protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('proposeBlueprint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IBlueprint,
-          | protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('proposeBlueprint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .proposeBlueprint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IBlueprint,
-          (
-            | protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('proposeBlueprint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.proposeBlueprint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IProposeBlueprintRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('proposeBlueprint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Rejects a blueprint revision proposal and flips it back to Draft state.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the blueprint being rejected.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.reject_blueprint.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_RejectBlueprint_async
-   */
+/**
+ * Rejects a blueprint revision proposal and flips it back to Draft state.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the blueprint being rejected.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.reject_blueprint.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_RejectBlueprint_async
+ */
   rejectBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      (
-        | protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest|undefined, {}|undefined
+      ]>;
   rejectBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  rejectBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  rejectBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IBlueprint,
-          | protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint,
-      (
-        | protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  rejectBlueprint(
+      request: protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  rejectBlueprint(
+      request?: protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IBlueprint,
+          protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('rejectBlueprint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IBlueprint,
-          | protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('rejectBlueprint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .rejectBlueprint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IBlueprint,
-          (
-            | protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('rejectBlueprint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.rejectBlueprint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IBlueprint,
+        protos.google.cloud.telcoautomation.v1.IRejectBlueprintRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('rejectBlueprint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Discards the changes in a blueprint and reverts the blueprint to the last
-   * approved blueprint revision. No changes take place if a blueprint does not
-   * have revisions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the blueprint of which changes are being discarded.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.DiscardBlueprintChangesResponse|DiscardBlueprintChangesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.discard_blueprint_changes.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_DiscardBlueprintChanges_async
-   */
+/**
+ * Discards the changes in a blueprint and reverts the blueprint to the last
+ * approved blueprint revision. No changes take place if a blueprint does not
+ * have revisions.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the blueprint of which changes are being discarded.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.DiscardBlueprintChangesResponse|DiscardBlueprintChangesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.discard_blueprint_changes.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_DiscardBlueprintChanges_async
+ */
   discardBlueprintChanges(
-    request?: protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesResponse,
-      (
-        | protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesResponse,
+        protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest|undefined, {}|undefined
+      ]>;
   discardBlueprintChanges(
-    request: protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesResponse,
-      | protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  discardBlueprintChanges(
-    request: protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesResponse,
-      | protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  discardBlueprintChanges(
-    request?: protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesResponse,
-          | protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesResponse,
-      | protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesResponse,
-      (
-        | protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest|null|undefined,
+          {}|null|undefined>): void;
+  discardBlueprintChanges(
+      request: protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesResponse,
+          protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest|null|undefined,
+          {}|null|undefined>): void;
+  discardBlueprintChanges(
+      request?: protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesResponse,
+          protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesResponse,
+          protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesResponse,
+        protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('discardBlueprintChanges request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesResponse,
-          | protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesResponse,
+        protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('discardBlueprintChanges response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .discardBlueprintChanges(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesResponse,
-          (
-            | protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('discardBlueprintChanges response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.discardBlueprintChanges(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesResponse,
+        protos.google.cloud.telcoautomation.v1.IDiscardBlueprintChangesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('discardBlueprintChanges response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns the requested public blueprint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the public blueprint.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.PublicBlueprint|PublicBlueprint}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.get_public_blueprint.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_GetPublicBlueprint_async
-   */
+/**
+ * Returns the requested public blueprint.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the public blueprint.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.PublicBlueprint|PublicBlueprint}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.get_public_blueprint.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_GetPublicBlueprint_async
+ */
   getPublicBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IPublicBlueprint,
-      (
-        | protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IPublicBlueprint,
+        protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest|undefined, {}|undefined
+      ]>;
   getPublicBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IPublicBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPublicBlueprint(
-    request: protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IPublicBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPublicBlueprint(
-    request?: protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IPublicBlueprint,
-          | protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IPublicBlueprint,
-      | protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IPublicBlueprint,
-      (
-        | protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPublicBlueprint(
+      request: protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IPublicBlueprint,
+          protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPublicBlueprint(
+      request?: protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IPublicBlueprint,
+          protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IPublicBlueprint,
+          protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IPublicBlueprint,
+        protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPublicBlueprint request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IPublicBlueprint,
-          | protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IPublicBlueprint,
+        protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPublicBlueprint response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPublicBlueprint(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IPublicBlueprint,
-          (
-            | protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getPublicBlueprint response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getPublicBlueprint(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IPublicBlueprint,
+        protos.google.cloud.telcoautomation.v1.IGetPublicBlueprintRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPublicBlueprint response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a deployment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of parent resource.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
-   * @param {string} [request.deploymentId]
-   *   Optional. The name of the deployment.
-   * @param {google.cloud.telcoautomation.v1.Deployment} request.deployment
-   *   Required. The `Deployment` to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.create_deployment.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_CreateDeployment_async
-   */
+/**
+ * Creates a deployment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of parent resource.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
+ * @param {string} [request.deploymentId]
+ *   Optional. The name of the deployment.
+ * @param {google.cloud.telcoautomation.v1.Deployment} request.deployment
+ *   Required. The `Deployment` to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.create_deployment.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_CreateDeployment_async
+ */
   createDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      (
-        | protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest|undefined, {}|undefined
+      ]>;
   createDeployment(
-    request: protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      | protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDeployment(
-    request: protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      | protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IDeployment,
-          | protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      | protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      (
-        | protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDeployment(
+      request: protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IDeployment,
+          protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDeployment(
+      request?: protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IDeployment,
+          protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IDeployment,
+          protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createDeployment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IDeployment,
-          | protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createDeployment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IDeployment,
-          (
-            | protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('createDeployment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createDeployment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.ICreateDeploymentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDeployment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a deployment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.telcoautomation.v1.Deployment} request.deployment
-   *   Required. The `deployment` to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Update mask is used to specify the fields to be overwritten in
-   *   the `deployment` resource by the update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.update_deployment.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_UpdateDeployment_async
-   */
+/**
+ * Updates a deployment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.telcoautomation.v1.Deployment} request.deployment
+ *   Required. The `deployment` to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Update mask is used to specify the fields to be overwritten in
+ *   the `deployment` resource by the update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.update_deployment.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_UpdateDeployment_async
+ */
   updateDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      (
-        | protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest|undefined, {}|undefined
+      ]>;
   updateDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      | protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      | protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IDeployment,
-          | protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      | protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      (
-        | protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDeployment(
+      request: protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IDeployment,
+          protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateDeployment(
+      request?: protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IDeployment,
+          protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IDeployment,
+          protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'deployment.name': request.deployment!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'deployment.name': request.deployment!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateDeployment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IDeployment,
-          | protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateDeployment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IDeployment,
-          (
-            | protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateDeployment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateDeployment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IUpdateDeploymentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateDeployment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns the requested deployment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the deployment.
-   *   Case 1: If the name provided in the request is
-   *   {deployment_id}@{revision_id}, then the revision with revision_id will be
-   *   returned.
-   *   Case 2: If the name provided in the request is {deployment}, then
-   *   the current state of the deployment is returned.
-   * @param {google.cloud.telcoautomation.v1.DeploymentView} [request.view]
-   *   Optional. Defines the type of view of the deployment.
-   *   When field is not present VIEW_BASIC is considered as default.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.get_deployment.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_GetDeployment_async
-   */
+/**
+ * Returns the requested deployment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the deployment.
+ *   Case 1: If the name provided in the request is
+ *   {deployment_id}@{revision_id}, then the revision with revision_id will be
+ *   returned.
+ *   Case 2: If the name provided in the request is {deployment}, then
+ *   the current state of the deployment is returned.
+ * @param {google.cloud.telcoautomation.v1.DeploymentView} [request.view]
+ *   Optional. Defines the type of view of the deployment.
+ *   When field is not present VIEW_BASIC is considered as default.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.get_deployment.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_GetDeployment_async
+ */
   getDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest|undefined, {}|undefined
+      ]>;
   getDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      | protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      | protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IDeployment,
-          | protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      | protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDeployment(
+      request: protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IDeployment,
+          protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getDeployment(
+      request?: protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IDeployment,
+          protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IDeployment,
+          protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getDeployment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IDeployment,
-          | protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getDeployment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IDeployment,
-          (
-            | protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getDeployment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getDeployment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IGetDeploymentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getDeployment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Removes the deployment by marking it as DELETING. Post which deployment and
-   * it's revisions gets deleted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of deployment to initiate delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.remove_deployment.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_RemoveDeployment_async
-   */
+/**
+ * Removes the deployment by marking it as DELETING. Post which deployment and
+ * it's revisions gets deleted.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of deployment to initiate delete.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.remove_deployment.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_RemoveDeployment_async
+ */
   removeDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest|undefined, {}|undefined
+      ]>;
   removeDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  removeDeployment(
+      request: protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  removeDeployment(
+      request?: protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('removeDeployment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('removeDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .removeDeployment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('removeDeployment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.removeDeployment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.telcoautomation.v1.IRemoveDeploymentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('removeDeployment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Discards the changes in a deployment and reverts the deployment to the last
-   * approved deployment revision. No changes take place if a deployment does
-   * not have revisions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the deployment of which changes are being discarded.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.DiscardDeploymentChangesResponse|DiscardDeploymentChangesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.discard_deployment_changes.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_DiscardDeploymentChanges_async
-   */
+/**
+ * Discards the changes in a deployment and reverts the deployment to the last
+ * approved deployment revision. No changes take place if a deployment does
+ * not have revisions.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the deployment of which changes are being discarded.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.DiscardDeploymentChangesResponse|DiscardDeploymentChangesResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.discard_deployment_changes.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_DiscardDeploymentChanges_async
+ */
   discardDeploymentChanges(
-    request?: protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesResponse,
-      (
-        | protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesResponse,
+        protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest|undefined, {}|undefined
+      ]>;
   discardDeploymentChanges(
-    request: protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesResponse,
-      | protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  discardDeploymentChanges(
-    request: protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesResponse,
-      | protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  discardDeploymentChanges(
-    request?: protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesResponse,
-          | protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesResponse,
-      | protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesResponse,
-      (
-        | protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest|null|undefined,
+          {}|null|undefined>): void;
+  discardDeploymentChanges(
+      request: protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesResponse,
+          protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest|null|undefined,
+          {}|null|undefined>): void;
+  discardDeploymentChanges(
+      request?: protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesResponse,
+          protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesResponse,
+          protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesResponse,
+        protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('discardDeploymentChanges request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesResponse,
-          | protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesResponse,
+        protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('discardDeploymentChanges response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .discardDeploymentChanges(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesResponse,
-          (
-            | protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('discardDeploymentChanges response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.discardDeploymentChanges(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesResponse,
+        protos.google.cloud.telcoautomation.v1.IDiscardDeploymentChangesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('discardDeploymentChanges response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Applies the deployment's YAML files to the parent orchestration cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the deployment to apply to orchestration cluster.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.apply_deployment.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_ApplyDeployment_async
-   */
+/**
+ * Applies the deployment's YAML files to the parent orchestration cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the deployment to apply to orchestration cluster.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.apply_deployment.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_ApplyDeployment_async
+ */
   applyDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      (
-        | protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest|undefined, {}|undefined
+      ]>;
   applyDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      | protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  applyDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      | protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  applyDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IDeployment,
-          | protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      | protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      (
-        | protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  applyDeployment(
+      request: protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IDeployment,
+          protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  applyDeployment(
+      request?: protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IDeployment,
+          protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IDeployment,
+          protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('applyDeployment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IDeployment,
-          | protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('applyDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .applyDeployment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IDeployment,
-          (
-            | protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('applyDeployment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.applyDeployment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IApplyDeploymentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('applyDeployment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns the requested deployment status.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the deployment without revisionID.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.ComputeDeploymentStatusResponse|ComputeDeploymentStatusResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.compute_deployment_status.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_ComputeDeploymentStatus_async
-   */
+/**
+ * Returns the requested deployment status.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the deployment without revisionID.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.ComputeDeploymentStatusResponse|ComputeDeploymentStatusResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.compute_deployment_status.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_ComputeDeploymentStatus_async
+ */
   computeDeploymentStatus(
-    request?: protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusResponse,
-      (
-        | protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusResponse,
+        protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest|undefined, {}|undefined
+      ]>;
   computeDeploymentStatus(
-    request: protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusResponse,
-      | protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  computeDeploymentStatus(
-    request: protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusResponse,
-      | protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  computeDeploymentStatus(
-    request?: protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusResponse,
-          | protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusResponse,
-      | protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusResponse,
-      (
-        | protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest|null|undefined,
+          {}|null|undefined>): void;
+  computeDeploymentStatus(
+      request: protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusResponse,
+          protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest|null|undefined,
+          {}|null|undefined>): void;
+  computeDeploymentStatus(
+      request?: protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusResponse,
+          protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusResponse,
+          protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusResponse,
+        protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('computeDeploymentStatus request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusResponse,
-          | protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusResponse,
+        protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('computeDeploymentStatus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .computeDeploymentStatus(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusResponse,
-          (
-            | protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('computeDeploymentStatus response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.computeDeploymentStatus(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusResponse,
+        protos.google.cloud.telcoautomation.v1.IComputeDeploymentStatusRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('computeDeploymentStatus response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Rollback the active deployment to the given past approved deployment
-   * revision.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the deployment.
-   * @param {string} request.revisionId
-   *   Required. The revision id of deployment to roll back to.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.rollback_deployment.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_RollbackDeployment_async
-   */
+/**
+ * Rollback the active deployment to the given past approved deployment
+ * revision.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the deployment.
+ * @param {string} request.revisionId
+ *   Required. The revision id of deployment to roll back to.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.rollback_deployment.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_RollbackDeployment_async
+ */
   rollbackDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      (
-        | protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest|undefined, {}|undefined
+      ]>;
   rollbackDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      | protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  rollbackDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      | protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  rollbackDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IDeployment,
-          | protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      | protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment,
-      (
-        | protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  rollbackDeployment(
+      request: protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IDeployment,
+          protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  rollbackDeployment(
+      request?: protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IDeployment,
+          protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IDeployment,
+          protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('rollbackDeployment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IDeployment,
-          | protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('rollbackDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .rollbackDeployment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IDeployment,
-          (
-            | protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('rollbackDeployment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.rollbackDeployment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IDeployment,
+        protos.google.cloud.telcoautomation.v1.IRollbackDeploymentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('rollbackDeployment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Returns the requested hydrated deployment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the hydrated deployment.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.HydratedDeployment|HydratedDeployment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.get_hydrated_deployment.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_GetHydratedDeployment_async
-   */
+/**
+ * Returns the requested hydrated deployment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the hydrated deployment.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.HydratedDeployment|HydratedDeployment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.get_hydrated_deployment.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_GetHydratedDeployment_async
+ */
   getHydratedDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-      (
-        | protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+        protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest|undefined, {}|undefined
+      ]>;
   getHydratedDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-      | protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getHydratedDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-      | protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getHydratedDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-          | protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-      | protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-      (
-        | protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getHydratedDeployment(
+      request: protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+          protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  getHydratedDeployment(
+      request?: protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+          protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+          protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+        protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getHydratedDeployment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-          | protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+        protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getHydratedDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getHydratedDeployment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-          (
-            | protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getHydratedDeployment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getHydratedDeployment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+        protos.google.cloud.telcoautomation.v1.IGetHydratedDeploymentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getHydratedDeployment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates a hydrated deployment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.telcoautomation.v1.HydratedDeployment} request.hydratedDeployment
-   *   Required. The hydrated deployment to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to update. Update mask supports a special
-   *   value `*` which fully replaces (equivalent to PUT) the resource provided.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.HydratedDeployment|HydratedDeployment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.update_hydrated_deployment.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_UpdateHydratedDeployment_async
-   */
+/**
+ * Updates a hydrated deployment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.telcoautomation.v1.HydratedDeployment} request.hydratedDeployment
+ *   Required. The hydrated deployment to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The list of fields to update. Update mask supports a special
+ *   value `*` which fully replaces (equivalent to PUT) the resource provided.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.HydratedDeployment|HydratedDeployment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.update_hydrated_deployment.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_UpdateHydratedDeployment_async
+ */
   updateHydratedDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-      (
-        | protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+        protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest|undefined, {}|undefined
+      ]>;
   updateHydratedDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-      | protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateHydratedDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-      | protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateHydratedDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-          | protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-      | protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-      (
-        | protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateHydratedDeployment(
+      request: protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+          protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateHydratedDeployment(
+      request?: protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+          protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+          protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+        protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'hydrated_deployment.name': request.hydratedDeployment!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'hydrated_deployment.name': request.hydratedDeployment!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateHydratedDeployment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-          | protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+        protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateHydratedDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateHydratedDeployment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-          (
-            | protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateHydratedDeployment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateHydratedDeployment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+        protos.google.cloud.telcoautomation.v1.IUpdateHydratedDeploymentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateHydratedDeployment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Applies a hydrated deployment to a workload cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the hydrated deployment to apply.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.HydratedDeployment|HydratedDeployment}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.apply_hydrated_deployment.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_ApplyHydratedDeployment_async
-   */
+/**
+ * Applies a hydrated deployment to a workload cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the hydrated deployment to apply.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.telcoautomation.v1.HydratedDeployment|HydratedDeployment}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.apply_hydrated_deployment.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_ApplyHydratedDeployment_async
+ */
   applyHydratedDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-      (
-        | protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+        protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest|undefined, {}|undefined
+      ]>;
   applyHydratedDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-      | protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  applyHydratedDeployment(
-    request: protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest,
-    callback: Callback<
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-      | protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  applyHydratedDeployment(
-    request?: protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-          | protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-      | protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-      (
-        | protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  applyHydratedDeployment(
+      request: protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest,
+      callback: Callback<
+          protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+          protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest|null|undefined,
+          {}|null|undefined>): void;
+  applyHydratedDeployment(
+      request?: protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+          protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+          protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+        protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('applyHydratedDeployment request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-          | protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+        protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('applyHydratedDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .applyHydratedDeployment(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
-          (
-            | protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('applyHydratedDeployment response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.applyHydratedDeployment(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.telcoautomation.v1.IHydratedDeployment,
+        protos.google.cloud.telcoautomation.v1.IApplyHydratedDeploymentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('applyHydratedDeployment response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates a new OrchestrationCluster in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {string} request.orchestrationClusterId
-   *   Required. Id of the requesting object
-   *   If auto-generating Id server-side, remove this field and
-   *   orchestration_cluster_id from the method_signature of Create RPC
-   * @param {google.cloud.telcoautomation.v1.OrchestrationCluster} request.orchestrationCluster
-   *   Required. The resource being created
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.create_orchestration_cluster.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_CreateOrchestrationCluster_async
-   */
+/**
+ * Creates a new OrchestrationCluster in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.orchestrationClusterId
+ *   Required. Id of the requesting object
+ *   If auto-generating Id server-side, remove this field and
+ *   orchestration_cluster_id from the method_signature of Create RPC
+ * @param {google.cloud.telcoautomation.v1.OrchestrationCluster} request.orchestrationCluster
+ *   Required. The resource being created
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.create_orchestration_cluster.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_CreateOrchestrationCluster_async
+ */
   createOrchestrationCluster(
-    request?: protos.google.cloud.telcoautomation.v1.ICreateOrchestrationClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.ICreateOrchestrationClusterRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.telcoautomation.v1.IOrchestrationCluster, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createOrchestrationCluster(
-    request: protos.google.cloud.telcoautomation.v1.ICreateOrchestrationClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.telcoautomation.v1.ICreateOrchestrationClusterRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.telcoautomation.v1.IOrchestrationCluster, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createOrchestrationCluster(
-    request: protos.google.cloud.telcoautomation.v1.ICreateOrchestrationClusterRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.telcoautomation.v1.ICreateOrchestrationClusterRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.telcoautomation.v1.IOrchestrationCluster, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createOrchestrationCluster(
-    request?: protos.google.cloud.telcoautomation.v1.ICreateOrchestrationClusterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-            protos.google.cloud.telcoautomation.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.telcoautomation.v1.ICreateOrchestrationClusterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.telcoautomation.v1.IOrchestrationCluster, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.telcoautomation.v1.IOrchestrationCluster, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.telcoautomation.v1.IOrchestrationCluster, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-            protos.google.cloud.telcoautomation.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.telcoautomation.v1.IOrchestrationCluster, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createOrchestrationCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createOrchestrationCluster request %j', request);
-    return this.innerApiCalls
-      .createOrchestrationCluster(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.telcoautomation.v1.IOrchestrationCluster,
-            protos.google.cloud.telcoautomation.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createOrchestrationCluster response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createOrchestrationCluster(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.telcoautomation.v1.IOrchestrationCluster, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createOrchestrationCluster response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createOrchestrationCluster()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.create_orchestration_cluster.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_CreateOrchestrationCluster_async
-   */
-  async checkCreateOrchestrationClusterProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.telcoautomation.v1.OrchestrationCluster,
-      protos.google.cloud.telcoautomation.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createOrchestrationCluster()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.create_orchestration_cluster.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_CreateOrchestrationCluster_async
+ */
+  async checkCreateOrchestrationClusterProgress(name: string): Promise<LROperation<protos.google.cloud.telcoautomation.v1.OrchestrationCluster, protos.google.cloud.telcoautomation.v1.OperationMetadata>>{
     this._log.info('createOrchestrationCluster long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createOrchestrationCluster,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.telcoautomation.v1.OrchestrationCluster,
-      protos.google.cloud.telcoautomation.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createOrchestrationCluster, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.telcoautomation.v1.OrchestrationCluster, protos.google.cloud.telcoautomation.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single OrchestrationCluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.delete_orchestration_cluster.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_DeleteOrchestrationCluster_async
-   */
+/**
+ * Deletes a single OrchestrationCluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.delete_orchestration_cluster.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_DeleteOrchestrationCluster_async
+ */
   deleteOrchestrationCluster(
-    request?: protos.google.cloud.telcoautomation.v1.IDeleteOrchestrationClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IDeleteOrchestrationClusterRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteOrchestrationCluster(
-    request: protos.google.cloud.telcoautomation.v1.IDeleteOrchestrationClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.telcoautomation.v1.IDeleteOrchestrationClusterRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteOrchestrationCluster(
-    request: protos.google.cloud.telcoautomation.v1.IDeleteOrchestrationClusterRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.telcoautomation.v1.IDeleteOrchestrationClusterRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteOrchestrationCluster(
-    request?: protos.google.cloud.telcoautomation.v1.IDeleteOrchestrationClusterRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.telcoautomation.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.telcoautomation.v1.IDeleteOrchestrationClusterRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.telcoautomation.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteOrchestrationCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteOrchestrationCluster request %j', request);
-    return this.innerApiCalls
-      .deleteOrchestrationCluster(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.telcoautomation.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteOrchestrationCluster response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteOrchestrationCluster(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteOrchestrationCluster response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteOrchestrationCluster()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.delete_orchestration_cluster.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_DeleteOrchestrationCluster_async
-   */
-  async checkDeleteOrchestrationClusterProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.telcoautomation.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteOrchestrationCluster()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.delete_orchestration_cluster.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_DeleteOrchestrationCluster_async
+ */
+  async checkDeleteOrchestrationClusterProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.telcoautomation.v1.OperationMetadata>>{
     this._log.info('deleteOrchestrationCluster long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteOrchestrationCluster,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.telcoautomation.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteOrchestrationCluster, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.telcoautomation.v1.OperationMetadata>;
   }
-  /**
-   * Creates a new EdgeSlm in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Value for parent.
-   * @param {string} request.edgeSlmId
-   *   Required. Id of the requesting object
-   *   If auto-generating Id server-side, remove this field and
-   *   edge_slm_id from the method_signature of Create RPC
-   * @param {google.cloud.telcoautomation.v1.EdgeSlm} request.edgeSlm
-   *   Required. The resource being created
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.create_edge_slm.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_CreateEdgeSlm_async
-   */
+/**
+ * Creates a new EdgeSlm in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.edgeSlmId
+ *   Required. Id of the requesting object
+ *   If auto-generating Id server-side, remove this field and
+ *   edge_slm_id from the method_signature of Create RPC
+ * @param {google.cloud.telcoautomation.v1.EdgeSlm} request.edgeSlm
+ *   Required. The resource being created
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.create_edge_slm.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_CreateEdgeSlm_async
+ */
   createEdgeSlm(
-    request?: protos.google.cloud.telcoautomation.v1.ICreateEdgeSlmRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.ICreateEdgeSlmRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.telcoautomation.v1.IEdgeSlm, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createEdgeSlm(
-    request: protos.google.cloud.telcoautomation.v1.ICreateEdgeSlmRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.telcoautomation.v1.ICreateEdgeSlmRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.telcoautomation.v1.IEdgeSlm, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createEdgeSlm(
-    request: protos.google.cloud.telcoautomation.v1.ICreateEdgeSlmRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.telcoautomation.v1.ICreateEdgeSlmRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.telcoautomation.v1.IEdgeSlm, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createEdgeSlm(
-    request?: protos.google.cloud.telcoautomation.v1.ICreateEdgeSlmRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-            protos.google.cloud.telcoautomation.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.telcoautomation.v1.ICreateEdgeSlmRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.telcoautomation.v1.IEdgeSlm, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.telcoautomation.v1.IEdgeSlm, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.telcoautomation.v1.IEdgeSlm, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-            protos.google.cloud.telcoautomation.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.telcoautomation.v1.IEdgeSlm, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createEdgeSlm response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createEdgeSlm request %j', request);
-    return this.innerApiCalls
-      .createEdgeSlm(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.telcoautomation.v1.IEdgeSlm,
-            protos.google.cloud.telcoautomation.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createEdgeSlm response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createEdgeSlm(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.telcoautomation.v1.IEdgeSlm, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createEdgeSlm response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createEdgeSlm()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.create_edge_slm.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_CreateEdgeSlm_async
-   */
-  async checkCreateEdgeSlmProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.telcoautomation.v1.EdgeSlm,
-      protos.google.cloud.telcoautomation.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createEdgeSlm()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.create_edge_slm.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_CreateEdgeSlm_async
+ */
+  async checkCreateEdgeSlmProgress(name: string): Promise<LROperation<protos.google.cloud.telcoautomation.v1.EdgeSlm, protos.google.cloud.telcoautomation.v1.OperationMetadata>>{
     this._log.info('createEdgeSlm long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createEdgeSlm,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.telcoautomation.v1.EdgeSlm,
-      protos.google.cloud.telcoautomation.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createEdgeSlm, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.telcoautomation.v1.EdgeSlm, protos.google.cloud.telcoautomation.v1.OperationMetadata>;
   }
-  /**
-   * Deletes a single EdgeSlm.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the resource
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.delete_edge_slm.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_DeleteEdgeSlm_async
-   */
+/**
+ * Deletes a single EdgeSlm.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server will know to
+ *   ignore the request if it has already been completed. The server will
+ *   guarantee that for at least 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same request
+ *   ID, the server can check if original operation with the same request ID
+ *   was received, and if so, will ignore the second request. This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.delete_edge_slm.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_DeleteEdgeSlm_async
+ */
   deleteEdgeSlm(
-    request?: protos.google.cloud.telcoautomation.v1.IDeleteEdgeSlmRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IDeleteEdgeSlmRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteEdgeSlm(
-    request: protos.google.cloud.telcoautomation.v1.IDeleteEdgeSlmRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.telcoautomation.v1.IDeleteEdgeSlmRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteEdgeSlm(
-    request: protos.google.cloud.telcoautomation.v1.IDeleteEdgeSlmRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.telcoautomation.v1.IDeleteEdgeSlmRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteEdgeSlm(
-    request?: protos.google.cloud.telcoautomation.v1.IDeleteEdgeSlmRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.telcoautomation.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.telcoautomation.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.telcoautomation.v1.IDeleteEdgeSlmRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.telcoautomation.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteEdgeSlm response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteEdgeSlm request %j', request);
-    return this.innerApiCalls
-      .deleteEdgeSlm(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.telcoautomation.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteEdgeSlm response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteEdgeSlm(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.telcoautomation.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteEdgeSlm response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteEdgeSlm()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.delete_edge_slm.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_DeleteEdgeSlm_async
-   */
-  async checkDeleteEdgeSlmProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.telcoautomation.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteEdgeSlm()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.delete_edge_slm.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_DeleteEdgeSlm_async
+ */
+  async checkDeleteEdgeSlmProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.telcoautomation.v1.OperationMetadata>>{
     this._log.info('deleteEdgeSlm long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteEdgeSlm,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.telcoautomation.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteEdgeSlm, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.telcoautomation.v1.OperationMetadata>;
   }
-  /**
-   * Lists OrchestrationClusters in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListOrchestrationClustersRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.OrchestrationCluster|OrchestrationCluster}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listOrchestrationClustersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists OrchestrationClusters in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListOrchestrationClustersRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.OrchestrationCluster|OrchestrationCluster}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listOrchestrationClustersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listOrchestrationClusters(
-    request?: protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IOrchestrationCluster[],
-      protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IOrchestrationCluster[],
+        protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse
+      ]>;
   listOrchestrationClusters(
-    request: protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
-      | protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IOrchestrationCluster
-    >
-  ): void;
-  listOrchestrationClusters(
-    request: protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
-      | protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IOrchestrationCluster
-    >
-  ): void;
-  listOrchestrationClusters(
-    request?: protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
-          | protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IOrchestrationCluster
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
-      | protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IOrchestrationCluster
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IOrchestrationCluster[],
-      protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IOrchestrationCluster>): void;
+  listOrchestrationClusters(
+      request: protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
+          protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IOrchestrationCluster>): void;
+  listOrchestrationClusters(
+      request?: protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
+          protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IOrchestrationCluster>,
+      callback?: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
+          protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IOrchestrationCluster>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IOrchestrationCluster[],
+        protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
-          | protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IOrchestrationCluster
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
+      protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse|null|undefined,
+      protos.google.cloud.telcoautomation.v1.IOrchestrationCluster>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listOrchestrationClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4283,61 +3143,58 @@ export class TelcoAutomationClient {
     this._log.info('listOrchestrationClusters request %j', request);
     return this.innerApiCalls
       .listOrchestrationClusters(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.telcoautomation.v1.IOrchestrationCluster[],
-          protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest | null,
-          protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse,
-        ]) => {
-          this._log.info('listOrchestrationClusters values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.telcoautomation.v1.IOrchestrationCluster[],
+        protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersResponse
+      ]) => {
+        this._log.info('listOrchestrationClusters values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listOrchestrationClusters`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListOrchestrationClustersRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.OrchestrationCluster|OrchestrationCluster} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listOrchestrationClustersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listOrchestrationClusters`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListOrchestrationClustersRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.OrchestrationCluster|OrchestrationCluster} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listOrchestrationClustersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listOrchestrationClustersStream(
-    request?: protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listOrchestrationClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listOrchestrationClusters stream %j', request);
     return this.descriptors.page.listOrchestrationClusters.createStream(
       this.innerApiCalls.listOrchestrationClusters as GaxCall,
@@ -4346,52 +3203,51 @@ export class TelcoAutomationClient {
     );
   }
 
-  /**
-   * Equivalent to `listOrchestrationClusters`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListOrchestrationClustersRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results.
-   * @param {string} request.orderBy
-   *   Hint for how to order the results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.telcoautomation.v1.OrchestrationCluster|OrchestrationCluster}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.list_orchestration_clusters.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListOrchestrationClusters_async
-   */
+/**
+ * Equivalent to `listOrchestrationClusters`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListOrchestrationClustersRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results.
+ * @param {string} request.orderBy
+ *   Hint for how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.telcoautomation.v1.OrchestrationCluster|OrchestrationCluster}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.list_orchestration_clusters.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListOrchestrationClusters_async
+ */
   listOrchestrationClustersAsync(
-    request?: protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.telcoautomation.v1.IOrchestrationCluster> {
+      request?: protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.telcoautomation.v1.IOrchestrationCluster>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listOrchestrationClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listOrchestrationClusters iterate %j', request);
     return this.descriptors.page.listOrchestrationClusters.asyncIterate(
       this.innerApiCalls['listOrchestrationClusters'] as GaxCall,
@@ -4399,117 +3255,92 @@ export class TelcoAutomationClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.telcoautomation.v1.IOrchestrationCluster>;
   }
-  /**
-   * Lists EdgeSlms in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListEdgeSlmsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.EdgeSlm|EdgeSlm}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEdgeSlmsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists EdgeSlms in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListEdgeSlmsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.EdgeSlm|EdgeSlm}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listEdgeSlmsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEdgeSlms(
-    request?: protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IEdgeSlm[],
-      protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IEdgeSlm[],
+        protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse
+      ]>;
   listEdgeSlms(
-    request: protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IEdgeSlm
-    >
-  ): void;
-  listEdgeSlms(
-    request: protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IEdgeSlm
-    >
-  ): void;
-  listEdgeSlms(
-    request?: protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
-          | protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IEdgeSlm
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IEdgeSlm
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IEdgeSlm[],
-      protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IEdgeSlm>): void;
+  listEdgeSlms(
+      request: protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
+          protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IEdgeSlm>): void;
+  listEdgeSlms(
+      request?: protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
+          protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IEdgeSlm>,
+      callback?: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
+          protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IEdgeSlm>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IEdgeSlm[],
+        protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
-          | protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IEdgeSlm
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
+      protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse|null|undefined,
+      protos.google.cloud.telcoautomation.v1.IEdgeSlm>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEdgeSlms values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4518,61 +3349,58 @@ export class TelcoAutomationClient {
     this._log.info('listEdgeSlms request %j', request);
     return this.innerApiCalls
       .listEdgeSlms(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.telcoautomation.v1.IEdgeSlm[],
-          protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest | null,
-          protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse,
-        ]) => {
-          this._log.info('listEdgeSlms values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.telcoautomation.v1.IEdgeSlm[],
+        protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListEdgeSlmsResponse
+      ]) => {
+        this._log.info('listEdgeSlms values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listEdgeSlms`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListEdgeSlmsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.EdgeSlm|EdgeSlm} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEdgeSlmsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listEdgeSlms`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListEdgeSlmsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.EdgeSlm|EdgeSlm} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listEdgeSlmsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEdgeSlmsStream(
-    request?: protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEdgeSlms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEdgeSlms stream %j', request);
     return this.descriptors.page.listEdgeSlms.createStream(
       this.innerApiCalls.listEdgeSlms as GaxCall,
@@ -4581,52 +3409,51 @@ export class TelcoAutomationClient {
     );
   }
 
-  /**
-   * Equivalent to `listEdgeSlms`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value for ListEdgeSlmsRequest
-   * @param {number} request.pageSize
-   *   Requested page size. Server may return fewer items than requested.
-   *   If unspecified, server will pick an appropriate default.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results the server should return.
-   * @param {string} request.filter
-   *   Filtering results
-   * @param {string} request.orderBy
-   *   Hint for how to order the results
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.telcoautomation.v1.EdgeSlm|EdgeSlm}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.list_edge_slms.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListEdgeSlms_async
-   */
+/**
+ * Equivalent to `listEdgeSlms`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value for ListEdgeSlmsRequest
+ * @param {number} request.pageSize
+ *   Requested page size. Server may return fewer items than requested.
+ *   If unspecified, server will pick an appropriate default.
+ * @param {string} request.pageToken
+ *   A token identifying a page of results the server should return.
+ * @param {string} request.filter
+ *   Filtering results
+ * @param {string} request.orderBy
+ *   Hint for how to order the results
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.telcoautomation.v1.EdgeSlm|EdgeSlm}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.list_edge_slms.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListEdgeSlms_async
+ */
   listEdgeSlmsAsync(
-    request?: protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.telcoautomation.v1.IEdgeSlm> {
+      request?: protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.telcoautomation.v1.IEdgeSlm>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEdgeSlms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEdgeSlms iterate %j', request);
     return this.descriptors.page.listEdgeSlms.asyncIterate(
       this.innerApiCalls['listEdgeSlms'] as GaxCall,
@@ -4634,119 +3461,94 @@ export class TelcoAutomationClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.telcoautomation.v1.IEdgeSlm>;
   }
-  /**
-   * List all blueprints.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of parent orchestration cluster resource.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
-   * @param {string} [request.filter]
-   *   Optional. Filtering only supports equality on blueprint state.
-   *   It should be in the form: "state = DRAFT". `OR` operator can be used to
-   *   get response for multiple states. e.g. "state = DRAFT OR state = PROPOSED".
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of blueprints to return per page.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous ListBlueprints call.
-   *   It can be provided to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listBlueprintsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List all blueprints.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of parent orchestration cluster resource.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
+ * @param {string} [request.filter]
+ *   Optional. Filtering only supports equality on blueprint state.
+ *   It should be in the form: "state = DRAFT". `OR` operator can be used to
+ *   get response for multiple states. e.g. "state = DRAFT OR state = PROPOSED".
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of blueprints to return per page.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous ListBlueprints call.
+ *   It can be provided to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listBlueprintsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listBlueprints(
-    request?: protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint[],
-      protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint[],
+        protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse
+      ]>;
   listBlueprints(
-    request: protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IBlueprint
-    >
-  ): void;
-  listBlueprints(
-    request: protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IBlueprint
-    >
-  ): void;
-  listBlueprints(
-    request?: protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
-          | protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IBlueprint
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IBlueprint
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint[],
-      protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IBlueprint>): void;
+  listBlueprints(
+      request: protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
+          protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IBlueprint>): void;
+  listBlueprints(
+      request?: protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
+          protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IBlueprint>,
+      callback?: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
+          protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IBlueprint>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint[],
+        protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
-          | protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IBlueprint
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
+      protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse|null|undefined,
+      protos.google.cloud.telcoautomation.v1.IBlueprint>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listBlueprints values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4755,63 +3557,60 @@ export class TelcoAutomationClient {
     this._log.info('listBlueprints request %j', request);
     return this.innerApiCalls
       .listBlueprints(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.telcoautomation.v1.IBlueprint[],
-          protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest | null,
-          protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse,
-        ]) => {
-          this._log.info('listBlueprints values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.telcoautomation.v1.IBlueprint[],
+        protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListBlueprintsResponse
+      ]) => {
+        this._log.info('listBlueprints values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listBlueprints`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of parent orchestration cluster resource.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
-   * @param {string} [request.filter]
-   *   Optional. Filtering only supports equality on blueprint state.
-   *   It should be in the form: "state = DRAFT". `OR` operator can be used to
-   *   get response for multiple states. e.g. "state = DRAFT OR state = PROPOSED".
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of blueprints to return per page.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous ListBlueprints call.
-   *   It can be provided to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listBlueprintsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listBlueprints`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of parent orchestration cluster resource.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
+ * @param {string} [request.filter]
+ *   Optional. Filtering only supports equality on blueprint state.
+ *   It should be in the form: "state = DRAFT". `OR` operator can be used to
+ *   get response for multiple states. e.g. "state = DRAFT OR state = PROPOSED".
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of blueprints to return per page.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous ListBlueprints call.
+ *   It can be provided to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listBlueprintsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listBlueprintsStream(
-    request?: protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listBlueprints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listBlueprints stream %j', request);
     return this.descriptors.page.listBlueprints.createStream(
       this.innerApiCalls.listBlueprints as GaxCall,
@@ -4820,54 +3619,53 @@ export class TelcoAutomationClient {
     );
   }
 
-  /**
-   * Equivalent to `listBlueprints`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of parent orchestration cluster resource.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
-   * @param {string} [request.filter]
-   *   Optional. Filtering only supports equality on blueprint state.
-   *   It should be in the form: "state = DRAFT". `OR` operator can be used to
-   *   get response for multiple states. e.g. "state = DRAFT OR state = PROPOSED".
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of blueprints to return per page.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous ListBlueprints call.
-   *   It can be provided to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.list_blueprints.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListBlueprints_async
-   */
+/**
+ * Equivalent to `listBlueprints`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of parent orchestration cluster resource.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
+ * @param {string} [request.filter]
+ *   Optional. Filtering only supports equality on blueprint state.
+ *   It should be in the form: "state = DRAFT". `OR` operator can be used to
+ *   get response for multiple states. e.g. "state = DRAFT OR state = PROPOSED".
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of blueprints to return per page.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous ListBlueprints call.
+ *   It can be provided to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.list_blueprints.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListBlueprints_async
+ */
   listBlueprintsAsync(
-    request?: protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.telcoautomation.v1.IBlueprint> {
+      request?: protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.telcoautomation.v1.IBlueprint>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listBlueprints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listBlueprints iterate %j', request);
     return this.descriptors.page.listBlueprints.asyncIterate(
       this.innerApiCalls['listBlueprints'] as GaxCall,
@@ -4875,113 +3673,88 @@ export class TelcoAutomationClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.telcoautomation.v1.IBlueprint>;
   }
-  /**
-   * List blueprint revisions of a given blueprint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the blueprint to list revisions for.
-   * @param {number} request.pageSize
-   *   The maximum number of revisions to return per page.
-   * @param {string} request.pageToken
-   *   The page token, received from a previous ListBlueprintRevisions call
-   *   It can be provided to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listBlueprintRevisionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List blueprint revisions of a given blueprint.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the blueprint to list revisions for.
+ * @param {number} request.pageSize
+ *   The maximum number of revisions to return per page.
+ * @param {string} request.pageToken
+ *   The page token, received from a previous ListBlueprintRevisions call
+ *   It can be provided to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listBlueprintRevisionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listBlueprintRevisions(
-    request?: protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint[],
-      protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint[],
+        protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse
+      ]>;
   listBlueprintRevisions(
-    request: protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IBlueprint
-    >
-  ): void;
-  listBlueprintRevisions(
-    request: protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IBlueprint
-    >
-  ): void;
-  listBlueprintRevisions(
-    request?: protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
-          | protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IBlueprint
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IBlueprint
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint[],
-      protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IBlueprint>): void;
+  listBlueprintRevisions(
+      request: protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
+          protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IBlueprint>): void;
+  listBlueprintRevisions(
+      request?: protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
+          protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IBlueprint>,
+      callback?: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
+          protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IBlueprint>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint[],
+        protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
-          | protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IBlueprint
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
+      protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse|null|undefined,
+      protos.google.cloud.telcoautomation.v1.IBlueprint>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listBlueprintRevisions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4990,57 +3763,54 @@ export class TelcoAutomationClient {
     this._log.info('listBlueprintRevisions request %j', request);
     return this.innerApiCalls
       .listBlueprintRevisions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.telcoautomation.v1.IBlueprint[],
-          protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest | null,
-          protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse,
-        ]) => {
-          this._log.info('listBlueprintRevisions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.telcoautomation.v1.IBlueprint[],
+        protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsResponse
+      ]) => {
+        this._log.info('listBlueprintRevisions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listBlueprintRevisions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the blueprint to list revisions for.
-   * @param {number} request.pageSize
-   *   The maximum number of revisions to return per page.
-   * @param {string} request.pageToken
-   *   The page token, received from a previous ListBlueprintRevisions call
-   *   It can be provided to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listBlueprintRevisionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listBlueprintRevisions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the blueprint to list revisions for.
+ * @param {number} request.pageSize
+ *   The maximum number of revisions to return per page.
+ * @param {string} request.pageToken
+ *   The page token, received from a previous ListBlueprintRevisions call
+ *   It can be provided to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listBlueprintRevisionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listBlueprintRevisionsStream(
-    request?: protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['listBlueprintRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listBlueprintRevisions stream %j', request);
     return this.descriptors.page.listBlueprintRevisions.createStream(
       this.innerApiCalls.listBlueprintRevisions as GaxCall,
@@ -5049,48 +3819,47 @@ export class TelcoAutomationClient {
     );
   }
 
-  /**
-   * Equivalent to `listBlueprintRevisions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the blueprint to list revisions for.
-   * @param {number} request.pageSize
-   *   The maximum number of revisions to return per page.
-   * @param {string} request.pageToken
-   *   The page token, received from a previous ListBlueprintRevisions call
-   *   It can be provided to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.list_blueprint_revisions.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListBlueprintRevisions_async
-   */
+/**
+ * Equivalent to `listBlueprintRevisions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the blueprint to list revisions for.
+ * @param {number} request.pageSize
+ *   The maximum number of revisions to return per page.
+ * @param {string} request.pageToken
+ *   The page token, received from a previous ListBlueprintRevisions call
+ *   It can be provided to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.list_blueprint_revisions.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListBlueprintRevisions_async
+ */
   listBlueprintRevisionsAsync(
-    request?: protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.telcoautomation.v1.IBlueprint> {
+      request?: protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.telcoautomation.v1.IBlueprint>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['listBlueprintRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listBlueprintRevisions iterate %j', request);
     return this.descriptors.page.listBlueprintRevisions.asyncIterate(
       this.innerApiCalls['listBlueprintRevisions'] as GaxCall,
@@ -5098,124 +3867,99 @@ export class TelcoAutomationClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.telcoautomation.v1.IBlueprint>;
   }
-  /**
-   * Searches across blueprint revisions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of parent orchestration cluster resource.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
-   * @param {string} request.query
-   *   Required. Supported queries:
-   *   1. ""                       : Lists all revisions across all blueprints.
-   *   2. "latest=true"            : Lists latest revisions across all blueprints.
-   *   3. "name={name}"            : Lists all revisions of blueprint with name
-   *   {name}.
-   *   4. "name={name} latest=true": Lists latest revision of blueprint with name
-   *   {name}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of blueprints revisions to return per page.
-   *   max page size = 100, default page size = 20.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous search call.
-   *   It can be provided to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchBlueprintRevisionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Searches across blueprint revisions.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of parent orchestration cluster resource.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
+ * @param {string} request.query
+ *   Required. Supported queries:
+ *   1. ""                       : Lists all revisions across all blueprints.
+ *   2. "latest=true"            : Lists latest revisions across all blueprints.
+ *   3. "name={name}"            : Lists all revisions of blueprint with name
+ *   {name}.
+ *   4. "name={name} latest=true": Lists latest revision of blueprint with name
+ *   {name}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of blueprints revisions to return per page.
+ *   max page size = 100, default page size = 20.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous search call.
+ *   It can be provided to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchBlueprintRevisionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchBlueprintRevisions(
-    request?: protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint[],
-      protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest | null,
-      protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint[],
+        protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest|null,
+        protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse
+      ]>;
   searchBlueprintRevisions(
-    request: protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
-      | protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IBlueprint
-    >
-  ): void;
-  searchBlueprintRevisions(
-    request: protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
-      | protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IBlueprint
-    >
-  ): void;
-  searchBlueprintRevisions(
-    request?: protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
-          | protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IBlueprint
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
-      | protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IBlueprint
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IBlueprint[],
-      protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest | null,
-      protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IBlueprint>): void;
+  searchBlueprintRevisions(
+      request: protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
+          protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IBlueprint>): void;
+  searchBlueprintRevisions(
+      request?: protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
+          protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IBlueprint>,
+      callback?: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
+          protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IBlueprint>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IBlueprint[],
+        protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest|null,
+        protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
-          | protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IBlueprint
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
+      protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse|null|undefined,
+      protos.google.cloud.telcoautomation.v1.IBlueprint>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchBlueprintRevisions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5224,68 +3968,65 @@ export class TelcoAutomationClient {
     this._log.info('searchBlueprintRevisions request %j', request);
     return this.innerApiCalls
       .searchBlueprintRevisions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.telcoautomation.v1.IBlueprint[],
-          protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest | null,
-          protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse,
-        ]) => {
-          this._log.info('searchBlueprintRevisions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.telcoautomation.v1.IBlueprint[],
+        protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest|null,
+        protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsResponse
+      ]) => {
+        this._log.info('searchBlueprintRevisions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchBlueprintRevisions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of parent orchestration cluster resource.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
-   * @param {string} request.query
-   *   Required. Supported queries:
-   *   1. ""                       : Lists all revisions across all blueprints.
-   *   2. "latest=true"            : Lists latest revisions across all blueprints.
-   *   3. "name={name}"            : Lists all revisions of blueprint with name
-   *   {name}.
-   *   4. "name={name} latest=true": Lists latest revision of blueprint with name
-   *   {name}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of blueprints revisions to return per page.
-   *   max page size = 100, default page size = 20.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous search call.
-   *   It can be provided to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchBlueprintRevisionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchBlueprintRevisions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of parent orchestration cluster resource.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
+ * @param {string} request.query
+ *   Required. Supported queries:
+ *   1. ""                       : Lists all revisions across all blueprints.
+ *   2. "latest=true"            : Lists latest revisions across all blueprints.
+ *   3. "name={name}"            : Lists all revisions of blueprint with name
+ *   {name}.
+ *   4. "name={name} latest=true": Lists latest revision of blueprint with name
+ *   {name}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of blueprints revisions to return per page.
+ *   max page size = 100, default page size = 20.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous search call.
+ *   It can be provided to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchBlueprintRevisionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchBlueprintRevisionsStream(
-    request?: protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchBlueprintRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchBlueprintRevisions stream %j', request);
     return this.descriptors.page.searchBlueprintRevisions.createStream(
       this.innerApiCalls.searchBlueprintRevisions as GaxCall,
@@ -5294,59 +4035,58 @@ export class TelcoAutomationClient {
     );
   }
 
-  /**
-   * Equivalent to `searchBlueprintRevisions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of parent orchestration cluster resource.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
-   * @param {string} request.query
-   *   Required. Supported queries:
-   *   1. ""                       : Lists all revisions across all blueprints.
-   *   2. "latest=true"            : Lists latest revisions across all blueprints.
-   *   3. "name={name}"            : Lists all revisions of blueprint with name
-   *   {name}.
-   *   4. "name={name} latest=true": Lists latest revision of blueprint with name
-   *   {name}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of blueprints revisions to return per page.
-   *   max page size = 100, default page size = 20.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous search call.
-   *   It can be provided to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.search_blueprint_revisions.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_SearchBlueprintRevisions_async
-   */
+/**
+ * Equivalent to `searchBlueprintRevisions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of parent orchestration cluster resource.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
+ * @param {string} request.query
+ *   Required. Supported queries:
+ *   1. ""                       : Lists all revisions across all blueprints.
+ *   2. "latest=true"            : Lists latest revisions across all blueprints.
+ *   3. "name={name}"            : Lists all revisions of blueprint with name
+ *   {name}.
+ *   4. "name={name} latest=true": Lists latest revision of blueprint with name
+ *   {name}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of blueprints revisions to return per page.
+ *   max page size = 100, default page size = 20.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous search call.
+ *   It can be provided to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.telcoautomation.v1.Blueprint|Blueprint}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.search_blueprint_revisions.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_SearchBlueprintRevisions_async
+ */
   searchBlueprintRevisionsAsync(
-    request?: protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.telcoautomation.v1.IBlueprint> {
+      request?: protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.telcoautomation.v1.IBlueprint>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchBlueprintRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchBlueprintRevisions iterate %j', request);
     return this.descriptors.page.searchBlueprintRevisions.asyncIterate(
       this.innerApiCalls['searchBlueprintRevisions'] as GaxCall,
@@ -5354,125 +4094,100 @@ export class TelcoAutomationClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.telcoautomation.v1.IBlueprint>;
   }
-  /**
-   * Searches across deployment revisions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of parent orchestration cluster resource.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
-   * @param {string} request.query
-   *   Required. Supported queries:
-   *   1. ""                       : Lists all revisions across all deployments.
-   *   2. "latest=true"            : Lists latest revisions across all
-   *   deployments.
-   *   3. "name={name}"            : Lists all revisions of deployment with name
-   *   {name}.
-   *   4. "name={name} latest=true": Lists latest revision of deployment with name
-   *   {name}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of deployment revisions to return per page.
-   *   max page size = 100, default page size = 20.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous search call.
-   *   It can be provided to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchDeploymentRevisionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Searches across deployment revisions.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of parent orchestration cluster resource.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
+ * @param {string} request.query
+ *   Required. Supported queries:
+ *   1. ""                       : Lists all revisions across all deployments.
+ *   2. "latest=true"            : Lists latest revisions across all
+ *   deployments.
+ *   3. "name={name}"            : Lists all revisions of deployment with name
+ *   {name}.
+ *   4. "name={name} latest=true": Lists latest revision of deployment with name
+ *   {name}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of deployment revisions to return per page.
+ *   max page size = 100, default page size = 20.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous search call.
+ *   It can be provided to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchDeploymentRevisionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchDeploymentRevisions(
-    request?: protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment[],
-      protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest | null,
-      protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment[],
+        protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest|null,
+        protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse
+      ]>;
   searchDeploymentRevisions(
-    request: protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
-      | protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IDeployment
-    >
-  ): void;
-  searchDeploymentRevisions(
-    request: protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
-      | protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IDeployment
-    >
-  ): void;
-  searchDeploymentRevisions(
-    request?: protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
-          | protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IDeployment
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
-      | protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IDeployment
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment[],
-      protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest | null,
-      protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IDeployment>): void;
+  searchDeploymentRevisions(
+      request: protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
+          protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IDeployment>): void;
+  searchDeploymentRevisions(
+      request?: protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
+          protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IDeployment>,
+      callback?: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
+          protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IDeployment>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment[],
+        protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest|null,
+        protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
-          | protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IDeployment
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
+      protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse|null|undefined,
+      protos.google.cloud.telcoautomation.v1.IDeployment>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchDeploymentRevisions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5481,69 +4196,66 @@ export class TelcoAutomationClient {
     this._log.info('searchDeploymentRevisions request %j', request);
     return this.innerApiCalls
       .searchDeploymentRevisions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.telcoautomation.v1.IDeployment[],
-          protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest | null,
-          protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse,
-        ]) => {
-          this._log.info('searchDeploymentRevisions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.telcoautomation.v1.IDeployment[],
+        protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest|null,
+        protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsResponse
+      ]) => {
+        this._log.info('searchDeploymentRevisions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchDeploymentRevisions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of parent orchestration cluster resource.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
-   * @param {string} request.query
-   *   Required. Supported queries:
-   *   1. ""                       : Lists all revisions across all deployments.
-   *   2. "latest=true"            : Lists latest revisions across all
-   *   deployments.
-   *   3. "name={name}"            : Lists all revisions of deployment with name
-   *   {name}.
-   *   4. "name={name} latest=true": Lists latest revision of deployment with name
-   *   {name}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of deployment revisions to return per page.
-   *   max page size = 100, default page size = 20.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous search call.
-   *   It can be provided to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchDeploymentRevisionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchDeploymentRevisions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of parent orchestration cluster resource.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
+ * @param {string} request.query
+ *   Required. Supported queries:
+ *   1. ""                       : Lists all revisions across all deployments.
+ *   2. "latest=true"            : Lists latest revisions across all
+ *   deployments.
+ *   3. "name={name}"            : Lists all revisions of deployment with name
+ *   {name}.
+ *   4. "name={name} latest=true": Lists latest revision of deployment with name
+ *   {name}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of deployment revisions to return per page.
+ *   max page size = 100, default page size = 20.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous search call.
+ *   It can be provided to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchDeploymentRevisionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchDeploymentRevisionsStream(
-    request?: protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchDeploymentRevisions stream %j', request);
     return this.descriptors.page.searchDeploymentRevisions.createStream(
       this.innerApiCalls.searchDeploymentRevisions as GaxCall,
@@ -5552,60 +4264,59 @@ export class TelcoAutomationClient {
     );
   }
 
-  /**
-   * Equivalent to `searchDeploymentRevisions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of parent orchestration cluster resource.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
-   * @param {string} request.query
-   *   Required. Supported queries:
-   *   1. ""                       : Lists all revisions across all deployments.
-   *   2. "latest=true"            : Lists latest revisions across all
-   *   deployments.
-   *   3. "name={name}"            : Lists all revisions of deployment with name
-   *   {name}.
-   *   4. "name={name} latest=true": Lists latest revision of deployment with name
-   *   {name}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of deployment revisions to return per page.
-   *   max page size = 100, default page size = 20.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous search call.
-   *   It can be provided to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.search_deployment_revisions.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_SearchDeploymentRevisions_async
-   */
+/**
+ * Equivalent to `searchDeploymentRevisions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of parent orchestration cluster resource.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
+ * @param {string} request.query
+ *   Required. Supported queries:
+ *   1. ""                       : Lists all revisions across all deployments.
+ *   2. "latest=true"            : Lists latest revisions across all
+ *   deployments.
+ *   3. "name={name}"            : Lists all revisions of deployment with name
+ *   {name}.
+ *   4. "name={name} latest=true": Lists latest revision of deployment with name
+ *   {name}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of deployment revisions to return per page.
+ *   max page size = 100, default page size = 20.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous search call.
+ *   It can be provided to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.search_deployment_revisions.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_SearchDeploymentRevisions_async
+ */
   searchDeploymentRevisionsAsync(
-    request?: protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.telcoautomation.v1.IDeployment> {
+      request?: protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.telcoautomation.v1.IDeployment>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['searchDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchDeploymentRevisions iterate %j', request);
     return this.descriptors.page.searchDeploymentRevisions.asyncIterate(
       this.innerApiCalls['searchDeploymentRevisions'] as GaxCall,
@@ -5613,116 +4324,91 @@ export class TelcoAutomationClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.telcoautomation.v1.IDeployment>;
   }
-  /**
-   * Lists the blueprints in TNA's public catalog. Default page size = 20,
-   * Max Page Size = 100.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value of public blueprint.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}".
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.PublicBlueprint|PublicBlueprint}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPublicBlueprintsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the blueprints in TNA's public catalog. Default page size = 20,
+ * Max Page Size = 100.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value of public blueprint.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}".
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.PublicBlueprint|PublicBlueprint}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPublicBlueprintsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPublicBlueprints(
-    request?: protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IPublicBlueprint[],
-      protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IPublicBlueprint[],
+        protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse
+      ]>;
   listPublicBlueprints(
-    request: protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IPublicBlueprint
-    >
-  ): void;
-  listPublicBlueprints(
-    request: protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IPublicBlueprint
-    >
-  ): void;
-  listPublicBlueprints(
-    request?: protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
-          | protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IPublicBlueprint
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IPublicBlueprint
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IPublicBlueprint[],
-      protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IPublicBlueprint>): void;
+  listPublicBlueprints(
+      request: protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
+          protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IPublicBlueprint>): void;
+  listPublicBlueprints(
+      request?: protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
+          protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IPublicBlueprint>,
+      callback?: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
+          protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IPublicBlueprint>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IPublicBlueprint[],
+        protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
-          | protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IPublicBlueprint
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
+      protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse|null|undefined,
+      protos.google.cloud.telcoautomation.v1.IPublicBlueprint>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPublicBlueprints values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5731,59 +4417,56 @@ export class TelcoAutomationClient {
     this._log.info('listPublicBlueprints request %j', request);
     return this.innerApiCalls
       .listPublicBlueprints(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.telcoautomation.v1.IPublicBlueprint[],
-          protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest | null,
-          protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse,
-        ]) => {
-          this._log.info('listPublicBlueprints values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.telcoautomation.v1.IPublicBlueprint[],
+        protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsResponse
+      ]) => {
+        this._log.info('listPublicBlueprints values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listPublicBlueprints`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value of public blueprint.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}".
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.PublicBlueprint|PublicBlueprint} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPublicBlueprintsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listPublicBlueprints`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value of public blueprint.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}".
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.PublicBlueprint|PublicBlueprint} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPublicBlueprintsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPublicBlueprintsStream(
-    request?: protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPublicBlueprints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPublicBlueprints stream %j', request);
     return this.descriptors.page.listPublicBlueprints.createStream(
       this.innerApiCalls.listPublicBlueprints as GaxCall,
@@ -5792,50 +4475,49 @@ export class TelcoAutomationClient {
     );
   }
 
-  /**
-   * Equivalent to `listPublicBlueprints`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent value of public blueprint.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}".
-   * @param {number} [request.pageSize]
-   *   Optional. Requested page size. Server may return fewer items than
-   *   requested. If unspecified, server will pick an appropriate default.
-   * @param {string} [request.pageToken]
-   *   Optional. A token identifying a page of results the server should return.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.telcoautomation.v1.PublicBlueprint|PublicBlueprint}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.list_public_blueprints.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListPublicBlueprints_async
-   */
+/**
+ * Equivalent to `listPublicBlueprints`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Parent value of public blueprint.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}".
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. Server may return fewer items than
+ *   requested. If unspecified, server will pick an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results the server should return.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.telcoautomation.v1.PublicBlueprint|PublicBlueprint}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.list_public_blueprints.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListPublicBlueprints_async
+ */
   listPublicBlueprintsAsync(
-    request?: protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.telcoautomation.v1.IPublicBlueprint> {
+      request?: protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.telcoautomation.v1.IPublicBlueprint>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listPublicBlueprints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPublicBlueprints iterate %j', request);
     return this.descriptors.page.listPublicBlueprints.asyncIterate(
       this.innerApiCalls['listPublicBlueprints'] as GaxCall,
@@ -5843,119 +4525,94 @@ export class TelcoAutomationClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.telcoautomation.v1.IPublicBlueprint>;
   }
-  /**
-   * List all deployments.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of parent orchestration cluster resource.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
-   * @param {string} [request.filter]
-   *   Optional. Filtering only supports equality on deployment state.
-   *   It should be in the form: "state = DRAFT". `OR` operator can be used to
-   *   get response for multiple states. e.g. "state = DRAFT OR state = APPLIED".
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of deployments to return per page.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous ListDeployments call.
-   *   It can be provided to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDeploymentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List all deployments.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of parent orchestration cluster resource.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
+ * @param {string} [request.filter]
+ *   Optional. Filtering only supports equality on deployment state.
+ *   It should be in the form: "state = DRAFT". `OR` operator can be used to
+ *   get response for multiple states. e.g. "state = DRAFT OR state = APPLIED".
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of deployments to return per page.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous ListDeployments call.
+ *   It can be provided to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDeploymentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDeployments(
-    request?: protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment[],
-      protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment[],
+        protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse
+      ]>;
   listDeployments(
-    request: protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IDeployment
-    >
-  ): void;
-  listDeployments(
-    request: protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IDeployment
-    >
-  ): void;
-  listDeployments(
-    request?: protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
-          | protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IDeployment
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IDeployment
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment[],
-      protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IDeployment>): void;
+  listDeployments(
+      request: protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
+          protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IDeployment>): void;
+  listDeployments(
+      request?: protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
+          protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IDeployment>,
+      callback?: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
+          protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IDeployment>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment[],
+        protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
-          | protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IDeployment
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
+      protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse|null|undefined,
+      protos.google.cloud.telcoautomation.v1.IDeployment>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDeployments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5964,63 +4621,60 @@ export class TelcoAutomationClient {
     this._log.info('listDeployments request %j', request);
     return this.innerApiCalls
       .listDeployments(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.telcoautomation.v1.IDeployment[],
-          protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest | null,
-          protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse,
-        ]) => {
-          this._log.info('listDeployments values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.telcoautomation.v1.IDeployment[],
+        protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListDeploymentsResponse
+      ]) => {
+        this._log.info('listDeployments values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDeployments`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of parent orchestration cluster resource.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
-   * @param {string} [request.filter]
-   *   Optional. Filtering only supports equality on deployment state.
-   *   It should be in the form: "state = DRAFT". `OR` operator can be used to
-   *   get response for multiple states. e.g. "state = DRAFT OR state = APPLIED".
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of deployments to return per page.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous ListDeployments call.
-   *   It can be provided to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDeploymentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDeployments`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of parent orchestration cluster resource.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
+ * @param {string} [request.filter]
+ *   Optional. Filtering only supports equality on deployment state.
+ *   It should be in the form: "state = DRAFT". `OR` operator can be used to
+ *   get response for multiple states. e.g. "state = DRAFT OR state = APPLIED".
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of deployments to return per page.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous ListDeployments call.
+ *   It can be provided to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDeploymentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDeploymentsStream(
-    request?: protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDeployments stream %j', request);
     return this.descriptors.page.listDeployments.createStream(
       this.innerApiCalls.listDeployments as GaxCall,
@@ -6029,54 +4683,53 @@ export class TelcoAutomationClient {
     );
   }
 
-  /**
-   * Equivalent to `listDeployments`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of parent orchestration cluster resource.
-   *   Format should be -
-   *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
-   * @param {string} [request.filter]
-   *   Optional. Filtering only supports equality on deployment state.
-   *   It should be in the form: "state = DRAFT". `OR` operator can be used to
-   *   get response for multiple states. e.g. "state = DRAFT OR state = APPLIED".
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of deployments to return per page.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous ListDeployments call.
-   *   It can be provided to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.list_deployments.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListDeployments_async
-   */
+/**
+ * Equivalent to `listDeployments`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of parent orchestration cluster resource.
+ *   Format should be -
+ *   "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
+ * @param {string} [request.filter]
+ *   Optional. Filtering only supports equality on deployment state.
+ *   It should be in the form: "state = DRAFT". `OR` operator can be used to
+ *   get response for multiple states. e.g. "state = DRAFT OR state = APPLIED".
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of deployments to return per page.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous ListDeployments call.
+ *   It can be provided to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.list_deployments.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListDeployments_async
+ */
   listDeploymentsAsync(
-    request?: protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.telcoautomation.v1.IDeployment> {
+      request?: protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.telcoautomation.v1.IDeployment>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDeployments iterate %j', request);
     return this.descriptors.page.listDeployments.asyncIterate(
       this.innerApiCalls['listDeployments'] as GaxCall,
@@ -6084,113 +4737,88 @@ export class TelcoAutomationClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.telcoautomation.v1.IDeployment>;
   }
-  /**
-   * List deployment revisions of a given deployment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the deployment to list revisions for.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of revisions to return per page.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous ListDeploymentRevisions
-   *   call Provide this to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDeploymentRevisionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List deployment revisions of a given deployment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the deployment to list revisions for.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of revisions to return per page.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous ListDeploymentRevisions
+ *   call Provide this to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listDeploymentRevisionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDeploymentRevisions(
-    request?: protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment[],
-      protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment[],
+        protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse
+      ]>;
   listDeploymentRevisions(
-    request: protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IDeployment
-    >
-  ): void;
-  listDeploymentRevisions(
-    request: protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IDeployment
-    >
-  ): void;
-  listDeploymentRevisions(
-    request?: protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
-          | protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IDeployment
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IDeployment
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IDeployment[],
-      protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IDeployment>): void;
+  listDeploymentRevisions(
+      request: protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
+          protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IDeployment>): void;
+  listDeploymentRevisions(
+      request?: protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
+          protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IDeployment>,
+      callback?: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
+          protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IDeployment>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IDeployment[],
+        protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
-          | protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IDeployment
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
+      protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse|null|undefined,
+      protos.google.cloud.telcoautomation.v1.IDeployment>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDeploymentRevisions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6199,57 +4827,54 @@ export class TelcoAutomationClient {
     this._log.info('listDeploymentRevisions request %j', request);
     return this.innerApiCalls
       .listDeploymentRevisions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.telcoautomation.v1.IDeployment[],
-          protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest | null,
-          protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse,
-        ]) => {
-          this._log.info('listDeploymentRevisions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.telcoautomation.v1.IDeployment[],
+        protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsResponse
+      ]) => {
+        this._log.info('listDeploymentRevisions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listDeploymentRevisions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the deployment to list revisions for.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of revisions to return per page.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous ListDeploymentRevisions
-   *   call Provide this to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listDeploymentRevisionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listDeploymentRevisions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the deployment to list revisions for.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of revisions to return per page.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous ListDeploymentRevisions
+ *   call Provide this to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listDeploymentRevisionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listDeploymentRevisionsStream(
-    request?: protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['listDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDeploymentRevisions stream %j', request);
     return this.descriptors.page.listDeploymentRevisions.createStream(
       this.innerApiCalls.listDeploymentRevisions as GaxCall,
@@ -6258,48 +4883,47 @@ export class TelcoAutomationClient {
     );
   }
 
-  /**
-   * Equivalent to `listDeploymentRevisions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the deployment to list revisions for.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of revisions to return per page.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous ListDeploymentRevisions
-   *   call Provide this to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.list_deployment_revisions.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListDeploymentRevisions_async
-   */
+/**
+ * Equivalent to `listDeploymentRevisions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the deployment to list revisions for.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of revisions to return per page.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous ListDeploymentRevisions
+ *   call Provide this to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.telcoautomation.v1.Deployment|Deployment}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.list_deployment_revisions.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListDeploymentRevisions_async
+ */
   listDeploymentRevisionsAsync(
-    request?: protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.telcoautomation.v1.IDeployment> {
+      request?: protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.telcoautomation.v1.IDeployment>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['listDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listDeploymentRevisions iterate %j', request);
     return this.descriptors.page.listDeploymentRevisions.asyncIterate(
       this.innerApiCalls['listDeploymentRevisions'] as GaxCall,
@@ -6307,116 +4931,91 @@ export class TelcoAutomationClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.telcoautomation.v1.IDeployment>;
   }
-  /**
-   * List all hydrated deployments present under a deployment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The deployment managing the hydrated deployments.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of hydrated deployments to return. The service
-   *   may return fewer than this value. If unspecified, at most 50 hydrated
-   *   deployments will be returned. The maximum value is 1000. Values above 1000
-   *   will be set to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous ListHydratedDeployments
-   *   call. Provide this to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.HydratedDeployment|HydratedDeployment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listHydratedDeploymentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * List all hydrated deployments present under a deployment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The deployment managing the hydrated deployments.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of hydrated deployments to return. The service
+ *   may return fewer than this value. If unspecified, at most 50 hydrated
+ *   deployments will be returned. The maximum value is 1000. Values above 1000
+ *   will be set to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous ListHydratedDeployments
+ *   call. Provide this to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.telcoautomation.v1.HydratedDeployment|HydratedDeployment}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listHydratedDeploymentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listHydratedDeployments(
-    request?: protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment[],
-      protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IHydratedDeployment[],
+        protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse
+      ]>;
   listHydratedDeployments(
-    request: protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment
-    >
-  ): void;
-  listHydratedDeployments(
-    request: protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment
-    >
-  ): void;
-  listHydratedDeployments(
-    request?: protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
-          | protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IHydratedDeployment
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
-      | protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment
-    >
-  ): Promise<
-    [
-      protos.google.cloud.telcoautomation.v1.IHydratedDeployment[],
-      protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest | null,
-      protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse,
-    ]
-  > | void {
+          protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IHydratedDeployment>): void;
+  listHydratedDeployments(
+      request: protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
+          protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IHydratedDeployment>): void;
+  listHydratedDeployments(
+      request?: protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
+          protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IHydratedDeployment>,
+      callback?: PaginationCallback<
+          protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
+          protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse|null|undefined,
+          protos.google.cloud.telcoautomation.v1.IHydratedDeployment>):
+      Promise<[
+        protos.google.cloud.telcoautomation.v1.IHydratedDeployment[],
+        protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
-          | protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse
-          | null
-          | undefined,
-          protos.google.cloud.telcoautomation.v1.IHydratedDeployment
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
+      protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse|null|undefined,
+      protos.google.cloud.telcoautomation.v1.IHydratedDeployment>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listHydratedDeployments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6425,60 +5024,57 @@ export class TelcoAutomationClient {
     this._log.info('listHydratedDeployments request %j', request);
     return this.innerApiCalls
       .listHydratedDeployments(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.telcoautomation.v1.IHydratedDeployment[],
-          protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest | null,
-          protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse,
-        ]) => {
-          this._log.info('listHydratedDeployments values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.telcoautomation.v1.IHydratedDeployment[],
+        protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest|null,
+        protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsResponse
+      ]) => {
+        this._log.info('listHydratedDeployments values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listHydratedDeployments`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The deployment managing the hydrated deployments.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of hydrated deployments to return. The service
-   *   may return fewer than this value. If unspecified, at most 50 hydrated
-   *   deployments will be returned. The maximum value is 1000. Values above 1000
-   *   will be set to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous ListHydratedDeployments
-   *   call. Provide this to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.HydratedDeployment|HydratedDeployment} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listHydratedDeploymentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listHydratedDeployments`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The deployment managing the hydrated deployments.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of hydrated deployments to return. The service
+ *   may return fewer than this value. If unspecified, at most 50 hydrated
+ *   deployments will be returned. The maximum value is 1000. Values above 1000
+ *   will be set to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous ListHydratedDeployments
+ *   call. Provide this to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.telcoautomation.v1.HydratedDeployment|HydratedDeployment} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listHydratedDeploymentsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listHydratedDeploymentsStream(
-    request?: protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listHydratedDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listHydratedDeployments stream %j', request);
     return this.descriptors.page.listHydratedDeployments.createStream(
       this.innerApiCalls.listHydratedDeployments as GaxCall,
@@ -6487,51 +5083,50 @@ export class TelcoAutomationClient {
     );
   }
 
-  /**
-   * Equivalent to `listHydratedDeployments`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The deployment managing the hydrated deployments.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of hydrated deployments to return. The service
-   *   may return fewer than this value. If unspecified, at most 50 hydrated
-   *   deployments will be returned. The maximum value is 1000. Values above 1000
-   *   will be set to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, received from a previous ListHydratedDeployments
-   *   call. Provide this to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.telcoautomation.v1.HydratedDeployment|HydratedDeployment}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/telco_automation.list_hydrated_deployments.js</caption>
-   * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListHydratedDeployments_async
-   */
+/**
+ * Equivalent to `listHydratedDeployments`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The deployment managing the hydrated deployments.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of hydrated deployments to return. The service
+ *   may return fewer than this value. If unspecified, at most 50 hydrated
+ *   deployments will be returned. The maximum value is 1000. Values above 1000
+ *   will be set to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token, received from a previous ListHydratedDeployments
+ *   call. Provide this to retrieve the subsequent page.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.telcoautomation.v1.HydratedDeployment|HydratedDeployment}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/telco_automation.list_hydrated_deployments.js</caption>
+ * region_tag:telcoautomation_v1_generated_TelcoAutomation_ListHydratedDeployments_async
+ */
   listHydratedDeploymentsAsync(
-    request?: protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.telcoautomation.v1.IHydratedDeployment> {
+      request?: protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.telcoautomation.v1.IHydratedDeployment>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listHydratedDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listHydratedDeployments iterate %j', request);
     return this.descriptors.page.listHydratedDeployments.asyncIterate(
       this.innerApiCalls['listHydratedDeployments'] as GaxCall,
@@ -6539,7 +5134,7 @@ export class TelcoAutomationClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.telcoautomation.v1.IHydratedDeployment>;
   }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -6579,7 +5174,7 @@ export class TelcoAutomationClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -6617,7 +5212,7 @@ export class TelcoAutomationClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -6662,20 +5257,20 @@ export class TelcoAutomationClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -6712,13 +5307,13 @@ export class TelcoAutomationClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -6752,7 +5347,7 @@ export class TelcoAutomationClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -6767,20 +5362,20 @@ export class TelcoAutomationClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -6824,20 +5419,20 @@ export class TelcoAutomationClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -6854,12 +5449,7 @@ export class TelcoAutomationClient {
    * @param {string} blueprint
    * @returns {string} Resource name string.
    */
-  blueprintPath(
-    project: string,
-    location: string,
-    orchestrationCluster: string,
-    blueprint: string
-  ) {
+  blueprintPath(project:string,location:string,orchestrationCluster:string,blueprint:string) {
     return this.pathTemplates.blueprintPathTemplate.render({
       project: project,
       location: location,
@@ -6876,8 +5466,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBlueprintName(blueprintName: string) {
-    return this.pathTemplates.blueprintPathTemplate.match(blueprintName)
-      .project;
+    return this.pathTemplates.blueprintPathTemplate.match(blueprintName).project;
   }
 
   /**
@@ -6888,8 +5477,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBlueprintName(blueprintName: string) {
-    return this.pathTemplates.blueprintPathTemplate.match(blueprintName)
-      .location;
+    return this.pathTemplates.blueprintPathTemplate.match(blueprintName).location;
   }
 
   /**
@@ -6900,8 +5488,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the orchestration_cluster.
    */
   matchOrchestrationClusterFromBlueprintName(blueprintName: string) {
-    return this.pathTemplates.blueprintPathTemplate.match(blueprintName)
-      .orchestration_cluster;
+    return this.pathTemplates.blueprintPathTemplate.match(blueprintName).orchestration_cluster;
   }
 
   /**
@@ -6912,8 +5499,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the blueprint.
    */
   matchBlueprintFromBlueprintName(blueprintName: string) {
-    return this.pathTemplates.blueprintPathTemplate.match(blueprintName)
-      .blueprint;
+    return this.pathTemplates.blueprintPathTemplate.match(blueprintName).blueprint;
   }
 
   /**
@@ -6925,12 +5511,7 @@ export class TelcoAutomationClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  deploymentPath(
-    project: string,
-    location: string,
-    orchestrationCluster: string,
-    deployment: string
-  ) {
+  deploymentPath(project:string,location:string,orchestrationCluster:string,deployment:string) {
     return this.pathTemplates.deploymentPathTemplate.render({
       project: project,
       location: location,
@@ -6947,8 +5528,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .project;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).project;
   }
 
   /**
@@ -6959,8 +5539,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .location;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).location;
   }
 
   /**
@@ -6971,8 +5550,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the orchestration_cluster.
    */
   matchOrchestrationClusterFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .orchestration_cluster;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).orchestration_cluster;
   }
 
   /**
@@ -6983,8 +5561,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .deployment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
   }
 
   /**
@@ -6995,7 +5572,7 @@ export class TelcoAutomationClient {
    * @param {string} edge_slm
    * @returns {string} Resource name string.
    */
-  edgeSlmPath(project: string, location: string, edgeSlm: string) {
+  edgeSlmPath(project:string,location:string,edgeSlm:string) {
     return this.pathTemplates.edgeSlmPathTemplate.render({
       project: project,
       location: location,
@@ -7046,13 +5623,7 @@ export class TelcoAutomationClient {
    * @param {string} hydrated_deployment
    * @returns {string} Resource name string.
    */
-  hydratedDeploymentPath(
-    project: string,
-    location: string,
-    orchestrationCluster: string,
-    deployment: string,
-    hydratedDeployment: string
-  ) {
+  hydratedDeploymentPath(project:string,location:string,orchestrationCluster:string,deployment:string,hydratedDeployment:string) {
     return this.pathTemplates.hydratedDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -7070,9 +5641,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromHydratedDeploymentName(hydratedDeploymentName: string) {
-    return this.pathTemplates.hydratedDeploymentPathTemplate.match(
-      hydratedDeploymentName
-    ).project;
+    return this.pathTemplates.hydratedDeploymentPathTemplate.match(hydratedDeploymentName).project;
   }
 
   /**
@@ -7083,9 +5652,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromHydratedDeploymentName(hydratedDeploymentName: string) {
-    return this.pathTemplates.hydratedDeploymentPathTemplate.match(
-      hydratedDeploymentName
-    ).location;
+    return this.pathTemplates.hydratedDeploymentPathTemplate.match(hydratedDeploymentName).location;
   }
 
   /**
@@ -7095,12 +5662,8 @@ export class TelcoAutomationClient {
    *   A fully-qualified path representing HydratedDeployment resource.
    * @returns {string} A string representing the orchestration_cluster.
    */
-  matchOrchestrationClusterFromHydratedDeploymentName(
-    hydratedDeploymentName: string
-  ) {
-    return this.pathTemplates.hydratedDeploymentPathTemplate.match(
-      hydratedDeploymentName
-    ).orchestration_cluster;
+  matchOrchestrationClusterFromHydratedDeploymentName(hydratedDeploymentName: string) {
+    return this.pathTemplates.hydratedDeploymentPathTemplate.match(hydratedDeploymentName).orchestration_cluster;
   }
 
   /**
@@ -7111,9 +5674,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromHydratedDeploymentName(hydratedDeploymentName: string) {
-    return this.pathTemplates.hydratedDeploymentPathTemplate.match(
-      hydratedDeploymentName
-    ).deployment;
+    return this.pathTemplates.hydratedDeploymentPathTemplate.match(hydratedDeploymentName).deployment;
   }
 
   /**
@@ -7123,12 +5684,8 @@ export class TelcoAutomationClient {
    *   A fully-qualified path representing HydratedDeployment resource.
    * @returns {string} A string representing the hydrated_deployment.
    */
-  matchHydratedDeploymentFromHydratedDeploymentName(
-    hydratedDeploymentName: string
-  ) {
-    return this.pathTemplates.hydratedDeploymentPathTemplate.match(
-      hydratedDeploymentName
-    ).hydrated_deployment;
+  matchHydratedDeploymentFromHydratedDeploymentName(hydratedDeploymentName: string) {
+    return this.pathTemplates.hydratedDeploymentPathTemplate.match(hydratedDeploymentName).hydrated_deployment;
   }
 
   /**
@@ -7138,7 +5695,7 @@ export class TelcoAutomationClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -7175,11 +5732,7 @@ export class TelcoAutomationClient {
    * @param {string} orchestration_cluster
    * @returns {string} Resource name string.
    */
-  orchestrationClusterPath(
-    project: string,
-    location: string,
-    orchestrationCluster: string
-  ) {
+  orchestrationClusterPath(project:string,location:string,orchestrationCluster:string) {
     return this.pathTemplates.orchestrationClusterPathTemplate.render({
       project: project,
       location: location,
@@ -7195,9 +5748,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromOrchestrationClusterName(orchestrationClusterName: string) {
-    return this.pathTemplates.orchestrationClusterPathTemplate.match(
-      orchestrationClusterName
-    ).project;
+    return this.pathTemplates.orchestrationClusterPathTemplate.match(orchestrationClusterName).project;
   }
 
   /**
@@ -7208,9 +5759,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOrchestrationClusterName(orchestrationClusterName: string) {
-    return this.pathTemplates.orchestrationClusterPathTemplate.match(
-      orchestrationClusterName
-    ).location;
+    return this.pathTemplates.orchestrationClusterPathTemplate.match(orchestrationClusterName).location;
   }
 
   /**
@@ -7220,12 +5769,8 @@ export class TelcoAutomationClient {
    *   A fully-qualified path representing OrchestrationCluster resource.
    * @returns {string} A string representing the orchestration_cluster.
    */
-  matchOrchestrationClusterFromOrchestrationClusterName(
-    orchestrationClusterName: string
-  ) {
-    return this.pathTemplates.orchestrationClusterPathTemplate.match(
-      orchestrationClusterName
-    ).orchestration_cluster;
+  matchOrchestrationClusterFromOrchestrationClusterName(orchestrationClusterName: string) {
+    return this.pathTemplates.orchestrationClusterPathTemplate.match(orchestrationClusterName).orchestration_cluster;
   }
 
   /**
@@ -7234,7 +5779,7 @@ export class TelcoAutomationClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -7259,11 +5804,7 @@ export class TelcoAutomationClient {
    * @param {string} public_lueprint
    * @returns {string} Resource name string.
    */
-  publicBlueprintPath(
-    project: string,
-    location: string,
-    publicLueprint: string
-  ) {
+  publicBlueprintPath(project:string,location:string,publicLueprint:string) {
     return this.pathTemplates.publicBlueprintPathTemplate.render({
       project: project,
       location: location,
@@ -7279,9 +5820,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPublicBlueprintName(publicBlueprintName: string) {
-    return this.pathTemplates.publicBlueprintPathTemplate.match(
-      publicBlueprintName
-    ).project;
+    return this.pathTemplates.publicBlueprintPathTemplate.match(publicBlueprintName).project;
   }
 
   /**
@@ -7292,9 +5831,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPublicBlueprintName(publicBlueprintName: string) {
-    return this.pathTemplates.publicBlueprintPathTemplate.match(
-      publicBlueprintName
-    ).location;
+    return this.pathTemplates.publicBlueprintPathTemplate.match(publicBlueprintName).location;
   }
 
   /**
@@ -7305,9 +5842,7 @@ export class TelcoAutomationClient {
    * @returns {string} A string representing the public_lueprint.
    */
   matchPublicLueprintFromPublicBlueprintName(publicBlueprintName: string) {
-    return this.pathTemplates.publicBlueprintPathTemplate.match(
-      publicBlueprintName
-    ).public_lueprint;
+    return this.pathTemplates.publicBlueprintPathTemplate.match(publicBlueprintName).public_lueprint;
   }
 
   /**
@@ -7322,9 +5857,7 @@ export class TelcoAutomationClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

@@ -888,54 +888,6 @@ export namespace google {
                         /** MerchantReviewAttributes reviewCountry. */
                         public reviewCountry?: (string|null);
 
-                        /** MerchantReviewAttributes _merchantId. */
-                        public _merchantId?: "merchantId";
-
-                        /** MerchantReviewAttributes _merchantDisplayName. */
-                        public _merchantDisplayName?: "merchantDisplayName";
-
-                        /** MerchantReviewAttributes _merchantLink. */
-                        public _merchantLink?: "merchantLink";
-
-                        /** MerchantReviewAttributes _merchantRatingLink. */
-                        public _merchantRatingLink?: "merchantRatingLink";
-
-                        /** MerchantReviewAttributes _minRating. */
-                        public _minRating?: "minRating";
-
-                        /** MerchantReviewAttributes _maxRating. */
-                        public _maxRating?: "maxRating";
-
-                        /** MerchantReviewAttributes _rating. */
-                        public _rating?: "rating";
-
-                        /** MerchantReviewAttributes _title. */
-                        public _title?: "title";
-
-                        /** MerchantReviewAttributes _content. */
-                        public _content?: "content";
-
-                        /** MerchantReviewAttributes _reviewerId. */
-                        public _reviewerId?: "reviewerId";
-
-                        /** MerchantReviewAttributes _reviewerUsername. */
-                        public _reviewerUsername?: "reviewerUsername";
-
-                        /** MerchantReviewAttributes _isAnonymous. */
-                        public _isAnonymous?: "isAnonymous";
-
-                        /** MerchantReviewAttributes _collectionMethod. */
-                        public _collectionMethod?: "collectionMethod";
-
-                        /** MerchantReviewAttributes _reviewTime. */
-                        public _reviewTime?: "reviewTime";
-
-                        /** MerchantReviewAttributes _reviewLanguage. */
-                        public _reviewLanguage?: "reviewLanguage";
-
-                        /** MerchantReviewAttributes _reviewCountry. */
-                        public _reviewCountry?: "reviewCountry";
-
                         /**
                          * Creates a new MerchantReviewAttributes instance using the specified properties.
                          * @param [properties] Properties to set
@@ -2326,51 +2278,6 @@ export namespace google {
                         /** ProductReviewAttributes transactionId. */
                         public transactionId: string;
 
-                        /** ProductReviewAttributes _aggregatorName. */
-                        public _aggregatorName?: "aggregatorName";
-
-                        /** ProductReviewAttributes _subclientName. */
-                        public _subclientName?: "subclientName";
-
-                        /** ProductReviewAttributes _publisherName. */
-                        public _publisherName?: "publisherName";
-
-                        /** ProductReviewAttributes _publisherFavicon. */
-                        public _publisherFavicon?: "publisherFavicon";
-
-                        /** ProductReviewAttributes _reviewerId. */
-                        public _reviewerId?: "reviewerId";
-
-                        /** ProductReviewAttributes _reviewerIsAnonymous. */
-                        public _reviewerIsAnonymous?: "reviewerIsAnonymous";
-
-                        /** ProductReviewAttributes _reviewerUsername. */
-                        public _reviewerUsername?: "reviewerUsername";
-
-                        /** ProductReviewAttributes _reviewLanguage. */
-                        public _reviewLanguage?: "reviewLanguage";
-
-                        /** ProductReviewAttributes _reviewCountry. */
-                        public _reviewCountry?: "reviewCountry";
-
-                        /** ProductReviewAttributes _title. */
-                        public _title?: "title";
-
-                        /** ProductReviewAttributes _content. */
-                        public _content?: "content";
-
-                        /** ProductReviewAttributes _minRating. */
-                        public _minRating?: "minRating";
-
-                        /** ProductReviewAttributes _maxRating. */
-                        public _maxRating?: "maxRating";
-
-                        /** ProductReviewAttributes _rating. */
-                        public _rating?: "rating";
-
-                        /** ProductReviewAttributes _isSpam. */
-                        public _isSpam?: "isSpam";
-
                         /**
                          * Creates a new ProductReviewAttributes instance using the specified properties.
                          * @param [properties] Properties to set
@@ -2967,9 +2874,6 @@ export namespace google {
                 /** Weight unit. */
                 public unit: (google.shopping.type.Weight.WeightUnit|keyof typeof google.shopping.type.Weight.WeightUnit);
 
-                /** Weight _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
                 /**
                  * Creates a new Weight instance using the specified properties.
                  * @param [properties] Properties to set
@@ -3083,12 +2987,6 @@ export namespace google {
                 /** Price currencyCode. */
                 public currencyCode?: (string|null);
 
-                /** Price _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
-                /** Price _currencyCode. */
-                public _currencyCode?: "currencyCode";
-
                 /**
                  * Creates a new Price instance using the specified properties.
                  * @param [properties] Properties to set
@@ -3197,12 +3095,6 @@ export namespace google {
 
                 /** CustomAttribute groupValues. */
                 public groupValues: google.shopping.type.ICustomAttribute[];
-
-                /** CustomAttribute _name. */
-                public _name?: "name";
-
-                /** CustomAttribute _value. */
-                public _value?: "value";
 
                 /**
                  * Creates a new CustomAttribute instance using the specified properties.
@@ -4258,6 +4150,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -4298,6 +4193,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -8516,6 +8414,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -8764,7 +8665,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -8795,7 +8696,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;

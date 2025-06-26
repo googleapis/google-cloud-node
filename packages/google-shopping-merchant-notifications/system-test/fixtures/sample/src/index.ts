@@ -19,9 +19,7 @@
 import {NotificationsApiServiceClient} from '@google-shopping/notifications';
 
 // check that the client class type name can be used
-function doStuffWithNotificationsApiServiceClient(
-  client: NotificationsApiServiceClient
-) {
+function doStuffWithNotificationsApiServiceClient(client: NotificationsApiServiceClient) {
   client.close();
 }
 

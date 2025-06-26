@@ -788,12 +788,6 @@ export namespace google {
                     /** GetFolderRequest requestId. */
                     public requestId: string;
 
-                    /** GetFolderRequest _ifMetagenerationMatch. */
-                    public _ifMetagenerationMatch?: "ifMetagenerationMatch";
-
-                    /** GetFolderRequest _ifMetagenerationNotMatch. */
-                    public _ifMetagenerationNotMatch?: "ifMetagenerationNotMatch";
-
                     /**
                      * Creates a new GetFolderRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1029,12 +1023,6 @@ export namespace google {
 
                     /** DeleteFolderRequest requestId. */
                     public requestId: string;
-
-                    /** DeleteFolderRequest _ifMetagenerationMatch. */
-                    public _ifMetagenerationMatch?: "ifMetagenerationMatch";
-
-                    /** DeleteFolderRequest _ifMetagenerationNotMatch. */
-                    public _ifMetagenerationNotMatch?: "ifMetagenerationNotMatch";
 
                     /**
                      * Creates a new DeleteFolderRequest instance using the specified properties.
@@ -1398,12 +1386,6 @@ export namespace google {
 
                     /** RenameFolderRequest requestId. */
                     public requestId: string;
-
-                    /** RenameFolderRequest _ifMetagenerationMatch. */
-                    public _ifMetagenerationMatch?: "ifMetagenerationMatch";
-
-                    /** RenameFolderRequest _ifMetagenerationNotMatch. */
-                    public _ifMetagenerationNotMatch?: "ifMetagenerationNotMatch";
 
                     /**
                      * Creates a new RenameFolderRequest instance using the specified properties.
@@ -2298,12 +2280,6 @@ export namespace google {
                     /** GetManagedFolderRequest requestId. */
                     public requestId: string;
 
-                    /** GetManagedFolderRequest _ifMetagenerationMatch. */
-                    public _ifMetagenerationMatch?: "ifMetagenerationMatch";
-
-                    /** GetManagedFolderRequest _ifMetagenerationNotMatch. */
-                    public _ifMetagenerationNotMatch?: "ifMetagenerationNotMatch";
-
                     /**
                      * Creates a new GetManagedFolderRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -2539,12 +2515,6 @@ export namespace google {
 
                     /** DeleteManagedFolderRequest requestId. */
                     public requestId: string;
-
-                    /** DeleteManagedFolderRequest _ifMetagenerationMatch. */
-                    public _ifMetagenerationMatch?: "ifMetagenerationMatch";
-
-                    /** DeleteManagedFolderRequest _ifMetagenerationNotMatch. */
-                    public _ifMetagenerationNotMatch?: "ifMetagenerationNotMatch";
 
                     /**
                      * Creates a new DeleteManagedFolderRequest instance using the specified properties.
@@ -2891,18 +2861,6 @@ export namespace google {
                     /** CreateAnywhereCacheMetadata admissionPolicy. */
                     public admissionPolicy?: (string|null);
 
-                    /** CreateAnywhereCacheMetadata _anywhereCacheId. */
-                    public _anywhereCacheId?: "anywhereCacheId";
-
-                    /** CreateAnywhereCacheMetadata _zone. */
-                    public _zone?: "zone";
-
-                    /** CreateAnywhereCacheMetadata _ttl. */
-                    public _ttl?: "ttl";
-
-                    /** CreateAnywhereCacheMetadata _admissionPolicy. */
-                    public _admissionPolicy?: "admissionPolicy";
-
                     /**
                      * Creates a new CreateAnywhereCacheMetadata instance using the specified properties.
                      * @param [properties] Properties to set
@@ -3023,18 +2981,6 @@ export namespace google {
 
                     /** UpdateAnywhereCacheMetadata admissionPolicy. */
                     public admissionPolicy?: (string|null);
-
-                    /** UpdateAnywhereCacheMetadata _anywhereCacheId. */
-                    public _anywhereCacheId?: "anywhereCacheId";
-
-                    /** UpdateAnywhereCacheMetadata _zone. */
-                    public _zone?: "zone";
-
-                    /** UpdateAnywhereCacheMetadata _ttl. */
-                    public _ttl?: "ttl";
-
-                    /** UpdateAnywhereCacheMetadata _admissionPolicy. */
-                    public _admissionPolicy?: "admissionPolicy";
 
                     /**
                      * Creates a new UpdateAnywhereCacheMetadata instance using the specified properties.
@@ -6044,6 +5990,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -6084,6 +6033,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -10614,6 +10566,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -10868,7 +10823,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -10899,7 +10854,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -12038,7 +11993,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -12054,7 +12009,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
