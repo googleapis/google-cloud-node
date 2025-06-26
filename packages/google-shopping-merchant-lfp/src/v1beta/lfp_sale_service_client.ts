@@ -18,16 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,41 +102,20 @@ export class LfpSaleServiceClient {
    *     const client = new LfpSaleServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof LfpSaleServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +141,7 @@ export class LfpSaleServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -181,7 +155,10 @@ export class LfpSaleServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -218,11 +195,8 @@ export class LfpSaleServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.shopping.merchant.lfp.v1beta.LfpSaleService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.shopping.merchant.lfp.v1beta.LfpSaleService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -253,36 +227,31 @@ export class LfpSaleServiceClient {
     // Put together the "service stub" for
     // google.shopping.merchant.lfp.v1beta.LfpSaleService.
     this.lfpSaleServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.shopping.merchant.lfp.v1beta.LfpSaleService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.shopping.merchant.lfp.v1beta
-            .LfpSaleService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.shopping.merchant.lfp.v1beta.LfpSaleService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.shopping.merchant.lfp.v1beta.LfpSaleService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const lfpSaleServiceStubMethods = ['insertLfpSale'];
+    const lfpSaleServiceStubMethods =
+        ['insertLfpSale'];
     for (const methodName of lfpSaleServiceStubMethods) {
       const callPromise = this.lfpSaleServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -302,14 +271,8 @@ export class LfpSaleServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -320,14 +283,8 @@ export class LfpSaleServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -358,7 +315,9 @@ export class LfpSaleServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/content'];
+    return [
+      'https://www.googleapis.com/auth/content'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -367,9 +326,8 @@ export class LfpSaleServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -380,135 +338,102 @@ export class LfpSaleServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Inserts a `LfpSale` for the given merchant.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The LFP provider account.
-   *   Format: `accounts/{lfp_partner}`
-   * @param {google.shopping.merchant.lfp.v1beta.LfpSale} request.lfpSale
-   *   Required. The sale to insert.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.lfp.v1beta.LfpSale|LfpSale}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/lfp_sale_service.insert_lfp_sale.js</caption>
-   * region_tag:merchantapi_v1beta_generated_LfpSaleService_InsertLfpSale_async
-   */
+/**
+ * Inserts a `LfpSale` for the given merchant.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The LFP provider account.
+ *   Format: `accounts/{lfp_partner}`
+ * @param {google.shopping.merchant.lfp.v1beta.LfpSale} request.lfpSale
+ *   Required. The sale to insert.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.lfp.v1beta.LfpSale|LfpSale}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/lfp_sale_service.insert_lfp_sale.js</caption>
+ * region_tag:merchantapi_v1beta_generated_LfpSaleService_InsertLfpSale_async
+ */
   insertLfpSale(
-    request?: protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.lfp.v1beta.ILfpSale,
-      (
-        | protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.lfp.v1beta.ILfpSale,
+        protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest|undefined, {}|undefined
+      ]>;
   insertLfpSale(
-    request: protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.lfp.v1beta.ILfpSale,
-      | protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insertLfpSale(
-    request: protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.lfp.v1beta.ILfpSale,
-      | protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insertLfpSale(
-    request?: protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.lfp.v1beta.ILfpSale,
-          | protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.lfp.v1beta.ILfpSale,
-      | protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.lfp.v1beta.ILfpSale,
-      (
-        | protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest|null|undefined,
+          {}|null|undefined>): void;
+  insertLfpSale(
+      request: protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.lfp.v1beta.ILfpSale,
+          protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest|null|undefined,
+          {}|null|undefined>): void;
+  insertLfpSale(
+      request?: protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.lfp.v1beta.ILfpSale,
+          protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.lfp.v1beta.ILfpSale,
+          protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.lfp.v1beta.ILfpSale,
+        protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('insertLfpSale request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.lfp.v1beta.ILfpSale,
-          | protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.lfp.v1beta.ILfpSale,
+        protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('insertLfpSale response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .insertLfpSale(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.lfp.v1beta.ILfpSale,
-          (
-            | protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('insertLfpSale response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.insertLfpSale(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.lfp.v1beta.ILfpSale,
+        protos.google.shopping.merchant.lfp.v1beta.IInsertLfpSaleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('insertLfpSale response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
   // --------------------
@@ -524,12 +449,7 @@ export class LfpSaleServiceClient {
    * @param {string} offer
    * @returns {string} Resource name string.
    */
-  lfpInventoryPath(
-    account: string,
-    targetMerchant: string,
-    storeCode: string,
-    offer: string
-  ) {
+  lfpInventoryPath(account:string,targetMerchant:string,storeCode:string,offer:string) {
     return this.pathTemplates.lfpInventoryPathTemplate.render({
       account: account,
       target_merchant: targetMerchant,
@@ -546,8 +466,7 @@ export class LfpSaleServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromLfpInventoryName(lfpInventoryName: string) {
-    return this.pathTemplates.lfpInventoryPathTemplate.match(lfpInventoryName)
-      .account;
+    return this.pathTemplates.lfpInventoryPathTemplate.match(lfpInventoryName).account;
   }
 
   /**
@@ -558,8 +477,7 @@ export class LfpSaleServiceClient {
    * @returns {string} A string representing the target_merchant.
    */
   matchTargetMerchantFromLfpInventoryName(lfpInventoryName: string) {
-    return this.pathTemplates.lfpInventoryPathTemplate.match(lfpInventoryName)
-      .target_merchant;
+    return this.pathTemplates.lfpInventoryPathTemplate.match(lfpInventoryName).target_merchant;
   }
 
   /**
@@ -570,8 +488,7 @@ export class LfpSaleServiceClient {
    * @returns {string} A string representing the store_code.
    */
   matchStoreCodeFromLfpInventoryName(lfpInventoryName: string) {
-    return this.pathTemplates.lfpInventoryPathTemplate.match(lfpInventoryName)
-      .store_code;
+    return this.pathTemplates.lfpInventoryPathTemplate.match(lfpInventoryName).store_code;
   }
 
   /**
@@ -582,8 +499,7 @@ export class LfpSaleServiceClient {
    * @returns {string} A string representing the offer.
    */
   matchOfferFromLfpInventoryName(lfpInventoryName: string) {
-    return this.pathTemplates.lfpInventoryPathTemplate.match(lfpInventoryName)
-      .offer;
+    return this.pathTemplates.lfpInventoryPathTemplate.match(lfpInventoryName).offer;
   }
 
   /**
@@ -593,7 +509,7 @@ export class LfpSaleServiceClient {
    * @param {string} lfp_merchant_state
    * @returns {string} Resource name string.
    */
-  lfpMerchantStatePath(account: string, lfpMerchantState: string) {
+  lfpMerchantStatePath(account:string,lfpMerchantState:string) {
     return this.pathTemplates.lfpMerchantStatePathTemplate.render({
       account: account,
       lfp_merchant_state: lfpMerchantState,
@@ -608,9 +524,7 @@ export class LfpSaleServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromLfpMerchantStateName(lfpMerchantStateName: string) {
-    return this.pathTemplates.lfpMerchantStatePathTemplate.match(
-      lfpMerchantStateName
-    ).account;
+    return this.pathTemplates.lfpMerchantStatePathTemplate.match(lfpMerchantStateName).account;
   }
 
   /**
@@ -621,9 +535,7 @@ export class LfpSaleServiceClient {
    * @returns {string} A string representing the lfp_merchant_state.
    */
   matchLfpMerchantStateFromLfpMerchantStateName(lfpMerchantStateName: string) {
-    return this.pathTemplates.lfpMerchantStatePathTemplate.match(
-      lfpMerchantStateName
-    ).lfp_merchant_state;
+    return this.pathTemplates.lfpMerchantStatePathTemplate.match(lfpMerchantStateName).lfp_merchant_state;
   }
 
   /**
@@ -633,7 +545,7 @@ export class LfpSaleServiceClient {
    * @param {string} sale
    * @returns {string} Resource name string.
    */
-  lfpSalePath(account: string, sale: string) {
+  lfpSalePath(account:string,sale:string) {
     return this.pathTemplates.lfpSalePathTemplate.render({
       account: account,
       sale: sale,
@@ -670,7 +582,7 @@ export class LfpSaleServiceClient {
    * @param {string} store_code
    * @returns {string} Resource name string.
    */
-  lfpStorePath(account: string, targetMerchant: string, storeCode: string) {
+  lfpStorePath(account:string,targetMerchant:string,storeCode:string) {
     return this.pathTemplates.lfpStorePathTemplate.render({
       account: account,
       target_merchant: targetMerchant,
@@ -697,8 +609,7 @@ export class LfpSaleServiceClient {
    * @returns {string} A string representing the target_merchant.
    */
   matchTargetMerchantFromLfpStoreName(lfpStoreName: string) {
-    return this.pathTemplates.lfpStorePathTemplate.match(lfpStoreName)
-      .target_merchant;
+    return this.pathTemplates.lfpStorePathTemplate.match(lfpStoreName).target_merchant;
   }
 
   /**
@@ -709,8 +620,7 @@ export class LfpSaleServiceClient {
    * @returns {string} A string representing the store_code.
    */
   matchStoreCodeFromLfpStoreName(lfpStoreName: string) {
-    return this.pathTemplates.lfpStorePathTemplate.match(lfpStoreName)
-      .store_code;
+    return this.pathTemplates.lfpStorePathTemplate.match(lfpStoreName).store_code;
   }
 
   /**

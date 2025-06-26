@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const ordertracking = require('@google-shopping/ordertracking');
 
 function main() {
-  const orderTrackingSignalsServiceClient =
-    new ordertracking.OrderTrackingSignalsServiceClient();
+  const orderTrackingSignalsServiceClient = new ordertracking.OrderTrackingSignalsServiceClient();
 }
 
 main();

@@ -75,6 +75,1807 @@
                          */
                         var v1beta = {};
     
+                        v1beta.AggregateProductStatusesService = (function() {
+    
+                            /**
+                             * Constructs a new AggregateProductStatusesService service.
+                             * @memberof google.shopping.merchant.issueresolution.v1beta
+                             * @classdesc Represents an AggregateProductStatusesService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function AggregateProductStatusesService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (AggregateProductStatusesService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = AggregateProductStatusesService;
+    
+                            /**
+                             * Creates new AggregateProductStatusesService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatusesService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {AggregateProductStatusesService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            AggregateProductStatusesService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.issueresolution.v1beta.AggregateProductStatusesService|listAggregateProductStatuses}.
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatusesService
+                             * @typedef ListAggregateProductStatusesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse} [response] ListAggregateProductStatusesResponse
+                             */
+    
+                            /**
+                             * Calls ListAggregateProductStatuses.
+                             * @function listAggregateProductStatuses
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatusesService
+                             * @instance
+                             * @param {google.shopping.merchant.issueresolution.v1beta.IListAggregateProductStatusesRequest} request ListAggregateProductStatusesRequest message or plain object
+                             * @param {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatusesService.ListAggregateProductStatusesCallback} callback Node-style callback called with the error, if any, and ListAggregateProductStatusesResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AggregateProductStatusesService.prototype.listAggregateProductStatuses = function listAggregateProductStatuses(request, callback) {
+                                return this.rpcCall(listAggregateProductStatuses, $root.google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest, $root.google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse, request, callback);
+                            }, "name", { value: "ListAggregateProductStatuses" });
+    
+                            /**
+                             * Calls ListAggregateProductStatuses.
+                             * @function listAggregateProductStatuses
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatusesService
+                             * @instance
+                             * @param {google.shopping.merchant.issueresolution.v1beta.IListAggregateProductStatusesRequest} request ListAggregateProductStatusesRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return AggregateProductStatusesService;
+                        })();
+    
+                        v1beta.ListAggregateProductStatusesRequest = (function() {
+    
+                            /**
+                             * Properties of a ListAggregateProductStatusesRequest.
+                             * @memberof google.shopping.merchant.issueresolution.v1beta
+                             * @interface IListAggregateProductStatusesRequest
+                             * @property {string|null} [parent] ListAggregateProductStatusesRequest parent
+                             * @property {number|null} [pageSize] ListAggregateProductStatusesRequest pageSize
+                             * @property {string|null} [pageToken] ListAggregateProductStatusesRequest pageToken
+                             * @property {string|null} [filter] ListAggregateProductStatusesRequest filter
+                             */
+    
+                            /**
+                             * Constructs a new ListAggregateProductStatusesRequest.
+                             * @memberof google.shopping.merchant.issueresolution.v1beta
+                             * @classdesc Represents a ListAggregateProductStatusesRequest.
+                             * @implements IListAggregateProductStatusesRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1beta.IListAggregateProductStatusesRequest=} [properties] Properties to set
+                             */
+                            function ListAggregateProductStatusesRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListAggregateProductStatusesRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest
+                             * @instance
+                             */
+                            ListAggregateProductStatusesRequest.prototype.parent = "";
+    
+                            /**
+                             * ListAggregateProductStatusesRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest
+                             * @instance
+                             */
+                            ListAggregateProductStatusesRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListAggregateProductStatusesRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest
+                             * @instance
+                             */
+                            ListAggregateProductStatusesRequest.prototype.pageToken = "";
+    
+                            /**
+                             * ListAggregateProductStatusesRequest filter.
+                             * @member {string} filter
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest
+                             * @instance
+                             */
+                            ListAggregateProductStatusesRequest.prototype.filter = "";
+    
+                            /**
+                             * Creates a new ListAggregateProductStatusesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1beta.IListAggregateProductStatusesRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest} ListAggregateProductStatusesRequest instance
+                             */
+                            ListAggregateProductStatusesRequest.create = function create(properties) {
+                                return new ListAggregateProductStatusesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListAggregateProductStatusesRequest message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1beta.IListAggregateProductStatusesRequest} message ListAggregateProductStatusesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAggregateProductStatusesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListAggregateProductStatusesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1beta.IListAggregateProductStatusesRequest} message ListAggregateProductStatusesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAggregateProductStatusesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListAggregateProductStatusesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest} ListAggregateProductStatusesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAggregateProductStatusesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.filter = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListAggregateProductStatusesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest} ListAggregateProductStatusesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAggregateProductStatusesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListAggregateProductStatusesRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListAggregateProductStatusesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    if (!$util.isString(message.filter))
+                                        return "filter: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListAggregateProductStatusesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest} ListAggregateProductStatusesRequest
+                             */
+                            ListAggregateProductStatusesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                if (object.filter != null)
+                                    message.filter = String(object.filter);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListAggregateProductStatusesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest} message ListAggregateProductStatusesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListAggregateProductStatusesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                    object.filter = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    object.filter = message.filter;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListAggregateProductStatusesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListAggregateProductStatusesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListAggregateProductStatusesRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListAggregateProductStatusesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesRequest";
+                            };
+    
+                            return ListAggregateProductStatusesRequest;
+                        })();
+    
+                        v1beta.ListAggregateProductStatusesResponse = (function() {
+    
+                            /**
+                             * Properties of a ListAggregateProductStatusesResponse.
+                             * @memberof google.shopping.merchant.issueresolution.v1beta
+                             * @interface IListAggregateProductStatusesResponse
+                             * @property {Array.<google.shopping.merchant.issueresolution.v1beta.IAggregateProductStatus>|null} [aggregateProductStatuses] ListAggregateProductStatusesResponse aggregateProductStatuses
+                             * @property {string|null} [nextPageToken] ListAggregateProductStatusesResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListAggregateProductStatusesResponse.
+                             * @memberof google.shopping.merchant.issueresolution.v1beta
+                             * @classdesc Represents a ListAggregateProductStatusesResponse.
+                             * @implements IListAggregateProductStatusesResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1beta.IListAggregateProductStatusesResponse=} [properties] Properties to set
+                             */
+                            function ListAggregateProductStatusesResponse(properties) {
+                                this.aggregateProductStatuses = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListAggregateProductStatusesResponse aggregateProductStatuses.
+                             * @member {Array.<google.shopping.merchant.issueresolution.v1beta.IAggregateProductStatus>} aggregateProductStatuses
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse
+                             * @instance
+                             */
+                            ListAggregateProductStatusesResponse.prototype.aggregateProductStatuses = $util.emptyArray;
+    
+                            /**
+                             * ListAggregateProductStatusesResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse
+                             * @instance
+                             */
+                            ListAggregateProductStatusesResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListAggregateProductStatusesResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1beta.IListAggregateProductStatusesResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse} ListAggregateProductStatusesResponse instance
+                             */
+                            ListAggregateProductStatusesResponse.create = function create(properties) {
+                                return new ListAggregateProductStatusesResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListAggregateProductStatusesResponse message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1beta.IListAggregateProductStatusesResponse} message ListAggregateProductStatusesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAggregateProductStatusesResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.aggregateProductStatuses != null && message.aggregateProductStatuses.length)
+                                    for (var i = 0; i < message.aggregateProductStatuses.length; ++i)
+                                        $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.encode(message.aggregateProductStatuses[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListAggregateProductStatusesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1beta.IListAggregateProductStatusesResponse} message ListAggregateProductStatusesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAggregateProductStatusesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListAggregateProductStatusesResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse} ListAggregateProductStatusesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAggregateProductStatusesResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.aggregateProductStatuses && message.aggregateProductStatuses.length))
+                                                message.aggregateProductStatuses = [];
+                                            message.aggregateProductStatuses.push($root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListAggregateProductStatusesResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse} ListAggregateProductStatusesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAggregateProductStatusesResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListAggregateProductStatusesResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListAggregateProductStatusesResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.aggregateProductStatuses != null && message.hasOwnProperty("aggregateProductStatuses")) {
+                                    if (!Array.isArray(message.aggregateProductStatuses))
+                                        return "aggregateProductStatuses: array expected";
+                                    for (var i = 0; i < message.aggregateProductStatuses.length; ++i) {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.verify(message.aggregateProductStatuses[i]);
+                                        if (error)
+                                            return "aggregateProductStatuses." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListAggregateProductStatusesResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse} ListAggregateProductStatusesResponse
+                             */
+                            ListAggregateProductStatusesResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse();
+                                if (object.aggregateProductStatuses) {
+                                    if (!Array.isArray(object.aggregateProductStatuses))
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse.aggregateProductStatuses: array expected");
+                                    message.aggregateProductStatuses = [];
+                                    for (var i = 0; i < object.aggregateProductStatuses.length; ++i) {
+                                        if (typeof object.aggregateProductStatuses[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse.aggregateProductStatuses: object expected");
+                                        message.aggregateProductStatuses[i] = $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.fromObject(object.aggregateProductStatuses[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListAggregateProductStatusesResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse} message ListAggregateProductStatusesResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListAggregateProductStatusesResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.aggregateProductStatuses = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.aggregateProductStatuses && message.aggregateProductStatuses.length) {
+                                    object.aggregateProductStatuses = [];
+                                    for (var j = 0; j < message.aggregateProductStatuses.length; ++j)
+                                        object.aggregateProductStatuses[j] = $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.toObject(message.aggregateProductStatuses[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListAggregateProductStatusesResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListAggregateProductStatusesResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListAggregateProductStatusesResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListAggregateProductStatusesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1beta.ListAggregateProductStatusesResponse";
+                            };
+    
+                            return ListAggregateProductStatusesResponse;
+                        })();
+    
+                        v1beta.AggregateProductStatus = (function() {
+    
+                            /**
+                             * Properties of an AggregateProductStatus.
+                             * @memberof google.shopping.merchant.issueresolution.v1beta
+                             * @interface IAggregateProductStatus
+                             * @property {string|null} [name] AggregateProductStatus name
+                             * @property {google.shopping.type.ReportingContext.ReportingContextEnum|null} [reportingContext] AggregateProductStatus reportingContext
+                             * @property {string|null} [country] AggregateProductStatus country
+                             * @property {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.IStats|null} [stats] AggregateProductStatus stats
+                             * @property {Array.<google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.IItemLevelIssue>|null} [itemLevelIssues] AggregateProductStatus itemLevelIssues
+                             */
+    
+                            /**
+                             * Constructs a new AggregateProductStatus.
+                             * @memberof google.shopping.merchant.issueresolution.v1beta
+                             * @classdesc Represents an AggregateProductStatus.
+                             * @implements IAggregateProductStatus
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1beta.IAggregateProductStatus=} [properties] Properties to set
+                             */
+                            function AggregateProductStatus(properties) {
+                                this.itemLevelIssues = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AggregateProductStatus name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                             * @instance
+                             */
+                            AggregateProductStatus.prototype.name = "";
+    
+                            /**
+                             * AggregateProductStatus reportingContext.
+                             * @member {google.shopping.type.ReportingContext.ReportingContextEnum} reportingContext
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                             * @instance
+                             */
+                            AggregateProductStatus.prototype.reportingContext = 0;
+    
+                            /**
+                             * AggregateProductStatus country.
+                             * @member {string} country
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                             * @instance
+                             */
+                            AggregateProductStatus.prototype.country = "";
+    
+                            /**
+                             * AggregateProductStatus stats.
+                             * @member {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.IStats|null|undefined} stats
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                             * @instance
+                             */
+                            AggregateProductStatus.prototype.stats = null;
+    
+                            /**
+                             * AggregateProductStatus itemLevelIssues.
+                             * @member {Array.<google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.IItemLevelIssue>} itemLevelIssues
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                             * @instance
+                             */
+                            AggregateProductStatus.prototype.itemLevelIssues = $util.emptyArray;
+    
+                            /**
+                             * Creates a new AggregateProductStatus instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1beta.IAggregateProductStatus=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus} AggregateProductStatus instance
+                             */
+                            AggregateProductStatus.create = function create(properties) {
+                                return new AggregateProductStatus(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AggregateProductStatus message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1beta.IAggregateProductStatus} message AggregateProductStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AggregateProductStatus.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.reportingContext != null && Object.hasOwnProperty.call(message, "reportingContext"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.reportingContext);
+                                if (message.country != null && Object.hasOwnProperty.call(message, "country"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.country);
+                                if (message.stats != null && Object.hasOwnProperty.call(message, "stats"))
+                                    $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats.encode(message.stats, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.itemLevelIssues != null && message.itemLevelIssues.length)
+                                    for (var i = 0; i < message.itemLevelIssues.length; ++i)
+                                        $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.encode(message.itemLevelIssues[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AggregateProductStatus message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1beta.IAggregateProductStatus} message AggregateProductStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AggregateProductStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AggregateProductStatus message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus} AggregateProductStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AggregateProductStatus.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.reportingContext = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.country = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.stats = $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            if (!(message.itemLevelIssues && message.itemLevelIssues.length))
+                                                message.itemLevelIssues = [];
+                                            message.itemLevelIssues.push($root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AggregateProductStatus message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus} AggregateProductStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AggregateProductStatus.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AggregateProductStatus message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AggregateProductStatus.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.reportingContext != null && message.hasOwnProperty("reportingContext"))
+                                    switch (message.reportingContext) {
+                                    default:
+                                        return "reportingContext: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 13:
+                                    case 14:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                    case 9:
+                                    case 10:
+                                    case 11:
+                                    case 12:
+                                        break;
+                                    }
+                                if (message.country != null && message.hasOwnProperty("country"))
+                                    if (!$util.isString(message.country))
+                                        return "country: string expected";
+                                if (message.stats != null && message.hasOwnProperty("stats")) {
+                                    var error = $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats.verify(message.stats);
+                                    if (error)
+                                        return "stats." + error;
+                                }
+                                if (message.itemLevelIssues != null && message.hasOwnProperty("itemLevelIssues")) {
+                                    if (!Array.isArray(message.itemLevelIssues))
+                                        return "itemLevelIssues: array expected";
+                                    for (var i = 0; i < message.itemLevelIssues.length; ++i) {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.verify(message.itemLevelIssues[i]);
+                                        if (error)
+                                            return "itemLevelIssues." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AggregateProductStatus message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus} AggregateProductStatus
+                             */
+                            AggregateProductStatus.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                switch (object.reportingContext) {
+                                default:
+                                    if (typeof object.reportingContext === "number") {
+                                        message.reportingContext = object.reportingContext;
+                                        break;
+                                    }
+                                    break;
+                                case "REPORTING_CONTEXT_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.reportingContext = 0;
+                                    break;
+                                case "SHOPPING_ADS":
+                                case 1:
+                                    message.reportingContext = 1;
+                                    break;
+                                case "DISCOVERY_ADS":
+                                case 2:
+                                    message.reportingContext = 2;
+                                    break;
+                                case "DEMAND_GEN_ADS":
+                                case 13:
+                                    message.reportingContext = 13;
+                                    break;
+                                case "DEMAND_GEN_ADS_DISCOVER_SURFACE":
+                                case 14:
+                                    message.reportingContext = 14;
+                                    break;
+                                case "VIDEO_ADS":
+                                case 3:
+                                    message.reportingContext = 3;
+                                    break;
+                                case "DISPLAY_ADS":
+                                case 4:
+                                    message.reportingContext = 4;
+                                    break;
+                                case "LOCAL_INVENTORY_ADS":
+                                case 5:
+                                    message.reportingContext = 5;
+                                    break;
+                                case "VEHICLE_INVENTORY_ADS":
+                                case 6:
+                                    message.reportingContext = 6;
+                                    break;
+                                case "FREE_LISTINGS":
+                                case 7:
+                                    message.reportingContext = 7;
+                                    break;
+                                case "FREE_LOCAL_LISTINGS":
+                                case 8:
+                                    message.reportingContext = 8;
+                                    break;
+                                case "FREE_LOCAL_VEHICLE_LISTINGS":
+                                case 9:
+                                    message.reportingContext = 9;
+                                    break;
+                                case "YOUTUBE_SHOPPING":
+                                case 10:
+                                    message.reportingContext = 10;
+                                    break;
+                                case "CLOUD_RETAIL":
+                                case 11:
+                                    message.reportingContext = 11;
+                                    break;
+                                case "LOCAL_CLOUD_RETAIL":
+                                case 12:
+                                    message.reportingContext = 12;
+                                    break;
+                                }
+                                if (object.country != null)
+                                    message.country = String(object.country);
+                                if (object.stats != null) {
+                                    if (typeof object.stats !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.stats: object expected");
+                                    message.stats = $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats.fromObject(object.stats);
+                                }
+                                if (object.itemLevelIssues) {
+                                    if (!Array.isArray(object.itemLevelIssues))
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.itemLevelIssues: array expected");
+                                    message.itemLevelIssues = [];
+                                    for (var i = 0; i < object.itemLevelIssues.length; ++i) {
+                                        if (typeof object.itemLevelIssues[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.itemLevelIssues: object expected");
+                                        message.itemLevelIssues[i] = $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.fromObject(object.itemLevelIssues[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AggregateProductStatus message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus} message AggregateProductStatus
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AggregateProductStatus.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.itemLevelIssues = [];
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.reportingContext = options.enums === String ? "REPORTING_CONTEXT_ENUM_UNSPECIFIED" : 0;
+                                    object.country = "";
+                                    object.stats = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.reportingContext != null && message.hasOwnProperty("reportingContext"))
+                                    object.reportingContext = options.enums === String ? $root.google.shopping.type.ReportingContext.ReportingContextEnum[message.reportingContext] === undefined ? message.reportingContext : $root.google.shopping.type.ReportingContext.ReportingContextEnum[message.reportingContext] : message.reportingContext;
+                                if (message.country != null && message.hasOwnProperty("country"))
+                                    object.country = message.country;
+                                if (message.stats != null && message.hasOwnProperty("stats"))
+                                    object.stats = $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats.toObject(message.stats, options);
+                                if (message.itemLevelIssues && message.itemLevelIssues.length) {
+                                    object.itemLevelIssues = [];
+                                    for (var j = 0; j < message.itemLevelIssues.length; ++j)
+                                        object.itemLevelIssues[j] = $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.toObject(message.itemLevelIssues[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AggregateProductStatus to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AggregateProductStatus.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AggregateProductStatus
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AggregateProductStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus";
+                            };
+    
+                            AggregateProductStatus.Stats = (function() {
+    
+                                /**
+                                 * Properties of a Stats.
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                                 * @interface IStats
+                                 * @property {number|Long|null} [activeCount] Stats activeCount
+                                 * @property {number|Long|null} [pendingCount] Stats pendingCount
+                                 * @property {number|Long|null} [disapprovedCount] Stats disapprovedCount
+                                 * @property {number|Long|null} [expiringCount] Stats expiringCount
+                                 */
+    
+                                /**
+                                 * Constructs a new Stats.
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                                 * @classdesc Represents a Stats.
+                                 * @implements IStats
+                                 * @constructor
+                                 * @param {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.IStats=} [properties] Properties to set
+                                 */
+                                function Stats(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Stats activeCount.
+                                 * @member {number|Long} activeCount
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats
+                                 * @instance
+                                 */
+                                Stats.prototype.activeCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Stats pendingCount.
+                                 * @member {number|Long} pendingCount
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats
+                                 * @instance
+                                 */
+                                Stats.prototype.pendingCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Stats disapprovedCount.
+                                 * @member {number|Long} disapprovedCount
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats
+                                 * @instance
+                                 */
+                                Stats.prototype.disapprovedCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Stats expiringCount.
+                                 * @member {number|Long} expiringCount
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats
+                                 * @instance
+                                 */
+                                Stats.prototype.expiringCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Creates a new Stats instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.IStats=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats} Stats instance
+                                 */
+                                Stats.create = function create(properties) {
+                                    return new Stats(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Stats message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.IStats} message Stats message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Stats.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.activeCount != null && Object.hasOwnProperty.call(message, "activeCount"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.activeCount);
+                                    if (message.pendingCount != null && Object.hasOwnProperty.call(message, "pendingCount"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int64(message.pendingCount);
+                                    if (message.disapprovedCount != null && Object.hasOwnProperty.call(message, "disapprovedCount"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).int64(message.disapprovedCount);
+                                    if (message.expiringCount != null && Object.hasOwnProperty.call(message, "expiringCount"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).int64(message.expiringCount);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Stats message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.IStats} message Stats message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Stats.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Stats message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats} Stats
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Stats.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.activeCount = reader.int64();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.pendingCount = reader.int64();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.disapprovedCount = reader.int64();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.expiringCount = reader.int64();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Stats message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats} Stats
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Stats.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Stats message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Stats.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.activeCount != null && message.hasOwnProperty("activeCount"))
+                                        if (!$util.isInteger(message.activeCount) && !(message.activeCount && $util.isInteger(message.activeCount.low) && $util.isInteger(message.activeCount.high)))
+                                            return "activeCount: integer|Long expected";
+                                    if (message.pendingCount != null && message.hasOwnProperty("pendingCount"))
+                                        if (!$util.isInteger(message.pendingCount) && !(message.pendingCount && $util.isInteger(message.pendingCount.low) && $util.isInteger(message.pendingCount.high)))
+                                            return "pendingCount: integer|Long expected";
+                                    if (message.disapprovedCount != null && message.hasOwnProperty("disapprovedCount"))
+                                        if (!$util.isInteger(message.disapprovedCount) && !(message.disapprovedCount && $util.isInteger(message.disapprovedCount.low) && $util.isInteger(message.disapprovedCount.high)))
+                                            return "disapprovedCount: integer|Long expected";
+                                    if (message.expiringCount != null && message.hasOwnProperty("expiringCount"))
+                                        if (!$util.isInteger(message.expiringCount) && !(message.expiringCount && $util.isInteger(message.expiringCount.low) && $util.isInteger(message.expiringCount.high)))
+                                            return "expiringCount: integer|Long expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Stats message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats} Stats
+                                 */
+                                Stats.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats();
+                                    if (object.activeCount != null)
+                                        if ($util.Long)
+                                            (message.activeCount = $util.Long.fromValue(object.activeCount)).unsigned = false;
+                                        else if (typeof object.activeCount === "string")
+                                            message.activeCount = parseInt(object.activeCount, 10);
+                                        else if (typeof object.activeCount === "number")
+                                            message.activeCount = object.activeCount;
+                                        else if (typeof object.activeCount === "object")
+                                            message.activeCount = new $util.LongBits(object.activeCount.low >>> 0, object.activeCount.high >>> 0).toNumber();
+                                    if (object.pendingCount != null)
+                                        if ($util.Long)
+                                            (message.pendingCount = $util.Long.fromValue(object.pendingCount)).unsigned = false;
+                                        else if (typeof object.pendingCount === "string")
+                                            message.pendingCount = parseInt(object.pendingCount, 10);
+                                        else if (typeof object.pendingCount === "number")
+                                            message.pendingCount = object.pendingCount;
+                                        else if (typeof object.pendingCount === "object")
+                                            message.pendingCount = new $util.LongBits(object.pendingCount.low >>> 0, object.pendingCount.high >>> 0).toNumber();
+                                    if (object.disapprovedCount != null)
+                                        if ($util.Long)
+                                            (message.disapprovedCount = $util.Long.fromValue(object.disapprovedCount)).unsigned = false;
+                                        else if (typeof object.disapprovedCount === "string")
+                                            message.disapprovedCount = parseInt(object.disapprovedCount, 10);
+                                        else if (typeof object.disapprovedCount === "number")
+                                            message.disapprovedCount = object.disapprovedCount;
+                                        else if (typeof object.disapprovedCount === "object")
+                                            message.disapprovedCount = new $util.LongBits(object.disapprovedCount.low >>> 0, object.disapprovedCount.high >>> 0).toNumber();
+                                    if (object.expiringCount != null)
+                                        if ($util.Long)
+                                            (message.expiringCount = $util.Long.fromValue(object.expiringCount)).unsigned = false;
+                                        else if (typeof object.expiringCount === "string")
+                                            message.expiringCount = parseInt(object.expiringCount, 10);
+                                        else if (typeof object.expiringCount === "number")
+                                            message.expiringCount = object.expiringCount;
+                                        else if (typeof object.expiringCount === "object")
+                                            message.expiringCount = new $util.LongBits(object.expiringCount.low >>> 0, object.expiringCount.high >>> 0).toNumber();
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Stats message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats} message Stats
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Stats.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.activeCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.activeCount = options.longs === String ? "0" : 0;
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.pendingCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.pendingCount = options.longs === String ? "0" : 0;
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.disapprovedCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.disapprovedCount = options.longs === String ? "0" : 0;
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.expiringCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.expiringCount = options.longs === String ? "0" : 0;
+                                    }
+                                    if (message.activeCount != null && message.hasOwnProperty("activeCount"))
+                                        if (typeof message.activeCount === "number")
+                                            object.activeCount = options.longs === String ? String(message.activeCount) : message.activeCount;
+                                        else
+                                            object.activeCount = options.longs === String ? $util.Long.prototype.toString.call(message.activeCount) : options.longs === Number ? new $util.LongBits(message.activeCount.low >>> 0, message.activeCount.high >>> 0).toNumber() : message.activeCount;
+                                    if (message.pendingCount != null && message.hasOwnProperty("pendingCount"))
+                                        if (typeof message.pendingCount === "number")
+                                            object.pendingCount = options.longs === String ? String(message.pendingCount) : message.pendingCount;
+                                        else
+                                            object.pendingCount = options.longs === String ? $util.Long.prototype.toString.call(message.pendingCount) : options.longs === Number ? new $util.LongBits(message.pendingCount.low >>> 0, message.pendingCount.high >>> 0).toNumber() : message.pendingCount;
+                                    if (message.disapprovedCount != null && message.hasOwnProperty("disapprovedCount"))
+                                        if (typeof message.disapprovedCount === "number")
+                                            object.disapprovedCount = options.longs === String ? String(message.disapprovedCount) : message.disapprovedCount;
+                                        else
+                                            object.disapprovedCount = options.longs === String ? $util.Long.prototype.toString.call(message.disapprovedCount) : options.longs === Number ? new $util.LongBits(message.disapprovedCount.low >>> 0, message.disapprovedCount.high >>> 0).toNumber() : message.disapprovedCount;
+                                    if (message.expiringCount != null && message.hasOwnProperty("expiringCount"))
+                                        if (typeof message.expiringCount === "number")
+                                            object.expiringCount = options.longs === String ? String(message.expiringCount) : message.expiringCount;
+                                        else
+                                            object.expiringCount = options.longs === String ? $util.Long.prototype.toString.call(message.expiringCount) : options.longs === Number ? new $util.LongBits(message.expiringCount.low >>> 0, message.expiringCount.high >>> 0).toNumber() : message.expiringCount;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Stats to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Stats.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Stats
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Stats.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.Stats";
+                                };
+    
+                                return Stats;
+                            })();
+    
+                            AggregateProductStatus.ItemLevelIssue = (function() {
+    
+                                /**
+                                 * Properties of an ItemLevelIssue.
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                                 * @interface IItemLevelIssue
+                                 * @property {string|null} [code] ItemLevelIssue code
+                                 * @property {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.Severity|null} [severity] ItemLevelIssue severity
+                                 * @property {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.Resolution|null} [resolution] ItemLevelIssue resolution
+                                 * @property {string|null} [attribute] ItemLevelIssue attribute
+                                 * @property {string|null} [description] ItemLevelIssue description
+                                 * @property {string|null} [detail] ItemLevelIssue detail
+                                 * @property {string|null} [documentationUri] ItemLevelIssue documentationUri
+                                 * @property {number|Long|null} [productCount] ItemLevelIssue productCount
+                                 */
+    
+                                /**
+                                 * Constructs a new ItemLevelIssue.
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus
+                                 * @classdesc Represents an ItemLevelIssue.
+                                 * @implements IItemLevelIssue
+                                 * @constructor
+                                 * @param {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.IItemLevelIssue=} [properties] Properties to set
+                                 */
+                                function ItemLevelIssue(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ItemLevelIssue code.
+                                 * @member {string} code
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.code = "";
+    
+                                /**
+                                 * ItemLevelIssue severity.
+                                 * @member {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.Severity} severity
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.severity = 0;
+    
+                                /**
+                                 * ItemLevelIssue resolution.
+                                 * @member {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.Resolution} resolution
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.resolution = 0;
+    
+                                /**
+                                 * ItemLevelIssue attribute.
+                                 * @member {string} attribute
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.attribute = "";
+    
+                                /**
+                                 * ItemLevelIssue description.
+                                 * @member {string} description
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.description = "";
+    
+                                /**
+                                 * ItemLevelIssue detail.
+                                 * @member {string} detail
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.detail = "";
+    
+                                /**
+                                 * ItemLevelIssue documentationUri.
+                                 * @member {string} documentationUri
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.documentationUri = "";
+    
+                                /**
+                                 * ItemLevelIssue productCount.
+                                 * @member {number|Long} productCount
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.productCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Creates a new ItemLevelIssue instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.IItemLevelIssue=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue} ItemLevelIssue instance
+                                 */
+                                ItemLevelIssue.create = function create(properties) {
+                                    return new ItemLevelIssue(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ItemLevelIssue message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.IItemLevelIssue} message ItemLevelIssue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ItemLevelIssue.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.code);
+                                    if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.severity);
+                                    if (message.resolution != null && Object.hasOwnProperty.call(message, "resolution"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.resolution);
+                                    if (message.attribute != null && Object.hasOwnProperty.call(message, "attribute"))
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.attribute);
+                                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
+                                    if (message.detail != null && Object.hasOwnProperty.call(message, "detail"))
+                                        writer.uint32(/* id 7, wireType 2 =*/58).string(message.detail);
+                                    if (message.documentationUri != null && Object.hasOwnProperty.call(message, "documentationUri"))
+                                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.documentationUri);
+                                    if (message.productCount != null && Object.hasOwnProperty.call(message, "productCount"))
+                                        writer.uint32(/* id 9, wireType 0 =*/72).int64(message.productCount);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ItemLevelIssue message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.IItemLevelIssue} message ItemLevelIssue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ItemLevelIssue.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ItemLevelIssue message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue} ItemLevelIssue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ItemLevelIssue.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.code = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.severity = reader.int32();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.resolution = reader.int32();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.attribute = reader.string();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.description = reader.string();
+                                                break;
+                                            }
+                                        case 7: {
+                                                message.detail = reader.string();
+                                                break;
+                                            }
+                                        case 8: {
+                                                message.documentationUri = reader.string();
+                                                break;
+                                            }
+                                        case 9: {
+                                                message.productCount = reader.int64();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ItemLevelIssue message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue} ItemLevelIssue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ItemLevelIssue.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ItemLevelIssue message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ItemLevelIssue.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.code != null && message.hasOwnProperty("code"))
+                                        if (!$util.isString(message.code))
+                                            return "code: string expected";
+                                    if (message.severity != null && message.hasOwnProperty("severity"))
+                                        switch (message.severity) {
+                                        default:
+                                            return "severity: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                    if (message.resolution != null && message.hasOwnProperty("resolution"))
+                                        switch (message.resolution) {
+                                        default:
+                                            return "resolution: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    if (message.attribute != null && message.hasOwnProperty("attribute"))
+                                        if (!$util.isString(message.attribute))
+                                            return "attribute: string expected";
+                                    if (message.description != null && message.hasOwnProperty("description"))
+                                        if (!$util.isString(message.description))
+                                            return "description: string expected";
+                                    if (message.detail != null && message.hasOwnProperty("detail"))
+                                        if (!$util.isString(message.detail))
+                                            return "detail: string expected";
+                                    if (message.documentationUri != null && message.hasOwnProperty("documentationUri"))
+                                        if (!$util.isString(message.documentationUri))
+                                            return "documentationUri: string expected";
+                                    if (message.productCount != null && message.hasOwnProperty("productCount"))
+                                        if (!$util.isInteger(message.productCount) && !(message.productCount && $util.isInteger(message.productCount.low) && $util.isInteger(message.productCount.high)))
+                                            return "productCount: integer|Long expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ItemLevelIssue message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue} ItemLevelIssue
+                                 */
+                                ItemLevelIssue.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue();
+                                    if (object.code != null)
+                                        message.code = String(object.code);
+                                    switch (object.severity) {
+                                    default:
+                                        if (typeof object.severity === "number") {
+                                            message.severity = object.severity;
+                                            break;
+                                        }
+                                        break;
+                                    case "SEVERITY_UNSPECIFIED":
+                                    case 0:
+                                        message.severity = 0;
+                                        break;
+                                    case "NOT_IMPACTED":
+                                    case 1:
+                                        message.severity = 1;
+                                        break;
+                                    case "DEMOTED":
+                                    case 2:
+                                        message.severity = 2;
+                                        break;
+                                    case "DISAPPROVED":
+                                    case 3:
+                                        message.severity = 3;
+                                        break;
+                                    }
+                                    switch (object.resolution) {
+                                    default:
+                                        if (typeof object.resolution === "number") {
+                                            message.resolution = object.resolution;
+                                            break;
+                                        }
+                                        break;
+                                    case "RESOLUTION_UNSPECIFIED":
+                                    case 0:
+                                        message.resolution = 0;
+                                        break;
+                                    case "MERCHANT_ACTION":
+                                    case 1:
+                                        message.resolution = 1;
+                                        break;
+                                    case "PENDING_PROCESSING":
+                                    case 2:
+                                        message.resolution = 2;
+                                        break;
+                                    }
+                                    if (object.attribute != null)
+                                        message.attribute = String(object.attribute);
+                                    if (object.description != null)
+                                        message.description = String(object.description);
+                                    if (object.detail != null)
+                                        message.detail = String(object.detail);
+                                    if (object.documentationUri != null)
+                                        message.documentationUri = String(object.documentationUri);
+                                    if (object.productCount != null)
+                                        if ($util.Long)
+                                            (message.productCount = $util.Long.fromValue(object.productCount)).unsigned = false;
+                                        else if (typeof object.productCount === "string")
+                                            message.productCount = parseInt(object.productCount, 10);
+                                        else if (typeof object.productCount === "number")
+                                            message.productCount = object.productCount;
+                                        else if (typeof object.productCount === "object")
+                                            message.productCount = new $util.LongBits(object.productCount.low >>> 0, object.productCount.high >>> 0).toNumber();
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ItemLevelIssue message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue} message ItemLevelIssue
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ItemLevelIssue.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.code = "";
+                                        object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
+                                        object.resolution = options.enums === String ? "RESOLUTION_UNSPECIFIED" : 0;
+                                        object.attribute = "";
+                                        object.description = "";
+                                        object.detail = "";
+                                        object.documentationUri = "";
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.productCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.productCount = options.longs === String ? "0" : 0;
+                                    }
+                                    if (message.code != null && message.hasOwnProperty("code"))
+                                        object.code = message.code;
+                                    if (message.severity != null && message.hasOwnProperty("severity"))
+                                        object.severity = options.enums === String ? $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.Severity[message.severity] === undefined ? message.severity : $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.Severity[message.severity] : message.severity;
+                                    if (message.resolution != null && message.hasOwnProperty("resolution"))
+                                        object.resolution = options.enums === String ? $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.Resolution[message.resolution] === undefined ? message.resolution : $root.google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.Resolution[message.resolution] : message.resolution;
+                                    if (message.attribute != null && message.hasOwnProperty("attribute"))
+                                        object.attribute = message.attribute;
+                                    if (message.description != null && message.hasOwnProperty("description"))
+                                        object.description = message.description;
+                                    if (message.detail != null && message.hasOwnProperty("detail"))
+                                        object.detail = message.detail;
+                                    if (message.documentationUri != null && message.hasOwnProperty("documentationUri"))
+                                        object.documentationUri = message.documentationUri;
+                                    if (message.productCount != null && message.hasOwnProperty("productCount"))
+                                        if (typeof message.productCount === "number")
+                                            object.productCount = options.longs === String ? String(message.productCount) : message.productCount;
+                                        else
+                                            object.productCount = options.longs === String ? $util.Long.prototype.toString.call(message.productCount) : options.longs === Number ? new $util.LongBits(message.productCount.low >>> 0, message.productCount.high >>> 0).toNumber() : message.productCount;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ItemLevelIssue to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ItemLevelIssue.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ItemLevelIssue
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ItemLevelIssue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue";
+                                };
+    
+                                /**
+                                 * Severity enum.
+                                 * @name google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.Severity
+                                 * @enum {number}
+                                 * @property {number} SEVERITY_UNSPECIFIED=0 SEVERITY_UNSPECIFIED value
+                                 * @property {number} NOT_IMPACTED=1 NOT_IMPACTED value
+                                 * @property {number} DEMOTED=2 DEMOTED value
+                                 * @property {number} DISAPPROVED=3 DISAPPROVED value
+                                 */
+                                ItemLevelIssue.Severity = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "SEVERITY_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "NOT_IMPACTED"] = 1;
+                                    values[valuesById[2] = "DEMOTED"] = 2;
+                                    values[valuesById[3] = "DISAPPROVED"] = 3;
+                                    return values;
+                                })();
+    
+                                /**
+                                 * Resolution enum.
+                                 * @name google.shopping.merchant.issueresolution.v1beta.AggregateProductStatus.ItemLevelIssue.Resolution
+                                 * @enum {number}
+                                 * @property {number} RESOLUTION_UNSPECIFIED=0 RESOLUTION_UNSPECIFIED value
+                                 * @property {number} MERCHANT_ACTION=1 MERCHANT_ACTION value
+                                 * @property {number} PENDING_PROCESSING=2 PENDING_PROCESSING value
+                                 */
+                                ItemLevelIssue.Resolution = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "RESOLUTION_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "MERCHANT_ACTION"] = 1;
+                                    values[valuesById[2] = "PENDING_PROCESSING"] = 2;
+                                    return values;
+                                })();
+    
+                                return ItemLevelIssue;
+                            })();
+    
+                            return AggregateProductStatus;
+                        })();
+    
                         v1beta.IssueResolutionService = (function() {
     
                             /**
@@ -8849,6 +10650,1478 @@
                 })();
     
                 return merchant;
+            })();
+    
+            shopping.type = (function() {
+    
+                /**
+                 * Namespace type.
+                 * @memberof google.shopping
+                 * @namespace
+                 */
+                var type = {};
+    
+                type.Weight = (function() {
+    
+                    /**
+                     * Properties of a Weight.
+                     * @memberof google.shopping.type
+                     * @interface IWeight
+                     * @property {number|Long|null} [amountMicros] Weight amountMicros
+                     * @property {google.shopping.type.Weight.WeightUnit|null} [unit] Weight unit
+                     */
+    
+                    /**
+                     * Constructs a new Weight.
+                     * @memberof google.shopping.type
+                     * @classdesc Represents a Weight.
+                     * @implements IWeight
+                     * @constructor
+                     * @param {google.shopping.type.IWeight=} [properties] Properties to set
+                     */
+                    function Weight(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Weight amountMicros.
+                     * @member {number|Long|null|undefined} amountMicros
+                     * @memberof google.shopping.type.Weight
+                     * @instance
+                     */
+                    Weight.prototype.amountMicros = null;
+    
+                    /**
+                     * Weight unit.
+                     * @member {google.shopping.type.Weight.WeightUnit} unit
+                     * @memberof google.shopping.type.Weight
+                     * @instance
+                     */
+                    Weight.prototype.unit = 0;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(Weight.prototype, "_amountMicros", {
+                        get: $util.oneOfGetter($oneOfFields = ["amountMicros"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new Weight instance using the specified properties.
+                     * @function create
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {google.shopping.type.IWeight=} [properties] Properties to set
+                     * @returns {google.shopping.type.Weight} Weight instance
+                     */
+                    Weight.create = function create(properties) {
+                        return new Weight(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Weight message. Does not implicitly {@link google.shopping.type.Weight.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {google.shopping.type.IWeight} message Weight message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Weight.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.amountMicros != null && Object.hasOwnProperty.call(message, "amountMicros"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int64(message.amountMicros);
+                        if (message.unit != null && Object.hasOwnProperty.call(message, "unit"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.unit);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Weight message, length delimited. Does not implicitly {@link google.shopping.type.Weight.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {google.shopping.type.IWeight} message Weight message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Weight.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Weight message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.shopping.type.Weight} Weight
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Weight.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Weight();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.amountMicros = reader.int64();
+                                    break;
+                                }
+                            case 2: {
+                                    message.unit = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Weight message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.shopping.type.Weight} Weight
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Weight.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Weight message.
+                     * @function verify
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Weight.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.amountMicros != null && message.hasOwnProperty("amountMicros")) {
+                            properties._amountMicros = 1;
+                            if (!$util.isInteger(message.amountMicros) && !(message.amountMicros && $util.isInteger(message.amountMicros.low) && $util.isInteger(message.amountMicros.high)))
+                                return "amountMicros: integer|Long expected";
+                        }
+                        if (message.unit != null && message.hasOwnProperty("unit"))
+                            switch (message.unit) {
+                            default:
+                                return "unit: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Weight message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.shopping.type.Weight} Weight
+                     */
+                    Weight.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.shopping.type.Weight)
+                            return object;
+                        var message = new $root.google.shopping.type.Weight();
+                        if (object.amountMicros != null)
+                            if ($util.Long)
+                                (message.amountMicros = $util.Long.fromValue(object.amountMicros)).unsigned = false;
+                            else if (typeof object.amountMicros === "string")
+                                message.amountMicros = parseInt(object.amountMicros, 10);
+                            else if (typeof object.amountMicros === "number")
+                                message.amountMicros = object.amountMicros;
+                            else if (typeof object.amountMicros === "object")
+                                message.amountMicros = new $util.LongBits(object.amountMicros.low >>> 0, object.amountMicros.high >>> 0).toNumber();
+                        switch (object.unit) {
+                        default:
+                            if (typeof object.unit === "number") {
+                                message.unit = object.unit;
+                                break;
+                            }
+                            break;
+                        case "WEIGHT_UNIT_UNSPECIFIED":
+                        case 0:
+                            message.unit = 0;
+                            break;
+                        case "POUND":
+                        case 1:
+                            message.unit = 1;
+                            break;
+                        case "KILOGRAM":
+                        case 2:
+                            message.unit = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Weight message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {google.shopping.type.Weight} message Weight
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Weight.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.unit = options.enums === String ? "WEIGHT_UNIT_UNSPECIFIED" : 0;
+                        if (message.amountMicros != null && message.hasOwnProperty("amountMicros")) {
+                            if (typeof message.amountMicros === "number")
+                                object.amountMicros = options.longs === String ? String(message.amountMicros) : message.amountMicros;
+                            else
+                                object.amountMicros = options.longs === String ? $util.Long.prototype.toString.call(message.amountMicros) : options.longs === Number ? new $util.LongBits(message.amountMicros.low >>> 0, message.amountMicros.high >>> 0).toNumber() : message.amountMicros;
+                            if (options.oneofs)
+                                object._amountMicros = "amountMicros";
+                        }
+                        if (message.unit != null && message.hasOwnProperty("unit"))
+                            object.unit = options.enums === String ? $root.google.shopping.type.Weight.WeightUnit[message.unit] === undefined ? message.unit : $root.google.shopping.type.Weight.WeightUnit[message.unit] : message.unit;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Weight to JSON.
+                     * @function toJSON
+                     * @memberof google.shopping.type.Weight
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Weight.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Weight
+                     * @function getTypeUrl
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Weight.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.shopping.type.Weight";
+                    };
+    
+                    /**
+                     * WeightUnit enum.
+                     * @name google.shopping.type.Weight.WeightUnit
+                     * @enum {number}
+                     * @property {number} WEIGHT_UNIT_UNSPECIFIED=0 WEIGHT_UNIT_UNSPECIFIED value
+                     * @property {number} POUND=1 POUND value
+                     * @property {number} KILOGRAM=2 KILOGRAM value
+                     */
+                    Weight.WeightUnit = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "WEIGHT_UNIT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "POUND"] = 1;
+                        values[valuesById[2] = "KILOGRAM"] = 2;
+                        return values;
+                    })();
+    
+                    return Weight;
+                })();
+    
+                type.Price = (function() {
+    
+                    /**
+                     * Properties of a Price.
+                     * @memberof google.shopping.type
+                     * @interface IPrice
+                     * @property {number|Long|null} [amountMicros] Price amountMicros
+                     * @property {string|null} [currencyCode] Price currencyCode
+                     */
+    
+                    /**
+                     * Constructs a new Price.
+                     * @memberof google.shopping.type
+                     * @classdesc Represents a Price.
+                     * @implements IPrice
+                     * @constructor
+                     * @param {google.shopping.type.IPrice=} [properties] Properties to set
+                     */
+                    function Price(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Price amountMicros.
+                     * @member {number|Long|null|undefined} amountMicros
+                     * @memberof google.shopping.type.Price
+                     * @instance
+                     */
+                    Price.prototype.amountMicros = null;
+    
+                    /**
+                     * Price currencyCode.
+                     * @member {string|null|undefined} currencyCode
+                     * @memberof google.shopping.type.Price
+                     * @instance
+                     */
+                    Price.prototype.currencyCode = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(Price.prototype, "_amountMicros", {
+                        get: $util.oneOfGetter($oneOfFields = ["amountMicros"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(Price.prototype, "_currencyCode", {
+                        get: $util.oneOfGetter($oneOfFields = ["currencyCode"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new Price instance using the specified properties.
+                     * @function create
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {google.shopping.type.IPrice=} [properties] Properties to set
+                     * @returns {google.shopping.type.Price} Price instance
+                     */
+                    Price.create = function create(properties) {
+                        return new Price(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Price message. Does not implicitly {@link google.shopping.type.Price.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {google.shopping.type.IPrice} message Price message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Price.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.amountMicros != null && Object.hasOwnProperty.call(message, "amountMicros"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int64(message.amountMicros);
+                        if (message.currencyCode != null && Object.hasOwnProperty.call(message, "currencyCode"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.currencyCode);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Price message, length delimited. Does not implicitly {@link google.shopping.type.Price.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {google.shopping.type.IPrice} message Price message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Price.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Price message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.shopping.type.Price} Price
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Price.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Price();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.amountMicros = reader.int64();
+                                    break;
+                                }
+                            case 2: {
+                                    message.currencyCode = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Price message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.shopping.type.Price} Price
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Price.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Price message.
+                     * @function verify
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Price.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.amountMicros != null && message.hasOwnProperty("amountMicros")) {
+                            properties._amountMicros = 1;
+                            if (!$util.isInteger(message.amountMicros) && !(message.amountMicros && $util.isInteger(message.amountMicros.low) && $util.isInteger(message.amountMicros.high)))
+                                return "amountMicros: integer|Long expected";
+                        }
+                        if (message.currencyCode != null && message.hasOwnProperty("currencyCode")) {
+                            properties._currencyCode = 1;
+                            if (!$util.isString(message.currencyCode))
+                                return "currencyCode: string expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Price message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.shopping.type.Price} Price
+                     */
+                    Price.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.shopping.type.Price)
+                            return object;
+                        var message = new $root.google.shopping.type.Price();
+                        if (object.amountMicros != null)
+                            if ($util.Long)
+                                (message.amountMicros = $util.Long.fromValue(object.amountMicros)).unsigned = false;
+                            else if (typeof object.amountMicros === "string")
+                                message.amountMicros = parseInt(object.amountMicros, 10);
+                            else if (typeof object.amountMicros === "number")
+                                message.amountMicros = object.amountMicros;
+                            else if (typeof object.amountMicros === "object")
+                                message.amountMicros = new $util.LongBits(object.amountMicros.low >>> 0, object.amountMicros.high >>> 0).toNumber();
+                        if (object.currencyCode != null)
+                            message.currencyCode = String(object.currencyCode);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Price message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {google.shopping.type.Price} message Price
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Price.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.amountMicros != null && message.hasOwnProperty("amountMicros")) {
+                            if (typeof message.amountMicros === "number")
+                                object.amountMicros = options.longs === String ? String(message.amountMicros) : message.amountMicros;
+                            else
+                                object.amountMicros = options.longs === String ? $util.Long.prototype.toString.call(message.amountMicros) : options.longs === Number ? new $util.LongBits(message.amountMicros.low >>> 0, message.amountMicros.high >>> 0).toNumber() : message.amountMicros;
+                            if (options.oneofs)
+                                object._amountMicros = "amountMicros";
+                        }
+                        if (message.currencyCode != null && message.hasOwnProperty("currencyCode")) {
+                            object.currencyCode = message.currencyCode;
+                            if (options.oneofs)
+                                object._currencyCode = "currencyCode";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Price to JSON.
+                     * @function toJSON
+                     * @memberof google.shopping.type.Price
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Price.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Price
+                     * @function getTypeUrl
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Price.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.shopping.type.Price";
+                    };
+    
+                    return Price;
+                })();
+    
+                type.CustomAttribute = (function() {
+    
+                    /**
+                     * Properties of a CustomAttribute.
+                     * @memberof google.shopping.type
+                     * @interface ICustomAttribute
+                     * @property {string|null} [name] CustomAttribute name
+                     * @property {string|null} [value] CustomAttribute value
+                     * @property {Array.<google.shopping.type.ICustomAttribute>|null} [groupValues] CustomAttribute groupValues
+                     */
+    
+                    /**
+                     * Constructs a new CustomAttribute.
+                     * @memberof google.shopping.type
+                     * @classdesc Represents a CustomAttribute.
+                     * @implements ICustomAttribute
+                     * @constructor
+                     * @param {google.shopping.type.ICustomAttribute=} [properties] Properties to set
+                     */
+                    function CustomAttribute(properties) {
+                        this.groupValues = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CustomAttribute name.
+                     * @member {string|null|undefined} name
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @instance
+                     */
+                    CustomAttribute.prototype.name = null;
+    
+                    /**
+                     * CustomAttribute value.
+                     * @member {string|null|undefined} value
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @instance
+                     */
+                    CustomAttribute.prototype.value = null;
+    
+                    /**
+                     * CustomAttribute groupValues.
+                     * @member {Array.<google.shopping.type.ICustomAttribute>} groupValues
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @instance
+                     */
+                    CustomAttribute.prototype.groupValues = $util.emptyArray;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(CustomAttribute.prototype, "_name", {
+                        get: $util.oneOfGetter($oneOfFields = ["name"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(CustomAttribute.prototype, "_value", {
+                        get: $util.oneOfGetter($oneOfFields = ["value"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new CustomAttribute instance using the specified properties.
+                     * @function create
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {google.shopping.type.ICustomAttribute=} [properties] Properties to set
+                     * @returns {google.shopping.type.CustomAttribute} CustomAttribute instance
+                     */
+                    CustomAttribute.create = function create(properties) {
+                        return new CustomAttribute(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CustomAttribute message. Does not implicitly {@link google.shopping.type.CustomAttribute.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {google.shopping.type.ICustomAttribute} message CustomAttribute message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CustomAttribute.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                        if (message.groupValues != null && message.groupValues.length)
+                            for (var i = 0; i < message.groupValues.length; ++i)
+                                $root.google.shopping.type.CustomAttribute.encode(message.groupValues[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CustomAttribute message, length delimited. Does not implicitly {@link google.shopping.type.CustomAttribute.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {google.shopping.type.ICustomAttribute} message CustomAttribute message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CustomAttribute.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CustomAttribute message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.shopping.type.CustomAttribute} CustomAttribute
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CustomAttribute.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.CustomAttribute();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.value = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.groupValues && message.groupValues.length))
+                                        message.groupValues = [];
+                                    message.groupValues.push($root.google.shopping.type.CustomAttribute.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CustomAttribute message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.shopping.type.CustomAttribute} CustomAttribute
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CustomAttribute.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CustomAttribute message.
+                     * @function verify
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CustomAttribute.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.name != null && message.hasOwnProperty("name")) {
+                            properties._name = 1;
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        }
+                        if (message.value != null && message.hasOwnProperty("value")) {
+                            properties._value = 1;
+                            if (!$util.isString(message.value))
+                                return "value: string expected";
+                        }
+                        if (message.groupValues != null && message.hasOwnProperty("groupValues")) {
+                            if (!Array.isArray(message.groupValues))
+                                return "groupValues: array expected";
+                            for (var i = 0; i < message.groupValues.length; ++i) {
+                                var error = $root.google.shopping.type.CustomAttribute.verify(message.groupValues[i]);
+                                if (error)
+                                    return "groupValues." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CustomAttribute message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.shopping.type.CustomAttribute} CustomAttribute
+                     */
+                    CustomAttribute.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.shopping.type.CustomAttribute)
+                            return object;
+                        var message = new $root.google.shopping.type.CustomAttribute();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.value != null)
+                            message.value = String(object.value);
+                        if (object.groupValues) {
+                            if (!Array.isArray(object.groupValues))
+                                throw TypeError(".google.shopping.type.CustomAttribute.groupValues: array expected");
+                            message.groupValues = [];
+                            for (var i = 0; i < object.groupValues.length; ++i) {
+                                if (typeof object.groupValues[i] !== "object")
+                                    throw TypeError(".google.shopping.type.CustomAttribute.groupValues: object expected");
+                                message.groupValues[i] = $root.google.shopping.type.CustomAttribute.fromObject(object.groupValues[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CustomAttribute message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {google.shopping.type.CustomAttribute} message CustomAttribute
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CustomAttribute.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.groupValues = [];
+                        if (message.name != null && message.hasOwnProperty("name")) {
+                            object.name = message.name;
+                            if (options.oneofs)
+                                object._name = "name";
+                        }
+                        if (message.value != null && message.hasOwnProperty("value")) {
+                            object.value = message.value;
+                            if (options.oneofs)
+                                object._value = "value";
+                        }
+                        if (message.groupValues && message.groupValues.length) {
+                            object.groupValues = [];
+                            for (var j = 0; j < message.groupValues.length; ++j)
+                                object.groupValues[j] = $root.google.shopping.type.CustomAttribute.toObject(message.groupValues[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CustomAttribute to JSON.
+                     * @function toJSON
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CustomAttribute.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CustomAttribute
+                     * @function getTypeUrl
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CustomAttribute.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.shopping.type.CustomAttribute";
+                    };
+    
+                    return CustomAttribute;
+                })();
+    
+                type.Destination = (function() {
+    
+                    /**
+                     * Properties of a Destination.
+                     * @memberof google.shopping.type
+                     * @interface IDestination
+                     */
+    
+                    /**
+                     * Constructs a new Destination.
+                     * @memberof google.shopping.type
+                     * @classdesc Represents a Destination.
+                     * @implements IDestination
+                     * @constructor
+                     * @param {google.shopping.type.IDestination=} [properties] Properties to set
+                     */
+                    function Destination(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new Destination instance using the specified properties.
+                     * @function create
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {google.shopping.type.IDestination=} [properties] Properties to set
+                     * @returns {google.shopping.type.Destination} Destination instance
+                     */
+                    Destination.create = function create(properties) {
+                        return new Destination(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Destination message. Does not implicitly {@link google.shopping.type.Destination.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {google.shopping.type.IDestination} message Destination message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Destination.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Destination message, length delimited. Does not implicitly {@link google.shopping.type.Destination.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {google.shopping.type.IDestination} message Destination message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Destination.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Destination message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.shopping.type.Destination} Destination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Destination.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Destination();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Destination message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.shopping.type.Destination} Destination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Destination.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Destination message.
+                     * @function verify
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Destination.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Destination message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.shopping.type.Destination} Destination
+                     */
+                    Destination.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.shopping.type.Destination)
+                            return object;
+                        return new $root.google.shopping.type.Destination();
+                    };
+    
+                    /**
+                     * Creates a plain object from a Destination message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {google.shopping.type.Destination} message Destination
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Destination.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this Destination to JSON.
+                     * @function toJSON
+                     * @memberof google.shopping.type.Destination
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Destination.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Destination
+                     * @function getTypeUrl
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Destination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.shopping.type.Destination";
+                    };
+    
+                    /**
+                     * DestinationEnum enum.
+                     * @name google.shopping.type.Destination.DestinationEnum
+                     * @enum {number}
+                     * @property {number} DESTINATION_ENUM_UNSPECIFIED=0 DESTINATION_ENUM_UNSPECIFIED value
+                     * @property {number} SHOPPING_ADS=1 SHOPPING_ADS value
+                     * @property {number} DISPLAY_ADS=2 DISPLAY_ADS value
+                     * @property {number} LOCAL_INVENTORY_ADS=3 LOCAL_INVENTORY_ADS value
+                     * @property {number} FREE_LISTINGS=4 FREE_LISTINGS value
+                     * @property {number} FREE_LOCAL_LISTINGS=5 FREE_LOCAL_LISTINGS value
+                     * @property {number} YOUTUBE_SHOPPING=6 YOUTUBE_SHOPPING value
+                     */
+                    Destination.DestinationEnum = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DESTINATION_ENUM_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SHOPPING_ADS"] = 1;
+                        values[valuesById[2] = "DISPLAY_ADS"] = 2;
+                        values[valuesById[3] = "LOCAL_INVENTORY_ADS"] = 3;
+                        values[valuesById[4] = "FREE_LISTINGS"] = 4;
+                        values[valuesById[5] = "FREE_LOCAL_LISTINGS"] = 5;
+                        values[valuesById[6] = "YOUTUBE_SHOPPING"] = 6;
+                        return values;
+                    })();
+    
+                    return Destination;
+                })();
+    
+                type.ReportingContext = (function() {
+    
+                    /**
+                     * Properties of a ReportingContext.
+                     * @memberof google.shopping.type
+                     * @interface IReportingContext
+                     */
+    
+                    /**
+                     * Constructs a new ReportingContext.
+                     * @memberof google.shopping.type
+                     * @classdesc Represents a ReportingContext.
+                     * @implements IReportingContext
+                     * @constructor
+                     * @param {google.shopping.type.IReportingContext=} [properties] Properties to set
+                     */
+                    function ReportingContext(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new ReportingContext instance using the specified properties.
+                     * @function create
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {google.shopping.type.IReportingContext=} [properties] Properties to set
+                     * @returns {google.shopping.type.ReportingContext} ReportingContext instance
+                     */
+                    ReportingContext.create = function create(properties) {
+                        return new ReportingContext(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ReportingContext message. Does not implicitly {@link google.shopping.type.ReportingContext.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {google.shopping.type.IReportingContext} message ReportingContext message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReportingContext.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ReportingContext message, length delimited. Does not implicitly {@link google.shopping.type.ReportingContext.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {google.shopping.type.IReportingContext} message ReportingContext message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReportingContext.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ReportingContext message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.shopping.type.ReportingContext} ReportingContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReportingContext.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.ReportingContext();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ReportingContext message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.shopping.type.ReportingContext} ReportingContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReportingContext.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ReportingContext message.
+                     * @function verify
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ReportingContext.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ReportingContext message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.shopping.type.ReportingContext} ReportingContext
+                     */
+                    ReportingContext.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.shopping.type.ReportingContext)
+                            return object;
+                        return new $root.google.shopping.type.ReportingContext();
+                    };
+    
+                    /**
+                     * Creates a plain object from a ReportingContext message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {google.shopping.type.ReportingContext} message ReportingContext
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ReportingContext.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this ReportingContext to JSON.
+                     * @function toJSON
+                     * @memberof google.shopping.type.ReportingContext
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ReportingContext.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ReportingContext
+                     * @function getTypeUrl
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ReportingContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.shopping.type.ReportingContext";
+                    };
+    
+                    /**
+                     * ReportingContextEnum enum.
+                     * @name google.shopping.type.ReportingContext.ReportingContextEnum
+                     * @enum {number}
+                     * @property {number} REPORTING_CONTEXT_ENUM_UNSPECIFIED=0 REPORTING_CONTEXT_ENUM_UNSPECIFIED value
+                     * @property {number} SHOPPING_ADS=1 SHOPPING_ADS value
+                     * @property {number} DISCOVERY_ADS=2 DISCOVERY_ADS value
+                     * @property {number} DEMAND_GEN_ADS=13 DEMAND_GEN_ADS value
+                     * @property {number} DEMAND_GEN_ADS_DISCOVER_SURFACE=14 DEMAND_GEN_ADS_DISCOVER_SURFACE value
+                     * @property {number} VIDEO_ADS=3 VIDEO_ADS value
+                     * @property {number} DISPLAY_ADS=4 DISPLAY_ADS value
+                     * @property {number} LOCAL_INVENTORY_ADS=5 LOCAL_INVENTORY_ADS value
+                     * @property {number} VEHICLE_INVENTORY_ADS=6 VEHICLE_INVENTORY_ADS value
+                     * @property {number} FREE_LISTINGS=7 FREE_LISTINGS value
+                     * @property {number} FREE_LOCAL_LISTINGS=8 FREE_LOCAL_LISTINGS value
+                     * @property {number} FREE_LOCAL_VEHICLE_LISTINGS=9 FREE_LOCAL_VEHICLE_LISTINGS value
+                     * @property {number} YOUTUBE_SHOPPING=10 YOUTUBE_SHOPPING value
+                     * @property {number} CLOUD_RETAIL=11 CLOUD_RETAIL value
+                     * @property {number} LOCAL_CLOUD_RETAIL=12 LOCAL_CLOUD_RETAIL value
+                     */
+                    ReportingContext.ReportingContextEnum = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "REPORTING_CONTEXT_ENUM_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SHOPPING_ADS"] = 1;
+                        values[valuesById[2] = "DISCOVERY_ADS"] = 2;
+                        values[valuesById[13] = "DEMAND_GEN_ADS"] = 13;
+                        values[valuesById[14] = "DEMAND_GEN_ADS_DISCOVER_SURFACE"] = 14;
+                        values[valuesById[3] = "VIDEO_ADS"] = 3;
+                        values[valuesById[4] = "DISPLAY_ADS"] = 4;
+                        values[valuesById[5] = "LOCAL_INVENTORY_ADS"] = 5;
+                        values[valuesById[6] = "VEHICLE_INVENTORY_ADS"] = 6;
+                        values[valuesById[7] = "FREE_LISTINGS"] = 7;
+                        values[valuesById[8] = "FREE_LOCAL_LISTINGS"] = 8;
+                        values[valuesById[9] = "FREE_LOCAL_VEHICLE_LISTINGS"] = 9;
+                        values[valuesById[10] = "YOUTUBE_SHOPPING"] = 10;
+                        values[valuesById[11] = "CLOUD_RETAIL"] = 11;
+                        values[valuesById[12] = "LOCAL_CLOUD_RETAIL"] = 12;
+                        return values;
+                    })();
+    
+                    return ReportingContext;
+                })();
+    
+                type.Channel = (function() {
+    
+                    /**
+                     * Properties of a Channel.
+                     * @memberof google.shopping.type
+                     * @interface IChannel
+                     */
+    
+                    /**
+                     * Constructs a new Channel.
+                     * @memberof google.shopping.type
+                     * @classdesc Represents a Channel.
+                     * @implements IChannel
+                     * @constructor
+                     * @param {google.shopping.type.IChannel=} [properties] Properties to set
+                     */
+                    function Channel(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new Channel instance using the specified properties.
+                     * @function create
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {google.shopping.type.IChannel=} [properties] Properties to set
+                     * @returns {google.shopping.type.Channel} Channel instance
+                     */
+                    Channel.create = function create(properties) {
+                        return new Channel(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Channel message. Does not implicitly {@link google.shopping.type.Channel.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {google.shopping.type.IChannel} message Channel message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Channel.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Channel message, length delimited. Does not implicitly {@link google.shopping.type.Channel.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {google.shopping.type.IChannel} message Channel message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Channel.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Channel message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.shopping.type.Channel} Channel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Channel.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Channel();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Channel message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.shopping.type.Channel} Channel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Channel.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Channel message.
+                     * @function verify
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Channel.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Channel message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.shopping.type.Channel} Channel
+                     */
+                    Channel.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.shopping.type.Channel)
+                            return object;
+                        return new $root.google.shopping.type.Channel();
+                    };
+    
+                    /**
+                     * Creates a plain object from a Channel message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {google.shopping.type.Channel} message Channel
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Channel.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this Channel to JSON.
+                     * @function toJSON
+                     * @memberof google.shopping.type.Channel
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Channel.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Channel
+                     * @function getTypeUrl
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Channel.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.shopping.type.Channel";
+                    };
+    
+                    /**
+                     * ChannelEnum enum.
+                     * @name google.shopping.type.Channel.ChannelEnum
+                     * @enum {number}
+                     * @property {number} CHANNEL_ENUM_UNSPECIFIED=0 CHANNEL_ENUM_UNSPECIFIED value
+                     * @property {number} ONLINE=1 ONLINE value
+                     * @property {number} LOCAL=2 LOCAL value
+                     */
+                    Channel.ChannelEnum = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "CHANNEL_ENUM_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ONLINE"] = 1;
+                        values[valuesById[2] = "LOCAL"] = 2;
+                        return values;
+                    })();
+    
+                    return Channel;
+                })();
+    
+                return type;
             })();
     
             return shopping;

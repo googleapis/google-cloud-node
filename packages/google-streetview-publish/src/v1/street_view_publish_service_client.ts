@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -109,42 +100,20 @@ export class StreetViewPublishServiceClient {
    *     const client = new StreetViewPublishServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof StreetViewPublishServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof StreetViewPublishServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'streetviewpublish.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +139,7 @@ export class StreetViewPublishServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,7 +153,10 @@ export class StreetViewPublishServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -205,66 +177,49 @@ export class StreetViewPublishServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listPhotos: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'photos'
-      ),
-      listPhotoSequences: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'photoSequences'
-      ),
+      listPhotos:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'photos'),
+      listPhotoSequences:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'photoSequences')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createPhotoSequenceResponse = protoFilesRoot.lookup(
-      '.google.streetview.publish.v1.PhotoSequence'
-    ) as gax.protobuf.Type;
+      '.google.streetview.publish.v1.PhotoSequence') as gax.protobuf.Type;
     const createPhotoSequenceMetadata = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const getPhotoSequenceResponse = protoFilesRoot.lookup(
-      '.google.streetview.publish.v1.PhotoSequence'
-    ) as gax.protobuf.Type;
+      '.google.streetview.publish.v1.PhotoSequence') as gax.protobuf.Type;
     const getPhotoSequenceMetadata = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createPhotoSequence: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createPhotoSequenceResponse.decode.bind(createPhotoSequenceResponse),
-        createPhotoSequenceMetadata.decode.bind(createPhotoSequenceMetadata)
-      ),
+        createPhotoSequenceMetadata.decode.bind(createPhotoSequenceMetadata)),
       getPhotoSequence: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         getPhotoSequenceResponse.decode.bind(getPhotoSequenceResponse),
-        getPhotoSequenceMetadata.decode.bind(getPhotoSequenceMetadata)
-      ),
+        getPhotoSequenceMetadata.decode.bind(getPhotoSequenceMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.streetview.publish.v1.StreetViewPublishService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.streetview.publish.v1.StreetViewPublishService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -295,49 +250,28 @@ export class StreetViewPublishServiceClient {
     // Put together the "service stub" for
     // google.streetview.publish.v1.StreetViewPublishService.
     this.streetViewPublishServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.streetview.publish.v1.StreetViewPublishService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.streetview.publish.v1
-            .StreetViewPublishService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.streetview.publish.v1.StreetViewPublishService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.streetview.publish.v1.StreetViewPublishService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const streetViewPublishServiceStubMethods = [
-      'startUpload',
-      'createPhoto',
-      'getPhoto',
-      'batchGetPhotos',
-      'listPhotos',
-      'updatePhoto',
-      'batchUpdatePhotos',
-      'deletePhoto',
-      'batchDeletePhotos',
-      'startPhotoSequenceUpload',
-      'createPhotoSequence',
-      'getPhotoSequence',
-      'listPhotoSequences',
-      'deletePhotoSequence',
-    ];
+    const streetViewPublishServiceStubMethods =
+        ['startUpload', 'createPhoto', 'getPhoto', 'batchGetPhotos', 'listPhotos', 'updatePhoto', 'batchUpdatePhotos', 'deletePhoto', 'batchDeletePhotos', 'startPhotoSequenceUpload', 'createPhotoSequence', 'getPhotoSequence', 'listPhotoSequences', 'deletePhotoSequence'];
     for (const methodName of streetViewPublishServiceStubMethods) {
       const callPromise = this.streetViewPublishServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -362,14 +296,8 @@ export class StreetViewPublishServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'streetviewpublish.googleapis.com';
   }
@@ -380,14 +308,8 @@ export class StreetViewPublishServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'streetviewpublish.googleapis.com';
   }
@@ -418,7 +340,9 @@ export class StreetViewPublishServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/streetviewpublish'];
+    return [
+      'https://www.googleapis.com/auth/streetviewpublish'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -427,9 +351,8 @@ export class StreetViewPublishServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -440,1874 +363,1485 @@ export class StreetViewPublishServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Creates an upload session to start uploading photo bytes.  The method uses
-   * the upload URL of the returned
-   * {@link protos.google.streetview.publish.v1.UploadRef|UploadRef} to upload the bytes for
-   * the {@link protos.google.streetview.publish.v1.Photo|Photo}.
-   *
-   * In addition to the photo requirements shown in
-   * https://support.google.com/maps/answer/7012050?ref_topic=6275604,
-   * the photo must meet the following requirements:
-   *
-   * * Photo Sphere XMP metadata must be included in the photo metadata. See
-   * https://developers.google.com/streetview/spherical-metadata for the
-   * required fields.
-   * * The pixel size of the photo must meet the size requirements listed in
-   * https://support.google.com/maps/answer/7012050?ref_topic=6275604, and
-   * the photo must be a full 360 horizontally.
-   *
-   * After the upload completes, the method uses
-   * {@link protos.google.streetview.publish.v1.UploadRef|UploadRef} with
-   * {@link protos.google.streetview.publish.v1.StreetViewPublishService.CreatePhoto|CreatePhoto}
-   * to create the {@link protos.google.streetview.publish.v1.Photo|Photo} object entry.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.UploadRef|UploadRef}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.start_upload.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_StartUpload_async
-   */
+/**
+ * Creates an upload session to start uploading photo bytes.  The method uses
+ * the upload URL of the returned
+ * {@link protos.google.streetview.publish.v1.UploadRef|UploadRef} to upload the bytes for
+ * the {@link protos.google.streetview.publish.v1.Photo|Photo}.
+ *
+ * In addition to the photo requirements shown in
+ * https://support.google.com/maps/answer/7012050?ref_topic=6275604,
+ * the photo must meet the following requirements:
+ *
+ * * Photo Sphere XMP metadata must be included in the photo metadata. See
+ * https://developers.google.com/streetview/spherical-metadata for the
+ * required fields.
+ * * The pixel size of the photo must meet the size requirements listed in
+ * https://support.google.com/maps/answer/7012050?ref_topic=6275604, and
+ * the photo must be a full 360 horizontally.
+ *
+ * After the upload completes, the method uses
+ * {@link protos.google.streetview.publish.v1.UploadRef|UploadRef} with
+ * {@link protos.google.streetview.publish.v1.StreetViewPublishService.CreatePhoto|CreatePhoto}
+ * to create the {@link protos.google.streetview.publish.v1.Photo|Photo} object entry.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.UploadRef|UploadRef}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.start_upload.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_StartUpload_async
+ */
   startUpload(
-    request?: protos.google.protobuf.IEmpty,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IUploadRef,
-      protos.google.protobuf.IEmpty | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.protobuf.IEmpty,
+      options?: CallOptions):
+      Promise<[
+        protos.google.streetview.publish.v1.IUploadRef,
+        protos.google.protobuf.IEmpty|undefined, {}|undefined
+      ]>;
   startUpload(
-    request: protos.google.protobuf.IEmpty,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IUploadRef,
-      protos.google.protobuf.IEmpty | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  startUpload(
-    request: protos.google.protobuf.IEmpty,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IUploadRef,
-      protos.google.protobuf.IEmpty | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  startUpload(
-    request?: protos.google.protobuf.IEmpty,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.protobuf.IEmpty,
+      options: CallOptions,
+      callback: Callback<
           protos.google.streetview.publish.v1.IUploadRef,
-          protos.google.protobuf.IEmpty | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.streetview.publish.v1.IUploadRef,
-      protos.google.protobuf.IEmpty | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IUploadRef,
-      protos.google.protobuf.IEmpty | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.protobuf.IEmpty|null|undefined,
+          {}|null|undefined>): void;
+  startUpload(
+      request: protos.google.protobuf.IEmpty,
+      callback: Callback<
+          protos.google.streetview.publish.v1.IUploadRef,
+          protos.google.protobuf.IEmpty|null|undefined,
+          {}|null|undefined>): void;
+  startUpload(
+      request?: protos.google.protobuf.IEmpty,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.streetview.publish.v1.IUploadRef,
+          protos.google.protobuf.IEmpty|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.streetview.publish.v1.IUploadRef,
+          protos.google.protobuf.IEmpty|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.streetview.publish.v1.IUploadRef,
+        protos.google.protobuf.IEmpty|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('startUpload request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.streetview.publish.v1.IUploadRef,
-          protos.google.protobuf.IEmpty | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.streetview.publish.v1.IUploadRef,
+        protos.google.protobuf.IEmpty|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('startUpload response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .startUpload(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.streetview.publish.v1.IUploadRef,
-          protos.google.protobuf.IEmpty | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('startUpload response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.startUpload(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.streetview.publish.v1.IUploadRef,
+        protos.google.protobuf.IEmpty|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('startUpload response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * After the client finishes uploading the photo with the returned
-   * {@link protos.google.streetview.publish.v1.UploadRef|UploadRef},
-   * {@link protos.google.streetview.publish.v1.StreetViewPublishService.CreatePhoto|CreatePhoto}
-   * publishes the uploaded {@link protos.google.streetview.publish.v1.Photo|Photo} to
-   * Street View on Google Maps.
-   *
-   * Currently, the only way to set heading, pitch, and roll in CreatePhoto is
-   * through the [Photo Sphere XMP
-   * metadata](https://developers.google.com/streetview/spherical-metadata) in
-   * the photo bytes. CreatePhoto ignores the  `pose.heading`, `pose.pitch`,
-   * `pose.roll`, `pose.altitude`, and `pose.level` fields in Pose.
-   *
-   * This method returns the following error codes:
-   *
-   * * {@link protos.google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT} if
-   * the request is malformed or if the uploaded photo is not a 360 photo.
-   * * {@link protos.google.rpc.Code.NOT_FOUND|google.rpc.Code.NOT_FOUND} if the upload
-   * reference does not exist.
-   * * {@link protos.google.rpc.Code.RESOURCE_EXHAUSTED|google.rpc.Code.RESOURCE_EXHAUSTED}
-   * if the account has reached the storage limit.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.streetview.publish.v1.Photo} request.photo
-   *   Required. Photo to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.Photo|Photo}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.create_photo.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_CreatePhoto_async
-   */
+/**
+ * After the client finishes uploading the photo with the returned
+ * {@link protos.google.streetview.publish.v1.UploadRef|UploadRef},
+ * {@link protos.google.streetview.publish.v1.StreetViewPublishService.CreatePhoto|CreatePhoto}
+ * publishes the uploaded {@link protos.google.streetview.publish.v1.Photo|Photo} to
+ * Street View on Google Maps.
+ *
+ * Currently, the only way to set heading, pitch, and roll in CreatePhoto is
+ * through the [Photo Sphere XMP
+ * metadata](https://developers.google.com/streetview/spherical-metadata) in
+ * the photo bytes. CreatePhoto ignores the  `pose.heading`, `pose.pitch`,
+ * `pose.roll`, `pose.altitude`, and `pose.level` fields in Pose.
+ *
+ * This method returns the following error codes:
+ *
+ * * {@link protos.google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT} if
+ * the request is malformed or if the uploaded photo is not a 360 photo.
+ * * {@link protos.google.rpc.Code.NOT_FOUND|google.rpc.Code.NOT_FOUND} if the upload
+ * reference does not exist.
+ * * {@link protos.google.rpc.Code.RESOURCE_EXHAUSTED|google.rpc.Code.RESOURCE_EXHAUSTED}
+ * if the account has reached the storage limit.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.streetview.publish.v1.Photo} request.photo
+ *   Required. Photo to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.Photo|Photo}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.create_photo.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_CreatePhoto_async
+ */
   createPhoto(
-    request?: protos.google.streetview.publish.v1.ICreatePhotoRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IPhoto,
-      protos.google.streetview.publish.v1.ICreatePhotoRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.streetview.publish.v1.ICreatePhotoRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.streetview.publish.v1.IPhoto,
+        protos.google.streetview.publish.v1.ICreatePhotoRequest|undefined, {}|undefined
+      ]>;
   createPhoto(
-    request: protos.google.streetview.publish.v1.ICreatePhotoRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IPhoto,
-      | protos.google.streetview.publish.v1.ICreatePhotoRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createPhoto(
-    request: protos.google.streetview.publish.v1.ICreatePhotoRequest,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IPhoto,
-      | protos.google.streetview.publish.v1.ICreatePhotoRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createPhoto(
-    request?: protos.google.streetview.publish.v1.ICreatePhotoRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.streetview.publish.v1.ICreatePhotoRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.streetview.publish.v1.IPhoto,
-          | protos.google.streetview.publish.v1.ICreatePhotoRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.streetview.publish.v1.IPhoto,
-      | protos.google.streetview.publish.v1.ICreatePhotoRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IPhoto,
-      protos.google.streetview.publish.v1.ICreatePhotoRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.streetview.publish.v1.ICreatePhotoRequest|null|undefined,
+          {}|null|undefined>): void;
+  createPhoto(
+      request: protos.google.streetview.publish.v1.ICreatePhotoRequest,
+      callback: Callback<
+          protos.google.streetview.publish.v1.IPhoto,
+          protos.google.streetview.publish.v1.ICreatePhotoRequest|null|undefined,
+          {}|null|undefined>): void;
+  createPhoto(
+      request?: protos.google.streetview.publish.v1.ICreatePhotoRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.streetview.publish.v1.IPhoto,
+          protos.google.streetview.publish.v1.ICreatePhotoRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.streetview.publish.v1.IPhoto,
+          protos.google.streetview.publish.v1.ICreatePhotoRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.streetview.publish.v1.IPhoto,
+        protos.google.streetview.publish.v1.ICreatePhotoRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('createPhoto request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.streetview.publish.v1.IPhoto,
-          | protos.google.streetview.publish.v1.ICreatePhotoRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.streetview.publish.v1.IPhoto,
+        protos.google.streetview.publish.v1.ICreatePhotoRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createPhoto response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createPhoto(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.streetview.publish.v1.IPhoto,
-          protos.google.streetview.publish.v1.ICreatePhotoRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createPhoto response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createPhoto(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.streetview.publish.v1.IPhoto,
+        protos.google.streetview.publish.v1.ICreatePhotoRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createPhoto response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the metadata of the specified
-   * {@link protos.google.streetview.publish.v1.Photo|Photo}.
-   *
-   * This method returns the following error codes:
-   *
-   * * {@link protos.google.rpc.Code.PERMISSION_DENIED|google.rpc.Code.PERMISSION_DENIED} if
-   * the requesting user did not create the requested
-   * {@link protos.google.streetview.publish.v1.Photo|Photo}.
-   * * {@link protos.google.rpc.Code.NOT_FOUND|google.rpc.Code.NOT_FOUND} if the requested
-   * {@link protos.google.streetview.publish.v1.Photo|Photo} does not exist.
-   * * {@link protos.google.rpc.Code.UNAVAILABLE|google.rpc.Code.UNAVAILABLE} if the
-   * requested {@link protos.google.streetview.publish.v1.Photo|Photo} is still being
-   * indexed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.photoId
-   *   Required. ID of the {@link protos.google.streetview.publish.v1.Photo|Photo}.
-   * @param {google.streetview.publish.v1.PhotoView} request.view
-   *   Required. Specifies if a download URL for the photo bytes should be
-   *   returned in the {@link protos.google.streetview.publish.v1.Photo|Photo} response.
-   * @param {string} request.languageCode
-   *   The BCP-47 language code, such as "en-US" or "sr-Latn". For more
-   *   information, see
-   *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-   *   If language_code is unspecified, the user's language preference for Google
-   *   services is used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.Photo|Photo}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.get_photo.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_GetPhoto_async
-   */
+/**
+ * Gets the metadata of the specified
+ * {@link protos.google.streetview.publish.v1.Photo|Photo}.
+ *
+ * This method returns the following error codes:
+ *
+ * * {@link protos.google.rpc.Code.PERMISSION_DENIED|google.rpc.Code.PERMISSION_DENIED} if
+ * the requesting user did not create the requested
+ * {@link protos.google.streetview.publish.v1.Photo|Photo}.
+ * * {@link protos.google.rpc.Code.NOT_FOUND|google.rpc.Code.NOT_FOUND} if the requested
+ * {@link protos.google.streetview.publish.v1.Photo|Photo} does not exist.
+ * * {@link protos.google.rpc.Code.UNAVAILABLE|google.rpc.Code.UNAVAILABLE} if the
+ * requested {@link protos.google.streetview.publish.v1.Photo|Photo} is still being
+ * indexed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.photoId
+ *   Required. ID of the {@link protos.google.streetview.publish.v1.Photo|Photo}.
+ * @param {google.streetview.publish.v1.PhotoView} request.view
+ *   Required. Specifies if a download URL for the photo bytes should be
+ *   returned in the {@link protos.google.streetview.publish.v1.Photo|Photo} response.
+ * @param {string} request.languageCode
+ *   The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+ *   information, see
+ *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+ *   If language_code is unspecified, the user's language preference for Google
+ *   services is used.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.Photo|Photo}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.get_photo.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_GetPhoto_async
+ */
   getPhoto(
-    request?: protos.google.streetview.publish.v1.IGetPhotoRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IPhoto,
-      protos.google.streetview.publish.v1.IGetPhotoRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.streetview.publish.v1.IGetPhotoRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.streetview.publish.v1.IPhoto,
+        protos.google.streetview.publish.v1.IGetPhotoRequest|undefined, {}|undefined
+      ]>;
   getPhoto(
-    request: protos.google.streetview.publish.v1.IGetPhotoRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IPhoto,
-      protos.google.streetview.publish.v1.IGetPhotoRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPhoto(
-    request: protos.google.streetview.publish.v1.IGetPhotoRequest,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IPhoto,
-      protos.google.streetview.publish.v1.IGetPhotoRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPhoto(
-    request?: protos.google.streetview.publish.v1.IGetPhotoRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.streetview.publish.v1.IGetPhotoRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.streetview.publish.v1.IPhoto,
-          | protos.google.streetview.publish.v1.IGetPhotoRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.streetview.publish.v1.IPhoto,
-      protos.google.streetview.publish.v1.IGetPhotoRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IPhoto,
-      protos.google.streetview.publish.v1.IGetPhotoRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.streetview.publish.v1.IGetPhotoRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPhoto(
+      request: protos.google.streetview.publish.v1.IGetPhotoRequest,
+      callback: Callback<
+          protos.google.streetview.publish.v1.IPhoto,
+          protos.google.streetview.publish.v1.IGetPhotoRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPhoto(
+      request?: protos.google.streetview.publish.v1.IGetPhotoRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.streetview.publish.v1.IPhoto,
+          protos.google.streetview.publish.v1.IGetPhotoRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.streetview.publish.v1.IPhoto,
+          protos.google.streetview.publish.v1.IGetPhotoRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.streetview.publish.v1.IPhoto,
+        protos.google.streetview.publish.v1.IGetPhotoRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        photo_id: request.photoId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'photo_id': request.photoId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPhoto request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.streetview.publish.v1.IPhoto,
-          | protos.google.streetview.publish.v1.IGetPhotoRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.streetview.publish.v1.IPhoto,
+        protos.google.streetview.publish.v1.IGetPhotoRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPhoto response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPhoto(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.streetview.publish.v1.IPhoto,
-          protos.google.streetview.publish.v1.IGetPhotoRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getPhoto response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getPhoto(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.streetview.publish.v1.IPhoto,
+        protos.google.streetview.publish.v1.IGetPhotoRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPhoto response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets the metadata of the specified
-   * {@link protos.google.streetview.publish.v1.Photo|Photo} batch.
-   *
-   * Note that if
-   * {@link protos.google.streetview.publish.v1.StreetViewPublishService.BatchGetPhotos|BatchGetPhotos}
-   * fails, either critical fields are missing or there is an authentication
-   * error. Even if
-   * {@link protos.google.streetview.publish.v1.StreetViewPublishService.BatchGetPhotos|BatchGetPhotos}
-   * succeeds, individual photos in the batch may have failures.
-   * These failures are specified in each
-   * {@link protos.google.streetview.publish.v1.PhotoResponse.status|PhotoResponse.status}
-   * in
-   * {@link protos.google.streetview.publish.v1.BatchGetPhotosResponse.results|BatchGetPhotosResponse.results}.
-   * See
-   * {@link protos.google.streetview.publish.v1.StreetViewPublishService.GetPhoto|GetPhoto}
-   * for specific failures that can occur per photo.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string[]} request.photoIds
-   *   Required. IDs of the {@link protos.google.streetview.publish.v1.Photo|Photos}. For HTTP
-   *   GET requests, the URL query parameter should be
-   *   `photoIds=<id1>&photoIds=<id2>&...`.
-   * @param {google.streetview.publish.v1.PhotoView} request.view
-   *   Required. Specifies if a download URL for the photo bytes should be
-   *   returned in the Photo response.
-   * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn". For more
-   *   information, see
-   *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-   *   If language_code is unspecified, the user's language preference for Google
-   *   services is used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.BatchGetPhotosResponse|BatchGetPhotosResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.batch_get_photos.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_BatchGetPhotos_async
-   */
+/**
+ * Gets the metadata of the specified
+ * {@link protos.google.streetview.publish.v1.Photo|Photo} batch.
+ *
+ * Note that if
+ * {@link protos.google.streetview.publish.v1.StreetViewPublishService.BatchGetPhotos|BatchGetPhotos}
+ * fails, either critical fields are missing or there is an authentication
+ * error. Even if
+ * {@link protos.google.streetview.publish.v1.StreetViewPublishService.BatchGetPhotos|BatchGetPhotos}
+ * succeeds, individual photos in the batch may have failures.
+ * These failures are specified in each
+ * {@link protos.google.streetview.publish.v1.PhotoResponse.status|PhotoResponse.status}
+ * in
+ * {@link protos.google.streetview.publish.v1.BatchGetPhotosResponse.results|BatchGetPhotosResponse.results}.
+ * See
+ * {@link protos.google.streetview.publish.v1.StreetViewPublishService.GetPhoto|GetPhoto}
+ * for specific failures that can occur per photo.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string[]} request.photoIds
+ *   Required. IDs of the {@link protos.google.streetview.publish.v1.Photo|Photos}. For HTTP
+ *   GET requests, the URL query parameter should be
+ *   `photoIds=<id1>&photoIds=<id2>&...`.
+ * @param {google.streetview.publish.v1.PhotoView} request.view
+ *   Required. Specifies if a download URL for the photo bytes should be
+ *   returned in the Photo response.
+ * @param {string} [request.languageCode]
+ *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+ *   information, see
+ *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+ *   If language_code is unspecified, the user's language preference for Google
+ *   services is used.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.BatchGetPhotosResponse|BatchGetPhotosResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.batch_get_photos.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_BatchGetPhotos_async
+ */
   batchGetPhotos(
-    request?: protos.google.streetview.publish.v1.IBatchGetPhotosRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
-      protos.google.streetview.publish.v1.IBatchGetPhotosRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.streetview.publish.v1.IBatchGetPhotosRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
+        protos.google.streetview.publish.v1.IBatchGetPhotosRequest|undefined, {}|undefined
+      ]>;
   batchGetPhotos(
-    request: protos.google.streetview.publish.v1.IBatchGetPhotosRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
-      | protos.google.streetview.publish.v1.IBatchGetPhotosRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchGetPhotos(
-    request: protos.google.streetview.publish.v1.IBatchGetPhotosRequest,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
-      | protos.google.streetview.publish.v1.IBatchGetPhotosRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchGetPhotos(
-    request?: protos.google.streetview.publish.v1.IBatchGetPhotosRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.streetview.publish.v1.IBatchGetPhotosRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
-          | protos.google.streetview.publish.v1.IBatchGetPhotosRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
-      | protos.google.streetview.publish.v1.IBatchGetPhotosRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
-      protos.google.streetview.publish.v1.IBatchGetPhotosRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.streetview.publish.v1.IBatchGetPhotosRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchGetPhotos(
+      request: protos.google.streetview.publish.v1.IBatchGetPhotosRequest,
+      callback: Callback<
+          protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
+          protos.google.streetview.publish.v1.IBatchGetPhotosRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchGetPhotos(
+      request?: protos.google.streetview.publish.v1.IBatchGetPhotosRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
+          protos.google.streetview.publish.v1.IBatchGetPhotosRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
+          protos.google.streetview.publish.v1.IBatchGetPhotosRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
+        protos.google.streetview.publish.v1.IBatchGetPhotosRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchGetPhotos request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
-          | protos.google.streetview.publish.v1.IBatchGetPhotosRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
+        protos.google.streetview.publish.v1.IBatchGetPhotosRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchGetPhotos response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchGetPhotos(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
-          (
-            | protos.google.streetview.publish.v1.IBatchGetPhotosRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchGetPhotos response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchGetPhotos(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.streetview.publish.v1.IBatchGetPhotosResponse,
+        protos.google.streetview.publish.v1.IBatchGetPhotosRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchGetPhotos response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the metadata of a {@link protos.google.streetview.publish.v1.Photo|Photo}, such
-   * as pose, place association, connections, etc. Changing the pixels of a
-   * photo is not supported.
-   *
-   * Only the fields specified in the
-   * {@link protos.google.streetview.publish.v1.UpdatePhotoRequest.update_mask|updateMask}
-   * field are used. If `updateMask` is not present, the update applies to all
-   * fields.
-   *
-   * This method returns the following error codes:
-   *
-   * * {@link protos.google.rpc.Code.PERMISSION_DENIED|google.rpc.Code.PERMISSION_DENIED} if
-   * the requesting user did not create the requested photo.
-   * * {@link protos.google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT} if
-   * the request is malformed.
-   * * {@link protos.google.rpc.Code.NOT_FOUND|google.rpc.Code.NOT_FOUND} if the requested
-   * photo does not exist.
-   * * {@link protos.google.rpc.Code.UNAVAILABLE|google.rpc.Code.UNAVAILABLE} if the
-   * requested {@link protos.google.streetview.publish.v1.Photo|Photo} is still being
-   * indexed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.streetview.publish.v1.Photo} request.photo
-   *   Required. {@link protos.google.streetview.publish.v1.Photo|Photo} object containing the
-   *   new metadata.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask that identifies fields on the photo metadata to update.
-   *   If not present, the old {@link protos.google.streetview.publish.v1.Photo|Photo}
-   *   metadata is entirely replaced with the
-   *   new {@link protos.google.streetview.publish.v1.Photo|Photo} metadata in this request.
-   *   The update fails if invalid fields are specified. Multiple fields can be
-   *   specified in a comma-delimited list.
-   *
-   *   The following fields are valid:
-   *
-   *   * `pose.heading`
-   *   * `pose.lat_lng_pair`
-   *   * `pose.pitch`
-   *   * `pose.roll`
-   *   * `pose.level`
-   *   * `pose.altitude`
-   *   * `connections`
-   *   * `places`
-   *
-   *
-   *   > Note: When
-   *   {@link protos.google.streetview.publish.v1.UpdatePhotoRequest.update_mask|updateMask}
-   *   contains repeated fields, the entire set of repeated values get replaced
-   *   with the new contents. For example, if
-   *   {@link protos.google.streetview.publish.v1.UpdatePhotoRequest.update_mask|updateMask}
-   *   contains `connections` and `UpdatePhotoRequest.photo.connections` is empty,
-   *   all connections are removed.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.Photo|Photo}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.update_photo.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_UpdatePhoto_async
-   */
+/**
+ * Updates the metadata of a {@link protos.google.streetview.publish.v1.Photo|Photo}, such
+ * as pose, place association, connections, etc. Changing the pixels of a
+ * photo is not supported.
+ *
+ * Only the fields specified in the
+ * {@link protos.google.streetview.publish.v1.UpdatePhotoRequest.update_mask|updateMask}
+ * field are used. If `updateMask` is not present, the update applies to all
+ * fields.
+ *
+ * This method returns the following error codes:
+ *
+ * * {@link protos.google.rpc.Code.PERMISSION_DENIED|google.rpc.Code.PERMISSION_DENIED} if
+ * the requesting user did not create the requested photo.
+ * * {@link protos.google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT} if
+ * the request is malformed.
+ * * {@link protos.google.rpc.Code.NOT_FOUND|google.rpc.Code.NOT_FOUND} if the requested
+ * photo does not exist.
+ * * {@link protos.google.rpc.Code.UNAVAILABLE|google.rpc.Code.UNAVAILABLE} if the
+ * requested {@link protos.google.streetview.publish.v1.Photo|Photo} is still being
+ * indexed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.streetview.publish.v1.Photo} request.photo
+ *   Required. {@link protos.google.streetview.publish.v1.Photo|Photo} object containing the
+ *   new metadata.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Mask that identifies fields on the photo metadata to update.
+ *   If not present, the old {@link protos.google.streetview.publish.v1.Photo|Photo}
+ *   metadata is entirely replaced with the
+ *   new {@link protos.google.streetview.publish.v1.Photo|Photo} metadata in this request.
+ *   The update fails if invalid fields are specified. Multiple fields can be
+ *   specified in a comma-delimited list.
+ *
+ *   The following fields are valid:
+ *
+ *   * `pose.heading`
+ *   * `pose.lat_lng_pair`
+ *   * `pose.pitch`
+ *   * `pose.roll`
+ *   * `pose.level`
+ *   * `pose.altitude`
+ *   * `connections`
+ *   * `places`
+ *
+ *
+ *   > Note: When
+ *   {@link protos.google.streetview.publish.v1.UpdatePhotoRequest.update_mask|updateMask}
+ *   contains repeated fields, the entire set of repeated values get replaced
+ *   with the new contents. For example, if
+ *   {@link protos.google.streetview.publish.v1.UpdatePhotoRequest.update_mask|updateMask}
+ *   contains `connections` and `UpdatePhotoRequest.photo.connections` is empty,
+ *   all connections are removed.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.Photo|Photo}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.update_photo.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_UpdatePhoto_async
+ */
   updatePhoto(
-    request?: protos.google.streetview.publish.v1.IUpdatePhotoRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IPhoto,
-      protos.google.streetview.publish.v1.IUpdatePhotoRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.streetview.publish.v1.IUpdatePhotoRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.streetview.publish.v1.IPhoto,
+        protos.google.streetview.publish.v1.IUpdatePhotoRequest|undefined, {}|undefined
+      ]>;
   updatePhoto(
-    request: protos.google.streetview.publish.v1.IUpdatePhotoRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IPhoto,
-      | protos.google.streetview.publish.v1.IUpdatePhotoRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updatePhoto(
-    request: protos.google.streetview.publish.v1.IUpdatePhotoRequest,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IPhoto,
-      | protos.google.streetview.publish.v1.IUpdatePhotoRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updatePhoto(
-    request?: protos.google.streetview.publish.v1.IUpdatePhotoRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.streetview.publish.v1.IUpdatePhotoRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.streetview.publish.v1.IPhoto,
-          | protos.google.streetview.publish.v1.IUpdatePhotoRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.streetview.publish.v1.IPhoto,
-      | protos.google.streetview.publish.v1.IUpdatePhotoRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IPhoto,
-      protos.google.streetview.publish.v1.IUpdatePhotoRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.streetview.publish.v1.IUpdatePhotoRequest|null|undefined,
+          {}|null|undefined>): void;
+  updatePhoto(
+      request: protos.google.streetview.publish.v1.IUpdatePhotoRequest,
+      callback: Callback<
+          protos.google.streetview.publish.v1.IPhoto,
+          protos.google.streetview.publish.v1.IUpdatePhotoRequest|null|undefined,
+          {}|null|undefined>): void;
+  updatePhoto(
+      request?: protos.google.streetview.publish.v1.IUpdatePhotoRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.streetview.publish.v1.IPhoto,
+          protos.google.streetview.publish.v1.IUpdatePhotoRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.streetview.publish.v1.IPhoto,
+          protos.google.streetview.publish.v1.IUpdatePhotoRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.streetview.publish.v1.IPhoto,
+        protos.google.streetview.publish.v1.IUpdatePhotoRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'photo.photo_id.id': request.photo!.photoId!.id ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'photo.photo_id.id': request.photo!.photoId!.id ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updatePhoto request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.streetview.publish.v1.IPhoto,
-          | protos.google.streetview.publish.v1.IUpdatePhotoRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.streetview.publish.v1.IPhoto,
+        protos.google.streetview.publish.v1.IUpdatePhotoRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updatePhoto response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updatePhoto(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.streetview.publish.v1.IPhoto,
-          protos.google.streetview.publish.v1.IUpdatePhotoRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updatePhoto response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updatePhoto(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.streetview.publish.v1.IPhoto,
+        protos.google.streetview.publish.v1.IUpdatePhotoRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updatePhoto response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates the metadata of {@link protos.google.streetview.publish.v1.Photo|Photos}, such
-   * as pose, place association, connections, etc. Changing the pixels of photos
-   * is not supported.
-   *
-   * Note that if
-   * {@link protos.google.streetview.publish.v1.StreetViewPublishService.BatchUpdatePhotos|BatchUpdatePhotos}
-   * fails, either critical fields are missing or there is an authentication
-   * error. Even if
-   * {@link protos.google.streetview.publish.v1.StreetViewPublishService.BatchUpdatePhotos|BatchUpdatePhotos}
-   * succeeds, individual photos in the batch may have failures.
-   * These failures are specified in each
-   * {@link protos.google.streetview.publish.v1.PhotoResponse.status|PhotoResponse.status}
-   * in
-   * {@link protos.google.streetview.publish.v1.BatchUpdatePhotosResponse.results|BatchUpdatePhotosResponse.results}.
-   * See
-   * {@link protos.google.streetview.publish.v1.StreetViewPublishService.UpdatePhoto|UpdatePhoto}
-   * for specific failures that can occur per photo.
-   *
-   * Only the fields specified in
-   * {@link protos.google.streetview.publish.v1.UpdatePhotoRequest.update_mask|updateMask}
-   * field are used. If `updateMask` is not present, the update applies to all
-   * fields.
-   *
-   * The number of
-   * {@link protos.google.streetview.publish.v1.UpdatePhotoRequest|UpdatePhotoRequest}
-   * messages in a
-   * {@link protos.google.streetview.publish.v1.BatchUpdatePhotosRequest|BatchUpdatePhotosRequest}
-   * must not exceed 20.
-   *
-   * > Note: To update
-   * {@link protos.google.streetview.publish.v1.Pose.altitude|Pose.altitude},
-   * {@link protos.google.streetview.publish.v1.Pose.lat_lng_pair|Pose.latLngPair} has to be
-   * filled as well. Otherwise, the request will fail.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number[]} request.updatePhotoRequests
-   *   Required. List of
-   *   {@link protos.google.streetview.publish.v1.UpdatePhotoRequest|UpdatePhotoRequests}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.BatchUpdatePhotosResponse|BatchUpdatePhotosResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.batch_update_photos.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_BatchUpdatePhotos_async
-   */
+/**
+ * Updates the metadata of {@link protos.google.streetview.publish.v1.Photo|Photos}, such
+ * as pose, place association, connections, etc. Changing the pixels of photos
+ * is not supported.
+ *
+ * Note that if
+ * {@link protos.google.streetview.publish.v1.StreetViewPublishService.BatchUpdatePhotos|BatchUpdatePhotos}
+ * fails, either critical fields are missing or there is an authentication
+ * error. Even if
+ * {@link protos.google.streetview.publish.v1.StreetViewPublishService.BatchUpdatePhotos|BatchUpdatePhotos}
+ * succeeds, individual photos in the batch may have failures.
+ * These failures are specified in each
+ * {@link protos.google.streetview.publish.v1.PhotoResponse.status|PhotoResponse.status}
+ * in
+ * {@link protos.google.streetview.publish.v1.BatchUpdatePhotosResponse.results|BatchUpdatePhotosResponse.results}.
+ * See
+ * {@link protos.google.streetview.publish.v1.StreetViewPublishService.UpdatePhoto|UpdatePhoto}
+ * for specific failures that can occur per photo.
+ *
+ * Only the fields specified in
+ * {@link protos.google.streetview.publish.v1.UpdatePhotoRequest.update_mask|updateMask}
+ * field are used. If `updateMask` is not present, the update applies to all
+ * fields.
+ *
+ * The number of
+ * {@link protos.google.streetview.publish.v1.UpdatePhotoRequest|UpdatePhotoRequest}
+ * messages in a
+ * {@link protos.google.streetview.publish.v1.BatchUpdatePhotosRequest|BatchUpdatePhotosRequest}
+ * must not exceed 20.
+ *
+ * > Note: To update
+ * {@link protos.google.streetview.publish.v1.Pose.altitude|Pose.altitude},
+ * {@link protos.google.streetview.publish.v1.Pose.lat_lng_pair|Pose.latLngPair} has to be
+ * filled as well. Otherwise, the request will fail.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number[]} request.updatePhotoRequests
+ *   Required. List of
+ *   {@link protos.google.streetview.publish.v1.UpdatePhotoRequest|UpdatePhotoRequests}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.BatchUpdatePhotosResponse|BatchUpdatePhotosResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.batch_update_photos.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_BatchUpdatePhotos_async
+ */
   batchUpdatePhotos(
-    request?: protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
-      protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
+        protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest|undefined, {}|undefined
+      ]>;
   batchUpdatePhotos(
-    request: protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
-      | protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchUpdatePhotos(
-    request: protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
-      | protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchUpdatePhotos(
-    request?: protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
-          | protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
-      | protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
-      protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdatePhotos(
+      request: protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest,
+      callback: Callback<
+          protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
+          protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdatePhotos(
+      request?: protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
+          protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
+          protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
+        protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('batchUpdatePhotos request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
-          | protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
+        protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchUpdatePhotos response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .batchUpdatePhotos(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
-          (
-            | protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchUpdatePhotos response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.batchUpdatePhotos(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.streetview.publish.v1.IBatchUpdatePhotosResponse,
+        protos.google.streetview.publish.v1.IBatchUpdatePhotosRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchUpdatePhotos response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a {@link protos.google.streetview.publish.v1.Photo|Photo} and its metadata.
-   *
-   * This method returns the following error codes:
-   *
-   * * {@link protos.google.rpc.Code.PERMISSION_DENIED|google.rpc.Code.PERMISSION_DENIED} if
-   * the requesting user did not create the requested photo.
-   * * {@link protos.google.rpc.Code.NOT_FOUND|google.rpc.Code.NOT_FOUND} if the photo ID
-   * does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.photoId
-   *   Required. ID of the {@link protos.google.streetview.publish.v1.Photo|Photo}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.delete_photo.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_DeletePhoto_async
-   */
+/**
+ * Deletes a {@link protos.google.streetview.publish.v1.Photo|Photo} and its metadata.
+ *
+ * This method returns the following error codes:
+ *
+ * * {@link protos.google.rpc.Code.PERMISSION_DENIED|google.rpc.Code.PERMISSION_DENIED} if
+ * the requesting user did not create the requested photo.
+ * * {@link protos.google.rpc.Code.NOT_FOUND|google.rpc.Code.NOT_FOUND} if the photo ID
+ * does not exist.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.photoId
+ *   Required. ID of the {@link protos.google.streetview.publish.v1.Photo|Photo}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.delete_photo.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_DeletePhoto_async
+ */
   deletePhoto(
-    request?: protos.google.streetview.publish.v1.IDeletePhotoRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.streetview.publish.v1.IDeletePhotoRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.streetview.publish.v1.IDeletePhotoRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.streetview.publish.v1.IDeletePhotoRequest|undefined, {}|undefined
+      ]>;
   deletePhoto(
-    request: protos.google.streetview.publish.v1.IDeletePhotoRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.streetview.publish.v1.IDeletePhotoRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePhoto(
-    request: protos.google.streetview.publish.v1.IDeletePhotoRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.streetview.publish.v1.IDeletePhotoRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePhoto(
-    request?: protos.google.streetview.publish.v1.IDeletePhotoRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.streetview.publish.v1.IDeletePhotoRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.streetview.publish.v1.IDeletePhotoRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.streetview.publish.v1.IDeletePhotoRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.streetview.publish.v1.IDeletePhotoRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.streetview.publish.v1.IDeletePhotoRequest|null|undefined,
+          {}|null|undefined>): void;
+  deletePhoto(
+      request: protos.google.streetview.publish.v1.IDeletePhotoRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.streetview.publish.v1.IDeletePhotoRequest|null|undefined,
+          {}|null|undefined>): void;
+  deletePhoto(
+      request?: protos.google.streetview.publish.v1.IDeletePhotoRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.streetview.publish.v1.IDeletePhotoRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.streetview.publish.v1.IDeletePhotoRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.streetview.publish.v1.IDeletePhotoRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        photo_id: request.photoId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'photo_id': request.photoId ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deletePhoto request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.streetview.publish.v1.IDeletePhotoRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.streetview.publish.v1.IDeletePhotoRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deletePhoto response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deletePhoto(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.streetview.publish.v1.IDeletePhotoRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deletePhoto response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deletePhoto(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.streetview.publish.v1.IDeletePhotoRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deletePhoto response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
-  }
-  /**
-   * Deletes a list of {@link protos.google.streetview.publish.v1.Photo|Photos} and their
-   * metadata.
-   *
-   * Note that if
-   * {@link protos.google.streetview.publish.v1.StreetViewPublishService.BatchDeletePhotos|BatchDeletePhotos}
-   * fails, either critical fields are missing or there is an authentication
-   * error. Even if
-   * {@link protos.google.streetview.publish.v1.StreetViewPublishService.BatchDeletePhotos|BatchDeletePhotos}
-   * succeeds, individual photos in the batch may have failures.
-   * These failures are specified in each
-   * {@link protos.google.streetview.publish.v1.PhotoResponse.status|PhotoResponse.status}
-   * in
-   * {@link protos.google.streetview.publish.v1.BatchDeletePhotosResponse.status|BatchDeletePhotosResponse.results}.
-   * See
-   * {@link protos.google.streetview.publish.v1.StreetViewPublishService.DeletePhoto|DeletePhoto}
-   * for specific failures that can occur per photo.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string[]} request.photoIds
-   *   Required. IDs of the {@link protos.google.streetview.publish.v1.Photo|Photos}. HTTP
-   *   GET requests require the following syntax for the URL query parameter:
-   *   `photoIds=<id1>&photoIds=<id2>&...`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.BatchDeletePhotosResponse|BatchDeletePhotosResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.batch_delete_photos.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_BatchDeletePhotos_async
-   */
-  batchDeletePhotos(
-    request?: protos.google.streetview.publish.v1.IBatchDeletePhotosRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
-      protos.google.streetview.publish.v1.IBatchDeletePhotosRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  batchDeletePhotos(
-    request: protos.google.streetview.publish.v1.IBatchDeletePhotosRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
-      | protos.google.streetview.publish.v1.IBatchDeletePhotosRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchDeletePhotos(
-    request: protos.google.streetview.publish.v1.IBatchDeletePhotosRequest,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
-      | protos.google.streetview.publish.v1.IBatchDeletePhotosRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchDeletePhotos(
-    request?: protos.google.streetview.publish.v1.IBatchDeletePhotosRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
-          | protos.google.streetview.publish.v1.IBatchDeletePhotosRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
-      | protos.google.streetview.publish.v1.IBatchDeletePhotosRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
-      protos.google.streetview.publish.v1.IBatchDeletePhotosRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('batchDeletePhotos request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
-          | protos.google.streetview.publish.v1.IBatchDeletePhotosRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('batchDeletePhotos response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .batchDeletePhotos(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
-          (
-            | protos.google.streetview.publish.v1.IBatchDeletePhotosRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('batchDeletePhotos response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Creates an upload session to start uploading photo sequence data.
-   * The upload URL of the returned
-   * {@link protos.google.streetview.publish.v1.UploadRef|UploadRef} is used to upload the
-   * data for the `photoSequence`.
-   *
-   * After the upload is complete, the
-   * {@link protos.google.streetview.publish.v1.UploadRef|UploadRef} is used with
-   * {@link protos.google.streetview.publish.v1.StreetViewPublishService.CreatePhotoSequence|CreatePhotoSequence}
-   * to create the {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence}
-   * object entry.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.UploadRef|UploadRef}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.start_photo_sequence_upload.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_StartPhotoSequenceUpload_async
-   */
-  startPhotoSequenceUpload(
-    request?: protos.google.protobuf.IEmpty,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IUploadRef,
-      protos.google.protobuf.IEmpty | undefined,
-      {} | undefined,
-    ]
-  >;
-  startPhotoSequenceUpload(
-    request: protos.google.protobuf.IEmpty,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IUploadRef,
-      protos.google.protobuf.IEmpty | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  startPhotoSequenceUpload(
-    request: protos.google.protobuf.IEmpty,
-    callback: Callback<
-      protos.google.streetview.publish.v1.IUploadRef,
-      protos.google.protobuf.IEmpty | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  startPhotoSequenceUpload(
-    request?: protos.google.protobuf.IEmpty,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.streetview.publish.v1.IUploadRef,
-          protos.google.protobuf.IEmpty | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.streetview.publish.v1.IUploadRef,
-      protos.google.protobuf.IEmpty | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IUploadRef,
-      protos.google.protobuf.IEmpty | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('startPhotoSequenceUpload request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.streetview.publish.v1.IUploadRef,
-          protos.google.protobuf.IEmpty | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('startPhotoSequenceUpload response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .startPhotoSequenceUpload(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.streetview.publish.v1.IUploadRef,
-          protos.google.protobuf.IEmpty | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('startPhotoSequenceUpload response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Deletes a {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} and
-   * its metadata.
-   *
-   * This method returns the following error codes:
-   *
-   * * {@link protos.google.rpc.Code.PERMISSION_DENIED|google.rpc.Code.PERMISSION_DENIED} if
-   * the requesting user did not create the requested photo sequence.
-   * * {@link protos.google.rpc.Code.NOT_FOUND|google.rpc.Code.NOT_FOUND} if the photo
-   * sequence ID does not exist.
-   * * {@link protos.google.rpc.Code.FAILED_PRECONDITION|google.rpc.Code.FAILED_PRECONDITION} if the photo sequence ID is not
-   * yet finished processing.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.sequenceId
-   *   Required. ID of the
-   *   {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.delete_photo_sequence.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_DeletePhotoSequence_async
-   */
-  deletePhotoSequence(
-    request?: protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  deletePhotoSequence(
-    request: protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePhotoSequence(
-    request: protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePhotoSequence(
-    request?: protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        sequence_id: request.sequenceId ?? '',
+        throw error;
       });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('deletePhotoSequence request %j', request);
-    const wrappedCallback:
-      | Callback<
+  }
+/**
+ * Deletes a list of {@link protos.google.streetview.publish.v1.Photo|Photos} and their
+ * metadata.
+ *
+ * Note that if
+ * {@link protos.google.streetview.publish.v1.StreetViewPublishService.BatchDeletePhotos|BatchDeletePhotos}
+ * fails, either critical fields are missing or there is an authentication
+ * error. Even if
+ * {@link protos.google.streetview.publish.v1.StreetViewPublishService.BatchDeletePhotos|BatchDeletePhotos}
+ * succeeds, individual photos in the batch may have failures.
+ * These failures are specified in each
+ * {@link protos.google.streetview.publish.v1.PhotoResponse.status|PhotoResponse.status}
+ * in
+ * {@link protos.google.streetview.publish.v1.BatchDeletePhotosResponse.status|BatchDeletePhotosResponse.results}.
+ * See
+ * {@link protos.google.streetview.publish.v1.StreetViewPublishService.DeletePhoto|DeletePhoto}
+ * for specific failures that can occur per photo.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string[]} request.photoIds
+ *   Required. IDs of the {@link protos.google.streetview.publish.v1.Photo|Photos}. HTTP
+ *   GET requests require the following syntax for the URL query parameter:
+ *   `photoIds=<id1>&photoIds=<id2>&...`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.BatchDeletePhotosResponse|BatchDeletePhotosResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.batch_delete_photos.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_BatchDeletePhotos_async
+ */
+  batchDeletePhotos(
+      request?: protos.google.streetview.publish.v1.IBatchDeletePhotosRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
+        protos.google.streetview.publish.v1.IBatchDeletePhotosRequest|undefined, {}|undefined
+      ]>;
+  batchDeletePhotos(
+      request: protos.google.streetview.publish.v1.IBatchDeletePhotosRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
+          protos.google.streetview.publish.v1.IBatchDeletePhotosRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchDeletePhotos(
+      request: protos.google.streetview.publish.v1.IBatchDeletePhotosRequest,
+      callback: Callback<
+          protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
+          protos.google.streetview.publish.v1.IBatchDeletePhotosRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchDeletePhotos(
+      request?: protos.google.streetview.publish.v1.IBatchDeletePhotosRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
+          protos.google.streetview.publish.v1.IBatchDeletePhotosRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
+          protos.google.streetview.publish.v1.IBatchDeletePhotosRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
+        protos.google.streetview.publish.v1.IBatchDeletePhotosRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchDeletePhotos request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
+        protos.google.streetview.publish.v1.IBatchDeletePhotosRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchDeletePhotos response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchDeletePhotos(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.streetview.publish.v1.IBatchDeletePhotosResponse,
+        protos.google.streetview.publish.v1.IBatchDeletePhotosRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchDeletePhotos response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Creates an upload session to start uploading photo sequence data.
+ * The upload URL of the returned
+ * {@link protos.google.streetview.publish.v1.UploadRef|UploadRef} is used to upload the
+ * data for the `photoSequence`.
+ *
+ * After the upload is complete, the
+ * {@link protos.google.streetview.publish.v1.UploadRef|UploadRef} is used with
+ * {@link protos.google.streetview.publish.v1.StreetViewPublishService.CreatePhotoSequence|CreatePhotoSequence}
+ * to create the {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence}
+ * object entry.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.streetview.publish.v1.UploadRef|UploadRef}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.start_photo_sequence_upload.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_StartPhotoSequenceUpload_async
+ */
+  startPhotoSequenceUpload(
+      request?: protos.google.protobuf.IEmpty,
+      options?: CallOptions):
+      Promise<[
+        protos.google.streetview.publish.v1.IUploadRef,
+        protos.google.protobuf.IEmpty|undefined, {}|undefined
+      ]>;
+  startPhotoSequenceUpload(
+      request: protos.google.protobuf.IEmpty,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.streetview.publish.v1.IUploadRef,
+          protos.google.protobuf.IEmpty|null|undefined,
+          {}|null|undefined>): void;
+  startPhotoSequenceUpload(
+      request: protos.google.protobuf.IEmpty,
+      callback: Callback<
+          protos.google.streetview.publish.v1.IUploadRef,
+          protos.google.protobuf.IEmpty|null|undefined,
+          {}|null|undefined>): void;
+  startPhotoSequenceUpload(
+      request?: protos.google.protobuf.IEmpty,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.streetview.publish.v1.IUploadRef,
+          protos.google.protobuf.IEmpty|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.streetview.publish.v1.IUploadRef,
+          protos.google.protobuf.IEmpty|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.streetview.publish.v1.IUploadRef,
+        protos.google.protobuf.IEmpty|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize().catch(err => {throw err});
+    this._log.info('startPhotoSequenceUpload request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.streetview.publish.v1.IUploadRef,
+        protos.google.protobuf.IEmpty|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('startPhotoSequenceUpload response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.startPhotoSequenceUpload(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.streetview.publish.v1.IUploadRef,
+        protos.google.protobuf.IEmpty|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('startPhotoSequenceUpload response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Deletes a {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} and
+ * its metadata.
+ *
+ * This method returns the following error codes:
+ *
+ * * {@link protos.google.rpc.Code.PERMISSION_DENIED|google.rpc.Code.PERMISSION_DENIED} if
+ * the requesting user did not create the requested photo sequence.
+ * * {@link protos.google.rpc.Code.NOT_FOUND|google.rpc.Code.NOT_FOUND} if the photo
+ * sequence ID does not exist.
+ * * {@link protos.google.rpc.Code.FAILED_PRECONDITION|google.rpc.Code.FAILED_PRECONDITION} if the photo sequence ID is not
+ * yet finished processing.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.sequenceId
+ *   Required. ID of the
+ *   {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.delete_photo_sequence.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_DeletePhotoSequence_async
+ */
+  deletePhotoSequence(
+      request?: protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest|undefined, {}|undefined
+      ]>;
+  deletePhotoSequence(
+      request: protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+          protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deletePhotoSequence(
+      request: protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest|null|undefined,
+          {}|null|undefined>): void;
+  deletePhotoSequence(
+      request?: protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'sequence_id': request.sequenceId ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('deletePhotoSequence request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deletePhotoSequence response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deletePhotoSequence(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deletePhotoSequence response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deletePhotoSequence(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.streetview.publish.v1.IDeletePhotoSequenceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deletePhotoSequence response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * After the client finishes uploading the
-   * {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} with the
-   * returned {@link protos.google.streetview.publish.v1.UploadRef|UploadRef},
-   * {@link protos.google.streetview.publish.v1.StreetViewPublishService.CreatePhotoSequence|CreatePhotoSequence}
-   * extracts a sequence of 360 photos from a video or Extensible Device
-   * Metadata (XDM, http://www.xdm.org/) to be published to Street View on
-   * Google Maps.
-   *
-   * `CreatePhotoSequence` returns an {@link protos.google.longrunning.Operation|Operation},
-   * with the {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} Id set
-   * in the `Operation.name` field.
-   *
-   * This method returns the following error codes:
-   *
-   * * {@link protos.google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT} if
-   * the request is malformed.
-   * * {@link protos.google.rpc.Code.NOT_FOUND|google.rpc.Code.NOT_FOUND} if the upload
-   * reference does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.streetview.publish.v1.PhotoSequence} request.photoSequence
-   *   Required. {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} to
-   *   create.
-   * @param {google.streetview.publish.v1.CreatePhotoSequenceRequest.InputType} request.inputType
-   *   Required. The input form of
-   *   {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.create_photo_sequence.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_CreatePhotoSequence_async
-   */
+/**
+ * After the client finishes uploading the
+ * {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} with the
+ * returned {@link protos.google.streetview.publish.v1.UploadRef|UploadRef},
+ * {@link protos.google.streetview.publish.v1.StreetViewPublishService.CreatePhotoSequence|CreatePhotoSequence}
+ * extracts a sequence of 360 photos from a video or Extensible Device
+ * Metadata (XDM, http://www.xdm.org/) to be published to Street View on
+ * Google Maps.
+ *
+ * `CreatePhotoSequence` returns an {@link protos.google.longrunning.Operation|Operation},
+ * with the {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} Id set
+ * in the `Operation.name` field.
+ *
+ * This method returns the following error codes:
+ *
+ * * {@link protos.google.rpc.Code.INVALID_ARGUMENT|google.rpc.Code.INVALID_ARGUMENT} if
+ * the request is malformed.
+ * * {@link protos.google.rpc.Code.NOT_FOUND|google.rpc.Code.NOT_FOUND} if the upload
+ * reference does not exist.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.streetview.publish.v1.PhotoSequence} request.photoSequence
+ *   Required. {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} to
+ *   create.
+ * @param {google.streetview.publish.v1.CreatePhotoSequenceRequest.InputType} request.inputType
+ *   Required. The input form of
+ *   {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.create_photo_sequence.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_CreatePhotoSequence_async
+ */
   createPhotoSequence(
-    request?: protos.google.streetview.publish.v1.ICreatePhotoSequenceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.streetview.publish.v1.IPhotoSequence,
-        protos.google.protobuf.IEmpty
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.streetview.publish.v1.ICreatePhotoSequenceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createPhotoSequence(
-    request: protos.google.streetview.publish.v1.ICreatePhotoSequenceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.streetview.publish.v1.IPhotoSequence,
-        protos.google.protobuf.IEmpty
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.streetview.publish.v1.ICreatePhotoSequenceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createPhotoSequence(
-    request: protos.google.streetview.publish.v1.ICreatePhotoSequenceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.streetview.publish.v1.IPhotoSequence,
-        protos.google.protobuf.IEmpty
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.streetview.publish.v1.ICreatePhotoSequenceRequest,
+      callback: Callback<
+          LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createPhotoSequence(
-    request?: protos.google.streetview.publish.v1.ICreatePhotoSequenceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.streetview.publish.v1.IPhotoSequence,
-            protos.google.protobuf.IEmpty
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.streetview.publish.v1.IPhotoSequence,
-        protos.google.protobuf.IEmpty
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.streetview.publish.v1.IPhotoSequence,
-        protos.google.protobuf.IEmpty
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.streetview.publish.v1.ICreatePhotoSequenceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.streetview.publish.v1.IPhotoSequence,
-            protos.google.protobuf.IEmpty
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createPhotoSequence response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createPhotoSequence request %j', request);
-    return this.innerApiCalls
-      .createPhotoSequence(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.streetview.publish.v1.IPhotoSequence,
-            protos.google.protobuf.IEmpty
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createPhotoSequence response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createPhotoSequence(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createPhotoSequence response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createPhotoSequence()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.create_photo_sequence.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_CreatePhotoSequence_async
-   */
-  async checkCreatePhotoSequenceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.streetview.publish.v1.PhotoSequence,
-      protos.google.protobuf.Empty
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createPhotoSequence()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.create_photo_sequence.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_CreatePhotoSequence_async
+ */
+  async checkCreatePhotoSequenceProgress(name: string): Promise<LROperation<protos.google.streetview.publish.v1.PhotoSequence, protos.google.protobuf.Empty>>{
     this._log.info('createPhotoSequence long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createPhotoSequence,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.streetview.publish.v1.PhotoSequence,
-      protos.google.protobuf.Empty
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createPhotoSequence, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.streetview.publish.v1.PhotoSequence, protos.google.protobuf.Empty>;
   }
-  /**
-   * Gets the metadata of the specified
-   * {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} via the
-   * {@link protos.google.longrunning.Operation|Operation} interface.
-   *
-   * This method returns the following three types of responses:
-   *
-   * * `Operation.done` = false, if the processing of
-   *   {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} is not
-   *   finished yet.
-   * * `Operation.done` = true and `Operation.error` is populated, if there was
-   *   an error in processing.
-   * * `Operation.done` = true and `Operation.response` is poulated, which
-   *   contains a {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence}
-   *   message.
-   *
-   * This method returns the following error codes:
-   *
-   * * {@link protos.google.rpc.Code.PERMISSION_DENIED|google.rpc.Code.PERMISSION_DENIED} if
-   * the requesting user did not create the requested
-   * {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence}.
-   * * {@link protos.google.rpc.Code.NOT_FOUND|google.rpc.Code.NOT_FOUND} if the requested
-   * {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.sequenceId
-   *   Required. ID of the photo sequence.
-   * @param {google.streetview.publish.v1.PhotoView} request.view
-   *   Specifies if a download URL for the photo sequence should be returned in
-   *   `download_url` of individual photos in the
-   *   {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} response.
-   *   > Note: Currently not implemented.
-   * @param {string} [request.filter]
-   *   Optional. The filter expression. For example: `published_status=PUBLISHED`.
-   *
-   *   The filters supported are: `published_status`.  See
-   *   https://google.aip.dev/160 for more information.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.get_photo_sequence.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_GetPhotoSequence_async
-   */
+/**
+ * Gets the metadata of the specified
+ * {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} via the
+ * {@link protos.google.longrunning.Operation|Operation} interface.
+ *
+ * This method returns the following three types of responses:
+ *
+ * * `Operation.done` = false, if the processing of
+ *   {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} is not
+ *   finished yet.
+ * * `Operation.done` = true and `Operation.error` is populated, if there was
+ *   an error in processing.
+ * * `Operation.done` = true and `Operation.response` is poulated, which
+ *   contains a {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence}
+ *   message.
+ *
+ * This method returns the following error codes:
+ *
+ * * {@link protos.google.rpc.Code.PERMISSION_DENIED|google.rpc.Code.PERMISSION_DENIED} if
+ * the requesting user did not create the requested
+ * {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence}.
+ * * {@link protos.google.rpc.Code.NOT_FOUND|google.rpc.Code.NOT_FOUND} if the requested
+ * {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} does not exist.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.sequenceId
+ *   Required. ID of the photo sequence.
+ * @param {google.streetview.publish.v1.PhotoView} request.view
+ *   Specifies if a download URL for the photo sequence should be returned in
+ *   `download_url` of individual photos in the
+ *   {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequence} response.
+ *   > Note: Currently not implemented.
+ * @param {string} [request.filter]
+ *   Optional. The filter expression. For example: `published_status=PUBLISHED`.
+ *
+ *   The filters supported are: `published_status`.  See
+ *   https://google.aip.dev/160 for more information.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.get_photo_sequence.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_GetPhotoSequence_async
+ */
   getPhotoSequence(
-    request?: protos.google.streetview.publish.v1.IGetPhotoSequenceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.streetview.publish.v1.IPhotoSequence,
-        protos.google.protobuf.IEmpty
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.streetview.publish.v1.IGetPhotoSequenceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   getPhotoSequence(
-    request: protos.google.streetview.publish.v1.IGetPhotoSequenceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.streetview.publish.v1.IPhotoSequence,
-        protos.google.protobuf.IEmpty
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.streetview.publish.v1.IGetPhotoSequenceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   getPhotoSequence(
-    request: protos.google.streetview.publish.v1.IGetPhotoSequenceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.streetview.publish.v1.IPhotoSequence,
-        protos.google.protobuf.IEmpty
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.streetview.publish.v1.IGetPhotoSequenceRequest,
+      callback: Callback<
+          LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   getPhotoSequence(
-    request?: protos.google.streetview.publish.v1.IGetPhotoSequenceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.streetview.publish.v1.IPhotoSequence,
-            protos.google.protobuf.IEmpty
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.streetview.publish.v1.IPhotoSequence,
-        protos.google.protobuf.IEmpty
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.streetview.publish.v1.IPhotoSequence,
-        protos.google.protobuf.IEmpty
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.streetview.publish.v1.IGetPhotoSequenceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        sequence_id: request.sequenceId ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'sequence_id': request.sequenceId ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.streetview.publish.v1.IPhotoSequence,
-            protos.google.protobuf.IEmpty
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('getPhotoSequence response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('getPhotoSequence request %j', request);
-    return this.innerApiCalls
-      .getPhotoSequence(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.streetview.publish.v1.IPhotoSequence,
-            protos.google.protobuf.IEmpty
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getPhotoSequence response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.getPhotoSequence(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.streetview.publish.v1.IPhotoSequence, protos.google.protobuf.IEmpty>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('getPhotoSequence response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `getPhotoSequence()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.get_photo_sequence.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_GetPhotoSequence_async
-   */
-  async checkGetPhotoSequenceProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.streetview.publish.v1.PhotoSequence,
-      protos.google.protobuf.Empty
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `getPhotoSequence()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.get_photo_sequence.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_GetPhotoSequence_async
+ */
+  async checkGetPhotoSequenceProgress(name: string): Promise<LROperation<protos.google.streetview.publish.v1.PhotoSequence, protos.google.protobuf.Empty>>{
     this._log.info('getPhotoSequence long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.getPhotoSequence,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.streetview.publish.v1.PhotoSequence,
-      protos.google.protobuf.Empty
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.getPhotoSequence, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.streetview.publish.v1.PhotoSequence, protos.google.protobuf.Empty>;
   }
-  /**
-   * Lists all the {@link protos.google.streetview.publish.v1.Photo|Photos} that belong to
-   * the user.
-   *
-   * > Note: Recently created photos that are still
-   * being indexed are not returned in the response.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.streetview.publish.v1.PhotoView} request.view
-   *   Required. Specifies if a download URL for the photos bytes should be
-   *   returned in the Photos response.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of photos to return.
-   *   `pageSize` must be non-negative. If `pageSize` is zero or is not provided,
-   *   the default page size of 100 is used.
-   *   The number of photos returned in the response may be less than `pageSize`
-   *   if the number of photos that belong to the user is less than `pageSize`.
-   * @param {string} [request.pageToken]
-   *   Optional. The
-   *   {@link protos.google.streetview.publish.v1.ListPhotosResponse.next_page_token|nextPageToken}
-   *   value returned from a previous
-   *   {@link protos.google.streetview.publish.v1.StreetViewPublishService.ListPhotos|ListPhotos}
-   *   request, if any.
-   * @param {string} [request.filter]
-   *   Optional. The filter expression. For example:
-   *   `placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw`.
-   *
-   *   The filters supported are: `placeId`, `min_latitude`, `max_latitude`,
-   *   `min_longitude`, `max_longitude`. See https://google.aip.dev/160 for more
-   *   information.
-   * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn". For more
-   *   information, see
-   *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-   *   If language_code is unspecified, the user's language preference for Google
-   *   services is used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.streetview.publish.v1.Photo|Photo}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPhotosAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all the {@link protos.google.streetview.publish.v1.Photo|Photos} that belong to
+ * the user.
+ *
+ * > Note: Recently created photos that are still
+ * being indexed are not returned in the response.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.streetview.publish.v1.PhotoView} request.view
+ *   Required. Specifies if a download URL for the photos bytes should be
+ *   returned in the Photos response.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of photos to return.
+ *   `pageSize` must be non-negative. If `pageSize` is zero or is not provided,
+ *   the default page size of 100 is used.
+ *   The number of photos returned in the response may be less than `pageSize`
+ *   if the number of photos that belong to the user is less than `pageSize`.
+ * @param {string} [request.pageToken]
+ *   Optional. The
+ *   {@link protos.google.streetview.publish.v1.ListPhotosResponse.next_page_token|nextPageToken}
+ *   value returned from a previous
+ *   {@link protos.google.streetview.publish.v1.StreetViewPublishService.ListPhotos|ListPhotos}
+ *   request, if any.
+ * @param {string} [request.filter]
+ *   Optional. The filter expression. For example:
+ *   `placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw`.
+ *
+ *   The filters supported are: `placeId`, `min_latitude`, `max_latitude`,
+ *   `min_longitude`, `max_longitude`. See https://google.aip.dev/160 for more
+ *   information.
+ * @param {string} [request.languageCode]
+ *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+ *   information, see
+ *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+ *   If language_code is unspecified, the user's language preference for Google
+ *   services is used.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.streetview.publish.v1.Photo|Photo}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPhotosAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPhotos(
-    request?: protos.google.streetview.publish.v1.IListPhotosRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IPhoto[],
-      protos.google.streetview.publish.v1.IListPhotosRequest | null,
-      protos.google.streetview.publish.v1.IListPhotosResponse,
-    ]
-  >;
+      request?: protos.google.streetview.publish.v1.IListPhotosRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.streetview.publish.v1.IPhoto[],
+        protos.google.streetview.publish.v1.IListPhotosRequest|null,
+        protos.google.streetview.publish.v1.IListPhotosResponse
+      ]>;
   listPhotos(
-    request: protos.google.streetview.publish.v1.IListPhotosRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.streetview.publish.v1.IListPhotosRequest,
-      | protos.google.streetview.publish.v1.IListPhotosResponse
-      | null
-      | undefined,
-      protos.google.streetview.publish.v1.IPhoto
-    >
-  ): void;
-  listPhotos(
-    request: protos.google.streetview.publish.v1.IListPhotosRequest,
-    callback: PaginationCallback<
-      protos.google.streetview.publish.v1.IListPhotosRequest,
-      | protos.google.streetview.publish.v1.IListPhotosResponse
-      | null
-      | undefined,
-      protos.google.streetview.publish.v1.IPhoto
-    >
-  ): void;
-  listPhotos(
-    request?: protos.google.streetview.publish.v1.IListPhotosRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.streetview.publish.v1.IListPhotosRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.streetview.publish.v1.IListPhotosRequest,
-          | protos.google.streetview.publish.v1.IListPhotosResponse
-          | null
-          | undefined,
-          protos.google.streetview.publish.v1.IPhoto
-        >,
-    callback?: PaginationCallback<
-      protos.google.streetview.publish.v1.IListPhotosRequest,
-      | protos.google.streetview.publish.v1.IListPhotosResponse
-      | null
-      | undefined,
-      protos.google.streetview.publish.v1.IPhoto
-    >
-  ): Promise<
-    [
-      protos.google.streetview.publish.v1.IPhoto[],
-      protos.google.streetview.publish.v1.IListPhotosRequest | null,
-      protos.google.streetview.publish.v1.IListPhotosResponse,
-    ]
-  > | void {
+          protos.google.streetview.publish.v1.IListPhotosResponse|null|undefined,
+          protos.google.streetview.publish.v1.IPhoto>): void;
+  listPhotos(
+      request: protos.google.streetview.publish.v1.IListPhotosRequest,
+      callback: PaginationCallback<
+          protos.google.streetview.publish.v1.IListPhotosRequest,
+          protos.google.streetview.publish.v1.IListPhotosResponse|null|undefined,
+          protos.google.streetview.publish.v1.IPhoto>): void;
+  listPhotos(
+      request?: protos.google.streetview.publish.v1.IListPhotosRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.streetview.publish.v1.IListPhotosRequest,
+          protos.google.streetview.publish.v1.IListPhotosResponse|null|undefined,
+          protos.google.streetview.publish.v1.IPhoto>,
+      callback?: PaginationCallback<
+          protos.google.streetview.publish.v1.IListPhotosRequest,
+          protos.google.streetview.publish.v1.IListPhotosResponse|null|undefined,
+          protos.google.streetview.publish.v1.IPhoto>):
+      Promise<[
+        protos.google.streetview.publish.v1.IPhoto[],
+        protos.google.streetview.publish.v1.IListPhotosRequest|null,
+        protos.google.streetview.publish.v1.IListPhotosResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.streetview.publish.v1.IListPhotosRequest,
-          | protos.google.streetview.publish.v1.IListPhotosResponse
-          | null
-          | undefined,
-          protos.google.streetview.publish.v1.IPhoto
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.streetview.publish.v1.IListPhotosRequest,
+      protos.google.streetview.publish.v1.IListPhotosResponse|null|undefined,
+      protos.google.streetview.publish.v1.IPhoto>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPhotos values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2316,74 +1850,70 @@ export class StreetViewPublishServiceClient {
     this._log.info('listPhotos request %j', request);
     return this.innerApiCalls
       .listPhotos(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.streetview.publish.v1.IPhoto[],
-          protos.google.streetview.publish.v1.IListPhotosRequest | null,
-          protos.google.streetview.publish.v1.IListPhotosResponse,
-        ]) => {
-          this._log.info('listPhotos values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.streetview.publish.v1.IPhoto[],
+        protos.google.streetview.publish.v1.IListPhotosRequest|null,
+        protos.google.streetview.publish.v1.IListPhotosResponse
+      ]) => {
+        this._log.info('listPhotos values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listPhotos`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.streetview.publish.v1.PhotoView} request.view
-   *   Required. Specifies if a download URL for the photos bytes should be
-   *   returned in the Photos response.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of photos to return.
-   *   `pageSize` must be non-negative. If `pageSize` is zero or is not provided,
-   *   the default page size of 100 is used.
-   *   The number of photos returned in the response may be less than `pageSize`
-   *   if the number of photos that belong to the user is less than `pageSize`.
-   * @param {string} [request.pageToken]
-   *   Optional. The
-   *   {@link protos.google.streetview.publish.v1.ListPhotosResponse.next_page_token|nextPageToken}
-   *   value returned from a previous
-   *   {@link protos.google.streetview.publish.v1.StreetViewPublishService.ListPhotos|ListPhotos}
-   *   request, if any.
-   * @param {string} [request.filter]
-   *   Optional. The filter expression. For example:
-   *   `placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw`.
-   *
-   *   The filters supported are: `placeId`, `min_latitude`, `max_latitude`,
-   *   `min_longitude`, `max_longitude`. See https://google.aip.dev/160 for more
-   *   information.
-   * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn". For more
-   *   information, see
-   *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-   *   If language_code is unspecified, the user's language preference for Google
-   *   services is used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.streetview.publish.v1.Photo|Photo} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPhotosAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listPhotos`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.streetview.publish.v1.PhotoView} request.view
+ *   Required. Specifies if a download URL for the photos bytes should be
+ *   returned in the Photos response.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of photos to return.
+ *   `pageSize` must be non-negative. If `pageSize` is zero or is not provided,
+ *   the default page size of 100 is used.
+ *   The number of photos returned in the response may be less than `pageSize`
+ *   if the number of photos that belong to the user is less than `pageSize`.
+ * @param {string} [request.pageToken]
+ *   Optional. The
+ *   {@link protos.google.streetview.publish.v1.ListPhotosResponse.next_page_token|nextPageToken}
+ *   value returned from a previous
+ *   {@link protos.google.streetview.publish.v1.StreetViewPublishService.ListPhotos|ListPhotos}
+ *   request, if any.
+ * @param {string} [request.filter]
+ *   Optional. The filter expression. For example:
+ *   `placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw`.
+ *
+ *   The filters supported are: `placeId`, `min_latitude`, `max_latitude`,
+ *   `min_longitude`, `max_longitude`. See https://google.aip.dev/160 for more
+ *   information.
+ * @param {string} [request.languageCode]
+ *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+ *   information, see
+ *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+ *   If language_code is unspecified, the user's language preference for Google
+ *   services is used.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.streetview.publish.v1.Photo|Photo} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPhotosAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPhotosStream(
-    request?: protos.google.streetview.publish.v1.IListPhotosRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.streetview.publish.v1.IListPhotosRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listPhotos'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPhotos stream %j', request);
     return this.descriptors.page.listPhotos.createStream(
       this.innerApiCalls.listPhotos as GaxCall,
@@ -2392,65 +1922,63 @@ export class StreetViewPublishServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listPhotos`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.streetview.publish.v1.PhotoView} request.view
-   *   Required. Specifies if a download URL for the photos bytes should be
-   *   returned in the Photos response.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of photos to return.
-   *   `pageSize` must be non-negative. If `pageSize` is zero or is not provided,
-   *   the default page size of 100 is used.
-   *   The number of photos returned in the response may be less than `pageSize`
-   *   if the number of photos that belong to the user is less than `pageSize`.
-   * @param {string} [request.pageToken]
-   *   Optional. The
-   *   {@link protos.google.streetview.publish.v1.ListPhotosResponse.next_page_token|nextPageToken}
-   *   value returned from a previous
-   *   {@link protos.google.streetview.publish.v1.StreetViewPublishService.ListPhotos|ListPhotos}
-   *   request, if any.
-   * @param {string} [request.filter]
-   *   Optional. The filter expression. For example:
-   *   `placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw`.
-   *
-   *   The filters supported are: `placeId`, `min_latitude`, `max_latitude`,
-   *   `min_longitude`, `max_longitude`. See https://google.aip.dev/160 for more
-   *   information.
-   * @param {string} [request.languageCode]
-   *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn". For more
-   *   information, see
-   *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-   *   If language_code is unspecified, the user's language preference for Google
-   *   services is used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.streetview.publish.v1.Photo|Photo}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.list_photos.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_ListPhotos_async
-   */
+/**
+ * Equivalent to `listPhotos`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.streetview.publish.v1.PhotoView} request.view
+ *   Required. Specifies if a download URL for the photos bytes should be
+ *   returned in the Photos response.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of photos to return.
+ *   `pageSize` must be non-negative. If `pageSize` is zero or is not provided,
+ *   the default page size of 100 is used.
+ *   The number of photos returned in the response may be less than `pageSize`
+ *   if the number of photos that belong to the user is less than `pageSize`.
+ * @param {string} [request.pageToken]
+ *   Optional. The
+ *   {@link protos.google.streetview.publish.v1.ListPhotosResponse.next_page_token|nextPageToken}
+ *   value returned from a previous
+ *   {@link protos.google.streetview.publish.v1.StreetViewPublishService.ListPhotos|ListPhotos}
+ *   request, if any.
+ * @param {string} [request.filter]
+ *   Optional. The filter expression. For example:
+ *   `placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw`.
+ *
+ *   The filters supported are: `placeId`, `min_latitude`, `max_latitude`,
+ *   `min_longitude`, `max_longitude`. See https://google.aip.dev/160 for more
+ *   information.
+ * @param {string} [request.languageCode]
+ *   Optional. The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+ *   information, see
+ *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+ *   If language_code is unspecified, the user's language preference for Google
+ *   services is used.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.streetview.publish.v1.Photo|Photo}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.list_photos.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_ListPhotos_async
+ */
   listPhotosAsync(
-    request?: protos.google.streetview.publish.v1.IListPhotosRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.streetview.publish.v1.IPhoto> {
+      request?: protos.google.streetview.publish.v1.IListPhotosRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.streetview.publish.v1.IPhoto>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listPhotos'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPhotos iterate %j', request);
     return this.descriptors.page.listPhotos.asyncIterate(
       this.innerApiCalls['listPhotos'] as GaxCall,
@@ -2458,126 +1986,100 @@ export class StreetViewPublishServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.streetview.publish.v1.IPhoto>;
   }
-  /**
-   * Lists all the {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequences}
-   * that belong to the user, in descending CreatePhotoSequence timestamp order.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of photo sequences to return.
-   *   `pageSize` must be non-negative. If `pageSize` is zero or is not
-   *   provided, the default page size of 100 is used.
-   *   The number of photo sequences returned in the response may be less than
-   *   `pageSize` if the number of matches is less than `pageSize`.
-   *   This is currently unimplemented but is in process.
-   * @param {string} [request.pageToken]
-   *   Optional. The
-   *   {@link protos.google.streetview.publish.v1.ListPhotosResponse.next_page_token|nextPageToken}
-   *   value returned from a previous
-   *   {@link protos.google.streetview.publish.v1.StreetViewPublishService.ListPhotoSequences|ListPhotoSequences}
-   *   request, if any.
-   * @param {string} [request.filter]
-   *   Optional. The filter expression. For example: `imagery_type=SPHERICAL`.
-   *
-   *   The filters supported are: `imagery_type`, `processing_state`,
-   *   `min_latitude`, `max_latitude`, `min_longitude`, `max_longitude`,
-   *   `filename_query`, `min_capture_time_seconds`, `max_capture_time_seconds.
-   *   See https://google.aip.dev/160 for more information. Filename queries
-   *   should sent as a Phrase in order to support multiple words and special
-   *   characters by adding escaped quotes. Ex: filename_query="example of a
-   *   phrase.mp4"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.longrunning.Operation|Operation}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPhotoSequencesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists all the {@link protos.google.streetview.publish.v1.PhotoSequence|PhotoSequences}
+ * that belong to the user, in descending CreatePhotoSequence timestamp order.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of photo sequences to return.
+ *   `pageSize` must be non-negative. If `pageSize` is zero or is not
+ *   provided, the default page size of 100 is used.
+ *   The number of photo sequences returned in the response may be less than
+ *   `pageSize` if the number of matches is less than `pageSize`.
+ *   This is currently unimplemented but is in process.
+ * @param {string} [request.pageToken]
+ *   Optional. The
+ *   {@link protos.google.streetview.publish.v1.ListPhotosResponse.next_page_token|nextPageToken}
+ *   value returned from a previous
+ *   {@link protos.google.streetview.publish.v1.StreetViewPublishService.ListPhotoSequences|ListPhotoSequences}
+ *   request, if any.
+ * @param {string} [request.filter]
+ *   Optional. The filter expression. For example: `imagery_type=SPHERICAL`.
+ *
+ *   The filters supported are: `imagery_type`, `processing_state`,
+ *   `min_latitude`, `max_latitude`, `min_longitude`, `max_longitude`,
+ *   `filename_query`, `min_capture_time_seconds`, `max_capture_time_seconds.
+ *   See https://google.aip.dev/160 for more information. Filename queries
+ *   should sent as a Phrase in order to support multiple words and special
+ *   characters by adding escaped quotes. Ex: filename_query="example of a
+ *   phrase.mp4"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.longrunning.Operation|Operation}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPhotoSequencesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPhotoSequences(
-    request?: protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.longrunning.IOperation[],
-      protos.google.streetview.publish.v1.IListPhotoSequencesRequest | null,
-      protos.google.streetview.publish.v1.IListPhotoSequencesResponse,
-    ]
-  >;
+      request?: protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.longrunning.IOperation[],
+        protos.google.streetview.publish.v1.IListPhotoSequencesRequest|null,
+        protos.google.streetview.publish.v1.IListPhotoSequencesResponse
+      ]>;
   listPhotoSequences(
-    request: protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
-      | protos.google.streetview.publish.v1.IListPhotoSequencesResponse
-      | null
-      | undefined,
-      protos.google.longrunning.IOperation
-    >
-  ): void;
-  listPhotoSequences(
-    request: protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
-    callback: PaginationCallback<
-      protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
-      | protos.google.streetview.publish.v1.IListPhotoSequencesResponse
-      | null
-      | undefined,
-      protos.google.longrunning.IOperation
-    >
-  ): void;
-  listPhotoSequences(
-    request?: protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
-          | protos.google.streetview.publish.v1.IListPhotoSequencesResponse
-          | null
-          | undefined,
-          protos.google.longrunning.IOperation
-        >,
-    callback?: PaginationCallback<
-      protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
-      | protos.google.streetview.publish.v1.IListPhotoSequencesResponse
-      | null
-      | undefined,
-      protos.google.longrunning.IOperation
-    >
-  ): Promise<
-    [
-      protos.google.longrunning.IOperation[],
-      protos.google.streetview.publish.v1.IListPhotoSequencesRequest | null,
-      protos.google.streetview.publish.v1.IListPhotoSequencesResponse,
-    ]
-  > | void {
+          protos.google.streetview.publish.v1.IListPhotoSequencesResponse|null|undefined,
+          protos.google.longrunning.IOperation>): void;
+  listPhotoSequences(
+      request: protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
+      callback: PaginationCallback<
+          protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
+          protos.google.streetview.publish.v1.IListPhotoSequencesResponse|null|undefined,
+          protos.google.longrunning.IOperation>): void;
+  listPhotoSequences(
+      request?: protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
+          protos.google.streetview.publish.v1.IListPhotoSequencesResponse|null|undefined,
+          protos.google.longrunning.IOperation>,
+      callback?: PaginationCallback<
+          protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
+          protos.google.streetview.publish.v1.IListPhotoSequencesResponse|null|undefined,
+          protos.google.longrunning.IOperation>):
+      Promise<[
+        protos.google.longrunning.IOperation[],
+        protos.google.streetview.publish.v1.IListPhotoSequencesRequest|null,
+        protos.google.streetview.publish.v1.IListPhotoSequencesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
-          | protos.google.streetview.publish.v1.IListPhotoSequencesResponse
-          | null
-          | undefined,
-          protos.google.longrunning.IOperation
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
+      protos.google.streetview.publish.v1.IListPhotoSequencesResponse|null|undefined,
+      protos.google.longrunning.IOperation>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPhotoSequences values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2586,69 +2088,65 @@ export class StreetViewPublishServiceClient {
     this._log.info('listPhotoSequences request %j', request);
     return this.innerApiCalls
       .listPhotoSequences(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.longrunning.IOperation[],
-          protos.google.streetview.publish.v1.IListPhotoSequencesRequest | null,
-          protos.google.streetview.publish.v1.IListPhotoSequencesResponse,
-        ]) => {
-          this._log.info('listPhotoSequences values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.longrunning.IOperation[],
+        protos.google.streetview.publish.v1.IListPhotoSequencesRequest|null,
+        protos.google.streetview.publish.v1.IListPhotoSequencesResponse
+      ]) => {
+        this._log.info('listPhotoSequences values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listPhotoSequences`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of photo sequences to return.
-   *   `pageSize` must be non-negative. If `pageSize` is zero or is not
-   *   provided, the default page size of 100 is used.
-   *   The number of photo sequences returned in the response may be less than
-   *   `pageSize` if the number of matches is less than `pageSize`.
-   *   This is currently unimplemented but is in process.
-   * @param {string} [request.pageToken]
-   *   Optional. The
-   *   {@link protos.google.streetview.publish.v1.ListPhotosResponse.next_page_token|nextPageToken}
-   *   value returned from a previous
-   *   {@link protos.google.streetview.publish.v1.StreetViewPublishService.ListPhotoSequences|ListPhotoSequences}
-   *   request, if any.
-   * @param {string} [request.filter]
-   *   Optional. The filter expression. For example: `imagery_type=SPHERICAL`.
-   *
-   *   The filters supported are: `imagery_type`, `processing_state`,
-   *   `min_latitude`, `max_latitude`, `min_longitude`, `max_longitude`,
-   *   `filename_query`, `min_capture_time_seconds`, `max_capture_time_seconds.
-   *   See https://google.aip.dev/160 for more information. Filename queries
-   *   should sent as a Phrase in order to support multiple words and special
-   *   characters by adding escaped quotes. Ex: filename_query="example of a
-   *   phrase.mp4"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.longrunning.Operation|Operation} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listPhotoSequencesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listPhotoSequences`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of photo sequences to return.
+ *   `pageSize` must be non-negative. If `pageSize` is zero or is not
+ *   provided, the default page size of 100 is used.
+ *   The number of photo sequences returned in the response may be less than
+ *   `pageSize` if the number of matches is less than `pageSize`.
+ *   This is currently unimplemented but is in process.
+ * @param {string} [request.pageToken]
+ *   Optional. The
+ *   {@link protos.google.streetview.publish.v1.ListPhotosResponse.next_page_token|nextPageToken}
+ *   value returned from a previous
+ *   {@link protos.google.streetview.publish.v1.StreetViewPublishService.ListPhotoSequences|ListPhotoSequences}
+ *   request, if any.
+ * @param {string} [request.filter]
+ *   Optional. The filter expression. For example: `imagery_type=SPHERICAL`.
+ *
+ *   The filters supported are: `imagery_type`, `processing_state`,
+ *   `min_latitude`, `max_latitude`, `min_longitude`, `max_longitude`,
+ *   `filename_query`, `min_capture_time_seconds`, `max_capture_time_seconds.
+ *   See https://google.aip.dev/160 for more information. Filename queries
+ *   should sent as a Phrase in order to support multiple words and special
+ *   characters by adding escaped quotes. Ex: filename_query="example of a
+ *   phrase.mp4"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.longrunning.Operation|Operation} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPhotoSequencesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listPhotoSequencesStream(
-    request?: protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listPhotoSequences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPhotoSequences stream %j', request);
     return this.descriptors.page.listPhotoSequences.createStream(
       this.innerApiCalls.listPhotoSequences as GaxCall,
@@ -2657,60 +2155,58 @@ export class StreetViewPublishServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listPhotoSequences`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of photo sequences to return.
-   *   `pageSize` must be non-negative. If `pageSize` is zero or is not
-   *   provided, the default page size of 100 is used.
-   *   The number of photo sequences returned in the response may be less than
-   *   `pageSize` if the number of matches is less than `pageSize`.
-   *   This is currently unimplemented but is in process.
-   * @param {string} [request.pageToken]
-   *   Optional. The
-   *   {@link protos.google.streetview.publish.v1.ListPhotosResponse.next_page_token|nextPageToken}
-   *   value returned from a previous
-   *   {@link protos.google.streetview.publish.v1.StreetViewPublishService.ListPhotoSequences|ListPhotoSequences}
-   *   request, if any.
-   * @param {string} [request.filter]
-   *   Optional. The filter expression. For example: `imagery_type=SPHERICAL`.
-   *
-   *   The filters supported are: `imagery_type`, `processing_state`,
-   *   `min_latitude`, `max_latitude`, `min_longitude`, `max_longitude`,
-   *   `filename_query`, `min_capture_time_seconds`, `max_capture_time_seconds.
-   *   See https://google.aip.dev/160 for more information. Filename queries
-   *   should sent as a Phrase in order to support multiple words and special
-   *   characters by adding escaped quotes. Ex: filename_query="example of a
-   *   phrase.mp4"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.longrunning.Operation|Operation}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/street_view_publish_service.list_photo_sequences.js</caption>
-   * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_ListPhotoSequences_async
-   */
+/**
+ * Equivalent to `listPhotoSequences`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of photo sequences to return.
+ *   `pageSize` must be non-negative. If `pageSize` is zero or is not
+ *   provided, the default page size of 100 is used.
+ *   The number of photo sequences returned in the response may be less than
+ *   `pageSize` if the number of matches is less than `pageSize`.
+ *   This is currently unimplemented but is in process.
+ * @param {string} [request.pageToken]
+ *   Optional. The
+ *   {@link protos.google.streetview.publish.v1.ListPhotosResponse.next_page_token|nextPageToken}
+ *   value returned from a previous
+ *   {@link protos.google.streetview.publish.v1.StreetViewPublishService.ListPhotoSequences|ListPhotoSequences}
+ *   request, if any.
+ * @param {string} [request.filter]
+ *   Optional. The filter expression. For example: `imagery_type=SPHERICAL`.
+ *
+ *   The filters supported are: `imagery_type`, `processing_state`,
+ *   `min_latitude`, `max_latitude`, `min_longitude`, `max_longitude`,
+ *   `filename_query`, `min_capture_time_seconds`, `max_capture_time_seconds.
+ *   See https://google.aip.dev/160 for more information. Filename queries
+ *   should sent as a Phrase in order to support multiple words and special
+ *   characters by adding escaped quotes. Ex: filename_query="example of a
+ *   phrase.mp4"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.longrunning.Operation|Operation}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/street_view_publish_service.list_photo_sequences.js</caption>
+ * region_tag:streetviewpublish_v1_generated_StreetViewPublishService_ListPhotoSequences_async
+ */
   listPhotoSequencesAsync(
-    request?: protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.longrunning.IOperation> {
+      request?: protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.longrunning.IOperation>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listPhotoSequences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listPhotoSequences iterate %j', request);
     return this.descriptors.page.listPhotoSequences.asyncIterate(
       this.innerApiCalls['listPhotoSequences'] as GaxCall,

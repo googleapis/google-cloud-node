@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const publish = require('@googlemaps/streetview-publish');
 
 function main() {
-  const streetViewPublishServiceClient =
-    new publish.StreetViewPublishServiceClient();
+  const streetViewPublishServiceClient = new publish.StreetViewPublishServiceClient();
 }
 
 main();

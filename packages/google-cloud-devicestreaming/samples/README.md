@@ -37,7 +37,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Direct_access_service.adb_connect
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.adb_connect.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.adb_connect.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.adb_connect.js,samples/README.md)
 
@@ -54,7 +54,7 @@ __Usage:__
 
 ### Direct_access_service.cancel_device_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.cancel_device_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.cancel_device_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.cancel_device_session.js,samples/README.md)
 
@@ -71,7 +71,7 @@ __Usage:__
 
 ### Direct_access_service.create_device_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.create_device_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.create_device_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.create_device_session.js,samples/README.md)
 
@@ -88,7 +88,7 @@ __Usage:__
 
 ### Direct_access_service.get_device_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.get_device_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.get_device_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.get_device_session.js,samples/README.md)
 
@@ -105,7 +105,7 @@ __Usage:__
 
 ### Direct_access_service.list_device_sessions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.list_device_sessions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.list_device_sessions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.list_device_sessions.js,samples/README.md)
 
@@ -122,7 +122,7 @@ __Usage:__
 
 ### Direct_access_service.update_device_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.update_device_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.update_device_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.update_device_session.js,samples/README.md)
 
@@ -139,7 +139,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-devicestreaming/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-devicestreaming/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-devicestreaming/samples/quickstart.js,samples/README.md)
 

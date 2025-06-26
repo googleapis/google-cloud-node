@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,42 +100,20 @@ export class NotificationsApiServiceClient {
    *     const client = new NotificationsApiServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof NotificationsApiServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof NotificationsApiServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +139,7 @@ export class NotificationsApiServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +153,10 @@ export class NotificationsApiServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -215,20 +189,14 @@ export class NotificationsApiServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listNotificationSubscriptions: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'notificationSubscriptions'
-      ),
+      listNotificationSubscriptions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'notificationSubscriptions')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.shopping.merchant.notifications.v1beta.NotificationsApiService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.shopping.merchant.notifications.v1beta.NotificationsApiService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -259,42 +227,32 @@ export class NotificationsApiServiceClient {
     // Put together the "service stub" for
     // google.shopping.merchant.notifications.v1beta.NotificationsApiService.
     this.notificationsApiServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.shopping.merchant.notifications.v1beta.NotificationsApiService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.shopping.merchant.notifications.v1beta
-            .NotificationsApiService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.shopping.merchant.notifications.v1beta.NotificationsApiService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.shopping.merchant.notifications.v1beta.NotificationsApiService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const notificationsApiServiceStubMethods = [
-      'getNotificationSubscription',
-      'createNotificationSubscription',
-      'updateNotificationSubscription',
-      'deleteNotificationSubscription',
-      'listNotificationSubscriptions',
-    ];
+    const notificationsApiServiceStubMethods =
+        ['getNotificationSubscription', 'createNotificationSubscription', 'updateNotificationSubscription', 'deleteNotificationSubscription', 'listNotificationSubscriptions'];
     for (const methodName of notificationsApiServiceStubMethods) {
       const callPromise = this.notificationsApiServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -314,14 +272,8 @@ export class NotificationsApiServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -332,14 +284,8 @@ export class NotificationsApiServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -370,7 +316,9 @@ export class NotificationsApiServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/content'];
+    return [
+      'https://www.googleapis.com/auth/content'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -379,9 +327,8 @@ export class NotificationsApiServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -392,661 +339,485 @@ export class NotificationsApiServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets notification subscriptions for an account.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The `name` of the notification subscription.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription|NotificationSubscription}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/notifications_api_service.get_notification_subscription.js</caption>
-   * region_tag:merchantapi_v1beta_generated_NotificationsApiService_GetNotificationSubscription_async
-   */
+/**
+ * Gets notification subscriptions for an account.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The `name` of the notification subscription.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription|NotificationSubscription}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/notifications_api_service.get_notification_subscription.js</caption>
+ * region_tag:merchantapi_v1beta_generated_NotificationsApiService_GetNotificationSubscription_async
+ */
   getNotificationSubscription(
-    request?: protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-      (
-        | protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+        protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest|undefined, {}|undefined
+      ]>;
   getNotificationSubscription(
-    request: protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-      | protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNotificationSubscription(
-    request: protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-      | protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNotificationSubscription(
-    request?: protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-          | protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-      | protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-      (
-        | protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNotificationSubscription(
+      request: protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+          protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNotificationSubscription(
+      request?: protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+          protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+          protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+        protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getNotificationSubscription request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-          | protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+        protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNotificationSubscription response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getNotificationSubscription(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-          (
-            | protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getNotificationSubscription response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getNotificationSubscription(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+        protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getNotificationSubscription response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates a notification subscription for a merchant. We will allow the
-   * following types of notification subscriptions to exist together (per
-   * merchant as a subscriber per event type):
-   * 1. Subscription for all managed accounts + subscription for self
-   * 2. Multiple "partial" subscriptions for managed accounts + subscription
-   * for self
-   *
-   * we will not allow (per merchant as a subscriber per event type):
-   * 1. multiple self subscriptions.
-   * 2. multiple "all managed accounts" subscriptions.
-   * 3. all and partial subscriptions at the same time.
-   * 4. multiple partial subscriptions for the same target account
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The merchant account that owns the new notification subscription.
-   *   Format: `accounts/{account}`
-   * @param {google.shopping.merchant.notifications.v1beta.NotificationSubscription} request.notificationSubscription
-   *   Required. The notification subscription to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription|NotificationSubscription}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/notifications_api_service.create_notification_subscription.js</caption>
-   * region_tag:merchantapi_v1beta_generated_NotificationsApiService_CreateNotificationSubscription_async
-   */
+/**
+ * Creates a notification subscription for a merchant. We will allow the
+ * following types of notification subscriptions to exist together (per
+ * merchant as a subscriber per event type):
+ * 1. Subscription for all managed accounts + subscription for self
+ * 2. Multiple "partial" subscriptions for managed accounts + subscription
+ * for self
+ *
+ * we will not allow (per merchant as a subscriber per event type):
+ * 1. multiple self subscriptions.
+ * 2. multiple "all managed accounts" subscriptions.
+ * 3. all and partial subscriptions at the same time.
+ * 4. multiple partial subscriptions for the same target account
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The merchant account that owns the new notification subscription.
+ *   Format: `accounts/{account}`
+ * @param {google.shopping.merchant.notifications.v1beta.NotificationSubscription} request.notificationSubscription
+ *   Required. The notification subscription to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription|NotificationSubscription}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/notifications_api_service.create_notification_subscription.js</caption>
+ * region_tag:merchantapi_v1beta_generated_NotificationsApiService_CreateNotificationSubscription_async
+ */
   createNotificationSubscription(
-    request?: protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-      (
-        | protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+        protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest|undefined, {}|undefined
+      ]>;
   createNotificationSubscription(
-    request: protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-      | protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createNotificationSubscription(
-    request: protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-      | protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createNotificationSubscription(
-    request?: protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-          | protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-      | protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-      (
-        | protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createNotificationSubscription(
+      request: protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+          protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>): void;
+  createNotificationSubscription(
+      request?: protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+          protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+          protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+        protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createNotificationSubscription request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-          | protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+        protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'createNotificationSubscription response %j',
-            response
-          );
+          this._log.info('createNotificationSubscription response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createNotificationSubscription(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-          (
-            | protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'createNotificationSubscription response %j',
-            response
-          );
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createNotificationSubscription(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+        protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createNotificationSubscription response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates an existing notification subscription for a merchant.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.shopping.merchant.notifications.v1beta.NotificationSubscription} request.notificationSubscription
-   *   Required. The new version of the notification subscription that should be
-   *   updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   List of fields being updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription|NotificationSubscription}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/notifications_api_service.update_notification_subscription.js</caption>
-   * region_tag:merchantapi_v1beta_generated_NotificationsApiService_UpdateNotificationSubscription_async
-   */
+/**
+ * Updates an existing notification subscription for a merchant.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.shopping.merchant.notifications.v1beta.NotificationSubscription} request.notificationSubscription
+ *   Required. The new version of the notification subscription that should be
+ *   updated.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   List of fields being updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription|NotificationSubscription}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/notifications_api_service.update_notification_subscription.js</caption>
+ * region_tag:merchantapi_v1beta_generated_NotificationsApiService_UpdateNotificationSubscription_async
+ */
   updateNotificationSubscription(
-    request?: protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-      (
-        | protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+        protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest|undefined, {}|undefined
+      ]>;
   updateNotificationSubscription(
-    request: protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-      | protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateNotificationSubscription(
-    request: protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-      | protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateNotificationSubscription(
-    request?: protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-          | protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-      | protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-      (
-        | protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateNotificationSubscription(
+      request: protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+          protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateNotificationSubscription(
+      request?: protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+          protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+          protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+        protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'notification_subscription.name':
-          request.notificationSubscription!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'notification_subscription.name': request.notificationSubscription!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateNotificationSubscription request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-          | protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+        protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'updateNotificationSubscription response %j',
-            response
-          );
+          this._log.info('updateNotificationSubscription response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateNotificationSubscription(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
-          (
-            | protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'updateNotificationSubscription response %j',
-            response
-          );
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateNotificationSubscription(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+        protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateNotificationSubscription response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a notification subscription for a merchant.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the notification subscription to be deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/notifications_api_service.delete_notification_subscription.js</caption>
-   * region_tag:merchantapi_v1beta_generated_NotificationsApiService_DeleteNotificationSubscription_async
-   */
+/**
+ * Deletes a notification subscription for a merchant.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the notification subscription to be deleted.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/notifications_api_service.delete_notification_subscription.js</caption>
+ * region_tag:merchantapi_v1beta_generated_NotificationsApiService_DeleteNotificationSubscription_async
+ */
   deleteNotificationSubscription(
-    request?: protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest|undefined, {}|undefined
+      ]>;
   deleteNotificationSubscription(
-    request: protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteNotificationSubscription(
-    request: protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteNotificationSubscription(
-    request?: protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteNotificationSubscription(
+      request: protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteNotificationSubscription(
+      request?: protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteNotificationSubscription request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info(
-            'deleteNotificationSubscription response %j',
-            response
-          );
+          this._log.info('deleteNotificationSubscription response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteNotificationSubscription(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info(
-            'deleteNotificationSubscription response %j',
-            response
-          );
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteNotificationSubscription(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteNotificationSubscription response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Gets all the notification subscriptions for a merchant.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The merchant account who owns the notification subscriptions.
-   *   Format: `accounts/{account}`
-   * @param {number} request.pageSize
-   *   The maximum number of notification subscriptions to return in a page.
-   *   The default value for `page_size` is 100. The
-   *   maximum value is `200`. Values above `200` will be coerced to `200`.
-   * @param {string} request.pageToken
-   *   Token (if provided) to retrieve the subsequent page. All other parameters
-   *   must match the original call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription|NotificationSubscription}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listNotificationSubscriptionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Gets all the notification subscriptions for a merchant.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The merchant account who owns the notification subscriptions.
+ *   Format: `accounts/{account}`
+ * @param {number} request.pageSize
+ *   The maximum number of notification subscriptions to return in a page.
+ *   The default value for `page_size` is 100. The
+ *   maximum value is `200`. Values above `200` will be coerced to `200`.
+ * @param {string} request.pageToken
+ *   Token (if provided) to retrieve the subsequent page. All other parameters
+ *   must match the original call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription|NotificationSubscription}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listNotificationSubscriptionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNotificationSubscriptions(
-    request?: protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription[],
-      protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest | null,
-      protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription[],
+        protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest|null,
+        protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse
+      ]>;
   listNotificationSubscriptions(
-    request: protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
-      | protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription
-    >
-  ): void;
-  listNotificationSubscriptions(
-    request: protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
-    callback: PaginationCallback<
-      protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
-      | protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription
-    >
-  ): void;
-  listNotificationSubscriptions(
-    request?: protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
-          | protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse
-          | null
-          | undefined,
-          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription
-        >,
-    callback?: PaginationCallback<
-      protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
-      | protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription[],
-      protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest | null,
-      protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse,
-    ]
-  > | void {
+          protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse|null|undefined,
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription>): void;
+  listNotificationSubscriptions(
+      request: protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
+      callback: PaginationCallback<
+          protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
+          protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse|null|undefined,
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription>): void;
+  listNotificationSubscriptions(
+      request?: protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
+          protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse|null|undefined,
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription>,
+      callback?: PaginationCallback<
+          protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
+          protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse|null|undefined,
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription>):
+      Promise<[
+        protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription[],
+        protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest|null,
+        protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
-          | protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse
-          | null
-          | undefined,
-          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
+      protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse|null|undefined,
+      protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listNotificationSubscriptions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1055,60 +826,57 @@ export class NotificationsApiServiceClient {
     this._log.info('listNotificationSubscriptions request %j', request);
     return this.innerApiCalls
       .listNotificationSubscriptions(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription[],
-          protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest | null,
-          protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse,
-        ]) => {
-          this._log.info('listNotificationSubscriptions values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription[],
+        protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest|null,
+        protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse
+      ]) => {
+        this._log.info('listNotificationSubscriptions values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listNotificationSubscriptions`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The merchant account who owns the notification subscriptions.
-   *   Format: `accounts/{account}`
-   * @param {number} request.pageSize
-   *   The maximum number of notification subscriptions to return in a page.
-   *   The default value for `page_size` is 100. The
-   *   maximum value is `200`. Values above `200` will be coerced to `200`.
-   * @param {string} request.pageToken
-   *   Token (if provided) to retrieve the subsequent page. All other parameters
-   *   must match the original call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription|NotificationSubscription} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listNotificationSubscriptionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listNotificationSubscriptions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The merchant account who owns the notification subscriptions.
+ *   Format: `accounts/{account}`
+ * @param {number} request.pageSize
+ *   The maximum number of notification subscriptions to return in a page.
+ *   The default value for `page_size` is 100. The
+ *   maximum value is `200`. Values above `200` will be coerced to `200`.
+ * @param {string} request.pageToken
+ *   Token (if provided) to retrieve the subsequent page. All other parameters
+ *   must match the original call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription|NotificationSubscription} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listNotificationSubscriptionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNotificationSubscriptionsStream(
-    request?: protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listNotificationSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listNotificationSubscriptions stream %j', request);
     return this.descriptors.page.listNotificationSubscriptions.createStream(
       this.innerApiCalls.listNotificationSubscriptions as GaxCall,
@@ -1117,51 +885,50 @@ export class NotificationsApiServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listNotificationSubscriptions`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The merchant account who owns the notification subscriptions.
-   *   Format: `accounts/{account}`
-   * @param {number} request.pageSize
-   *   The maximum number of notification subscriptions to return in a page.
-   *   The default value for `page_size` is 100. The
-   *   maximum value is `200`. Values above `200` will be coerced to `200`.
-   * @param {string} request.pageToken
-   *   Token (if provided) to retrieve the subsequent page. All other parameters
-   *   must match the original call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription|NotificationSubscription}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/notifications_api_service.list_notification_subscriptions.js</caption>
-   * region_tag:merchantapi_v1beta_generated_NotificationsApiService_ListNotificationSubscriptions_async
-   */
+/**
+ * Equivalent to `listNotificationSubscriptions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The merchant account who owns the notification subscriptions.
+ *   Format: `accounts/{account}`
+ * @param {number} request.pageSize
+ *   The maximum number of notification subscriptions to return in a page.
+ *   The default value for `page_size` is 100. The
+ *   maximum value is `200`. Values above `200` will be coerced to `200`.
+ * @param {string} request.pageToken
+ *   Token (if provided) to retrieve the subsequent page. All other parameters
+ *   must match the original call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.shopping.merchant.notifications.v1beta.NotificationSubscription|NotificationSubscription}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/notifications_api_service.list_notification_subscriptions.js</caption>
+ * region_tag:merchantapi_v1beta_generated_NotificationsApiService_ListNotificationSubscriptions_async
+ */
   listNotificationSubscriptionsAsync(
-    request?: protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription> {
+      request?: protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listNotificationSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listNotificationSubscriptions iterate %j', request);
     return this.descriptors.page.listNotificationSubscriptions.asyncIterate(
       this.innerApiCalls['listNotificationSubscriptions'] as GaxCall,
@@ -1179,7 +946,7 @@ export class NotificationsApiServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  accountPath(account: string) {
+  accountPath(account:string) {
     return this.pathTemplates.accountPathTemplate.render({
       account: account,
     });
@@ -1203,10 +970,7 @@ export class NotificationsApiServiceClient {
    * @param {string} notification_subscription
    * @returns {string} Resource name string.
    */
-  notificationSubscriptionPath(
-    account: string,
-    notificationSubscription: string
-  ) {
+  notificationSubscriptionPath(account:string,notificationSubscription:string) {
     return this.pathTemplates.notificationSubscriptionPathTemplate.render({
       account: account,
       notification_subscription: notificationSubscription,
@@ -1220,12 +984,8 @@ export class NotificationsApiServiceClient {
    *   A fully-qualified path representing NotificationSubscription resource.
    * @returns {string} A string representing the account.
    */
-  matchAccountFromNotificationSubscriptionName(
-    notificationSubscriptionName: string
-  ) {
-    return this.pathTemplates.notificationSubscriptionPathTemplate.match(
-      notificationSubscriptionName
-    ).account;
+  matchAccountFromNotificationSubscriptionName(notificationSubscriptionName: string) {
+    return this.pathTemplates.notificationSubscriptionPathTemplate.match(notificationSubscriptionName).account;
   }
 
   /**
@@ -1235,12 +995,8 @@ export class NotificationsApiServiceClient {
    *   A fully-qualified path representing NotificationSubscription resource.
    * @returns {string} A string representing the notification_subscription.
    */
-  matchNotificationSubscriptionFromNotificationSubscriptionName(
-    notificationSubscriptionName: string
-  ) {
-    return this.pathTemplates.notificationSubscriptionPathTemplate.match(
-      notificationSubscriptionName
-    ).notification_subscription;
+  matchNotificationSubscriptionFromNotificationSubscriptionName(notificationSubscriptionName: string) {
+    return this.pathTemplates.notificationSubscriptionPathTemplate.match(notificationSubscriptionName).notification_subscription;
   }
 
   /**

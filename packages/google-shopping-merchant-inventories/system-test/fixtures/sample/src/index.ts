@@ -16,20 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  LocalInventoryServiceClient,
-  RegionalInventoryServiceClient,
-} from '@google-shopping/inventories';
+import {LocalInventoryServiceClient, RegionalInventoryServiceClient} from '@google-shopping/inventories';
 
 // check that the client class type name can be used
-function doStuffWithLocalInventoryServiceClient(
-  client: LocalInventoryServiceClient
-) {
+function doStuffWithLocalInventoryServiceClient(client: LocalInventoryServiceClient) {
   client.close();
 }
-function doStuffWithRegionalInventoryServiceClient(
-  client: RegionalInventoryServiceClient
-) {
+function doStuffWithRegionalInventoryServiceClient(client: RegionalInventoryServiceClient) {
   client.close();
 }
 
