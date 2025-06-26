@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,42 +100,20 @@ export class MerchantReviewsServiceClient {
    *     const client = new MerchantReviewsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof MerchantReviewsServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof MerchantReviewsServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +139,7 @@ export class MerchantReviewsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +153,10 @@ export class MerchantReviewsServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -218,20 +192,14 @@ export class MerchantReviewsServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listMerchantReviews: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'merchantReviews'
-      ),
+      listMerchantReviews:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'merchantReviews')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.shopping.merchant.reviews.v1beta.MerchantReviewsService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.shopping.merchant.reviews.v1beta.MerchantReviewsService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -262,41 +230,32 @@ export class MerchantReviewsServiceClient {
     // Put together the "service stub" for
     // google.shopping.merchant.reviews.v1beta.MerchantReviewsService.
     this.merchantReviewsServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.shopping.merchant.reviews.v1beta.MerchantReviewsService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.shopping.merchant.reviews.v1beta
-            .MerchantReviewsService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.shopping.merchant.reviews.v1beta.MerchantReviewsService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.shopping.merchant.reviews.v1beta.MerchantReviewsService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const merchantReviewsServiceStubMethods = [
-      'getMerchantReview',
-      'listMerchantReviews',
-      'insertMerchantReview',
-      'deleteMerchantReview',
-    ];
+    const merchantReviewsServiceStubMethods =
+        ['getMerchantReview', 'listMerchantReviews', 'insertMerchantReview', 'deleteMerchantReview'];
     for (const methodName of merchantReviewsServiceStubMethods) {
       const callPromise = this.merchantReviewsServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -316,14 +275,8 @@ export class MerchantReviewsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -334,14 +287,8 @@ export class MerchantReviewsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -372,7 +319,9 @@ export class MerchantReviewsServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/content'];
+    return [
+      'https://www.googleapis.com/auth/content'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -381,9 +330,8 @@ export class MerchantReviewsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -394,513 +342,389 @@ export class MerchantReviewsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets a merchant review.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The ID of the merchant review.
-   *   Format: accounts/{account}/merchantReviews/{merchantReview}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.reviews.v1beta.MerchantReview|MerchantReview}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/merchant_reviews_service.get_merchant_review.js</caption>
-   * region_tag:merchantapi_v1beta_generated_MerchantReviewsService_GetMerchantReview_async
-   */
+/**
+ * Gets a merchant review.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The ID of the merchant review.
+ *   Format: accounts/{account}/merchantReviews/{merchantReview}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.reviews.v1beta.MerchantReview|MerchantReview}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/merchant_reviews_service.get_merchant_review.js</caption>
+ * region_tag:merchantapi_v1beta_generated_MerchantReviewsService_GetMerchantReview_async
+ */
   getMerchantReview(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-      (
-        | protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
+        protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest|undefined, {}|undefined
+      ]>;
   getMerchantReview(
-    request: protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-      | protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMerchantReview(
-    request: protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-      | protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMerchantReview(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-          | protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-      | protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-      (
-        | protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMerchantReview(
+      request: protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
+          protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMerchantReview(
+      request?: protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
+          protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
+          protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
+        protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getMerchantReview request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-          | protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
+        protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMerchantReview response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getMerchantReview(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-          (
-            | protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getMerchantReview response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getMerchantReview(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
+        protos.google.shopping.merchant.reviews.v1beta.IGetMerchantReviewRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getMerchantReview response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Inserts a review for your Merchant Center account. If the review
-   * already exists, then the review is replaced with the new instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The account where the merchant review will be inserted.
-   *   Format: accounts/{account}
-   * @param {google.shopping.merchant.reviews.v1beta.MerchantReview} request.merchantReview
-   *   Required. The merchant review to insert.
-   * @param {string} request.dataSource
-   *   Required. The data source of the
-   *   [merchantreview](https://support.google.com/merchants/answer/7045996?sjid=5253581244217581976-EU)
-   *   Format:
-   *   `accounts/{account}/dataSources/{datasource}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.reviews.v1beta.MerchantReview|MerchantReview}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/merchant_reviews_service.insert_merchant_review.js</caption>
-   * region_tag:merchantapi_v1beta_generated_MerchantReviewsService_InsertMerchantReview_async
-   */
+/**
+ * Inserts a review for your Merchant Center account. If the review
+ * already exists, then the review is replaced with the new instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The account where the merchant review will be inserted.
+ *   Format: accounts/{account}
+ * @param {google.shopping.merchant.reviews.v1beta.MerchantReview} request.merchantReview
+ *   Required. The merchant review to insert.
+ * @param {string} request.dataSource
+ *   Required. The data source of the
+ *   [merchantreview](https://support.google.com/merchants/answer/7045996?sjid=5253581244217581976-EU)
+ *   Format:
+ *   `accounts/{account}/dataSources/{datasource}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.reviews.v1beta.MerchantReview|MerchantReview}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/merchant_reviews_service.insert_merchant_review.js</caption>
+ * region_tag:merchantapi_v1beta_generated_MerchantReviewsService_InsertMerchantReview_async
+ */
   insertMerchantReview(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-      (
-        | protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
+        protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest|undefined, {}|undefined
+      ]>;
   insertMerchantReview(
-    request: protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-      | protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insertMerchantReview(
-    request: protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-      | protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insertMerchantReview(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-          | protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-      | protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-      (
-        | protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest|null|undefined,
+          {}|null|undefined>): void;
+  insertMerchantReview(
+      request: protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
+          protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest|null|undefined,
+          {}|null|undefined>): void;
+  insertMerchantReview(
+      request?: protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
+          protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
+          protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
+        protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('insertMerchantReview request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-          | protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
+        protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('insertMerchantReview response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .insertMerchantReview(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
-          (
-            | protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('insertMerchantReview response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.insertMerchantReview(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.reviews.v1beta.IMerchantReview,
+        protos.google.shopping.merchant.reviews.v1beta.IInsertMerchantReviewRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('insertMerchantReview response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes merchant review.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The ID of the merchant review.
-   *   Format: accounts/{account}/merchantReviews/{merchantReview}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/merchant_reviews_service.delete_merchant_review.js</caption>
-   * region_tag:merchantapi_v1beta_generated_MerchantReviewsService_DeleteMerchantReview_async
-   */
+/**
+ * Deletes merchant review.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The ID of the merchant review.
+ *   Format: accounts/{account}/merchantReviews/{merchantReview}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/merchant_reviews_service.delete_merchant_review.js</caption>
+ * region_tag:merchantapi_v1beta_generated_MerchantReviewsService_DeleteMerchantReview_async
+ */
   deleteMerchantReview(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest|undefined, {}|undefined
+      ]>;
   deleteMerchantReview(
-    request: protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteMerchantReview(
-    request: protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteMerchantReview(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteMerchantReview(
+      request: protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteMerchantReview(
+      request?: protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteMerchantReview request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteMerchantReview response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteMerchantReview(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteMerchantReview response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteMerchantReview(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.reviews.v1beta.IDeleteMerchantReviewRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteMerchantReview response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists merchant reviews.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The account to list merchant reviews for.
-   *   Format: accounts/{account}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of merchant reviews to return. The service can
-   *   return fewer than this value. The maximum value is 1000; values above 1000
-   *   are coerced to 1000. If unspecified, the maximum number of reviews is
-   *   returned.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListMerchantReviews`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListMerchantReviews`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.shopping.merchant.reviews.v1beta.MerchantReview|MerchantReview}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listMerchantReviewsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists merchant reviews.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The account to list merchant reviews for.
+ *   Format: accounts/{account}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of merchant reviews to return. The service can
+ *   return fewer than this value. The maximum value is 1000; values above 1000
+ *   are coerced to 1000. If unspecified, the maximum number of reviews is
+ *   returned.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListMerchantReviews`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListMerchantReviews`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.shopping.merchant.reviews.v1beta.MerchantReview|MerchantReview}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listMerchantReviewsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listMerchantReviews(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview[],
-      protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest | null,
-      protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.reviews.v1beta.IMerchantReview[],
+        protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest|null,
+        protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse
+      ]>;
   listMerchantReviews(
-    request: protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
-      | protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview
-    >
-  ): void;
-  listMerchantReviews(
-    request: protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
-    callback: PaginationCallback<
-      protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
-      | protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview
-    >
-  ): void;
-  listMerchantReviews(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
-          | protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse
-          | null
-          | undefined,
-          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview
-        >,
-    callback?: PaginationCallback<
-      protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
-      | protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview[],
-      protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest | null,
-      protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse,
-    ]
-  > | void {
+          protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse|null|undefined,
+          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview>): void;
+  listMerchantReviews(
+      request: protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
+      callback: PaginationCallback<
+          protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
+          protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse|null|undefined,
+          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview>): void;
+  listMerchantReviews(
+      request?: protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
+          protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse|null|undefined,
+          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview>,
+      callback?: PaginationCallback<
+          protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
+          protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse|null|undefined,
+          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview>):
+      Promise<[
+        protos.google.shopping.merchant.reviews.v1beta.IMerchantReview[],
+        protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest|null,
+        protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
-          | protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse
-          | null
-          | undefined,
-          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
+      protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse|null|undefined,
+      protos.google.shopping.merchant.reviews.v1beta.IMerchantReview>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMerchantReviews values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -909,64 +733,61 @@ export class MerchantReviewsServiceClient {
     this._log.info('listMerchantReviews request %j', request);
     return this.innerApiCalls
       .listMerchantReviews(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.shopping.merchant.reviews.v1beta.IMerchantReview[],
-          protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest | null,
-          protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse,
-        ]) => {
-          this._log.info('listMerchantReviews values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.shopping.merchant.reviews.v1beta.IMerchantReview[],
+        protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest|null,
+        protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsResponse
+      ]) => {
+        this._log.info('listMerchantReviews values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listMerchantReviews`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The account to list merchant reviews for.
-   *   Format: accounts/{account}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of merchant reviews to return. The service can
-   *   return fewer than this value. The maximum value is 1000; values above 1000
-   *   are coerced to 1000. If unspecified, the maximum number of reviews is
-   *   returned.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListMerchantReviews`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListMerchantReviews`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.shopping.merchant.reviews.v1beta.MerchantReview|MerchantReview} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listMerchantReviewsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listMerchantReviews`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The account to list merchant reviews for.
+ *   Format: accounts/{account}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of merchant reviews to return. The service can
+ *   return fewer than this value. The maximum value is 1000; values above 1000
+ *   are coerced to 1000. If unspecified, the maximum number of reviews is
+ *   returned.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListMerchantReviews`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListMerchantReviews`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.shopping.merchant.reviews.v1beta.MerchantReview|MerchantReview} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listMerchantReviewsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listMerchantReviewsStream(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listMerchantReviews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listMerchantReviews stream %j', request);
     return this.descriptors.page.listMerchantReviews.createStream(
       this.innerApiCalls.listMerchantReviews as GaxCall,
@@ -975,55 +796,54 @@ export class MerchantReviewsServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listMerchantReviews`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The account to list merchant reviews for.
-   *   Format: accounts/{account}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of merchant reviews to return. The service can
-   *   return fewer than this value. The maximum value is 1000; values above 1000
-   *   are coerced to 1000. If unspecified, the maximum number of reviews is
-   *   returned.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListMerchantReviews`
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListMerchantReviews`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.shopping.merchant.reviews.v1beta.MerchantReview|MerchantReview}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/merchant_reviews_service.list_merchant_reviews.js</caption>
-   * region_tag:merchantapi_v1beta_generated_MerchantReviewsService_ListMerchantReviews_async
-   */
+/**
+ * Equivalent to `listMerchantReviews`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The account to list merchant reviews for.
+ *   Format: accounts/{account}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of merchant reviews to return. The service can
+ *   return fewer than this value. The maximum value is 1000; values above 1000
+ *   are coerced to 1000. If unspecified, the maximum number of reviews is
+ *   returned.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListMerchantReviews`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListMerchantReviews`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.shopping.merchant.reviews.v1beta.MerchantReview|MerchantReview}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/merchant_reviews_service.list_merchant_reviews.js</caption>
+ * region_tag:merchantapi_v1beta_generated_MerchantReviewsService_ListMerchantReviews_async
+ */
   listMerchantReviewsAsync(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.shopping.merchant.reviews.v1beta.IMerchantReview> {
+      request?: protos.google.shopping.merchant.reviews.v1beta.IListMerchantReviewsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.shopping.merchant.reviews.v1beta.IMerchantReview>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listMerchantReviews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listMerchantReviews iterate %j', request);
     return this.descriptors.page.listMerchantReviews.asyncIterate(
       this.innerApiCalls['listMerchantReviews'] as GaxCall,
@@ -1041,7 +861,7 @@ export class MerchantReviewsServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  accountPath(account: string) {
+  accountPath(account:string) {
     return this.pathTemplates.accountPathTemplate.render({
       account: account,
     });
@@ -1065,7 +885,7 @@ export class MerchantReviewsServiceClient {
    * @param {string} name
    * @returns {string} Resource name string.
    */
-  merchantReviewPath(account: string, name: string) {
+  merchantReviewPath(account:string,name:string) {
     return this.pathTemplates.merchantReviewPathTemplate.render({
       account: account,
       name: name,
@@ -1080,9 +900,7 @@ export class MerchantReviewsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromMerchantReviewName(merchantReviewName: string) {
-    return this.pathTemplates.merchantReviewPathTemplate.match(
-      merchantReviewName
-    ).account;
+    return this.pathTemplates.merchantReviewPathTemplate.match(merchantReviewName).account;
   }
 
   /**
@@ -1093,9 +911,7 @@ export class MerchantReviewsServiceClient {
    * @returns {string} A string representing the name.
    */
   matchNameFromMerchantReviewName(merchantReviewName: string) {
-    return this.pathTemplates.merchantReviewPathTemplate.match(
-      merchantReviewName
-    ).name;
+    return this.pathTemplates.merchantReviewPathTemplate.match(merchantReviewName).name;
   }
 
   /**
@@ -1105,7 +921,7 @@ export class MerchantReviewsServiceClient {
    * @param {string} productreview
    * @returns {string} Resource name string.
    */
-  productReviewPath(account: string, productreview: string) {
+  productReviewPath(account:string,productreview:string) {
     return this.pathTemplates.productReviewPathTemplate.render({
       account: account,
       productreview: productreview,
@@ -1120,8 +936,7 @@ export class MerchantReviewsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromProductReviewName(productReviewName: string) {
-    return this.pathTemplates.productReviewPathTemplate.match(productReviewName)
-      .account;
+    return this.pathTemplates.productReviewPathTemplate.match(productReviewName).account;
   }
 
   /**
@@ -1132,8 +947,7 @@ export class MerchantReviewsServiceClient {
    * @returns {string} A string representing the productreview.
    */
   matchProductreviewFromProductReviewName(productReviewName: string) {
-    return this.pathTemplates.productReviewPathTemplate.match(productReviewName)
-      .productreview;
+    return this.pathTemplates.productReviewPathTemplate.match(productReviewName).productreview;
   }
 
   /**

@@ -22,7 +22,7 @@ import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallba
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -247,13 +247,13 @@ export class PlaybooksClient {
       projectLocationAgentEnvironmentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}/entityTypes/{entity_type}'
       ),
-      projectLocationAgentFlowTransitionRouteGroupPathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationAgentFlowTransitionRouteGroupsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
       ),
       projectLocationAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}/entityTypes/{entity_type}'
       ),
-      projectLocationAgentTransitionRouteGroupPathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationAgentTransitionRouteGroupsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}'
       ),
       securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
@@ -525,6 +525,12 @@ export class PlaybooksClient {
       ]) => {
         this._log.info('createPlaybook response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -615,6 +621,12 @@ export class PlaybooksClient {
       ]) => {
         this._log.info('deletePlaybook response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -705,6 +717,12 @@ export class PlaybooksClient {
       ]) => {
         this._log.info('getPlaybook response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -796,6 +814,12 @@ export class PlaybooksClient {
       ]) => {
         this._log.info('updatePlaybook response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -888,6 +912,12 @@ export class PlaybooksClient {
       ]) => {
         this._log.info('createPlaybookVersion response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -978,6 +1008,12 @@ export class PlaybooksClient {
       ]) => {
         this._log.info('getPlaybookVersion response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1068,6 +1104,12 @@ export class PlaybooksClient {
       ]) => {
         this._log.info('deletePlaybookVersion response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 
@@ -2853,7 +2895,7 @@ export class PlaybooksClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationAgentFlowTransitionRouteGroup resource name string.
+   * Return a fully-qualified projectLocationAgentFlowTransitionRouteGroups resource name string.
    *
    * @param {string} project
    * @param {string} location
@@ -2862,8 +2904,8 @@ export class PlaybooksClient {
    * @param {string} transition_route_group
    * @returns {string} Resource name string.
    */
-  projectLocationAgentFlowTransitionRouteGroupPath(project:string,location:string,agent:string,flow:string,transitionRouteGroup:string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render({
+  projectLocationAgentFlowTransitionRouteGroupsPath(project:string,location:string,agent:string,flow:string,transitionRouteGroup:string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.render({
       project: project,
       location: location,
       agent: agent,
@@ -2873,58 +2915,58 @@ export class PlaybooksClient {
   }
 
   /**
-   * Parse the project from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   * Parse the project from ProjectLocationAgentFlowTransitionRouteGroups resource.
    *
-   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
-   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupsName
+   *   A fully-qualified path representing project_location_agent_flow_transitionRouteGroups resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentFlowTransitionRouteGroupName(projectLocationAgentFlowTransitionRouteGroupName: string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupName).project;
+  matchProjectFromProjectLocationAgentFlowTransitionRouteGroupsName(projectLocationAgentFlowTransitionRouteGroupsName: string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupsName).project;
   }
 
   /**
-   * Parse the location from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   * Parse the location from ProjectLocationAgentFlowTransitionRouteGroups resource.
    *
-   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
-   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupsName
+   *   A fully-qualified path representing project_location_agent_flow_transitionRouteGroups resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentFlowTransitionRouteGroupName(projectLocationAgentFlowTransitionRouteGroupName: string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupName).location;
+  matchLocationFromProjectLocationAgentFlowTransitionRouteGroupsName(projectLocationAgentFlowTransitionRouteGroupsName: string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupsName).location;
   }
 
   /**
-   * Parse the agent from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   * Parse the agent from ProjectLocationAgentFlowTransitionRouteGroups resource.
    *
-   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
-   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupsName
+   *   A fully-qualified path representing project_location_agent_flow_transitionRouteGroups resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentFlowTransitionRouteGroupName(projectLocationAgentFlowTransitionRouteGroupName: string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupName).agent;
+  matchAgentFromProjectLocationAgentFlowTransitionRouteGroupsName(projectLocationAgentFlowTransitionRouteGroupsName: string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupsName).agent;
   }
 
   /**
-   * Parse the flow from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   * Parse the flow from ProjectLocationAgentFlowTransitionRouteGroups resource.
    *
-   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
-   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupsName
+   *   A fully-qualified path representing project_location_agent_flow_transitionRouteGroups resource.
    * @returns {string} A string representing the flow.
    */
-  matchFlowFromProjectLocationAgentFlowTransitionRouteGroupName(projectLocationAgentFlowTransitionRouteGroupName: string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupName).flow;
+  matchFlowFromProjectLocationAgentFlowTransitionRouteGroupsName(projectLocationAgentFlowTransitionRouteGroupsName: string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupsName).flow;
   }
 
   /**
-   * Parse the transition_route_group from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   * Parse the transition_route_group from ProjectLocationAgentFlowTransitionRouteGroups resource.
    *
-   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
-   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupsName
+   *   A fully-qualified path representing project_location_agent_flow_transitionRouteGroups resource.
    * @returns {string} A string representing the transition_route_group.
    */
-  matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupName(projectLocationAgentFlowTransitionRouteGroupName: string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupName).transition_route_group;
+  matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupsName(projectLocationAgentFlowTransitionRouteGroupsName: string) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupsName).transition_route_group;
   }
 
   /**
@@ -3003,7 +3045,7 @@ export class PlaybooksClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationAgentTransitionRouteGroup resource name string.
+   * Return a fully-qualified projectLocationAgentTransitionRouteGroups resource name string.
    *
    * @param {string} project
    * @param {string} location
@@ -3011,8 +3053,8 @@ export class PlaybooksClient {
    * @param {string} transition_route_group
    * @returns {string} Resource name string.
    */
-  projectLocationAgentTransitionRouteGroupPath(project:string,location:string,agent:string,transitionRouteGroup:string) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render({
+  projectLocationAgentTransitionRouteGroupsPath(project:string,location:string,agent:string,transitionRouteGroup:string) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.render({
       project: project,
       location: location,
       agent: agent,
@@ -3021,47 +3063,47 @@ export class PlaybooksClient {
   }
 
   /**
-   * Parse the project from ProjectLocationAgentTransitionRouteGroup resource.
+   * Parse the project from ProjectLocationAgentTransitionRouteGroups resource.
    *
-   * @param {string} projectLocationAgentTransitionRouteGroupName
-   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @param {string} projectLocationAgentTransitionRouteGroupsName
+   *   A fully-qualified path representing project_location_agent_transitionRouteGroups resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentTransitionRouteGroupName(projectLocationAgentTransitionRouteGroupName: string) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(projectLocationAgentTransitionRouteGroupName).project;
+  matchProjectFromProjectLocationAgentTransitionRouteGroupsName(projectLocationAgentTransitionRouteGroupsName: string) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(projectLocationAgentTransitionRouteGroupsName).project;
   }
 
   /**
-   * Parse the location from ProjectLocationAgentTransitionRouteGroup resource.
+   * Parse the location from ProjectLocationAgentTransitionRouteGroups resource.
    *
-   * @param {string} projectLocationAgentTransitionRouteGroupName
-   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @param {string} projectLocationAgentTransitionRouteGroupsName
+   *   A fully-qualified path representing project_location_agent_transitionRouteGroups resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentTransitionRouteGroupName(projectLocationAgentTransitionRouteGroupName: string) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(projectLocationAgentTransitionRouteGroupName).location;
+  matchLocationFromProjectLocationAgentTransitionRouteGroupsName(projectLocationAgentTransitionRouteGroupsName: string) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(projectLocationAgentTransitionRouteGroupsName).location;
   }
 
   /**
-   * Parse the agent from ProjectLocationAgentTransitionRouteGroup resource.
+   * Parse the agent from ProjectLocationAgentTransitionRouteGroups resource.
    *
-   * @param {string} projectLocationAgentTransitionRouteGroupName
-   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @param {string} projectLocationAgentTransitionRouteGroupsName
+   *   A fully-qualified path representing project_location_agent_transitionRouteGroups resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentTransitionRouteGroupName(projectLocationAgentTransitionRouteGroupName: string) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(projectLocationAgentTransitionRouteGroupName).agent;
+  matchAgentFromProjectLocationAgentTransitionRouteGroupsName(projectLocationAgentTransitionRouteGroupsName: string) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(projectLocationAgentTransitionRouteGroupsName).agent;
   }
 
   /**
-   * Parse the transition_route_group from ProjectLocationAgentTransitionRouteGroup resource.
+   * Parse the transition_route_group from ProjectLocationAgentTransitionRouteGroups resource.
    *
-   * @param {string} projectLocationAgentTransitionRouteGroupName
-   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @param {string} projectLocationAgentTransitionRouteGroupsName
+   *   A fully-qualified path representing project_location_agent_transitionRouteGroups resource.
    * @returns {string} A string representing the transition_route_group.
    */
-  matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupName(projectLocationAgentTransitionRouteGroupName: string) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(projectLocationAgentTransitionRouteGroupName).transition_route_group;
+  matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupsName(projectLocationAgentTransitionRouteGroupsName: string) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(projectLocationAgentTransitionRouteGroupsName).transition_route_group;
   }
 
   /**

@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -107,42 +100,20 @@ export class ProductReviewsServiceClient {
    *     const client = new ProductReviewsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof ProductReviewsServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    const staticMembers = this.constructor as typeof ProductReviewsServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +139,7 @@ export class ProductReviewsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +153,10 @@ export class ProductReviewsServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -218,20 +192,14 @@ export class ProductReviewsServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listProductReviews: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'productReviews'
-      ),
+      listProductReviews:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'productReviews')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.shopping.merchant.reviews.v1beta.ProductReviewsService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.shopping.merchant.reviews.v1beta.ProductReviewsService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -262,41 +230,32 @@ export class ProductReviewsServiceClient {
     // Put together the "service stub" for
     // google.shopping.merchant.reviews.v1beta.ProductReviewsService.
     this.productReviewsServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.shopping.merchant.reviews.v1beta.ProductReviewsService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.shopping.merchant.reviews.v1beta
-            .ProductReviewsService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.shopping.merchant.reviews.v1beta.ProductReviewsService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.shopping.merchant.reviews.v1beta.ProductReviewsService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const productReviewsServiceStubMethods = [
-      'getProductReview',
-      'listProductReviews',
-      'insertProductReview',
-      'deleteProductReview',
-    ];
+    const productReviewsServiceStubMethods =
+        ['getProductReview', 'listProductReviews', 'insertProductReview', 'deleteProductReview'];
     for (const methodName of productReviewsServiceStubMethods) {
       const callPromise = this.productReviewsServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -316,14 +275,8 @@ export class ProductReviewsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -334,14 +287,8 @@ export class ProductReviewsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'merchantapi.googleapis.com';
   }
@@ -372,7 +319,9 @@ export class ProductReviewsServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/content'];
+    return [
+      'https://www.googleapis.com/auth/content'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -381,9 +330,8 @@ export class ProductReviewsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -394,508 +342,384 @@ export class ProductReviewsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets a product review.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The ID of the merchant review.
-   *   Format: accounts/{account}/productReviews/{productReview}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.reviews.v1beta.ProductReview|ProductReview}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/product_reviews_service.get_product_review.js</caption>
-   * region_tag:merchantapi_v1beta_generated_ProductReviewsService_GetProductReview_async
-   */
+/**
+ * Gets a product review.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The ID of the merchant review.
+ *   Format: accounts/{account}/productReviews/{productReview}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.reviews.v1beta.ProductReview|ProductReview}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/product_reviews_service.get_product_review.js</caption>
+ * region_tag:merchantapi_v1beta_generated_ProductReviewsService_GetProductReview_async
+ */
   getProductReview(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-      (
-        | protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+        protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest|undefined, {}|undefined
+      ]>;
   getProductReview(
-    request: protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-      | protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getProductReview(
-    request: protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-      | protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getProductReview(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-          | protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-      | protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-      (
-        | protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest|null|undefined,
+          {}|null|undefined>): void;
+  getProductReview(
+      request: protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+          protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest|null|undefined,
+          {}|null|undefined>): void;
+  getProductReview(
+      request?: protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+          protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+          protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+        protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getProductReview request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-          | protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+        protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getProductReview response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getProductReview(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-          (
-            | protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getProductReview response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getProductReview(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+        protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getProductReview response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Inserts a product review.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The account where the product review will be inserted.
-   *   Format: accounts/{account}
-   * @param {google.shopping.merchant.reviews.v1beta.ProductReview} request.productReview
-   *   Required. The product review to insert.
-   * @param {string} request.dataSource
-   *   Required. Format:
-   *   `accounts/{account}/dataSources/{datasource}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.reviews.v1beta.ProductReview|ProductReview}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/product_reviews_service.insert_product_review.js</caption>
-   * region_tag:merchantapi_v1beta_generated_ProductReviewsService_InsertProductReview_async
-   */
+/**
+ * Inserts a product review.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The account where the product review will be inserted.
+ *   Format: accounts/{account}
+ * @param {google.shopping.merchant.reviews.v1beta.ProductReview} request.productReview
+ *   Required. The product review to insert.
+ * @param {string} request.dataSource
+ *   Required. Format:
+ *   `accounts/{account}/dataSources/{datasource}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.reviews.v1beta.ProductReview|ProductReview}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/product_reviews_service.insert_product_review.js</caption>
+ * region_tag:merchantapi_v1beta_generated_ProductReviewsService_InsertProductReview_async
+ */
   insertProductReview(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-      (
-        | protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+        protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest|undefined, {}|undefined
+      ]>;
   insertProductReview(
-    request: protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-      | protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insertProductReview(
-    request: protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest,
-    callback: Callback<
-      protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-      | protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insertProductReview(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-          | protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-      | protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-      (
-        | protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest|null|undefined,
+          {}|null|undefined>): void;
+  insertProductReview(
+      request: protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+          protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest|null|undefined,
+          {}|null|undefined>): void;
+  insertProductReview(
+      request?: protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+          protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+          protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+        protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('insertProductReview request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-          | protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+        protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('insertProductReview response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .insertProductReview(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.reviews.v1beta.IProductReview,
-          (
-            | protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('insertProductReview response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.insertProductReview(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+        protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('insertProductReview response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes a product review.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The ID of the Product review.
-   *   Format: accounts/{account}/productReviews/{productReview}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/product_reviews_service.delete_product_review.js</caption>
-   * region_tag:merchantapi_v1beta_generated_ProductReviewsService_DeleteProductReview_async
-   */
+/**
+ * Deletes a product review.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The ID of the Product review.
+ *   Format: accounts/{account}/productReviews/{productReview}
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/product_reviews_service.delete_product_review.js</caption>
+ * region_tag:merchantapi_v1beta_generated_ProductReviewsService_DeleteProductReview_async
+ */
   deleteProductReview(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest|undefined, {}|undefined
+      ]>;
   deleteProductReview(
-    request: protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteProductReview(
-    request: protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteProductReview(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteProductReview(
+      request: protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteProductReview(
+      request?: protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteProductReview request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteProductReview response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteProductReview(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteProductReview response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteProductReview(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteProductReview response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Lists product reviews.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The account to list product reviews for.
-   *   Format: accounts/{account}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of products to return. The service may return
-   *   fewer than this value.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListProductReviews` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListProductReviews`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.shopping.merchant.reviews.v1beta.ProductReview|ProductReview}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listProductReviewsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists product reviews.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The account to list product reviews for.
+ *   Format: accounts/{account}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of products to return. The service may return
+ *   fewer than this value.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListProductReviews` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListProductReviews`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.shopping.merchant.reviews.v1beta.ProductReview|ProductReview}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listProductReviewsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listProductReviews(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.shopping.merchant.reviews.v1beta.IProductReview[],
-      protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest | null,
-      protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse,
-    ]
-  >;
+      request?: protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.reviews.v1beta.IProductReview[],
+        protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest|null,
+        protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse
+      ]>;
   listProductReviews(
-    request: protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
-      | protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.reviews.v1beta.IProductReview
-    >
-  ): void;
-  listProductReviews(
-    request: protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
-    callback: PaginationCallback<
-      protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
-      | protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.reviews.v1beta.IProductReview
-    >
-  ): void;
-  listProductReviews(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
-          | protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse
-          | null
-          | undefined,
-          protos.google.shopping.merchant.reviews.v1beta.IProductReview
-        >,
-    callback?: PaginationCallback<
-      protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
-      | protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse
-      | null
-      | undefined,
-      protos.google.shopping.merchant.reviews.v1beta.IProductReview
-    >
-  ): Promise<
-    [
-      protos.google.shopping.merchant.reviews.v1beta.IProductReview[],
-      protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest | null,
-      protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse,
-    ]
-  > | void {
+          protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse|null|undefined,
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview>): void;
+  listProductReviews(
+      request: protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
+      callback: PaginationCallback<
+          protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
+          protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse|null|undefined,
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview>): void;
+  listProductReviews(
+      request?: protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
+          protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse|null|undefined,
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview>,
+      callback?: PaginationCallback<
+          protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
+          protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse|null|undefined,
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview>):
+      Promise<[
+        protos.google.shopping.merchant.reviews.v1beta.IProductReview[],
+        protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest|null,
+        protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
-          | protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse
-          | null
-          | undefined,
-          protos.google.shopping.merchant.reviews.v1beta.IProductReview
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
+      protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse|null|undefined,
+      protos.google.shopping.merchant.reviews.v1beta.IProductReview>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listProductReviews values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -904,62 +728,59 @@ export class ProductReviewsServiceClient {
     this._log.info('listProductReviews request %j', request);
     return this.innerApiCalls
       .listProductReviews(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.shopping.merchant.reviews.v1beta.IProductReview[],
-          protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest | null,
-          protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse,
-        ]) => {
-          this._log.info('listProductReviews values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.shopping.merchant.reviews.v1beta.IProductReview[],
+        protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest|null,
+        protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse
+      ]) => {
+        this._log.info('listProductReviews values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listProductReviews`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The account to list product reviews for.
-   *   Format: accounts/{account}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of products to return. The service may return
-   *   fewer than this value.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListProductReviews` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListProductReviews`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.shopping.merchant.reviews.v1beta.ProductReview|ProductReview} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listProductReviewsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listProductReviews`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The account to list product reviews for.
+ *   Format: accounts/{account}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of products to return. The service may return
+ *   fewer than this value.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListProductReviews` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListProductReviews`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.shopping.merchant.reviews.v1beta.ProductReview|ProductReview} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listProductReviewsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listProductReviewsStream(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listProductReviews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listProductReviews stream %j', request);
     return this.descriptors.page.listProductReviews.createStream(
       this.innerApiCalls.listProductReviews as GaxCall,
@@ -968,53 +789,52 @@ export class ProductReviewsServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listProductReviews`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The account to list product reviews for.
-   *   Format: accounts/{account}
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of products to return. The service may return
-   *   fewer than this value.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListProductReviews` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListProductReviews`
-   *   must match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.shopping.merchant.reviews.v1beta.ProductReview|ProductReview}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/product_reviews_service.list_product_reviews.js</caption>
-   * region_tag:merchantapi_v1beta_generated_ProductReviewsService_ListProductReviews_async
-   */
+/**
+ * Equivalent to `listProductReviews`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The account to list product reviews for.
+ *   Format: accounts/{account}
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of products to return. The service may return
+ *   fewer than this value.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListProductReviews` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListProductReviews`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.shopping.merchant.reviews.v1beta.ProductReview|ProductReview}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/product_reviews_service.list_product_reviews.js</caption>
+ * region_tag:merchantapi_v1beta_generated_ProductReviewsService_ListProductReviews_async
+ */
   listProductReviewsAsync(
-    request?: protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.shopping.merchant.reviews.v1beta.IProductReview> {
+      request?: protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.shopping.merchant.reviews.v1beta.IProductReview>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listProductReviews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listProductReviews iterate %j', request);
     return this.descriptors.page.listProductReviews.asyncIterate(
       this.innerApiCalls['listProductReviews'] as GaxCall,
@@ -1032,7 +852,7 @@ export class ProductReviewsServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  accountPath(account: string) {
+  accountPath(account:string) {
     return this.pathTemplates.accountPathTemplate.render({
       account: account,
     });
@@ -1056,7 +876,7 @@ export class ProductReviewsServiceClient {
    * @param {string} name
    * @returns {string} Resource name string.
    */
-  merchantReviewPath(account: string, name: string) {
+  merchantReviewPath(account:string,name:string) {
     return this.pathTemplates.merchantReviewPathTemplate.render({
       account: account,
       name: name,
@@ -1071,9 +891,7 @@ export class ProductReviewsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromMerchantReviewName(merchantReviewName: string) {
-    return this.pathTemplates.merchantReviewPathTemplate.match(
-      merchantReviewName
-    ).account;
+    return this.pathTemplates.merchantReviewPathTemplate.match(merchantReviewName).account;
   }
 
   /**
@@ -1084,9 +902,7 @@ export class ProductReviewsServiceClient {
    * @returns {string} A string representing the name.
    */
   matchNameFromMerchantReviewName(merchantReviewName: string) {
-    return this.pathTemplates.merchantReviewPathTemplate.match(
-      merchantReviewName
-    ).name;
+    return this.pathTemplates.merchantReviewPathTemplate.match(merchantReviewName).name;
   }
 
   /**
@@ -1096,7 +912,7 @@ export class ProductReviewsServiceClient {
    * @param {string} productreview
    * @returns {string} Resource name string.
    */
-  productReviewPath(account: string, productreview: string) {
+  productReviewPath(account:string,productreview:string) {
     return this.pathTemplates.productReviewPathTemplate.render({
       account: account,
       productreview: productreview,
@@ -1111,8 +927,7 @@ export class ProductReviewsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromProductReviewName(productReviewName: string) {
-    return this.pathTemplates.productReviewPathTemplate.match(productReviewName)
-      .account;
+    return this.pathTemplates.productReviewPathTemplate.match(productReviewName).account;
   }
 
   /**
@@ -1123,8 +938,7 @@ export class ProductReviewsServiceClient {
    * @returns {string} A string representing the productreview.
    */
   matchProductreviewFromProductReviewName(productReviewName: string) {
-    return this.pathTemplates.productReviewPathTemplate.match(productReviewName)
-      .productreview;
+    return this.pathTemplates.productReviewPathTemplate.match(productReviewName).productreview;
   }
 
   /**

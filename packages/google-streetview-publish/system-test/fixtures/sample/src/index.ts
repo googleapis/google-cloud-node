@@ -19,9 +19,7 @@
 import {StreetViewPublishServiceClient} from '@googlemaps/streetview-publish';
 
 // check that the client class type name can be used
-function doStuffWithStreetViewPublishServiceClient(
-  client: StreetViewPublishServiceClient
-) {
+function doStuffWithStreetViewPublishServiceClient(client: StreetViewPublishServiceClient) {
   client.close();
 }
 

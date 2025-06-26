@@ -4424,6 +4424,7 @@
                          * @memberof google.cloud.alloydb.v1
                          * @interface IMaintenanceUpdatePolicy
                          * @property {Array.<google.cloud.alloydb.v1.MaintenanceUpdatePolicy.IMaintenanceWindow>|null} [maintenanceWindows] MaintenanceUpdatePolicy maintenanceWindows
+                         * @property {Array.<google.cloud.alloydb.v1.MaintenanceUpdatePolicy.IDenyMaintenancePeriod>|null} [denyMaintenancePeriods] MaintenanceUpdatePolicy denyMaintenancePeriods
                          */
     
                         /**
@@ -4436,6 +4437,7 @@
                          */
                         function MaintenanceUpdatePolicy(properties) {
                             this.maintenanceWindows = [];
+                            this.denyMaintenancePeriods = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -4449,6 +4451,14 @@
                          * @instance
                          */
                         MaintenanceUpdatePolicy.prototype.maintenanceWindows = $util.emptyArray;
+    
+                        /**
+                         * MaintenanceUpdatePolicy denyMaintenancePeriods.
+                         * @member {Array.<google.cloud.alloydb.v1.MaintenanceUpdatePolicy.IDenyMaintenancePeriod>} denyMaintenancePeriods
+                         * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy
+                         * @instance
+                         */
+                        MaintenanceUpdatePolicy.prototype.denyMaintenancePeriods = $util.emptyArray;
     
                         /**
                          * Creates a new MaintenanceUpdatePolicy instance using the specified properties.
@@ -4477,6 +4487,9 @@
                             if (message.maintenanceWindows != null && message.maintenanceWindows.length)
                                 for (var i = 0; i < message.maintenanceWindows.length; ++i)
                                     $root.google.cloud.alloydb.v1.MaintenanceUpdatePolicy.MaintenanceWindow.encode(message.maintenanceWindows[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.denyMaintenancePeriods != null && message.denyMaintenancePeriods.length)
+                                for (var i = 0; i < message.denyMaintenancePeriods.length; ++i)
+                                    $root.google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod.encode(message.denyMaintenancePeriods[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -4517,6 +4530,12 @@
                                         if (!(message.maintenanceWindows && message.maintenanceWindows.length))
                                             message.maintenanceWindows = [];
                                         message.maintenanceWindows.push($root.google.cloud.alloydb.v1.MaintenanceUpdatePolicy.MaintenanceWindow.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.denyMaintenancePeriods && message.denyMaintenancePeriods.length))
+                                            message.denyMaintenancePeriods = [];
+                                        message.denyMaintenancePeriods.push($root.google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -4563,6 +4582,15 @@
                                         return "maintenanceWindows." + error;
                                 }
                             }
+                            if (message.denyMaintenancePeriods != null && message.hasOwnProperty("denyMaintenancePeriods")) {
+                                if (!Array.isArray(message.denyMaintenancePeriods))
+                                    return "denyMaintenancePeriods: array expected";
+                                for (var i = 0; i < message.denyMaintenancePeriods.length; ++i) {
+                                    var error = $root.google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod.verify(message.denyMaintenancePeriods[i]);
+                                    if (error)
+                                        return "denyMaintenancePeriods." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -4588,6 +4616,16 @@
                                     message.maintenanceWindows[i] = $root.google.cloud.alloydb.v1.MaintenanceUpdatePolicy.MaintenanceWindow.fromObject(object.maintenanceWindows[i]);
                                 }
                             }
+                            if (object.denyMaintenancePeriods) {
+                                if (!Array.isArray(object.denyMaintenancePeriods))
+                                    throw TypeError(".google.cloud.alloydb.v1.MaintenanceUpdatePolicy.denyMaintenancePeriods: array expected");
+                                message.denyMaintenancePeriods = [];
+                                for (var i = 0; i < object.denyMaintenancePeriods.length; ++i) {
+                                    if (typeof object.denyMaintenancePeriods[i] !== "object")
+                                        throw TypeError(".google.cloud.alloydb.v1.MaintenanceUpdatePolicy.denyMaintenancePeriods: object expected");
+                                    message.denyMaintenancePeriods[i] = $root.google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod.fromObject(object.denyMaintenancePeriods[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -4604,12 +4642,19 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.maintenanceWindows = [];
+                                object.denyMaintenancePeriods = [];
+                            }
                             if (message.maintenanceWindows && message.maintenanceWindows.length) {
                                 object.maintenanceWindows = [];
                                 for (var j = 0; j < message.maintenanceWindows.length; ++j)
                                     object.maintenanceWindows[j] = $root.google.cloud.alloydb.v1.MaintenanceUpdatePolicy.MaintenanceWindow.toObject(message.maintenanceWindows[j], options);
+                            }
+                            if (message.denyMaintenancePeriods && message.denyMaintenancePeriods.length) {
+                                object.denyMaintenancePeriods = [];
+                                for (var j = 0; j < message.denyMaintenancePeriods.length; ++j)
+                                    object.denyMaintenancePeriods[j] = $root.google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod.toObject(message.denyMaintenancePeriods[j], options);
                             }
                             return object;
                         };
@@ -4921,6 +4966,273 @@
                             };
     
                             return MaintenanceWindow;
+                        })();
+    
+                        MaintenanceUpdatePolicy.DenyMaintenancePeriod = (function() {
+    
+                            /**
+                             * Properties of a DenyMaintenancePeriod.
+                             * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy
+                             * @interface IDenyMaintenancePeriod
+                             * @property {google.type.IDate|null} [startDate] DenyMaintenancePeriod startDate
+                             * @property {google.type.IDate|null} [endDate] DenyMaintenancePeriod endDate
+                             * @property {google.type.ITimeOfDay|null} [time] DenyMaintenancePeriod time
+                             */
+    
+                            /**
+                             * Constructs a new DenyMaintenancePeriod.
+                             * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy
+                             * @classdesc Represents a DenyMaintenancePeriod.
+                             * @implements IDenyMaintenancePeriod
+                             * @constructor
+                             * @param {google.cloud.alloydb.v1.MaintenanceUpdatePolicy.IDenyMaintenancePeriod=} [properties] Properties to set
+                             */
+                            function DenyMaintenancePeriod(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DenyMaintenancePeriod startDate.
+                             * @member {google.type.IDate|null|undefined} startDate
+                             * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @instance
+                             */
+                            DenyMaintenancePeriod.prototype.startDate = null;
+    
+                            /**
+                             * DenyMaintenancePeriod endDate.
+                             * @member {google.type.IDate|null|undefined} endDate
+                             * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @instance
+                             */
+                            DenyMaintenancePeriod.prototype.endDate = null;
+    
+                            /**
+                             * DenyMaintenancePeriod time.
+                             * @member {google.type.ITimeOfDay|null|undefined} time
+                             * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @instance
+                             */
+                            DenyMaintenancePeriod.prototype.time = null;
+    
+                            /**
+                             * Creates a new DenyMaintenancePeriod instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {google.cloud.alloydb.v1.MaintenanceUpdatePolicy.IDenyMaintenancePeriod=} [properties] Properties to set
+                             * @returns {google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod} DenyMaintenancePeriod instance
+                             */
+                            DenyMaintenancePeriod.create = function create(properties) {
+                                return new DenyMaintenancePeriod(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DenyMaintenancePeriod message. Does not implicitly {@link google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {google.cloud.alloydb.v1.MaintenanceUpdatePolicy.IDenyMaintenancePeriod} message DenyMaintenancePeriod message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DenyMaintenancePeriod.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.startDate != null && Object.hasOwnProperty.call(message, "startDate"))
+                                    $root.google.type.Date.encode(message.startDate, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.endDate != null && Object.hasOwnProperty.call(message, "endDate"))
+                                    $root.google.type.Date.encode(message.endDate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.time != null && Object.hasOwnProperty.call(message, "time"))
+                                    $root.google.type.TimeOfDay.encode(message.time, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DenyMaintenancePeriod message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {google.cloud.alloydb.v1.MaintenanceUpdatePolicy.IDenyMaintenancePeriod} message DenyMaintenancePeriod message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DenyMaintenancePeriod.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DenyMaintenancePeriod message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod} DenyMaintenancePeriod
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DenyMaintenancePeriod.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.startDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.endDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.time = $root.google.type.TimeOfDay.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DenyMaintenancePeriod message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod} DenyMaintenancePeriod
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DenyMaintenancePeriod.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DenyMaintenancePeriod message.
+                             * @function verify
+                             * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DenyMaintenancePeriod.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.startDate != null && message.hasOwnProperty("startDate")) {
+                                    var error = $root.google.type.Date.verify(message.startDate);
+                                    if (error)
+                                        return "startDate." + error;
+                                }
+                                if (message.endDate != null && message.hasOwnProperty("endDate")) {
+                                    var error = $root.google.type.Date.verify(message.endDate);
+                                    if (error)
+                                        return "endDate." + error;
+                                }
+                                if (message.time != null && message.hasOwnProperty("time")) {
+                                    var error = $root.google.type.TimeOfDay.verify(message.time);
+                                    if (error)
+                                        return "time." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DenyMaintenancePeriod message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod} DenyMaintenancePeriod
+                             */
+                            DenyMaintenancePeriod.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod)
+                                    return object;
+                                var message = new $root.google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod();
+                                if (object.startDate != null) {
+                                    if (typeof object.startDate !== "object")
+                                        throw TypeError(".google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod.startDate: object expected");
+                                    message.startDate = $root.google.type.Date.fromObject(object.startDate);
+                                }
+                                if (object.endDate != null) {
+                                    if (typeof object.endDate !== "object")
+                                        throw TypeError(".google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod.endDate: object expected");
+                                    message.endDate = $root.google.type.Date.fromObject(object.endDate);
+                                }
+                                if (object.time != null) {
+                                    if (typeof object.time !== "object")
+                                        throw TypeError(".google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod.time: object expected");
+                                    message.time = $root.google.type.TimeOfDay.fromObject(object.time);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DenyMaintenancePeriod message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod} message DenyMaintenancePeriod
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DenyMaintenancePeriod.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.startDate = null;
+                                    object.endDate = null;
+                                    object.time = null;
+                                }
+                                if (message.startDate != null && message.hasOwnProperty("startDate"))
+                                    object.startDate = $root.google.type.Date.toObject(message.startDate, options);
+                                if (message.endDate != null && message.hasOwnProperty("endDate"))
+                                    object.endDate = $root.google.type.Date.toObject(message.endDate, options);
+                                if (message.time != null && message.hasOwnProperty("time"))
+                                    object.time = $root.google.type.TimeOfDay.toObject(message.time, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DenyMaintenancePeriod to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DenyMaintenancePeriod.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DenyMaintenancePeriod
+                             * @function getTypeUrl
+                             * @memberof google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DenyMaintenancePeriod.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod";
+                            };
+    
+                            return DenyMaintenancePeriod;
                         })();
     
                         return MaintenanceUpdatePolicy;
@@ -7754,6 +8066,7 @@
                          * @property {google.cloud.alloydb.v1.Instance.IPscInstanceConfig|null} [pscInstanceConfig] Instance pscInstanceConfig
                          * @property {google.cloud.alloydb.v1.Instance.IInstanceNetworkConfig|null} [networkConfig] Instance networkConfig
                          * @property {Array.<string>|null} [outboundPublicIpAddresses] Instance outboundPublicIpAddresses
+                         * @property {google.cloud.alloydb.v1.Instance.ActivationPolicy|null} [activationPolicy] Instance activationPolicy
                          */
     
                         /**
@@ -8001,6 +8314,14 @@
                         Instance.prototype.outboundPublicIpAddresses = $util.emptyArray;
     
                         /**
+                         * Instance activationPolicy.
+                         * @member {google.cloud.alloydb.v1.Instance.ActivationPolicy} activationPolicy
+                         * @memberof google.cloud.alloydb.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.activationPolicy = 0;
+    
+                        /**
                          * Creates a new Instance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.alloydb.v1.Instance
@@ -8085,6 +8406,8 @@
                             if (message.outboundPublicIpAddresses != null && message.outboundPublicIpAddresses.length)
                                 for (var i = 0; i < message.outboundPublicIpAddresses.length; ++i)
                                     writer.uint32(/* id 34, wireType 2 =*/274).string(message.outboundPublicIpAddresses[i]);
+                            if (message.activationPolicy != null && Object.hasOwnProperty.call(message, "activationPolicy"))
+                                writer.uint32(/* id 35, wireType 0 =*/280).int32(message.activationPolicy);
                             return writer;
                         };
     
@@ -8294,6 +8617,10 @@
                                         message.outboundPublicIpAddresses.push(reader.string());
                                         break;
                                     }
+                                case 35: {
+                                        message.activationPolicy = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8485,6 +8812,15 @@
                                     if (!$util.isString(message.outboundPublicIpAddresses[i]))
                                         return "outboundPublicIpAddresses: string[] expected";
                             }
+                            if (message.activationPolicy != null && message.hasOwnProperty("activationPolicy"))
+                                switch (message.activationPolicy) {
+                                default:
+                                    return "activationPolicy: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -8699,6 +9035,26 @@
                                 for (var i = 0; i < object.outboundPublicIpAddresses.length; ++i)
                                     message.outboundPublicIpAddresses[i] = String(object.outboundPublicIpAddresses[i]);
                             }
+                            switch (object.activationPolicy) {
+                            default:
+                                if (typeof object.activationPolicy === "number") {
+                                    message.activationPolicy = object.activationPolicy;
+                                    break;
+                                }
+                                break;
+                            case "ACTIVATION_POLICY_UNSPECIFIED":
+                            case 0:
+                                message.activationPolicy = 0;
+                                break;
+                            case "ALWAYS":
+                            case 1:
+                                message.activationPolicy = 1;
+                                break;
+                            case "NEVER":
+                            case 2:
+                                message.activationPolicy = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -8748,6 +9104,7 @@
                                 object.publicIpAddress = "";
                                 object.pscInstanceConfig = null;
                                 object.networkConfig = null;
+                                object.activationPolicy = options.enums === String ? "ACTIVATION_POLICY_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -8821,6 +9178,8 @@
                                 for (var j = 0; j < message.outboundPublicIpAddresses.length; ++j)
                                     object.outboundPublicIpAddresses[j] = message.outboundPublicIpAddresses[j];
                             }
+                            if (message.activationPolicy != null && message.hasOwnProperty("activationPolicy"))
+                                object.activationPolicy = options.enums === String ? $root.google.cloud.alloydb.v1.Instance.ActivationPolicy[message.activationPolicy] === undefined ? message.activationPolicy : $root.google.cloud.alloydb.v1.Instance.ActivationPolicy[message.activationPolicy] : message.activationPolicy;
                             return object;
                         };
     
@@ -11420,6 +11779,8 @@
                              * @property {Array.<google.cloud.alloydb.v1.Instance.InstanceNetworkConfig.IAuthorizedNetwork>|null} [authorizedExternalNetworks] InstanceNetworkConfig authorizedExternalNetworks
                              * @property {boolean|null} [enablePublicIp] InstanceNetworkConfig enablePublicIp
                              * @property {boolean|null} [enableOutboundPublicIp] InstanceNetworkConfig enableOutboundPublicIp
+                             * @property {string|null} [network] InstanceNetworkConfig network
+                             * @property {string|null} [allocatedIpRangeOverride] InstanceNetworkConfig allocatedIpRangeOverride
                              */
     
                             /**
@@ -11463,6 +11824,22 @@
                             InstanceNetworkConfig.prototype.enableOutboundPublicIp = false;
     
                             /**
+                             * InstanceNetworkConfig network.
+                             * @member {string} network
+                             * @memberof google.cloud.alloydb.v1.Instance.InstanceNetworkConfig
+                             * @instance
+                             */
+                            InstanceNetworkConfig.prototype.network = "";
+    
+                            /**
+                             * InstanceNetworkConfig allocatedIpRangeOverride.
+                             * @member {string} allocatedIpRangeOverride
+                             * @memberof google.cloud.alloydb.v1.Instance.InstanceNetworkConfig
+                             * @instance
+                             */
+                            InstanceNetworkConfig.prototype.allocatedIpRangeOverride = "";
+    
+                            /**
                              * Creates a new InstanceNetworkConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.alloydb.v1.Instance.InstanceNetworkConfig
@@ -11493,6 +11870,10 @@
                                     writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enablePublicIp);
                                 if (message.enableOutboundPublicIp != null && Object.hasOwnProperty.call(message, "enableOutboundPublicIp"))
                                     writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enableOutboundPublicIp);
+                                if (message.network != null && Object.hasOwnProperty.call(message, "network"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.network);
+                                if (message.allocatedIpRangeOverride != null && Object.hasOwnProperty.call(message, "allocatedIpRangeOverride"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.allocatedIpRangeOverride);
                                 return writer;
                             };
     
@@ -11541,6 +11922,14 @@
                                         }
                                     case 3: {
                                             message.enableOutboundPublicIp = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.network = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.allocatedIpRangeOverride = reader.string();
                                             break;
                                         }
                                     default:
@@ -11593,6 +11982,12 @@
                                 if (message.enableOutboundPublicIp != null && message.hasOwnProperty("enableOutboundPublicIp"))
                                     if (typeof message.enableOutboundPublicIp !== "boolean")
                                         return "enableOutboundPublicIp: boolean expected";
+                                if (message.network != null && message.hasOwnProperty("network"))
+                                    if (!$util.isString(message.network))
+                                        return "network: string expected";
+                                if (message.allocatedIpRangeOverride != null && message.hasOwnProperty("allocatedIpRangeOverride"))
+                                    if (!$util.isString(message.allocatedIpRangeOverride))
+                                        return "allocatedIpRangeOverride: string expected";
                                 return null;
                             };
     
@@ -11622,6 +12017,10 @@
                                     message.enablePublicIp = Boolean(object.enablePublicIp);
                                 if (object.enableOutboundPublicIp != null)
                                     message.enableOutboundPublicIp = Boolean(object.enableOutboundPublicIp);
+                                if (object.network != null)
+                                    message.network = String(object.network);
+                                if (object.allocatedIpRangeOverride != null)
+                                    message.allocatedIpRangeOverride = String(object.allocatedIpRangeOverride);
                                 return message;
                             };
     
@@ -11643,6 +12042,8 @@
                                 if (options.defaults) {
                                     object.enablePublicIp = false;
                                     object.enableOutboundPublicIp = false;
+                                    object.network = "";
+                                    object.allocatedIpRangeOverride = "";
                                 }
                                 if (message.authorizedExternalNetworks && message.authorizedExternalNetworks.length) {
                                     object.authorizedExternalNetworks = [];
@@ -11653,6 +12054,10 @@
                                     object.enablePublicIp = message.enablePublicIp;
                                 if (message.enableOutboundPublicIp != null && message.hasOwnProperty("enableOutboundPublicIp"))
                                     object.enableOutboundPublicIp = message.enableOutboundPublicIp;
+                                if (message.network != null && message.hasOwnProperty("network"))
+                                    object.network = message.network;
+                                if (message.allocatedIpRangeOverride != null && message.hasOwnProperty("allocatedIpRangeOverride"))
+                                    object.allocatedIpRangeOverride = message.allocatedIpRangeOverride;
                                 return object;
                             };
     
@@ -11952,6 +12357,22 @@
                             return values;
                         })();
     
+                        /**
+                         * ActivationPolicy enum.
+                         * @name google.cloud.alloydb.v1.Instance.ActivationPolicy
+                         * @enum {number}
+                         * @property {number} ACTIVATION_POLICY_UNSPECIFIED=0 ACTIVATION_POLICY_UNSPECIFIED value
+                         * @property {number} ALWAYS=1 ALWAYS value
+                         * @property {number} NEVER=2 NEVER value
+                         */
+                        Instance.ActivationPolicy = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ACTIVATION_POLICY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ALWAYS"] = 1;
+                            values[valuesById[2] = "NEVER"] = 2;
+                            return values;
+                        })();
+    
                         return Instance;
                     })();
     
@@ -12242,6 +12663,7 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] Backup createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Backup updateTime
                          * @property {google.protobuf.ITimestamp|null} [deleteTime] Backup deleteTime
+                         * @property {google.protobuf.ITimestamp|null} [createCompletionTime] Backup createCompletionTime
                          * @property {Object.<string,string>|null} [labels] Backup labels
                          * @property {google.cloud.alloydb.v1.Backup.State|null} [state] Backup state
                          * @property {google.cloud.alloydb.v1.Backup.Type|null} [type] Backup type
@@ -12326,6 +12748,14 @@
                          * @instance
                          */
                         Backup.prototype.deleteTime = null;
+    
+                        /**
+                         * Backup createCompletionTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createCompletionTime
+                         * @memberof google.cloud.alloydb.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.createCompletionTime = null;
     
                         /**
                          * Backup labels.
@@ -12536,6 +12966,8 @@
                             if (message.tags != null && Object.hasOwnProperty.call(message, "tags"))
                                 for (var keys = Object.keys(message.tags), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 25, wireType 2 =*/202).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.tags[keys[i]]).ldelim();
+                            if (message.createCompletionTime != null && Object.hasOwnProperty.call(message, "createCompletionTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createCompletionTime, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             return writer;
                         };
     
@@ -12594,6 +13026,10 @@
                                     }
                                 case 15: {
                                         message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 26: {
+                                        message.createCompletionTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 6: {
@@ -12780,6 +13216,11 @@
                                 if (error)
                                     return "deleteTime." + error;
                             }
+                            if (message.createCompletionTime != null && message.hasOwnProperty("createCompletionTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createCompletionTime);
+                                if (error)
+                                    return "createCompletionTime." + error;
+                            }
                             if (message.labels != null && message.hasOwnProperty("labels")) {
                                 if (!$util.isObject(message.labels))
                                     return "labels: object expected";
@@ -12912,6 +13353,11 @@
                                 if (typeof object.deleteTime !== "object")
                                     throw TypeError(".google.cloud.alloydb.v1.Backup.deleteTime: object expected");
                                 message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime);
+                            }
+                            if (object.createCompletionTime != null) {
+                                if (typeof object.createCompletionTime !== "object")
+                                    throw TypeError(".google.cloud.alloydb.v1.Backup.createCompletionTime: object expected");
+                                message.createCompletionTime = $root.google.protobuf.Timestamp.fromObject(object.createCompletionTime);
                             }
                             if (object.labels) {
                                 if (typeof object.labels !== "object")
@@ -13101,6 +13547,7 @@
                                 object.expiryQuantity = null;
                                 object.satisfiesPzs = false;
                                 object.databaseVersion = options.enums === String ? "DATABASE_VERSION_UNSPECIFIED" : 0;
+                                object.createCompletionTime = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -13161,6 +13608,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.tags[keys2[j]] = message.tags[keys2[j]];
                             }
+                            if (message.createCompletionTime != null && message.hasOwnProperty("createCompletionTime"))
+                                object.createCompletionTime = $root.google.protobuf.Timestamp.toObject(message.createCompletionTime, options);
                             return object;
                         };
     
@@ -80114,6 +80563,7 @@
                          * @memberof google.cloud.alloydb.v1beta
                          * @interface IMaintenanceUpdatePolicy
                          * @property {Array.<google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IMaintenanceWindow>|null} [maintenanceWindows] MaintenanceUpdatePolicy maintenanceWindows
+                         * @property {Array.<google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IDenyMaintenancePeriod>|null} [denyMaintenancePeriods] MaintenanceUpdatePolicy denyMaintenancePeriods
                          */
     
                         /**
@@ -80126,6 +80576,7 @@
                          */
                         function MaintenanceUpdatePolicy(properties) {
                             this.maintenanceWindows = [];
+                            this.denyMaintenancePeriods = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -80139,6 +80590,14 @@
                          * @instance
                          */
                         MaintenanceUpdatePolicy.prototype.maintenanceWindows = $util.emptyArray;
+    
+                        /**
+                         * MaintenanceUpdatePolicy denyMaintenancePeriods.
+                         * @member {Array.<google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IDenyMaintenancePeriod>} denyMaintenancePeriods
+                         * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy
+                         * @instance
+                         */
+                        MaintenanceUpdatePolicy.prototype.denyMaintenancePeriods = $util.emptyArray;
     
                         /**
                          * Creates a new MaintenanceUpdatePolicy instance using the specified properties.
@@ -80167,6 +80626,9 @@
                             if (message.maintenanceWindows != null && message.maintenanceWindows.length)
                                 for (var i = 0; i < message.maintenanceWindows.length; ++i)
                                     $root.google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.MaintenanceWindow.encode(message.maintenanceWindows[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.denyMaintenancePeriods != null && message.denyMaintenancePeriods.length)
+                                for (var i = 0; i < message.denyMaintenancePeriods.length; ++i)
+                                    $root.google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod.encode(message.denyMaintenancePeriods[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -80207,6 +80669,12 @@
                                         if (!(message.maintenanceWindows && message.maintenanceWindows.length))
                                             message.maintenanceWindows = [];
                                         message.maintenanceWindows.push($root.google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.MaintenanceWindow.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.denyMaintenancePeriods && message.denyMaintenancePeriods.length))
+                                            message.denyMaintenancePeriods = [];
+                                        message.denyMaintenancePeriods.push($root.google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -80253,6 +80721,15 @@
                                         return "maintenanceWindows." + error;
                                 }
                             }
+                            if (message.denyMaintenancePeriods != null && message.hasOwnProperty("denyMaintenancePeriods")) {
+                                if (!Array.isArray(message.denyMaintenancePeriods))
+                                    return "denyMaintenancePeriods: array expected";
+                                for (var i = 0; i < message.denyMaintenancePeriods.length; ++i) {
+                                    var error = $root.google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod.verify(message.denyMaintenancePeriods[i]);
+                                    if (error)
+                                        return "denyMaintenancePeriods." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -80278,6 +80755,16 @@
                                     message.maintenanceWindows[i] = $root.google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.MaintenanceWindow.fromObject(object.maintenanceWindows[i]);
                                 }
                             }
+                            if (object.denyMaintenancePeriods) {
+                                if (!Array.isArray(object.denyMaintenancePeriods))
+                                    throw TypeError(".google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.denyMaintenancePeriods: array expected");
+                                message.denyMaintenancePeriods = [];
+                                for (var i = 0; i < object.denyMaintenancePeriods.length; ++i) {
+                                    if (typeof object.denyMaintenancePeriods[i] !== "object")
+                                        throw TypeError(".google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.denyMaintenancePeriods: object expected");
+                                    message.denyMaintenancePeriods[i] = $root.google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod.fromObject(object.denyMaintenancePeriods[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -80294,12 +80781,19 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.maintenanceWindows = [];
+                                object.denyMaintenancePeriods = [];
+                            }
                             if (message.maintenanceWindows && message.maintenanceWindows.length) {
                                 object.maintenanceWindows = [];
                                 for (var j = 0; j < message.maintenanceWindows.length; ++j)
                                     object.maintenanceWindows[j] = $root.google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.MaintenanceWindow.toObject(message.maintenanceWindows[j], options);
+                            }
+                            if (message.denyMaintenancePeriods && message.denyMaintenancePeriods.length) {
+                                object.denyMaintenancePeriods = [];
+                                for (var j = 0; j < message.denyMaintenancePeriods.length; ++j)
+                                    object.denyMaintenancePeriods[j] = $root.google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod.toObject(message.denyMaintenancePeriods[j], options);
                             }
                             return object;
                         };
@@ -80613,6 +81107,273 @@
                             return MaintenanceWindow;
                         })();
     
+                        MaintenanceUpdatePolicy.DenyMaintenancePeriod = (function() {
+    
+                            /**
+                             * Properties of a DenyMaintenancePeriod.
+                             * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy
+                             * @interface IDenyMaintenancePeriod
+                             * @property {google.type.IDate|null} [startDate] DenyMaintenancePeriod startDate
+                             * @property {google.type.IDate|null} [endDate] DenyMaintenancePeriod endDate
+                             * @property {google.type.ITimeOfDay|null} [time] DenyMaintenancePeriod time
+                             */
+    
+                            /**
+                             * Constructs a new DenyMaintenancePeriod.
+                             * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy
+                             * @classdesc Represents a DenyMaintenancePeriod.
+                             * @implements IDenyMaintenancePeriod
+                             * @constructor
+                             * @param {google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IDenyMaintenancePeriod=} [properties] Properties to set
+                             */
+                            function DenyMaintenancePeriod(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DenyMaintenancePeriod startDate.
+                             * @member {google.type.IDate|null|undefined} startDate
+                             * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @instance
+                             */
+                            DenyMaintenancePeriod.prototype.startDate = null;
+    
+                            /**
+                             * DenyMaintenancePeriod endDate.
+                             * @member {google.type.IDate|null|undefined} endDate
+                             * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @instance
+                             */
+                            DenyMaintenancePeriod.prototype.endDate = null;
+    
+                            /**
+                             * DenyMaintenancePeriod time.
+                             * @member {google.type.ITimeOfDay|null|undefined} time
+                             * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @instance
+                             */
+                            DenyMaintenancePeriod.prototype.time = null;
+    
+                            /**
+                             * Creates a new DenyMaintenancePeriod instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IDenyMaintenancePeriod=} [properties] Properties to set
+                             * @returns {google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod} DenyMaintenancePeriod instance
+                             */
+                            DenyMaintenancePeriod.create = function create(properties) {
+                                return new DenyMaintenancePeriod(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DenyMaintenancePeriod message. Does not implicitly {@link google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IDenyMaintenancePeriod} message DenyMaintenancePeriod message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DenyMaintenancePeriod.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.startDate != null && Object.hasOwnProperty.call(message, "startDate"))
+                                    $root.google.type.Date.encode(message.startDate, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.endDate != null && Object.hasOwnProperty.call(message, "endDate"))
+                                    $root.google.type.Date.encode(message.endDate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.time != null && Object.hasOwnProperty.call(message, "time"))
+                                    $root.google.type.TimeOfDay.encode(message.time, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DenyMaintenancePeriod message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IDenyMaintenancePeriod} message DenyMaintenancePeriod message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DenyMaintenancePeriod.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DenyMaintenancePeriod message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod} DenyMaintenancePeriod
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DenyMaintenancePeriod.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.startDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.endDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.time = $root.google.type.TimeOfDay.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DenyMaintenancePeriod message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod} DenyMaintenancePeriod
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DenyMaintenancePeriod.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DenyMaintenancePeriod message.
+                             * @function verify
+                             * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DenyMaintenancePeriod.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.startDate != null && message.hasOwnProperty("startDate")) {
+                                    var error = $root.google.type.Date.verify(message.startDate);
+                                    if (error)
+                                        return "startDate." + error;
+                                }
+                                if (message.endDate != null && message.hasOwnProperty("endDate")) {
+                                    var error = $root.google.type.Date.verify(message.endDate);
+                                    if (error)
+                                        return "endDate." + error;
+                                }
+                                if (message.time != null && message.hasOwnProperty("time")) {
+                                    var error = $root.google.type.TimeOfDay.verify(message.time);
+                                    if (error)
+                                        return "time." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DenyMaintenancePeriod message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod} DenyMaintenancePeriod
+                             */
+                            DenyMaintenancePeriod.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod)
+                                    return object;
+                                var message = new $root.google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod();
+                                if (object.startDate != null) {
+                                    if (typeof object.startDate !== "object")
+                                        throw TypeError(".google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod.startDate: object expected");
+                                    message.startDate = $root.google.type.Date.fromObject(object.startDate);
+                                }
+                                if (object.endDate != null) {
+                                    if (typeof object.endDate !== "object")
+                                        throw TypeError(".google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod.endDate: object expected");
+                                    message.endDate = $root.google.type.Date.fromObject(object.endDate);
+                                }
+                                if (object.time != null) {
+                                    if (typeof object.time !== "object")
+                                        throw TypeError(".google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod.time: object expected");
+                                    message.time = $root.google.type.TimeOfDay.fromObject(object.time);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DenyMaintenancePeriod message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod} message DenyMaintenancePeriod
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DenyMaintenancePeriod.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.startDate = null;
+                                    object.endDate = null;
+                                    object.time = null;
+                                }
+                                if (message.startDate != null && message.hasOwnProperty("startDate"))
+                                    object.startDate = $root.google.type.Date.toObject(message.startDate, options);
+                                if (message.endDate != null && message.hasOwnProperty("endDate"))
+                                    object.endDate = $root.google.type.Date.toObject(message.endDate, options);
+                                if (message.time != null && message.hasOwnProperty("time"))
+                                    object.time = $root.google.type.TimeOfDay.toObject(message.time, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DenyMaintenancePeriod to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DenyMaintenancePeriod.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DenyMaintenancePeriod
+                             * @function getTypeUrl
+                             * @memberof google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DenyMaintenancePeriod.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod";
+                            };
+    
+                            return DenyMaintenancePeriod;
+                        })();
+    
                         return MaintenanceUpdatePolicy;
                     })();
     
@@ -80867,6 +81628,7 @@
                          * @property {google.cloud.alloydb.v1beta.SubscriptionType|null} [subscriptionType] Cluster subscriptionType
                          * @property {google.cloud.alloydb.v1beta.Cluster.ITrialMetadata|null} [trialMetadata] Cluster trialMetadata
                          * @property {Object.<string,string>|null} [tags] Cluster tags
+                         * @property {string|null} [serviceAccountEmail] Cluster serviceAccountEmail
                          */
     
                         /**
@@ -81167,6 +81929,14 @@
                          */
                         Cluster.prototype.tags = $util.emptyObject;
     
+                        /**
+                         * Cluster serviceAccountEmail.
+                         * @member {string} serviceAccountEmail
+                         * @memberof google.cloud.alloydb.v1beta.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.serviceAccountEmail = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -81278,6 +82048,8 @@
                                     writer.uint32(/* id 41, wireType 2 =*/330).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.tags[keys[i]]).ldelim();
                             if (message.cloudsqlBackupRunSource != null && Object.hasOwnProperty.call(message, "cloudsqlBackupRunSource"))
                                 $root.google.cloud.alloydb.v1beta.CloudSQLBackupRunSource.encode(message.cloudsqlBackupRunSource, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
+                            if (message.serviceAccountEmail != null && Object.hasOwnProperty.call(message, "serviceAccountEmail"))
+                                writer.uint32(/* id 46, wireType 2 =*/370).string(message.serviceAccountEmail);
                             return writer;
                         };
     
@@ -81509,6 +82281,10 @@
                                             }
                                         }
                                         message.tags[key] = value;
+                                        break;
+                                    }
+                                case 46: {
+                                        message.serviceAccountEmail = reader.string();
                                         break;
                                     }
                                 default:
@@ -81755,6 +82531,9 @@
                                     if (!$util.isString(message.tags[key[i]]))
                                         return "tags: string{k:string} expected";
                             }
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                if (!$util.isString(message.serviceAccountEmail))
+                                    return "serviceAccountEmail: string expected";
                             return null;
                         };
     
@@ -82026,6 +82805,8 @@
                                 for (var keys = Object.keys(object.tags), i = 0; i < keys.length; ++i)
                                     message.tags[keys[i]] = String(object.tags[keys[i]]);
                             }
+                            if (object.serviceAccountEmail != null)
+                                message.serviceAccountEmail = String(object.serviceAccountEmail);
                             return message;
                         };
     
@@ -82077,6 +82858,7 @@
                                 object.maintenanceSchedule = null;
                                 object.subscriptionType = options.enums === String ? "SUBSCRIPTION_TYPE_UNSPECIFIED" : 0;
                                 object.trialMetadata = null;
+                                object.serviceAccountEmail = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -82167,6 +82949,8 @@
                                 if (options.oneofs)
                                     object.source = "cloudsqlBackupRunSource";
                             }
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                object.serviceAccountEmail = message.serviceAccountEmail;
                             return object;
                         };
     
@@ -83474,6 +84258,8 @@
                          * @property {google.cloud.alloydb.v1beta.Instance.IInstanceNetworkConfig|null} [networkConfig] Instance networkConfig
                          * @property {google.cloud.alloydb.v1beta.IGeminiInstanceConfig|null} [geminiConfig] Instance geminiConfig
                          * @property {Array.<string>|null} [outboundPublicIpAddresses] Instance outboundPublicIpAddresses
+                         * @property {google.cloud.alloydb.v1beta.Instance.ActivationPolicy|null} [activationPolicy] Instance activationPolicy
+                         * @property {google.cloud.alloydb.v1beta.Instance.IConnectionPoolConfig|null} [connectionPoolConfig] Instance connectionPoolConfig
                          * @property {google.cloud.alloydb.v1beta.IGCAInstanceConfig|null} [gcaConfig] Instance gcaConfig
                          */
     
@@ -83738,6 +84524,22 @@
                         Instance.prototype.outboundPublicIpAddresses = $util.emptyArray;
     
                         /**
+                         * Instance activationPolicy.
+                         * @member {google.cloud.alloydb.v1beta.Instance.ActivationPolicy} activationPolicy
+                         * @memberof google.cloud.alloydb.v1beta.Instance
+                         * @instance
+                         */
+                        Instance.prototype.activationPolicy = 0;
+    
+                        /**
+                         * Instance connectionPoolConfig.
+                         * @member {google.cloud.alloydb.v1beta.Instance.IConnectionPoolConfig|null|undefined} connectionPoolConfig
+                         * @memberof google.cloud.alloydb.v1beta.Instance
+                         * @instance
+                         */
+                        Instance.prototype.connectionPoolConfig = null;
+    
+                        /**
                          * Instance gcaConfig.
                          * @member {google.cloud.alloydb.v1beta.IGCAInstanceConfig|null|undefined} gcaConfig
                          * @memberof google.cloud.alloydb.v1beta.Instance
@@ -83834,6 +84636,10 @@
                             if (message.outboundPublicIpAddresses != null && message.outboundPublicIpAddresses.length)
                                 for (var i = 0; i < message.outboundPublicIpAddresses.length; ++i)
                                     writer.uint32(/* id 34, wireType 2 =*/274).string(message.outboundPublicIpAddresses[i]);
+                            if (message.activationPolicy != null && Object.hasOwnProperty.call(message, "activationPolicy"))
+                                writer.uint32(/* id 35, wireType 0 =*/280).int32(message.activationPolicy);
+                            if (message.connectionPoolConfig != null && Object.hasOwnProperty.call(message, "connectionPoolConfig"))
+                                $root.google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig.encode(message.connectionPoolConfig, writer.uint32(/* id 37, wireType 2 =*/298).fork()).ldelim();
                             if (message.gcaConfig != null && Object.hasOwnProperty.call(message, "gcaConfig"))
                                 $root.google.cloud.alloydb.v1beta.GCAInstanceConfig.encode(message.gcaConfig, writer.uint32(/* id 38, wireType 2 =*/306).fork()).ldelim();
                             return writer;
@@ -84053,6 +84859,14 @@
                                         message.outboundPublicIpAddresses.push(reader.string());
                                         break;
                                     }
+                                case 35: {
+                                        message.activationPolicy = reader.int32();
+                                        break;
+                                    }
+                                case 37: {
+                                        message.connectionPoolConfig = $root.google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 38: {
                                         message.gcaConfig = $root.google.cloud.alloydb.v1beta.GCAInstanceConfig.decode(reader, reader.uint32());
                                         break;
@@ -84257,6 +85071,20 @@
                                 for (var i = 0; i < message.outboundPublicIpAddresses.length; ++i)
                                     if (!$util.isString(message.outboundPublicIpAddresses[i]))
                                         return "outboundPublicIpAddresses: string[] expected";
+                            }
+                            if (message.activationPolicy != null && message.hasOwnProperty("activationPolicy"))
+                                switch (message.activationPolicy) {
+                                default:
+                                    return "activationPolicy: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.connectionPoolConfig != null && message.hasOwnProperty("connectionPoolConfig")) {
+                                var error = $root.google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig.verify(message.connectionPoolConfig);
+                                if (error)
+                                    return "connectionPoolConfig." + error;
                             }
                             if (message.gcaConfig != null && message.hasOwnProperty("gcaConfig")) {
                                 var error = $root.google.cloud.alloydb.v1beta.GCAInstanceConfig.verify(message.gcaConfig);
@@ -84487,6 +85315,31 @@
                                 for (var i = 0; i < object.outboundPublicIpAddresses.length; ++i)
                                     message.outboundPublicIpAddresses[i] = String(object.outboundPublicIpAddresses[i]);
                             }
+                            switch (object.activationPolicy) {
+                            default:
+                                if (typeof object.activationPolicy === "number") {
+                                    message.activationPolicy = object.activationPolicy;
+                                    break;
+                                }
+                                break;
+                            case "ACTIVATION_POLICY_UNSPECIFIED":
+                            case 0:
+                                message.activationPolicy = 0;
+                                break;
+                            case "ALWAYS":
+                            case 1:
+                                message.activationPolicy = 1;
+                                break;
+                            case "NEVER":
+                            case 2:
+                                message.activationPolicy = 2;
+                                break;
+                            }
+                            if (object.connectionPoolConfig != null) {
+                                if (typeof object.connectionPoolConfig !== "object")
+                                    throw TypeError(".google.cloud.alloydb.v1beta.Instance.connectionPoolConfig: object expected");
+                                message.connectionPoolConfig = $root.google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig.fromObject(object.connectionPoolConfig);
+                            }
                             if (object.gcaConfig != null) {
                                 if (typeof object.gcaConfig !== "object")
                                     throw TypeError(".google.cloud.alloydb.v1beta.Instance.gcaConfig: object expected");
@@ -84543,6 +85396,8 @@
                                 object.pscInstanceConfig = null;
                                 object.networkConfig = null;
                                 object.geminiConfig = null;
+                                object.activationPolicy = options.enums === String ? "ACTIVATION_POLICY_UNSPECIFIED" : 0;
+                                object.connectionPoolConfig = null;
                                 object.gcaConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -84621,6 +85476,10 @@
                                 for (var j = 0; j < message.outboundPublicIpAddresses.length; ++j)
                                     object.outboundPublicIpAddresses[j] = message.outboundPublicIpAddresses[j];
                             }
+                            if (message.activationPolicy != null && message.hasOwnProperty("activationPolicy"))
+                                object.activationPolicy = options.enums === String ? $root.google.cloud.alloydb.v1beta.Instance.ActivationPolicy[message.activationPolicy] === undefined ? message.activationPolicy : $root.google.cloud.alloydb.v1beta.Instance.ActivationPolicy[message.activationPolicy] : message.activationPolicy;
+                            if (message.connectionPoolConfig != null && message.hasOwnProperty("connectionPoolConfig"))
+                                object.connectionPoolConfig = $root.google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig.toObject(message.connectionPoolConfig, options);
                             if (message.gcaConfig != null && message.hasOwnProperty("gcaConfig"))
                                 object.gcaConfig = $root.google.cloud.alloydb.v1beta.GCAInstanceConfig.toObject(message.gcaConfig, options);
                             return object;
@@ -85479,6 +86338,7 @@
                              * @property {number|null} [queryPlansPerMinute] ObservabilityInstanceConfig queryPlansPerMinute
                              * @property {boolean|null} [trackActiveQueries] ObservabilityInstanceConfig trackActiveQueries
                              * @property {boolean|null} [trackClientAddress] ObservabilityInstanceConfig trackClientAddress
+                             * @property {boolean|null} [assistiveExperiencesEnabled] ObservabilityInstanceConfig assistiveExperiencesEnabled
                              */
     
                             /**
@@ -85568,6 +86428,14 @@
                              */
                             ObservabilityInstanceConfig.prototype.trackClientAddress = null;
     
+                            /**
+                             * ObservabilityInstanceConfig assistiveExperiencesEnabled.
+                             * @member {boolean|null|undefined} assistiveExperiencesEnabled
+                             * @memberof google.cloud.alloydb.v1beta.Instance.ObservabilityInstanceConfig
+                             * @instance
+                             */
+                            ObservabilityInstanceConfig.prototype.assistiveExperiencesEnabled = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -85625,6 +86493,12 @@
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ObservabilityInstanceConfig.prototype, "_assistiveExperiencesEnabled", {
+                                get: $util.oneOfGetter($oneOfFields = ["assistiveExperiencesEnabled"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
                             /**
                              * Creates a new ObservabilityInstanceConfig instance using the specified properties.
                              * @function create
@@ -85667,6 +86541,8 @@
                                     writer.uint32(/* id 8, wireType 0 =*/64).bool(message.trackActiveQueries);
                                 if (message.trackClientAddress != null && Object.hasOwnProperty.call(message, "trackClientAddress"))
                                     writer.uint32(/* id 9, wireType 0 =*/72).bool(message.trackClientAddress);
+                                if (message.assistiveExperiencesEnabled != null && Object.hasOwnProperty.call(message, "assistiveExperiencesEnabled"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).bool(message.assistiveExperiencesEnabled);
                                 return writer;
                             };
     
@@ -85737,6 +86613,10 @@
                                         }
                                     case 9: {
                                             message.trackClientAddress = reader.bool();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.assistiveExperiencesEnabled = reader.bool();
                                             break;
                                         }
                                     default:
@@ -85820,6 +86700,11 @@
                                     if (typeof message.trackClientAddress !== "boolean")
                                         return "trackClientAddress: boolean expected";
                                 }
+                                if (message.assistiveExperiencesEnabled != null && message.hasOwnProperty("assistiveExperiencesEnabled")) {
+                                    properties._assistiveExperiencesEnabled = 1;
+                                    if (typeof message.assistiveExperiencesEnabled !== "boolean")
+                                        return "assistiveExperiencesEnabled: boolean expected";
+                                }
                                 return null;
                             };
     
@@ -85853,6 +86738,8 @@
                                     message.trackActiveQueries = Boolean(object.trackActiveQueries);
                                 if (object.trackClientAddress != null)
                                     message.trackClientAddress = Boolean(object.trackClientAddress);
+                                if (object.assistiveExperiencesEnabled != null)
+                                    message.assistiveExperiencesEnabled = Boolean(object.assistiveExperiencesEnabled);
                                 return message;
                             };
     
@@ -85913,6 +86800,11 @@
                                     object.trackClientAddress = message.trackClientAddress;
                                     if (options.oneofs)
                                         object._trackClientAddress = "trackClientAddress";
+                                }
+                                if (message.assistiveExperiencesEnabled != null && message.hasOwnProperty("assistiveExperiencesEnabled")) {
+                                    object.assistiveExperiencesEnabled = message.assistiveExperiencesEnabled;
+                                    if (options.oneofs)
+                                        object._assistiveExperiencesEnabled = "assistiveExperiencesEnabled";
                                 }
                                 return object;
                             };
@@ -87500,6 +88392,8 @@
                              * @property {Array.<google.cloud.alloydb.v1beta.Instance.InstanceNetworkConfig.IAuthorizedNetwork>|null} [authorizedExternalNetworks] InstanceNetworkConfig authorizedExternalNetworks
                              * @property {boolean|null} [enablePublicIp] InstanceNetworkConfig enablePublicIp
                              * @property {boolean|null} [enableOutboundPublicIp] InstanceNetworkConfig enableOutboundPublicIp
+                             * @property {string|null} [network] InstanceNetworkConfig network
+                             * @property {string|null} [allocatedIpRangeOverride] InstanceNetworkConfig allocatedIpRangeOverride
                              */
     
                             /**
@@ -87543,6 +88437,22 @@
                             InstanceNetworkConfig.prototype.enableOutboundPublicIp = false;
     
                             /**
+                             * InstanceNetworkConfig network.
+                             * @member {string} network
+                             * @memberof google.cloud.alloydb.v1beta.Instance.InstanceNetworkConfig
+                             * @instance
+                             */
+                            InstanceNetworkConfig.prototype.network = "";
+    
+                            /**
+                             * InstanceNetworkConfig allocatedIpRangeOverride.
+                             * @member {string} allocatedIpRangeOverride
+                             * @memberof google.cloud.alloydb.v1beta.Instance.InstanceNetworkConfig
+                             * @instance
+                             */
+                            InstanceNetworkConfig.prototype.allocatedIpRangeOverride = "";
+    
+                            /**
                              * Creates a new InstanceNetworkConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.alloydb.v1beta.Instance.InstanceNetworkConfig
@@ -87573,6 +88483,10 @@
                                     writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enablePublicIp);
                                 if (message.enableOutboundPublicIp != null && Object.hasOwnProperty.call(message, "enableOutboundPublicIp"))
                                     writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enableOutboundPublicIp);
+                                if (message.network != null && Object.hasOwnProperty.call(message, "network"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.network);
+                                if (message.allocatedIpRangeOverride != null && Object.hasOwnProperty.call(message, "allocatedIpRangeOverride"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.allocatedIpRangeOverride);
                                 return writer;
                             };
     
@@ -87621,6 +88535,14 @@
                                         }
                                     case 3: {
                                             message.enableOutboundPublicIp = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.network = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.allocatedIpRangeOverride = reader.string();
                                             break;
                                         }
                                     default:
@@ -87673,6 +88595,12 @@
                                 if (message.enableOutboundPublicIp != null && message.hasOwnProperty("enableOutboundPublicIp"))
                                     if (typeof message.enableOutboundPublicIp !== "boolean")
                                         return "enableOutboundPublicIp: boolean expected";
+                                if (message.network != null && message.hasOwnProperty("network"))
+                                    if (!$util.isString(message.network))
+                                        return "network: string expected";
+                                if (message.allocatedIpRangeOverride != null && message.hasOwnProperty("allocatedIpRangeOverride"))
+                                    if (!$util.isString(message.allocatedIpRangeOverride))
+                                        return "allocatedIpRangeOverride: string expected";
                                 return null;
                             };
     
@@ -87702,6 +88630,10 @@
                                     message.enablePublicIp = Boolean(object.enablePublicIp);
                                 if (object.enableOutboundPublicIp != null)
                                     message.enableOutboundPublicIp = Boolean(object.enableOutboundPublicIp);
+                                if (object.network != null)
+                                    message.network = String(object.network);
+                                if (object.allocatedIpRangeOverride != null)
+                                    message.allocatedIpRangeOverride = String(object.allocatedIpRangeOverride);
                                 return message;
                             };
     
@@ -87723,6 +88655,8 @@
                                 if (options.defaults) {
                                     object.enablePublicIp = false;
                                     object.enableOutboundPublicIp = false;
+                                    object.network = "";
+                                    object.allocatedIpRangeOverride = "";
                                 }
                                 if (message.authorizedExternalNetworks && message.authorizedExternalNetworks.length) {
                                     object.authorizedExternalNetworks = [];
@@ -87733,6 +88667,10 @@
                                     object.enablePublicIp = message.enablePublicIp;
                                 if (message.enableOutboundPublicIp != null && message.hasOwnProperty("enableOutboundPublicIp"))
                                     object.enableOutboundPublicIp = message.enableOutboundPublicIp;
+                                if (message.network != null && message.hasOwnProperty("network"))
+                                    object.network = message.network;
+                                if (message.allocatedIpRangeOverride != null && message.hasOwnProperty("allocatedIpRangeOverride"))
+                                    object.allocatedIpRangeOverride = message.allocatedIpRangeOverride;
                                 return object;
                             };
     
@@ -87970,6 +88908,286 @@
                             return InstanceNetworkConfig;
                         })();
     
+                        Instance.ConnectionPoolConfig = (function() {
+    
+                            /**
+                             * Properties of a ConnectionPoolConfig.
+                             * @memberof google.cloud.alloydb.v1beta.Instance
+                             * @interface IConnectionPoolConfig
+                             * @property {boolean|null} [enabled] ConnectionPoolConfig enabled
+                             * @property {Object.<string,string>|null} [flags] ConnectionPoolConfig flags
+                             */
+    
+                            /**
+                             * Constructs a new ConnectionPoolConfig.
+                             * @memberof google.cloud.alloydb.v1beta.Instance
+                             * @classdesc Represents a ConnectionPoolConfig.
+                             * @implements IConnectionPoolConfig
+                             * @constructor
+                             * @param {google.cloud.alloydb.v1beta.Instance.IConnectionPoolConfig=} [properties] Properties to set
+                             */
+                            function ConnectionPoolConfig(properties) {
+                                this.flags = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ConnectionPoolConfig enabled.
+                             * @member {boolean} enabled
+                             * @memberof google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig
+                             * @instance
+                             */
+                            ConnectionPoolConfig.prototype.enabled = false;
+    
+                            /**
+                             * ConnectionPoolConfig flags.
+                             * @member {Object.<string,string>} flags
+                             * @memberof google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig
+                             * @instance
+                             */
+                            ConnectionPoolConfig.prototype.flags = $util.emptyObject;
+    
+                            /**
+                             * Creates a new ConnectionPoolConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1beta.Instance.IConnectionPoolConfig=} [properties] Properties to set
+                             * @returns {google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig} ConnectionPoolConfig instance
+                             */
+                            ConnectionPoolConfig.create = function create(properties) {
+                                return new ConnectionPoolConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ConnectionPoolConfig message. Does not implicitly {@link google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1beta.Instance.IConnectionPoolConfig} message ConnectionPoolConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConnectionPoolConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                    writer.uint32(/* id 12, wireType 0 =*/96).bool(message.enabled);
+                                if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
+                                    for (var keys = Object.keys(message.flags), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 13, wireType 2 =*/106).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.flags[keys[i]]).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ConnectionPoolConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1beta.Instance.IConnectionPoolConfig} message ConnectionPoolConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConnectionPoolConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ConnectionPoolConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig} ConnectionPoolConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConnectionPoolConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 12: {
+                                            message.enabled = reader.bool();
+                                            break;
+                                        }
+                                    case 13: {
+                                            if (message.flags === $util.emptyObject)
+                                                message.flags = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.flags[key] = value;
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ConnectionPoolConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig} ConnectionPoolConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConnectionPoolConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ConnectionPoolConfig message.
+                             * @function verify
+                             * @memberof google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ConnectionPoolConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    if (typeof message.enabled !== "boolean")
+                                        return "enabled: boolean expected";
+                                if (message.flags != null && message.hasOwnProperty("flags")) {
+                                    if (!$util.isObject(message.flags))
+                                        return "flags: object expected";
+                                    var key = Object.keys(message.flags);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.flags[key[i]]))
+                                            return "flags: string{k:string} expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ConnectionPoolConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig} ConnectionPoolConfig
+                             */
+                            ConnectionPoolConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig)
+                                    return object;
+                                var message = new $root.google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig();
+                                if (object.enabled != null)
+                                    message.enabled = Boolean(object.enabled);
+                                if (object.flags) {
+                                    if (typeof object.flags !== "object")
+                                        throw TypeError(".google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig.flags: object expected");
+                                    message.flags = {};
+                                    for (var keys = Object.keys(object.flags), i = 0; i < keys.length; ++i)
+                                        message.flags[keys[i]] = String(object.flags[keys[i]]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ConnectionPoolConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig} message ConnectionPoolConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ConnectionPoolConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.flags = {};
+                                if (options.defaults)
+                                    object.enabled = false;
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    object.enabled = message.enabled;
+                                var keys2;
+                                if (message.flags && (keys2 = Object.keys(message.flags)).length) {
+                                    object.flags = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.flags[keys2[j]] = message.flags[keys2[j]];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ConnectionPoolConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ConnectionPoolConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConnectionPoolConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConnectionPoolConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig";
+                            };
+    
+                            /**
+                             * PoolMode enum.
+                             * @name google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig.PoolMode
+                             * @enum {number}
+                             * @property {number} POOL_MODE_UNSPECIFIED=0 POOL_MODE_UNSPECIFIED value
+                             * @property {number} POOL_MODE_SESSION=1 POOL_MODE_SESSION value
+                             * @property {number} POOL_MODE_TRANSACTION=2 POOL_MODE_TRANSACTION value
+                             */
+                            ConnectionPoolConfig.PoolMode = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "POOL_MODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "POOL_MODE_SESSION"] = 1;
+                                values[valuesById[2] = "POOL_MODE_TRANSACTION"] = 2;
+                                return values;
+                            })();
+    
+                            return ConnectionPoolConfig;
+                        })();
+    
                         /**
                          * State enum.
                          * @name google.cloud.alloydb.v1beta.Instance.State
@@ -88029,6 +89247,22 @@
                             values[valuesById[0] = "AVAILABILITY_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "ZONAL"] = 1;
                             values[valuesById[2] = "REGIONAL"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ActivationPolicy enum.
+                         * @name google.cloud.alloydb.v1beta.Instance.ActivationPolicy
+                         * @enum {number}
+                         * @property {number} ACTIVATION_POLICY_UNSPECIFIED=0 ACTIVATION_POLICY_UNSPECIFIED value
+                         * @property {number} ALWAYS=1 ALWAYS value
+                         * @property {number} NEVER=2 NEVER value
+                         */
+                        Instance.ActivationPolicy = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ACTIVATION_POLICY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ALWAYS"] = 1;
+                            values[valuesById[2] = "NEVER"] = 2;
                             return values;
                         })();
     
@@ -88385,6 +89619,7 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] Backup createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Backup updateTime
                          * @property {google.protobuf.ITimestamp|null} [deleteTime] Backup deleteTime
+                         * @property {google.protobuf.ITimestamp|null} [createCompletionTime] Backup createCompletionTime
                          * @property {Object.<string,string>|null} [labels] Backup labels
                          * @property {google.cloud.alloydb.v1beta.Backup.State|null} [state] Backup state
                          * @property {google.cloud.alloydb.v1beta.Backup.Type|null} [type] Backup type
@@ -88469,6 +89704,14 @@
                          * @instance
                          */
                         Backup.prototype.deleteTime = null;
+    
+                        /**
+                         * Backup createCompletionTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createCompletionTime
+                         * @memberof google.cloud.alloydb.v1beta.Backup
+                         * @instance
+                         */
+                        Backup.prototype.createCompletionTime = null;
     
                         /**
                          * Backup labels.
@@ -88679,6 +89922,8 @@
                             if (message.tags != null && Object.hasOwnProperty.call(message, "tags"))
                                 for (var keys = Object.keys(message.tags), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 25, wireType 2 =*/202).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.tags[keys[i]]).ldelim();
+                            if (message.createCompletionTime != null && Object.hasOwnProperty.call(message, "createCompletionTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createCompletionTime, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             return writer;
                         };
     
@@ -88737,6 +89982,10 @@
                                     }
                                 case 15: {
                                         message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 26: {
+                                        message.createCompletionTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 6: {
@@ -88923,6 +90172,11 @@
                                 if (error)
                                     return "deleteTime." + error;
                             }
+                            if (message.createCompletionTime != null && message.hasOwnProperty("createCompletionTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createCompletionTime);
+                                if (error)
+                                    return "createCompletionTime." + error;
+                            }
                             if (message.labels != null && message.hasOwnProperty("labels")) {
                                 if (!$util.isObject(message.labels))
                                     return "labels: object expected";
@@ -89055,6 +90309,11 @@
                                 if (typeof object.deleteTime !== "object")
                                     throw TypeError(".google.cloud.alloydb.v1beta.Backup.deleteTime: object expected");
                                 message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime);
+                            }
+                            if (object.createCompletionTime != null) {
+                                if (typeof object.createCompletionTime !== "object")
+                                    throw TypeError(".google.cloud.alloydb.v1beta.Backup.createCompletionTime: object expected");
+                                message.createCompletionTime = $root.google.protobuf.Timestamp.fromObject(object.createCompletionTime);
                             }
                             if (object.labels) {
                                 if (typeof object.labels !== "object")
@@ -89244,6 +90503,7 @@
                                 object.expiryQuantity = null;
                                 object.satisfiesPzs = false;
                                 object.databaseVersion = options.enums === String ? "DATABASE_VERSION_UNSPECIFIED" : 0;
+                                object.createCompletionTime = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -89304,6 +90564,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.tags[keys2[j]] = message.tags[keys2[j]];
                             }
+                            if (message.createCompletionTime != null && message.hasOwnProperty("createCompletionTime"))
+                                object.createCompletionTime = $root.google.protobuf.Timestamp.toObject(message.createCompletionTime, options);
                             return object;
                         };
     
@@ -134991,6 +136253,258 @@
              */
             var type = {};
     
+            type.Date = (function() {
+    
+                /**
+                 * Properties of a Date.
+                 * @memberof google.type
+                 * @interface IDate
+                 * @property {number|null} [year] Date year
+                 * @property {number|null} [month] Date month
+                 * @property {number|null} [day] Date day
+                 */
+    
+                /**
+                 * Constructs a new Date.
+                 * @memberof google.type
+                 * @classdesc Represents a Date.
+                 * @implements IDate
+                 * @constructor
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 */
+                function Date(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Date year.
+                 * @member {number} year
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.year = 0;
+    
+                /**
+                 * Date month.
+                 * @member {number} month
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.month = 0;
+    
+                /**
+                 * Date day.
+                 * @member {number} day
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.day = 0;
+    
+                /**
+                 * Creates a new Date instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 * @returns {google.type.Date} Date instance
+                 */
+                Date.create = function create(properties) {
+                    return new Date(properties);
+                };
+    
+                /**
+                 * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.year);
+                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.month);
+                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.year = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.month = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.day = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Date message.
+                 * @function verify
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Date.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        if (!$util.isInteger(message.year))
+                            return "year: integer expected";
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        if (!$util.isInteger(message.month))
+                            return "month: integer expected";
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        if (!$util.isInteger(message.day))
+                            return "day: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Date message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Date} Date
+                 */
+                Date.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Date)
+                        return object;
+                    var message = new $root.google.type.Date();
+                    if (object.year != null)
+                        message.year = object.year | 0;
+                    if (object.month != null)
+                        message.month = object.month | 0;
+                    if (object.day != null)
+                        message.day = object.day | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Date message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.Date} message Date
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Date.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.year = 0;
+                        object.month = 0;
+                        object.day = 0;
+                    }
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        object.year = message.year;
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        object.month = message.month;
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        object.day = message.day;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Date to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Date
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Date.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Date
+                 * @function getTypeUrl
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Date.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.Date";
+                };
+    
+                return Date;
+            })();
+    
             /**
              * DayOfWeek enum.
              * @name google.type.DayOfWeek
@@ -135290,258 +136804,6 @@
                 };
     
                 return TimeOfDay;
-            })();
-    
-            type.Date = (function() {
-    
-                /**
-                 * Properties of a Date.
-                 * @memberof google.type
-                 * @interface IDate
-                 * @property {number|null} [year] Date year
-                 * @property {number|null} [month] Date month
-                 * @property {number|null} [day] Date day
-                 */
-    
-                /**
-                 * Constructs a new Date.
-                 * @memberof google.type
-                 * @classdesc Represents a Date.
-                 * @implements IDate
-                 * @constructor
-                 * @param {google.type.IDate=} [properties] Properties to set
-                 */
-                function Date(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Date year.
-                 * @member {number} year
-                 * @memberof google.type.Date
-                 * @instance
-                 */
-                Date.prototype.year = 0;
-    
-                /**
-                 * Date month.
-                 * @member {number} month
-                 * @memberof google.type.Date
-                 * @instance
-                 */
-                Date.prototype.month = 0;
-    
-                /**
-                 * Date day.
-                 * @member {number} day
-                 * @memberof google.type.Date
-                 * @instance
-                 */
-                Date.prototype.day = 0;
-    
-                /**
-                 * Creates a new Date instance using the specified properties.
-                 * @function create
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {google.type.IDate=} [properties] Properties to set
-                 * @returns {google.type.Date} Date instance
-                 */
-                Date.create = function create(properties) {
-                    return new Date(properties);
-                };
-    
-                /**
-                 * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {google.type.IDate} message Date message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Date.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.year);
-                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.month);
-                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
-                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {google.type.IDate} message Date message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Date.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Date message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.type.Date} Date
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Date.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.year = reader.int32();
-                                break;
-                            }
-                        case 2: {
-                                message.month = reader.int32();
-                                break;
-                            }
-                        case 3: {
-                                message.day = reader.int32();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Date message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.type.Date} Date
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Date.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Date message.
-                 * @function verify
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Date.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.year != null && message.hasOwnProperty("year"))
-                        if (!$util.isInteger(message.year))
-                            return "year: integer expected";
-                    if (message.month != null && message.hasOwnProperty("month"))
-                        if (!$util.isInteger(message.month))
-                            return "month: integer expected";
-                    if (message.day != null && message.hasOwnProperty("day"))
-                        if (!$util.isInteger(message.day))
-                            return "day: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Date message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.type.Date} Date
-                 */
-                Date.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.type.Date)
-                        return object;
-                    var message = new $root.google.type.Date();
-                    if (object.year != null)
-                        message.year = object.year | 0;
-                    if (object.month != null)
-                        message.month = object.month | 0;
-                    if (object.day != null)
-                        message.day = object.day | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Date message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {google.type.Date} message Date
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Date.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.year = 0;
-                        object.month = 0;
-                        object.day = 0;
-                    }
-                    if (message.year != null && message.hasOwnProperty("year"))
-                        object.year = message.year;
-                    if (message.month != null && message.hasOwnProperty("month"))
-                        object.month = message.month;
-                    if (message.day != null && message.hasOwnProperty("day"))
-                        object.day = message.day;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Date to JSON.
-                 * @function toJSON
-                 * @memberof google.type.Date
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Date.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Date
-                 * @function getTypeUrl
-                 * @memberof google.type.Date
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Date.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.type.Date";
-                };
-    
-                return Date;
             })();
     
             return type;
