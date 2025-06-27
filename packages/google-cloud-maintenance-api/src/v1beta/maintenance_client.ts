@@ -47,7 +47,7 @@ export class MaintenanceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('api');
+  private _log = logging.log('maintenance-api');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
