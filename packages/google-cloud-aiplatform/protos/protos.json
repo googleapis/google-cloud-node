@@ -41992,6 +41992,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "computerUse": {
+                          "type": "ComputerUse",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -42000,6 +42007,25 @@
                         },
                         "CodeExecution": {
                           "fields": {}
+                        },
+                        "ComputerUse": {
+                          "fields": {
+                            "environment": {
+                              "type": "Environment",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Environment": {
+                              "values": {
+                                "ENVIRONMENT_UNSPECIFIED": 0,
+                                "ENVIRONMENT_BROWSER": 1
+                              }
+                            }
+                          }
                         }
                       }
                     },
