@@ -27,6 +27,6 @@ option ruby_package = "Google::Cloud::SecurityCenter::V2";
 // Contains information about the disk associated with the finding.
 message Disk {
   // The name of the disk, for example,
-  // `https://www.googleapis.com/compute/v1/projects/{project-id}/zones/{zone-id}/disks/{disk-id}`.
+  // "https://www.googleapis.com/compute/v1/projects/{project-id}/zones/{zone-id}/disks/{disk-id}".
   string name = 1;
 }
