@@ -33,7 +33,6 @@
   * [Chat_service.get_space_notification_setting](#chat_service.get_space_notification_setting)
   * [Chat_service.get_space_read_state](#chat_service.get_space_read_state)
   * [Chat_service.get_thread_read_state](#chat_service.get_thread_read_state)
-  * [Chat_service.list_custom_emojis](#chat_service.list_custom_emojis)
   * [Chat_service.list_memberships](#chat_service.list_memberships)
   * [Chat_service.list_messages](#chat_service.list_messages)
   * [Chat_service.list_reactions](#chat_service.list_reactions)
@@ -414,23 +413,6 @@ __Usage:__
 
 
 `node packages/google-chat/samples/generated/v1/chat_service.get_thread_read_state.js`
-
-
------
-
-
-
-
-### Chat_service.list_custom_emojis
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.list_custom_emojis.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-chat/samples/generated/v1/chat_service.list_custom_emojis.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-chat/samples/generated/v1/chat_service.list_custom_emojis.js`
 
 
 -----
