@@ -45,6 +45,7 @@
   * [Data_chat_service.get_conversation](#data_chat_service.get_conversation)
   * [Data_chat_service.list_conversations](#data_chat_service.list_conversations)
   * [Data_chat_service.list_messages](#data_chat_service.list_messages)
+  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -615,6 +616,23 @@ __Usage:__
 
 
 `node packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.list_messages.js`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-geminidataanalytics/samples/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-geminidataanalytics/samples/quickstart.js`
 
 
 

@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,6 +53,70 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/geminidataanalytics
 ```
 
+
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. Parent value for ListDataAgentsRequest.
+ */
+// const parent = 'abc123'
+/**
+ *  Optional. Server may return fewer items than requested.
+ *  If unspecified, server will pick an appropriate default.
+ */
+// const pageSize = 1234
+/**
+ *  Optional. A page token, received from a previous `ListDataAgents` call.
+ *  Provide this to retrieve the subsequent page.
+ *  When paginating, all other parameters provided to `ListDataAgents` must
+ *  match the call that provided the page token. The service may return fewer
+ *  than this value.
+ */
+// const pageToken = 'abc123'
+/**
+ *  Optional. Filtering results. See AIP-160 (https://google.aip.dev/160) for
+ *  syntax.
+ */
+// const filter = 'abc123'
+/**
+ *  Optional. User specification for how to order the results.
+ */
+// const orderBy = 'abc123'
+/**
+ *  Optional. If true, the list results will include soft-deleted DataAgents.
+ *  Defaults to false.
+ */
+// const showDeleted = true
+
+// Imports the Geminidataanalytics library
+const {DataAgentServiceClient} = require('@google-cloud/geminidataanalytics').v1beta;
+
+// Instantiates a client
+const geminidataanalyticsClient = new DataAgentServiceClient();
+
+async function callListDataAgents() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = geminidataanalyticsClient.listDataAgentsAsync(request);
+  for await (const response of iterable) {
+      console.log(response);
+  }
+}
+
+callListDataAgents();
+
+```
 
 
 
@@ -95,6 +159,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Data_chat_service.get_conversation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.get_conversation.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.get_conversation.js,packages/google-cloud-geminidataanalytics/samples/README.md) |
 | Data_chat_service.list_conversations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.list_conversations.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.list_conversations.js,packages/google-cloud-geminidataanalytics/samples/README.md) |
 | Data_chat_service.list_messages | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.list_messages.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.list_messages.js,packages/google-cloud-geminidataanalytics/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-geminidataanalytics/samples/quickstart.js,packages/google-cloud-geminidataanalytics/samples/README.md) |
 
 
 
