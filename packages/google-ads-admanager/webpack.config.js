@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'AdUnitService',
-    filename: './ad-unit-service.js',
+    library: 'AdBreakService',
+    filename: './ad-break-service.js',
   },
   node: {
     child_process: 'empty',

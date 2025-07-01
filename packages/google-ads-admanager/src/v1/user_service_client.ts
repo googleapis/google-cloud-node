@@ -183,8 +183,14 @@ export class UserServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      adBreakPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/liveStreamEventsByAssetKey/{asset_key}/adBreaks/{ad_break}'
+      ),
       adUnitPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/adUnits/{ad_unit}'
+      ),
+      bandwidthGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/bandwidthGroups/{bandwidth_group}'
       ),
       companyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/companies/{company}'
@@ -199,22 +205,46 @@ export class UserServiceClient {
         'networks/{network_code}/customTargetingKeys/{custom_targeting_key}'
       ),
       customTargetingValuePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/customTargetingKeys/{custom_targeting_key}/customTargetingValues/{custom_targeting_value}'
+        'networks/{network_code}/customTargetingValues/{custom_targeting_value}'
+      ),
+      deviceCategoryPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/deviceCategories/{device_category}'
       ),
       entitySignalsMappingPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/entitySignalsMappings/{entity_signals_mapping}'
       ),
+      geoTargetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/geoTargets/{geo_target}'
+      ),
       labelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/labels/{label}'
       ),
+      liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/liveStreamEvents/{live_stream_event}'
+      ),
       networkPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}'
+      ),
+      operatingSystemPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/operatingSystems/{operating_system}'
+      ),
+      operatingSystemVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/operatingSystemVersions/{operating_system_version}'
       ),
       orderPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/orders/{order}'
       ),
       placementPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/placements/{placement}'
+      ),
+      privateAuctionPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/privateAuctions/{private_auction}'
+      ),
+      privateAuctionDealPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/privateAuctionDeals/{private_auction_deal}'
+      ),
+      programmaticBuyerPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/programmaticBuyers/{programmatic_buyer}'
       ),
       reportPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/reports/{report}'
@@ -355,7 +385,9 @@ export class UserServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [];
+    return [
+      'https://www.googleapis.com/auth/admanager'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -480,6 +512,55 @@ export class UserServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified adBreak resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} asset_key
+   * @param {string} ad_break
+   * @returns {string} Resource name string.
+   */
+  adBreakPath(networkCode:string,assetKey:string,adBreak:string) {
+    return this.pathTemplates.adBreakPathTemplate.render({
+      network_code: networkCode,
+      asset_key: assetKey,
+      ad_break: adBreak,
+    });
+  }
+
+  /**
+   * Parse the network_code from AdBreak resource.
+   *
+   * @param {string} adBreakName
+   *   A fully-qualified path representing AdBreak resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAdBreakName(adBreakName: string) {
+    return this.pathTemplates.adBreakPathTemplate.match(adBreakName).network_code;
+  }
+
+  /**
+   * Parse the asset_key from AdBreak resource.
+   *
+   * @param {string} adBreakName
+   *   A fully-qualified path representing AdBreak resource.
+   * @returns {string} A string representing the asset_key.
+   */
+  matchAssetKeyFromAdBreakName(adBreakName: string) {
+    return this.pathTemplates.adBreakPathTemplate.match(adBreakName).asset_key;
+  }
+
+  /**
+   * Parse the ad_break from AdBreak resource.
+   *
+   * @param {string} adBreakName
+   *   A fully-qualified path representing AdBreak resource.
+   * @returns {string} A string representing the ad_break.
+   */
+  matchAdBreakFromAdBreakName(adBreakName: string) {
+    return this.pathTemplates.adBreakPathTemplate.match(adBreakName).ad_break;
+  }
+
+  /**
    * Return a fully-qualified adUnit resource name string.
    *
    * @param {string} network_code
@@ -513,6 +594,42 @@ export class UserServiceClient {
    */
   matchAdUnitFromAdUnitName(adUnitName: string) {
     return this.pathTemplates.adUnitPathTemplate.match(adUnitName).ad_unit;
+  }
+
+  /**
+   * Return a fully-qualified bandwidthGroup resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} bandwidth_group
+   * @returns {string} Resource name string.
+   */
+  bandwidthGroupPath(networkCode:string,bandwidthGroup:string) {
+    return this.pathTemplates.bandwidthGroupPathTemplate.render({
+      network_code: networkCode,
+      bandwidth_group: bandwidthGroup,
+    });
+  }
+
+  /**
+   * Parse the network_code from BandwidthGroup resource.
+   *
+   * @param {string} bandwidthGroupName
+   *   A fully-qualified path representing BandwidthGroup resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromBandwidthGroupName(bandwidthGroupName: string) {
+    return this.pathTemplates.bandwidthGroupPathTemplate.match(bandwidthGroupName).network_code;
+  }
+
+  /**
+   * Parse the bandwidth_group from BandwidthGroup resource.
+   *
+   * @param {string} bandwidthGroupName
+   *   A fully-qualified path representing BandwidthGroup resource.
+   * @returns {string} A string representing the bandwidth_group.
+   */
+  matchBandwidthGroupFromBandwidthGroupName(bandwidthGroupName: string) {
+    return this.pathTemplates.bandwidthGroupPathTemplate.match(bandwidthGroupName).bandwidth_group;
   }
 
   /**
@@ -663,14 +780,12 @@ export class UserServiceClient {
    * Return a fully-qualified customTargetingValue resource name string.
    *
    * @param {string} network_code
-   * @param {string} custom_targeting_key
    * @param {string} custom_targeting_value
    * @returns {string} Resource name string.
    */
-  customTargetingValuePath(networkCode:string,customTargetingKey:string,customTargetingValue:string) {
+  customTargetingValuePath(networkCode:string,customTargetingValue:string) {
     return this.pathTemplates.customTargetingValuePathTemplate.render({
       network_code: networkCode,
-      custom_targeting_key: customTargetingKey,
       custom_targeting_value: customTargetingValue,
     });
   }
@@ -687,17 +802,6 @@ export class UserServiceClient {
   }
 
   /**
-   * Parse the custom_targeting_key from CustomTargetingValue resource.
-   *
-   * @param {string} customTargetingValueName
-   *   A fully-qualified path representing CustomTargetingValue resource.
-   * @returns {string} A string representing the custom_targeting_key.
-   */
-  matchCustomTargetingKeyFromCustomTargetingValueName(customTargetingValueName: string) {
-    return this.pathTemplates.customTargetingValuePathTemplate.match(customTargetingValueName).custom_targeting_key;
-  }
-
-  /**
    * Parse the custom_targeting_value from CustomTargetingValue resource.
    *
    * @param {string} customTargetingValueName
@@ -706,6 +810,42 @@ export class UserServiceClient {
    */
   matchCustomTargetingValueFromCustomTargetingValueName(customTargetingValueName: string) {
     return this.pathTemplates.customTargetingValuePathTemplate.match(customTargetingValueName).custom_targeting_value;
+  }
+
+  /**
+   * Return a fully-qualified deviceCategory resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} device_category
+   * @returns {string} Resource name string.
+   */
+  deviceCategoryPath(networkCode:string,deviceCategory:string) {
+    return this.pathTemplates.deviceCategoryPathTemplate.render({
+      network_code: networkCode,
+      device_category: deviceCategory,
+    });
+  }
+
+  /**
+   * Parse the network_code from DeviceCategory resource.
+   *
+   * @param {string} deviceCategoryName
+   *   A fully-qualified path representing DeviceCategory resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDeviceCategoryName(deviceCategoryName: string) {
+    return this.pathTemplates.deviceCategoryPathTemplate.match(deviceCategoryName).network_code;
+  }
+
+  /**
+   * Parse the device_category from DeviceCategory resource.
+   *
+   * @param {string} deviceCategoryName
+   *   A fully-qualified path representing DeviceCategory resource.
+   * @returns {string} A string representing the device_category.
+   */
+  matchDeviceCategoryFromDeviceCategoryName(deviceCategoryName: string) {
+    return this.pathTemplates.deviceCategoryPathTemplate.match(deviceCategoryName).device_category;
   }
 
   /**
@@ -745,6 +885,42 @@ export class UserServiceClient {
   }
 
   /**
+   * Return a fully-qualified geoTarget resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} geo_target
+   * @returns {string} Resource name string.
+   */
+  geoTargetPath(networkCode:string,geoTarget:string) {
+    return this.pathTemplates.geoTargetPathTemplate.render({
+      network_code: networkCode,
+      geo_target: geoTarget,
+    });
+  }
+
+  /**
+   * Parse the network_code from GeoTarget resource.
+   *
+   * @param {string} geoTargetName
+   *   A fully-qualified path representing GeoTarget resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromGeoTargetName(geoTargetName: string) {
+    return this.pathTemplates.geoTargetPathTemplate.match(geoTargetName).network_code;
+  }
+
+  /**
+   * Parse the geo_target from GeoTarget resource.
+   *
+   * @param {string} geoTargetName
+   *   A fully-qualified path representing GeoTarget resource.
+   * @returns {string} A string representing the geo_target.
+   */
+  matchGeoTargetFromGeoTargetName(geoTargetName: string) {
+    return this.pathTemplates.geoTargetPathTemplate.match(geoTargetName).geo_target;
+  }
+
+  /**
    * Return a fully-qualified label resource name string.
    *
    * @param {string} network_code
@@ -781,6 +957,42 @@ export class UserServiceClient {
   }
 
   /**
+   * Return a fully-qualified liveStreamEvent resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} live_stream_event
+   * @returns {string} Resource name string.
+   */
+  liveStreamEventPath(networkCode:string,liveStreamEvent:string) {
+    return this.pathTemplates.liveStreamEventPathTemplate.render({
+      network_code: networkCode,
+      live_stream_event: liveStreamEvent,
+    });
+  }
+
+  /**
+   * Parse the network_code from LiveStreamEvent resource.
+   *
+   * @param {string} liveStreamEventName
+   *   A fully-qualified path representing LiveStreamEvent resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLiveStreamEventName(liveStreamEventName: string) {
+    return this.pathTemplates.liveStreamEventPathTemplate.match(liveStreamEventName).network_code;
+  }
+
+  /**
+   * Parse the live_stream_event from LiveStreamEvent resource.
+   *
+   * @param {string} liveStreamEventName
+   *   A fully-qualified path representing LiveStreamEvent resource.
+   * @returns {string} A string representing the live_stream_event.
+   */
+  matchLiveStreamEventFromLiveStreamEventName(liveStreamEventName: string) {
+    return this.pathTemplates.liveStreamEventPathTemplate.match(liveStreamEventName).live_stream_event;
+  }
+
+  /**
    * Return a fully-qualified network resource name string.
    *
    * @param {string} network_code
@@ -801,6 +1013,78 @@ export class UserServiceClient {
    */
   matchNetworkCodeFromNetworkName(networkName: string) {
     return this.pathTemplates.networkPathTemplate.match(networkName).network_code;
+  }
+
+  /**
+   * Return a fully-qualified operatingSystem resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} operating_system
+   * @returns {string} Resource name string.
+   */
+  operatingSystemPath(networkCode:string,operatingSystem:string) {
+    return this.pathTemplates.operatingSystemPathTemplate.render({
+      network_code: networkCode,
+      operating_system: operatingSystem,
+    });
+  }
+
+  /**
+   * Parse the network_code from OperatingSystem resource.
+   *
+   * @param {string} operatingSystemName
+   *   A fully-qualified path representing OperatingSystem resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromOperatingSystemName(operatingSystemName: string) {
+    return this.pathTemplates.operatingSystemPathTemplate.match(operatingSystemName).network_code;
+  }
+
+  /**
+   * Parse the operating_system from OperatingSystem resource.
+   *
+   * @param {string} operatingSystemName
+   *   A fully-qualified path representing OperatingSystem resource.
+   * @returns {string} A string representing the operating_system.
+   */
+  matchOperatingSystemFromOperatingSystemName(operatingSystemName: string) {
+    return this.pathTemplates.operatingSystemPathTemplate.match(operatingSystemName).operating_system;
+  }
+
+  /**
+   * Return a fully-qualified operatingSystemVersion resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} operating_system_version
+   * @returns {string} Resource name string.
+   */
+  operatingSystemVersionPath(networkCode:string,operatingSystemVersion:string) {
+    return this.pathTemplates.operatingSystemVersionPathTemplate.render({
+      network_code: networkCode,
+      operating_system_version: operatingSystemVersion,
+    });
+  }
+
+  /**
+   * Parse the network_code from OperatingSystemVersion resource.
+   *
+   * @param {string} operatingSystemVersionName
+   *   A fully-qualified path representing OperatingSystemVersion resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromOperatingSystemVersionName(operatingSystemVersionName: string) {
+    return this.pathTemplates.operatingSystemVersionPathTemplate.match(operatingSystemVersionName).network_code;
+  }
+
+  /**
+   * Parse the operating_system_version from OperatingSystemVersion resource.
+   *
+   * @param {string} operatingSystemVersionName
+   *   A fully-qualified path representing OperatingSystemVersion resource.
+   * @returns {string} A string representing the operating_system_version.
+   */
+  matchOperatingSystemVersionFromOperatingSystemVersionName(operatingSystemVersionName: string) {
+    return this.pathTemplates.operatingSystemVersionPathTemplate.match(operatingSystemVersionName).operating_system_version;
   }
 
   /**
@@ -873,6 +1157,114 @@ export class UserServiceClient {
    */
   matchPlacementFromPlacementName(placementName: string) {
     return this.pathTemplates.placementPathTemplate.match(placementName).placement;
+  }
+
+  /**
+   * Return a fully-qualified privateAuction resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} private_auction
+   * @returns {string} Resource name string.
+   */
+  privateAuctionPath(networkCode:string,privateAuction:string) {
+    return this.pathTemplates.privateAuctionPathTemplate.render({
+      network_code: networkCode,
+      private_auction: privateAuction,
+    });
+  }
+
+  /**
+   * Parse the network_code from PrivateAuction resource.
+   *
+   * @param {string} privateAuctionName
+   *   A fully-qualified path representing PrivateAuction resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromPrivateAuctionName(privateAuctionName: string) {
+    return this.pathTemplates.privateAuctionPathTemplate.match(privateAuctionName).network_code;
+  }
+
+  /**
+   * Parse the private_auction from PrivateAuction resource.
+   *
+   * @param {string} privateAuctionName
+   *   A fully-qualified path representing PrivateAuction resource.
+   * @returns {string} A string representing the private_auction.
+   */
+  matchPrivateAuctionFromPrivateAuctionName(privateAuctionName: string) {
+    return this.pathTemplates.privateAuctionPathTemplate.match(privateAuctionName).private_auction;
+  }
+
+  /**
+   * Return a fully-qualified privateAuctionDeal resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} private_auction_deal
+   * @returns {string} Resource name string.
+   */
+  privateAuctionDealPath(networkCode:string,privateAuctionDeal:string) {
+    return this.pathTemplates.privateAuctionDealPathTemplate.render({
+      network_code: networkCode,
+      private_auction_deal: privateAuctionDeal,
+    });
+  }
+
+  /**
+   * Parse the network_code from PrivateAuctionDeal resource.
+   *
+   * @param {string} privateAuctionDealName
+   *   A fully-qualified path representing PrivateAuctionDeal resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromPrivateAuctionDealName(privateAuctionDealName: string) {
+    return this.pathTemplates.privateAuctionDealPathTemplate.match(privateAuctionDealName).network_code;
+  }
+
+  /**
+   * Parse the private_auction_deal from PrivateAuctionDeal resource.
+   *
+   * @param {string} privateAuctionDealName
+   *   A fully-qualified path representing PrivateAuctionDeal resource.
+   * @returns {string} A string representing the private_auction_deal.
+   */
+  matchPrivateAuctionDealFromPrivateAuctionDealName(privateAuctionDealName: string) {
+    return this.pathTemplates.privateAuctionDealPathTemplate.match(privateAuctionDealName).private_auction_deal;
+  }
+
+  /**
+   * Return a fully-qualified programmaticBuyer resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} programmatic_buyer
+   * @returns {string} Resource name string.
+   */
+  programmaticBuyerPath(networkCode:string,programmaticBuyer:string) {
+    return this.pathTemplates.programmaticBuyerPathTemplate.render({
+      network_code: networkCode,
+      programmatic_buyer: programmaticBuyer,
+    });
+  }
+
+  /**
+   * Parse the network_code from ProgrammaticBuyer resource.
+   *
+   * @param {string} programmaticBuyerName
+   *   A fully-qualified path representing ProgrammaticBuyer resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromProgrammaticBuyerName(programmaticBuyerName: string) {
+    return this.pathTemplates.programmaticBuyerPathTemplate.match(programmaticBuyerName).network_code;
+  }
+
+  /**
+   * Parse the programmatic_buyer from ProgrammaticBuyer resource.
+   *
+   * @param {string} programmaticBuyerName
+   *   A fully-qualified path representing ProgrammaticBuyer resource.
+   * @returns {string} A string representing the programmatic_buyer.
+   */
+  matchProgrammaticBuyerFromProgrammaticBuyerName(programmaticBuyerName: string) {
+    return this.pathTemplates.programmaticBuyerPathTemplate.match(programmaticBuyerName).programmatic_buyer;
   }
 
   /**

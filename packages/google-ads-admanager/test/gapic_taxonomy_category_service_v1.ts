@@ -625,6 +625,52 @@ describe('v1.TaxonomyCategoryServiceClient', () => {
 
     describe('Path templates', () => {
 
+        describe('adBreak', async () => {
+            const fakePath = "/rendered/path/adBreak";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                asset_key: "assetKeyValue",
+                ad_break: "adBreakValue",
+            };
+            const client = new taxonomycategoryserviceModule.v1.TaxonomyCategoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.adBreakPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.adBreakPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('adBreakPath', () => {
+                const result = client.adBreakPath("networkCodeValue", "assetKeyValue", "adBreakValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.adBreakPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromAdBreakName', () => {
+                const result = client.matchNetworkCodeFromAdBreakName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.adBreakPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAssetKeyFromAdBreakName', () => {
+                const result = client.matchAssetKeyFromAdBreakName(fakePath);
+                assert.strictEqual(result, "assetKeyValue");
+                assert((client.pathTemplates.adBreakPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAdBreakFromAdBreakName', () => {
+                const result = client.matchAdBreakFromAdBreakName(fakePath);
+                assert.strictEqual(result, "adBreakValue");
+                assert((client.pathTemplates.adBreakPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('adUnit', async () => {
             const fakePath = "/rendered/path/adUnit";
             const expectedParameters = {
@@ -659,6 +705,44 @@ describe('v1.TaxonomyCategoryServiceClient', () => {
                 const result = client.matchAdUnitFromAdUnitName(fakePath);
                 assert.strictEqual(result, "adUnitValue");
                 assert((client.pathTemplates.adUnitPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('bandwidthGroup', async () => {
+            const fakePath = "/rendered/path/bandwidthGroup";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                bandwidth_group: "bandwidthGroupValue",
+            };
+            const client = new taxonomycategoryserviceModule.v1.TaxonomyCategoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.bandwidthGroupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.bandwidthGroupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('bandwidthGroupPath', () => {
+                const result = client.bandwidthGroupPath("networkCodeValue", "bandwidthGroupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.bandwidthGroupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromBandwidthGroupName', () => {
+                const result = client.matchNetworkCodeFromBandwidthGroupName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.bandwidthGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBandwidthGroupFromBandwidthGroupName', () => {
+                const result = client.matchBandwidthGroupFromBandwidthGroupName(fakePath);
+                assert.strictEqual(result, "bandwidthGroupValue");
+                assert((client.pathTemplates.bandwidthGroupPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -819,7 +903,6 @@ describe('v1.TaxonomyCategoryServiceClient', () => {
             const fakePath = "/rendered/path/customTargetingValue";
             const expectedParameters = {
                 network_code: "networkCodeValue",
-                custom_targeting_key: "customTargetingKeyValue",
                 custom_targeting_value: "customTargetingValueValue",
             };
             const client = new taxonomycategoryserviceModule.v1.TaxonomyCategoryServiceClient({
@@ -833,7 +916,7 @@ describe('v1.TaxonomyCategoryServiceClient', () => {
                 sinon.stub().returns(expectedParameters);
 
             it('customTargetingValuePath', () => {
-                const result = client.customTargetingValuePath("networkCodeValue", "customTargetingKeyValue", "customTargetingValueValue");
+                const result = client.customTargetingValuePath("networkCodeValue", "customTargetingValueValue");
                 assert.strictEqual(result, fakePath);
                 assert((client.pathTemplates.customTargetingValuePathTemplate.render as SinonStub)
                     .getCall(-1).calledWith(expectedParameters));
@@ -846,17 +929,48 @@ describe('v1.TaxonomyCategoryServiceClient', () => {
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchCustomTargetingKeyFromCustomTargetingValueName', () => {
-                const result = client.matchCustomTargetingKeyFromCustomTargetingValueName(fakePath);
-                assert.strictEqual(result, "customTargetingKeyValue");
-                assert((client.pathTemplates.customTargetingValuePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
             it('matchCustomTargetingValueFromCustomTargetingValueName', () => {
                 const result = client.matchCustomTargetingValueFromCustomTargetingValueName(fakePath);
                 assert.strictEqual(result, "customTargetingValueValue");
                 assert((client.pathTemplates.customTargetingValuePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('deviceCategory', async () => {
+            const fakePath = "/rendered/path/deviceCategory";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                device_category: "deviceCategoryValue",
+            };
+            const client = new taxonomycategoryserviceModule.v1.TaxonomyCategoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.deviceCategoryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.deviceCategoryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('deviceCategoryPath', () => {
+                const result = client.deviceCategoryPath("networkCodeValue", "deviceCategoryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.deviceCategoryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromDeviceCategoryName', () => {
+                const result = client.matchNetworkCodeFromDeviceCategoryName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.deviceCategoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeviceCategoryFromDeviceCategoryName', () => {
+                const result = client.matchDeviceCategoryFromDeviceCategoryName(fakePath);
+                assert.strictEqual(result, "deviceCategoryValue");
+                assert((client.pathTemplates.deviceCategoryPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -899,6 +1013,44 @@ describe('v1.TaxonomyCategoryServiceClient', () => {
             });
         });
 
+        describe('geoTarget', async () => {
+            const fakePath = "/rendered/path/geoTarget";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                geo_target: "geoTargetValue",
+            };
+            const client = new taxonomycategoryserviceModule.v1.TaxonomyCategoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.geoTargetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.geoTargetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('geoTargetPath', () => {
+                const result = client.geoTargetPath("networkCodeValue", "geoTargetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.geoTargetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromGeoTargetName', () => {
+                const result = client.matchNetworkCodeFromGeoTargetName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.geoTargetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGeoTargetFromGeoTargetName', () => {
+                const result = client.matchGeoTargetFromGeoTargetName(fakePath);
+                assert.strictEqual(result, "geoTargetValue");
+                assert((client.pathTemplates.geoTargetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('label', async () => {
             const fakePath = "/rendered/path/label";
             const expectedParameters = {
@@ -937,6 +1089,44 @@ describe('v1.TaxonomyCategoryServiceClient', () => {
             });
         });
 
+        describe('liveStreamEvent', async () => {
+            const fakePath = "/rendered/path/liveStreamEvent";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                live_stream_event: "liveStreamEventValue",
+            };
+            const client = new taxonomycategoryserviceModule.v1.TaxonomyCategoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.liveStreamEventPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.liveStreamEventPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('liveStreamEventPath', () => {
+                const result = client.liveStreamEventPath("networkCodeValue", "liveStreamEventValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.liveStreamEventPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromLiveStreamEventName', () => {
+                const result = client.matchNetworkCodeFromLiveStreamEventName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.liveStreamEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLiveStreamEventFromLiveStreamEventName', () => {
+                const result = client.matchLiveStreamEventFromLiveStreamEventName(fakePath);
+                assert.strictEqual(result, "liveStreamEventValue");
+                assert((client.pathTemplates.liveStreamEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('network', async () => {
             const fakePath = "/rendered/path/network";
             const expectedParameters = {
@@ -963,6 +1153,82 @@ describe('v1.TaxonomyCategoryServiceClient', () => {
                 const result = client.matchNetworkCodeFromNetworkName(fakePath);
                 assert.strictEqual(result, "networkCodeValue");
                 assert((client.pathTemplates.networkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('operatingSystem', async () => {
+            const fakePath = "/rendered/path/operatingSystem";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                operating_system: "operatingSystemValue",
+            };
+            const client = new taxonomycategoryserviceModule.v1.TaxonomyCategoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.operatingSystemPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.operatingSystemPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('operatingSystemPath', () => {
+                const result = client.operatingSystemPath("networkCodeValue", "operatingSystemValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.operatingSystemPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromOperatingSystemName', () => {
+                const result = client.matchNetworkCodeFromOperatingSystemName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.operatingSystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOperatingSystemFromOperatingSystemName', () => {
+                const result = client.matchOperatingSystemFromOperatingSystemName(fakePath);
+                assert.strictEqual(result, "operatingSystemValue");
+                assert((client.pathTemplates.operatingSystemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('operatingSystemVersion', async () => {
+            const fakePath = "/rendered/path/operatingSystemVersion";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                operating_system_version: "operatingSystemVersionValue",
+            };
+            const client = new taxonomycategoryserviceModule.v1.TaxonomyCategoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.operatingSystemVersionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.operatingSystemVersionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('operatingSystemVersionPath', () => {
+                const result = client.operatingSystemVersionPath("networkCodeValue", "operatingSystemVersionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.operatingSystemVersionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromOperatingSystemVersionName', () => {
+                const result = client.matchNetworkCodeFromOperatingSystemVersionName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.operatingSystemVersionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOperatingSystemVersionFromOperatingSystemVersionName', () => {
+                const result = client.matchOperatingSystemVersionFromOperatingSystemVersionName(fakePath);
+                assert.strictEqual(result, "operatingSystemVersionValue");
+                assert((client.pathTemplates.operatingSystemVersionPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -1039,6 +1305,120 @@ describe('v1.TaxonomyCategoryServiceClient', () => {
                 const result = client.matchPlacementFromPlacementName(fakePath);
                 assert.strictEqual(result, "placementValue");
                 assert((client.pathTemplates.placementPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('privateAuction', async () => {
+            const fakePath = "/rendered/path/privateAuction";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                private_auction: "privateAuctionValue",
+            };
+            const client = new taxonomycategoryserviceModule.v1.TaxonomyCategoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.privateAuctionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.privateAuctionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('privateAuctionPath', () => {
+                const result = client.privateAuctionPath("networkCodeValue", "privateAuctionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.privateAuctionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromPrivateAuctionName', () => {
+                const result = client.matchNetworkCodeFromPrivateAuctionName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.privateAuctionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPrivateAuctionFromPrivateAuctionName', () => {
+                const result = client.matchPrivateAuctionFromPrivateAuctionName(fakePath);
+                assert.strictEqual(result, "privateAuctionValue");
+                assert((client.pathTemplates.privateAuctionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('privateAuctionDeal', async () => {
+            const fakePath = "/rendered/path/privateAuctionDeal";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                private_auction_deal: "privateAuctionDealValue",
+            };
+            const client = new taxonomycategoryserviceModule.v1.TaxonomyCategoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.privateAuctionDealPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.privateAuctionDealPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('privateAuctionDealPath', () => {
+                const result = client.privateAuctionDealPath("networkCodeValue", "privateAuctionDealValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.privateAuctionDealPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromPrivateAuctionDealName', () => {
+                const result = client.matchNetworkCodeFromPrivateAuctionDealName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.privateAuctionDealPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPrivateAuctionDealFromPrivateAuctionDealName', () => {
+                const result = client.matchPrivateAuctionDealFromPrivateAuctionDealName(fakePath);
+                assert.strictEqual(result, "privateAuctionDealValue");
+                assert((client.pathTemplates.privateAuctionDealPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('programmaticBuyer', async () => {
+            const fakePath = "/rendered/path/programmaticBuyer";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                programmatic_buyer: "programmaticBuyerValue",
+            };
+            const client = new taxonomycategoryserviceModule.v1.TaxonomyCategoryServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.programmaticBuyerPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.programmaticBuyerPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('programmaticBuyerPath', () => {
+                const result = client.programmaticBuyerPath("networkCodeValue", "programmaticBuyerValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.programmaticBuyerPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromProgrammaticBuyerName', () => {
+                const result = client.matchNetworkCodeFromProgrammaticBuyerName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.programmaticBuyerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchProgrammaticBuyerFromProgrammaticBuyerName', () => {
+                const result = client.matchProgrammaticBuyerFromProgrammaticBuyerName(fakePath);
+                assert.strictEqual(result, "programmaticBuyerValue");
+                assert((client.pathTemplates.programmaticBuyerPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
