@@ -13462,6 +13462,7 @@
                          * Properties of a ClusterConfig.
                          * @memberof google.cloud.dataproc.v1
                          * @interface IClusterConfig
+                         * @property {google.cloud.dataproc.v1.ClusterConfig.ClusterTier|null} [clusterTier] ClusterConfig clusterTier
                          * @property {string|null} [configBucket] ClusterConfig configBucket
                          * @property {string|null} [tempBucket] ClusterConfig tempBucket
                          * @property {google.cloud.dataproc.v1.IGceClusterConfig|null} [gceClusterConfig] ClusterConfig gceClusterConfig
@@ -13496,6 +13497,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * ClusterConfig clusterTier.
+                         * @member {google.cloud.dataproc.v1.ClusterConfig.ClusterTier} clusterTier
+                         * @memberof google.cloud.dataproc.v1.ClusterConfig
+                         * @instance
+                         */
+                        ClusterConfig.prototype.clusterTier = 0;
     
                         /**
                          * ClusterConfig configBucket.
@@ -13683,6 +13692,8 @@
                             if (message.auxiliaryNodeGroups != null && message.auxiliaryNodeGroups.length)
                                 for (var i = 0; i < message.auxiliaryNodeGroups.length; ++i)
                                     $root.google.cloud.dataproc.v1.AuxiliaryNodeGroup.encode(message.auxiliaryNodeGroups[i], writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                            if (message.clusterTier != null && Object.hasOwnProperty.call(message, "clusterTier"))
+                                writer.uint32(/* id 29, wireType 0 =*/232).int32(message.clusterTier);
                             return writer;
                         };
     
@@ -13719,6 +13730,10 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
+                                case 29: {
+                                        message.clusterTier = reader.int32();
+                                        break;
+                                    }
                                 case 1: {
                                         message.configBucket = reader.string();
                                         break;
@@ -13822,6 +13837,15 @@
                         ClusterConfig.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.clusterTier != null && message.hasOwnProperty("clusterTier"))
+                                switch (message.clusterTier) {
+                                default:
+                                    return "clusterTier: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             if (message.configBucket != null && message.hasOwnProperty("configBucket"))
                                 if (!$util.isString(message.configBucket))
                                     return "configBucket: string expected";
@@ -13921,6 +13945,26 @@
                             if (object instanceof $root.google.cloud.dataproc.v1.ClusterConfig)
                                 return object;
                             var message = new $root.google.cloud.dataproc.v1.ClusterConfig();
+                            switch (object.clusterTier) {
+                            default:
+                                if (typeof object.clusterTier === "number") {
+                                    message.clusterTier = object.clusterTier;
+                                    break;
+                                }
+                                break;
+                            case "CLUSTER_TIER_UNSPECIFIED":
+                            case 0:
+                                message.clusterTier = 0;
+                                break;
+                            case "CLUSTER_TIER_STANDARD":
+                            case 1:
+                                message.clusterTier = 1;
+                                break;
+                            case "CLUSTER_TIER_PREMIUM":
+                            case 2:
+                                message.clusterTier = 2;
+                                break;
+                            }
                             if (object.configBucket != null)
                                 message.configBucket = String(object.configBucket);
                             if (object.tempBucket != null)
@@ -14040,6 +14084,7 @@
                                 object.endpointConfig = null;
                                 object.metastoreConfig = null;
                                 object.dataprocMetricConfig = null;
+                                object.clusterTier = options.enums === String ? "CLUSTER_TIER_UNSPECIFIED" : 0;
                             }
                             if (message.configBucket != null && message.hasOwnProperty("configBucket"))
                                 object.configBucket = message.configBucket;
@@ -14079,6 +14124,8 @@
                                 for (var j = 0; j < message.auxiliaryNodeGroups.length; ++j)
                                     object.auxiliaryNodeGroups[j] = $root.google.cloud.dataproc.v1.AuxiliaryNodeGroup.toObject(message.auxiliaryNodeGroups[j], options);
                             }
+                            if (message.clusterTier != null && message.hasOwnProperty("clusterTier"))
+                                object.clusterTier = options.enums === String ? $root.google.cloud.dataproc.v1.ClusterConfig.ClusterTier[message.clusterTier] === undefined ? message.clusterTier : $root.google.cloud.dataproc.v1.ClusterConfig.ClusterTier[message.clusterTier] : message.clusterTier;
                             return object;
                         };
     
@@ -14107,6 +14154,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.dataproc.v1.ClusterConfig";
                         };
+    
+                        /**
+                         * ClusterTier enum.
+                         * @name google.cloud.dataproc.v1.ClusterConfig.ClusterTier
+                         * @enum {number}
+                         * @property {number} CLUSTER_TIER_UNSPECIFIED=0 CLUSTER_TIER_UNSPECIFIED value
+                         * @property {number} CLUSTER_TIER_STANDARD=1 CLUSTER_TIER_STANDARD value
+                         * @property {number} CLUSTER_TIER_PREMIUM=2 CLUSTER_TIER_PREMIUM value
+                         */
+                        ClusterConfig.ClusterTier = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CLUSTER_TIER_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CLUSTER_TIER_STANDARD"] = 1;
+                            values[valuesById[2] = "CLUSTER_TIER_PREMIUM"] = 2;
+                            return values;
+                        })();
     
                         return ClusterConfig;
                     })();

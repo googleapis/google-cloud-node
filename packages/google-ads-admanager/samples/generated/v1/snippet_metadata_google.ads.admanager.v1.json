@@ -12,8 +12,236 @@
     },
     "snippets": [
         {
+            "regionTag": "admanager_v1_generated_AdBreakService_GetAdBreak_async",
+            "title": "AdBreakService getAdBreak Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve an `AdBreak` object. Query an ad break by its resource name or custom asset key. Check the resource's `breakState` field to determine its state.",
+            "canonical": true,
+            "file": "ad_break_service.get_ad_break.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 57,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetAdBreak",
+                "fullName": "google.ads.admanager.v1.AdBreakService.GetAdBreak",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.AdBreak",
+                "client": {
+                    "shortName": "AdBreakServiceClient",
+                    "fullName": "google.ads.admanager.v1.AdBreakServiceClient"
+                },
+                "method": {
+                    "shortName": "GetAdBreak",
+                    "fullName": "google.ads.admanager.v1.AdBreakService.GetAdBreak",
+                    "service": {
+                        "shortName": "AdBreakService",
+                        "fullName": "google.ads.admanager.v1.AdBreakService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_AdBreakService_ListAdBreaks_async",
+            "title": "AdBreakService listAdBreaks Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a list of `AdBreak` objects. By default, when no `orderBy` query parameter is specified, ad breaks are ordered reverse chronologically. However, ad breaks with a 'breakState' of 'SCHEDULED' or 'DECISIONED' are prioritized and appear first.",
+            "canonical": true,
+            "file": "ad_break_service.list_ad_breaks.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 88,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListAdBreaks",
+                "fullName": "google.ads.admanager.v1.AdBreakService.ListAdBreaks",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "skip",
+                        "type": "TYPE_INT32"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.ListAdBreaksResponse",
+                "client": {
+                    "shortName": "AdBreakServiceClient",
+                    "fullName": "google.ads.admanager.v1.AdBreakServiceClient"
+                },
+                "method": {
+                    "shortName": "ListAdBreaks",
+                    "fullName": "google.ads.admanager.v1.AdBreakService.ListAdBreaks",
+                    "service": {
+                        "shortName": "AdBreakService",
+                        "fullName": "google.ads.admanager.v1.AdBreakService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_AdBreakService_CreateAdBreak_async",
+            "title": "AdBreakService createAdBreak Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to create an `AdBreak` object. Informs DAI of an upcoming ad break for a live stream event, with an optional expected start time. DAI will begin decisioning ads for the break shortly before the expected start time, if provided. Each live stream event can only have one incomplete ad break at any given time. The next ad break can be scheduled after the previous ad break has started serving, indicated by its state being [`COMPLETE`][google.ads.admanager.v1.AdBreakStateEnum.AdBreakState.COMPLETE], or it has been deleted. This method cannot be used if the `LiveStreamEvent` has [prefetching ad breaks enabled](https://developers.google.com/ad-manager/api/reference/latest/LiveStreamEventService.LiveStreamEvent#prefetchenabled) or the event is not active. If a `LiveStreamEvent` is deactivated after creating an ad break and before the ad break is complete, the ad break is discarded. An ad break's state is complete when the following occurs:  - Full service DAI: after a matching ad break shows in the  `LiveStreamEvent` manifest only when the ad break has started decisioning.  - Pod Serving: after the ad break is requested using the ad break ID or  break sequence.",
+            "canonical": true,
+            "file": "ad_break_service.create_ad_break.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateAdBreak",
+                "fullName": "google.ads.admanager.v1.AdBreakService.CreateAdBreak",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ad_break",
+                        "type": ".google.ads.admanager.v1.AdBreak"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.AdBreak",
+                "client": {
+                    "shortName": "AdBreakServiceClient",
+                    "fullName": "google.ads.admanager.v1.AdBreakServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateAdBreak",
+                    "fullName": "google.ads.admanager.v1.AdBreakService.CreateAdBreak",
+                    "service": {
+                        "shortName": "AdBreakService",
+                        "fullName": "google.ads.admanager.v1.AdBreakService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_AdBreakService_UpdateAdBreak_async",
+            "title": "AdBreakService updateAdBreak Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to update an `AdBreak` object. Modify an ad break when its state is [`SCHEDULED`][google.ads.admanager.v1.AdBreakStateEnum.AdBreakState.SCHEDULED].",
+            "canonical": true,
+            "file": "ad_break_service.update_ad_break.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateAdBreak",
+                "fullName": "google.ads.admanager.v1.AdBreakService.UpdateAdBreak",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "ad_break",
+                        "type": ".google.ads.admanager.v1.AdBreak"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.AdBreak",
+                "client": {
+                    "shortName": "AdBreakServiceClient",
+                    "fullName": "google.ads.admanager.v1.AdBreakServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateAdBreak",
+                    "fullName": "google.ads.admanager.v1.AdBreakService.UpdateAdBreak",
+                    "service": {
+                        "shortName": "AdBreakService",
+                        "fullName": "google.ads.admanager.v1.AdBreakService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_AdBreakService_DeleteAdBreak_async",
+            "title": "AdBreakService deleteAdBreak Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to delete an `AdBreak` object. Deletes and cancels an incomplete ad break, mitigating the need to wait for the current break to serve before recreating an ad break. You can delete an ad break that has not started serving or seen in manifests, indicated by its state being [`SCHEDULED`][google.ads.admanager.v1.AdBreakStateEnum.AdBreakState.SCHEDULED] or [`DECISIONED`][google.ads.admanager.v1.AdBreakStateEnum.AdBreakState.DECISIONED].",
+            "canonical": true,
+            "file": "ad_break_service.delete_ad_break.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteAdBreak",
+                "fullName": "google.ads.admanager.v1.AdBreakService.DeleteAdBreak",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "AdBreakServiceClient",
+                    "fullName": "google.ads.admanager.v1.AdBreakServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteAdBreak",
+                    "fullName": "google.ads.admanager.v1.AdBreakService.DeleteAdBreak",
+                    "service": {
+                        "shortName": "AdBreakService",
+                        "fullName": "google.ads.admanager.v1.AdBreakService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "admanager_v1_generated_AdUnitService_GetAdUnit_async",
-            "title": "AdUnitService getAdUnit Sample",
+            "title": "AdBreakService getAdUnit Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve an AdUnit object.",
             "canonical": true,
@@ -53,7 +281,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_AdUnitService_ListAdUnits_async",
-            "title": "AdUnitService listAdUnits Sample",
+            "title": "AdBreakService listAdUnits Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a list of AdUnit objects.",
             "canonical": true,
@@ -113,7 +341,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_AdUnitService_ListAdUnitSizes_async",
-            "title": "AdUnitService listAdUnitSizes Sample",
+            "title": "AdBreakService listAdUnitSizes Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a list of AdUnitSize objects.",
             "canonical": true,
@@ -172,8 +400,108 @@
             }
         },
         {
+            "regionTag": "admanager_v1_generated_BandwidthGroupService_GetBandwidthGroup_async",
+            "title": "AdBreakService getBandwidthGroup Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a `BandwidthGroup` object.",
+            "canonical": true,
+            "file": "bandwidth_group_service.get_bandwidth_group.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetBandwidthGroup",
+                "fullName": "google.ads.admanager.v1.BandwidthGroupService.GetBandwidthGroup",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.BandwidthGroup",
+                "client": {
+                    "shortName": "BandwidthGroupServiceClient",
+                    "fullName": "google.ads.admanager.v1.BandwidthGroupServiceClient"
+                },
+                "method": {
+                    "shortName": "GetBandwidthGroup",
+                    "fullName": "google.ads.admanager.v1.BandwidthGroupService.GetBandwidthGroup",
+                    "service": {
+                        "shortName": "BandwidthGroupService",
+                        "fullName": "google.ads.admanager.v1.BandwidthGroupService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_BandwidthGroupService_ListBandwidthGroups_async",
+            "title": "AdBreakService listBandwidthGroups Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a list of `BandwidthGroup` objects.",
+            "canonical": true,
+            "file": "bandwidth_group_service.list_bandwidth_groups.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 86,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListBandwidthGroups",
+                "fullName": "google.ads.admanager.v1.BandwidthGroupService.ListBandwidthGroups",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "skip",
+                        "type": "TYPE_INT32"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.ListBandwidthGroupsResponse",
+                "client": {
+                    "shortName": "BandwidthGroupServiceClient",
+                    "fullName": "google.ads.admanager.v1.BandwidthGroupServiceClient"
+                },
+                "method": {
+                    "shortName": "ListBandwidthGroups",
+                    "fullName": "google.ads.admanager.v1.BandwidthGroupService.ListBandwidthGroups",
+                    "service": {
+                        "shortName": "BandwidthGroupService",
+                        "fullName": "google.ads.admanager.v1.BandwidthGroupService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "admanager_v1_generated_CompanyService_GetCompany_async",
-            "title": "AdUnitService getCompany Sample",
+            "title": "AdBreakService getCompany Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a `Company` object.",
             "canonical": true,
@@ -213,7 +541,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_CompanyService_ListCompanies_async",
-            "title": "AdUnitService listCompanies Sample",
+            "title": "AdBreakService listCompanies Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a list of `Company` objects.",
             "canonical": true,
@@ -273,7 +601,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_CustomFieldService_GetCustomField_async",
-            "title": "AdUnitService getCustomField Sample",
+            "title": "AdBreakService getCustomField Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a `CustomField` object.",
             "canonical": true,
@@ -313,7 +641,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_CustomFieldService_ListCustomFields_async",
-            "title": "AdUnitService listCustomFields Sample",
+            "title": "AdBreakService listCustomFields Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a list of `CustomField` objects.",
             "canonical": true,
@@ -373,7 +701,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_CustomTargetingKeyService_GetCustomTargetingKey_async",
-            "title": "AdUnitService getCustomTargetingKey Sample",
+            "title": "AdBreakService getCustomTargetingKey Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a `CustomTargetingKey` object.",
             "canonical": true,
@@ -413,7 +741,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_CustomTargetingKeyService_ListCustomTargetingKeys_async",
-            "title": "AdUnitService listCustomTargetingKeys Sample",
+            "title": "AdBreakService listCustomTargetingKeys Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a list of `CustomTargetingKey` objects.",
             "canonical": true,
@@ -473,7 +801,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_CustomTargetingValueService_GetCustomTargetingValue_async",
-            "title": "AdUnitService getCustomTargetingValue Sample",
+            "title": "AdBreakService getCustomTargetingValue Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a `CustomTargetingValue` object.",
             "canonical": true,
@@ -513,7 +841,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_CustomTargetingValueService_ListCustomTargetingValues_async",
-            "title": "AdUnitService listCustomTargetingValues Sample",
+            "title": "AdBreakService listCustomTargetingValues Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a list of `CustomTargetingValue` objects.",
             "canonical": true,
@@ -572,8 +900,108 @@
             }
         },
         {
+            "regionTag": "admanager_v1_generated_DeviceCategoryService_GetDeviceCategory_async",
+            "title": "AdBreakService getDeviceCategory Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a `DeviceCategory` object.",
+            "canonical": true,
+            "file": "device_category_service.get_device_category.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetDeviceCategory",
+                "fullName": "google.ads.admanager.v1.DeviceCategoryService.GetDeviceCategory",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.DeviceCategory",
+                "client": {
+                    "shortName": "DeviceCategoryServiceClient",
+                    "fullName": "google.ads.admanager.v1.DeviceCategoryServiceClient"
+                },
+                "method": {
+                    "shortName": "GetDeviceCategory",
+                    "fullName": "google.ads.admanager.v1.DeviceCategoryService.GetDeviceCategory",
+                    "service": {
+                        "shortName": "DeviceCategoryService",
+                        "fullName": "google.ads.admanager.v1.DeviceCategoryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_DeviceCategoryService_ListDeviceCategories_async",
+            "title": "AdBreakService listDeviceCategories Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a list of `DeviceCategory` objects.",
+            "canonical": true,
+            "file": "device_category_service.list_device_categories.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 86,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListDeviceCategories",
+                "fullName": "google.ads.admanager.v1.DeviceCategoryService.ListDeviceCategories",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "skip",
+                        "type": "TYPE_INT32"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.ListDeviceCategoriesResponse",
+                "client": {
+                    "shortName": "DeviceCategoryServiceClient",
+                    "fullName": "google.ads.admanager.v1.DeviceCategoryServiceClient"
+                },
+                "method": {
+                    "shortName": "ListDeviceCategories",
+                    "fullName": "google.ads.admanager.v1.DeviceCategoryService.ListDeviceCategories",
+                    "service": {
+                        "shortName": "DeviceCategoryService",
+                        "fullName": "google.ads.admanager.v1.DeviceCategoryService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "admanager_v1_generated_EntitySignalsMappingService_GetEntitySignalsMapping_async",
-            "title": "AdUnitService getEntitySignalsMapping Sample",
+            "title": "AdBreakService getEntitySignalsMapping Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a `EntitySignalsMapping` object.",
             "canonical": true,
@@ -613,7 +1041,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_EntitySignalsMappingService_ListEntitySignalsMappings_async",
-            "title": "AdUnitService listEntitySignalsMappings Sample",
+            "title": "AdBreakService listEntitySignalsMappings Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a list of `EntitySignalsMapping` objects.",
             "canonical": true,
@@ -673,7 +1101,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_EntitySignalsMappingService_CreateEntitySignalsMapping_async",
-            "title": "AdUnitService createEntitySignalsMapping Sample",
+            "title": "AdBreakService createEntitySignalsMapping Sample",
             "origin": "API_DEFINITION",
             "description": " API to create an `EntitySignalsMapping` object.",
             "canonical": true,
@@ -717,7 +1145,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_EntitySignalsMappingService_UpdateEntitySignalsMapping_async",
-            "title": "AdUnitService updateEntitySignalsMapping Sample",
+            "title": "AdBreakService updateEntitySignalsMapping Sample",
             "origin": "API_DEFINITION",
             "description": " API to update an `EntitySignalsMapping` object.",
             "canonical": true,
@@ -761,7 +1189,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_EntitySignalsMappingService_BatchCreateEntitySignalsMappings_async",
-            "title": "AdUnitService batchCreateEntitySignalsMappings Sample",
+            "title": "AdBreakService batchCreateEntitySignalsMappings Sample",
             "origin": "API_DEFINITION",
             "description": " API to batch create `EntitySignalsMapping` objects.",
             "canonical": true,
@@ -805,7 +1233,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_EntitySignalsMappingService_BatchUpdateEntitySignalsMappings_async",
-            "title": "AdUnitService batchUpdateEntitySignalsMappings Sample",
+            "title": "AdBreakService batchUpdateEntitySignalsMappings Sample",
             "origin": "API_DEFINITION",
             "description": " API to batch update `EntitySignalsMapping` objects.",
             "canonical": true,
@@ -848,8 +1276,108 @@
             }
         },
         {
+            "regionTag": "admanager_v1_generated_GeoTargetService_GetGeoTarget_async",
+            "title": "AdBreakService getGeoTarget Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a `GeoTarget` object.",
+            "canonical": true,
+            "file": "geo_target_service.get_geo_target.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetGeoTarget",
+                "fullName": "google.ads.admanager.v1.GeoTargetService.GetGeoTarget",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.GeoTarget",
+                "client": {
+                    "shortName": "GeoTargetServiceClient",
+                    "fullName": "google.ads.admanager.v1.GeoTargetServiceClient"
+                },
+                "method": {
+                    "shortName": "GetGeoTarget",
+                    "fullName": "google.ads.admanager.v1.GeoTargetService.GetGeoTarget",
+                    "service": {
+                        "shortName": "GeoTargetService",
+                        "fullName": "google.ads.admanager.v1.GeoTargetService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_GeoTargetService_ListGeoTargets_async",
+            "title": "AdBreakService listGeoTargets Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a list of `GeoTarget` objects.",
+            "canonical": true,
+            "file": "geo_target_service.list_geo_targets.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 86,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListGeoTargets",
+                "fullName": "google.ads.admanager.v1.GeoTargetService.ListGeoTargets",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "skip",
+                        "type": "TYPE_INT32"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.ListGeoTargetsResponse",
+                "client": {
+                    "shortName": "GeoTargetServiceClient",
+                    "fullName": "google.ads.admanager.v1.GeoTargetServiceClient"
+                },
+                "method": {
+                    "shortName": "ListGeoTargets",
+                    "fullName": "google.ads.admanager.v1.GeoTargetService.ListGeoTargets",
+                    "service": {
+                        "shortName": "GeoTargetService",
+                        "fullName": "google.ads.admanager.v1.GeoTargetService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "admanager_v1_generated_NetworkService_GetNetwork_async",
-            "title": "AdUnitService getNetwork Sample",
+            "title": "AdBreakService getNetwork Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a Network object.",
             "canonical": true,
@@ -889,7 +1417,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_NetworkService_ListNetworks_async",
-            "title": "AdUnitService listNetworks Sample",
+            "title": "AdBreakService listNetworks Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve all the networks the current user has access to.",
             "canonical": true,
@@ -923,8 +1451,208 @@
             }
         },
         {
+            "regionTag": "admanager_v1_generated_OperatingSystemService_GetOperatingSystem_async",
+            "title": "AdBreakService getOperatingSystem Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a `OperatingSystem` object.",
+            "canonical": true,
+            "file": "operating_system_service.get_operating_system.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetOperatingSystem",
+                "fullName": "google.ads.admanager.v1.OperatingSystemService.GetOperatingSystem",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.OperatingSystem",
+                "client": {
+                    "shortName": "OperatingSystemServiceClient",
+                    "fullName": "google.ads.admanager.v1.OperatingSystemServiceClient"
+                },
+                "method": {
+                    "shortName": "GetOperatingSystem",
+                    "fullName": "google.ads.admanager.v1.OperatingSystemService.GetOperatingSystem",
+                    "service": {
+                        "shortName": "OperatingSystemService",
+                        "fullName": "google.ads.admanager.v1.OperatingSystemService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_OperatingSystemService_ListOperatingSystems_async",
+            "title": "AdBreakService listOperatingSystems Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a list of `OperatingSystem` objects.",
+            "canonical": true,
+            "file": "operating_system_service.list_operating_systems.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 86,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListOperatingSystems",
+                "fullName": "google.ads.admanager.v1.OperatingSystemService.ListOperatingSystems",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "skip",
+                        "type": "TYPE_INT32"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.ListOperatingSystemsResponse",
+                "client": {
+                    "shortName": "OperatingSystemServiceClient",
+                    "fullName": "google.ads.admanager.v1.OperatingSystemServiceClient"
+                },
+                "method": {
+                    "shortName": "ListOperatingSystems",
+                    "fullName": "google.ads.admanager.v1.OperatingSystemService.ListOperatingSystems",
+                    "service": {
+                        "shortName": "OperatingSystemService",
+                        "fullName": "google.ads.admanager.v1.OperatingSystemService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_OperatingSystemVersionService_GetOperatingSystemVersion_async",
+            "title": "AdBreakService getOperatingSystemVersion Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a `OperatingSystemVersion` object.",
+            "canonical": true,
+            "file": "operating_system_version_service.get_operating_system_version.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetOperatingSystemVersion",
+                "fullName": "google.ads.admanager.v1.OperatingSystemVersionService.GetOperatingSystemVersion",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.OperatingSystemVersion",
+                "client": {
+                    "shortName": "OperatingSystemVersionServiceClient",
+                    "fullName": "google.ads.admanager.v1.OperatingSystemVersionServiceClient"
+                },
+                "method": {
+                    "shortName": "GetOperatingSystemVersion",
+                    "fullName": "google.ads.admanager.v1.OperatingSystemVersionService.GetOperatingSystemVersion",
+                    "service": {
+                        "shortName": "OperatingSystemVersionService",
+                        "fullName": "google.ads.admanager.v1.OperatingSystemVersionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_OperatingSystemVersionService_ListOperatingSystemVersions_async",
+            "title": "AdBreakService listOperatingSystemVersions Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a list of `OperatingSystemVersion` objects.",
+            "canonical": true,
+            "file": "operating_system_version_service.list_operating_system_versions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 88,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListOperatingSystemVersions",
+                "fullName": "google.ads.admanager.v1.OperatingSystemVersionService.ListOperatingSystemVersions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "skip",
+                        "type": "TYPE_INT32"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.ListOperatingSystemVersionsResponse",
+                "client": {
+                    "shortName": "OperatingSystemVersionServiceClient",
+                    "fullName": "google.ads.admanager.v1.OperatingSystemVersionServiceClient"
+                },
+                "method": {
+                    "shortName": "ListOperatingSystemVersions",
+                    "fullName": "google.ads.admanager.v1.OperatingSystemVersionService.ListOperatingSystemVersions",
+                    "service": {
+                        "shortName": "OperatingSystemVersionService",
+                        "fullName": "google.ads.admanager.v1.OperatingSystemVersionService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "admanager_v1_generated_OrderService_GetOrder_async",
-            "title": "AdUnitService getOrder Sample",
+            "title": "AdBreakService getOrder Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve an Order object.",
             "canonical": true,
@@ -964,7 +1692,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_OrderService_ListOrders_async",
-            "title": "AdUnitService listOrders Sample",
+            "title": "AdBreakService listOrders Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a list of `Order` objects. Fields used for literal matching in filter string: * `order_id` * `display_name` * `external_order_id`",
             "canonical": true,
@@ -1024,7 +1752,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_PlacementService_GetPlacement_async",
-            "title": "AdUnitService getPlacement Sample",
+            "title": "AdBreakService getPlacement Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a `Placement` object.",
             "canonical": true,
@@ -1064,7 +1792,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_PlacementService_ListPlacements_async",
-            "title": "AdUnitService listPlacements Sample",
+            "title": "AdBreakService listPlacements Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a list of `Placement` objects.",
             "canonical": true,
@@ -1123,8 +1851,484 @@
             }
         },
         {
+            "regionTag": "admanager_v1_generated_PrivateAuctionDealService_GetPrivateAuctionDeal_async",
+            "title": "AdBreakService getPrivateAuctionDeal Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a `PrivateAuctionDeal` object.",
+            "canonical": true,
+            "file": "private_auction_deal_service.get_private_auction_deal.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetPrivateAuctionDeal",
+                "fullName": "google.ads.admanager.v1.PrivateAuctionDealService.GetPrivateAuctionDeal",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.PrivateAuctionDeal",
+                "client": {
+                    "shortName": "PrivateAuctionDealServiceClient",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionDealServiceClient"
+                },
+                "method": {
+                    "shortName": "GetPrivateAuctionDeal",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionDealService.GetPrivateAuctionDeal",
+                    "service": {
+                        "shortName": "PrivateAuctionDealService",
+                        "fullName": "google.ads.admanager.v1.PrivateAuctionDealService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_PrivateAuctionDealService_ListPrivateAuctionDeals_async",
+            "title": "AdBreakService listPrivateAuctionDeals Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a list of `PrivateAuctionDeal` objects.",
+            "canonical": true,
+            "file": "private_auction_deal_service.list_private_auction_deals.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 88,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListPrivateAuctionDeals",
+                "fullName": "google.ads.admanager.v1.PrivateAuctionDealService.ListPrivateAuctionDeals",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "skip",
+                        "type": "TYPE_INT32"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.ListPrivateAuctionDealsResponse",
+                "client": {
+                    "shortName": "PrivateAuctionDealServiceClient",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionDealServiceClient"
+                },
+                "method": {
+                    "shortName": "ListPrivateAuctionDeals",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionDealService.ListPrivateAuctionDeals",
+                    "service": {
+                        "shortName": "PrivateAuctionDealService",
+                        "fullName": "google.ads.admanager.v1.PrivateAuctionDealService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_PrivateAuctionDealService_CreatePrivateAuctionDeal_async",
+            "title": "AdBreakService createPrivateAuctionDeal Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to create a `PrivateAuctionDeal` object.",
+            "canonical": true,
+            "file": "private_auction_deal_service.create_private_auction_deal.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreatePrivateAuctionDeal",
+                "fullName": "google.ads.admanager.v1.PrivateAuctionDealService.CreatePrivateAuctionDeal",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "private_auction_deal",
+                        "type": ".google.ads.admanager.v1.PrivateAuctionDeal"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.PrivateAuctionDeal",
+                "client": {
+                    "shortName": "PrivateAuctionDealServiceClient",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionDealServiceClient"
+                },
+                "method": {
+                    "shortName": "CreatePrivateAuctionDeal",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionDealService.CreatePrivateAuctionDeal",
+                    "service": {
+                        "shortName": "PrivateAuctionDealService",
+                        "fullName": "google.ads.admanager.v1.PrivateAuctionDealService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_PrivateAuctionDealService_UpdatePrivateAuctionDeal_async",
+            "title": "AdBreakService updatePrivateAuctionDeal Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to update a `PrivateAuctionDeal` object.",
+            "canonical": true,
+            "file": "private_auction_deal_service.update_private_auction_deal.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdatePrivateAuctionDeal",
+                "fullName": "google.ads.admanager.v1.PrivateAuctionDealService.UpdatePrivateAuctionDeal",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "private_auction_deal",
+                        "type": ".google.ads.admanager.v1.PrivateAuctionDeal"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.PrivateAuctionDeal",
+                "client": {
+                    "shortName": "PrivateAuctionDealServiceClient",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionDealServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdatePrivateAuctionDeal",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionDealService.UpdatePrivateAuctionDeal",
+                    "service": {
+                        "shortName": "PrivateAuctionDealService",
+                        "fullName": "google.ads.admanager.v1.PrivateAuctionDealService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_PrivateAuctionService_GetPrivateAuction_async",
+            "title": "AdBreakService getPrivateAuction Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a `PrivateAuction` object.",
+            "canonical": true,
+            "file": "private_auction_service.get_private_auction.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetPrivateAuction",
+                "fullName": "google.ads.admanager.v1.PrivateAuctionService.GetPrivateAuction",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.PrivateAuction",
+                "client": {
+                    "shortName": "PrivateAuctionServiceClient",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionServiceClient"
+                },
+                "method": {
+                    "shortName": "GetPrivateAuction",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionService.GetPrivateAuction",
+                    "service": {
+                        "shortName": "PrivateAuctionService",
+                        "fullName": "google.ads.admanager.v1.PrivateAuctionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_PrivateAuctionService_ListPrivateAuctions_async",
+            "title": "AdBreakService listPrivateAuctions Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a list of `PrivateAuction` objects.",
+            "canonical": true,
+            "file": "private_auction_service.list_private_auctions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 87,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListPrivateAuctions",
+                "fullName": "google.ads.admanager.v1.PrivateAuctionService.ListPrivateAuctions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "skip",
+                        "type": "TYPE_INT32"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.ListPrivateAuctionsResponse",
+                "client": {
+                    "shortName": "PrivateAuctionServiceClient",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionServiceClient"
+                },
+                "method": {
+                    "shortName": "ListPrivateAuctions",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionService.ListPrivateAuctions",
+                    "service": {
+                        "shortName": "PrivateAuctionService",
+                        "fullName": "google.ads.admanager.v1.PrivateAuctionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_PrivateAuctionService_CreatePrivateAuction_async",
+            "title": "AdBreakService createPrivateAuction Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to create a `PrivateAuction` object.",
+            "canonical": true,
+            "file": "private_auction_service.create_private_auction.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreatePrivateAuction",
+                "fullName": "google.ads.admanager.v1.PrivateAuctionService.CreatePrivateAuction",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "private_auction",
+                        "type": ".google.ads.admanager.v1.PrivateAuction"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.PrivateAuction",
+                "client": {
+                    "shortName": "PrivateAuctionServiceClient",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionServiceClient"
+                },
+                "method": {
+                    "shortName": "CreatePrivateAuction",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionService.CreatePrivateAuction",
+                    "service": {
+                        "shortName": "PrivateAuctionService",
+                        "fullName": "google.ads.admanager.v1.PrivateAuctionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_PrivateAuctionService_UpdatePrivateAuction_async",
+            "title": "AdBreakService updatePrivateAuction Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to update a `PrivateAuction` object.",
+            "canonical": true,
+            "file": "private_auction_service.update_private_auction.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdatePrivateAuction",
+                "fullName": "google.ads.admanager.v1.PrivateAuctionService.UpdatePrivateAuction",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "private_auction",
+                        "type": ".google.ads.admanager.v1.PrivateAuction"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.PrivateAuction",
+                "client": {
+                    "shortName": "PrivateAuctionServiceClient",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdatePrivateAuction",
+                    "fullName": "google.ads.admanager.v1.PrivateAuctionService.UpdatePrivateAuction",
+                    "service": {
+                        "shortName": "PrivateAuctionService",
+                        "fullName": "google.ads.admanager.v1.PrivateAuctionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_ProgrammaticBuyerService_GetProgrammaticBuyer_async",
+            "title": "AdBreakService getProgrammaticBuyer Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a `ProgrammaticBuyer` object.",
+            "canonical": true,
+            "file": "programmatic_buyer_service.get_programmatic_buyer.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetProgrammaticBuyer",
+                "fullName": "google.ads.admanager.v1.ProgrammaticBuyerService.GetProgrammaticBuyer",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.ProgrammaticBuyer",
+                "client": {
+                    "shortName": "ProgrammaticBuyerServiceClient",
+                    "fullName": "google.ads.admanager.v1.ProgrammaticBuyerServiceClient"
+                },
+                "method": {
+                    "shortName": "GetProgrammaticBuyer",
+                    "fullName": "google.ads.admanager.v1.ProgrammaticBuyerService.GetProgrammaticBuyer",
+                    "service": {
+                        "shortName": "ProgrammaticBuyerService",
+                        "fullName": "google.ads.admanager.v1.ProgrammaticBuyerService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "admanager_v1_generated_ProgrammaticBuyerService_ListProgrammaticBuyers_async",
+            "title": "AdBreakService listProgrammaticBuyers Sample",
+            "origin": "API_DEFINITION",
+            "description": " API to retrieve a list of `ProgrammaticBuyer` objects.",
+            "canonical": true,
+            "file": "programmatic_buyer_service.list_programmatic_buyers.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 86,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListProgrammaticBuyers",
+                "fullName": "google.ads.admanager.v1.ProgrammaticBuyerService.ListProgrammaticBuyers",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "skip",
+                        "type": "TYPE_INT32"
+                    }
+                ],
+                "resultType": ".google.ads.admanager.v1.ListProgrammaticBuyersResponse",
+                "client": {
+                    "shortName": "ProgrammaticBuyerServiceClient",
+                    "fullName": "google.ads.admanager.v1.ProgrammaticBuyerServiceClient"
+                },
+                "method": {
+                    "shortName": "ListProgrammaticBuyers",
+                    "fullName": "google.ads.admanager.v1.ProgrammaticBuyerService.ListProgrammaticBuyers",
+                    "service": {
+                        "shortName": "ProgrammaticBuyerService",
+                        "fullName": "google.ads.admanager.v1.ProgrammaticBuyerService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "admanager_v1_generated_ReportService_GetReport_async",
-            "title": "AdUnitService getReport Sample",
+            "title": "AdBreakService getReport Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a `Report` object.",
             "canonical": true,
@@ -1164,7 +2368,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_ReportService_ListReports_async",
-            "title": "AdUnitService listReports Sample",
+            "title": "AdBreakService listReports Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a list of `Report` objects.",
             "canonical": true,
@@ -1224,7 +2428,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_ReportService_CreateReport_async",
-            "title": "AdUnitService createReport Sample",
+            "title": "AdBreakService createReport Sample",
             "origin": "API_DEFINITION",
             "description": " API to create a `Report` object.",
             "canonical": true,
@@ -1268,7 +2472,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_ReportService_UpdateReport_async",
-            "title": "AdUnitService updateReport Sample",
+            "title": "AdBreakService updateReport Sample",
             "origin": "API_DEFINITION",
             "description": " API to update a `Report` object.",
             "canonical": true,
@@ -1312,7 +2516,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_ReportService_RunReport_async",
-            "title": "AdUnitService runReport Sample",
+            "title": "AdBreakService runReport Sample",
             "origin": "API_DEFINITION",
             "description": " Initiates the execution of an existing report asynchronously. Users can get the report by polling this operation via `OperationsService.GetOperation`. Poll every 5 seconds initially, with an exponential backoff. Once a report is complete, the operation will contain a `RunReportResponse` in its response field containing a report_result that can be passed to the `FetchReportResultRows` method to retrieve the report data.",
             "canonical": true,
@@ -1352,7 +2556,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_ReportService_FetchReportResultRows_async",
-            "title": "AdUnitService fetchReportResultRows Sample",
+            "title": "AdBreakService fetchReportResultRows Sample",
             "origin": "API_DEFINITION",
             "description": " Returns the result rows from a completed report. The caller must have previously called `RunReport` and waited for that operation to complete. The rows will be returned according to the order specified by the `sorts` member of the report definition.",
             "canonical": true,
@@ -1400,7 +2604,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_RoleService_GetRole_async",
-            "title": "AdUnitService getRole Sample",
+            "title": "AdBreakService getRole Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a `Role` object.",
             "canonical": true,
@@ -1440,7 +2644,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_RoleService_ListRoles_async",
-            "title": "AdUnitService listRoles Sample",
+            "title": "AdBreakService listRoles Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a list of `Role` objects.",
             "canonical": true,
@@ -1500,7 +2704,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_TaxonomyCategoryService_GetTaxonomyCategory_async",
-            "title": "AdUnitService getTaxonomyCategory Sample",
+            "title": "AdBreakService getTaxonomyCategory Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a `TaxonomyCategory` object.",
             "canonical": true,
@@ -1540,7 +2744,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_TaxonomyCategoryService_ListTaxonomyCategories_async",
-            "title": "AdUnitService listTaxonomyCategories Sample",
+            "title": "AdBreakService listTaxonomyCategories Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a list of `TaxonomyCategory` objects.",
             "canonical": true,
@@ -1600,7 +2804,7 @@
         },
         {
             "regionTag": "admanager_v1_generated_UserService_GetUser_async",
-            "title": "AdUnitService getUser Sample",
+            "title": "AdBreakService getUser Sample",
             "origin": "API_DEFINITION",
             "description": " API to retrieve a User object. To get the current user, the resource name `networks/{networkCode}/users/me` can be used.",
             "canonical": true,

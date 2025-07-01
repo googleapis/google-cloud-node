@@ -12,9 +12,16 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Ad_break_service.create_ad_break](#ad_break_service.create_ad_break)
+  * [Ad_break_service.delete_ad_break](#ad_break_service.delete_ad_break)
+  * [Ad_break_service.get_ad_break](#ad_break_service.get_ad_break)
+  * [Ad_break_service.list_ad_breaks](#ad_break_service.list_ad_breaks)
+  * [Ad_break_service.update_ad_break](#ad_break_service.update_ad_break)
   * [Ad_unit_service.get_ad_unit](#ad_unit_service.get_ad_unit)
   * [Ad_unit_service.list_ad_unit_sizes](#ad_unit_service.list_ad_unit_sizes)
   * [Ad_unit_service.list_ad_units](#ad_unit_service.list_ad_units)
+  * [Bandwidth_group_service.get_bandwidth_group](#bandwidth_group_service.get_bandwidth_group)
+  * [Bandwidth_group_service.list_bandwidth_groups](#bandwidth_group_service.list_bandwidth_groups)
   * [Company_service.get_company](#company_service.get_company)
   * [Company_service.list_companies](#company_service.list_companies)
   * [Custom_field_service.get_custom_field](#custom_field_service.get_custom_field)
@@ -23,18 +30,36 @@
   * [Custom_targeting_key_service.list_custom_targeting_keys](#custom_targeting_key_service.list_custom_targeting_keys)
   * [Custom_targeting_value_service.get_custom_targeting_value](#custom_targeting_value_service.get_custom_targeting_value)
   * [Custom_targeting_value_service.list_custom_targeting_values](#custom_targeting_value_service.list_custom_targeting_values)
+  * [Device_category_service.get_device_category](#device_category_service.get_device_category)
+  * [Device_category_service.list_device_categories](#device_category_service.list_device_categories)
   * [Entity_signals_mapping_service.batch_create_entity_signals_mappings](#entity_signals_mapping_service.batch_create_entity_signals_mappings)
   * [Entity_signals_mapping_service.batch_update_entity_signals_mappings](#entity_signals_mapping_service.batch_update_entity_signals_mappings)
   * [Entity_signals_mapping_service.create_entity_signals_mapping](#entity_signals_mapping_service.create_entity_signals_mapping)
   * [Entity_signals_mapping_service.get_entity_signals_mapping](#entity_signals_mapping_service.get_entity_signals_mapping)
   * [Entity_signals_mapping_service.list_entity_signals_mappings](#entity_signals_mapping_service.list_entity_signals_mappings)
   * [Entity_signals_mapping_service.update_entity_signals_mapping](#entity_signals_mapping_service.update_entity_signals_mapping)
+  * [Geo_target_service.get_geo_target](#geo_target_service.get_geo_target)
+  * [Geo_target_service.list_geo_targets](#geo_target_service.list_geo_targets)
   * [Network_service.get_network](#network_service.get_network)
   * [Network_service.list_networks](#network_service.list_networks)
+  * [Operating_system_service.get_operating_system](#operating_system_service.get_operating_system)
+  * [Operating_system_service.list_operating_systems](#operating_system_service.list_operating_systems)
+  * [Operating_system_version_service.get_operating_system_version](#operating_system_version_service.get_operating_system_version)
+  * [Operating_system_version_service.list_operating_system_versions](#operating_system_version_service.list_operating_system_versions)
   * [Order_service.get_order](#order_service.get_order)
   * [Order_service.list_orders](#order_service.list_orders)
   * [Placement_service.get_placement](#placement_service.get_placement)
   * [Placement_service.list_placements](#placement_service.list_placements)
+  * [Private_auction_deal_service.create_private_auction_deal](#private_auction_deal_service.create_private_auction_deal)
+  * [Private_auction_deal_service.get_private_auction_deal](#private_auction_deal_service.get_private_auction_deal)
+  * [Private_auction_deal_service.list_private_auction_deals](#private_auction_deal_service.list_private_auction_deals)
+  * [Private_auction_deal_service.update_private_auction_deal](#private_auction_deal_service.update_private_auction_deal)
+  * [Private_auction_service.create_private_auction](#private_auction_service.create_private_auction)
+  * [Private_auction_service.get_private_auction](#private_auction_service.get_private_auction)
+  * [Private_auction_service.list_private_auctions](#private_auction_service.list_private_auctions)
+  * [Private_auction_service.update_private_auction](#private_auction_service.update_private_auction)
+  * [Programmatic_buyer_service.get_programmatic_buyer](#programmatic_buyer_service.get_programmatic_buyer)
+  * [Programmatic_buyer_service.list_programmatic_buyers](#programmatic_buyer_service.list_programmatic_buyers)
   * [Report_service.create_report](#report_service.create_report)
   * [Report_service.fetch_report_result_rows](#report_service.fetch_report_result_rows)
   * [Report_service.get_report](#report_service.get_report)
@@ -60,6 +85,91 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Ad_break_service.create_ad_break
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_break_service.create_ad_break.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/ad_break_service.create_ad_break.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/ad_break_service.create_ad_break.js`
+
+
+-----
+
+
+
+
+### Ad_break_service.delete_ad_break
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_break_service.delete_ad_break.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/ad_break_service.delete_ad_break.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/ad_break_service.delete_ad_break.js`
+
+
+-----
+
+
+
+
+### Ad_break_service.get_ad_break
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_break_service.get_ad_break.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/ad_break_service.get_ad_break.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/ad_break_service.get_ad_break.js`
+
+
+-----
+
+
+
+
+### Ad_break_service.list_ad_breaks
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_break_service.list_ad_breaks.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/ad_break_service.list_ad_breaks.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/ad_break_service.list_ad_breaks.js`
+
+
+-----
+
+
+
+
+### Ad_break_service.update_ad_break
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_break_service.update_ad_break.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/ad_break_service.update_ad_break.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/ad_break_service.update_ad_break.js`
+
+
+-----
+
 
 
 
@@ -107,6 +217,40 @@ __Usage:__
 
 
 `node packages/google-ads-admanager/samples/generated/v1/ad_unit_service.list_ad_units.js`
+
+
+-----
+
+
+
+
+### Bandwidth_group_service.get_bandwidth_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/bandwidth_group_service.get_bandwidth_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/bandwidth_group_service.get_bandwidth_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/bandwidth_group_service.get_bandwidth_group.js`
+
+
+-----
+
+
+
+
+### Bandwidth_group_service.list_bandwidth_groups
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/bandwidth_group_service.list_bandwidth_groups.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/bandwidth_group_service.list_bandwidth_groups.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/bandwidth_group_service.list_bandwidth_groups.js`
 
 
 -----
@@ -250,6 +394,40 @@ __Usage:__
 
 
 
+### Device_category_service.get_device_category
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/device_category_service.get_device_category.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/device_category_service.get_device_category.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/device_category_service.get_device_category.js`
+
+
+-----
+
+
+
+
+### Device_category_service.list_device_categories
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/device_category_service.list_device_categories.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/device_category_service.list_device_categories.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/device_category_service.list_device_categories.js`
+
+
+-----
+
+
+
+
 ### Entity_signals_mapping_service.batch_create_entity_signals_mappings
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.batch_create_entity_signals_mappings.js).
@@ -352,6 +530,40 @@ __Usage:__
 
 
 
+### Geo_target_service.get_geo_target
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/geo_target_service.get_geo_target.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/geo_target_service.get_geo_target.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/geo_target_service.get_geo_target.js`
+
+
+-----
+
+
+
+
+### Geo_target_service.list_geo_targets
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/geo_target_service.list_geo_targets.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/geo_target_service.list_geo_targets.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/geo_target_service.list_geo_targets.js`
+
+
+-----
+
+
+
+
 ### Network_service.get_network
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/network_service.get_network.js).
@@ -379,6 +591,74 @@ __Usage:__
 
 
 `node packages/google-ads-admanager/samples/generated/v1/network_service.list_networks.js`
+
+
+-----
+
+
+
+
+### Operating_system_service.get_operating_system
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/operating_system_service.get_operating_system.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/operating_system_service.get_operating_system.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/operating_system_service.get_operating_system.js`
+
+
+-----
+
+
+
+
+### Operating_system_service.list_operating_systems
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/operating_system_service.list_operating_systems.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/operating_system_service.list_operating_systems.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/operating_system_service.list_operating_systems.js`
+
+
+-----
+
+
+
+
+### Operating_system_version_service.get_operating_system_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/operating_system_version_service.get_operating_system_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/operating_system_version_service.get_operating_system_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/operating_system_version_service.get_operating_system_version.js`
+
+
+-----
+
+
+
+
+### Operating_system_version_service.list_operating_system_versions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/operating_system_version_service.list_operating_system_versions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/operating_system_version_service.list_operating_system_versions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/operating_system_version_service.list_operating_system_versions.js`
 
 
 -----
@@ -447,6 +727,176 @@ __Usage:__
 
 
 `node packages/google-ads-admanager/samples/generated/v1/placement_service.list_placements.js`
+
+
+-----
+
+
+
+
+### Private_auction_deal_service.create_private_auction_deal
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/private_auction_deal_service.create_private_auction_deal.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/private_auction_deal_service.create_private_auction_deal.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/private_auction_deal_service.create_private_auction_deal.js`
+
+
+-----
+
+
+
+
+### Private_auction_deal_service.get_private_auction_deal
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/private_auction_deal_service.get_private_auction_deal.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/private_auction_deal_service.get_private_auction_deal.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/private_auction_deal_service.get_private_auction_deal.js`
+
+
+-----
+
+
+
+
+### Private_auction_deal_service.list_private_auction_deals
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/private_auction_deal_service.list_private_auction_deals.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/private_auction_deal_service.list_private_auction_deals.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/private_auction_deal_service.list_private_auction_deals.js`
+
+
+-----
+
+
+
+
+### Private_auction_deal_service.update_private_auction_deal
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/private_auction_deal_service.update_private_auction_deal.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/private_auction_deal_service.update_private_auction_deal.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/private_auction_deal_service.update_private_auction_deal.js`
+
+
+-----
+
+
+
+
+### Private_auction_service.create_private_auction
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/private_auction_service.create_private_auction.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/private_auction_service.create_private_auction.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/private_auction_service.create_private_auction.js`
+
+
+-----
+
+
+
+
+### Private_auction_service.get_private_auction
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/private_auction_service.get_private_auction.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/private_auction_service.get_private_auction.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/private_auction_service.get_private_auction.js`
+
+
+-----
+
+
+
+
+### Private_auction_service.list_private_auctions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/private_auction_service.list_private_auctions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/private_auction_service.list_private_auctions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/private_auction_service.list_private_auctions.js`
+
+
+-----
+
+
+
+
+### Private_auction_service.update_private_auction
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/private_auction_service.update_private_auction.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/private_auction_service.update_private_auction.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/private_auction_service.update_private_auction.js`
+
+
+-----
+
+
+
+
+### Programmatic_buyer_service.get_programmatic_buyer
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/programmatic_buyer_service.get_programmatic_buyer.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/programmatic_buyer_service.get_programmatic_buyer.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/programmatic_buyer_service.get_programmatic_buyer.js`
+
+
+-----
+
+
+
+
+### Programmatic_buyer_service.list_programmatic_buyers
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/programmatic_buyer_service.list_programmatic_buyers.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ads-admanager/samples/generated/v1/programmatic_buyer_service.list_programmatic_buyers.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ads-admanager/samples/generated/v1/programmatic_buyer_service.list_programmatic_buyers.js`
 
 
 -----

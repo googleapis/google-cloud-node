@@ -34,9 +34,10 @@ const version = require('../../../package.json').version;
 
 /**
  *  Service definition for the Places API.
- *  Note: every request (except for Autocomplete requests) requires a field mask
- *  set outside of the request proto (`all/*`, is not assumed). The field mask
- *  can be set via the HTTP header `X-Goog-FieldMask`. See:
+ *  Note: every request (except for Autocomplete and GetPhotoMedia requests)
+ *  requires a field mask set outside of the request proto (`all/*`, is not
+ *  assumed). The field mask can be set via the HTTP header `X-Goog-FieldMask`.
+ *  See:
  *  https://developers.google.com/maps/documentation/places/web-service/choose-fields
  * @class
  * @memberof v1

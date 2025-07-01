@@ -5297,6 +5297,9 @@ export namespace google {
                 /** Properties of a ClusterConfig. */
                 interface IClusterConfig {
 
+                    /** ClusterConfig clusterTier */
+                    clusterTier?: (google.cloud.dataproc.v1.ClusterConfig.ClusterTier|keyof typeof google.cloud.dataproc.v1.ClusterConfig.ClusterTier|null);
+
                     /** ClusterConfig configBucket */
                     configBucket?: (string|null);
 
@@ -5354,6 +5357,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.dataproc.v1.IClusterConfig);
+
+                    /** ClusterConfig clusterTier. */
+                    public clusterTier: (google.cloud.dataproc.v1.ClusterConfig.ClusterTier|keyof typeof google.cloud.dataproc.v1.ClusterConfig.ClusterTier);
 
                     /** ClusterConfig configBucket. */
                     public configBucket: string;
@@ -5479,6 +5485,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ClusterConfig {
+
+                    /** ClusterTier enum. */
+                    enum ClusterTier {
+                        CLUSTER_TIER_UNSPECIFIED = 0,
+                        CLUSTER_TIER_STANDARD = 1,
+                        CLUSTER_TIER_PREMIUM = 2
+                    }
                 }
 
                 /** Properties of a VirtualClusterConfig. */

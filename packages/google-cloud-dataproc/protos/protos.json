@@ -1821,6 +1821,13 @@
                     },
                     "ClusterConfig": {
                       "fields": {
+                        "clusterTier": {
+                          "type": "ClusterTier",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "configBucket": {
                           "type": "string",
                           "id": 1,
@@ -1933,6 +1940,15 @@
                           "id": 25,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ClusterTier": {
+                          "values": {
+                            "CLUSTER_TIER_UNSPECIFIED": 0,
+                            "CLUSTER_TIER_STANDARD": 1,
+                            "CLUSTER_TIER_PREMIUM": 2
                           }
                         }
                       }

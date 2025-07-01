@@ -1,10 +1,13 @@
 [
   "../../protos/google/cloud/securitycenter/v2/access.proto",
+  "../../protos/google/cloud/securitycenter/v2/affected_resources.proto",
+  "../../protos/google/cloud/securitycenter/v2/ai_model.proto",
   "../../protos/google/cloud/securitycenter/v2/application.proto",
   "../../protos/google/cloud/securitycenter/v2/attack_exposure.proto",
   "../../protos/google/cloud/securitycenter/v2/attack_path.proto",
   "../../protos/google/cloud/securitycenter/v2/backup_disaster_recovery.proto",
   "../../protos/google/cloud/securitycenter/v2/bigquery_export.proto",
+  "../../protos/google/cloud/securitycenter/v2/chokepoint.proto",
   "../../protos/google/cloud/securitycenter/v2/cloud_armor.proto",
   "../../protos/google/cloud/securitycenter/v2/cloud_dlp_data_profile.proto",
   "../../protos/google/cloud/securitycenter/v2/cloud_dlp_inspection.proto",
@@ -25,6 +28,8 @@
   "../../protos/google/cloud/securitycenter/v2/group_membership.proto",
   "../../protos/google/cloud/securitycenter/v2/iam_binding.proto",
   "../../protos/google/cloud/securitycenter/v2/indicator.proto",
+  "../../protos/google/cloud/securitycenter/v2/ip_rules.proto",
+  "../../protos/google/cloud/securitycenter/v2/job.proto",
   "../../protos/google/cloud/securitycenter/v2/kernel_rootkit.proto",
   "../../protos/google/cloud/securitycenter/v2/kubernetes.proto",
   "../../protos/google/cloud/securitycenter/v2/label.proto",
@@ -32,6 +37,7 @@
   "../../protos/google/cloud/securitycenter/v2/log_entry.proto",
   "../../protos/google/cloud/securitycenter/v2/mitre_attack.proto",
   "../../protos/google/cloud/securitycenter/v2/mute_config.proto",
+  "../../protos/google/cloud/securitycenter/v2/network.proto",
   "../../protos/google/cloud/securitycenter/v2/notebook.proto",
   "../../protos/google/cloud/securitycenter/v2/notification_config.proto",
   "../../protos/google/cloud/securitycenter/v2/notification_message.proto",
@@ -46,5 +52,6 @@
   "../../protos/google/cloud/securitycenter/v2/source.proto",
   "../../protos/google/cloud/securitycenter/v2/toxic_combination.proto",
   "../../protos/google/cloud/securitycenter/v2/valued_resource.proto",
+  "../../protos/google/cloud/securitycenter/v2/vertex_ai.proto",
   "../../protos/google/cloud/securitycenter/v2/vulnerability.proto"
 ]

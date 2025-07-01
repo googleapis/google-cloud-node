@@ -16,15 +16,24 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+export {AdBreakServiceClient} from './ad_break_service_client';
 export {AdUnitServiceClient} from './ad_unit_service_client';
+export {BandwidthGroupServiceClient} from './bandwidth_group_service_client';
 export {CompanyServiceClient} from './company_service_client';
 export {CustomFieldServiceClient} from './custom_field_service_client';
 export {CustomTargetingKeyServiceClient} from './custom_targeting_key_service_client';
 export {CustomTargetingValueServiceClient} from './custom_targeting_value_service_client';
+export {DeviceCategoryServiceClient} from './device_category_service_client';
 export {EntitySignalsMappingServiceClient} from './entity_signals_mapping_service_client';
+export {GeoTargetServiceClient} from './geo_target_service_client';
 export {NetworkServiceClient} from './network_service_client';
+export {OperatingSystemServiceClient} from './operating_system_service_client';
+export {OperatingSystemVersionServiceClient} from './operating_system_version_service_client';
 export {OrderServiceClient} from './order_service_client';
 export {PlacementServiceClient} from './placement_service_client';
+export {PrivateAuctionDealServiceClient} from './private_auction_deal_service_client';
+export {PrivateAuctionServiceClient} from './private_auction_service_client';
+export {ProgrammaticBuyerServiceClient} from './programmatic_buyer_service_client';
 export {ReportServiceClient} from './report_service_client';
 export {RoleServiceClient} from './role_service_client';
 export {TaxonomyCategoryServiceClient} from './taxonomy_category_service_client';
