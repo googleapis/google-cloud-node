@@ -27976,7 +27976,6 @@
                           "type": "string",
                           "id": 6,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Schedule"
                           }
                         },
@@ -28482,8 +28481,40 @@
                         }
                       }
                     },
-                    "NotebookSoftwareConfig": {
+                    "ColabImage": {
                       "fields": {
+                        "releaseName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "NotebookSoftwareConfig": {
+                      "oneofs": {
+                        "runtimeImage": {
+                          "oneof": [
+                            "colabImage"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "colabImage": {
+                          "type": "ColabImage",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "env": {
                           "rule": "repeated",
                           "type": "EnvVar",
