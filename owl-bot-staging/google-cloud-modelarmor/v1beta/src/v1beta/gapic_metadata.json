@@ -1,0 +1,117 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.modelarmor.v1beta",
+  "libraryPackage": "@google-cloud/modelarmor",
+  "services": {
+    "ModelArmor": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ModelArmorClient",
+          "rpcs": {
+            "GetTemplate": {
+              "methods": [
+                "getTemplate"
+              ]
+            },
+            "CreateTemplate": {
+              "methods": [
+                "createTemplate"
+              ]
+            },
+            "UpdateTemplate": {
+              "methods": [
+                "updateTemplate"
+              ]
+            },
+            "DeleteTemplate": {
+              "methods": [
+                "deleteTemplate"
+              ]
+            },
+            "GetFloorSetting": {
+              "methods": [
+                "getFloorSetting"
+              ]
+            },
+            "UpdateFloorSetting": {
+              "methods": [
+                "updateFloorSetting"
+              ]
+            },
+            "SanitizeUserPrompt": {
+              "methods": [
+                "sanitizeUserPrompt"
+              ]
+            },
+            "SanitizeModelResponse": {
+              "methods": [
+                "sanitizeModelResponse"
+              ]
+            },
+            "ListTemplates": {
+              "methods": [
+                "listTemplates",
+                "listTemplatesStream",
+                "listTemplatesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ModelArmorClient",
+          "rpcs": {
+            "GetTemplate": {
+              "methods": [
+                "getTemplate"
+              ]
+            },
+            "CreateTemplate": {
+              "methods": [
+                "createTemplate"
+              ]
+            },
+            "UpdateTemplate": {
+              "methods": [
+                "updateTemplate"
+              ]
+            },
+            "DeleteTemplate": {
+              "methods": [
+                "deleteTemplate"
+              ]
+            },
+            "GetFloorSetting": {
+              "methods": [
+                "getFloorSetting"
+              ]
+            },
+            "UpdateFloorSetting": {
+              "methods": [
+                "updateFloorSetting"
+              ]
+            },
+            "SanitizeUserPrompt": {
+              "methods": [
+                "sanitizeUserPrompt"
+              ]
+            },
+            "SanitizeModelResponse": {
+              "methods": [
+                "sanitizeModelResponse"
+              ]
+            },
+            "ListTemplates": {
+              "methods": [
+                "listTemplates",
+                "listTemplatesStream",
+                "listTemplatesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
