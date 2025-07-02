@@ -4138,6 +4138,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "computerUse": {
+                          "type": "ComputerUse",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -4146,6 +4153,25 @@
                         },
                         "CodeExecution": {
                           "fields": {}
+                        },
+                        "ComputerUse": {
+                          "fields": {
+                            "environment": {
+                              "type": "Environment",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Environment": {
+                              "values": {
+                                "ENVIRONMENT_UNSPECIFIED": 0,
+                                "ENVIRONMENT_BROWSER": 1
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -27950,7 +27976,6 @@
                           "type": "string",
                           "id": 6,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Schedule"
                           }
                         },
@@ -28456,8 +28481,40 @@
                         }
                       }
                     },
-                    "NotebookSoftwareConfig": {
+                    "ColabImage": {
                       "fields": {
+                        "releaseName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "NotebookSoftwareConfig": {
+                      "oneofs": {
+                        "runtimeImage": {
+                          "oneof": [
+                            "colabImage"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "colabImage": {
+                          "type": "ColabImage",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "env": {
                           "rule": "repeated",
                           "type": "EnvVar",
@@ -41992,6 +42049,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "computerUse": {
+                          "type": "ComputerUse",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -42000,6 +42064,25 @@
                         },
                         "CodeExecution": {
                           "fields": {}
+                        },
+                        "ComputerUse": {
+                          "fields": {
+                            "environment": {
+                              "type": "Environment",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Environment": {
+                              "values": {
+                                "ENVIRONMENT_UNSPECIFIED": 0,
+                                "ENVIRONMENT_BROWSER": 1
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -72106,7 +72189,6 @@
                           "type": "string",
                           "id": 6,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Schedule"
                           }
                         },
@@ -72612,8 +72694,40 @@
                         }
                       }
                     },
-                    "NotebookSoftwareConfig": {
+                    "ColabImage": {
                       "fields": {
+                        "releaseName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "NotebookSoftwareConfig": {
+                      "oneofs": {
+                        "runtimeImage": {
+                          "oneof": [
+                            "colabImage"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "colabImage": {
+                          "type": "ColabImage",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "env": {
                           "rule": "repeated",
                           "type": "EnvVar",
@@ -74554,6 +74668,13 @@
                           "keyType": "string",
                           "type": "ArtifactList",
                           "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "taskUniqueName": {
+                          "type": "string",
+                          "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }

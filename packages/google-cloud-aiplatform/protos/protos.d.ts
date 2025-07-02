@@ -14784,6 +14784,9 @@ export namespace google {
 
                     /** Tool urlContext */
                     urlContext?: (google.cloud.aiplatform.v1.IUrlContext|null);
+
+                    /** Tool computerUse */
+                    computerUse?: (google.cloud.aiplatform.v1.Tool.IComputerUse|null);
                 }
 
                 /** Represents a Tool. */
@@ -14815,6 +14818,9 @@ export namespace google {
 
                     /** Tool urlContext. */
                     public urlContext?: (google.cloud.aiplatform.v1.IUrlContext|null);
+
+                    /** Tool computerUse. */
+                    public computerUse?: (google.cloud.aiplatform.v1.Tool.IComputerUse|null);
 
                     /**
                      * Creates a new Tool instance using the specified properties.
@@ -15076,6 +15082,112 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ComputerUse. */
+                    interface IComputerUse {
+
+                        /** ComputerUse environment */
+                        environment?: (google.cloud.aiplatform.v1.Tool.ComputerUse.Environment|keyof typeof google.cloud.aiplatform.v1.Tool.ComputerUse.Environment|null);
+                    }
+
+                    /** Represents a ComputerUse. */
+                    class ComputerUse implements IComputerUse {
+
+                        /**
+                         * Constructs a new ComputerUse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.Tool.IComputerUse);
+
+                        /** ComputerUse environment. */
+                        public environment: (google.cloud.aiplatform.v1.Tool.ComputerUse.Environment|keyof typeof google.cloud.aiplatform.v1.Tool.ComputerUse.Environment);
+
+                        /**
+                         * Creates a new ComputerUse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ComputerUse instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.Tool.IComputerUse): google.cloud.aiplatform.v1.Tool.ComputerUse;
+
+                        /**
+                         * Encodes the specified ComputerUse message. Does not implicitly {@link google.cloud.aiplatform.v1.Tool.ComputerUse.verify|verify} messages.
+                         * @param message ComputerUse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.Tool.IComputerUse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ComputerUse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.Tool.ComputerUse.verify|verify} messages.
+                         * @param message ComputerUse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.Tool.IComputerUse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ComputerUse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ComputerUse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.Tool.ComputerUse;
+
+                        /**
+                         * Decodes a ComputerUse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ComputerUse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.Tool.ComputerUse;
+
+                        /**
+                         * Verifies a ComputerUse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ComputerUse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ComputerUse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.Tool.ComputerUse;
+
+                        /**
+                         * Creates a plain object from a ComputerUse message. Also converts values to other types if specified.
+                         * @param message ComputerUse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.Tool.ComputerUse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ComputerUse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ComputerUse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ComputerUse {
+
+                        /** Environment enum. */
+                        enum Environment {
+                            ENVIRONMENT_UNSPECIFIED = 0,
+                            ENVIRONMENT_BROWSER = 1
+                        }
                     }
                 }
 
@@ -104606,8 +104718,114 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a ColabImage. */
+                interface IColabImage {
+
+                    /** ColabImage releaseName */
+                    releaseName?: (string|null);
+
+                    /** ColabImage description */
+                    description?: (string|null);
+                }
+
+                /** Represents a ColabImage. */
+                class ColabImage implements IColabImage {
+
+                    /**
+                     * Constructs a new ColabImage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IColabImage);
+
+                    /** ColabImage releaseName. */
+                    public releaseName: string;
+
+                    /** ColabImage description. */
+                    public description: string;
+
+                    /**
+                     * Creates a new ColabImage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ColabImage instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IColabImage): google.cloud.aiplatform.v1.ColabImage;
+
+                    /**
+                     * Encodes the specified ColabImage message. Does not implicitly {@link google.cloud.aiplatform.v1.ColabImage.verify|verify} messages.
+                     * @param message ColabImage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IColabImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ColabImage message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.ColabImage.verify|verify} messages.
+                     * @param message ColabImage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IColabImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ColabImage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ColabImage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.ColabImage;
+
+                    /**
+                     * Decodes a ColabImage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ColabImage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.ColabImage;
+
+                    /**
+                     * Verifies a ColabImage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ColabImage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ColabImage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.ColabImage;
+
+                    /**
+                     * Creates a plain object from a ColabImage message. Also converts values to other types if specified.
+                     * @param message ColabImage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.ColabImage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ColabImage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ColabImage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a NotebookSoftwareConfig. */
                 interface INotebookSoftwareConfig {
+
+                    /** NotebookSoftwareConfig colabImage */
+                    colabImage?: (google.cloud.aiplatform.v1.IColabImage|null);
 
                     /** NotebookSoftwareConfig env */
                     env?: (google.cloud.aiplatform.v1.IEnvVar[]|null);
@@ -104625,11 +104843,17 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.aiplatform.v1.INotebookSoftwareConfig);
 
+                    /** NotebookSoftwareConfig colabImage. */
+                    public colabImage?: (google.cloud.aiplatform.v1.IColabImage|null);
+
                     /** NotebookSoftwareConfig env. */
                     public env: google.cloud.aiplatform.v1.IEnvVar[];
 
                     /** NotebookSoftwareConfig postStartupScriptConfig. */
                     public postStartupScriptConfig?: (google.cloud.aiplatform.v1.IPostStartupScriptConfig|null);
+
+                    /** NotebookSoftwareConfig runtimeImage. */
+                    public runtimeImage?: "colabImage";
 
                     /**
                      * Creates a new NotebookSoftwareConfig instance using the specified properties.
@@ -156420,6 +156644,9 @@ export namespace google {
 
                     /** Tool urlContext */
                     urlContext?: (google.cloud.aiplatform.v1beta1.IUrlContext|null);
+
+                    /** Tool computerUse */
+                    computerUse?: (google.cloud.aiplatform.v1beta1.Tool.IComputerUse|null);
                 }
 
                 /** Represents a Tool. */
@@ -156451,6 +156678,9 @@ export namespace google {
 
                     /** Tool urlContext. */
                     public urlContext?: (google.cloud.aiplatform.v1beta1.IUrlContext|null);
+
+                    /** Tool computerUse. */
+                    public computerUse?: (google.cloud.aiplatform.v1beta1.Tool.IComputerUse|null);
 
                     /**
                      * Creates a new Tool instance using the specified properties.
@@ -156712,6 +156942,112 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ComputerUse. */
+                    interface IComputerUse {
+
+                        /** ComputerUse environment */
+                        environment?: (google.cloud.aiplatform.v1beta1.Tool.ComputerUse.Environment|keyof typeof google.cloud.aiplatform.v1beta1.Tool.ComputerUse.Environment|null);
+                    }
+
+                    /** Represents a ComputerUse. */
+                    class ComputerUse implements IComputerUse {
+
+                        /**
+                         * Constructs a new ComputerUse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.Tool.IComputerUse);
+
+                        /** ComputerUse environment. */
+                        public environment: (google.cloud.aiplatform.v1beta1.Tool.ComputerUse.Environment|keyof typeof google.cloud.aiplatform.v1beta1.Tool.ComputerUse.Environment);
+
+                        /**
+                         * Creates a new ComputerUse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ComputerUse instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.Tool.IComputerUse): google.cloud.aiplatform.v1beta1.Tool.ComputerUse;
+
+                        /**
+                         * Encodes the specified ComputerUse message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.Tool.ComputerUse.verify|verify} messages.
+                         * @param message ComputerUse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.Tool.IComputerUse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ComputerUse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.Tool.ComputerUse.verify|verify} messages.
+                         * @param message ComputerUse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.Tool.IComputerUse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ComputerUse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ComputerUse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.Tool.ComputerUse;
+
+                        /**
+                         * Decodes a ComputerUse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ComputerUse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.Tool.ComputerUse;
+
+                        /**
+                         * Verifies a ComputerUse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ComputerUse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ComputerUse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.Tool.ComputerUse;
+
+                        /**
+                         * Creates a plain object from a ComputerUse message. Also converts values to other types if specified.
+                         * @param message ComputerUse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.Tool.ComputerUse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ComputerUse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ComputerUse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ComputerUse {
+
+                        /** Environment enum. */
+                        enum Environment {
+                            ENVIRONMENT_UNSPECIFIED = 0,
+                            ENVIRONMENT_BROWSER = 1
+                        }
                     }
                 }
 
@@ -272317,8 +272653,114 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a ColabImage. */
+                interface IColabImage {
+
+                    /** ColabImage releaseName */
+                    releaseName?: (string|null);
+
+                    /** ColabImage description */
+                    description?: (string|null);
+                }
+
+                /** Represents a ColabImage. */
+                class ColabImage implements IColabImage {
+
+                    /**
+                     * Constructs a new ColabImage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IColabImage);
+
+                    /** ColabImage releaseName. */
+                    public releaseName: string;
+
+                    /** ColabImage description. */
+                    public description: string;
+
+                    /**
+                     * Creates a new ColabImage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ColabImage instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IColabImage): google.cloud.aiplatform.v1beta1.ColabImage;
+
+                    /**
+                     * Encodes the specified ColabImage message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ColabImage.verify|verify} messages.
+                     * @param message ColabImage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IColabImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ColabImage message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ColabImage.verify|verify} messages.
+                     * @param message ColabImage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IColabImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ColabImage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ColabImage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ColabImage;
+
+                    /**
+                     * Decodes a ColabImage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ColabImage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ColabImage;
+
+                    /**
+                     * Verifies a ColabImage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ColabImage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ColabImage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ColabImage;
+
+                    /**
+                     * Creates a plain object from a ColabImage message. Also converts values to other types if specified.
+                     * @param message ColabImage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ColabImage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ColabImage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ColabImage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a NotebookSoftwareConfig. */
                 interface INotebookSoftwareConfig {
+
+                    /** NotebookSoftwareConfig colabImage */
+                    colabImage?: (google.cloud.aiplatform.v1beta1.IColabImage|null);
 
                     /** NotebookSoftwareConfig env */
                     env?: (google.cloud.aiplatform.v1beta1.IEnvVar[]|null);
@@ -272336,11 +272778,17 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.aiplatform.v1beta1.INotebookSoftwareConfig);
 
+                    /** NotebookSoftwareConfig colabImage. */
+                    public colabImage?: (google.cloud.aiplatform.v1beta1.IColabImage|null);
+
                     /** NotebookSoftwareConfig env. */
                     public env: google.cloud.aiplatform.v1beta1.IEnvVar[];
 
                     /** NotebookSoftwareConfig postStartupScriptConfig. */
                     public postStartupScriptConfig?: (google.cloud.aiplatform.v1beta1.IPostStartupScriptConfig|null);
+
+                    /** NotebookSoftwareConfig runtimeImage. */
+                    public runtimeImage?: "colabImage";
 
                     /**
                      * Creates a new NotebookSoftwareConfig instance using the specified properties.
@@ -278862,6 +279310,9 @@ export namespace google {
 
                     /** PipelineTaskDetail outputs */
                     outputs?: ({ [k: string]: google.cloud.aiplatform.v1beta1.PipelineTaskDetail.IArtifactList }|null);
+
+                    /** PipelineTaskDetail taskUniqueName */
+                    taskUniqueName?: (string|null);
                 }
 
                 /** Represents a PipelineTaskDetail. */
@@ -278911,6 +279362,9 @@ export namespace google {
 
                     /** PipelineTaskDetail outputs. */
                     public outputs: { [k: string]: google.cloud.aiplatform.v1beta1.PipelineTaskDetail.IArtifactList };
+
+                    /** PipelineTaskDetail taskUniqueName. */
+                    public taskUniqueName: string;
 
                     /**
                      * Creates a new PipelineTaskDetail instance using the specified properties.

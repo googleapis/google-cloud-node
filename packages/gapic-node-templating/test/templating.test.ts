@@ -66,15 +66,6 @@ describe('tests for templates', () => {
     snapshot(
       readFileSync(join(templateDirWrite, '.repo-metadata.json'), 'utf8'),
     );
-    snapshot(
-      readFileSync(join(templateDirWrite, 'samples', 'package.json'), 'utf8'),
-    );
-    snapshot(
-      readFileSync(
-        join(templateDirWrite, 'samples', 'test', 'quickstart.js'),
-        'utf8',
-      ),
-    );
     snapshot(readFileSync(join(templateDirWrite, 'LICENSE'), 'utf8'));
     const packageJson = JSON.parse(
       readFileSync(join(templateDirWrite, 'package.json'), 'utf8'),
@@ -101,7 +92,6 @@ describe('tests for templates', () => {
       '.repo-metadata.json.njk',
       'LICENSE',
       'package.json',
-      'samples',
     ]);
 
     assert.deepStrictEqual(readdirSync(templateDirWrite), [
@@ -109,7 +99,6 @@ describe('tests for templates', () => {
       '.repo-metadata.json',
       'LICENSE',
       'package.json',
-      'samples',
     ]);
   });
 

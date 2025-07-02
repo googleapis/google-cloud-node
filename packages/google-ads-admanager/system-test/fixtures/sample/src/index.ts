@@ -16,10 +16,16 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AdUnitServiceClient, CompanyServiceClient, CustomFieldServiceClient, CustomTargetingKeyServiceClient, CustomTargetingValueServiceClient, EntitySignalsMappingServiceClient, NetworkServiceClient, OrderServiceClient, PlacementServiceClient, ReportServiceClient, RoleServiceClient, TaxonomyCategoryServiceClient, UserServiceClient} from '@google-ads/admanager';
+import {AdBreakServiceClient, AdUnitServiceClient, BandwidthGroupServiceClient, CompanyServiceClient, CustomFieldServiceClient, CustomTargetingKeyServiceClient, CustomTargetingValueServiceClient, DeviceCategoryServiceClient, EntitySignalsMappingServiceClient, GeoTargetServiceClient, NetworkServiceClient, OperatingSystemServiceClient, OperatingSystemVersionServiceClient, OrderServiceClient, PlacementServiceClient, PrivateAuctionDealServiceClient, PrivateAuctionServiceClient, ProgrammaticBuyerServiceClient, ReportServiceClient, RoleServiceClient, TaxonomyCategoryServiceClient, UserServiceClient} from '@google-ads/admanager';
 
 // check that the client class type name can be used
+function doStuffWithAdBreakServiceClient(client: AdBreakServiceClient) {
+  client.close();
+}
 function doStuffWithAdUnitServiceClient(client: AdUnitServiceClient) {
+  client.close();
+}
+function doStuffWithBandwidthGroupServiceClient(client: BandwidthGroupServiceClient) {
   client.close();
 }
 function doStuffWithCompanyServiceClient(client: CompanyServiceClient) {
@@ -34,16 +40,37 @@ function doStuffWithCustomTargetingKeyServiceClient(client: CustomTargetingKeySe
 function doStuffWithCustomTargetingValueServiceClient(client: CustomTargetingValueServiceClient) {
   client.close();
 }
+function doStuffWithDeviceCategoryServiceClient(client: DeviceCategoryServiceClient) {
+  client.close();
+}
 function doStuffWithEntitySignalsMappingServiceClient(client: EntitySignalsMappingServiceClient) {
   client.close();
 }
+function doStuffWithGeoTargetServiceClient(client: GeoTargetServiceClient) {
+  client.close();
+}
 function doStuffWithNetworkServiceClient(client: NetworkServiceClient) {
+  client.close();
+}
+function doStuffWithOperatingSystemServiceClient(client: OperatingSystemServiceClient) {
+  client.close();
+}
+function doStuffWithOperatingSystemVersionServiceClient(client: OperatingSystemVersionServiceClient) {
   client.close();
 }
 function doStuffWithOrderServiceClient(client: OrderServiceClient) {
   client.close();
 }
 function doStuffWithPlacementServiceClient(client: PlacementServiceClient) {
+  client.close();
+}
+function doStuffWithPrivateAuctionDealServiceClient(client: PrivateAuctionDealServiceClient) {
+  client.close();
+}
+function doStuffWithPrivateAuctionServiceClient(client: PrivateAuctionServiceClient) {
+  client.close();
+}
+function doStuffWithProgrammaticBuyerServiceClient(client: ProgrammaticBuyerServiceClient) {
   client.close();
 }
 function doStuffWithReportServiceClient(client: ReportServiceClient) {
@@ -61,8 +88,14 @@ function doStuffWithUserServiceClient(client: UserServiceClient) {
 
 function main() {
   // check that the client instance can be created
+  const adBreakServiceClient = new AdBreakServiceClient();
+  doStuffWithAdBreakServiceClient(adBreakServiceClient);
+  // check that the client instance can be created
   const adUnitServiceClient = new AdUnitServiceClient();
   doStuffWithAdUnitServiceClient(adUnitServiceClient);
+  // check that the client instance can be created
+  const bandwidthGroupServiceClient = new BandwidthGroupServiceClient();
+  doStuffWithBandwidthGroupServiceClient(bandwidthGroupServiceClient);
   // check that the client instance can be created
   const companyServiceClient = new CompanyServiceClient();
   doStuffWithCompanyServiceClient(companyServiceClient);
@@ -76,17 +109,38 @@ function main() {
   const customTargetingValueServiceClient = new CustomTargetingValueServiceClient();
   doStuffWithCustomTargetingValueServiceClient(customTargetingValueServiceClient);
   // check that the client instance can be created
+  const deviceCategoryServiceClient = new DeviceCategoryServiceClient();
+  doStuffWithDeviceCategoryServiceClient(deviceCategoryServiceClient);
+  // check that the client instance can be created
   const entitySignalsMappingServiceClient = new EntitySignalsMappingServiceClient();
   doStuffWithEntitySignalsMappingServiceClient(entitySignalsMappingServiceClient);
   // check that the client instance can be created
+  const geoTargetServiceClient = new GeoTargetServiceClient();
+  doStuffWithGeoTargetServiceClient(geoTargetServiceClient);
+  // check that the client instance can be created
   const networkServiceClient = new NetworkServiceClient();
   doStuffWithNetworkServiceClient(networkServiceClient);
+  // check that the client instance can be created
+  const operatingSystemServiceClient = new OperatingSystemServiceClient();
+  doStuffWithOperatingSystemServiceClient(operatingSystemServiceClient);
+  // check that the client instance can be created
+  const operatingSystemVersionServiceClient = new OperatingSystemVersionServiceClient();
+  doStuffWithOperatingSystemVersionServiceClient(operatingSystemVersionServiceClient);
   // check that the client instance can be created
   const orderServiceClient = new OrderServiceClient();
   doStuffWithOrderServiceClient(orderServiceClient);
   // check that the client instance can be created
   const placementServiceClient = new PlacementServiceClient();
   doStuffWithPlacementServiceClient(placementServiceClient);
+  // check that the client instance can be created
+  const privateAuctionDealServiceClient = new PrivateAuctionDealServiceClient();
+  doStuffWithPrivateAuctionDealServiceClient(privateAuctionDealServiceClient);
+  // check that the client instance can be created
+  const privateAuctionServiceClient = new PrivateAuctionServiceClient();
+  doStuffWithPrivateAuctionServiceClient(privateAuctionServiceClient);
+  // check that the client instance can be created
+  const programmaticBuyerServiceClient = new ProgrammaticBuyerServiceClient();
+  doStuffWithProgrammaticBuyerServiceClient(programmaticBuyerServiceClient);
   // check that the client instance can be created
   const reportServiceClient = new ReportServiceClient();
   doStuffWithReportServiceClient(reportServiceClient);
