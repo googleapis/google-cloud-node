@@ -37,6 +37,10 @@ function main(name, userPromptData) {
    *  Required. User prompt data to sanitize.
    */
   // const userPromptData = {}
+  /**
+   *  Optional. Metadata related to Multi Language Detection.
+   */
+  // const multiLanguageDetectionMetadata = {}
 
   // Imports the Modelarmor library
   const {ModelArmorClient} = require('@google-cloud/modelarmor').v1;
