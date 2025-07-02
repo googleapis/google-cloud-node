@@ -184,6 +184,25 @@ are generated from a central template. To edit one of these files, make an edit
 to its templates in
 [directory](https://github.com/googleapis/synthtool).
 
+
+## Terms of Service
+
+`@googlemaps/maps-platform-datasets` uses Google Maps Platform services. Use of Google
+Maps Platform services through this library is subject to the
+[Google Maps Platform Terms of Service][gmp-tos].
+
+This library is not a Google Maps Platform Core Service.
+Therefore, the Google Maps Platform Terms of Service (e.g., Technical
+Support Services, Service Level Agreements, and Deprecation Policy)
+do not apply to this library.
+
+### European Economic Area (EEA) developers
+
+If your billing address is in the European Economic Area, effective on
+8 July 2025, the [Google Maps Platform EEA Terms of Service][gmp-tos-eea]
+will apply to your use of the Services. Functionality varies by region.
+[Learn more][gmp-tos-eea-faq].
+
 ## License
 
 Apache Version 2.0
@@ -197,3 +216,6 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=mapsplatformdatasets.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
+[gmp-tos]: https://cloud.google.com/maps-platform/terms
+[gmp-tos-eea]: https://cloud.google.com/terms/maps-platform/eea
+[gmp-tos-eea-faq]: https://developers.google.com/maps/comms/eea/faq
