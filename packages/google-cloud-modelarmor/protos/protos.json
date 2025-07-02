@@ -1790,6 +1790,26 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "multiLanguageDetection": {
+                              "type": "MultiLanguageDetection",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "MultiLanguageDetection": {
+                              "fields": {
+                                "enableMultiLanguageDetection": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
                             }
                           }
                         }
@@ -2219,6 +2239,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "multiLanguageDetectionMetadata": {
+                          "type": "MultiLanguageDetectionMetadata",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2329,7 +2356,22 @@
                       }
                     },
                     "MultiLanguageDetectionMetadata": {
-                      "fields": {}
+                      "fields": {
+                        "sourceLanguage": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableMultiLanguageDetection": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
                     },
                     "FilterResult": {
                       "oneofs": {

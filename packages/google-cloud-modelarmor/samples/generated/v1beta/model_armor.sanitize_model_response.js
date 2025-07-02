@@ -42,7 +42,7 @@ function main(name, modelResponseData) {
    */
   // const userPrompt = 'abc123'
   /**
-   *  Optional. Metadata related for Translations.
+   *  Optional. Metadata related for multi language detection.
    */
   // const multiLanguageDetectionMetadata = {}
 
