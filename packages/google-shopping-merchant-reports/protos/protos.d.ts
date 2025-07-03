@@ -26,6 +26,3744 @@ export namespace google {
             /** Namespace reports. */
             namespace reports {
 
+                /** Namespace v1alpha. */
+                namespace v1alpha {
+
+                    /** Represents a ReportService */
+                    class ReportService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new ReportService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new ReportService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ReportService;
+
+                        /**
+                         * Calls Search.
+                         * @param request SearchRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and SearchResponse
+                         */
+                        public search(request: google.shopping.merchant.reports.v1alpha.ISearchRequest, callback: google.shopping.merchant.reports.v1alpha.ReportService.SearchCallback): void;
+
+                        /**
+                         * Calls Search.
+                         * @param request SearchRequest message or plain object
+                         * @returns Promise
+                         */
+                        public search(request: google.shopping.merchant.reports.v1alpha.ISearchRequest): Promise<google.shopping.merchant.reports.v1alpha.SearchResponse>;
+                    }
+
+                    namespace ReportService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.reports.v1alpha.ReportService|search}.
+                         * @param error Error, if any
+                         * @param [response] SearchResponse
+                         */
+                        type SearchCallback = (error: (Error|null), response?: google.shopping.merchant.reports.v1alpha.SearchResponse) => void;
+                    }
+
+                    /** Properties of a SearchRequest. */
+                    interface ISearchRequest {
+
+                        /** SearchRequest parent */
+                        parent?: (string|null);
+
+                        /** SearchRequest query */
+                        query?: (string|null);
+
+                        /** SearchRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** SearchRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a SearchRequest. */
+                    class SearchRequest implements ISearchRequest {
+
+                        /**
+                         * Constructs a new SearchRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.ISearchRequest);
+
+                        /** SearchRequest parent. */
+                        public parent: string;
+
+                        /** SearchRequest query. */
+                        public query: string;
+
+                        /** SearchRequest pageSize. */
+                        public pageSize: number;
+
+                        /** SearchRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new SearchRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SearchRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.ISearchRequest): google.shopping.merchant.reports.v1alpha.SearchRequest;
+
+                        /**
+                         * Encodes the specified SearchRequest message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.SearchRequest.verify|verify} messages.
+                         * @param message SearchRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.ISearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SearchRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.SearchRequest.verify|verify} messages.
+                         * @param message SearchRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.ISearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SearchRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SearchRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.SearchRequest;
+
+                        /**
+                         * Decodes a SearchRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SearchRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.SearchRequest;
+
+                        /**
+                         * Verifies a SearchRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SearchRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SearchRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.SearchRequest;
+
+                        /**
+                         * Creates a plain object from a SearchRequest message. Also converts values to other types if specified.
+                         * @param message SearchRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.SearchRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SearchRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SearchRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SearchResponse. */
+                    interface ISearchResponse {
+
+                        /** SearchResponse results */
+                        results?: (google.shopping.merchant.reports.v1alpha.IReportRow[]|null);
+
+                        /** SearchResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a SearchResponse. */
+                    class SearchResponse implements ISearchResponse {
+
+                        /**
+                         * Constructs a new SearchResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.ISearchResponse);
+
+                        /** SearchResponse results. */
+                        public results: google.shopping.merchant.reports.v1alpha.IReportRow[];
+
+                        /** SearchResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new SearchResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SearchResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.ISearchResponse): google.shopping.merchant.reports.v1alpha.SearchResponse;
+
+                        /**
+                         * Encodes the specified SearchResponse message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.SearchResponse.verify|verify} messages.
+                         * @param message SearchResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.ISearchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SearchResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.SearchResponse.verify|verify} messages.
+                         * @param message SearchResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.ISearchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SearchResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SearchResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.SearchResponse;
+
+                        /**
+                         * Decodes a SearchResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SearchResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.SearchResponse;
+
+                        /**
+                         * Verifies a SearchResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SearchResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SearchResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.SearchResponse;
+
+                        /**
+                         * Creates a plain object from a SearchResponse message. Also converts values to other types if specified.
+                         * @param message SearchResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.SearchResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SearchResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SearchResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ReportRow. */
+                    interface IReportRow {
+
+                        /** ReportRow productPerformanceView */
+                        productPerformanceView?: (google.shopping.merchant.reports.v1alpha.IProductPerformanceView|null);
+
+                        /** ReportRow nonProductPerformanceView */
+                        nonProductPerformanceView?: (google.shopping.merchant.reports.v1alpha.INonProductPerformanceView|null);
+
+                        /** ReportRow productView */
+                        productView?: (google.shopping.merchant.reports.v1alpha.IProductView|null);
+
+                        /** ReportRow priceCompetitivenessProductView */
+                        priceCompetitivenessProductView?: (google.shopping.merchant.reports.v1alpha.IPriceCompetitivenessProductView|null);
+
+                        /** ReportRow priceInsightsProductView */
+                        priceInsightsProductView?: (google.shopping.merchant.reports.v1alpha.IPriceInsightsProductView|null);
+
+                        /** ReportRow bestSellersProductClusterView */
+                        bestSellersProductClusterView?: (google.shopping.merchant.reports.v1alpha.IBestSellersProductClusterView|null);
+
+                        /** ReportRow bestSellersBrandView */
+                        bestSellersBrandView?: (google.shopping.merchant.reports.v1alpha.IBestSellersBrandView|null);
+
+                        /** ReportRow competitiveVisibilityCompetitorView */
+                        competitiveVisibilityCompetitorView?: (google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityCompetitorView|null);
+
+                        /** ReportRow competitiveVisibilityTopMerchantView */
+                        competitiveVisibilityTopMerchantView?: (google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityTopMerchantView|null);
+
+                        /** ReportRow competitiveVisibilityBenchmarkView */
+                        competitiveVisibilityBenchmarkView?: (google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityBenchmarkView|null);
+
+                        /** ReportRow youtubeCreatorPerformanceView */
+                        youtubeCreatorPerformanceView?: (google.shopping.merchant.reports.v1alpha.IYoutubeCreatorPerformanceView|null);
+
+                        /** ReportRow youtubeContentPerformanceView */
+                        youtubeContentPerformanceView?: (google.shopping.merchant.reports.v1alpha.IYoutubeContentPerformanceView|null);
+
+                        /** ReportRow youtubeProductPerformanceView */
+                        youtubeProductPerformanceView?: (google.shopping.merchant.reports.v1alpha.IYoutubeProductPerformanceView|null);
+                    }
+
+                    /** Represents a ReportRow. */
+                    class ReportRow implements IReportRow {
+
+                        /**
+                         * Constructs a new ReportRow.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.IReportRow);
+
+                        /** ReportRow productPerformanceView. */
+                        public productPerformanceView?: (google.shopping.merchant.reports.v1alpha.IProductPerformanceView|null);
+
+                        /** ReportRow nonProductPerformanceView. */
+                        public nonProductPerformanceView?: (google.shopping.merchant.reports.v1alpha.INonProductPerformanceView|null);
+
+                        /** ReportRow productView. */
+                        public productView?: (google.shopping.merchant.reports.v1alpha.IProductView|null);
+
+                        /** ReportRow priceCompetitivenessProductView. */
+                        public priceCompetitivenessProductView?: (google.shopping.merchant.reports.v1alpha.IPriceCompetitivenessProductView|null);
+
+                        /** ReportRow priceInsightsProductView. */
+                        public priceInsightsProductView?: (google.shopping.merchant.reports.v1alpha.IPriceInsightsProductView|null);
+
+                        /** ReportRow bestSellersProductClusterView. */
+                        public bestSellersProductClusterView?: (google.shopping.merchant.reports.v1alpha.IBestSellersProductClusterView|null);
+
+                        /** ReportRow bestSellersBrandView. */
+                        public bestSellersBrandView?: (google.shopping.merchant.reports.v1alpha.IBestSellersBrandView|null);
+
+                        /** ReportRow competitiveVisibilityCompetitorView. */
+                        public competitiveVisibilityCompetitorView?: (google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityCompetitorView|null);
+
+                        /** ReportRow competitiveVisibilityTopMerchantView. */
+                        public competitiveVisibilityTopMerchantView?: (google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityTopMerchantView|null);
+
+                        /** ReportRow competitiveVisibilityBenchmarkView. */
+                        public competitiveVisibilityBenchmarkView?: (google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityBenchmarkView|null);
+
+                        /** ReportRow youtubeCreatorPerformanceView. */
+                        public youtubeCreatorPerformanceView?: (google.shopping.merchant.reports.v1alpha.IYoutubeCreatorPerformanceView|null);
+
+                        /** ReportRow youtubeContentPerformanceView. */
+                        public youtubeContentPerformanceView?: (google.shopping.merchant.reports.v1alpha.IYoutubeContentPerformanceView|null);
+
+                        /** ReportRow youtubeProductPerformanceView. */
+                        public youtubeProductPerformanceView?: (google.shopping.merchant.reports.v1alpha.IYoutubeProductPerformanceView|null);
+
+                        /**
+                         * Creates a new ReportRow instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ReportRow instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.IReportRow): google.shopping.merchant.reports.v1alpha.ReportRow;
+
+                        /**
+                         * Encodes the specified ReportRow message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ReportRow.verify|verify} messages.
+                         * @param message ReportRow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.IReportRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ReportRow message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ReportRow.verify|verify} messages.
+                         * @param message ReportRow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.IReportRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ReportRow message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ReportRow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.ReportRow;
+
+                        /**
+                         * Decodes a ReportRow message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ReportRow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.ReportRow;
+
+                        /**
+                         * Verifies a ReportRow message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ReportRow message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ReportRow
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.ReportRow;
+
+                        /**
+                         * Creates a plain object from a ReportRow message. Also converts values to other types if specified.
+                         * @param message ReportRow
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.ReportRow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ReportRow to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ReportRow
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ProductPerformanceView. */
+                    interface IProductPerformanceView {
+
+                        /** ProductPerformanceView marketingMethod */
+                        marketingMethod?: (google.shopping.merchant.reports.v1alpha.MarketingMethod.MarketingMethodEnum|keyof typeof google.shopping.merchant.reports.v1alpha.MarketingMethod.MarketingMethodEnum|null);
+
+                        /** ProductPerformanceView date */
+                        date?: (google.type.IDate|null);
+
+                        /** ProductPerformanceView week */
+                        week?: (google.type.IDate|null);
+
+                        /** ProductPerformanceView customerCountryCode */
+                        customerCountryCode?: (string|null);
+
+                        /** ProductPerformanceView offerId */
+                        offerId?: (string|null);
+
+                        /** ProductPerformanceView title */
+                        title?: (string|null);
+
+                        /** ProductPerformanceView brand */
+                        brand?: (string|null);
+
+                        /** ProductPerformanceView categoryL1 */
+                        categoryL1?: (string|null);
+
+                        /** ProductPerformanceView categoryL2 */
+                        categoryL2?: (string|null);
+
+                        /** ProductPerformanceView categoryL3 */
+                        categoryL3?: (string|null);
+
+                        /** ProductPerformanceView categoryL4 */
+                        categoryL4?: (string|null);
+
+                        /** ProductPerformanceView categoryL5 */
+                        categoryL5?: (string|null);
+
+                        /** ProductPerformanceView productTypeL1 */
+                        productTypeL1?: (string|null);
+
+                        /** ProductPerformanceView productTypeL2 */
+                        productTypeL2?: (string|null);
+
+                        /** ProductPerformanceView productTypeL3 */
+                        productTypeL3?: (string|null);
+
+                        /** ProductPerformanceView productTypeL4 */
+                        productTypeL4?: (string|null);
+
+                        /** ProductPerformanceView productTypeL5 */
+                        productTypeL5?: (string|null);
+
+                        /** ProductPerformanceView customLabel0 */
+                        customLabel0?: (string|null);
+
+                        /** ProductPerformanceView customLabel1 */
+                        customLabel1?: (string|null);
+
+                        /** ProductPerformanceView customLabel2 */
+                        customLabel2?: (string|null);
+
+                        /** ProductPerformanceView customLabel3 */
+                        customLabel3?: (string|null);
+
+                        /** ProductPerformanceView customLabel4 */
+                        customLabel4?: (string|null);
+
+                        /** ProductPerformanceView clicks */
+                        clicks?: (number|Long|string|null);
+
+                        /** ProductPerformanceView impressions */
+                        impressions?: (number|Long|string|null);
+
+                        /** ProductPerformanceView clickThroughRate */
+                        clickThroughRate?: (number|null);
+
+                        /** ProductPerformanceView conversions */
+                        conversions?: (number|null);
+
+                        /** ProductPerformanceView conversionValue */
+                        conversionValue?: (google.shopping.type.IPrice|null);
+
+                        /** ProductPerformanceView conversionRate */
+                        conversionRate?: (number|null);
+                    }
+
+                    /** Represents a ProductPerformanceView. */
+                    class ProductPerformanceView implements IProductPerformanceView {
+
+                        /**
+                         * Constructs a new ProductPerformanceView.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.IProductPerformanceView);
+
+                        /** ProductPerformanceView marketingMethod. */
+                        public marketingMethod?: (google.shopping.merchant.reports.v1alpha.MarketingMethod.MarketingMethodEnum|keyof typeof google.shopping.merchant.reports.v1alpha.MarketingMethod.MarketingMethodEnum|null);
+
+                        /** ProductPerformanceView date. */
+                        public date?: (google.type.IDate|null);
+
+                        /** ProductPerformanceView week. */
+                        public week?: (google.type.IDate|null);
+
+                        /** ProductPerformanceView customerCountryCode. */
+                        public customerCountryCode?: (string|null);
+
+                        /** ProductPerformanceView offerId. */
+                        public offerId?: (string|null);
+
+                        /** ProductPerformanceView title. */
+                        public title?: (string|null);
+
+                        /** ProductPerformanceView brand. */
+                        public brand?: (string|null);
+
+                        /** ProductPerformanceView categoryL1. */
+                        public categoryL1?: (string|null);
+
+                        /** ProductPerformanceView categoryL2. */
+                        public categoryL2?: (string|null);
+
+                        /** ProductPerformanceView categoryL3. */
+                        public categoryL3?: (string|null);
+
+                        /** ProductPerformanceView categoryL4. */
+                        public categoryL4?: (string|null);
+
+                        /** ProductPerformanceView categoryL5. */
+                        public categoryL5?: (string|null);
+
+                        /** ProductPerformanceView productTypeL1. */
+                        public productTypeL1?: (string|null);
+
+                        /** ProductPerformanceView productTypeL2. */
+                        public productTypeL2?: (string|null);
+
+                        /** ProductPerformanceView productTypeL3. */
+                        public productTypeL3?: (string|null);
+
+                        /** ProductPerformanceView productTypeL4. */
+                        public productTypeL4?: (string|null);
+
+                        /** ProductPerformanceView productTypeL5. */
+                        public productTypeL5?: (string|null);
+
+                        /** ProductPerformanceView customLabel0. */
+                        public customLabel0?: (string|null);
+
+                        /** ProductPerformanceView customLabel1. */
+                        public customLabel1?: (string|null);
+
+                        /** ProductPerformanceView customLabel2. */
+                        public customLabel2?: (string|null);
+
+                        /** ProductPerformanceView customLabel3. */
+                        public customLabel3?: (string|null);
+
+                        /** ProductPerformanceView customLabel4. */
+                        public customLabel4?: (string|null);
+
+                        /** ProductPerformanceView clicks. */
+                        public clicks?: (number|Long|string|null);
+
+                        /** ProductPerformanceView impressions. */
+                        public impressions?: (number|Long|string|null);
+
+                        /** ProductPerformanceView clickThroughRate. */
+                        public clickThroughRate?: (number|null);
+
+                        /** ProductPerformanceView conversions. */
+                        public conversions?: (number|null);
+
+                        /** ProductPerformanceView conversionValue. */
+                        public conversionValue?: (google.shopping.type.IPrice|null);
+
+                        /** ProductPerformanceView conversionRate. */
+                        public conversionRate?: (number|null);
+
+                        /**
+                         * Creates a new ProductPerformanceView instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProductPerformanceView instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.IProductPerformanceView): google.shopping.merchant.reports.v1alpha.ProductPerformanceView;
+
+                        /**
+                         * Encodes the specified ProductPerformanceView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductPerformanceView.verify|verify} messages.
+                         * @param message ProductPerformanceView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.IProductPerformanceView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProductPerformanceView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductPerformanceView.verify|verify} messages.
+                         * @param message ProductPerformanceView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.IProductPerformanceView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProductPerformanceView message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProductPerformanceView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.ProductPerformanceView;
+
+                        /**
+                         * Decodes a ProductPerformanceView message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProductPerformanceView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.ProductPerformanceView;
+
+                        /**
+                         * Verifies a ProductPerformanceView message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProductPerformanceView message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProductPerformanceView
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.ProductPerformanceView;
+
+                        /**
+                         * Creates a plain object from a ProductPerformanceView message. Also converts values to other types if specified.
+                         * @param message ProductPerformanceView
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.ProductPerformanceView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProductPerformanceView to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProductPerformanceView
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ProductView. */
+                    interface IProductView {
+
+                        /** ProductView id */
+                        id?: (string|null);
+
+                        /** ProductView channel */
+                        channel?: (google.shopping.type.Channel.ChannelEnum|keyof typeof google.shopping.type.Channel.ChannelEnum|null);
+
+                        /** ProductView languageCode */
+                        languageCode?: (string|null);
+
+                        /** ProductView feedLabel */
+                        feedLabel?: (string|null);
+
+                        /** ProductView offerId */
+                        offerId?: (string|null);
+
+                        /** ProductView title */
+                        title?: (string|null);
+
+                        /** ProductView brand */
+                        brand?: (string|null);
+
+                        /** ProductView categoryL1 */
+                        categoryL1?: (string|null);
+
+                        /** ProductView categoryL2 */
+                        categoryL2?: (string|null);
+
+                        /** ProductView categoryL3 */
+                        categoryL3?: (string|null);
+
+                        /** ProductView categoryL4 */
+                        categoryL4?: (string|null);
+
+                        /** ProductView categoryL5 */
+                        categoryL5?: (string|null);
+
+                        /** ProductView productTypeL1 */
+                        productTypeL1?: (string|null);
+
+                        /** ProductView productTypeL2 */
+                        productTypeL2?: (string|null);
+
+                        /** ProductView productTypeL3 */
+                        productTypeL3?: (string|null);
+
+                        /** ProductView productTypeL4 */
+                        productTypeL4?: (string|null);
+
+                        /** ProductView productTypeL5 */
+                        productTypeL5?: (string|null);
+
+                        /** ProductView price */
+                        price?: (google.shopping.type.IPrice|null);
+
+                        /** ProductView condition */
+                        condition?: (string|null);
+
+                        /** ProductView availability */
+                        availability?: (string|null);
+
+                        /** ProductView shippingLabel */
+                        shippingLabel?: (string|null);
+
+                        /** ProductView gtin */
+                        gtin?: (string[]|null);
+
+                        /** ProductView itemGroupId */
+                        itemGroupId?: (string|null);
+
+                        /** ProductView thumbnailLink */
+                        thumbnailLink?: (string|null);
+
+                        /** ProductView creationTime */
+                        creationTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ProductView expirationDate */
+                        expirationDate?: (google.type.IDate|null);
+
+                        /** ProductView aggregatedReportingContextStatus */
+                        aggregatedReportingContextStatus?: (google.shopping.merchant.reports.v1alpha.ProductView.AggregatedReportingContextStatus|keyof typeof google.shopping.merchant.reports.v1alpha.ProductView.AggregatedReportingContextStatus|null);
+
+                        /** ProductView itemIssues */
+                        itemIssues?: (google.shopping.merchant.reports.v1alpha.ProductView.IItemIssue[]|null);
+
+                        /** ProductView clickPotential */
+                        clickPotential?: (google.shopping.merchant.reports.v1alpha.ProductView.ClickPotential|keyof typeof google.shopping.merchant.reports.v1alpha.ProductView.ClickPotential|null);
+
+                        /** ProductView clickPotentialRank */
+                        clickPotentialRank?: (number|Long|string|null);
+                    }
+
+                    /** Represents a ProductView. */
+                    class ProductView implements IProductView {
+
+                        /**
+                         * Constructs a new ProductView.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.IProductView);
+
+                        /** ProductView id. */
+                        public id?: (string|null);
+
+                        /** ProductView channel. */
+                        public channel?: (google.shopping.type.Channel.ChannelEnum|keyof typeof google.shopping.type.Channel.ChannelEnum|null);
+
+                        /** ProductView languageCode. */
+                        public languageCode?: (string|null);
+
+                        /** ProductView feedLabel. */
+                        public feedLabel?: (string|null);
+
+                        /** ProductView offerId. */
+                        public offerId?: (string|null);
+
+                        /** ProductView title. */
+                        public title?: (string|null);
+
+                        /** ProductView brand. */
+                        public brand?: (string|null);
+
+                        /** ProductView categoryL1. */
+                        public categoryL1?: (string|null);
+
+                        /** ProductView categoryL2. */
+                        public categoryL2?: (string|null);
+
+                        /** ProductView categoryL3. */
+                        public categoryL3?: (string|null);
+
+                        /** ProductView categoryL4. */
+                        public categoryL4?: (string|null);
+
+                        /** ProductView categoryL5. */
+                        public categoryL5?: (string|null);
+
+                        /** ProductView productTypeL1. */
+                        public productTypeL1?: (string|null);
+
+                        /** ProductView productTypeL2. */
+                        public productTypeL2?: (string|null);
+
+                        /** ProductView productTypeL3. */
+                        public productTypeL3?: (string|null);
+
+                        /** ProductView productTypeL4. */
+                        public productTypeL4?: (string|null);
+
+                        /** ProductView productTypeL5. */
+                        public productTypeL5?: (string|null);
+
+                        /** ProductView price. */
+                        public price?: (google.shopping.type.IPrice|null);
+
+                        /** ProductView condition. */
+                        public condition?: (string|null);
+
+                        /** ProductView availability. */
+                        public availability?: (string|null);
+
+                        /** ProductView shippingLabel. */
+                        public shippingLabel?: (string|null);
+
+                        /** ProductView gtin. */
+                        public gtin: string[];
+
+                        /** ProductView itemGroupId. */
+                        public itemGroupId?: (string|null);
+
+                        /** ProductView thumbnailLink. */
+                        public thumbnailLink?: (string|null);
+
+                        /** ProductView creationTime. */
+                        public creationTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ProductView expirationDate. */
+                        public expirationDate?: (google.type.IDate|null);
+
+                        /** ProductView aggregatedReportingContextStatus. */
+                        public aggregatedReportingContextStatus?: (google.shopping.merchant.reports.v1alpha.ProductView.AggregatedReportingContextStatus|keyof typeof google.shopping.merchant.reports.v1alpha.ProductView.AggregatedReportingContextStatus|null);
+
+                        /** ProductView itemIssues. */
+                        public itemIssues: google.shopping.merchant.reports.v1alpha.ProductView.IItemIssue[];
+
+                        /** ProductView clickPotential. */
+                        public clickPotential: (google.shopping.merchant.reports.v1alpha.ProductView.ClickPotential|keyof typeof google.shopping.merchant.reports.v1alpha.ProductView.ClickPotential);
+
+                        /** ProductView clickPotentialRank. */
+                        public clickPotentialRank?: (number|Long|string|null);
+
+                        /**
+                         * Creates a new ProductView instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProductView instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.IProductView): google.shopping.merchant.reports.v1alpha.ProductView;
+
+                        /**
+                         * Encodes the specified ProductView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.verify|verify} messages.
+                         * @param message ProductView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.IProductView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProductView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.verify|verify} messages.
+                         * @param message ProductView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.IProductView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProductView message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProductView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.ProductView;
+
+                        /**
+                         * Decodes a ProductView message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProductView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.ProductView;
+
+                        /**
+                         * Verifies a ProductView message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProductView message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProductView
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.ProductView;
+
+                        /**
+                         * Creates a plain object from a ProductView message. Also converts values to other types if specified.
+                         * @param message ProductView
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.ProductView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProductView to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProductView
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ProductView {
+
+                        /** Properties of an ItemIssue. */
+                        interface IItemIssue {
+
+                            /** ItemIssue type */
+                            type?: (google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueType|null);
+
+                            /** ItemIssue severity */
+                            severity?: (google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueSeverity|null);
+
+                            /** ItemIssue resolution */
+                            resolution?: (google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueResolution|keyof typeof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueResolution|null);
+                        }
+
+                        /** Represents an ItemIssue. */
+                        class ItemIssue implements IItemIssue {
+
+                            /**
+                             * Constructs a new ItemIssue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.reports.v1alpha.ProductView.IItemIssue);
+
+                            /** ItemIssue type. */
+                            public type?: (google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueType|null);
+
+                            /** ItemIssue severity. */
+                            public severity?: (google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueSeverity|null);
+
+                            /** ItemIssue resolution. */
+                            public resolution?: (google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueResolution|keyof typeof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueResolution|null);
+
+                            /**
+                             * Creates a new ItemIssue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ItemIssue instance
+                             */
+                            public static create(properties?: google.shopping.merchant.reports.v1alpha.ProductView.IItemIssue): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue;
+
+                            /**
+                             * Encodes the specified ItemIssue message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.verify|verify} messages.
+                             * @param message ItemIssue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.reports.v1alpha.ProductView.IItemIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ItemIssue message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.verify|verify} messages.
+                             * @param message ItemIssue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.ProductView.IItemIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an ItemIssue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ItemIssue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue;
+
+                            /**
+                             * Decodes an ItemIssue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ItemIssue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue;
+
+                            /**
+                             * Verifies an ItemIssue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an ItemIssue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ItemIssue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue;
+
+                            /**
+                             * Creates a plain object from an ItemIssue message. Also converts values to other types if specified.
+                             * @param message ItemIssue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ItemIssue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ItemIssue
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ItemIssue {
+
+                            /** Properties of an ItemIssueType. */
+                            interface IItemIssueType {
+
+                                /** ItemIssueType code */
+                                code?: (string|null);
+
+                                /** ItemIssueType canonicalAttribute */
+                                canonicalAttribute?: (string|null);
+                            }
+
+                            /** Represents an ItemIssueType. */
+                            class ItemIssueType implements IItemIssueType {
+
+                                /**
+                                 * Constructs a new ItemIssueType.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueType);
+
+                                /** ItemIssueType code. */
+                                public code?: (string|null);
+
+                                /** ItemIssueType canonicalAttribute. */
+                                public canonicalAttribute?: (string|null);
+
+                                /**
+                                 * Creates a new ItemIssueType instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ItemIssueType instance
+                                 */
+                                public static create(properties?: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueType): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType;
+
+                                /**
+                                 * Encodes the specified ItemIssueType message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType.verify|verify} messages.
+                                 * @param message ItemIssueType message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ItemIssueType message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType.verify|verify} messages.
+                                 * @param message ItemIssueType message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an ItemIssueType message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ItemIssueType
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType;
+
+                                /**
+                                 * Decodes an ItemIssueType message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ItemIssueType
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType;
+
+                                /**
+                                 * Verifies an ItemIssueType message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an ItemIssueType message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ItemIssueType
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType;
+
+                                /**
+                                 * Creates a plain object from an ItemIssueType message. Also converts values to other types if specified.
+                                 * @param message ItemIssueType
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ItemIssueType to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ItemIssueType
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of an ItemIssueSeverity. */
+                            interface IItemIssueSeverity {
+
+                                /** ItemIssueSeverity severityPerReportingContext */
+                                severityPerReportingContext?: (google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IIssueSeverityPerReportingContext[]|null);
+
+                                /** ItemIssueSeverity aggregatedSeverity */
+                                aggregatedSeverity?: (google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.AggregatedIssueSeverity|keyof typeof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.AggregatedIssueSeverity|null);
+                            }
+
+                            /** Represents an ItemIssueSeverity. */
+                            class ItemIssueSeverity implements IItemIssueSeverity {
+
+                                /**
+                                 * Constructs a new ItemIssueSeverity.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueSeverity);
+
+                                /** ItemIssueSeverity severityPerReportingContext. */
+                                public severityPerReportingContext: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IIssueSeverityPerReportingContext[];
+
+                                /** ItemIssueSeverity aggregatedSeverity. */
+                                public aggregatedSeverity?: (google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.AggregatedIssueSeverity|keyof typeof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.AggregatedIssueSeverity|null);
+
+                                /**
+                                 * Creates a new ItemIssueSeverity instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ItemIssueSeverity instance
+                                 */
+                                public static create(properties?: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueSeverity): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity;
+
+                                /**
+                                 * Encodes the specified ItemIssueSeverity message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.verify|verify} messages.
+                                 * @param message ItemIssueSeverity message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueSeverity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ItemIssueSeverity message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.verify|verify} messages.
+                                 * @param message ItemIssueSeverity message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueSeverity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an ItemIssueSeverity message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ItemIssueSeverity
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity;
+
+                                /**
+                                 * Decodes an ItemIssueSeverity message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ItemIssueSeverity
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity;
+
+                                /**
+                                 * Verifies an ItemIssueSeverity message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an ItemIssueSeverity message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ItemIssueSeverity
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity;
+
+                                /**
+                                 * Creates a plain object from an ItemIssueSeverity message. Also converts values to other types if specified.
+                                 * @param message ItemIssueSeverity
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ItemIssueSeverity to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ItemIssueSeverity
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            namespace ItemIssueSeverity {
+
+                                /** Properties of an IssueSeverityPerReportingContext. */
+                                interface IIssueSeverityPerReportingContext {
+
+                                    /** IssueSeverityPerReportingContext reportingContext */
+                                    reportingContext?: (google.shopping.type.ReportingContext.ReportingContextEnum|keyof typeof google.shopping.type.ReportingContext.ReportingContextEnum|null);
+
+                                    /** IssueSeverityPerReportingContext disapprovedCountries */
+                                    disapprovedCountries?: (string[]|null);
+
+                                    /** IssueSeverityPerReportingContext demotedCountries */
+                                    demotedCountries?: (string[]|null);
+                                }
+
+                                /** Represents an IssueSeverityPerReportingContext. */
+                                class IssueSeverityPerReportingContext implements IIssueSeverityPerReportingContext {
+
+                                    /**
+                                     * Constructs a new IssueSeverityPerReportingContext.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IIssueSeverityPerReportingContext);
+
+                                    /** IssueSeverityPerReportingContext reportingContext. */
+                                    public reportingContext?: (google.shopping.type.ReportingContext.ReportingContextEnum|keyof typeof google.shopping.type.ReportingContext.ReportingContextEnum|null);
+
+                                    /** IssueSeverityPerReportingContext disapprovedCountries. */
+                                    public disapprovedCountries: string[];
+
+                                    /** IssueSeverityPerReportingContext demotedCountries. */
+                                    public demotedCountries: string[];
+
+                                    /**
+                                     * Creates a new IssueSeverityPerReportingContext instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns IssueSeverityPerReportingContext instance
+                                     */
+                                    public static create(properties?: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IIssueSeverityPerReportingContext): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext;
+
+                                    /**
+                                     * Encodes the specified IssueSeverityPerReportingContext message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext.verify|verify} messages.
+                                     * @param message IssueSeverityPerReportingContext message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IIssueSeverityPerReportingContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified IssueSeverityPerReportingContext message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext.verify|verify} messages.
+                                     * @param message IssueSeverityPerReportingContext message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IIssueSeverityPerReportingContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes an IssueSeverityPerReportingContext message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns IssueSeverityPerReportingContext
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext;
+
+                                    /**
+                                     * Decodes an IssueSeverityPerReportingContext message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns IssueSeverityPerReportingContext
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext;
+
+                                    /**
+                                     * Verifies an IssueSeverityPerReportingContext message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates an IssueSeverityPerReportingContext message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns IssueSeverityPerReportingContext
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext;
+
+                                    /**
+                                     * Creates a plain object from an IssueSeverityPerReportingContext message. Also converts values to other types if specified.
+                                     * @param message IssueSeverityPerReportingContext
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this IssueSeverityPerReportingContext to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+
+                                    /**
+                                     * Gets the default type url for IssueSeverityPerReportingContext
+                                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns The default type url
+                                     */
+                                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                                }
+
+                                /** AggregatedIssueSeverity enum. */
+                                enum AggregatedIssueSeverity {
+                                    AGGREGATED_ISSUE_SEVERITY_UNSPECIFIED = 0,
+                                    DISAPPROVED = 1,
+                                    DEMOTED = 2,
+                                    PENDING = 3
+                                }
+                            }
+
+                            /** ItemIssueResolution enum. */
+                            enum ItemIssueResolution {
+                                ITEM_ISSUE_RESOLUTION_UNSPECIFIED = 0,
+                                MERCHANT_ACTION = 1,
+                                PENDING_PROCESSING = 2
+                            }
+                        }
+
+                        /** AggregatedReportingContextStatus enum. */
+                        enum AggregatedReportingContextStatus {
+                            AGGREGATED_REPORTING_CONTEXT_STATUS_UNSPECIFIED = 0,
+                            NOT_ELIGIBLE_OR_DISAPPROVED = 1,
+                            PENDING = 2,
+                            ELIGIBLE_LIMITED = 3,
+                            ELIGIBLE = 4
+                        }
+
+                        /** ClickPotential enum. */
+                        enum ClickPotential {
+                            CLICK_POTENTIAL_UNSPECIFIED = 0,
+                            LOW = 1,
+                            MEDIUM = 2,
+                            HIGH = 3
+                        }
+                    }
+
+                    /** Properties of a PriceCompetitivenessProductView. */
+                    interface IPriceCompetitivenessProductView {
+
+                        /** PriceCompetitivenessProductView reportCountryCode */
+                        reportCountryCode?: (string|null);
+
+                        /** PriceCompetitivenessProductView id */
+                        id?: (string|null);
+
+                        /** PriceCompetitivenessProductView offerId */
+                        offerId?: (string|null);
+
+                        /** PriceCompetitivenessProductView title */
+                        title?: (string|null);
+
+                        /** PriceCompetitivenessProductView brand */
+                        brand?: (string|null);
+
+                        /** PriceCompetitivenessProductView categoryL1 */
+                        categoryL1?: (string|null);
+
+                        /** PriceCompetitivenessProductView categoryL2 */
+                        categoryL2?: (string|null);
+
+                        /** PriceCompetitivenessProductView categoryL3 */
+                        categoryL3?: (string|null);
+
+                        /** PriceCompetitivenessProductView categoryL4 */
+                        categoryL4?: (string|null);
+
+                        /** PriceCompetitivenessProductView categoryL5 */
+                        categoryL5?: (string|null);
+
+                        /** PriceCompetitivenessProductView productTypeL1 */
+                        productTypeL1?: (string|null);
+
+                        /** PriceCompetitivenessProductView productTypeL2 */
+                        productTypeL2?: (string|null);
+
+                        /** PriceCompetitivenessProductView productTypeL3 */
+                        productTypeL3?: (string|null);
+
+                        /** PriceCompetitivenessProductView productTypeL4 */
+                        productTypeL4?: (string|null);
+
+                        /** PriceCompetitivenessProductView productTypeL5 */
+                        productTypeL5?: (string|null);
+
+                        /** PriceCompetitivenessProductView price */
+                        price?: (google.shopping.type.IPrice|null);
+
+                        /** PriceCompetitivenessProductView benchmarkPrice */
+                        benchmarkPrice?: (google.shopping.type.IPrice|null);
+                    }
+
+                    /** Represents a PriceCompetitivenessProductView. */
+                    class PriceCompetitivenessProductView implements IPriceCompetitivenessProductView {
+
+                        /**
+                         * Constructs a new PriceCompetitivenessProductView.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.IPriceCompetitivenessProductView);
+
+                        /** PriceCompetitivenessProductView reportCountryCode. */
+                        public reportCountryCode?: (string|null);
+
+                        /** PriceCompetitivenessProductView id. */
+                        public id?: (string|null);
+
+                        /** PriceCompetitivenessProductView offerId. */
+                        public offerId?: (string|null);
+
+                        /** PriceCompetitivenessProductView title. */
+                        public title?: (string|null);
+
+                        /** PriceCompetitivenessProductView brand. */
+                        public brand?: (string|null);
+
+                        /** PriceCompetitivenessProductView categoryL1. */
+                        public categoryL1?: (string|null);
+
+                        /** PriceCompetitivenessProductView categoryL2. */
+                        public categoryL2?: (string|null);
+
+                        /** PriceCompetitivenessProductView categoryL3. */
+                        public categoryL3?: (string|null);
+
+                        /** PriceCompetitivenessProductView categoryL4. */
+                        public categoryL4?: (string|null);
+
+                        /** PriceCompetitivenessProductView categoryL5. */
+                        public categoryL5?: (string|null);
+
+                        /** PriceCompetitivenessProductView productTypeL1. */
+                        public productTypeL1?: (string|null);
+
+                        /** PriceCompetitivenessProductView productTypeL2. */
+                        public productTypeL2?: (string|null);
+
+                        /** PriceCompetitivenessProductView productTypeL3. */
+                        public productTypeL3?: (string|null);
+
+                        /** PriceCompetitivenessProductView productTypeL4. */
+                        public productTypeL4?: (string|null);
+
+                        /** PriceCompetitivenessProductView productTypeL5. */
+                        public productTypeL5?: (string|null);
+
+                        /** PriceCompetitivenessProductView price. */
+                        public price?: (google.shopping.type.IPrice|null);
+
+                        /** PriceCompetitivenessProductView benchmarkPrice. */
+                        public benchmarkPrice?: (google.shopping.type.IPrice|null);
+
+                        /**
+                         * Creates a new PriceCompetitivenessProductView instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PriceCompetitivenessProductView instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.IPriceCompetitivenessProductView): google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView;
+
+                        /**
+                         * Encodes the specified PriceCompetitivenessProductView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView.verify|verify} messages.
+                         * @param message PriceCompetitivenessProductView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.IPriceCompetitivenessProductView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PriceCompetitivenessProductView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView.verify|verify} messages.
+                         * @param message PriceCompetitivenessProductView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.IPriceCompetitivenessProductView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PriceCompetitivenessProductView message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PriceCompetitivenessProductView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView;
+
+                        /**
+                         * Decodes a PriceCompetitivenessProductView message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PriceCompetitivenessProductView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView;
+
+                        /**
+                         * Verifies a PriceCompetitivenessProductView message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PriceCompetitivenessProductView message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PriceCompetitivenessProductView
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView;
+
+                        /**
+                         * Creates a plain object from a PriceCompetitivenessProductView message. Also converts values to other types if specified.
+                         * @param message PriceCompetitivenessProductView
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PriceCompetitivenessProductView to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PriceCompetitivenessProductView
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PriceInsightsProductView. */
+                    interface IPriceInsightsProductView {
+
+                        /** PriceInsightsProductView id */
+                        id?: (string|null);
+
+                        /** PriceInsightsProductView offerId */
+                        offerId?: (string|null);
+
+                        /** PriceInsightsProductView title */
+                        title?: (string|null);
+
+                        /** PriceInsightsProductView brand */
+                        brand?: (string|null);
+
+                        /** PriceInsightsProductView categoryL1 */
+                        categoryL1?: (string|null);
+
+                        /** PriceInsightsProductView categoryL2 */
+                        categoryL2?: (string|null);
+
+                        /** PriceInsightsProductView categoryL3 */
+                        categoryL3?: (string|null);
+
+                        /** PriceInsightsProductView categoryL4 */
+                        categoryL4?: (string|null);
+
+                        /** PriceInsightsProductView categoryL5 */
+                        categoryL5?: (string|null);
+
+                        /** PriceInsightsProductView productTypeL1 */
+                        productTypeL1?: (string|null);
+
+                        /** PriceInsightsProductView productTypeL2 */
+                        productTypeL2?: (string|null);
+
+                        /** PriceInsightsProductView productTypeL3 */
+                        productTypeL3?: (string|null);
+
+                        /** PriceInsightsProductView productTypeL4 */
+                        productTypeL4?: (string|null);
+
+                        /** PriceInsightsProductView productTypeL5 */
+                        productTypeL5?: (string|null);
+
+                        /** PriceInsightsProductView price */
+                        price?: (google.shopping.type.IPrice|null);
+
+                        /** PriceInsightsProductView suggestedPrice */
+                        suggestedPrice?: (google.shopping.type.IPrice|null);
+
+                        /** PriceInsightsProductView predictedImpressionsChangeFraction */
+                        predictedImpressionsChangeFraction?: (number|null);
+
+                        /** PriceInsightsProductView predictedClicksChangeFraction */
+                        predictedClicksChangeFraction?: (number|null);
+
+                        /** PriceInsightsProductView predictedConversionsChangeFraction */
+                        predictedConversionsChangeFraction?: (number|null);
+
+                        /** PriceInsightsProductView effectiveness */
+                        effectiveness?: (google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.Effectiveness|keyof typeof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.Effectiveness|null);
+                    }
+
+                    /** Represents a PriceInsightsProductView. */
+                    class PriceInsightsProductView implements IPriceInsightsProductView {
+
+                        /**
+                         * Constructs a new PriceInsightsProductView.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.IPriceInsightsProductView);
+
+                        /** PriceInsightsProductView id. */
+                        public id?: (string|null);
+
+                        /** PriceInsightsProductView offerId. */
+                        public offerId?: (string|null);
+
+                        /** PriceInsightsProductView title. */
+                        public title?: (string|null);
+
+                        /** PriceInsightsProductView brand. */
+                        public brand?: (string|null);
+
+                        /** PriceInsightsProductView categoryL1. */
+                        public categoryL1?: (string|null);
+
+                        /** PriceInsightsProductView categoryL2. */
+                        public categoryL2?: (string|null);
+
+                        /** PriceInsightsProductView categoryL3. */
+                        public categoryL3?: (string|null);
+
+                        /** PriceInsightsProductView categoryL4. */
+                        public categoryL4?: (string|null);
+
+                        /** PriceInsightsProductView categoryL5. */
+                        public categoryL5?: (string|null);
+
+                        /** PriceInsightsProductView productTypeL1. */
+                        public productTypeL1?: (string|null);
+
+                        /** PriceInsightsProductView productTypeL2. */
+                        public productTypeL2?: (string|null);
+
+                        /** PriceInsightsProductView productTypeL3. */
+                        public productTypeL3?: (string|null);
+
+                        /** PriceInsightsProductView productTypeL4. */
+                        public productTypeL4?: (string|null);
+
+                        /** PriceInsightsProductView productTypeL5. */
+                        public productTypeL5?: (string|null);
+
+                        /** PriceInsightsProductView price. */
+                        public price?: (google.shopping.type.IPrice|null);
+
+                        /** PriceInsightsProductView suggestedPrice. */
+                        public suggestedPrice?: (google.shopping.type.IPrice|null);
+
+                        /** PriceInsightsProductView predictedImpressionsChangeFraction. */
+                        public predictedImpressionsChangeFraction?: (number|null);
+
+                        /** PriceInsightsProductView predictedClicksChangeFraction. */
+                        public predictedClicksChangeFraction?: (number|null);
+
+                        /** PriceInsightsProductView predictedConversionsChangeFraction. */
+                        public predictedConversionsChangeFraction?: (number|null);
+
+                        /** PriceInsightsProductView effectiveness. */
+                        public effectiveness: (google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.Effectiveness|keyof typeof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.Effectiveness);
+
+                        /**
+                         * Creates a new PriceInsightsProductView instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PriceInsightsProductView instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.IPriceInsightsProductView): google.shopping.merchant.reports.v1alpha.PriceInsightsProductView;
+
+                        /**
+                         * Encodes the specified PriceInsightsProductView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.verify|verify} messages.
+                         * @param message PriceInsightsProductView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.IPriceInsightsProductView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PriceInsightsProductView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.verify|verify} messages.
+                         * @param message PriceInsightsProductView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.IPriceInsightsProductView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PriceInsightsProductView message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PriceInsightsProductView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.PriceInsightsProductView;
+
+                        /**
+                         * Decodes a PriceInsightsProductView message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PriceInsightsProductView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.PriceInsightsProductView;
+
+                        /**
+                         * Verifies a PriceInsightsProductView message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PriceInsightsProductView message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PriceInsightsProductView
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.PriceInsightsProductView;
+
+                        /**
+                         * Creates a plain object from a PriceInsightsProductView message. Also converts values to other types if specified.
+                         * @param message PriceInsightsProductView
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.PriceInsightsProductView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PriceInsightsProductView to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PriceInsightsProductView
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace PriceInsightsProductView {
+
+                        /** Effectiveness enum. */
+                        enum Effectiveness {
+                            EFFECTIVENESS_UNSPECIFIED = 0,
+                            LOW = 1,
+                            MEDIUM = 2,
+                            HIGH = 3
+                        }
+                    }
+
+                    /** Properties of a BestSellersProductClusterView. */
+                    interface IBestSellersProductClusterView {
+
+                        /** BestSellersProductClusterView reportDate */
+                        reportDate?: (google.type.IDate|null);
+
+                        /** BestSellersProductClusterView reportGranularity */
+                        reportGranularity?: (google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum|keyof typeof google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum|null);
+
+                        /** BestSellersProductClusterView reportCountryCode */
+                        reportCountryCode?: (string|null);
+
+                        /** BestSellersProductClusterView reportCategoryId */
+                        reportCategoryId?: (number|Long|string|null);
+
+                        /** BestSellersProductClusterView title */
+                        title?: (string|null);
+
+                        /** BestSellersProductClusterView brand */
+                        brand?: (string|null);
+
+                        /** BestSellersProductClusterView categoryL1 */
+                        categoryL1?: (string|null);
+
+                        /** BestSellersProductClusterView categoryL2 */
+                        categoryL2?: (string|null);
+
+                        /** BestSellersProductClusterView categoryL3 */
+                        categoryL3?: (string|null);
+
+                        /** BestSellersProductClusterView categoryL4 */
+                        categoryL4?: (string|null);
+
+                        /** BestSellersProductClusterView categoryL5 */
+                        categoryL5?: (string|null);
+
+                        /** BestSellersProductClusterView variantGtins */
+                        variantGtins?: (string[]|null);
+
+                        /** BestSellersProductClusterView inventoryStatus */
+                        inventoryStatus?: (google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus|keyof typeof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus|null);
+
+                        /** BestSellersProductClusterView brandInventoryStatus */
+                        brandInventoryStatus?: (google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus|keyof typeof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus|null);
+
+                        /** BestSellersProductClusterView rank */
+                        rank?: (number|Long|string|null);
+
+                        /** BestSellersProductClusterView previousRank */
+                        previousRank?: (number|Long|string|null);
+
+                        /** BestSellersProductClusterView relativeDemand */
+                        relativeDemand?: (google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|keyof typeof google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null);
+
+                        /** BestSellersProductClusterView previousRelativeDemand */
+                        previousRelativeDemand?: (google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|keyof typeof google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null);
+
+                        /** BestSellersProductClusterView relativeDemandChange */
+                        relativeDemandChange?: (google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|keyof typeof google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|null);
+                    }
+
+                    /** Represents a BestSellersProductClusterView. */
+                    class BestSellersProductClusterView implements IBestSellersProductClusterView {
+
+                        /**
+                         * Constructs a new BestSellersProductClusterView.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.IBestSellersProductClusterView);
+
+                        /** BestSellersProductClusterView reportDate. */
+                        public reportDate?: (google.type.IDate|null);
+
+                        /** BestSellersProductClusterView reportGranularity. */
+                        public reportGranularity?: (google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum|keyof typeof google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum|null);
+
+                        /** BestSellersProductClusterView reportCountryCode. */
+                        public reportCountryCode?: (string|null);
+
+                        /** BestSellersProductClusterView reportCategoryId. */
+                        public reportCategoryId?: (number|Long|string|null);
+
+                        /** BestSellersProductClusterView title. */
+                        public title?: (string|null);
+
+                        /** BestSellersProductClusterView brand. */
+                        public brand?: (string|null);
+
+                        /** BestSellersProductClusterView categoryL1. */
+                        public categoryL1?: (string|null);
+
+                        /** BestSellersProductClusterView categoryL2. */
+                        public categoryL2?: (string|null);
+
+                        /** BestSellersProductClusterView categoryL3. */
+                        public categoryL3?: (string|null);
+
+                        /** BestSellersProductClusterView categoryL4. */
+                        public categoryL4?: (string|null);
+
+                        /** BestSellersProductClusterView categoryL5. */
+                        public categoryL5?: (string|null);
+
+                        /** BestSellersProductClusterView variantGtins. */
+                        public variantGtins: string[];
+
+                        /** BestSellersProductClusterView inventoryStatus. */
+                        public inventoryStatus?: (google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus|keyof typeof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus|null);
+
+                        /** BestSellersProductClusterView brandInventoryStatus. */
+                        public brandInventoryStatus?: (google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus|keyof typeof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus|null);
+
+                        /** BestSellersProductClusterView rank. */
+                        public rank?: (number|Long|string|null);
+
+                        /** BestSellersProductClusterView previousRank. */
+                        public previousRank?: (number|Long|string|null);
+
+                        /** BestSellersProductClusterView relativeDemand. */
+                        public relativeDemand?: (google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|keyof typeof google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null);
+
+                        /** BestSellersProductClusterView previousRelativeDemand. */
+                        public previousRelativeDemand?: (google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|keyof typeof google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null);
+
+                        /** BestSellersProductClusterView relativeDemandChange. */
+                        public relativeDemandChange?: (google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|keyof typeof google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|null);
+
+                        /**
+                         * Creates a new BestSellersProductClusterView instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BestSellersProductClusterView instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.IBestSellersProductClusterView): google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView;
+
+                        /**
+                         * Encodes the specified BestSellersProductClusterView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.verify|verify} messages.
+                         * @param message BestSellersProductClusterView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.IBestSellersProductClusterView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BestSellersProductClusterView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.verify|verify} messages.
+                         * @param message BestSellersProductClusterView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.IBestSellersProductClusterView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BestSellersProductClusterView message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BestSellersProductClusterView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView;
+
+                        /**
+                         * Decodes a BestSellersProductClusterView message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BestSellersProductClusterView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView;
+
+                        /**
+                         * Verifies a BestSellersProductClusterView message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BestSellersProductClusterView message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BestSellersProductClusterView
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView;
+
+                        /**
+                         * Creates a plain object from a BestSellersProductClusterView message. Also converts values to other types if specified.
+                         * @param message BestSellersProductClusterView
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BestSellersProductClusterView to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BestSellersProductClusterView
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace BestSellersProductClusterView {
+
+                        /** InventoryStatus enum. */
+                        enum InventoryStatus {
+                            INVENTORY_STATUS_UNSPECIFIED = 0,
+                            IN_STOCK = 1,
+                            OUT_OF_STOCK = 2,
+                            NOT_IN_INVENTORY = 3
+                        }
+                    }
+
+                    /** Properties of a BestSellersBrandView. */
+                    interface IBestSellersBrandView {
+
+                        /** BestSellersBrandView reportDate */
+                        reportDate?: (google.type.IDate|null);
+
+                        /** BestSellersBrandView reportGranularity */
+                        reportGranularity?: (google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum|keyof typeof google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum|null);
+
+                        /** BestSellersBrandView reportCountryCode */
+                        reportCountryCode?: (string|null);
+
+                        /** BestSellersBrandView reportCategoryId */
+                        reportCategoryId?: (number|Long|string|null);
+
+                        /** BestSellersBrandView brand */
+                        brand?: (string|null);
+
+                        /** BestSellersBrandView rank */
+                        rank?: (number|Long|string|null);
+
+                        /** BestSellersBrandView previousRank */
+                        previousRank?: (number|Long|string|null);
+
+                        /** BestSellersBrandView relativeDemand */
+                        relativeDemand?: (google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|keyof typeof google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null);
+
+                        /** BestSellersBrandView previousRelativeDemand */
+                        previousRelativeDemand?: (google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|keyof typeof google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null);
+
+                        /** BestSellersBrandView relativeDemandChange */
+                        relativeDemandChange?: (google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|keyof typeof google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|null);
+                    }
+
+                    /** Represents a BestSellersBrandView. */
+                    class BestSellersBrandView implements IBestSellersBrandView {
+
+                        /**
+                         * Constructs a new BestSellersBrandView.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.IBestSellersBrandView);
+
+                        /** BestSellersBrandView reportDate. */
+                        public reportDate?: (google.type.IDate|null);
+
+                        /** BestSellersBrandView reportGranularity. */
+                        public reportGranularity?: (google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum|keyof typeof google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum|null);
+
+                        /** BestSellersBrandView reportCountryCode. */
+                        public reportCountryCode?: (string|null);
+
+                        /** BestSellersBrandView reportCategoryId. */
+                        public reportCategoryId?: (number|Long|string|null);
+
+                        /** BestSellersBrandView brand. */
+                        public brand?: (string|null);
+
+                        /** BestSellersBrandView rank. */
+                        public rank?: (number|Long|string|null);
+
+                        /** BestSellersBrandView previousRank. */
+                        public previousRank?: (number|Long|string|null);
+
+                        /** BestSellersBrandView relativeDemand. */
+                        public relativeDemand?: (google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|keyof typeof google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null);
+
+                        /** BestSellersBrandView previousRelativeDemand. */
+                        public previousRelativeDemand?: (google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|keyof typeof google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null);
+
+                        /** BestSellersBrandView relativeDemandChange. */
+                        public relativeDemandChange?: (google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|keyof typeof google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|null);
+
+                        /**
+                         * Creates a new BestSellersBrandView instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BestSellersBrandView instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.IBestSellersBrandView): google.shopping.merchant.reports.v1alpha.BestSellersBrandView;
+
+                        /**
+                         * Encodes the specified BestSellersBrandView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.BestSellersBrandView.verify|verify} messages.
+                         * @param message BestSellersBrandView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.IBestSellersBrandView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BestSellersBrandView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.BestSellersBrandView.verify|verify} messages.
+                         * @param message BestSellersBrandView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.IBestSellersBrandView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BestSellersBrandView message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BestSellersBrandView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.BestSellersBrandView;
+
+                        /**
+                         * Decodes a BestSellersBrandView message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BestSellersBrandView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.BestSellersBrandView;
+
+                        /**
+                         * Verifies a BestSellersBrandView message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BestSellersBrandView message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BestSellersBrandView
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.BestSellersBrandView;
+
+                        /**
+                         * Creates a plain object from a BestSellersBrandView message. Also converts values to other types if specified.
+                         * @param message BestSellersBrandView
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.BestSellersBrandView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BestSellersBrandView to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BestSellersBrandView
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a NonProductPerformanceView. */
+                    interface INonProductPerformanceView {
+
+                        /** NonProductPerformanceView date */
+                        date?: (google.type.IDate|null);
+
+                        /** NonProductPerformanceView week */
+                        week?: (google.type.IDate|null);
+
+                        /** NonProductPerformanceView clicks */
+                        clicks?: (number|Long|string|null);
+
+                        /** NonProductPerformanceView impressions */
+                        impressions?: (number|Long|string|null);
+
+                        /** NonProductPerformanceView clickThroughRate */
+                        clickThroughRate?: (number|null);
+                    }
+
+                    /** Represents a NonProductPerformanceView. */
+                    class NonProductPerformanceView implements INonProductPerformanceView {
+
+                        /**
+                         * Constructs a new NonProductPerformanceView.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.INonProductPerformanceView);
+
+                        /** NonProductPerformanceView date. */
+                        public date?: (google.type.IDate|null);
+
+                        /** NonProductPerformanceView week. */
+                        public week?: (google.type.IDate|null);
+
+                        /** NonProductPerformanceView clicks. */
+                        public clicks?: (number|Long|string|null);
+
+                        /** NonProductPerformanceView impressions. */
+                        public impressions?: (number|Long|string|null);
+
+                        /** NonProductPerformanceView clickThroughRate. */
+                        public clickThroughRate?: (number|null);
+
+                        /**
+                         * Creates a new NonProductPerformanceView instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NonProductPerformanceView instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.INonProductPerformanceView): google.shopping.merchant.reports.v1alpha.NonProductPerformanceView;
+
+                        /**
+                         * Encodes the specified NonProductPerformanceView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.NonProductPerformanceView.verify|verify} messages.
+                         * @param message NonProductPerformanceView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.INonProductPerformanceView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NonProductPerformanceView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.NonProductPerformanceView.verify|verify} messages.
+                         * @param message NonProductPerformanceView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.INonProductPerformanceView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NonProductPerformanceView message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NonProductPerformanceView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.NonProductPerformanceView;
+
+                        /**
+                         * Decodes a NonProductPerformanceView message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NonProductPerformanceView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.NonProductPerformanceView;
+
+                        /**
+                         * Verifies a NonProductPerformanceView message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NonProductPerformanceView message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NonProductPerformanceView
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.NonProductPerformanceView;
+
+                        /**
+                         * Creates a plain object from a NonProductPerformanceView message. Also converts values to other types if specified.
+                         * @param message NonProductPerformanceView
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.NonProductPerformanceView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NonProductPerformanceView to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NonProductPerformanceView
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CompetitiveVisibilityCompetitorView. */
+                    interface ICompetitiveVisibilityCompetitorView {
+
+                        /** CompetitiveVisibilityCompetitorView date */
+                        date?: (google.type.IDate|null);
+
+                        /** CompetitiveVisibilityCompetitorView domain */
+                        domain?: (string|null);
+
+                        /** CompetitiveVisibilityCompetitorView isYourDomain */
+                        isYourDomain?: (boolean|null);
+
+                        /** CompetitiveVisibilityCompetitorView reportCountryCode */
+                        reportCountryCode?: (string|null);
+
+                        /** CompetitiveVisibilityCompetitorView reportCategoryId */
+                        reportCategoryId?: (number|Long|string|null);
+
+                        /** CompetitiveVisibilityCompetitorView trafficSource */
+                        trafficSource?: (google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|keyof typeof google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|null);
+
+                        /** CompetitiveVisibilityCompetitorView rank */
+                        rank?: (number|Long|string|null);
+
+                        /** CompetitiveVisibilityCompetitorView adsOrganicRatio */
+                        adsOrganicRatio?: (number|null);
+
+                        /** CompetitiveVisibilityCompetitorView pageOverlapRate */
+                        pageOverlapRate?: (number|null);
+
+                        /** CompetitiveVisibilityCompetitorView higherPositionRate */
+                        higherPositionRate?: (number|null);
+
+                        /** CompetitiveVisibilityCompetitorView relativeVisibility */
+                        relativeVisibility?: (number|null);
+                    }
+
+                    /** Represents a CompetitiveVisibilityCompetitorView. */
+                    class CompetitiveVisibilityCompetitorView implements ICompetitiveVisibilityCompetitorView {
+
+                        /**
+                         * Constructs a new CompetitiveVisibilityCompetitorView.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityCompetitorView);
+
+                        /** CompetitiveVisibilityCompetitorView date. */
+                        public date?: (google.type.IDate|null);
+
+                        /** CompetitiveVisibilityCompetitorView domain. */
+                        public domain?: (string|null);
+
+                        /** CompetitiveVisibilityCompetitorView isYourDomain. */
+                        public isYourDomain?: (boolean|null);
+
+                        /** CompetitiveVisibilityCompetitorView reportCountryCode. */
+                        public reportCountryCode?: (string|null);
+
+                        /** CompetitiveVisibilityCompetitorView reportCategoryId. */
+                        public reportCategoryId?: (number|Long|string|null);
+
+                        /** CompetitiveVisibilityCompetitorView trafficSource. */
+                        public trafficSource?: (google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|keyof typeof google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|null);
+
+                        /** CompetitiveVisibilityCompetitorView rank. */
+                        public rank?: (number|Long|string|null);
+
+                        /** CompetitiveVisibilityCompetitorView adsOrganicRatio. */
+                        public adsOrganicRatio?: (number|null);
+
+                        /** CompetitiveVisibilityCompetitorView pageOverlapRate. */
+                        public pageOverlapRate?: (number|null);
+
+                        /** CompetitiveVisibilityCompetitorView higherPositionRate. */
+                        public higherPositionRate?: (number|null);
+
+                        /** CompetitiveVisibilityCompetitorView relativeVisibility. */
+                        public relativeVisibility?: (number|null);
+
+                        /**
+                         * Creates a new CompetitiveVisibilityCompetitorView instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CompetitiveVisibilityCompetitorView instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityCompetitorView): google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView;
+
+                        /**
+                         * Encodes the specified CompetitiveVisibilityCompetitorView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView.verify|verify} messages.
+                         * @param message CompetitiveVisibilityCompetitorView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityCompetitorView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CompetitiveVisibilityCompetitorView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView.verify|verify} messages.
+                         * @param message CompetitiveVisibilityCompetitorView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityCompetitorView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CompetitiveVisibilityCompetitorView message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CompetitiveVisibilityCompetitorView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView;
+
+                        /**
+                         * Decodes a CompetitiveVisibilityCompetitorView message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CompetitiveVisibilityCompetitorView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView;
+
+                        /**
+                         * Verifies a CompetitiveVisibilityCompetitorView message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CompetitiveVisibilityCompetitorView message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CompetitiveVisibilityCompetitorView
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView;
+
+                        /**
+                         * Creates a plain object from a CompetitiveVisibilityCompetitorView message. Also converts values to other types if specified.
+                         * @param message CompetitiveVisibilityCompetitorView
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CompetitiveVisibilityCompetitorView to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CompetitiveVisibilityCompetitorView
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CompetitiveVisibilityTopMerchantView. */
+                    interface ICompetitiveVisibilityTopMerchantView {
+
+                        /** CompetitiveVisibilityTopMerchantView date */
+                        date?: (google.type.IDate|null);
+
+                        /** CompetitiveVisibilityTopMerchantView domain */
+                        domain?: (string|null);
+
+                        /** CompetitiveVisibilityTopMerchantView isYourDomain */
+                        isYourDomain?: (boolean|null);
+
+                        /** CompetitiveVisibilityTopMerchantView reportCountryCode */
+                        reportCountryCode?: (string|null);
+
+                        /** CompetitiveVisibilityTopMerchantView reportCategoryId */
+                        reportCategoryId?: (number|Long|string|null);
+
+                        /** CompetitiveVisibilityTopMerchantView trafficSource */
+                        trafficSource?: (google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|keyof typeof google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|null);
+
+                        /** CompetitiveVisibilityTopMerchantView rank */
+                        rank?: (number|Long|string|null);
+
+                        /** CompetitiveVisibilityTopMerchantView adsOrganicRatio */
+                        adsOrganicRatio?: (number|null);
+
+                        /** CompetitiveVisibilityTopMerchantView pageOverlapRate */
+                        pageOverlapRate?: (number|null);
+
+                        /** CompetitiveVisibilityTopMerchantView higherPositionRate */
+                        higherPositionRate?: (number|null);
+                    }
+
+                    /** Represents a CompetitiveVisibilityTopMerchantView. */
+                    class CompetitiveVisibilityTopMerchantView implements ICompetitiveVisibilityTopMerchantView {
+
+                        /**
+                         * Constructs a new CompetitiveVisibilityTopMerchantView.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityTopMerchantView);
+
+                        /** CompetitiveVisibilityTopMerchantView date. */
+                        public date?: (google.type.IDate|null);
+
+                        /** CompetitiveVisibilityTopMerchantView domain. */
+                        public domain?: (string|null);
+
+                        /** CompetitiveVisibilityTopMerchantView isYourDomain. */
+                        public isYourDomain?: (boolean|null);
+
+                        /** CompetitiveVisibilityTopMerchantView reportCountryCode. */
+                        public reportCountryCode?: (string|null);
+
+                        /** CompetitiveVisibilityTopMerchantView reportCategoryId. */
+                        public reportCategoryId?: (number|Long|string|null);
+
+                        /** CompetitiveVisibilityTopMerchantView trafficSource. */
+                        public trafficSource?: (google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|keyof typeof google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|null);
+
+                        /** CompetitiveVisibilityTopMerchantView rank. */
+                        public rank?: (number|Long|string|null);
+
+                        /** CompetitiveVisibilityTopMerchantView adsOrganicRatio. */
+                        public adsOrganicRatio?: (number|null);
+
+                        /** CompetitiveVisibilityTopMerchantView pageOverlapRate. */
+                        public pageOverlapRate?: (number|null);
+
+                        /** CompetitiveVisibilityTopMerchantView higherPositionRate. */
+                        public higherPositionRate?: (number|null);
+
+                        /**
+                         * Creates a new CompetitiveVisibilityTopMerchantView instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CompetitiveVisibilityTopMerchantView instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityTopMerchantView): google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView;
+
+                        /**
+                         * Encodes the specified CompetitiveVisibilityTopMerchantView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView.verify|verify} messages.
+                         * @param message CompetitiveVisibilityTopMerchantView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityTopMerchantView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CompetitiveVisibilityTopMerchantView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView.verify|verify} messages.
+                         * @param message CompetitiveVisibilityTopMerchantView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityTopMerchantView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CompetitiveVisibilityTopMerchantView message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CompetitiveVisibilityTopMerchantView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView;
+
+                        /**
+                         * Decodes a CompetitiveVisibilityTopMerchantView message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CompetitiveVisibilityTopMerchantView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView;
+
+                        /**
+                         * Verifies a CompetitiveVisibilityTopMerchantView message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CompetitiveVisibilityTopMerchantView message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CompetitiveVisibilityTopMerchantView
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView;
+
+                        /**
+                         * Creates a plain object from a CompetitiveVisibilityTopMerchantView message. Also converts values to other types if specified.
+                         * @param message CompetitiveVisibilityTopMerchantView
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CompetitiveVisibilityTopMerchantView to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CompetitiveVisibilityTopMerchantView
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CompetitiveVisibilityBenchmarkView. */
+                    interface ICompetitiveVisibilityBenchmarkView {
+
+                        /** CompetitiveVisibilityBenchmarkView date */
+                        date?: (google.type.IDate|null);
+
+                        /** CompetitiveVisibilityBenchmarkView reportCountryCode */
+                        reportCountryCode?: (string|null);
+
+                        /** CompetitiveVisibilityBenchmarkView reportCategoryId */
+                        reportCategoryId?: (number|Long|string|null);
+
+                        /** CompetitiveVisibilityBenchmarkView trafficSource */
+                        trafficSource?: (google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|keyof typeof google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|null);
+
+                        /** CompetitiveVisibilityBenchmarkView yourDomainVisibilityTrend */
+                        yourDomainVisibilityTrend?: (number|null);
+
+                        /** CompetitiveVisibilityBenchmarkView categoryBenchmarkVisibilityTrend */
+                        categoryBenchmarkVisibilityTrend?: (number|null);
+                    }
+
+                    /** Represents a CompetitiveVisibilityBenchmarkView. */
+                    class CompetitiveVisibilityBenchmarkView implements ICompetitiveVisibilityBenchmarkView {
+
+                        /**
+                         * Constructs a new CompetitiveVisibilityBenchmarkView.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityBenchmarkView);
+
+                        /** CompetitiveVisibilityBenchmarkView date. */
+                        public date?: (google.type.IDate|null);
+
+                        /** CompetitiveVisibilityBenchmarkView reportCountryCode. */
+                        public reportCountryCode?: (string|null);
+
+                        /** CompetitiveVisibilityBenchmarkView reportCategoryId. */
+                        public reportCategoryId?: (number|Long|string|null);
+
+                        /** CompetitiveVisibilityBenchmarkView trafficSource. */
+                        public trafficSource?: (google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|keyof typeof google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|null);
+
+                        /** CompetitiveVisibilityBenchmarkView yourDomainVisibilityTrend. */
+                        public yourDomainVisibilityTrend?: (number|null);
+
+                        /** CompetitiveVisibilityBenchmarkView categoryBenchmarkVisibilityTrend. */
+                        public categoryBenchmarkVisibilityTrend?: (number|null);
+
+                        /**
+                         * Creates a new CompetitiveVisibilityBenchmarkView instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CompetitiveVisibilityBenchmarkView instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityBenchmarkView): google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView;
+
+                        /**
+                         * Encodes the specified CompetitiveVisibilityBenchmarkView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView.verify|verify} messages.
+                         * @param message CompetitiveVisibilityBenchmarkView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityBenchmarkView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CompetitiveVisibilityBenchmarkView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView.verify|verify} messages.
+                         * @param message CompetitiveVisibilityBenchmarkView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityBenchmarkView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CompetitiveVisibilityBenchmarkView message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CompetitiveVisibilityBenchmarkView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView;
+
+                        /**
+                         * Decodes a CompetitiveVisibilityBenchmarkView message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CompetitiveVisibilityBenchmarkView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView;
+
+                        /**
+                         * Verifies a CompetitiveVisibilityBenchmarkView message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CompetitiveVisibilityBenchmarkView message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CompetitiveVisibilityBenchmarkView
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView;
+
+                        /**
+                         * Creates a plain object from a CompetitiveVisibilityBenchmarkView message. Also converts values to other types if specified.
+                         * @param message CompetitiveVisibilityBenchmarkView
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CompetitiveVisibilityBenchmarkView to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CompetitiveVisibilityBenchmarkView
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MarketingMethod. */
+                    interface IMarketingMethod {
+                    }
+
+                    /** Represents a MarketingMethod. */
+                    class MarketingMethod implements IMarketingMethod {
+
+                        /**
+                         * Constructs a new MarketingMethod.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.IMarketingMethod);
+
+                        /**
+                         * Creates a new MarketingMethod instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MarketingMethod instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.IMarketingMethod): google.shopping.merchant.reports.v1alpha.MarketingMethod;
+
+                        /**
+                         * Encodes the specified MarketingMethod message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.MarketingMethod.verify|verify} messages.
+                         * @param message MarketingMethod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.IMarketingMethod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MarketingMethod message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.MarketingMethod.verify|verify} messages.
+                         * @param message MarketingMethod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.IMarketingMethod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MarketingMethod message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MarketingMethod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.MarketingMethod;
+
+                        /**
+                         * Decodes a MarketingMethod message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MarketingMethod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.MarketingMethod;
+
+                        /**
+                         * Verifies a MarketingMethod message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MarketingMethod message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MarketingMethod
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.MarketingMethod;
+
+                        /**
+                         * Creates a plain object from a MarketingMethod message. Also converts values to other types if specified.
+                         * @param message MarketingMethod
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.MarketingMethod, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MarketingMethod to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MarketingMethod
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MarketingMethod {
+
+                        /** MarketingMethodEnum enum. */
+                        enum MarketingMethodEnum {
+                            MARKETING_METHOD_ENUM_UNSPECIFIED = 0,
+                            ORGANIC = 1,
+                            ADS = 2
+                        }
+                    }
+
+                    /** Properties of a ReportGranularity. */
+                    interface IReportGranularity {
+                    }
+
+                    /** Represents a ReportGranularity. */
+                    class ReportGranularity implements IReportGranularity {
+
+                        /**
+                         * Constructs a new ReportGranularity.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.IReportGranularity);
+
+                        /**
+                         * Creates a new ReportGranularity instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ReportGranularity instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.IReportGranularity): google.shopping.merchant.reports.v1alpha.ReportGranularity;
+
+                        /**
+                         * Encodes the specified ReportGranularity message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ReportGranularity.verify|verify} messages.
+                         * @param message ReportGranularity message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.IReportGranularity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ReportGranularity message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ReportGranularity.verify|verify} messages.
+                         * @param message ReportGranularity message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.IReportGranularity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ReportGranularity message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ReportGranularity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.ReportGranularity;
+
+                        /**
+                         * Decodes a ReportGranularity message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ReportGranularity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.ReportGranularity;
+
+                        /**
+                         * Verifies a ReportGranularity message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ReportGranularity message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ReportGranularity
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.ReportGranularity;
+
+                        /**
+                         * Creates a plain object from a ReportGranularity message. Also converts values to other types if specified.
+                         * @param message ReportGranularity
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.ReportGranularity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ReportGranularity to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ReportGranularity
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ReportGranularity {
+
+                        /** ReportGranularityEnum enum. */
+                        enum ReportGranularityEnum {
+                            REPORT_GRANULARITY_ENUM_UNSPECIFIED = 0,
+                            WEEKLY = 1,
+                            MONTHLY = 2
+                        }
+                    }
+
+                    /** Properties of a RelativeDemand. */
+                    interface IRelativeDemand {
+                    }
+
+                    /** Represents a RelativeDemand. */
+                    class RelativeDemand implements IRelativeDemand {
+
+                        /**
+                         * Constructs a new RelativeDemand.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.IRelativeDemand);
+
+                        /**
+                         * Creates a new RelativeDemand instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RelativeDemand instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.IRelativeDemand): google.shopping.merchant.reports.v1alpha.RelativeDemand;
+
+                        /**
+                         * Encodes the specified RelativeDemand message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.RelativeDemand.verify|verify} messages.
+                         * @param message RelativeDemand message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.IRelativeDemand, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RelativeDemand message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.RelativeDemand.verify|verify} messages.
+                         * @param message RelativeDemand message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.IRelativeDemand, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RelativeDemand message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RelativeDemand
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.RelativeDemand;
+
+                        /**
+                         * Decodes a RelativeDemand message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RelativeDemand
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.RelativeDemand;
+
+                        /**
+                         * Verifies a RelativeDemand message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RelativeDemand message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RelativeDemand
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.RelativeDemand;
+
+                        /**
+                         * Creates a plain object from a RelativeDemand message. Also converts values to other types if specified.
+                         * @param message RelativeDemand
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.RelativeDemand, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RelativeDemand to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RelativeDemand
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace RelativeDemand {
+
+                        /** RelativeDemandEnum enum. */
+                        enum RelativeDemandEnum {
+                            RELATIVE_DEMAND_ENUM_UNSPECIFIED = 0,
+                            VERY_LOW = 10,
+                            LOW = 20,
+                            MEDIUM = 30,
+                            HIGH = 40,
+                            VERY_HIGH = 50
+                        }
+                    }
+
+                    /** Properties of a RelativeDemandChangeType. */
+                    interface IRelativeDemandChangeType {
+                    }
+
+                    /** Represents a RelativeDemandChangeType. */
+                    class RelativeDemandChangeType implements IRelativeDemandChangeType {
+
+                        /**
+                         * Constructs a new RelativeDemandChangeType.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.IRelativeDemandChangeType);
+
+                        /**
+                         * Creates a new RelativeDemandChangeType instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RelativeDemandChangeType instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.IRelativeDemandChangeType): google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType;
+
+                        /**
+                         * Encodes the specified RelativeDemandChangeType message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.verify|verify} messages.
+                         * @param message RelativeDemandChangeType message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.IRelativeDemandChangeType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RelativeDemandChangeType message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.verify|verify} messages.
+                         * @param message RelativeDemandChangeType message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.IRelativeDemandChangeType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RelativeDemandChangeType message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RelativeDemandChangeType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType;
+
+                        /**
+                         * Decodes a RelativeDemandChangeType message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RelativeDemandChangeType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType;
+
+                        /**
+                         * Verifies a RelativeDemandChangeType message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RelativeDemandChangeType message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RelativeDemandChangeType
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType;
+
+                        /**
+                         * Creates a plain object from a RelativeDemandChangeType message. Also converts values to other types if specified.
+                         * @param message RelativeDemandChangeType
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RelativeDemandChangeType to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RelativeDemandChangeType
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace RelativeDemandChangeType {
+
+                        /** RelativeDemandChangeTypeEnum enum. */
+                        enum RelativeDemandChangeTypeEnum {
+                            RELATIVE_DEMAND_CHANGE_TYPE_ENUM_UNSPECIFIED = 0,
+                            SINKER = 1,
+                            FLAT = 2,
+                            RISER = 3
+                        }
+                    }
+
+                    /** Properties of a TrafficSource. */
+                    interface ITrafficSource {
+                    }
+
+                    /** Represents a TrafficSource. */
+                    class TrafficSource implements ITrafficSource {
+
+                        /**
+                         * Constructs a new TrafficSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.ITrafficSource);
+
+                        /**
+                         * Creates a new TrafficSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TrafficSource instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.ITrafficSource): google.shopping.merchant.reports.v1alpha.TrafficSource;
+
+                        /**
+                         * Encodes the specified TrafficSource message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.TrafficSource.verify|verify} messages.
+                         * @param message TrafficSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.ITrafficSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TrafficSource message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.TrafficSource.verify|verify} messages.
+                         * @param message TrafficSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.ITrafficSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TrafficSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TrafficSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.TrafficSource;
+
+                        /**
+                         * Decodes a TrafficSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TrafficSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.TrafficSource;
+
+                        /**
+                         * Verifies a TrafficSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TrafficSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TrafficSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.TrafficSource;
+
+                        /**
+                         * Creates a plain object from a TrafficSource message. Also converts values to other types if specified.
+                         * @param message TrafficSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.TrafficSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TrafficSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TrafficSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TrafficSource {
+
+                        /** TrafficSourceEnum enum. */
+                        enum TrafficSourceEnum {
+                            TRAFFIC_SOURCE_ENUM_UNSPECIFIED = 0,
+                            ORGANIC = 1,
+                            ADS = 2,
+                            ALL = 3
+                        }
+                    }
+
+                    /** Properties of a YoutubeCreatorPerformanceView. */
+                    interface IYoutubeCreatorPerformanceView {
+
+                        /** YoutubeCreatorPerformanceView date */
+                        date?: (google.type.IDate|null);
+
+                        /** YoutubeCreatorPerformanceView title */
+                        title?: (string|null);
+
+                        /** YoutubeCreatorPerformanceView channelId */
+                        channelId?: (string|null);
+
+                        /** YoutubeCreatorPerformanceView grossSales */
+                        grossSales?: (google.shopping.type.IPrice|null);
+
+                        /** YoutubeCreatorPerformanceView commissions */
+                        commissions?: (google.shopping.type.IPrice|null);
+
+                        /** YoutubeCreatorPerformanceView orders */
+                        orders?: (number|Long|string|null);
+
+                        /** YoutubeCreatorPerformanceView views */
+                        views?: (number|Long|string|null);
+
+                        /** YoutubeCreatorPerformanceView clicks */
+                        clicks?: (number|Long|string|null);
+
+                        /** YoutubeCreatorPerformanceView netSales */
+                        netSales?: (google.shopping.type.IPrice|null);
+                    }
+
+                    /** Represents a YoutubeCreatorPerformanceView. */
+                    class YoutubeCreatorPerformanceView implements IYoutubeCreatorPerformanceView {
+
+                        /**
+                         * Constructs a new YoutubeCreatorPerformanceView.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.IYoutubeCreatorPerformanceView);
+
+                        /** YoutubeCreatorPerformanceView date. */
+                        public date?: (google.type.IDate|null);
+
+                        /** YoutubeCreatorPerformanceView title. */
+                        public title?: (string|null);
+
+                        /** YoutubeCreatorPerformanceView channelId. */
+                        public channelId?: (string|null);
+
+                        /** YoutubeCreatorPerformanceView grossSales. */
+                        public grossSales?: (google.shopping.type.IPrice|null);
+
+                        /** YoutubeCreatorPerformanceView commissions. */
+                        public commissions?: (google.shopping.type.IPrice|null);
+
+                        /** YoutubeCreatorPerformanceView orders. */
+                        public orders?: (number|Long|string|null);
+
+                        /** YoutubeCreatorPerformanceView views. */
+                        public views?: (number|Long|string|null);
+
+                        /** YoutubeCreatorPerformanceView clicks. */
+                        public clicks?: (number|Long|string|null);
+
+                        /** YoutubeCreatorPerformanceView netSales. */
+                        public netSales?: (google.shopping.type.IPrice|null);
+
+                        /**
+                         * Creates a new YoutubeCreatorPerformanceView instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns YoutubeCreatorPerformanceView instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.IYoutubeCreatorPerformanceView): google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView;
+
+                        /**
+                         * Encodes the specified YoutubeCreatorPerformanceView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView.verify|verify} messages.
+                         * @param message YoutubeCreatorPerformanceView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.IYoutubeCreatorPerformanceView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified YoutubeCreatorPerformanceView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView.verify|verify} messages.
+                         * @param message YoutubeCreatorPerformanceView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.IYoutubeCreatorPerformanceView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a YoutubeCreatorPerformanceView message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns YoutubeCreatorPerformanceView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView;
+
+                        /**
+                         * Decodes a YoutubeCreatorPerformanceView message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns YoutubeCreatorPerformanceView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView;
+
+                        /**
+                         * Verifies a YoutubeCreatorPerformanceView message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a YoutubeCreatorPerformanceView message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns YoutubeCreatorPerformanceView
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView;
+
+                        /**
+                         * Creates a plain object from a YoutubeCreatorPerformanceView message. Also converts values to other types if specified.
+                         * @param message YoutubeCreatorPerformanceView
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this YoutubeCreatorPerformanceView to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for YoutubeCreatorPerformanceView
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a YoutubeContentPerformanceView. */
+                    interface IYoutubeContentPerformanceView {
+
+                        /** YoutubeContentPerformanceView date */
+                        date?: (google.type.IDate|null);
+
+                        /** YoutubeContentPerformanceView title */
+                        title?: (string|null);
+
+                        /** YoutubeContentPerformanceView videoId */
+                        videoId?: (string|null);
+
+                        /** YoutubeContentPerformanceView channelTitle */
+                        channelTitle?: (string|null);
+
+                        /** YoutubeContentPerformanceView channelId */
+                        channelId?: (string|null);
+
+                        /** YoutubeContentPerformanceView grossSales */
+                        grossSales?: (google.shopping.type.IPrice|null);
+
+                        /** YoutubeContentPerformanceView commissions */
+                        commissions?: (google.shopping.type.IPrice|null);
+
+                        /** YoutubeContentPerformanceView orders */
+                        orders?: (number|Long|string|null);
+
+                        /** YoutubeContentPerformanceView views */
+                        views?: (number|Long|string|null);
+
+                        /** YoutubeContentPerformanceView clicks */
+                        clicks?: (number|Long|string|null);
+
+                        /** YoutubeContentPerformanceView netSales */
+                        netSales?: (google.shopping.type.IPrice|null);
+                    }
+
+                    /** Represents a YoutubeContentPerformanceView. */
+                    class YoutubeContentPerformanceView implements IYoutubeContentPerformanceView {
+
+                        /**
+                         * Constructs a new YoutubeContentPerformanceView.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.IYoutubeContentPerformanceView);
+
+                        /** YoutubeContentPerformanceView date. */
+                        public date?: (google.type.IDate|null);
+
+                        /** YoutubeContentPerformanceView title. */
+                        public title?: (string|null);
+
+                        /** YoutubeContentPerformanceView videoId. */
+                        public videoId?: (string|null);
+
+                        /** YoutubeContentPerformanceView channelTitle. */
+                        public channelTitle?: (string|null);
+
+                        /** YoutubeContentPerformanceView channelId. */
+                        public channelId?: (string|null);
+
+                        /** YoutubeContentPerformanceView grossSales. */
+                        public grossSales?: (google.shopping.type.IPrice|null);
+
+                        /** YoutubeContentPerformanceView commissions. */
+                        public commissions?: (google.shopping.type.IPrice|null);
+
+                        /** YoutubeContentPerformanceView orders. */
+                        public orders?: (number|Long|string|null);
+
+                        /** YoutubeContentPerformanceView views. */
+                        public views?: (number|Long|string|null);
+
+                        /** YoutubeContentPerformanceView clicks. */
+                        public clicks?: (number|Long|string|null);
+
+                        /** YoutubeContentPerformanceView netSales. */
+                        public netSales?: (google.shopping.type.IPrice|null);
+
+                        /**
+                         * Creates a new YoutubeContentPerformanceView instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns YoutubeContentPerformanceView instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.IYoutubeContentPerformanceView): google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView;
+
+                        /**
+                         * Encodes the specified YoutubeContentPerformanceView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView.verify|verify} messages.
+                         * @param message YoutubeContentPerformanceView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.IYoutubeContentPerformanceView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified YoutubeContentPerformanceView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView.verify|verify} messages.
+                         * @param message YoutubeContentPerformanceView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.IYoutubeContentPerformanceView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a YoutubeContentPerformanceView message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns YoutubeContentPerformanceView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView;
+
+                        /**
+                         * Decodes a YoutubeContentPerformanceView message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns YoutubeContentPerformanceView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView;
+
+                        /**
+                         * Verifies a YoutubeContentPerformanceView message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a YoutubeContentPerformanceView message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns YoutubeContentPerformanceView
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView;
+
+                        /**
+                         * Creates a plain object from a YoutubeContentPerformanceView message. Also converts values to other types if specified.
+                         * @param message YoutubeContentPerformanceView
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this YoutubeContentPerformanceView to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for YoutubeContentPerformanceView
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a YoutubeProductPerformanceView. */
+                    interface IYoutubeProductPerformanceView {
+
+                        /** YoutubeProductPerformanceView date */
+                        date?: (google.type.IDate|null);
+
+                        /** YoutubeProductPerformanceView title */
+                        title?: (string|null);
+
+                        /** YoutubeProductPerformanceView offerId */
+                        offerId?: (string|null);
+
+                        /** YoutubeProductPerformanceView distinctVideoCount */
+                        distinctVideoCount?: (number|Long|string|null);
+
+                        /** YoutubeProductPerformanceView distinctCreatorCount */
+                        distinctCreatorCount?: (number|Long|string|null);
+
+                        /** YoutubeProductPerformanceView grossSales */
+                        grossSales?: (google.shopping.type.IPrice|null);
+
+                        /** YoutubeProductPerformanceView commissions */
+                        commissions?: (google.shopping.type.IPrice|null);
+
+                        /** YoutubeProductPerformanceView orders */
+                        orders?: (number|Long|string|null);
+
+                        /** YoutubeProductPerformanceView views */
+                        views?: (number|Long|string|null);
+
+                        /** YoutubeProductPerformanceView clicks */
+                        clicks?: (number|Long|string|null);
+
+                        /** YoutubeProductPerformanceView netSales */
+                        netSales?: (google.shopping.type.IPrice|null);
+                    }
+
+                    /** Represents a YoutubeProductPerformanceView. */
+                    class YoutubeProductPerformanceView implements IYoutubeProductPerformanceView {
+
+                        /**
+                         * Constructs a new YoutubeProductPerformanceView.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reports.v1alpha.IYoutubeProductPerformanceView);
+
+                        /** YoutubeProductPerformanceView date. */
+                        public date?: (google.type.IDate|null);
+
+                        /** YoutubeProductPerformanceView title. */
+                        public title?: (string|null);
+
+                        /** YoutubeProductPerformanceView offerId. */
+                        public offerId?: (string|null);
+
+                        /** YoutubeProductPerformanceView distinctVideoCount. */
+                        public distinctVideoCount?: (number|Long|string|null);
+
+                        /** YoutubeProductPerformanceView distinctCreatorCount. */
+                        public distinctCreatorCount?: (number|Long|string|null);
+
+                        /** YoutubeProductPerformanceView grossSales. */
+                        public grossSales?: (google.shopping.type.IPrice|null);
+
+                        /** YoutubeProductPerformanceView commissions. */
+                        public commissions?: (google.shopping.type.IPrice|null);
+
+                        /** YoutubeProductPerformanceView orders. */
+                        public orders?: (number|Long|string|null);
+
+                        /** YoutubeProductPerformanceView views. */
+                        public views?: (number|Long|string|null);
+
+                        /** YoutubeProductPerformanceView clicks. */
+                        public clicks?: (number|Long|string|null);
+
+                        /** YoutubeProductPerformanceView netSales. */
+                        public netSales?: (google.shopping.type.IPrice|null);
+
+                        /**
+                         * Creates a new YoutubeProductPerformanceView instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns YoutubeProductPerformanceView instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reports.v1alpha.IYoutubeProductPerformanceView): google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView;
+
+                        /**
+                         * Encodes the specified YoutubeProductPerformanceView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView.verify|verify} messages.
+                         * @param message YoutubeProductPerformanceView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reports.v1alpha.IYoutubeProductPerformanceView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified YoutubeProductPerformanceView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView.verify|verify} messages.
+                         * @param message YoutubeProductPerformanceView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reports.v1alpha.IYoutubeProductPerformanceView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a YoutubeProductPerformanceView message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns YoutubeProductPerformanceView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView;
+
+                        /**
+                         * Decodes a YoutubeProductPerformanceView message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns YoutubeProductPerformanceView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView;
+
+                        /**
+                         * Verifies a YoutubeProductPerformanceView message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a YoutubeProductPerformanceView message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns YoutubeProductPerformanceView
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView;
+
+                        /**
+                         * Creates a plain object from a YoutubeProductPerformanceView message. Also converts values to other types if specified.
+                         * @param message YoutubeProductPerformanceView
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this YoutubeProductPerformanceView to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for YoutubeProductPerformanceView
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Namespace v1beta. */
                 namespace v1beta {
 
