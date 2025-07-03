@@ -9302,6 +9302,9 @@ export namespace google {
 
                         /** Fulfillment enableGenerativeFallback */
                         enableGenerativeFallback?: (boolean|null);
+
+                        /** Fulfillment generators */
+                        generators?: (google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings[]|null);
                     }
 
                     /** Represents a Fulfillment. */
@@ -9336,6 +9339,9 @@ export namespace google {
 
                         /** Fulfillment enableGenerativeFallback. */
                         public enableGenerativeFallback: boolean;
+
+                        /** Fulfillment generators. */
+                        public generators: google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings[];
 
                         /**
                          * Creates a new Fulfillment instance using the specified properties.
@@ -9830,6 +9836,115 @@ export namespace google {
                                     public static getTypeUrl(typeUrlPrefix?: string): string;
                                 }
                             }
+                        }
+
+                        /** Properties of a GeneratorSettings. */
+                        interface IGeneratorSettings {
+
+                            /** GeneratorSettings generator */
+                            generator?: (string|null);
+
+                            /** GeneratorSettings inputParameters */
+                            inputParameters?: ({ [k: string]: string }|null);
+
+                            /** GeneratorSettings outputParameter */
+                            outputParameter?: (string|null);
+                        }
+
+                        /** Represents a GeneratorSettings. */
+                        class GeneratorSettings implements IGeneratorSettings {
+
+                            /**
+                             * Constructs a new GeneratorSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings);
+
+                            /** GeneratorSettings generator. */
+                            public generator: string;
+
+                            /** GeneratorSettings inputParameters. */
+                            public inputParameters: { [k: string]: string };
+
+                            /** GeneratorSettings outputParameter. */
+                            public outputParameter: string;
+
+                            /**
+                             * Creates a new GeneratorSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GeneratorSettings instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings): google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings;
+
+                            /**
+                             * Encodes the specified GeneratorSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings.verify|verify} messages.
+                             * @param message GeneratorSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GeneratorSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings.verify|verify} messages.
+                             * @param message GeneratorSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GeneratorSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GeneratorSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings;
+
+                            /**
+                             * Decodes a GeneratorSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GeneratorSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings;
+
+                            /**
+                             * Verifies a GeneratorSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GeneratorSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GeneratorSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings;
+
+                            /**
+                             * Creates a plain object from a GeneratorSettings message. Also converts values to other types if specified.
+                             * @param message GeneratorSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GeneratorSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GeneratorSettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 

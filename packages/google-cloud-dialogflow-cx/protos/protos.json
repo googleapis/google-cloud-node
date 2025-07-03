@@ -2517,6 +2517,11 @@
                             "enableGenerativeFallback": {
                               "type": "bool",
                               "id": 12
+                            },
+                            "generators": {
+                              "rule": "repeated",
+                              "type": "GeneratorSettings",
+                              "id": 13
                             }
                           },
                           "nested": {
@@ -2574,6 +2579,30 @@
                                         }
                                       }
                                     }
+                                  }
+                                }
+                              }
+                            },
+                            "GeneratorSettings": {
+                              "fields": {
+                                "generator": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "dialogflow.googleapis.com/Generator"
+                                  }
+                                },
+                                "inputParameters": {
+                                  "keyType": "string",
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "outputParameter": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
                                   }
                                 }
                               }

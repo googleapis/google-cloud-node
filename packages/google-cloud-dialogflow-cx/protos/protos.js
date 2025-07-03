@@ -22631,6 +22631,7 @@
                              * @property {Array.<google.cloud.dialogflow.cx.v3.Fulfillment.IConditionalCases>|null} [conditionalCases] Fulfillment conditionalCases
                              * @property {google.cloud.dialogflow.cx.v3.IAdvancedSettings|null} [advancedSettings] Fulfillment advancedSettings
                              * @property {boolean|null} [enableGenerativeFallback] Fulfillment enableGenerativeFallback
+                             * @property {Array.<google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings>|null} [generators] Fulfillment generators
                              */
     
                             /**
@@ -22645,6 +22646,7 @@
                                 this.messages = [];
                                 this.setParameterActions = [];
                                 this.conditionalCases = [];
+                                this.generators = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -22716,6 +22718,14 @@
                             Fulfillment.prototype.enableGenerativeFallback = false;
     
                             /**
+                             * Fulfillment generators.
+                             * @member {Array.<google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings>} generators
+                             * @memberof google.cloud.dialogflow.cx.v3.Fulfillment
+                             * @instance
+                             */
+                            Fulfillment.prototype.generators = $util.emptyArray;
+    
+                            /**
                              * Creates a new Fulfillment instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.dialogflow.cx.v3.Fulfillment
@@ -22758,6 +22768,9 @@
                                     writer.uint32(/* id 8, wireType 0 =*/64).bool(message.returnPartialResponses);
                                 if (message.enableGenerativeFallback != null && Object.hasOwnProperty.call(message, "enableGenerativeFallback"))
                                     writer.uint32(/* id 12, wireType 0 =*/96).bool(message.enableGenerativeFallback);
+                                if (message.generators != null && message.generators.length)
+                                    for (var i = 0; i < message.generators.length; ++i)
+                                        $root.google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings.encode(message.generators[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                                 return writer;
                             };
     
@@ -22830,6 +22843,12 @@
                                         }
                                     case 12: {
                                             message.enableGenerativeFallback = reader.bool();
+                                            break;
+                                        }
+                                    case 13: {
+                                            if (!(message.generators && message.generators.length))
+                                                message.generators = [];
+                                            message.generators.push($root.google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     default:
@@ -22911,6 +22930,15 @@
                                 if (message.enableGenerativeFallback != null && message.hasOwnProperty("enableGenerativeFallback"))
                                     if (typeof message.enableGenerativeFallback !== "boolean")
                                         return "enableGenerativeFallback: boolean expected";
+                                if (message.generators != null && message.hasOwnProperty("generators")) {
+                                    if (!Array.isArray(message.generators))
+                                        return "generators: array expected";
+                                    for (var i = 0; i < message.generators.length; ++i) {
+                                        var error = $root.google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings.verify(message.generators[i]);
+                                        if (error)
+                                            return "generators." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -22969,6 +22997,16 @@
                                 }
                                 if (object.enableGenerativeFallback != null)
                                     message.enableGenerativeFallback = Boolean(object.enableGenerativeFallback);
+                                if (object.generators) {
+                                    if (!Array.isArray(object.generators))
+                                        throw TypeError(".google.cloud.dialogflow.cx.v3.Fulfillment.generators: array expected");
+                                    message.generators = [];
+                                    for (var i = 0; i < object.generators.length; ++i) {
+                                        if (typeof object.generators[i] !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.cx.v3.Fulfillment.generators: object expected");
+                                        message.generators[i] = $root.google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings.fromObject(object.generators[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -22989,6 +23027,7 @@
                                     object.messages = [];
                                     object.setParameterActions = [];
                                     object.conditionalCases = [];
+                                    object.generators = [];
                                 }
                                 if (options.defaults) {
                                     object.webhook = "";
@@ -23022,6 +23061,11 @@
                                     object.returnPartialResponses = message.returnPartialResponses;
                                 if (message.enableGenerativeFallback != null && message.hasOwnProperty("enableGenerativeFallback"))
                                     object.enableGenerativeFallback = message.enableGenerativeFallback;
+                                if (message.generators && message.generators.length) {
+                                    object.generators = [];
+                                    for (var j = 0; j < message.generators.length; ++j)
+                                        object.generators[j] = $root.google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings.toObject(message.generators[j], options);
+                                }
                                 return object;
                             };
     
@@ -24023,6 +24067,294 @@
                                 })();
     
                                 return ConditionalCases;
+                            })();
+    
+                            Fulfillment.GeneratorSettings = (function() {
+    
+                                /**
+                                 * Properties of a GeneratorSettings.
+                                 * @memberof google.cloud.dialogflow.cx.v3.Fulfillment
+                                 * @interface IGeneratorSettings
+                                 * @property {string|null} [generator] GeneratorSettings generator
+                                 * @property {Object.<string,string>|null} [inputParameters] GeneratorSettings inputParameters
+                                 * @property {string|null} [outputParameter] GeneratorSettings outputParameter
+                                 */
+    
+                                /**
+                                 * Constructs a new GeneratorSettings.
+                                 * @memberof google.cloud.dialogflow.cx.v3.Fulfillment
+                                 * @classdesc Represents a GeneratorSettings.
+                                 * @implements IGeneratorSettings
+                                 * @constructor
+                                 * @param {google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings=} [properties] Properties to set
+                                 */
+                                function GeneratorSettings(properties) {
+                                    this.inputParameters = {};
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * GeneratorSettings generator.
+                                 * @member {string} generator
+                                 * @memberof google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings
+                                 * @instance
+                                 */
+                                GeneratorSettings.prototype.generator = "";
+    
+                                /**
+                                 * GeneratorSettings inputParameters.
+                                 * @member {Object.<string,string>} inputParameters
+                                 * @memberof google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings
+                                 * @instance
+                                 */
+                                GeneratorSettings.prototype.inputParameters = $util.emptyObject;
+    
+                                /**
+                                 * GeneratorSettings outputParameter.
+                                 * @member {string} outputParameter
+                                 * @memberof google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings
+                                 * @instance
+                                 */
+                                GeneratorSettings.prototype.outputParameter = "";
+    
+                                /**
+                                 * Creates a new GeneratorSettings instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings
+                                 * @static
+                                 * @param {google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings=} [properties] Properties to set
+                                 * @returns {google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings} GeneratorSettings instance
+                                 */
+                                GeneratorSettings.create = function create(properties) {
+                                    return new GeneratorSettings(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified GeneratorSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings
+                                 * @static
+                                 * @param {google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings} message GeneratorSettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                GeneratorSettings.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.generator != null && Object.hasOwnProperty.call(message, "generator"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.generator);
+                                    if (message.inputParameters != null && Object.hasOwnProperty.call(message, "inputParameters"))
+                                        for (var keys = Object.keys(message.inputParameters), i = 0; i < keys.length; ++i)
+                                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.inputParameters[keys[i]]).ldelim();
+                                    if (message.outputParameter != null && Object.hasOwnProperty.call(message, "outputParameter"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.outputParameter);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified GeneratorSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings
+                                 * @static
+                                 * @param {google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings} message GeneratorSettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                GeneratorSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a GeneratorSettings message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings} GeneratorSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                GeneratorSettings.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings(), key, value;
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.generator = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (message.inputParameters === $util.emptyObject)
+                                                    message.inputParameters = {};
+                                                var end2 = reader.uint32() + reader.pos;
+                                                key = "";
+                                                value = "";
+                                                while (reader.pos < end2) {
+                                                    var tag2 = reader.uint32();
+                                                    switch (tag2 >>> 3) {
+                                                    case 1:
+                                                        key = reader.string();
+                                                        break;
+                                                    case 2:
+                                                        value = reader.string();
+                                                        break;
+                                                    default:
+                                                        reader.skipType(tag2 & 7);
+                                                        break;
+                                                    }
+                                                }
+                                                message.inputParameters[key] = value;
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.outputParameter = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a GeneratorSettings message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings} GeneratorSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                GeneratorSettings.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a GeneratorSettings message.
+                                 * @function verify
+                                 * @memberof google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                GeneratorSettings.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.generator != null && message.hasOwnProperty("generator"))
+                                        if (!$util.isString(message.generator))
+                                            return "generator: string expected";
+                                    if (message.inputParameters != null && message.hasOwnProperty("inputParameters")) {
+                                        if (!$util.isObject(message.inputParameters))
+                                            return "inputParameters: object expected";
+                                        var key = Object.keys(message.inputParameters);
+                                        for (var i = 0; i < key.length; ++i)
+                                            if (!$util.isString(message.inputParameters[key[i]]))
+                                                return "inputParameters: string{k:string} expected";
+                                    }
+                                    if (message.outputParameter != null && message.hasOwnProperty("outputParameter"))
+                                        if (!$util.isString(message.outputParameter))
+                                            return "outputParameter: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a GeneratorSettings message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings} GeneratorSettings
+                                 */
+                                GeneratorSettings.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings)
+                                        return object;
+                                    var message = new $root.google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings();
+                                    if (object.generator != null)
+                                        message.generator = String(object.generator);
+                                    if (object.inputParameters) {
+                                        if (typeof object.inputParameters !== "object")
+                                            throw TypeError(".google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings.inputParameters: object expected");
+                                        message.inputParameters = {};
+                                        for (var keys = Object.keys(object.inputParameters), i = 0; i < keys.length; ++i)
+                                            message.inputParameters[keys[i]] = String(object.inputParameters[keys[i]]);
+                                    }
+                                    if (object.outputParameter != null)
+                                        message.outputParameter = String(object.outputParameter);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a GeneratorSettings message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings
+                                 * @static
+                                 * @param {google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings} message GeneratorSettings
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                GeneratorSettings.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.objects || options.defaults)
+                                        object.inputParameters = {};
+                                    if (options.defaults) {
+                                        object.generator = "";
+                                        object.outputParameter = "";
+                                    }
+                                    if (message.generator != null && message.hasOwnProperty("generator"))
+                                        object.generator = message.generator;
+                                    var keys2;
+                                    if (message.inputParameters && (keys2 = Object.keys(message.inputParameters)).length) {
+                                        object.inputParameters = {};
+                                        for (var j = 0; j < keys2.length; ++j)
+                                            object.inputParameters[keys2[j]] = message.inputParameters[keys2[j]];
+                                    }
+                                    if (message.outputParameter != null && message.hasOwnProperty("outputParameter"))
+                                        object.outputParameter = message.outputParameter;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this GeneratorSettings to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                GeneratorSettings.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for GeneratorSettings
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                GeneratorSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings";
+                                };
+    
+                                return GeneratorSettings;
                             })();
     
                             return Fulfillment;
