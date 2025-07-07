@@ -27,5 +27,3 @@ export {v1, CloudBillingClient, CloudCatalogClient};
 export default {v1, CloudBillingClient, CloudCatalogClient};
 import * as protos from '../protos/protos';
 export {protos};
-
-// test
